@@ -1,0 +1,193 @@
+/* Google Fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Material Symbols - Outlined */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VAE Design System - CSS Custom Properties */
+@layer base {
+  :root {
+    /* VAE Color System - HSL for better manipulation */
+    --color-vae-turquoise: 157 100% 47%;
+    --color-vae-turquoise-rgb: 0, 255, 165;
+    
+    /* Typography Scale */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    
+    /* Spacing Scale - Consistent with Tailwind */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsla(var(--color-vae-turquoise), 0.3);
+    --shadow-glow-strong: 0 0 30px hsla(var(--color-vae-turquoise), 0.5);
+    
+    /* Z-Index Scale */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+  }
+  
+  /* Base Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: theme('colors.bg-darker');
+    color: theme('colors.text-light');
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Material Symbols Configuration */
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+}
+
+/* Component Layer */
+@layer components {
+  /* Container */
+  .container-vae {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 
+           bg-vae-turquoise text-vae-black font-medium rounded-lg
+           transition-all duration-300 hover:bg-vae-turquoise-400
+           hover:shadow-[var(--shadow-glow)] focus:outline-none
+           focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2
+           focus:ring-offset-bg-darker;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           border border-vae-turquoise text-vae-turquoise font-medium rounded-lg
+           transition-all duration-300 hover:bg-vae-turquoise hover:text-vae-black
+           focus:outline-none focus:ring-2 focus:ring-vae-turquoise
+           focus:ring-offset-2 focus:ring-offset-bg-darker;
+  }
+  
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-6 py-3
+           text-text-light font-medium rounded-lg
+           transition-all duration-300 hover:bg-bg-secondary
+           focus:outline-none focus:ring-2 focus:ring-vae-turquoise
+           focus:ring-offset-2 focus:ring-offset-bg-darker;
+  }
+  
+  /* Card */
+  .card-vae {
+    @apply bg-bg-dark border border-bg-secondary rounded-xl p-6
+           transition-all duration-300 hover:border-vae-turquoise/30
+           hover:shadow-[var(--shadow-glow)];
+  }
+  
+  /* Text Styles */
+  .text-gradient {
+    @apply bg-gradient-to-r from-vae-turquoise to-vae-turquoise-300
+           bg-clip-text text-transparent;
+  }
+  
+  /* Navigation */
+  .nav-link {
+    @apply text-text-secondary hover:text-vae-turquoise
+           transition-colors duration-300 font-medium;
+  }
+  
+  .nav-link.active {
+    @apply text-vae-turquoise;
+  }
+}
+
+/* Utility Layer */
+@layer utilities {
+  /* Custom Scrollbar */
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.vae-turquoise.500') theme('colors.bg-secondary');
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: theme('colors.bg-secondary');
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: theme('colors.vae-turquoise.500');
+    border-radius: 3px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.vae-turquoise.400');
+  }
+  
+  /* Glow Effects */
+  .glow-turquoise {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .glow-turquoise-strong {
+    box-shadow: var(--shadow-glow-strong);
+  }
+  
+  /* Backdrop Effects */
+  .backdrop-glass {
+    backdrop-filter: blur(10px) saturate(180%);
+    background: hsla(0, 0%, 4%, 0.8);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

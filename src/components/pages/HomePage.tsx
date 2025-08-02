@@ -1,6 +1,10 @@
 import React from 'react'
 import HeroSection from '../sections/HeroSection'
 import ServicesSection from '../sections/ServicesSection'
+import AboutSection from '../sections/AboutSection'
+import TestimonialsSection from '../sections/TestimonialsSection'
+import FAQSection from '../sections/FAQSection'
+import ContactSection from '../sections/ContactSection'
 
 /**
  * HomePage Component
@@ -16,7 +20,17 @@ const HomePage: React.FC = () => {
       {/* Services Section */}
       <ServicesSection />
 
-      {/* Additional sections will be added here */}
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
+      {/* FAQ Section */}
+      <FAQSection />
+
+      {/* Contact Section */}
+      <ContactSection />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import NeuralNetworkBackground from './NeuralNetworkBackground'
 
 /**
  * Hero Section Component
@@ -17,25 +18,13 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        {/* Main Glow Effect */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-vae-turquoise/10 rounded-full blur-3xl animate-pulse"></div>
-        
-        {/* Secondary Glow */}
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-vae-turquoise/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        
-        {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,255,165,0.3) 1px, transparent 0)`,
-            backgroundSize: '50px 50px'
-          }}
-        ></div>
-      </div>
+      {/* Neural Network Background Animation */}
+      <NeuralNetworkBackground />
+      
+      {/* Additional Background Layer for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-bg-darker/80 via-bg-dark/70 to-bg-darker/80" style={{ zIndex: 2 }}></div>
 
-      <div className="container-vae relative z-10">
+      <div className="container-vae relative" style={{ zIndex: 10 }}>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* Content Section */}
@@ -181,74 +170,133 @@ const TypewriterEffect: React.FC<{ texts: string[] }> = ({ texts }) => {
 }
 
 /**
- * Simplified Network Visualization
+ * Enhanced Network Visualization with growing nodes
  */
 const NetworkVisualization: React.FC = () => {
+  const services = [
+    { icon: 'psychology', label: 'KI-Beratung', distance: 100 },
+    { icon: 'storage', label: 'VAEKTRA CORE', distance: 120 },
+    { icon: 'security', label: 'DSGVO-konform', distance: 110 },
+    { icon: 'analytics', label: 'Analytics', distance: 95 },
+    { icon: 'code', label: 'Open Source', distance: 105 },
+    { icon: 'cloud', label: 'Local Hosting', distance: 115 }
+  ]
+
   return (
-    <div className="relative w-full h-96 flex items-center justify-center">
-      {/* Central Logo */}
-      <div className="relative z-10 w-32 h-32 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-700 rounded-2xl flex items-center justify-center glow-turquoise">
-        <img 
-          src="/LOGO_01_white.svg" 
-          alt="VAE Core" 
-          className="w-16 h-16"
-        />
-      </div>
-
-      {/* Orbiting Elements */}
-      {[...Array(6)].map((_, index) => (
-        <motion.div
-          key={index}
-          className="absolute w-12 h-12 bg-bg-secondary border border-vae-turquoise/30 rounded-lg flex items-center justify-center"
-          style={{
-            top: '50%',
-            left: '50%',
-            transformOrigin: '0 0',
-          }}
-          animate={{
-            rotate: 360,
-            x: Math.cos((index * 60) * Math.PI / 180) * 120 - 24,
-            y: Math.sin((index * 60) * Math.PI / 180) * 120 - 24,
-          }}
-          transition={{
-            duration: 20 + index * 2,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          <span className="material-symbols-outlined text-vae-turquoise text-sm">
-            {['psychology', 'storage', 'security', 'analytics', 'code', 'cloud'][index]}
-          </span>
-        </motion.div>
-      ))}
-
-      {/* Connection Lines */}
+    <div className="relative w-full h-96 flex items-center justify-center overflow-hidden">
+      {/* Connection Lines Background */}
       <div className="absolute inset-0 flex items-center justify-center">
         <svg className="w-full h-full" viewBox="0 0 400 400">
-          {[...Array(6)].map((_, index) => {
+          {services.map((service, index) => {
             const angle = (index * 60) * Math.PI / 180
-            const x = 200 + Math.cos(angle) * 120
-            const y = 200 + Math.sin(angle) * 120
+            const centerX = 200
+            const centerY = 200
+            const endX = centerX + Math.cos(angle) * service.distance
+            const endY = centerY + Math.sin(angle) * service.distance
+
             return (
               <motion.line
                 key={index}
-                x1="200"
-                y1="200"
-                x2={x}
-                y2={y}
-                stroke="rgba(0,255,165,0.2)"
-                strokeWidth="1"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
+                x1={centerX}
+                y1={centerY}
+                x2={endX}
+                y2={endY}
+                stroke="url(#lineGradient)"
+                strokeWidth="2"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ 
-                  duration: 2, 
-                  delay: index * 0.2,
-                  ease: "easeInOut"
+                  duration: 1.5, 
+                  delay: 0.8 + index * 0.15,
+                  ease: "easeOut"
                 }}
               />
             )
           })}
+          
+          {/* Define gradient for lines */}
+          <defs>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(0, 255, 165, 0.8)" />
+              <stop offset="100%" stopColor="rgba(0, 255, 165, 0.1)" />
+            </linearGradient>
+          </defs>
         </svg>
+      </div>
+
+      {/* Central VAE Logo */}
+      <motion.div 
+        className="relative z-20 w-36 h-36 bg-gradient-to-br from-vae-turquoise via-vae-turquoise-light to-vae-turquoise rounded-3xl flex items-center justify-center shadow-2xl"
+        style={{ 
+          boxShadow: '0 0 40px rgba(0, 255, 165, 0.4), 0 0 80px rgba(0, 255, 165, 0.2)' 
+        }}
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        whileHover={{ scale: 1.05 }}
+      >
+        <img 
+          src="/LOGO_01_white.svg" 
+          alt="VAE Systems" 
+          className="w-20 h-20 drop-shadow-lg"
+        />
+      </motion.div>
+
+      {/* Service Nodes */}
+      {services.map((service, index) => {
+        const angle = (index * 60) * Math.PI / 180
+        const x = Math.cos(angle) * service.distance
+        const y = Math.sin(angle) * service.distance
+
+        return (
+          <motion.div
+            key={index}
+            className="absolute w-16 h-16 bg-gradient-to-br from-bg-secondary to-bg-darker border-2 border-vae-turquoise/40 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm group hover:border-vae-turquoise hover:bg-vae-turquoise/10 transition-all duration-300 cursor-pointer z-10"
+            style={{
+              top: '50%',
+              left: '50%',
+              transform: `translate(${x - 32}px, ${y - 32}px)`
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ 
+              duration: 0.6, 
+              delay: 1.2 + index * 0.1,
+              ease: "easeOut"
+            }}
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: '0 0 20px rgba(0, 255, 165, 0.3)'
+            }}
+          >
+            <span className="material-symbols-outlined text-vae-turquoise text-lg group-hover:scale-110 transition-transform">
+              {service.icon}
+            </span>
+            <span className="text-xs text-text-secondary group-hover:text-vae-turquoise transition-colors mt-1 font-medium text-center">
+              {service.label.split(' ')[0]}
+            </span>
+            
+            {/* Node Pulse Effect */}
+            <motion.div
+              className="absolute inset-0 bg-vae-turquoise/20 rounded-xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0, 0.3, 0]
+              }}
+              transition={{
+                duration: 2,
+                delay: 2 + index * 0.3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+        )
+      })}
+
+      {/* Central Glow Effect */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-80 h-80 bg-vae-turquoise/5 rounded-full blur-3xl animate-pulse"></div>
       </div>
     </div>
   )

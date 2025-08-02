@@ -12,11 +12,14 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "framer-motion": "^10.16.0",
+    "@types/three": "^0.178.1",
+    "framer-motion": "^10.18.0",
     "gsap": "^3.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0"
+    "react-router-dom": "^6.15.0",
+    "three": "^0.179.1",
+    "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",

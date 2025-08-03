@@ -149,8 +149,8 @@ const ServicesSection: React.FC = () => {
           className="absolute top-0 left-0 w-full h-full"
           style={{
             background: `
-              radial-gradient(circle at 20% 30%, hsla(157, 100%, 47%, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 70%, hsla(157, 100%, 47%, 0.04) 0%, transparent 50%)
+              radial-gradient(circle at 20% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, hsla(var(--color-vae-turquoise), 0.04) 0%, transparent 50%)
             `
           }}
         />
@@ -162,7 +162,7 @@ const ServicesSection: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
             Unsere Services
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
             Enterprise-grade KI-Lösungen für maximale Effizienz und Datensouveränität
           </p>
         </div>
@@ -205,7 +205,7 @@ const ServicesSection: React.FC = () => {
               <h3 className={`text-xl font-semibold mb-4 leading-tight ${service.isVaektra ? 'text-white' : 'text-white'}`}>
                 {service.title}
               </h3>
-              <p className={`text-sm leading-relaxed mb-6 ${service.isVaektra ? 'text-white/80' : 'text-gray-300'}`}>
+              <p className={`text-sm leading-relaxed mb-6 ${service.isVaektra ? 'text-white/80' : 'text-text-secondary'}`}>
                 {service.description}
               </p>
 
@@ -219,7 +219,7 @@ const ServicesSection: React.FC = () => {
                     <div className={`text-lg font-bold leading-tight mb-1 ${service.isVaektra ? 'text-vae-turquoise' : 'text-vae-turquoise'}`}>
                       {stat.value}
                     </div>
-                    <div className={`text-xs leading-tight break-words ${service.isVaektra ? 'text-white/70' : 'text-gray-400'}`}>
+                    <div className={`text-xs leading-tight break-words ${service.isVaektra ? 'text-white/70' : 'text-text-muted'}`}>
                       {stat.desc}
                     </div>
                   </div>
@@ -229,7 +229,7 @@ const ServicesSection: React.FC = () => {
               {/* Feature List */}
               <ul className="space-y-3 mb-8">
                 {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className={`flex items-center gap-3 text-sm ${service.isVaektra ? 'text-white/80' : 'text-gray-300'}`}>
+                  <li key={featureIndex} className={`flex items-center gap-3 text-sm ${service.isVaektra ? 'text-white/80' : 'text-text-secondary'}`}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`flex-shrink-0 ${service.isVaektra ? 'text-vae-turquoise' : 'text-vae-turquoise'}`}>
                       <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2"/>
                     </svg>
@@ -261,7 +261,7 @@ const ServicesSection: React.FC = () => {
         {/* Source References */}
         <div className="bg-white/5 rounded-2xl p-8 border border-white/10">
           <p className="font-semibold mb-4 text-white">Quellen & Studien:</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-sm text-gray-400">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-sm text-text-muted">
             <span>¹ McKinsey Global Institute: The Age of AI (2023)</span>
             <span>² Gartner: Open Source Software Study (2024)</span>
             <span>³ Red Hat Enterprise Open Source Report (2024)</span>

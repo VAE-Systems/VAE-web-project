@@ -111,8 +111,8 @@ const ContactSection: React.FC = () => {
           className="absolute top-0 left-0 w-full h-full"
           style={{
             background: `
-              radial-gradient(circle at 40% 30%, hsla(157, 100%, 47%, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 60% 70%, hsla(157, 100%, 47%, 0.05) 0%, transparent 50%)
+              radial-gradient(circle at 40% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 60% 70%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%)
             `
           }}
         />

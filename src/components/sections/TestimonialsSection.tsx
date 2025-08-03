@@ -76,8 +76,8 @@ const TestimonialsSection: React.FC = () => {
           className="absolute top-0 left-0 w-full h-full"
           style={{
             background: `
-              radial-gradient(circle at 25% 25%, hsla(157, 100%, 47%, 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 75% 75%, hsla(157, 100%, 47%, 0.04) 0%, transparent 50%)
+              radial-gradient(circle at 25% 25%, hsla(var(--color-vae-turquoise), 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 75% 75%, hsla(var(--color-vae-turquoise), 0.04) 0%, transparent 50%)
             `
           }}
         />

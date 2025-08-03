@@ -69,8 +69,8 @@ const FAQSection: React.FC = () => {
           className="absolute top-0 left-0 w-full h-full"
           style={{
             background: `
-              radial-gradient(circle at 20% 40%, hsla(157, 100%, 47%, 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 80% 60%, hsla(157, 100%, 47%, 0.04) 0%, transparent 50%)
+              radial-gradient(circle at 20% 40%, hsla(var(--color-vae-turquoise), 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 80% 60%, hsla(var(--color-vae-turquoise), 0.04) 0%, transparent 50%)
             `
           }}
         />

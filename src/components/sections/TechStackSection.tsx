@@ -273,4 +273,4 @@ const TechStackSection: React.FC = () => {
   )
 }
 
-export default TechStackSection 
+export default TechStackSection

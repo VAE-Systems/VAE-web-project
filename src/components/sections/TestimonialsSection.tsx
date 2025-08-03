@@ -22,59 +22,99 @@ const TestimonialsSection: React.FC = () => {
 
       if (!sectionRef.current) return
 
-      const trig = { trigger: sectionRef.current, start: 'top 80%' }
+      // Header Animation mit scrub
+      gsap.fromTo(headerRef.current, 
+        {
+          opacity: 0,
+          y: 80
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 90%",
+            end: "top 70%",
+            scrub: 1,
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
 
-      // Header Animation
-      gsap.from(headerRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: trig
-      })
-
-      // Stats Animation with stagger
+      // Stats Animation - jedes Item einzeln mit scrub
       const statItems = statsRef.current?.children
       if (statItems) {
-        gsap.from(statItems, {
-          opacity: 0,
-          y: 40,
-          duration: 1,
-          ease: 'power2.out',
-          stagger: 0.2,
-          delay: 0.3,
-          scrollTrigger: trig
+        Array.from(statItems).forEach((item) => {
+          gsap.fromTo(item as HTMLElement,
+            {
+              opacity: 0,
+              y: 60,
+              scale: 0.8
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: item as HTMLElement,
+                start: "top 95%",
+                end: "top 75%",
+                scrub: 1.2,
+                toggleActions: "play none none reverse"
+              }
+            }
+          )
         })
       }
 
-      // Testimonials Animation
+      // Testimonials Animation - jede Karte einzeln mit scrub
       const testimonialCards = testimonialsRef.current?.children
       if (testimonialCards) {
-        gsap.from(testimonialCards, {
-          opacity: 0,
-          y: 60,
-          duration: 1,
-          ease: 'power2.out',
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: testimonialsRef.current,
-            start: 'top 85%'
-          }
+        Array.from(testimonialCards).forEach((card) => {
+          gsap.fromTo(card as HTMLElement,
+            {
+              opacity: 0,
+              y: 80,
+              scale: 0.9
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: card as HTMLElement,
+                start: "top 95%",
+                end: "top 75%",
+                scrub: 1.4,
+                toggleActions: "play none none reverse"
+              }
+            }
+          )
         })
       }
 
-      // CTA Animation
-      gsap.from(ctaRef.current, {
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        ease: 'power2.out',
-        delay: 0.6,
-        scrollTrigger: {
-          trigger: ctaRef.current,
-          start: 'top 90%'
+      // CTA Animation mit scrub
+      gsap.fromTo(ctaRef.current, 
+        {
+          opacity: 0,
+          y: 60
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: "top 90%",
+            end: "top 75%",
+            scrub: 1.6,
+            toggleActions: "play none none reverse"
+          }
         }
-      })
+      )
     }, sectionRef)
 
     return () => ctx.revert()

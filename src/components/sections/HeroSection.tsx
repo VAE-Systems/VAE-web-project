@@ -17,7 +17,10 @@ const HeroSection: React.FC = () => {
   ]
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
+    <section 
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker"
+    >
       {/* Neural Network Background Animation */}
       <NeuralNetworkBackground />
       

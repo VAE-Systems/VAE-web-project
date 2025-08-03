@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 // Layout Components
 import Header from '@components/layout/Header'
 import Footer from '@components/layout/Footer'
+import SectionNavigation from '@components/navigation/SectionNavigation'
 
 // Pages
 import HomePage from '@components/pages/HomePage'
@@ -19,6 +20,7 @@ const App: React.FC = () => {
     <Router>
       <div className="min-h-screen bg-bg-darker text-text-light">
         <Header />
+        <SectionNavigation />
         
         <main className="pt-20"> {/* Account for fixed header */}
           <Routes>

@@ -85,42 +85,73 @@ const TechStackSection: React.FC = () => {
         })
       })
 
-      gsap.from(headingRef.current, {
-        opacity: 0,
-        y: 30,
-        filter: 'blur(20px)',
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: trig
-      })
+      // Text animations mit scrub
+      gsap.fromTo(headingRef.current, 
+        {
+          opacity: 0,
+          y: 60,
+          filter: 'blur(20px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          ease: "none",
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 90%",
+            end: "top 70%",
+            scrub: 1,
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
 
-      gsap.from(subRef.current, {
-        opacity: 0,
-        y: 20,
-        filter: 'blur(20px)',
-        duration: 1,
-        delay: 0.3,
-        ease: 'power3.out',
-        scrollTrigger: trig
-      })
+      gsap.fromTo(subRef.current, 
+        {
+          opacity: 0,
+          y: 40,
+          filter: 'blur(15px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          ease: "none",
+          scrollTrigger: {
+            trigger: subRef.current,
+            start: "top 90%",
+            end: "top 75%",
+            scrub: 1.2,
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
 
+      // Logo Animationen mit scrub - jedes Logo einzeln
       logoRefs.current.forEach((el, i) => {
         if (!el) return
         const angle = (i * 30 * Math.PI) / 180
         const radius = 200 + (i % 5) * 40
         const x = radius * Math.cos(angle)
         const y = radius * Math.sin(angle)
+        
         gsap.fromTo(
           el,
-          { x, y, opacity: 0 },
+          { x, y, opacity: 0, scale: 0.6 },
           {
             x: 0,
             y: 0,
             opacity: 1,
-            duration: 1.2 + (i % 3) * 0.1,
-            ease: 'power2.out',
-            delay: i * 0.15,
-            scrollTrigger: trig,
+            scale: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 95%",
+              end: "top 75%",
+              scrub: 1.5,
+              toggleActions: "play none none reverse"
+            },
             onStart: () => {
               const img = el.querySelector('img')
               if (img) {
@@ -167,7 +198,7 @@ const TechStackSection: React.FC = () => {
       <div 
         className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20"
         style={{
-          background: 'radial-gradient(circle at center, rgba(var(--vae-turquoise-rgb), 0.2), transparent 70%)'
+          background: 'radial-gradient(circle at center, hsla(var(--color-vae-turquoise), 0.2), transparent 70%)'
         }}
       />
 
@@ -183,7 +214,7 @@ const TechStackSection: React.FC = () => {
           }}
           d="M50 50 C60 40,80 30,90 10"
           style={{
-            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
             opacity: 0
@@ -195,7 +226,7 @@ const TechStackSection: React.FC = () => {
           }}
           d="M50 50 C55 60,70 80,90 90"
           style={{
-            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
             opacity: 0
@@ -207,7 +238,7 @@ const TechStackSection: React.FC = () => {
           }}
           d="M50 50 C40 60,20 80,10 90"
           style={{
-            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
             opacity: 0
@@ -219,7 +250,7 @@ const TechStackSection: React.FC = () => {
           }}
           d="M50 50 C40 40,20 30,10 10"
           style={{
-            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
             opacity: 0
@@ -231,7 +262,7 @@ const TechStackSection: React.FC = () => {
           }}
           d="M50 50 C50 30,50 10,50 0"
           style={{
-            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
             opacity: 0
@@ -243,7 +274,7 @@ const TechStackSection: React.FC = () => {
           }}
           d="M50 50 C60 50,80 50,100 50"
           style={{
-            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
             opacity: 0

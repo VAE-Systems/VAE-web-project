@@ -23,45 +23,70 @@ const FAQSection: React.FC = () => {
 
       if (!sectionRef.current) return
 
-      const trig = { trigger: sectionRef.current, start: 'top 80%' }
+      // Header Animation mit scrub
+      gsap.fromTo(headerRef.current, 
+        {
+          opacity: 0,
+          y: 80
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 90%",
+            end: "top 70%",
+            scrub: 1,
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
 
-      // Header Animation
-      gsap.from(headerRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: trig
-      })
-
-      // FAQ Items Animation
+      // FAQ Items Animation - jedes Item einzeln mit scrub
       const faqItems = faqsRef.current?.children
       if (faqItems) {
-        gsap.from(faqItems, {
-          opacity: 0,
-          y: 40,
-          duration: 0.8,
-          ease: 'power2.out',
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: faqsRef.current,
-            start: 'top 85%'
-          }
+        Array.from(faqItems).forEach((item) => {
+          gsap.fromTo(item as HTMLElement,
+            {
+              opacity: 0,
+              y: 60
+            },
+            {
+              opacity: 1,
+              y: 0,
+              ease: "none",
+              scrollTrigger: {
+                trigger: item as HTMLElement,
+                start: "top 95%",
+                end: "top 80%",
+                scrub: 1.2,
+                toggleActions: "play none none reverse"
+              }
+            }
+          )
         })
       }
 
-      // CTA Animation
-      gsap.from(ctaRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        ease: 'power2.out',
-        delay: 0.5,
-        scrollTrigger: {
-          trigger: ctaRef.current,
-          start: 'top 90%'
+      // CTA Animation mit scrub
+      gsap.fromTo(ctaRef.current, 
+        {
+          opacity: 0,
+          y: 50
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: "top 90%",
+            end: "top 75%",
+            scrub: 1.4,
+            toggleActions: "play none none reverse"
+          }
         }
-      })
+      )
     }, sectionRef)
 
     return () => ctx.revert()
@@ -156,48 +181,83 @@ const FAQSection: React.FC = () => {
         </div>
 
         {/* FAQ Categories */}
-        <div ref={faqsRef}>
+        <div ref={faqsRef} className="space-y-8">
           {faqs.map((category, categoryIndex) => (
-          <div key={categoryIndex} className="mb-12">
-            <h3 className="text-2xl font-semibold text-white mb-6 text-center">
-              {category.category}
-            </h3>
-            <div className="space-y-4">
-              {category.questions.map((faq, questionIndex) => {
-                const faqIndex = categoryIndex * 100 + questionIndex
-                const isOpen = openFAQ === faqIndex
-                
-                return (
-                  <div 
-                    key={questionIndex}
-                    className="bg-gradient-to-br from-white/8 to-white/4 backdrop-blur-xl rounded-2xl border border-white/15 overflow-hidden"
-                  >
-                    <button
-                      className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
-                      onClick={() => toggleFAQ(faqIndex)}
+            <div key={categoryIndex} className="relative">
+              {/* Category Header with improved design */}
+              <div className="flex items-center mb-6">
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent"></div>
+                <div className="px-6 py-2 bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-full border border-vae-turquoise/20">
+                  <h3 className="text-lg font-semibold text-vae-turquoise uppercase tracking-wider">
+                    {category.category}
+                  </h3>
+                </div>
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent"></div>
+              </div>
+              
+              {/* FAQ Items with better spacing */}
+              <div className="space-y-3">
+                {category.questions.map((faq, questionIndex) => {
+                  const faqIndex = categoryIndex * 100 + questionIndex
+                  const isOpen = openFAQ === faqIndex
+                  
+                  return (
+                    <div 
+                      key={questionIndex}
+                      className={`
+                        relative group transition-all duration-300
+                        ${isOpen ? 'transform scale-[1.02]' : ''}
+                      `}
                     >
-                      <span className="text-lg font-medium text-white pr-4">
-                        {faq.question}
-                      </span>
-                      <div className={`flex-shrink-0 w-6 h-6 text-vae-turquoise transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </div>
-                    </button>
-                    
-                    <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <div className="px-8 pb-6">
-                        <div className="text-gray-300 leading-relaxed">
-                          {faq.answer}
+                      {/* FAQ Card */}
+                      <div className={`
+                        bg-gradient-to-br from-white/8 to-white/4 backdrop-blur-xl 
+                        rounded-xl border border-white/15 overflow-hidden
+                        transition-all duration-300 hover:border-vae-turquoise/30
+                        ${isOpen ? 'border-vae-turquoise/40 shadow-lg shadow-vae-turquoise/10' : ''}
+                      `}>
+                        {/* Question Button */}
+                        <button
+                          className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/5 transition-all duration-200"
+                          onClick={() => toggleFAQ(faqIndex)}
+                        >
+                          <span className="text-base font-medium text-white pr-4 leading-relaxed">
+                            {faq.question}
+                          </span>
+                          <div className={`
+                            flex-shrink-0 w-8 h-8 rounded-full bg-vae-turquoise/10 
+                            flex items-center justify-center transition-all duration-300
+                            ${isOpen ? 'rotate-180 bg-vae-turquoise/20' : 'group-hover:bg-vae-turquoise/15'}
+                          `}>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-vae-turquoise">
+                              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </button>
+                        
+                        {/* Answer */}
+                        <div className={`
+                          overflow-hidden transition-all duration-300 ease-out
+                          ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+                        `}>
+                          <div className="px-6 pb-6">
+                            <div className="w-full h-px bg-gradient-to-r from-vae-turquoise/20 via-vae-turquoise/40 to-vae-turquoise/20 mb-4"></div>
+                            <div className="text-gray-300 leading-relaxed text-sm">
+                              {faq.answer}
+                            </div>
+                          </div>
                         </div>
                       </div>
+                      
+                      {/* Subtle connection line for open items */}
+                      {isOpen && (
+                        <div className="absolute -left-2 top-1/2 w-1 h-8 bg-gradient-to-b from-vae-turquoise to-vae-turquoise-dark rounded-full transform -translate-y-1/2 opacity-50"></div>
+                      )}
                     </div>
-                  </div>
-                )
-              })}
+                  )
+                })}
+              </div>
             </div>
-          </div>
           ))}
         </div>
 

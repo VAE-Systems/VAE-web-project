@@ -14,38 +14,76 @@ const ServicesSection: React.FC = () => {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       
       if (reduced) {
+        // Für reduced-motion: Elemente sofort sichtbar machen
         gsap.set([headerRef.current, cardsRef.current], { opacity: 1, y: 0 })
         return
       }
 
-      if (!sectionRef.current) return
+      // Null-Checks für alle Refs
+      if (!sectionRef.current || !headerRef.current || !cardsRef.current) return
 
-      const trig = { trigger: sectionRef.current, start: 'top 80%' }
-
-      // Header Animation
-      gsap.from(headerRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: trig
-      })
-
-      // Cards Animation with stagger
-      const cards = cardsRef.current?.children
-      if (cards) {
-        gsap.from(cards, {
+      // 1. Header Animation - scrub-basiert (bewegt sich mit Scroll)
+      gsap.fromTo(headerRef.current, 
+        {
           opacity: 0,
-          y: 80,
-          duration: 1,
-          ease: 'power2.out',
-          stagger: 0.2,
+          y: 100
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "expo.out",
           scrollTrigger: {
-            trigger: cardsRef.current,
-            start: 'top 85%'
+            trigger: headerRef.current,
+            start: "top 90%",
+            end: "top 30%",
+            scrub: 0.25, // KEIN Delay - sofort gekoppelt
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
+
+      // 2. Cards Animation - jede Karte einzeln mit scrub
+      const cards = Array.from(cardsRef.current.children) as HTMLElement[]
+      
+      if (cards.length > 0) {
+        cards.forEach((card) => {
+          gsap.fromTo(card,
+            {
+              opacity: 0,
+              y: 120,
+              scale: 0.8
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 90%",
+                end: "top 30%",
+                scrub: 0.25, // KEIN Delay - sofort gekoppelt
+                toggleActions: "play none none reverse"
+              }
+            }
+          )
+        })
+      }
+
+      // 3. Section Background - parallax effect
+      if (sectionRef.current) {
+        gsap.to(sectionRef.current.querySelector('.background-gradient'), {
+          yPercent: -50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
           }
         })
       }
+
     }, sectionRef)
 
     return () => ctx.revert()
@@ -87,7 +125,7 @@ const ServicesSection: React.FC = () => {
       description: 'Von der ersten Idee bis zur vollständigen Implementierung. Umfassende Schulungen und kontinuierlicher Support für Ihr Team.',
       stats: [
         { value: '2-4', desc: 'Wochen Setup³' },
-        { value: '100%', desc: 'Team-Adoption' }
+        { value: '100%', desc: 'Team-Adoption' },
       ],
       features: [
         'Hands-on Workshops',
@@ -200,7 +238,7 @@ const ServicesSection: React.FC = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute top-0 left-0 w-full h-full"
+          className="absolute top-0 left-0 w-full h-full background-gradient"
           style={{
             background: `
               radial-gradient(circle at 20% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
@@ -210,10 +248,10 @@ const ServicesSection: React.FC = () => {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="container-vae">
         {/* Section Header */}
         <div className="text-center mb-16" ref={headerRef}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
             Unsere Services
           </h2>
           <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
@@ -298,10 +336,10 @@ const ServicesSection: React.FC = () => {
                   w-full py-3 px-6 rounded-lg font-semibold text-sm uppercase tracking-wider
                   transition-all duration-300 hover:-translate-y-1 hover:shadow-lg
                   ${service.isVaektra 
-                    ? 'bg-vae-turquoise text-white hover:bg-vae-turquoise-dark hover:shadow-vae-turquoise/40' 
+                    ? 'btn-primary' 
                     : service.badge === 'Coming Soon'
-                    ? 'bg-transparent border-2 border-vae-turquoise text-vae-turquoise hover:bg-vae-turquoise hover:text-white hover:shadow-vae-turquoise/30'
-                    : 'bg-white/10 border border-white/20 text-white hover:bg-vae-turquoise hover:border-vae-turquoise hover:shadow-vae-turquoise/30'
+                    ? 'btn-secondary'
+                    : 'btn-ghost'
                   }
                 `}
                 onClick={() => handleServiceClick(service.title)}

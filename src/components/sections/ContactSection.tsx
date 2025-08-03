@@ -29,36 +29,65 @@ const ContactSection: React.FC = () => {
 
       if (!sectionRef.current) return
 
-      const trig = { trigger: sectionRef.current, start: 'top 80%' }
+      // Header Animation mit scrub
+      gsap.fromTo(headerRef.current, 
+        {
+          opacity: 0,
+          y: 80
+        },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 90%",
+            end: "top 70%",
+            scrub: true,
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
 
-      // Header Animation
-      gsap.from(headerRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: trig
-      })
+      // Form Animation mit scrub
+      gsap.fromTo(formRef.current, 
+        {
+          opacity: 0,
+          x: -80
+        },
+        {
+          opacity: 1,
+          x: 0,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: formRef.current,
+            start: "top 90%",
+            end: "top 70%",
+            scrub: true,
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
 
-      // Form Animation
-      gsap.from(formRef.current, {
-        opacity: 0,
-        x: -60,
-        duration: 1,
-        ease: 'power2.out',
-        delay: 0.3,
-        scrollTrigger: trig
-      })
-
-      // Contact Info Animation
-      gsap.from(contactInfoRef.current, {
-        opacity: 0,
-        x: 60,
-        duration: 1,
-        ease: 'power2.out',
-        delay: 0.5,
-        scrollTrigger: trig
-      })
+      // Contact Info Animation mit scrub
+      gsap.fromTo(contactInfoRef.current, 
+        {
+          opacity: 0,
+          x: 80
+        },
+        {
+          opacity: 1,
+          x: 0,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: contactInfoRef.current,
+            start: "top 90%",
+            end: "top 70%",
+            scrub: true,
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
     }, sectionRef)
 
     return () => ctx.revert()

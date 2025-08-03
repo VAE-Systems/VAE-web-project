@@ -3,6 +3,8 @@ import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 import "./Chatbot.css";
 
 interface OrbProps {
+  size?: number;
+  isActive?: boolean;
   hue?: number;
   hoverIntensity?: number;
   rotateOnHover?: boolean;
@@ -10,14 +12,12 @@ interface OrbProps {
 }
 
 export default function Orb({
+  size = 100,
+  isActive = false,
   hue = 0,
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
-}: OrbProps) {
-  const ctnDom = useRef<HTMLDivElement>(null);
-
-  const vert = /* glsl */ `
     precision highp float;
     attribute vec2 position;
     attribute vec2 uv;

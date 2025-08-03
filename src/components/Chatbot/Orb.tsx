@@ -18,6 +18,10 @@ export default function Orb({
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
+}: OrbProps) {
+  const ctnDom = useRef<HTMLDivElement>(null);
+
+  const vert = /* glsl */ `
     precision highp float;
     attribute vec2 position;
     attribute vec2 uv;
@@ -285,5 +289,11 @@ export default function Orb({
     };
   }, [hue, hoverIntensity, rotateOnHover, forceHoverState]);
 
-  return <div ref={ctnDom} className="orb-container" />;
+  return (
+    <div 
+      ref={ctnDom} 
+      className="orb-container"
+      style={{ width: size, height: size }}
+    />
+  );
 }

@@ -1,351 +1,265 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import MaterialIcon, { Icons } from '../ui/MaterialIcon';
+import { MessageCircle, X, Send, Bot, User, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Orb from './Orb';
-import ROICalculator from './ROICalculator';
-import { getChatResponse, ChatMessage, UserRole } from './knowledgeBase';
+import { useChatbot } from './useChatbot';
+import { ROICalculator } from './ROICalculator';
 import './Chatbot.css';
 
 interface ChatbotProps {
   position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
   theme?: 'light' | 'dark' | 'auto';
   primaryColor?: string;
+  showROI?: boolean;
 }
 
 export const Chatbot: React.FC<ChatbotProps> = ({
   position = 'bottom-right',
   theme = 'auto',
-  primaryColor = '#00d4ff'
+  primaryColor = '#6366f1',
+  showROI = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [showROI, setShowROI] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [userRole, setUserRole] = useState<UserRole>('visitor');
-  const [showROICalculator, setShowROICalculator] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-  const [showQuickActions, setShowQuickActions] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const recognitionRef = useRef<any>(null);
 
-  // Initialize speech recognition
-  useEffect(() => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = 'de-DE';
-      
-      recognitionRef.current.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInputValue(transcript);
-        setIsListening(false);
-      };
-      
-      recognitionRef.current.onerror = () => {
-        setIsListening(false);
-      };
-    }
+  const {
+    messages,
+    isTyping,
+    sendMessage,
+    resetConversation,
+    getSuggestedQuestions,
+  } = useChatbot();
 
-    // Check for dark mode
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(mediaQuery.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  // Auto-scroll to bottom
-  useEffect(() => {
+  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
   }, [messages]);
 
-  // Focus input when chat opens
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
+    if (isOpen) {
+      inputRef.current?.focus();
     }
   }, [isOpen]);
 
-  // Welcome message on first open
-  useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      const welcomeMessage: ChatMessage = {
-        id: '1',
-        content: getWelcomeMessage(),
-        sender: 'bot',
-        timestamp: new Date(),
-        role: userRole
-      };
-      setMessages([welcomeMessage]);
+  const handleSend = useCallback(() => {
+    if (inputValue.trim()) {
+      sendMessage(inputValue.trim());
+      setInputValue('');
     }
-  }, [isOpen, messages.length, userRole]);
-
-  const getWelcomeMessage = () => {
-    const messages = {
-      visitor: "👋 Hallo! Ich bin VAE AI Assistant. Wie kann ich Ihnen helfen, Ihre Geschäftsprozesse zu optimieren?",
-      ceo: "👋 Guten Tag! Als CEO interessieren Sie sich sicher für ROI und strategische Vorteile. Lassen Sie uns über Ihre Ziele sprechen.",
-      cto: "👋 Moin! Als CTO möchten Sie sicher technische Details zu unserer KI-Plattform wissen. Fragen Sie mich gerne!",
-      developer: "👋 Hey! Als Developer können Sie mich alles zu APIs, Integration und technischen Details fragen.",
-      marketing: "👋 Hi! Als Marketing-Expert interessieren Sie sich für Use Cases und Erfolgsgeschichten. Lassen Sie uns starten!"
-    };
-    return messages[userRole] || messages.visitor;
-  };
-
-  const handleSendMessage = useCallback(async () => {
-    if (!inputValue.trim()) return;
-
-    const userMessage: ChatMessage = {
-      id: Date.now().toString(),
-      content: inputValue,
-      sender: 'user',
-      timestamp: new Date(),
-      role: userRole
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInputValue('');
-    setIsTyping(true);
-
-    try {
-      const response = await getChatResponse(inputValue, userRole);
-      
-      const botMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        content: response.content,
-        sender: 'bot',
-        timestamp: new Date(),
-        role: userRole,
-        metadata: response.metadata
-      };
-
-      setMessages(prev => [...prev, botMessage]);
-      
-      if (response.metadata?.action === 'show_roi_calculator') {
-        setShowROICalculator(true);
-      }
-    } catch (error) {
-      const errorMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        content: 'Entschuldigung, es gab einen Fehler bei der Verarbeitung. Bitte versuchen Sie es erneut.',
-        sender: 'bot',
-        timestamp: new Date(),
-        role: userRole
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsTyping(false);
-    }
-  }, [inputValue, userRole]);
+  }, [inputValue, sendMessage]);
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSendMessage();
+      handleSend();
     }
-  };
-
-  const toggleListening = () => {
-    if (!recognitionRef.current) return;
-    
-    if (isListening) {
-      recognitionRef.current.stop();
-      setIsListening(false);
-    } else {
-      recognitionRef.current.start();
-      setIsListening(true);
-    }
-  };
-
-  const quickActions = [
-    { label: 'ROI berechnen', action: () => setShowROICalculator(true) },
-    { label: 'Use Cases', action: () => handleQuickAction('use cases') },
-    { label: 'Technik', action: () => handleQuickAction('technik') },
-    { label: 'Preise', action: () => handleQuickAction('preise') }
-  ];
-
-  const handleQuickAction = (query: string) => {
-    setInputValue(query);
-    setTimeout(() => handleSendMessage(), 100);
   };
 
   const positionClasses = {
     'bottom-right': 'bottom-4 right-4',
     'bottom-left': 'bottom-4 left-4',
     'top-right': 'top-4 right-4',
-    'top-left': 'top-4 left-4'
+    'top-left': 'top-4 left-4',
   };
 
-  const currentTheme = isDarkMode ? 'dark' : 'light';
+  const suggestedQuestions = getSuggestedQuestions();
 
   return (
     <>
-      {/* Chat Widget */}
-      <div className={`fixed ${positionClasses[position]} z-50`}>
-        {/* Orb Trigger */}
-        {!isOpen && (
-          <button
-            onClick={() => setIsOpen(true)}
-            className="chatbot-trigger"
-            aria-label="Chat öffnen"
-          >
-            <Orb size={60} isActive={true} />
-            <div className="chatbot-notification">
-              <Icons.Chat size={20} />
-            </div>
-          </button>
-        )}
+      {/* Chat Widget Button */}
+      <motion.button
+        className={`fixed z-50 ${positionClasses[position]} bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300`}
+        onClick={() => setIsOpen(!isOpen)}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+      >
+        <AnimatePresence mode="wait">
+          {isOpen ? (
+            <motion.div
+              key="close"
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <X size={24} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="open"
+              initial={{ rotate: 90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: -90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <MessageCircle size={24} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.button>
 
-        {/* Chat Window */}
+      {/* Chat Window */}
+      <AnimatePresence>
         {isOpen && (
-          <div className={`chatbot-window ${currentTheme}`}>
+          <motion.div
+            className={`fixed z-40 ${positionClasses[position]} w-96 h-[600px] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col`}
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
             {/* Header */}
-            <div className="chatbot-header">
-              <div className="chatbot-header-content">
-                <div className="chatbot-avatar">
-                  <Orb size={32} isActive={true} />
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="relative">
+                    <Orb size={40} hue={220} forceHoverState={true} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">VAE Assistant</h3>
+                    <p className="text-sm opacity-90">AI-Powered Business Solutions</p>
+                  </div>
                 </div>
-                <div className="chatbot-info">
-                  <h3 className="chatbot-title">VAE AI Assistant</h3>
-                  <p className="chatbot-subtitle">Ihre KI für Geschäftsprozesse</p>
-                </div>
-                <div className="chatbot-controls">
-                  <button
-                    onClick={() => setShowQuickActions(!showQuickActions)}
-                    className="chatbot-control-btn"
-                    aria-label="Quick Actions"
-                  >
-                    {showQuickActions ? 
-                      <Icons.ExpandLess size={16} /> : 
-                      <Icons.ExpandMore size={16} />
-                    }
-                  </button>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="chatbot-control-btn"
-                    aria-label="Chat schließen"
-                  >
-                    <Icons.Close size={16} />
-                  </button>
-                </div>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <X size={20} />
+                </button>
               </div>
+            </div>
 
-              {/* Quick Actions */}
-              {showQuickActions && (
-                <div className="chatbot-quick-actions">
-                  {quickActions.map((action, index) => (
+            {/* ROI Calculator Toggle */}
+            {showROI && (
+              <button
+                onClick={() => setShowROI(!showROI)}
+                className="flex items-center justify-between px-4 py-2 bg-gray-50 hover:bg-gray-100 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-700">ROI Calculator</span>
+                {showROI ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+            )}
+
+            {/* ROI Calculator */}
+            {showROI && (
+              <div className="border-b">
+                <ROICalculator />
+              </div>
+            )}
+
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              <AnimatePresence>
+                {messages.map((message, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[80%] rounded-lg p-3 ${
+                        message.role === 'user'
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}
+                    >
+                      <div className="flex items-start space-x-2">
+                        {message.role === 'assistant' && (
+                          <Bot size={16} className="flex-shrink-0 mt-0.5" />
+                        )}
+                        <div className="text-sm">{message.content}</div>
+                        {message.role === 'user' && (
+                          <User size={16} className="flex-shrink-0 mt-0.5" />
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+
+              {isTyping && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex justify-start"
+                >
+                  <div className="bg-gray-100 rounded-lg p-3">
+                    <div className="flex space-x-1">
+                      <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity }}
+                        className="w-2 h-2 bg-gray-400 rounded-full"
+                      />
+                      <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.1 }}
+                        className="w-2 h-2 bg-gray-400 rounded-full"
+                      />
+                      <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                        className="w-2 h-2 bg-gray-400 rounded-full"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Suggested Questions */}
+              {messages.length === 0 && suggestedQuestions.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-sm text-gray-600">Suggested questions:</p>
+                  {suggestedQuestions.map((question, index) => (
                     <button
                       key={index}
-                      onClick={action.action}
-                      className="quick-action-btn"
+                      onClick={() => {
+                        sendMessage(question);
+                      }}
+                      className="w-full text-left p-2 text-sm bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
                     >
-                      {action.label}
+                      {question}
                     </button>
                   ))}
                 </div>
               )}
-            </div>
 
-            {/* Messages */}
-            <div className="chatbot-messages">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`message ${message.sender}`}
-                >
-                  <div className="message-avatar">
-                    {message.sender === 'bot' ? 
-                      <Icons.SmartToy size={16} /> : 
-                      <Icons.Person size={16} />
-                    }
-                  </div>
-                  <div className="message-content">
-                    <div className="message-text">{message.content}</div>
-                    <div className="message-time">
-                      {message.timestamp.toLocaleTimeString('de-DE', {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </div>
-                  </div>
-                </div>
-              ))}
-              
-              {isTyping && (
-                <div className="message bot typing">
-                  <div className="message-avatar">
-                    <Icons.SmartToy size={16} />
-                  </div>
-                  <div className="message-content">
-                    <div className="typing-indicator">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                  </div>
-                </div>
-              )}
-              
               <div ref={messagesEndRef} />
             </div>
 
             {/* Input */}
-            <div className="chatbot-input-container">
-              <div className="chatbot-input-wrapper">
+            <div className="border-t p-4">
+              <div className="flex space-x-2">
                 <input
                   ref={inputRef}
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Nachricht eingeben..."
-                  className="chatbot-input"
+                  placeholder="Type your message..."
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  disabled={isTyping}
                 />
-                <div className="chatbot-input-actions">
-                  {recognitionRef.current && (
-                    <button
-                      onClick={toggleListening}
-                      className={`chatbot-voice-btn ${isListening ? 'listening' : ''}`}
-                      aria-label="Spracheingabe"
-                    >
-                      {isListening ? 
-                        <Icons.MicOff size={16} /> : 
-                        <Icons.Mic size={16} />
-                      }
-                    </button>
-                  )}
-                  <button
-                    onClick={handleSendMessage}
-                    disabled={!inputValue.trim()}
-                    className="chatbot-send-btn"
-                    aria-label="Senden"
-                  >
-                    <Icons.Send size={16} />
-                  </button>
-                </div>
+                <button
+                  onClick={handleSend}
+                  disabled={!inputValue.trim() || isTyping}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <Send size={20} />
+                </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
-      </div>
-
-      {/* ROI Calculator Modal */}
-      {showROICalculator && (
-        <div className="chatbot-modal-overlay" onClick={() => setShowROICalculator(false)}>
-          <div className="chatbot-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="chatbot-modal-header">
-              <h3>ROI Rechner</h3>
-              <button onClick={() => setShowROICalculator(false)}>
-                <Icons.Close size={20} />
-              </button>
-            </div>
-            <ROICalculator onClose={() => setShowROICalculator(false)} />
-          </div>
-        </div>
-      )}
+      </AnimatePresence>
     </>
   );
 };

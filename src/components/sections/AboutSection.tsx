@@ -54,7 +54,7 @@ const AboutSection: React.FC = () => {
   ]
 
   return (
-    <section id="about" className="relative py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
+    <section id="about" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -155,7 +155,7 @@ const AboutSection: React.FC = () => {
               Lassen Sie uns gemeinsam eine maßgeschneiderte Lösung entwickeln, 
               die perfekt zu Ihren Anforderungen passt.
             </p>
-            <button className="bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
+            <button className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
               Kostenloses Beratungsgespräch
             </button>
           </div>

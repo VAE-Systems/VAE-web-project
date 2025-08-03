@@ -142,7 +142,7 @@ const ServicesSection: React.FC = () => {
   }
 
   return (
-    <section id="services" className="relative py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800">
+    <section id="services" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -178,7 +178,7 @@ const ServicesSection: React.FC = () => {
                 backdrop-blur-xl border border-white/15 
                 transition-all duration-300 hover:-translate-y-2 
                 hover:shadow-xl hover:shadow-vae-turquoise/20
-                ${service.isVaektra ? 'bg-gradient-to-br from-gray-900/90 to-vae-turquoise/20 border-vae-turquoise/30' : ''}
+                ${service.isVaektra ? 'bg-gradient-to-br from-bg-darker/90 to-vae-turquoise/20 border-vae-turquoise/30' : ''}
               `}
             >
               {/* Top Border Effect */}
@@ -244,8 +244,10 @@ const ServicesSection: React.FC = () => {
                   w-full py-3 px-6 rounded-lg font-semibold text-sm uppercase tracking-wider
                   transition-all duration-300 hover:-translate-y-1 hover:shadow-lg
                   ${service.isVaektra 
-                    ? 'bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-white hover:shadow-vae-turquoise/30' 
-                    : 'bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-white hover:shadow-vae-turquoise/30'
+                    ? 'bg-vae-turquoise text-white hover:bg-vae-turquoise-dark hover:shadow-vae-turquoise/40' 
+                    : service.badge === 'Coming Soon'
+                    ? 'bg-transparent border-2 border-vae-turquoise text-vae-turquoise hover:bg-vae-turquoise hover:text-white hover:shadow-vae-turquoise/30'
+                    : 'bg-white/10 border border-white/20 text-white hover:bg-vae-turquoise hover:border-vae-turquoise hover:shadow-vae-turquoise/30'
                   }
                 `}
                 onClick={() => handleServiceClick(service.title)}

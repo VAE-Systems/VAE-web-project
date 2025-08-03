@@ -198,7 +198,7 @@ const NeuralHeroSection: React.FC = () => {
   }, [mousePosition.x, mousePosition.y])
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-bg-darker">
       {/* Neural Network Background */}
       <div 
         ref={mountRef} 

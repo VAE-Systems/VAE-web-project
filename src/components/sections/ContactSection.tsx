@@ -104,7 +104,7 @@ const ContactSection: React.FC = () => {
   }
 
   return (
-    <section id="contact" className="relative py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800">
+    <section id="contact" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -225,7 +225,7 @@ const ContactSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-6 bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-white font-semibold rounded-lg hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="w-full py-3 px-6 bg-vae-turquoise hover:bg-vae-turquoise-dark text-white font-semibold rounded-lg hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
               </button>

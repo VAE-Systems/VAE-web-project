@@ -93,24 +93,204 @@
   }
   
   /* Buttons */
-  .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 
-           bg-vae-turquoise text-vae-black font-medium rounded-lg
-           transition-all duration-300 hover:bg-vae-turquoise-400
-           hover:shadow-[var(--shadow-glow)] focus:outline-none
-           focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2
-           focus:ring-offset-bg-darker;
-  }
+/* === CSS Variables === */
+:root {
+  /* Colors - HSL Values for easy manipulation */
+  --color-vae-turquoise: 157 100% 47%;
+  --color-vae-turquoise-rgb: 0, 255, 165;
+  --color-vae-black: 0 0% 4%;
   
-  .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3
-           border border-vae-turquoise text-vae-turquoise font-medium rounded-lg
-           transition-all duration-300 hover:bg-vae-turquoise hover:text-vae-black
-           focus:outline-none focus:ring-2 focus:ring-vae-turquoise
-           focus:ring-offset-2 focus:ring-offset-bg-darker;
-  }
+  /* Background Colors */
+  --color-bg-darker: 0 0% 4%;
+  --color-bg-dark: 0 0% 8%;
+  --color-bg-secondary: 0 0% 12%;
   
-  .btn-ghost {
+  /* Text Colors */
+  --color-text-light: 0 0% 95%;
+  --color-text-secondary: 0 0% 100% / 0.7;
+  --color-text-muted: 0 0% 80% / 0.8;
+  
+  /* Typography Scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+  
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-base: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Effects */
+  --shadow-glow: 0 0 20px hsla(var(--color-vae-turquoise), 0.3);
+  --shadow-glow-strong: 0 0 30px hsla(var(--color-vae-turquoise), 0.5);
+  --blur-glass: 16px;
+  
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-base: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  
+  /* Animation Durations */
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+}
+
+/* === VAE Button Components === */
+.btn-primary {
+  @apply inline-flex items-center justify-center px-8 py-3 text-base font-semibold rounded-xl bg-vae-turquoise text-bg-darker transition-all duration-300 hover:bg-vae-turquoise-400 hover:shadow-lg hover:shadow-vae-turquoise/25 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-8 py-3 text-base font-semibold rounded-xl border border-vae-turquoise text-vae-turquoise bg-transparent transition-all duration-300 hover:bg-vae-turquoise hover:text-bg-darker hover:shadow-lg hover:shadow-vae-turquoise/25 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-lg text-gray-300 bg-transparent transition-all duration-300 hover:text-vae-turquoise hover:bg-white/5 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+}
+
+/* === VAE Card Components === */
+.card-vae {
+  @apply bg-gradient-to-br from-white/8 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/15 hover:border-vae-turquoise/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-vae-turquoise/10;
+}
+
+/* === VAE Layout Components === */
+.container-vae {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* === VAE Text Components === */
+.text-gradient {
+  @apply bg-gradient-to-r from-vae-turquoise to-vae-turquoise-300 bg-clip-text text-transparent;
+}
+
+/* === VAE Navigation Components === */
+.nav-link {
+  @apply text-text-secondary hover:text-vae-turquoise transition-colors duration-300 font-medium;
+}
+
+.nav-link.active {
+  @apply text-vae-turquoise;
+}
+
+/* === VAE Effect Utilities === */
+.glow-turquoise {
+  box-shadow: var(--shadow-glow);
+}
+
+.glow-turquoise-strong {
+  box-shadow: var(--shadow-glow-strong);
+}
+
+.backdrop-glass {
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+}
+
+/* === Custom Scrollbar === */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--color-vae-turquoise)) hsl(var(--color-bg-secondary));
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: hsl(var(--color-bg-secondary));
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: hsl(var(--color-vae-turquoise));
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: hsl(157 100% 60%);
+}
+
+/* === VAE Animations === */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsla(var(--color-vae-turquoise), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px hsla(var(--color-vae-turquoise), 0.6);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in var(--duration-base) ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up var(--duration-base) ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* === Accessibility === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === Focus Indicators === */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+}  .btn-ghost {
     @apply inline-flex items-center justify-center px-6 py-3
            text-text-light font-medium rounded-lg
            transition-all duration-300 hover:bg-bg-secondary

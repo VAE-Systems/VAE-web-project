@@ -69,7 +69,7 @@ const TestimonialsSection: React.FC = () => {
   }
 
   return (
-    <section id="testimonials" className="relative py-24 bg-gradient-to-br from-slate-800 via-gray-900 to-slate-800">
+    <section id="testimonials" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -163,7 +163,7 @@ const TestimonialsSection: React.FC = () => {
               Kostenloses Erstgespräch und unverbindliche Beratung.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
+              <button className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
                 Projekt besprechen
               </button>
               <button className="border border-vae-turquoise text-vae-turquoise px-8 py-3 rounded-lg font-semibold hover:bg-vae-turquoise/10 transition-all duration-300">

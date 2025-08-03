@@ -62,7 +62,7 @@ const FAQSection: React.FC = () => {
   }
 
   return (
-    <section id="faq" className="relative py-24 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800">
+    <section id="faq" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -142,7 +142,7 @@ const FAQSection: React.FC = () => {
               Kontaktieren Sie uns für eine unverbindliche Beratung.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
+              <button className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
                 Beratungstermin buchen
               </button>
               <a 

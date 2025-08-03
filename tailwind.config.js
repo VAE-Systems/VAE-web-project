@@ -15,17 +15,19 @@ export default {
         
         // VAE Turquoise Palette
         'vae-turquoise': {
-          DEFAULT: 'hsl(157, 100%, 47%)', // #00ffa5
-          50: 'hsl(157, 100%, 95%)',
-          100: 'hsl(157, 100%, 85%)',
-          200: 'hsl(157, 100%, 75%)',
-          300: 'hsl(157, 100%, 65%)',
-          400: 'hsl(157, 100%, 55%)',
-          500: 'hsl(157, 100%, 47%)', // Main color
-          600: 'hsl(157, 100%, 40%)',
-          700: 'hsl(157, 100%, 35%)',
-          800: 'hsl(157, 100%, 30%)',
-          900: 'hsl(157, 100%, 25%)',
+          DEFAULT: 'hsl(157, 100%, 47%)', // #00ffa5 - Main brand color
+          50: 'hsl(157, 100%, 95%)',      // Ultra light
+          100: 'hsl(157, 100%, 85%)',     // Very light
+          200: 'hsl(157, 100%, 75%)',     // Light
+          300: 'hsl(157, 100%, 65%)',     // Medium light
+          400: 'hsl(157, 100%, 55%)',     // Medium
+          500: 'hsl(157, 100%, 47%)',     // Main color (DEFAULT)
+          600: 'hsl(157, 100%, 40%)',     // Medium dark
+          700: 'hsl(157, 100%, 35%)',     // Dark
+          800: 'hsl(157, 100%, 30%)',     // Very dark
+          900: 'hsl(157, 100%, 25%)',     // Ultra dark
+          'light': 'hsl(157, 100%, 60%)', // Shorthand for light variant
+          'dark': 'hsl(157, 100%, 35%)',  // Shorthand for dark variant
         },
         
         // Background Colors

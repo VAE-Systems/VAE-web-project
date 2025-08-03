@@ -1,6 +1,56 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const ServicesSection: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const ctx = gsap.context(() => {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      
+      if (reduced) {
+        gsap.set([headerRef.current, cardsRef.current], { opacity: 1, y: 0 })
+        return
+      }
+
+      if (!sectionRef.current) return
+
+      const trig = { trigger: sectionRef.current, start: 'top 80%' }
+
+      // Header Animation
+      gsap.from(headerRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: trig
+      })
+
+      // Cards Animation with stagger
+      const cards = cardsRef.current?.children
+      if (cards) {
+        gsap.from(cards, {
+          opacity: 0,
+          y: 80,
+          duration: 1,
+          ease: 'power2.out',
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 85%'
+          }
+        })
+      }
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
   const services = [
     {
       icon: (
@@ -142,7 +192,11 @@ const ServicesSection: React.FC = () => {
   }
 
   return (
-    <section id="services" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
+    <section 
+      id="services" 
+      className="relative py-20 overflow-hidden"
+      ref={sectionRef}
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -158,7 +212,7 @@ const ServicesSection: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" ref={headerRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
             Unsere Services
           </h2>
@@ -168,7 +222,7 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" ref={cardsRef}>
           {services.map((service, index) => (
             <div 
               key={index}

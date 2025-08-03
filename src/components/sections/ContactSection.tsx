@@ -1,6 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const ContactSection: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
+  const contactInfoRef = useRef<HTMLDivElement>(null)
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -8,6 +15,54 @@ const ContactSection: React.FC = () => {
     service: '',
     message: ''
   })
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const ctx = gsap.context(() => {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      
+      if (reduced) {
+        gsap.set([headerRef.current, formRef.current, contactInfoRef.current], { opacity: 1, y: 0 })
+        return
+      }
+
+      if (!sectionRef.current) return
+
+      const trig = { trigger: sectionRef.current, start: 'top 80%' }
+
+      // Header Animation
+      gsap.from(headerRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: trig
+      })
+
+      // Form Animation
+      gsap.from(formRef.current, {
+        opacity: 0,
+        x: -60,
+        duration: 1,
+        ease: 'power2.out',
+        delay: 0.3,
+        scrollTrigger: trig
+      })
+
+      // Contact Info Animation
+      gsap.from(contactInfoRef.current, {
+        opacity: 0,
+        x: 60,
+        duration: 1,
+        ease: 'power2.out',
+        delay: 0.5,
+        scrollTrigger: trig
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -104,7 +159,11 @@ const ContactSection: React.FC = () => {
   }
 
   return (
-    <section id="contact" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
+    <section 
+      id="contact" 
+      className="relative py-20 bg-bg-dark"
+      ref={sectionRef}
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -120,7 +179,7 @@ const ContactSection: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" ref={headerRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
             Kontakt
           </h2>
@@ -131,7 +190,7 @@ const ContactSection: React.FC = () => {
 
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/15">
+          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/15" ref={formRef}>
             <h3 className="text-2xl font-semibold text-white mb-6">
               Nachricht senden
             </h3>
@@ -245,7 +304,7 @@ const ContactSection: React.FC = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div className="space-y-8" ref={contactInfoRef}>
             <div>
               <h3 className="text-2xl font-semibold text-white mb-6">
                 Kontaktinformationen

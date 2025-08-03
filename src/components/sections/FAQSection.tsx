@@ -1,7 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const FAQSection: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const faqsRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
   const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const ctx = gsap.context(() => {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      
+      if (reduced) {
+        gsap.set([headerRef.current, faqsRef.current, ctaRef.current], { opacity: 1, y: 0 })
+        return
+      }
+
+      if (!sectionRef.current) return
+
+      const trig = { trigger: sectionRef.current, start: 'top 80%' }
+
+      // Header Animation
+      gsap.from(headerRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: trig
+      })
+
+      // FAQ Items Animation
+      const faqItems = faqsRef.current?.children
+      if (faqItems) {
+        gsap.from(faqItems, {
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: 'power2.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: faqsRef.current,
+            start: 'top 85%'
+          }
+        })
+      }
+
+      // CTA Animation
+      gsap.from(ctaRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        ease: 'power2.out',
+        delay: 0.5,
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: 'top 90%'
+        }
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
 
   const faqs = [
     {
@@ -62,7 +126,11 @@ const FAQSection: React.FC = () => {
   }
 
   return (
-    <section id="faq" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
+    <section 
+      id="faq" 
+      className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary"
+      ref={sectionRef}
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -78,7 +146,7 @@ const FAQSection: React.FC = () => {
 
       <div className="relative max-w-4xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" ref={headerRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
             Häufige Fragen
           </h2>
@@ -88,7 +156,8 @@ const FAQSection: React.FC = () => {
         </div>
 
         {/* FAQ Categories */}
-        {faqs.map((category, categoryIndex) => (
+        <div ref={faqsRef}>
+          {faqs.map((category, categoryIndex) => (
           <div key={categoryIndex} className="mb-12">
             <h3 className="text-2xl font-semibold text-white mb-6 text-center">
               {category.category}
@@ -129,10 +198,11 @@ const FAQSection: React.FC = () => {
               })}
             </div>
           </div>
-        ))}
+          ))}
+        </div>
 
         {/* Still have questions CTA */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center" ref={ctaRef}>
           <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-8 border border-vae-turquoise/20">
             <h3 className="text-2xl font-semibold text-white mb-4">
               Noch Fragen?

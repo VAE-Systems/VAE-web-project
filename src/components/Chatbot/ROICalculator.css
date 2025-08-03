@@ -1,0 +1,120 @@
+.roi-calculator {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.roi-calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.roi-calculator-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.roi-close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.roi-close-button:hover {
+  color: #333;
+}
+
+.roi-role-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.roi-role-button {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.roi-role-button:hover {
+  background: #e9e9e9;
+}
+
+.roi-role-button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.roi-input-group {
+  margin-bottom: 15px;
+}
+
+.roi-input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #444;
+}
+
+.roi-input-group input,
+.roi-input-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.roi-input-group input[type="range"] {
+  padding: 0;
+}
+
+.roi-results {
+  margin-top: 25px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.roi-result-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.roi-result-item span:first-child {
+  font-weight: 500;
+}
+
+.action-buttons-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.action-button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.action-button:hover {
+  background: #0069d9;
+}

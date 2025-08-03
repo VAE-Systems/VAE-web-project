@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+
 const techStack = [
   { name: 'TensorFlow', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', website: 'https://tensorflow.org' },
   { name: 'PyTorch', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', website: 'https://pytorch.org' },
@@ -26,7 +27,7 @@ const techStack = [
  * 
  * Features:
  * - GSAP animations with ScrollTrigger
- * - Animated cables/connections
+ * - Animated cables/connections  
  * - Radial background effect
  * - Interactive hover animations
  * - VAE design system integration
@@ -56,14 +57,12 @@ const TechStackSection: React.FC = () => {
 
       const trig = { trigger: sectionRef.current, start: 'top 80%' }
 
-      // Radial background animation
       gsap.fromTo(
         '.radial-bg',
         { scale: 0, opacity: 0.6 },
         { scale: 1, opacity: 1, duration: 2, ease: 'power2.out', scrollTrigger: trig }
       )
 
-      // Cable animations
       cableRefs.current.forEach((path, i) => {
         if (!path) return
         const length = path.getTotalLength()
@@ -86,7 +85,6 @@ const TechStackSection: React.FC = () => {
         })
       })
 
-      // Heading animation
       gsap.from(headingRef.current, {
         opacity: 0,
         y: 30,
@@ -96,7 +94,6 @@ const TechStackSection: React.FC = () => {
         scrollTrigger: trig
       })
 
-      // Subtitle animation
       gsap.from(subRef.current, {
         opacity: 0,
         y: 20,
@@ -107,14 +104,12 @@ const TechStackSection: React.FC = () => {
         scrollTrigger: trig
       })
 
-      // Logo animations
       logoRefs.current.forEach((el, i) => {
         if (!el) return
         const angle = (i * 30 * Math.PI) / 180
         const radius = 200 + (i % 5) * 40
         const x = radius * Math.cos(angle)
         const y = radius * Math.sin(angle)
-        
         gsap.fromTo(
           el,
           { x, y, opacity: 0 },
@@ -135,7 +130,6 @@ const TechStackSection: React.FC = () => {
           }
         )
 
-        // Hover animations
         const tl = gsap.timeline({ paused: true })
         tl.to(el, { 
           boxShadow: '0 0 20px rgba(0,255,165,0.6)', 
@@ -173,7 +167,7 @@ const TechStackSection: React.FC = () => {
       <div 
         className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20"
         style={{
-          background: 'radial-gradient(circle at center, hsla(var(--vae-turquoise-hsl) / 0.2), transparent 70%)'
+          background: 'radial-gradient(circle at center, rgba(var(--vae-turquoise-rgb), 0.2), transparent 70%)'
         }}
       />
 
@@ -188,51 +182,87 @@ const TechStackSection: React.FC = () => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C60 40,80 30,90 10"
-          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
+          style={{
+            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            strokeWidth: '1.5',
+            fill: 'none',
+            opacity: 0
+          }}
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C55 60,70 80,90 90"
-          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
+          style={{
+            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            strokeWidth: '1.5',
+            fill: 'none',
+            opacity: 0
+          }}
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C40 60,20 80,10 90"
-          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
+          style={{
+            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            strokeWidth: '1.5',
+            fill: 'none',
+            opacity: 0
+          }}
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C40 40,20 30,10 10"
-          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
+          style={{
+            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            strokeWidth: '1.5',
+            fill: 'none',
+            opacity: 0
+          }}
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C50 30,50 10,50 0"
-          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
+          style={{
+            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            strokeWidth: '1.5',
+            fill: 'none',
+            opacity: 0
+          }}
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C60 50,80 50,100 50"
-          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
+          style={{
+            stroke: 'rgba(var(--vae-turquoise-rgb), 0.3)',
+            strokeWidth: '1.5',
+            fill: 'none',
+            opacity: 0
+          }}
         />
       </svg>
 
-      <div className="container-vae">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
           <h3 
             ref={headingRef}
-            className="text-4xl md:text-5xl font-bold mb-3 gradient-text-vae"
+            className="text-4xl font-bold mb-3"
+            style={{
+              background: 'linear-gradient(135deg, var(--vae-turquoise), var(--vae-turquoise))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}
           >
             Unser Technologie-Fundament
           </h3>
@@ -245,14 +275,24 @@ const TechStackSection: React.FC = () => {
         </div>
 
         {/* Tech Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6 max-w-6xl mx-auto">
+        <div 
+          className="grid gap-8 max-w-5xl mx-auto"
+          style={{ 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))'
+          }}
+        >
           {techStack.map((tech, i) => (
             <a
               key={tech.name}
               href={tech.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="tech-logo-item flex flex-col items-center justify-center gap-2 p-4 bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-1 hover:scale-105 group"
+              className="tech-logo-item flex flex-col items-center justify-center gap-2 p-4 rounded-xl transition-all duration-300"
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(8px)'
+              }}
               ref={el => {
                 logoRefs.current[i] = el
               }}
@@ -260,9 +300,14 @@ const TechStackSection: React.FC = () => {
               <img 
                 src={tech.logo} 
                 alt={tech.name}
-                className="w-12 h-12 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                className="w-12 h-12 object-contain transition-all duration-300"
+                style={{
+                  filter: 'grayscale(100%)'
+                }}
               />
-              <span className="text-sm text-vae-white text-center font-medium">
+              <span 
+                className="text-sm text-center font-medium text-text-light"
+              >
                 {tech.name}
               </span>
             </a>

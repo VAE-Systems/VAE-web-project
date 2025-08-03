@@ -12,7 +12,40 @@
 /* VAE Design System - CSS Custom Properties */
 @layer base {
   :root {
-    /* VAE Color System - HSL for better manipulation */
+    /* VAE Branding Colors - Original System */
+    --vae-black: hsl(0, 0%, 2%);
+    --vae-black-soft: hsl(0, 0%, 6%);
+    --vae-black-lighter: hsl(0, 0%, 10%);
+    
+    /* VAE Türkis Palette - Original */
+    --vae-turquoise: hsl(157, 100%, 47%);
+    --vae-turquoise-dark: hsl(157, 100%, 35%);
+    --vae-turquoise-light: hsl(157, 100%, 60%);
+    --vae-turquoise-neon: hsl(157, 100%, 50%);
+    --vae-turquoise-rgb: 0, 255, 165;
+    
+    /* Background Colors - Original */
+    --bg-dark: hsl(0, 0%, 8%);
+    --bg-darker: hsl(0, 0%, 4%);
+    --bg-secondary: hsl(0, 0%, 12%);
+    
+    /* Text Colors - Original */
+    --vae-white: hsl(0, 0%, 100%);
+    --text-light: hsl(0, 0%, 95%);
+    --text-muted: hsla(0, 0%, 80%, 0.8);
+    --text-secondary: hsla(0, 0%, 100%, 0.7);
+    --vae-text-primary: hsl(0, 0%, 95%);
+    --vae-text-secondary: hsla(0, 0%, 100%, 0.85);
+    --vae-text-muted: hsla(0, 0%, 80%, 0.8);
+    
+    /* Glow Effects - Original */
+    --glow-turquoise: 0 0 20px hsla(157, 100%, 47%, 0.6);
+    --glow-turquoise-strong: 0 0 40px hsla(157, 100%, 47%, 0.8);
+    --glow-turquoise-ultra: 0 0 60px hsla(157, 100%, 47%, 1.0);
+    --shadow-turquoise: 0 8px 32px hsla(157, 100%, 47%, 0.3);
+    --shadow-turquoise-glow: 0 0 40px hsla(157, 100%, 47%, 0.5);
+    
+    /* Modern Tailwind compatibility */
     --color-vae-turquoise: 157 100% 47%;
     --color-vae-turquoise-rgb: 0, 255, 165;
     --color-vae-black: 0 0% 4%;
@@ -128,6 +161,24 @@
   /* VAE Card Components */
   .card-vae {
     @apply bg-gradient-to-br from-white/8 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/15 hover:border-vae-turquoise/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-vae-turquoise/10;
+  }
+  
+  /* Tech Stack Components */
+  .tech-logo-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .tech-logo-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(var(--vae-turquoise-rgb), 0.3);
+  }
+  
+  .tech-logo-item img {
+    transition: filter 0.3s ease;
+  }
+  
+  .tech-logo-item:hover img {
+    filter: grayscale(0%) !important;
   }
   
   /* VAE Text Components */

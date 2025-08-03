@@ -1,6 +1,84 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const TestimonialsSection: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
+  const testimonialsRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const ctx = gsap.context(() => {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      
+      if (reduced) {
+        gsap.set([headerRef.current, statsRef.current, testimonialsRef.current, ctaRef.current], { opacity: 1, y: 0 })
+        return
+      }
+
+      if (!sectionRef.current) return
+
+      const trig = { trigger: sectionRef.current, start: 'top 80%' }
+
+      // Header Animation
+      gsap.from(headerRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: trig
+      })
+
+      // Stats Animation with stagger
+      const statItems = statsRef.current?.children
+      if (statItems) {
+        gsap.from(statItems, {
+          opacity: 0,
+          y: 40,
+          duration: 1,
+          ease: 'power2.out',
+          stagger: 0.2,
+          delay: 0.3,
+          scrollTrigger: trig
+        })
+      }
+
+      // Testimonials Animation
+      const testimonialCards = testimonialsRef.current?.children
+      if (testimonialCards) {
+        gsap.from(testimonialCards, {
+          opacity: 0,
+          y: 60,
+          duration: 1,
+          ease: 'power2.out',
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: testimonialsRef.current,
+            start: 'top 85%'
+          }
+        })
+      }
+
+      // CTA Animation
+      gsap.from(ctaRef.current, {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: 'power2.out',
+        delay: 0.6,
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: 'top 90%'
+        }
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
   const testimonials = [
     {
       name: 'Dr. Sarah Weber',
@@ -69,7 +147,11 @@ const TestimonialsSection: React.FC = () => {
   }
 
   return (
-    <section id="testimonials" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
+    <section 
+      id="testimonials" 
+      className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary"
+      ref={sectionRef}
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -85,7 +167,7 @@ const TestimonialsSection: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" ref={headerRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
             Erfolgsgeschichten
           </h2>
@@ -95,7 +177,7 @@ const TestimonialsSection: React.FC = () => {
         </div>
 
         {/* Success Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20" ref={statsRef}>
           {successMetrics.map((metric, index) => (
             <div 
               key={index}
@@ -115,7 +197,7 @@ const TestimonialsSection: React.FC = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" ref={testimonialsRef}>
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}
@@ -153,7 +235,7 @@ const TestimonialsSection: React.FC = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center" ref={ctaRef}>
           <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-8 border border-vae-turquoise/20">
             <h3 className="text-2xl font-semibold text-white mb-4">
               Werden Sie unser nächster Erfolg

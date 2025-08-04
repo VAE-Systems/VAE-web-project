@@ -209,7 +209,7 @@ const TestimonialsSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16" ref={headerRef}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
-            Erfolgsgeschichten
+            Erfolgsgeschichten 
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Unsere Kunden vertrauen auf VAE Systems für ihre kritischen KI- und Infrastruktur-Projekte.

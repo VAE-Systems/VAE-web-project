@@ -124,8 +124,8 @@ const ContactSection: React.FC = () => {
         </svg>
       ),
       label: 'Telefon',
-      value: '+49 (0) 123 456 789',
-      link: 'tel:+491234567890'
+      value: '+49 (0) 151 730 24549',
+      link: 'tel:+4915173024549'
     },
     {
       icon: (
@@ -135,7 +135,7 @@ const ContactSection: React.FC = () => {
         </svg>
       ),
       label: 'Standort',
-      value: 'Berlin, Deutschland',
+      value: 'Heidelberg/Eppelheim, Deutschland',
       link: null
     },
     {

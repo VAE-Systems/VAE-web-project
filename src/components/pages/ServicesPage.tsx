@@ -141,37 +141,20 @@ const ServicesPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Page Header with Navigation */}
-      <div className="fixed top-0 left-0 right-0 z-50 backdrop-glass border-b border-vae-turquoise/30">
-        <div className="container-vae">
-          <div className="flex items-center justify-between h-16">
-            {/* Back to Home */}
-            <button 
-              onClick={() => window.location.href = '/'}
-              className="flex items-center gap-3 text-vae-turquoise hover:text-white transition-colors duration-300 group"
-            >
-              <MaterialIcon icon="arrow_back" className="text-xl group-hover:-translate-x-1 transition-transform duration-300" />
-              <span className="font-medium">Zurück zur Homepage</span>
-            </button>
-
-            {/* Page Title */}
-            <h1 className="text-xl font-bold text-white">Services</h1>
-
-            {/* CTA Button */}
-            <button 
-              onClick={handleCTAClick}
-              className="btn-primary text-sm px-6 py-2"
-            >
-              Projekt starten
-            </button>
-          </div>
+      {/* Page Hero */}
+      <section className="hero-section bg-bg-darker pt-32 pb-16">
+        <div className="container-vae text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-vae-turquoise mb-6">
+            Services
+          </h1>
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+            Enterprise-grade KI-Lösungen für maximale Effizienz und Datensouveränität
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Main Content */}
-      <div className="pt-16">
-        {/* 1. Hero Section */}
-        <section className="relative pt-16 pb-20 bg-bg-darker overflow-hidden">
+      {/* 1. Hero Content Section */}
+      <section className="relative pt-16 pb-20 bg-bg-darker overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
           <div 
@@ -186,12 +169,6 @@ const ServicesPage: React.FC = () => {
         </div>
 
         <div className="container-vae text-center relative z-10" ref={heroRef}>
-          <h1 className="text-4xl md:text-6xl font-bold text-vae-turquoise mb-6">
-            Enterprise-grade KI-Lösungen
-          </h1>
-          <p className="text-xl md:text-2xl text-text-secondary max-w-4xl mx-auto mb-8 leading-relaxed">
-            für maximale Effizienz und Datensouveränität.
-          </p>
           <p className="text-lg text-text-muted max-w-3xl mx-auto mb-12">
             Von der unverbindlichen Idee bis zur skalierbaren Automatisierung – wir bauen Systeme, die heute entlasten und morgen tragen.
           </p>
@@ -463,7 +440,6 @@ const ServicesPage: React.FC = () => {
           </div>
         </div>
       </section>
-      </div>
     </div>
   )
 }

@@ -8,6 +8,9 @@ import SectionNavigation from '@components/navigation/SectionNavigation'
 
 // Pages
 import HomePage from '@components/pages/HomePage'
+import ServicesPage from '@components/pages/ServicesPage'
+import AboutPage from '@components/pages/AboutPage'
+import ContactPage from '@components/pages/ContactPage'
 
 /**
  * Main App Component
@@ -25,7 +28,9 @@ const App: React.FC = () => {
         <main className="pt-20"> {/* Account for fixed header */}
           <Routes>
             <Route path="/" element={<HomePage />} />
-            {/* Additional routes will be added here */}
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
         

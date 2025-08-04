@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useContactForm } from '../../hooks/useContactForm'
 
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -8,12 +9,23 @@ const ContactSection: React.FC = () => {
   const formRef = useRef<HTMLDivElement>(null)
   const contactInfoRef = useRef<HTMLDivElement>(null)
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    service: '',
-    message: ''
+  // Contact form logic mit unserem neuen Hook
+  const {
+    formData,
+    updateField,
+    submitForm,
+    canSubmit,
+    hasErrors,
+    isSubmitting,
+    loadingState
+  } = useContactForm({
+    onSuccess: (submissionId) => {
+      console.log('Contact form submitted successfully:', submissionId)
+    },
+    onError: (error) => {
+      console.error('Contact form submission error:', error)
+    },
+    useMockApi: true
   })
 
   useEffect(() => {
@@ -93,19 +105,6 @@ const ContactSection: React.FC = () => {
     return () => ctx.revert()
   }, [])
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-
-  const services = [
-    'Open Source Consulting',
-    'Setup & Training',
-    'Startup Tech Stack',
-    'KI-Beratung & Integration',
-    'Local Hosting Solutions',
-    'VAEKTRA CORE Enterprise',
-    'Andere Anfrage'
-  ]
-
   const contactInfo = [
     {
       icon: (
@@ -152,41 +151,6 @@ const ContactSection: React.FC = () => {
     }
   ]
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
-    try {
-      // Hier würde normalerweise der API-Call stehen
-      // Für Demo-Zwecke simulieren wir eine erfolgreiche Übertragung
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      console.log('Form submitted:', formData)
-      setSubmitStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        service: '',
-        message: ''
-      })
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
   return (
     <section 
       id="contact" 
@@ -224,7 +188,8 @@ const ContactSection: React.FC = () => {
               Nachricht senden
             </h3>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Original Design mit neuer Backend-Logik */}
+            <form onSubmit={(e) => { e.preventDefault(); submitForm(); }} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -235,7 +200,7 @@ const ContactSection: React.FC = () => {
                     id="name"
                     name="name"
                     value={formData.name}
-                    onChange={handleInputChange}
+                    onChange={(e) => updateField('name', e.target.value)}
                     required
                     className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
                     placeholder="Ihr Name"
@@ -250,7 +215,7 @@ const ContactSection: React.FC = () => {
                     id="email"
                     name="email"
                     value={formData.email}
-                    onChange={handleInputChange}
+                    onChange={(e) => updateField('email', e.target.value)}
                     required
                     className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
                     placeholder="ihre.email@unternehmen.de"
@@ -267,30 +232,25 @@ const ContactSection: React.FC = () => {
                     type="text"
                     id="company"
                     name="company"
-                    value={formData.company}
-                    onChange={handleInputChange}
+                    value={formData.company || ''}
+                    onChange={(e) => updateField('company', e.target.value)}
                     className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
                     placeholder="Ihr Unternehmen"
                   />
                 </div>
                 <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-2">
-                    Service
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                    Betreff
                   </label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
-                  >
-                    <option value="">Service auswählen</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service} className="bg-gray-800">
-                        {service}
-                      </option>
-                    ))}
-                  </select>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject || ''}
+                    onChange={(e) => updateField('subject', e.target.value)}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
+                    placeholder="Worum geht es?"
+                  />
                 </div>
               </div>
 
@@ -302,7 +262,7 @@ const ContactSection: React.FC = () => {
                   id="message"
                   name="message"
                   value={formData.message}
-                  onChange={handleInputChange}
+                  onChange={(e) => updateField('message', e.target.value)}
                   required
                   rows={6}
                   className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors resize-none"
@@ -310,21 +270,28 @@ const ContactSection: React.FC = () => {
                 />
               </div>
 
+              {/* Error Display */}
+              {hasErrors && (
+                <div className="text-center text-red-400 text-sm">
+                  ❌ Bitte füllen Sie alle Pflichtfelder aus.
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={!canSubmit}
                 className="w-full py-3 px-6 bg-vae-turquoise hover:bg-vae-turquoise-dark text-white font-semibold rounded-lg hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
               </button>
 
-              {submitStatus === 'success' && (
+              {loadingState === 'success' && (
                 <div className="text-center text-green-400 text-sm">
                   ✅ Nachricht erfolgreich gesendet! Wir melden uns schnellstmöglich zurück.
                 </div>
               )}
 
-              {submitStatus === 'error' && (
+              {loadingState === 'error' && (
                 <div className="text-center text-red-400 text-sm">
                   ❌ Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.
                 </div>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { NewsletterForm } from '../forms'
 
 /**
  * Footer Component
@@ -7,34 +8,20 @@ import React, { useState } from 'react'
  * newsletter signup, and company information
  */
 const Footer: React.FC = () => {
-  const [newsletterEmail, setNewsletterEmail] = useState('')
-  const [sending, setSending] = useState(false)
-  const [status, setStatus] = useState<'success' | 'error' | null>(null)
-
   const techStack = [
     'Python', 'FastAPI', 'Temporal', 'Docker', 'K8s', 
     'PostgreSQL', 'Open Source AI', 'VAEKTRA CORE'
   ]
 
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!newsletterEmail) return
-    
-    setSending(true)
-    setStatus(null)
+  // Newsletter success/error handlers
+  const handleNewsletterSuccess = (subscriptionId: string) => {
+    console.log('Newsletter subscription successful:', subscriptionId)
+    // TODO: Add analytics tracking, show toast notification, etc.
+  }
 
-    // TODO: Implement actual newsletter subscription
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setStatus('success')
-      setNewsletterEmail('')
-    } catch (error) {
-      console.error('Newsletter subscribe error:', error)
-      setStatus('error')
-    } finally {
-      setSending(false)
-    }
+  const handleNewsletterError = (error: string) => {
+    console.error('Newsletter subscription error:', error)
+    // TODO: Add error tracking, show error notification, etc.
   }
 
   return (
@@ -154,30 +141,14 @@ const Footer: React.FC = () => {
               <p className="text-text-muted mb-4 text-sm">
                 Bleiben Sie informiert über neue Features und Tech-Updates.
               </p>
-              <form onSubmit={handleNewsletterSubmit} className="space-y-3">
-                <input
-                  type="email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Ihre E-Mail"
-                  required
-                  className="w-full px-4 py-3 bg-bg-secondary border border-bg-secondary rounded-lg text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:border-transparent transition-all"
-                />
-                <button
-                  type="submit"
-                  disabled={sending}
-                  className="w-full btn-primary"
-                >
-                  {sending ? 'Sende...' : 'Subscribe'}
-                </button>
-              </form>
               
-              {status === 'success' && (
-                <p className="text-green-400 text-sm mt-2">Vielen Dank!</p>
-              )}
-              {status === 'error' && (
-                <p className="text-red-400 text-sm mt-2">Anmeldung fehlgeschlagen.</p>
-              )}
+              <NewsletterForm
+                inline={true}
+                onSuccess={handleNewsletterSuccess}
+                onError={handleNewsletterError}
+                useMockApi={true}
+                className="mb-4"
+              />
             </div>
 
             {/* Quick Links */}

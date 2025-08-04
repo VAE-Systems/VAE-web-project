@@ -199,6 +199,86 @@
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
   }
+
+  /* Timeline Component */
+  .timeline-item {
+    @apply relative;
+  }
+  
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 2px;
+    height: 3rem;
+    background: linear-gradient(to bottom, hsl(var(--color-vae-turquoise)), transparent);
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  
+  @media (max-width: 1024px) {
+    .timeline-item::after {
+      display: none;
+    }
+  }
+
+  /* Enhanced Timeline Animations */
+  .timeline-path {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+  }
+
+  .timeline-card {
+    perspective: 1000px;
+  }
+
+  .timeline-dot {
+    transform-style: preserve-3d;
+  }
+
+  .timeline-number {
+    animation: bounceIn 0.8s ease-out;
+  }
+
+  .timeline-icon {
+    animation: flipIn 0.6s ease-out;
+  }
+
+  /* Floating particles */
+  @keyframes float-particle {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-30px) rotate(180deg);
+      opacity: 0.8;
+    }
+  }
+
+  .animate-float-particle {
+    animation: float-particle 4s ease-in-out infinite;
+  }
+
+  /* Enhanced glow effects for timeline */
+  .timeline-glow {
+    filter: drop-shadow(0 0 10px hsl(var(--color-vae-turquoise)));
+  }
+
+  /* Pulse animation for timeline dots */
+  @keyframes pulse-dot {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsla(var(--color-vae-turquoise), 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px hsla(var(--color-vae-turquoise), 0);
+    }
+  }
+
+  .timeline-dot-pulse {
+    animation: pulse-dot 2s infinite;
+  }
 }
 
 /* Utility Layer */

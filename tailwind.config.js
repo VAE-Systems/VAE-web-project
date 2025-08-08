@@ -1,4 +1,10 @@
-/** @type {import('tailwindcss').Config} */
+vae-black:         #050505    /* hsl(0, 0%, 2%) */
+vae-black-soft:    #0F0F0F    /* hsl(0, 0%, 6%) */
+vae-black-lighter: #1A1A1A    /* hsl(0, 0%, 10%) */
+
+bg-darker:         #0A0A0A    /* hsl(0, 0%, 4%) - Dunkelster BG */
+bg-dark:           #141414    /* hsl(0, 0%, 8%) - Standard dunkler BG */
+bg-secondary:      #1F1F1F    /* hsl(0, 0%, 12%) - Sekundärer BG *//** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",

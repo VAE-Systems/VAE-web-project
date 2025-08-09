@@ -39,3 +39,6 @@ export function searchKnowledgeBase(question: string): string | null {
   }
   return null;
 }
+
+// Chatbot feature removed.
+export {}

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -8,7 +9,10 @@ const techStack = [
   { name: 'PyTorch', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', website: 'https://pytorch.org' },
   { name: 'OpenAI', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg', website: 'https://openai.com' },
   { name: 'LangChain', logo: 'https://python.langchain.com/img/brand/wordmark.png', website: 'https://langchain.com' },
+  { name: 'Claude Sonnet', logo: 'https://avatars.githubusercontent.com/u/121681234?s=200&v=4', website: 'https://anthropic.com' },
+  { name: 'ChatGPT', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg', website: 'https://chat.openai.com' },
   { name: 'Python', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', website: 'https://python.org' },
+  { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', website: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
   { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', website: 'https://nodejs.org' },
   { name: 'FastAPI', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg', website: 'https://fastapi.tiangolo.com' },
   { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', website: 'https://react.dev' },
@@ -19,7 +23,10 @@ const techStack = [
   { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', website: 'https://kubernetes.io' },
   { name: 'AWS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', website: 'https://aws.amazon.com' },
   { name: 'Temporal', logo: 'https://temporal.io/logo-font-straight-dark.svg', website: 'https://temporal.io' },
-  { name: 'Pinecone', logo: 'https://www.pinecone.io/images/pinecone-logo.svg', website: 'https://pinecone.io' }
+  { name: 'Pinecone', logo: 'https://www.pinecone.io/images/pinecone-logo.svg', website: 'https://pinecone.io' },
+  { name: 'Supabase', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg', website: 'https://supabase.com' },
+  { name: 'Corteza', logo: 'https://cortezaproject.org/images/logo.svg', website: 'https://cortezaproject.org' },
+  { name: 'Lowcoder', logo: 'https://raw.githubusercontent.com/lowcoder-org/lowcoder/main/public/logo.svg', website: 'https://lowcoder.dev' }
 ] as const
 
 /**
@@ -38,6 +45,8 @@ const TechStackSection: React.FC = () => {
   const subRef = useRef<HTMLParagraphElement>(null)
   const logoRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const cableRefs = useRef<SVGPathElement[]>([])
+  const spotlightRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(false)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -128,38 +137,21 @@ const TechStackSection: React.FC = () => {
         }
       )
 
-      // Logo Animationen mit scrub - jedes Logo einzeln
+      // Logo Animationen – vereinfachte enter animation (ohne scrub für Performance)
       logoRefs.current.forEach((el, i) => {
         if (!el) return
         const angle = (i * 30 * Math.PI) / 180
         const radius = 200 + (i % 5) * 40
         const x = radius * Math.cos(angle)
         const y = radius * Math.sin(angle)
-        
-        gsap.fromTo(
-          el,
-          { x, y, opacity: 0, scale: 0.6 },
-          {
-            x: 0,
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 95%",
-              end: "top 75%",
-              scrub: 1.5,
-              toggleActions: "play none none reverse"
-            },
-            onStart: () => {
-              const img = el.querySelector('img')
-              if (img) {
-                gsap.fromTo(img, { rotationY: 0 }, { rotationY: 360, duration: 1, ease: 'power1.inOut' })
-              }
-            }
-          }
+        gsap.fromTo(el,
+          { x, y, opacity: 0, scale: 0.85 },
+          { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out', delay: i * 0.04, scrollTrigger: trig }
         )
+        const imgEl = el.querySelector('img')
+        if (imgEl) {
+          gsap.fromTo(imgEl, { rotationY: 0 }, { rotationY: 360, duration: 0.9, ease: 'power2.out', delay: i * 0.04, scrollTrigger: trig })
+        }
 
         const tl = gsap.timeline({ paused: true })
         tl.to(el, { 
@@ -172,28 +164,72 @@ const TechStackSection: React.FC = () => {
           ease: 'power1.inOut' 
         }, 0)
 
-        el.addEventListener('mouseenter', () => {
-          tl.play()
-        })
+        const handleEnter = () => { tl.play(); }
+        const handleLeave = () => { tl.reverse(); tl.eventCallback('onReverseComplete', () => { tl.pause(0) }) }
+        el.addEventListener('mouseenter', handleEnter)
+        el.addEventListener('mouseleave', handleLeave)
 
-        el.addEventListener('mouseleave', () => {
-          tl.reverse()
-          tl.eventCallback('onReverseComplete', () => {
-            tl.pause(0)
-          })
-        })
+        // 3D tilt effect (only update CSS variables to avoid clobbering GSAP / hover transforms)
+        const handleMove = (e: MouseEvent) => {
+          const rect = el.getBoundingClientRect()
+          const xRel = (e.clientX - rect.left) / rect.width
+          const yRel = (e.clientY - rect.top) / rect.height
+          const rotX = (0.5 - yRel) * 18 // a bit stronger
+          const rotY = (xRel - 0.5) * 18
+          el.style.setProperty('--rx', rotX + 'deg')
+          el.style.setProperty('--ry', rotY + 'deg')
+        }
+        const resetTilt = () => {
+          el.style.setProperty('--rx', '0deg')
+          el.style.setProperty('--ry', '0deg')
+        }
+        el.addEventListener('mousemove', handleMove)
+        el.addEventListener('mouseleave', resetTilt)
+
+        // cleanup
+        return () => {
+          el.removeEventListener('mouseenter', handleEnter)
+          el.removeEventListener('mouseleave', handleLeave)
+          el.removeEventListener('mousemove', handleMove)
+          el.removeEventListener('mouseleave', resetTilt)
+        }
       })
     }, sectionRef)
 
     return () => ctx.revert()
   }, [])
 
+  // Spotlight tracking & activation gating (IntersectionObserver)
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        setActive(entry.isIntersecting)
+      })
+    }, { threshold: 0.25 })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const handlePointer = (e: React.PointerEvent) => {
+    if (!spotlightRef.current) return
+    const rect = spotlightRef.current.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
+    spotlightRef.current.style.setProperty('--spot-x', `${x}%`)
+    spotlightRef.current.style.setProperty('--spot-y', `${y}%`)
+  }
+
   return (
     <section 
       id="tech-stack"
-      className="relative py-24 bg-bg-dark overflow-hidden"
+      className={"relative py-32 surface-alt overflow-hidden border-t border-white/5 overlay-grid overlay-diag edge-glow-top tech-stack-interactive " + (active ? 'tech-stack-active' : '')}
       ref={sectionRef}
+      onPointerMove={handlePointer}
     >
+      <ParallaxBackdrop strength={8} />
+      <ParticleField count={22} />
       {/* Radial Background */}
       <div 
         className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20"
@@ -306,43 +342,31 @@ const TechStackSection: React.FC = () => {
         </div>
 
         {/* Tech Grid */}
-        <div 
-          className="grid gap-8 max-w-5xl mx-auto"
-          style={{ 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))'
-          }}
-        >
-          {techStack.map((tech, i) => (
-            <a
-              key={tech.name}
-              href={tech.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tech-logo-item flex flex-col items-center justify-center gap-2 p-4 rounded-xl transition-all duration-300"
-              style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(8px)'
-              }}
-              ref={el => {
-                logoRefs.current[i] = el
-              }}
-            >
-              <img 
-                src={tech.logo} 
-                alt={tech.name}
-                className="w-12 h-12 object-contain transition-all duration-300"
-                style={{
-                  filter: 'grayscale(100%)'
-                }}
-              />
-              <span 
-                className="text-sm text-center font-medium text-text-light"
+        <div ref={spotlightRef} className="tech-spotlight">
+          <div 
+            className="tech-stack-grid grid gap-8 max-w-5xl mx-auto"
+            style={{ 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))'
+            }}
+          >
+            {techStack.map((tech, i) => (
+              <a
+                key={tech.name}
+                href={tech.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="tech-tile flex flex-col items-center justify-center gap-3 p-4 text-center will-change-transform"
+                ref={el => { logoRefs.current[i] = el }}
               >
-                {tech.name}
-              </span>
-            </a>
-          ))}
+                <img 
+                  src={tech.logo} 
+                  alt={tech.name}
+                  className="w-12 h-12 object-contain will-change-transform"
+                />
+                <span className="text-sm font-medium text-text-light">{tech.name}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

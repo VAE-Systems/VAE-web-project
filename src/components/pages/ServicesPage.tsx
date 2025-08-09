@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MaterialIcon from '../ui/MaterialIcon'
 import ServicesSection from '../sections/ServicesSection'
+import RippleGrid from '../sections/effects/RippleGrid'
 /**
  * ServicesPage Component
  * 
@@ -141,65 +142,44 @@ const ServicesPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Page Hero */}
-      <section className="hero-section bg-bg-darker pt-32 pb-16">
-        <div className="container-vae text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-vae-turquoise mb-6">
-            Services
-          </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-            Enterprise-grade KI-Lösungen für maximale Effizienz und Datensouveränität
-          </p>
-        </div>
-      </section>
-
-      {/* 1. Hero Content Section */}
-      <section className="relative pt-16 pb-20 bg-bg-darker overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div 
-            className="absolute top-0 left-0 w-full h-full"
-            style={{
-              background: `
-                radial-gradient(circle at 20% 30%, hsla(var(--color-vae-turquoise), 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%)
-              `
-            }}
+      {/* New RippleGrid Hero */}
+      <section className="relative pt-32 pb-28 overflow-hidden border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
+        <div className="absolute inset-0 opacity-80 mix-blend-screen">
+          <RippleGrid
+            enableRainbow={false}
+            gridColor="#00ffa5"
+            rippleIntensity={0.045}
+            gridSize={9}
+            gridThickness={14}
+            mouseInteraction={true}
+            mouseInteractionRadius={1.15}
+            opacity={0.9}
           />
         </div>
-
-        <div className="container-vae text-center relative z-10" ref={heroRef}>
-          <p className="text-lg text-text-muted max-w-3xl mx-auto mb-12">
-            Von der unverbindlichen Idee bis zur skalierbaren Automatisierung – wir bauen Systeme, die heute entlasten und morgen tragen.
-          </p>
-          
-          {/* Trust Signals */}
-          <div className="flex justify-center items-center gap-8 mb-12">
-            <div className="flex items-center gap-2 text-vae-turquoise">
-              <MaterialIcon icon="shield" className="text-2xl" />
-              <span className="text-sm font-medium">Datensouverän</span>
+        <div className="relative container-vae" ref={heroRef}>
+          <div className="max-w-5xl mx-auto text-center space-y-10">
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              <span className="block text-text-light">Services & Expertise</span>
+              <span className="block text-gradient">für nachhaltige KI-Infrastruktur.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
+              Von Analyse über Implementierung bis Lifecycle-Optimierung – modulare Service-Pakete für souveräne, lokale und skalierbare Automatisierung.
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-8 text-vae-turquoise">
+              <div className="flex items-center gap-2"><MaterialIcon icon="shield" className="text-2xl" /><span className="text-sm font-medium">Datensouverän</span></div>
+              <div className="flex items-center gap-2"><MaterialIcon icon="flash_on" className="text-2xl" /><span className="text-sm font-medium">Schnell</span></div>
+              <div className="flex items-center gap-2"><MaterialIcon icon="auto_awesome" className="text-2xl" /><span className="text-sm font-medium">KI-powered</span></div>
             </div>
-            <div className="flex items-center gap-2 text-vae-turquoise">
-              <MaterialIcon icon="flash_on" className="text-2xl" />
-              <span className="text-sm font-medium">Schnell</span>
-            </div>
-            <div className="flex items-center gap-2 text-vae-turquoise">
-              <MaterialIcon icon="auto_awesome" className="text-2xl" />
-              <span className="text-sm font-medium">KI-powered</span>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#services" className="btn-primary px-10 py-4">Services entdecken</a>
+              <button onClick={handleCTAClick} className="btn-secondary px-10 py-4">Projekt starten</button>
             </div>
           </div>
-
-          <button 
-            onClick={handleCTAClick}
-            className="btn-primary text-lg px-12 py-4"
-          >
-            Projekt starten
-          </button>
         </div>
       </section>
 
-      {/* 2. Service Cards */}
-          <ServicesSection />
+  {/* 2. Service Cards */}
+  <ServicesSection />
 
             
           {/* 3. Process Phases */}

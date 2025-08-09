@@ -232,21 +232,9 @@ const ServicesSection: React.FC = () => {
   return (
     <section 
       id="services" 
-      className="relative py-20 overflow-hidden"
+      className="relative py-32 bg-[linear-gradient(135deg,#0b0b0b,#141414)] border-t border-white/5"
       ref={sectionRef}
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute top-0 left-0 w-full h-full background-gradient"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 70%, hsla(var(--color-vae-turquoise), 0.04) 0%, transparent 50%)
-            `
-          }}
-        />
-      </div>
 
       <div className="container-vae">
         {/* Section Header */}
@@ -266,10 +254,11 @@ const ServicesSection: React.FC = () => {
               key={index}
               className={`
                 group relative overflow-hidden rounded-2xl p-8 
-                bg-gradient-to-br from-white/8 to-white/5 
+                bg-[linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] checker-faint 
                 backdrop-blur-xl border border-white/15 
                 transition-all duration-300 hover:-translate-y-2 
                 hover:shadow-xl hover:shadow-vae-turquoise/20
+                flex flex-col h-full
                 ${service.isVaektra ? 'bg-gradient-to-br from-bg-darker/90 to-vae-turquoise/20 border-vae-turquoise/30' : ''}
               `}
             >
@@ -293,58 +282,66 @@ const ServicesSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Service Content */}
-              <h3 className={`text-xl font-semibold mb-4 leading-tight ${service.isVaektra ? 'text-white' : 'text-white'}`}>
-                {service.title}
-              </h3>
-              <p className={`text-sm leading-relaxed mb-6 ${service.isVaektra ? 'text-white/80' : 'text-text-secondary'}`}>
-                {service.description}
-              </p>
+              {/* Service Content - Flex grow for equal heights */}
+              <div className="flex-grow flex flex-col">
+                <h3 className={`text-xl font-semibold mb-4 leading-tight ${service.isVaektra ? 'text-white' : 'text-white'}`}>
+                  {service.title}
+                </h3>
+                <p className={`text-sm leading-relaxed mb-6 flex-grow ${service.isVaektra ? 'text-white/80' : 'text-text-secondary'}`}>
+                  {service.description}
+                </p>
 
-              {/* Service Stats */}
-              <div className={`
-                grid grid-cols-2 gap-4 p-4 rounded-lg mb-6
-                ${service.isVaektra ? 'bg-vae-turquoise/10' : 'bg-vae-turquoise/5'}
-              `}>
-                {service.stats.map((stat, statIndex) => (
-                  <div key={statIndex} className="text-center">
-                    <div className={`text-lg font-bold leading-tight mb-1 ${service.isVaektra ? 'text-vae-turquoise' : 'text-vae-turquoise'}`}>
-                      {stat.value}
+                {/* Service Stats */}
+                <div className={`
+                  grid grid-cols-2 gap-4 p-4 rounded-lg mb-6
+                  ${service.isVaektra ? 'bg-vae-turquoise/10' : 'bg-vae-turquoise/5'}
+                `}>
+                  {service.stats.map((stat, statIndex) => (
+                    <div key={statIndex} className="text-center">
+                      <div className={`text-lg font-bold leading-tight mb-1 ${service.isVaektra ? 'text-vae-turquoise' : 'text-vae-turquoise'}`}>
+                        {stat.value}
+                      </div>
+                      <div className={`text-xs leading-tight break-words ${service.isVaektra ? 'text-white/70' : 'text-text-muted'}`}>
+                        {stat.desc}
+                      </div>
                     </div>
-                    <div className={`text-xs leading-tight break-words ${service.isVaektra ? 'text-white/70' : 'text-text-muted'}`}>
-                      {stat.desc}
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+
+                {/* Feature List */}
+                <ul className="space-y-3 mb-8">
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className={`flex items-center gap-3 text-sm ${service.isVaektra ? 'text-white/80' : 'text-text-secondary'}`}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`flex-shrink-0 ${service.isVaektra ? 'text-vae-turquoise' : 'text-vae-turquoise'}`}>
+                        <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Feature List */}
-              <ul className="space-y-3 mb-8">
-                {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className={`flex items-center gap-3 text-sm ${service.isVaektra ? 'text-white/80' : 'text-text-secondary'}`}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`flex-shrink-0 ${service.isVaektra ? 'text-vae-turquoise' : 'text-vae-turquoise'}`}>
-                      <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Service CTA */}
+              {/* Service CTA - Fixed at bottom */}
               <button 
                 className={`
-                  w-full py-3 px-6 rounded-lg font-semibold text-sm uppercase tracking-wider
+                  w-full py-4 px-6 rounded-xl font-semibold text-sm uppercase tracking-wider
                   transition-all duration-300 hover:-translate-y-1 hover:shadow-lg
+                  min-h-[48px] flex items-center justify-center
                   ${service.isVaektra 
-                    ? 'btn-primary' 
+                    ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-400 hover:shadow-vae-turquoise/30' 
                     : service.badge === 'Coming Soon'
-                    ? 'btn-secondary'
-                    : 'btn-ghost'
+                    ? 'border-2 border-vae-turquoise text-vae-turquoise bg-transparent hover:bg-vae-turquoise/10 hover:shadow-vae-turquoise/20'
+                    : 'bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 border border-vae-turquoise/40 hover:border-vae-turquoise/60'
                   }
                 `}
                 onClick={() => handleServiceClick(service.title)}
               >
-                {service.cta}
+                <span className="flex items-center gap-2">
+                  {service.cta}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 group-hover:translate-x-1">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                </span>
               </button>
             </div>
           ))}

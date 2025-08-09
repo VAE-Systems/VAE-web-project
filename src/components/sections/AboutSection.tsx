@@ -1,4 +1,5 @@
 import React from 'react'
+import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 
 const AboutSection: React.FC = () => {
   const stats = [
@@ -54,7 +55,9 @@ const AboutSection: React.FC = () => {
   ]
 
   return (
-    <section id="about" className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary">
+    <section id="about" className="relative py-32 surface-dark border-t border-white/5 overlay-grid edge-glow-top overflow-hidden">
+      <ParallaxBackdrop strength={9} />
+      <ParticleField count={16} />
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -70,7 +73,7 @@ const AboutSection: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+  <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
             Über VAE Systems
           </h2>
@@ -81,7 +84,7 @@ const AboutSection: React.FC = () => {
         </div>
 
         {/* Company Story */}
-        <div className="grid lg:grid-cols-2 gap-16 mb-20">
+  <div className="grid lg:grid-cols-2 gap-16 mb-20">
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold text-white mb-6">
               Unsere Mission
@@ -147,7 +150,7 @@ const AboutSection: React.FC = () => {
 
         {/* Call to Action */}
         <div className="mt-20 text-center">
-          <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-8 border border-vae-turquoise/20">
+          <div className="bg-[linear-gradient(135deg,rgba(0,255,165,0.08),rgba(0,255,165,0.03))] rounded-2xl p-8 border border-vae-turquoise/20 backdrop-blur-xl">
             <h3 className="text-2xl font-semibold text-white mb-4">
               Bereit für Ihre digitale Transformation?
             </h3>

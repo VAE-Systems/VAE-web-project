@@ -15,9 +15,10 @@ interface SectionData {
 const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
   { id: 'services', iconName: 'settings', label: 'Services' },
+  { id: 'products', iconName: 'inventory_2', label: 'Products' },
   { id: 'tech-stack', iconName: 'code', label: 'Tech Stack' },
   { id: 'about', iconName: 'people', label: 'Über Uns' },
-  { id: 'testimonials', iconName: 'chat', label: 'Testimonials' },
+  { id: 'case-studies', iconName: 'work', label: 'Case Studies' },
   { id: 'faq', iconName: 'help_outline', label: 'FAQ' },
   { id: 'contact', iconName: 'email', label: 'Kontakt' }
 ]

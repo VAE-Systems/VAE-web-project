@@ -1,5 +1,5 @@
 import React from 'react'
-import TestimonialsSection from '../sections/TestimonialsSection'
+import CaseStudiesSection from '../sections/CaseStudiesSection'
 import TechStackSection from '../sections/TechStackSection'
 
 /**
@@ -340,7 +340,7 @@ const AboutPage: React.FC = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Wert 1 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300">
+                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
                     <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined text-xl text-vae-turquoise">
                         code
@@ -349,13 +349,18 @@ const AboutPage: React.FC = () => {
                     <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
                       Technische Kompetenz
                     </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
                       Von Chatbots bis Prozessautomation – moderne KI mit sauberem Engineering.
                     </p>
+                    <div className="mt-6 pt-4 border-t border-white/10">
+                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
+                        Mehr erfahren →
+                      </button>
+                    </div>
                   </div>
 
                   {/* Wert 2 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300">
+                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
                     <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined text-xl text-vae-turquoise">
                         verified_user
@@ -364,13 +369,18 @@ const AboutPage: React.FC = () => {
                     <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
                       Open Source & Unabhängigkeit
                     </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
                       Keine Vendor-Lock-ins. Volle Kontrolle. Software Made in Germany.
                     </p>
+                    <div className="mt-6 pt-4 border-t border-white/10">
+                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
+                        Mehr erfahren →
+                      </button>
+                    </div>
                   </div>
 
                   {/* Wert 3 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300">
+                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
                     <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined text-xl text-vae-turquoise">
                         handshake
@@ -379,13 +389,18 @@ const AboutPage: React.FC = () => {
                     <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
                       Langfristige Partnerschaft
                     </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
                       Dokumentierte, nachhaltige Systeme für freiwillige Zusammenarbeit.
                     </p>
+                    <div className="mt-6 pt-4 border-t border-white/10">
+                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
+                        Mehr erfahren →
+                      </button>
+                    </div>
                   </div>
 
                   {/* Wert 4 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300">
+                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
                     <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <span className="material-symbols-outlined text-xl text-vae-turquoise">
                         palette
@@ -394,9 +409,14 @@ const AboutPage: React.FC = () => {
                     <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
                       Ästhetik & UX
                     </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
                       Design und Klarheit als Teil des ROI. Systeme, die begeistern.
                     </p>
+                    <div className="mt-6 pt-4 border-t border-white/10">
+                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
+                        Mehr erfahren →
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -636,7 +656,7 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      <TestimonialsSection />
+  <CaseStudiesSection />
 
       {/* Tech Stack Section */}
       <TechStackSection />

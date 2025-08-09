@@ -1,9 +1,10 @@
 import React from 'react'
 import HeroSection from '../sections/HeroSection'
 import ServicesSection from '../sections/ServicesSection'
+import ProductsSection from '../sections/ProductsSection'
 import TechStackSection from '../sections/TechStackSection'
 import AboutSection from '../sections/AboutSection'
-import TestimonialsSection from '../sections/TestimonialsSection'
+import CaseStudiesSection from '../sections/CaseStudiesSection'
 import FAQSection from '../sections/FAQSection'
 import ContactSection from '../sections/ContactSection'
 
@@ -21,14 +22,17 @@ const HomePage: React.FC = () => {
       {/* Services Section */}
       <ServicesSection />
 
+  {/* Products Section */}
+  <ProductsSection />
+
       {/* Tech Stack Section */}
       <TechStackSection />
 
       {/* About Section */}
       <AboutSection />
 
-      {/* Testimonials Section */}
-      <TestimonialsSection />
+  {/* Case Studies Section */}
+  <CaseStudiesSection />
 
       {/* FAQ Section */}
       <FAQSection />

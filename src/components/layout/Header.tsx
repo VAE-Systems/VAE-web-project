@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { productCategories } from '../navigation/productCategories'
+import { useFocusTrap } from '@/hooks'
 
 /**
  * Header Component
@@ -15,11 +17,47 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
+  const [productsOpen, setProductsOpen] = useState(false)
+  const productsTimeout = useRef<number | null>(null)
+  const megaRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(productsOpen, megaRef, () => setProductsOpen(false), { initialFocus: 'none' })
+
+  // Close on outside click
+  useEffect(() => {
+    if (!productsOpen) return
+    const handleClick = (e: MouseEvent) => {
+      if (megaRef.current && !megaRef.current.contains(e.target as Node)) {
+        // Ignore if trigger button clicked (handled separately)
+        const trigger = document.getElementById('products-trigger')
+        if (trigger && trigger.contains(e.target as Node)) return
+        setProductsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [productsOpen])
+
+  const openProducts = () => {
+    if (productsTimeout.current) window.clearTimeout(productsTimeout.current)
+    setProductsOpen(true)
+  }
+  const closeProducts = () => {
+    if (productsTimeout.current) window.clearTimeout(productsTimeout.current)
+    productsTimeout.current = window.setTimeout(() => setProductsOpen(false), 120)
+  }
 
   // Handle scroll effect
+  // Close on location (route) change
+  useEffect(() => {
+    setProductsOpen(false)
+  }, [location.pathname, location.hash])
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+      if (productsOpen) {
+        setProductsOpen(false)
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -30,6 +68,7 @@ const Header: React.FC = () => {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
+    { path: '/products', label: 'Products', hasMega: true },
     { path: '/about', label: 'Über uns' },
     { path: '/contact', label: 'Kontakt' },
   ]
@@ -71,15 +110,88 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-8 relative">
             {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`nav-link ${isActivePath(item.path) ? 'active' : ''}`}
-              >
-                {item.label}
-              </Link>
+              item.hasMega ? (
+                <div 
+                  key={item.path} 
+                  className="relative"
+                  onMouseEnter={openProducts}
+                  onMouseLeave={closeProducts}
+                  onFocus={openProducts}
+                  onBlur={closeProducts}
+                >
+                  <button
+                    id="products-trigger"
+                    className={`nav-link flex items-center gap-1 ${isActivePath(item.path) ? 'active' : ''}`}
+                    aria-haspopup="true"
+                    aria-expanded={productsOpen}
+                    onClick={(e) => { e.preventDefault(); setProductsOpen(p => !p) }}
+                  >
+                    {item.label}
+                    <span className={`material-symbols-outlined text-base transition-transform duration-300 ${productsOpen ? 'rotate-180' : ''}`}>expand_more</span>
+                  </button>
+                  {productsOpen && (
+                    <div
+                      className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-[var(--z-dropdown)]"
+                      onMouseEnter={openProducts}
+                      onMouseLeave={closeProducts}
+                    >
+                      <div 
+                        ref={megaRef}
+                        className="mega-panel w-[920px] rounded-2xl border border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/40 ring-1 ring-white/10 focus:outline-none"
+                        role="dialog"
+                        aria-label="Products Menu"
+                      >
+                        <div className="p-8 grid grid-cols-4 gap-6">
+                        {productCategories.map(cat => (
+                          <div key={cat.key} className="group flex flex-col text-left">
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h3 className="text-sm font-semibold text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
+                                <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
+                              </div>
+                              {cat.badge && (
+                                <span className="px-2 py-0.5 text-[9px] font-semibold rounded-full bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/30">{cat.badge}</span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
+                            <ul className="space-y-1.5 mb-4 text-[11px]">
+                              {cat.points.slice(0,3).map(p => (
+                                <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-white/80 transition-colors">
+                                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
+                                  <span>{p}</span>
+                                </li>
+                              ))}
+                            </ul>
+                            <Link 
+                              to={`/products#${cat.key}`}
+                              className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise hover:text-white transition-colors group/link"
+                              onClick={() => setProductsOpen(false)}
+                            >
+                              {cat.cta}
+                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover/link:translate-x-1">arrow_forward</span>
+                            </Link>
+                          </div>
+                        ))}
+                        </div>
+                        <div className="px-8 pb-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-text-muted">
+                          <span className="uppercase tracking-wider">VAE Product Suite</span>
+                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`nav-link ${isActivePath(item.path) ? 'active' : ''}`}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </nav>
 

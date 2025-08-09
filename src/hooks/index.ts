@@ -6,6 +6,7 @@
 
 export { useContactForm } from './useContactForm'
 export { useNewsletter } from './useNewsletter'
+export { useFocusTrap } from './useFocusTrap'
 
 // Future hooks can be added here:
 // export { useAuth } from './useAuth'

@@ -28,7 +28,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
 			</div>
 			<div className="relative container-vae" ref={innerRef}>
 				<div className="max-w-5xl mx-auto text-center space-y-10">
-					<h1 className="text-4xl md:text-6xl font-bold heading-fix-balance">
+					<h1 className="text-4xl md:text-6xl font-bold heading-fix">
 						<span className="block text-text-light leading-tight" style={{lineHeight:'1.05', paddingBottom:'0.05em'}}>Services &amp; Expertise</span>
 						<span className="block text-gradient" style={{lineHeight:'1.05', paddingBottom:'0.15em'}}>für nachhaltige KI-Infrastruktur.</span>
 					</h1>

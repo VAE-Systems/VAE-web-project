@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { productCategories } from '../navigation/productCategories'
+import { serviceCategories } from '../navigation/serviceCategories'
 import { useFocusTrap } from '@/hooks'
 
 /**
@@ -18,16 +19,19 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
   const [productsOpen, setProductsOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
   const productsTimeout = useRef<number | null>(null)
-  const megaRef = useRef<HTMLDivElement>(null)
-  useFocusTrap(productsOpen, megaRef, () => setProductsOpen(false), { initialFocus: 'none' })
+  const servicesTimeout = useRef<number | null>(null)
+  const productsMegaRef = useRef<HTMLDivElement>(null)
+  const servicesMegaRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(productsOpen, productsMegaRef, () => setProductsOpen(false), { initialFocus: 'none' })
+  useFocusTrap(servicesOpen, servicesMegaRef, () => setServicesOpen(false), { initialFocus: 'none' })
 
   // Close on outside click
   useEffect(() => {
     if (!productsOpen) return
     const handleClick = (e: MouseEvent) => {
-      if (megaRef.current && !megaRef.current.contains(e.target as Node)) {
-        // Ignore if trigger button clicked (handled separately)
+      if (productsMegaRef.current && !productsMegaRef.current.contains(e.target as Node)) {
         const trigger = document.getElementById('products-trigger')
         if (trigger && trigger.contains(e.target as Node)) return
         setProductsOpen(false)
@@ -37,27 +41,50 @@ const Header: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [productsOpen])
 
+  useEffect(() => {
+    if (!servicesOpen) return
+    const handleClick = (e: MouseEvent) => {
+      if (servicesMegaRef.current && !servicesMegaRef.current.contains(e.target as Node)) {
+        const trigger = document.getElementById('services-trigger')
+        if (trigger && trigger.contains(e.target as Node)) return
+        setServicesOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [servicesOpen])
+
   const openProducts = () => {
     if (productsTimeout.current) window.clearTimeout(productsTimeout.current)
     setProductsOpen(true)
+    setServicesOpen(false)
   }
   const closeProducts = () => {
     if (productsTimeout.current) window.clearTimeout(productsTimeout.current)
     productsTimeout.current = window.setTimeout(() => setProductsOpen(false), 120)
   }
+  const openServices = () => {
+    if (servicesTimeout.current) window.clearTimeout(servicesTimeout.current)
+    setServicesOpen(true)
+    setProductsOpen(false)
+  }
+  const closeServices = () => {
+    if (servicesTimeout.current) window.clearTimeout(servicesTimeout.current)
+    servicesTimeout.current = window.setTimeout(() => setServicesOpen(false), 120)
+  }
 
   // Handle scroll effect
   // Close on location (route) change
   useEffect(() => {
-    setProductsOpen(false)
+  setProductsOpen(false)
+  setServicesOpen(false)
   }, [location.pathname, location.hash])
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
-      if (productsOpen) {
-        setProductsOpen(false)
-      }
+  if (productsOpen) setProductsOpen(false)
+  if (servicesOpen) setServicesOpen(false)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -67,13 +94,15 @@ const Header: React.FC = () => {
   // Navigation items
   const navItems = [
     { path: '/', label: 'Home' },
-    { path: '/services', label: 'Services' },
-    { path: '/products', label: 'Products', hasMega: true },
+    { path: '/services', label: 'Services', hasMega: true, mega: 'services' as const },
+    { path: '/products', label: 'Products', hasMega: true, mega: 'products' as const },
     { path: '/about', label: 'Über uns' },
     { path: '/contact', label: 'Kontakt' },
   ]
 
   const isActivePath = (path: string) => {
+    if (path === '/products') return location.pathname.startsWith('/products')
+    if (path === '/services') return location.pathname.startsWith('/services')
     return location.pathname === path
   }
 
@@ -113,32 +142,39 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex items-center space-x-8 relative">
             {navItems.map((item) => (
               item.hasMega ? (
-                <div 
-                  key={item.path} 
+                <div
+                  key={item.path}
                   className="relative"
-                  onMouseEnter={openProducts}
-                  onMouseLeave={closeProducts}
-                  onFocus={openProducts}
-                  onBlur={closeProducts}
+                  onMouseEnter={item.mega === 'products' ? openProducts : openServices}
+                  onMouseLeave={item.mega === 'products' ? closeProducts : closeServices}
+                  onFocus={item.mega === 'products' ? openProducts : openServices}
+                  onBlur={item.mega === 'products' ? closeProducts : closeServices}
                 >
-                  <button
-                    id="products-trigger"
+                  <Link
+                    id={item.mega === 'products' ? 'products-trigger' : 'services-trigger'}
+                    to={item.path}
                     className={`nav-link flex items-center gap-1 ${isActivePath(item.path) ? 'active' : ''}`}
                     aria-haspopup="true"
-                    aria-expanded={productsOpen}
-                    onClick={(e) => { e.preventDefault(); setProductsOpen(p => !p) }}
+                    aria-expanded={item.mega === 'products' ? productsOpen : servicesOpen}
+                    onClick={() => {
+                      if (item.mega === 'products') {
+                        setProductsOpen(false)
+                      } else {
+                        setServicesOpen(false)
+                      }
+                    }}
                   >
                     {item.label}
-                    <span className={`material-symbols-outlined text-base transition-transform duration-300 ${productsOpen ? 'rotate-180' : ''}`}>expand_more</span>
-                  </button>
-                  {productsOpen && (
+                    <span className={`material-symbols-outlined text-base transition-transform duration-300 ${(item.mega === 'products' ? productsOpen : servicesOpen) ? 'rotate-180' : ''}`}>expand_more</span>
+                  </Link>
+                  {item.mega === 'products' && productsOpen && (
                     <div
                       className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-[var(--z-dropdown)]"
                       onMouseEnter={openProducts}
                       onMouseLeave={closeProducts}
                     >
                       <div 
-                        ref={megaRef}
+                        ref={productsMegaRef}
                         className="mega-panel w-[920px] rounded-2xl border border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/40 ring-1 ring-white/10 focus:outline-none"
                         role="dialog"
                         aria-label="Products Menu"
@@ -184,6 +220,59 @@ const Header: React.FC = () => {
                         <div className="px-8 pb-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-text-muted">
                           <span className="uppercase tracking-wider">VAE Product Suite</span>
                           <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {item.mega === 'services' && servicesOpen && (
+                    <div
+                      className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-[var(--z-dropdown)]"
+                      onMouseEnter={openServices}
+                      onMouseLeave={closeServices}
+                    >
+                      <div 
+                        ref={servicesMegaRef}
+                        className="mega-panel w-[760px] rounded-2xl border border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/40 ring-1 ring-white/10 focus:outline-none"
+                        role="dialog"
+                        aria-label="Services Menu"
+                      >
+                        <div className="p-8 grid grid-cols-3 gap-6">
+                        {serviceCategories.map(cat => (
+                          <div key={cat.key} className="group flex flex-col text-left">
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h3 className="text-sm font-semibold text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
+                                <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
+                              </div>
+                            </div>
+                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-white/90 transition-colors">{cat.description}</p>
+                            <ul className="space-y-1.5 mb-4 text-[11px]">
+                              {cat.points.slice(0,4).map(p => (
+                                <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-white/80 transition-colors">
+                                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
+                                  <span>{p}</span>
+                                </li>
+                              ))}
+                            </ul>
+                            <Link 
+                              to={
+                                cat.key === 'trainings' ? '/services/trainings'
+                                : cat.key === 'consulting' ? '/services/consulting'
+                                : cat.key === 'custom' ? '/services/custom-solutions'
+                                : '/services'
+                              }
+                              className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise hover:text-white transition-colors group/link"
+                              onClick={() => setServicesOpen(false)}
+                            >
+                              {cat.cta}
+                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover/link:translate-x-1">arrow_forward</span>
+                            </Link>
+                          </div>
+                        ))}
+                        </div>
+                        <div className="px-8 pb-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-text-muted">
+                          <span className="uppercase tracking-wider">VAE Services</span>
+                          <Link to="/services" onClick={() => setServicesOpen(false)} className="text-vae-turquoise hover:text-white font-medium inline-flex items-center">Alle Services<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
                         </div>
                       </div>
                     </div>

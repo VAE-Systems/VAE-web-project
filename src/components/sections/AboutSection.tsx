@@ -3,10 +3,10 @@ import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 
 const AboutSection: React.FC = () => {
   const stats = [
-    { value: '50+', label: 'Erfolgreiche Projekte' },
-    { value: '95%', label: 'Kundenzufriedenheit' },
-    { value: '24/7', label: 'Support' },
-    { value: '5+', label: 'Jahre Erfahrung' }
+    { value: '2025', label: 'Gründungsjahr' },
+    { value: 'Uni-HD', label: 'Herkunft Team' },
+    { value: 'Open', label: 'Source Fokus' },
+    { value: '0%', label: 'Vendor Lock-in' }
   ]
 
   const values = [
@@ -78,8 +78,8 @@ const AboutSection: React.FC = () => {
             Über VAE Systems
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Wir sind Ihr Partner für innovative KI-Lösungen und moderne Infrastruktur. 
-            Mit Fokus auf Open Source, Datensouveränität und langfristige Partnerschaften.
+            Junges Heidelberg-basiertes Team (Gründung 2025) – akademische Tiefe + pragmatische Umsetzung. 
+            Fokus: Open Source, Datensouveränität, transparente Zusammenarbeit.
           </p>
         </div>
 
@@ -90,18 +90,13 @@ const AboutSection: React.FC = () => {
               Unsere Mission
             </h3>
             <p className="text-gray-300 leading-relaxed">
-              VAE Systems steht für <strong className="text-vae-turquoise">VERSATILE AI/ENHANCED/SYSTEMS_</strong> - 
-              vielseitige, KI-erweiterte Systeme, die Unternehmen dabei helfen, ihre digitale Transformation 
-              erfolgreich zu meistern.
+              VAE Systems steht für <strong className="text-vae-turquoise">VERSATILE AI / ENHANCED / SYSTEMS_</strong> – flexible KI-gestützte Systeme, die reale Engpässe adressieren statt Präsentationsfolien zu füllen.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Wir glauben an die Kraft von Open Source Technologien und lokaler Infrastruktur. 
-              Unsere Lösungen sind transparent, erweiterbar und geben Ihnen die volle Kontrolle 
-              über Ihre Daten und Prozesse.
+              Entstanden aus universitärem Umfeld der Universität Heidelberg. Wir kombinieren Forschungssensibilität mit praktischer Produkt- & Prozesssicht.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Von startup-freundlichen MVP-Lösungen bis hin zu enterprise-grade KI-Infrastrukturen - 
-              wir skalieren mit Ihren Anforderungen und unterstützen Sie langfristig.
+              Wir bauen lieber nachvollziehbare Kernmodule als überladene Plattformen – dokumentiert, austauschbar, lokal betreibbar.
             </p>
           </div>
 

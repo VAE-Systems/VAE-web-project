@@ -36,16 +36,21 @@ const ProductsHeroSection: React.FC = () => {
 
       <div ref={containerRef} className="relative container-vae">
         <div className="flex flex-col items-center text-center gap-8">
-          <div className="relative">
-            <div className="relative z-20 w-40 h-40 bg-gradient-to-br from-vae-turquoise via-vae-turquoise-light to-vae-turquoise rounded-3xl flex items-center justify-center shadow-2xl"
-                 style={{ boxShadow:'0 0 40px rgba(0,255,165,0.45),0 0 90px rgba(0,255,165,0.18)' }}>
-              <img src="/LOGO_02_white.svg" alt="VAE Systems" className="w-24 h-24 drop-shadow-lg" />
+          <div className="relative flex items-center justify-center">
+            <div
+              className="relative w-56 h-56 rounded-[3rem] flex flex-col items-center justify-center gap-3 shadow-[0_0_40px_-10px_rgba(0,255,165,0.45)] border border-white/10 bg-[linear-gradient(140deg,rgba(0,255,165,0.18),rgba(0,255,165,0.08)_40%,rgba(0,40,30,0.35))] backdrop-blur-xl"
+            >
+              <img
+                src="/App_Logo_light.svg"
+                alt="VAE Systems App Icon"
+                className="w-40 h-40 drop-shadow-[0_0_22px_rgba(0,255,165,0.55)]"
+              />
+              <div className="absolute inset-0 rounded-[3rem] ring-1 ring-vae-turquoise/30 pointer-events-none" />
+              <div className="absolute -inset-4 rounded-[3.5rem] bg-vae-turquoise/15 blur-3xl opacity-60" />
             </div>
-            {/* Subtle rotating ring */}
-            <div className="absolute inset-0 -z-10 animate-spin-slow" aria-hidden>
-              <div className="w-full h-full rounded-[2rem] border border-vae-turquoise/30" />
+            <div className="absolute inset-0 -z-10 animate-spin-slow rounded-full" aria-hidden>
+              <div className="w-full h-full rounded-full border border-vae-turquoise/20" />
             </div>
-            <div className="absolute -inset-6 -z-20 blur-3xl bg-vae-turquoise/10 rounded-full" />
           </div>
 
           <div className="space-y-6 max-w-3xl relative">

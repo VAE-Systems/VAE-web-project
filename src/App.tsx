@@ -10,6 +10,9 @@ import ScrollProgress from '@components/navigation/ScrollProgress'
 // Pages
 import HomePage from '@components/pages/HomePage'
 import ServicesPage from '@components/pages/ServicesPage'
+import ServiceTrainingsPage from '@components/pages/ServiceTrainingsPage'
+import ServiceConsultingPage from '@components/pages/ServiceConsultingPage'
+import ServiceCustomSolutionsPage from '@components/pages/ServiceCustomSolutionsPage'
 import ProductsPage from '@components/pages/ProductsPage'
 import ProductSolutionsPage from '@components/pages/ProductSolutionsPage'
 import ProductToolsPage from '@components/pages/ProductToolsPage'
@@ -55,6 +58,9 @@ const App: React.FC = () => (
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
+          <Route path="/services/consulting" element={<ServiceConsultingPage />} />
+          <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/solutions" element={<ProductSolutionsPage />} />
           <Route path="/products/tools" element={<ProductToolsPage />} />

@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center space-x-4 mb-6">
               <div className="h-12">
                 <img 
-                  src="/LOGO_01_white.svg" 
+                  src="/LOGO_02_white.svg" 
                   alt="VAE Systems Logo" 
                   className="h-full w-auto"
                 />

@@ -14,8 +14,8 @@ export const productCategories: ProductCategory[] = [
     key: 'solutions',
     title: 'Komplettlösungen',
     badge: 'Neu',
-    tagline: 'End-to-End umgesetzt',
-    description: 'Schlüsselfertige KI & Automations-Pakete – von Architektur bis Deployment, inkl. Monitoring & Handover.',
+    tagline: 'End‑to‑End wie für uns selbst',
+    description: 'Von Architektur & Implementierung bis sauberer Übergabe in Ihren Betrieb – dokumentiert & vendor‑lock‑in frei.',
     points: [
       'Architektur & Implementierung',
       'Dokumentation & Übergabe',
@@ -25,22 +25,22 @@ export const productCategories: ProductCategory[] = [
   },
   {
     key: 'tools',
-    title: 'Werkzeuge & Module',
-    tagline: 'Bausteine für Teams',
-    description: 'Wiederverwendbare Open-Source-nahe Komponenten für Datenpipelines, Inferenz, Orchestrierung und Observability.',
+    title: 'Applikationen & Lizenzen',
+    tagline: 'Sofort einsetzbar',
+  description: 'Fokussierte Applikationen & Module – klarer Nutzen, schlanke Schnittstellen, transparente Lizenzmodelle.',
     points: [
-      'Schneller integrierbar',
-      'Modular & erweiterbar',
-      'Optimiert für Edge & Cloud'
+      'Lizenzierbar & wartbar',
+      'Klarer Nutzen (Plug‑in)',
+      'Optionaler Support'
     ],
-    cta: 'Module entdecken'
+    cta: 'Applikationen entdecken'
   },
   {
     key: 'core',
     title: 'VAE CORE',
     badge: 'Platform',
     tagline: 'Semantische Betriebsplattform',
-    description: 'Zentrale Plattform für datensouveräne KI-Arbeitsräume: Embeddings, Vektorsuche, Workflows, Zugriffskontrolle.',
+  description: 'Plattform-Fundament: Embeddings, Vektorsuche, Workflows, Zugriffskontrolle & Observability für souveräne KI‑Arbeitsräume.',
     points: [
       'On-Prem & Sovereign Cloud',
       'Plug-in Architektur',
@@ -53,7 +53,7 @@ export const productCategories: ProductCategory[] = [
     key: 'built',
     title: 'Built with VAE CORE',
     tagline: 'Ökosystem & Showcases',
-    description: 'Referenz-Anwendungen und Partnerlösungen, die auf VAE CORE aufsetzen – Qualität & Erweiterbarkeit sichtbar gemacht.',
+  description: 'Showcases & Partnerlösungen auf Basis von VAE CORE – reale Nutzung & Erweiterbarkeit nachvollziehbar.',
     points: [
       'Verifizierte Integrationen',
       'Best Practices',

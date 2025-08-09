@@ -39,7 +39,7 @@ const ProductsHeroSection: React.FC = () => {
           <div className="relative">
             <div className="relative z-20 w-40 h-40 bg-gradient-to-br from-vae-turquoise via-vae-turquoise-light to-vae-turquoise rounded-3xl flex items-center justify-center shadow-2xl"
                  style={{ boxShadow:'0 0 40px rgba(0,255,165,0.45),0 0 90px rgba(0,255,165,0.18)' }}>
-              <img src="/LOGO_01_white.svg" alt="VAE Systems" className="w-24 h-24 drop-shadow-lg" />
+              <img src="/LOGO_02_white.svg" alt="VAE Systems" className="w-24 h-24 drop-shadow-lg" />
             </div>
             {/* Subtle rotating ring */}
             <div className="absolute inset-0 -z-10 animate-spin-slow" aria-hidden>
@@ -48,8 +48,10 @@ const ProductsHeroSection: React.FC = () => {
             <div className="absolute -inset-6 -z-20 blur-3xl bg-vae-turquoise/10 rounded-full" />
           </div>
 
-          <div className="space-y-6 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+          <div className="space-y-6 max-w-3xl relative">
+            {/* Kontrast-Panel */}
+            <div className="absolute inset-0 -z-10 rounded-3xl bg-[linear-gradient(135deg,rgba(5,12,10,0.72),rgba(8,20,18,0.55))] backdrop-blur-sm border border-white/5 shadow-[0_0_40px_-10px_rgba(0,255,165,0.25)]" />
+            <h1 className="text-4xl md:text-6xl font-bold heading-fix">
               <span className="block text-text-light">Modulare KI-Produkte</span>
               <span className="block text-gradient">vom Kernel bis zur Plattform.</span>
             </h1>

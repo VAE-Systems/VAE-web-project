@@ -5,11 +5,16 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Header from '@components/layout/Header'
 import Footer from '@components/layout/Footer'
 import SectionNavigation from '@components/navigation/SectionNavigation'
+import ScrollProgress from '@components/navigation/ScrollProgress'
 
 // Pages
 import HomePage from '@components/pages/HomePage'
 import ServicesPage from '@components/pages/ServicesPage'
 import ProductsPage from '@components/pages/ProductsPage'
+import ProductSolutionsPage from '@components/pages/ProductSolutionsPage'
+import ProductToolsPage from '@components/pages/ProductToolsPage'
+import ProductVaeCorePage from '@components/pages/ProductVaeCorePage'
+import ProductShowcasesPage from '@components/pages/ProductShowcasesPage'
 import AboutPage from '@components/pages/AboutPage'
 import ContactPage from '@components/pages/ContactPage'
 
@@ -35,17 +40,26 @@ const ScrollToTop: React.FC = () => {
   return null
 }
 
+const NavigationSwitcher: React.FC = () => {
+  const { pathname } = useLocation()
+  return pathname === '/' ? <SectionNavigation /> : <ScrollProgress />
+}
+
 const App: React.FC = () => (
   <Router>
     <ScrollToTop />
     <div className="min-h-screen bg-bg-darker text-text-light">
       <Header />
-      <SectionNavigation />
+      <NavigationSwitcher />
       <main className="pt-20">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/solutions" element={<ProductSolutionsPage />} />
+          <Route path="/products/tools" element={<ProductToolsPage />} />
+          <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
+          <Route path="/products/showcases" element={<ProductShowcasesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

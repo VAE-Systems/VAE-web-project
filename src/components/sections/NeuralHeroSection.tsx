@@ -215,7 +215,7 @@ const NeuralHeroSection: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 heading-fix">
             <span className="block bg-gradient-to-r from-vae-turquoise via-vae-turquoise-light to-vae-turquoise bg-clip-text text-transparent">
               Lokale KI-Infrastruktur
             </span>

@@ -294,6 +294,9 @@
 
 /* Utility Layer */
 @layer utilities {
+  /* Prevent descender clipping for large headings (g, p, y). Adds slight negative overflow allowance and balanced line-height */
+  .heading-fix { line-height:1.07; padding-bottom:0.12em; }
+  .heading-fix-balance { line-height:1.08; padding-bottom:0.15em; }
   /* VAE Effect Utilities */
   .glow-turquoise {
     box-shadow: var(--shadow-glow);
@@ -375,6 +378,7 @@
     --tz: 0px;  /* future depth */
     --raise: 0px; /* hover raise */
     --scale: 1; /* hover / active scale */
+  --glow-alpha: 0; /* dynamic glow strength */
     position:relative; 
     background:linear-gradient(165deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); 
     border:1px solid rgba(255,255,255,0.10); 
@@ -382,14 +386,16 @@
     -webkit-backdrop-filter:blur(8px); 
     border-radius:1rem; 
     overflow:hidden; 
-    transition: box-shadow .4s ease, border-color .4s ease, background .6s ease, transform .45s cubic-bezier(.16,.84,.44,1); 
+  transition: border-color .35s ease, background .6s ease, transform .45s cubic-bezier(.16,.84,.44,1); 
     transform-style:preserve-3d; 
     transform: translateY(var(--raise)) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz)) scale(var(--scale));
     will-change: transform;
+  box-shadow: 0 0 calc(50px * var(--glow-alpha)) rgba(0,255,165,calc(.65 * var(--glow-alpha))), 0 0 0 1px rgba(0,255,165,calc(.55 * var(--glow-alpha))); 
   }
   .tech-tile::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,50%), hsla(var(--color-vae-turquoise),0.35), transparent 70%); opacity:0; transition:opacity .5s ease; pointer-events:none; mix-blend-mode:overlay; }
   .tech-stack-active .tech-tile::after { opacity:.35; }
-  .tech-tile:hover { --raise:-10px; --scale:1.06; box-shadow:0 8px 28px -4px rgba(0,255,165,0.35),0 0 0 1px rgba(0,255,165,0.35); border-color:rgba(0,255,165,0.5); }
+  /* Hover scale/raise only; box-shadow jetzt GSAP-gesteuert für schnell an / langsam aus */
+  .tech-tile:hover { --raise:-10px; --scale:1.06; border-color:rgba(0,255,165,0.55); }
   .tech-tile:active { --raise:-4px; --scale:1.02; }
   .tech-tile img { filter:grayscale(100%) brightness(.9); transition:filter .6s ease, transform .6s ease; }
   .tech-tile:hover img { filter:grayscale(0%) brightness(1.05); transform:translateZ(20px) scale(1.08); }

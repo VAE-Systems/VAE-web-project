@@ -74,7 +74,7 @@ const AboutSection: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
   <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent heading-fix">
             Über VAE Systems
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -86,7 +86,7 @@ const AboutSection: React.FC = () => {
         {/* Company Story */}
   <div className="grid lg:grid-cols-2 gap-16 mb-20">
           <div className="space-y-6">
-            <h3 className="text-2xl font-semibold text-white mb-6">
+            <h3 className="text-2xl font-semibold text-white mb-6 heading-fix">
               Unsere Mission
             </h3>
             <p className="text-gray-300 leading-relaxed">
@@ -125,7 +125,7 @@ const AboutSection: React.FC = () => {
 
         {/* Values Grid */}
         <div>
-          <h3 className="text-2xl font-semibold text-white text-center mb-12">
+          <h3 className="text-2xl font-semibold text-white text-center mb-12 heading-fix">
             Unsere Werte
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -151,7 +151,7 @@ const AboutSection: React.FC = () => {
         {/* Call to Action */}
         <div className="mt-20 text-center">
           <div className="bg-[linear-gradient(135deg,rgba(0,255,165,0.08),rgba(0,255,165,0.03))] rounded-2xl p-8 border border-vae-turquoise/20 backdrop-blur-xl">
-            <h3 className="text-2xl font-semibold text-white mb-4">
+            <h3 className="text-2xl font-semibold text-white mb-4 heading-fix">
               Bereit für Ihre digitale Transformation?
             </h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">

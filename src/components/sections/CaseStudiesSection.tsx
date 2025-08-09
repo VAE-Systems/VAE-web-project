@@ -61,7 +61,7 @@ const CaseStudiesSection: React.FC = () => {
         {/* Header */}
         <div ref={headerRef} className="text-center mb-20 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">Case Studies & Pilots</h2>
-          <p className="text-lg text-text-secondary leading-relaxed">Echte frühe Implementierungen & Pilotprojekte. Fokussiert auf validierbare Lernkurven statt künstlicher Referenz-Liste.</p>
+          <p className="text-lg text-text-secondary leading-relaxed">Frühe produktive Umsetzungen & fokussierte Pilot-Initiativen – ausgerichtet auf belastbare Lernkurven und validierbare Outcomes statt künstlicher Referenz-Sammlungen.</p>
         </div>
 
         <div ref={cardsRef} className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
@@ -109,7 +109,7 @@ const CaseStudiesSection: React.FC = () => {
         {/* CTA minimal for now */}
         <div className="mt-24 text-center">
           <p className="text-text-muted text-xs uppercase tracking-wider mb-4">Ausbau laufend</p>
-          <p className="text-sm text-text-secondary max-w-xl mx-auto leading-relaxed">Mehr Pilot-Projekte (R&D Automation, Sovereign LLM Workflows, Secure Vector Analytics) folgen – wir priorisieren Qualität & Validierung statt Masse.</p>
+          <p className="text-sm text-text-secondary max-w-xl mx-auto leading-relaxed">Weitere Pilots (R&D Automation, Sovereign LLM Workflows, Secure Vector Analytics) folgen – Ausbau laufend. Fokus bleibt: Qualität, Validierung, Wiederverwendbarkeit.</p>
         </div>
       </div>
     </section>

@@ -39,7 +39,7 @@ const HeroSection: React.FC = () => {
           >
             <div className="space-y-6">
               <motion.h1 
-                className="text-4xl lg:text-6xl font-bold leading-tight"
+                className="text-4xl lg:text-6xl font-bold heading-fix"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -239,7 +239,7 @@ const NetworkVisualization: React.FC = () => {
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src="/LOGO_01_white.svg" 
+          src="/LOGO_02_white.svg" 
           alt="VAE Systems" 
           className="w-20 h-20 drop-shadow-lg"
         />

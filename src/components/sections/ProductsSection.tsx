@@ -1,6 +1,8 @@
 import React from 'react'
 import { productCategories } from '../navigation/productCategories'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
+import { Link } from 'react-router-dom'
+import NewsletterForm from '../forms/NewsletterForm'
 
 const ProductsSection: React.FC = () => {
   return (
@@ -20,8 +22,11 @@ const ProductsSection: React.FC = () => {
       <div className="container-vae relative">
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-5 text-gradient">Produkte & Plattform</h2>
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
-            Von modularen Komponenten bis zur vollintegrierten Plattform – wählen Sie den Grad an Umsetzung, der zu Ihrer Roadmap passt.
+          <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-4">
+            Vier Erlebniswelten – Lösungen, Applikationen, Plattform & Ökosystem. Alles folgt einem Prinzip: pragmatischer Nutzen ohne versteckte Abhängigkeiten.
+          </p>
+          <p className="text-sm text-text-muted leading-relaxed">
+            Studien & Branchenreports zeigen wiederholt: Fragmentierte Tool‑Landschaften, fehlende Betriebs- & Integrationskompetenzen sowie mangelnde Observability bremsen Skalierung. Unsere Suite adressiert genau diese Lücken schrittweise.
           </p>
         </div>
 
@@ -53,11 +58,39 @@ const ProductsSection: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <button className="mt-auto w-full rounded-lg py-3 text-sm font-medium bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/40 hover:bg-vae-turquoise hover:text-bg-darker hover:shadow-lg hover:shadow-vae-turquoise/30 transition-all">
+              <Link
+                to={
+                  cat.key === 'solutions' ? '/products/solutions'
+                  : cat.key === 'tools' ? '/products/tools'
+                  : cat.key === 'core' ? '/products/vae-core'
+                  : cat.key === 'built' ? '/products/showcases'
+                  : '/products'
+                }
+                className="mt-auto w-full text-center rounded-lg py-3 text-sm font-medium bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/40 hover:bg-vae-turquoise hover:text-bg-darker hover:shadow-lg hover:shadow-vae-turquoise/30 transition-all"
+              >
                 {cat.cta}
-              </button>
+              </Link>
             </div>
           ))}
+        </div>
+
+        {/* Newsletter CTA */}
+        <div className="mt-32 max-w-4xl mx-auto">
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-[linear-gradient(140deg,rgba(5,12,10,0.85),rgba(10,28,24,0.85))] backdrop-blur-xl p-10 md:p-14">
+            <div className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(circle_at_80%_30%,rgba(0,255,165,0.18),transparent_60%)]" />
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
+              <div className="md:max-w-md">
+                <h3 className="text-2xl font-semibold text-white mb-4">Produkt‑ & Architektur‑Updates</h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                  Kurz, kuratiert, kein Spam: Releasenotizen, Learnings aus Projekten, Hinweise zu Governance & Observability.
+                </p>
+                <p className="text-[11px] text-text-muted">Frequenz ca. 1× pro Monat. Abmeldung jederzeit.</p>
+              </div>
+              <div className="flex-1">
+                <NewsletterForm inline />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

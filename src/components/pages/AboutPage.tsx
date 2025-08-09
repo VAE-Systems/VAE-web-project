@@ -48,7 +48,7 @@ const AboutPage: React.FC = () => {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Text Content */}
               <div className="lg:pr-8">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 heading-fix">
                   Wir entwickeln Systeme, die <span className="text-gradient">denken</span>
                 </h2>
                 <p className="text-xl md:text-2xl text-vae-turquoise font-medium mb-6">

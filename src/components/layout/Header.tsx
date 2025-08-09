@@ -95,7 +95,7 @@ const Header: React.FC = () => {
           >
             <div className="h-10 group-hover:glow-turquoise transition-all duration-300">
               <img 
-                src="/LOGO_01_white.svg" 
+                src="/LOGO_02_white.svg" 
                 alt="VAE Systems Logo" 
                 className="h-full w-auto"
               />
@@ -165,7 +165,13 @@ const Header: React.FC = () => {
                               ))}
                             </ul>
                             <Link 
-                              to={`/products#${cat.key}`}
+                              to={
+                                cat.key === 'solutions' ? '/products/solutions'
+                                : cat.key === 'tools' ? '/products/tools'
+                                : cat.key === 'core' ? '/products/vae-core'
+                                : cat.key === 'built' ? '/products/showcases'
+                                : '/products'
+                              }
                               className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise hover:text-white transition-colors group/link"
                               onClick={() => setProductsOpen(false)}
                             >

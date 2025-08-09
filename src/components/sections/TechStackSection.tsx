@@ -150,34 +150,56 @@ const TechStackSection: React.FC = () => {
         )
         const imgEl = el.querySelector('img')
         if (imgEl) {
-          gsap.fromTo(imgEl, { rotationY: 0 }, { rotationY: 360, duration: 0.9, ease: 'power2.out', delay: i * 0.04, scrollTrigger: trig })
+          // Keine Rotation initial – Ruhe im Idle
+          gsap.set(imgEl, { rotationY: 0 })
         }
 
-        const tl = gsap.timeline({ paused: true })
-        tl.to(el, { 
-          boxShadow: '0 0 20px rgba(0,255,165,0.6)', 
-          duration: 0.3, 
-          ease: 'power2.out' 
-        }).to(el.querySelector('img'), { 
-          rotationY: '+=360', 
-          duration: 0.5, 
-          ease: 'power1.inOut' 
-        }, 0)
-
-        const handleEnter = () => { tl.play(); }
-        const handleLeave = () => { tl.reverse(); tl.eventCallback('onReverseComplete', () => { tl.pause(0) }) }
-        el.addEventListener('mouseenter', handleEnter)
-        el.addEventListener('mouseleave', handleLeave)
+        // Hover Interaktion: Sofort hell (<=200ms), langsames Ausfaden (~1.2s)
+        // Re-Enter während Ausfaden: direkt wieder hochfahren (Keyboard-Trail Effekt)
+        const handleEnter = () => {
+          // Kill Ausblendung, Glow hochfahren über Variable
+          ;(el as any)._fadeOutTween?.kill?.()
+          gsap.to(el, { '--glow-alpha': 0.78, scale: 1.085, duration: 0.25, ease: 'power2.out' })
+          const img = el.querySelector('img') as HTMLElement | null
+          if (img) {
+            // Laufender Spin nur während Hover
+            ;(img as any)._spinTween?.kill?.()
+            ;(img as any)._spinTween = gsap.to(img, { rotationY: '+=360', duration: 1.4, ease: 'power1.inOut', repeat: -1 })
+          }
+        }
+        const handleLeave = () => {
+          // Spin auslaufen lassen (sanft abbremsen)
+          const img = el.querySelector('img') as HTMLElement | null
+          if (img) {
+            const currentRot = gsap.getProperty(img, 'rotationY') as number
+            ;(img as any)._spinTween?.kill?.()
+            // Zur nächsten vollen 360 Grad einrasten
+            const target = Math.ceil(currentRot / 360) * 360
+            gsap.to(img, { rotationY: target, duration: 0.8, ease: 'power2.out' })
+          }
+          // Sehr langsames Ausblenden des Glows (Trail Effekt)
+          const fade = gsap.to(el, { '--glow-alpha': 0, scale: 1, duration: 3.2, ease: 'power2.out' })
+          ;(el as any)._fadeOutTween = fade
+        }
+  el.addEventListener('pointerenter', handleEnter)
+  el.addEventListener('pointerleave', handleLeave)
 
         // 3D tilt effect (only update CSS variables to avoid clobbering GSAP / hover transforms)
+        // Leichtes Throttling (rAF) für effizienteren Tilt
+        let ticking = false
         const handleMove = (e: MouseEvent) => {
-          const rect = el.getBoundingClientRect()
-          const xRel = (e.clientX - rect.left) / rect.width
-          const yRel = (e.clientY - rect.top) / rect.height
-          const rotX = (0.5 - yRel) * 18 // a bit stronger
-          const rotY = (xRel - 0.5) * 18
-          el.style.setProperty('--rx', rotX + 'deg')
-          el.style.setProperty('--ry', rotY + 'deg')
+          if (ticking) return
+          ticking = true
+          requestAnimationFrame(() => {
+            const rect = el.getBoundingClientRect()
+            const xRel = (e.clientX - rect.left) / rect.width
+            const yRel = (e.clientY - rect.top) / rect.height
+            const rotX = (0.5 - yRel) * 14 // etwas reduziert für Ruhe
+            const rotY = (xRel - 0.5) * 14
+            el.style.setProperty('--rx', rotX + 'deg')
+            el.style.setProperty('--ry', rotY + 'deg')
+            ticking = false
+          })
         }
         const resetTilt = () => {
           el.style.setProperty('--rx', '0deg')
@@ -188,8 +210,8 @@ const TechStackSection: React.FC = () => {
 
         // cleanup
         return () => {
-          el.removeEventListener('mouseenter', handleEnter)
-          el.removeEventListener('mouseleave', handleLeave)
+          el.removeEventListener('pointerenter', handleEnter)
+          el.removeEventListener('pointerleave', handleLeave)
           el.removeEventListener('mousemove', handleMove)
           el.removeEventListener('mouseleave', resetTilt)
         }

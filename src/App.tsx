@@ -21,6 +21,7 @@ import ProductShowcasesPage from '@components/pages/ProductShowcasesPage'
 import AboutPage from '@components/pages/AboutPage'
 import ContactPage from '@components/pages/ContactPage'
 import ImpressumPage from '@components/pages/ImpressumPage'
+import PrivacyPage from '@components/pages/PrivacyPage'
 
 /**
  * Main App Component
@@ -70,6 +71,7 @@ const App: React.FC = () => (
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/impressum" element={<ImpressumPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
       </main>
       <Footer />

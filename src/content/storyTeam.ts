@@ -28,13 +28,13 @@ export const storyIntro = {
 export const founders: FounderBio[] = [
   {
     key: 'julian',
-    name: 'Julian Darius Goertz-Dini',
+    name: 'Julian Darius Goertz Dini',
     role: 'CEO & Gründer',
-    highlight: 'Struktur & Umsetzung komplexer Vorhaben, Community & Verantwortungsaufbau',
+    highlight: 'Strukturiert komplexe Vorhaben & baut belastbare Organisationslogik auf',
     points: [
-      'Enkel des Bildhauers Jürgen Görtz – geprägt von großer Form & langlebigen Projekten',
-      'Vorstand Aktiv Kollektiv Heidelberg – Organisations- & Enablement-Fokus',
-      'Priorisiert klare Übergabefähigkeit & dokumentierte Betriebsmodelle'
+      'Geprägt von skulpturaler Langfrist-Perspektive (Enkel des Bildhauers Jürgen Goertz)',
+      'Vorstand Aktiv Kollektiv Heidelberg – Aufbau effizienter Arbeits- & Informationsstrukturen',
+      'Treibende Kraft für dokumentierte Übergabefähigkeit & klare Betriebsmodelle'
     ],
     icon: 'engineering'
   },
@@ -42,11 +42,11 @@ export const founders: FounderBio[] = [
     key: 'jakob',
     name: 'Jakob Dünnebeil',
     role: 'CTO & Gründer',
-    highlight: 'Frühe Programmier- & Hosting-Erfahrung, Open Source & Systemarchitektur',
+    highlight: 'Architektur & Systemsauberkeit – seit früher Jugend tief in Code & Infrastruktur',
     points: [
-      'Seit Kindheit Software & Infrastrukturprojekte',
-      'Fokus: Modularisierung, Adapter-Layer, Testbarkeit',
-      'Self-Hosting & Observability Praxis'
+      'Frühe eigene Software- & Hosting-Projekte (Langjährige Praxis statt kurzfristiger Trend)',
+      'Modularisierung & Adapter-Layer für wartbare Erweiterbarkeit',
+      'Self-Hosting, Observability & Testbarkeit als Default'
     ],
     icon: 'terminal'
   },
@@ -54,11 +54,11 @@ export const founders: FounderBio[] = [
     key: 'ninaad',
     name: 'Ninaad Anirrudah Deswandikar',
     role: 'CPO & Gründer',
-    highlight: 'Produktstrategie, UX & nutzerzentrierte KI-Integrationen',
+    highlight: 'Verbindet technische Möglichkeiten mit nutzerzentrierter Produktführung',
     points: [
-      'Aufgewachsen im Umfeld globaler Tech-Einflüsse (Vater 19 Jahre bei Google)',
-      'Übersetzt technische Möglichkeiten in nutzbare Produktinkremente',
-      'Schnittstelle: Nutzer-Feedback ↔ Architekturentscheidungen'
+      'Aufgewachsen im Umfeld globaler Tech-Einflüsse (Vater 19 Jahre bei Microsoft)',
+      'Übersetzt komplexe Architekturentscheidungen in klare Produktinkremente',
+      'Brücke zwischen Nutzer-Feedback, Priorisierung & Engineering'
     ],
     icon: 'lightbulb'
   }

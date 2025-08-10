@@ -1,13 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { processSteps, processDisclaimer } from '../../content/process'
+import { TermHint } from '../ui/Glossary'
+
+// Wrap glossary term occurrences inside text with TermHint (underline hover) – only terms defined in each step glossary.
+function annotateWithHints(text: string, terms: string[]): (string | JSX.Element)[] {
+  if (!terms.length) return [text]
+  const sorted = [...terms].sort((a,b) => b.length - a.length)
+  const pattern = new RegExp(`(${sorted.map(t => t.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')).join('|')})`, 'gi')
+  const parts: (string | JSX.Element)[] = []
+  let last = 0
+  let m: RegExpExecArray | null
+  while ((m = pattern.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index))
+    const matchText = m[0]
+    parts.push(<TermHint key={parts.length + matchText} term={matchText} />)
+    last = m.index + matchText.length
+  }
+  if (last < text.length) parts.push(text.slice(last))
+  return parts
+}
 
 interface ProcessSectionProps { id?: string; className?: string }
 
 const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', className = '' }) => {
   const ref = useRef<HTMLDivElement>(null)
-  const [hoverTerm, setHoverTerm] = useState<{ term: string; explanation: string } | null>(null)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -53,49 +71,27 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
                   {s.durationHint && <span className="text-[11px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-white/60">{s.durationHint}</span>}
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-3 leading-snug">{s.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-grow">{s.summary}</p>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-grow">
+                  {annotateWithHints(s.summary, (s.glossary || []).map(g => g.term))}
+                </p>
                 {s.deliverables.length > 0 && (
                   <ul className="space-y-1.5 mb-4">
-                    {s.deliverables.map(d => (
-                      <li key={d} className="flex items-start gap-2 text-[12px] text-text-secondary">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-vae-turquoise flex-shrink-0 mt-[3px]"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2"/></svg>
-                        {d}
-                      </li>
-                    ))}
+                    {s.deliverables.map(d => {
+                      const annotated = annotateWithHints(d, (s.glossary || []).map(g => g.term))
+                      return (
+                        <li key={d} className="flex items-start gap-2 text-[12px] text-text-secondary">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-vae-turquoise flex-shrink-0 mt-[3px]"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2"/></svg>
+                          <span>{annotated}</span>
+                        </li>
+                      )
+                    })}
                   </ul>
-                )}
-                {s.glossary && s.glossary.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {s.glossary.map(g => (
-                      <button
-                        key={g.term}
-                        type="button"
-                        onMouseEnter={() => setHoverTerm(g)}
-                        onFocus={() => setHoverTerm(g)}
-                        onMouseLeave={() => setHoverTerm(null)}
-                        onBlur={() => setHoverTerm(null)}
-                        className="text-[11px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-vae-turquoise/40 transition-colors"
-                        aria-describedby={g.term + '-def'}
-                      >
-                        {g.term}
-                      </button>
-                    ))}
-                  </div>
                 )}
               </div>
             </li>
           ))}
         </ol>
         <p className="text-[11px] text-text-secondary mt-8 tracking-wide">{processDisclaimer}</p>
-        {hoverTerm && (
-          <div className="fixed bottom-6 right-6 max-w-xs p-4 rounded-xl bg-bg-darker/90 border border-white/10 backdrop-blur-md shadow-lg text-sm z-50" role="status">
-            <div className="flex items-center justify-between mb-1">
-              <strong className="text-white text-xs uppercase tracking-wider">{hoverTerm.term}</strong>
-              <button onClick={() => setHoverTerm(null)} className="text-white/50 hover:text-white text-xs">×</button>
-            </div>
-            <p className="text-text-secondary leading-relaxed text-[12px]">{hoverTerm.explanation}</p>
-          </div>
-        )}
       </div>
       <div className="section-divider-horizontal" aria-hidden="true" />
     </section>

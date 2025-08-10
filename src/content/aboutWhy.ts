@@ -23,6 +23,7 @@ export interface TestimonialSnippet {
   company?: string
 }
 
+
 export const tagline = 'Substanz statt KI‑Hype: belastbare, dokumentierte KI‑ & Automations‑Architektur ohne Lock‑In.'
 
 export const outcomes: Outcome[] = [
@@ -77,3 +78,5 @@ export const testimonial: TestimonialSnippet = {
   role: 'CTO / Beispiel',
   company: '—'
 }
+
+

@@ -79,25 +79,6 @@ const ProductsSection: React.FC = () => {
             )
           })}
         </div>
-
-        {/* Newsletter CTA */}
-        <div className="mt-32 max-w-4xl mx-auto">
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-[linear-gradient(140deg,rgba(5,12,10,0.85),rgba(10,28,24,0.85))] backdrop-blur-xl p-10 md:p-14">
-            <div className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(circle_at_80%_30%,rgba(0,255,165,0.18),transparent_60%)]" />
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
-              <div className="md:max-w-md">
-                <h3 className="text-2xl font-semibold text-white mb-4">Produkt‑ & Architektur‑Updates</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                  Kurz, kuratiert, kein Spam: Releasenotizen, Learnings aus Projekten, Hinweise zu Governance & Observability.
-                </p>
-                <p className="text-[11px] text-text-muted">Frequenz ca. 1× pro Monat. Abmeldung jederzeit.</p>
-              </div>
-              <div className="flex-1">
-                <NewsletterForm inline />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )

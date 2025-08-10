@@ -97,10 +97,12 @@ const AboutPage: React.FC = () => {
     const root = rootRef.current
     if (!root) return
     const accentMap: Record<string, string> = {
-  angebote: '157 100% 47%',
-  fruehphase: '157 100% 47%',
-  warum: '157 100% 48%',
-  cta: '157 100% 60%'
+      angebote: '157 100% 47%',
+      fruehphase: '157 100% 47%',
+      prozess: '157 100% 48%',
+      warum: '157 100% 48%',
+      team: '157 100% 50%',
+      cta: '157 100% 60%'
     }
     const sections = Array.from(root.querySelectorAll<HTMLElement>('section[id]'))
       .filter(s => accentMap[s.id])
@@ -190,12 +192,15 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Unified Services Summary */}
-      <section id="angebote" className="relative py-24 about-section theme-b z-10" data-section>
+  {/* Warum / Outcomes früher platzieren */}
+  <WhyOutcomesSection />
+
+  {/* Unified Services Summary */}
+  <section id="angebote" className="relative py-24 about-section theme-b z-10" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
           <header className="max-w-4xl mb-14" data-heading-accent data-animate>
-            <h2 className="h2 text-white h-space">Was wir für Unternehmen liefern</h2>
+            <h2 className="h2 text-white h-space">Was wir für Unternehmen bieten</h2>
             <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
@@ -233,8 +238,11 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-    {/* Section 1: Frühphase */}
-  <section id="fruehphase" className="relative py-32 about-section theme-a z-10" data-section>
+    {/* Prozess vor Frühphase (konkret vor Kontext) */}
+    <ProcessSection />
+
+    {/* Frühphase Kontext danach */}
+    <section id="fruehphase" className="relative py-32 about-section theme-a z-10" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -311,13 +319,10 @@ const AboutPage: React.FC = () => {
 
   {/* Story / Mission / Werte vorerst entfernt für Reduktion & Repositioning */}
 
-  <ProcessSection />
-
-  {/* Section 5: Warum VAE (Refactored Outcomes & Principles) */}
-  <WhyOutcomesSection />
-
   {/* Story & Team Block (compact) */}
   <StoryTeamSection />
+
+  {/* Pilot Scenario entfernt (zu hypothetisch) */}
 
   {/* CTA */}
   <section className="relative py-32 about-section theme-b z-10" id="cta" data-section>
@@ -372,10 +377,10 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-  <CaseStudiesSection />
+    {/* Tech Stack Section */}
+    <TechStackSection />
 
-      {/* Tech Stack Section */}
-      <TechStackSection />
+  <CaseStudiesSection />
     </div>
   )
 }

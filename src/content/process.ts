@@ -9,6 +9,8 @@ export interface ProcessStep {
   glossary?: { term: string; explanation: string }[]
 }
 
+export interface GlossaryTerm { term: string; explanation: string }
+
 export const processDisclaimer = 'Richtwerte – genaue Dauer variiert nach Systemlandschaft & Datenlage.'
 
 export const processSteps: ProcessStep[] = [
@@ -37,7 +39,8 @@ export const processSteps: ProcessStep[] = [
     durationHint: '~1–2 Wochen',
     icon: 'architecture',
     glossary: [
-      { term: 'Feasibility', explanation: 'Machbarkeitsprüfung: Sind Daten, Schnittstellen & Ressourcen ausreichend für einen sinnvollen Pilot?' }
+      { term: 'Feasibility', explanation: 'Machbarkeitsprüfung: Sind Daten, Schnittstellen & Ressourcen ausreichend für einen sinnvollen Pilot?' },
+      { term: 'Runbook', explanation: 'Praktische Betriebsanleitung für wiederkehrende Aufgaben (Deploy, Monitoring, Recovery).' }
     ]
   },
   {
@@ -53,7 +56,9 @@ export const processSteps: ProcessStep[] = [
     durationHint: '~2–4 Wochen',
     icon: 'rocket_launch',
     glossary: [
-      { term: 'Evaluierung', explanation: 'Systematische Bewertung: erfüllt das Ergebnis definierte Akzeptanzkriterien & Qualitätsziele?' }
+      { term: 'Evaluierung', explanation: 'Systematische Bewertung: erfüllt das Ergebnis definierte Akzeptanzkriterien & Qualitätsziele?' },
+      { term: 'Observability', explanation: 'Transparenz über Verhalten & Performance: Logs, Metriken, Traces für schnelle Diagnose.' },
+      { term: 'Guardrails', explanation: 'Eingebaute Sicherheits- / Qualitätsmechanismen (Filter, Validierung, Policies) um Fehlverhalten zu minimieren.' }
     ]
   },
   {
@@ -69,4 +74,11 @@ export const processSteps: ProcessStep[] = [
     durationHint: '~3–5 Tage',
     icon: 'assignment_turned_in'
   }
+]
+
+// Global zusätzliche Glossarbegriffe, die nicht nur einem Step zugeordnet sind
+export const processGlossary: GlossaryTerm[] = [
+  { term: 'Retrieval', explanation: 'Gezieltes Auffinden relevanter Inhalte aus internen Quellen (Index / Vektorsuche) zur Anreicherung von Antworten.' },
+  { term: 'Adapter-Layer', explanation: 'Abstraktionsschicht zwischen Kernlogik und externen Systemen – ermöglicht Austausch / Erweiterung ohne Kern-Rewrite.' },
+  { term: 'Ownership', explanation: 'Fähigkeit, System & Codebasis intern zu verstehen, betreiben und verändern zu können – ohne uns.' }
 ]

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import NeuralNetworkBackground from './NeuralNetworkBackground'
 
@@ -70,26 +71,36 @@ const HeroSection: React.FC = () => {
             </div>
 
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
+              className="space-y-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <a 
-                href="mailto:kontakt@vae-systems.com?subject=Kostenlose%20KI-Beratung%20Anfrage&body=Hallo%20VAE%20Systems%20Team,%0A%0AIch%20interessiere%20mich%20für%20eine%20kostenlose%20KI-Beratung.%0A%0AMein%20Name:%20%0AMein%20Unternehmen:%20%0AMeine%20Telefonnummer:%20%0A%0AKurze%20Beschreibung%20meines%20Projekts:%0A%0A%0AVielen%20Dank!"
-                className="btn-primary text-center"
-              >
-                <span className="material-symbols-outlined mr-2">
-                  psychology
-                </span>
-                Kostenlose KI-Beratung
-              </a>
-              <button className="btn-secondary">
-                <span className="material-symbols-outlined mr-2">
-                  play_circle
-                </span>
-                VAEKTRA CORE Demo
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link 
+                  to="/contact"
+                  className="btn-primary text-center flex-1 flex items-center justify-center"
+                >
+                  <span className="material-symbols-outlined mr-2">schedule</span>
+                  30‑Min Strategie‑Gespräch buchen
+                </Link>
+                <Link 
+                  to="/products"
+                  className="btn-secondary flex-1 text-center flex items-center justify-center"
+                >
+                  <span className="material-symbols-outlined mr-2">apps</span>
+                  Produkte & Plattform ansehen
+                </Link>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Link to="/services" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Services Übersicht</Link>
+                <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Custom Solutions</Link>
+                <Link to="/products#core" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">VAE CORE Architektur</Link>
+                <a href="mailto:kontakt@vae-systems.com?subject=Kurzfrage%20zu%20KI%20Projekt" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Direkte Frage per Mail</a>
+              </div>
+              <p className="text-[11px] text-text-muted leading-relaxed max-w-md">
+                Unverbindlich & fokussiert: In <span className="text-text-secondary font-medium">15–30 Minuten</span> klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.
+              </p>
             </motion.div>
 
             {/* Trust Indicators */}
@@ -178,7 +189,7 @@ const TypewriterEffect: React.FC<{ texts: string[] }> = ({ texts }) => {
 const NetworkVisualization: React.FC = () => {
   const services = [
     { icon: 'psychology', label: 'KI-Beratung', distance: 100 },
-    { icon: 'storage', label: 'VAEKTRA CORE', distance: 120 },
+  { icon: 'storage', label: 'VAE CORE', distance: 120 },
     { icon: 'security', label: 'DSGVO-konform', distance: 110 },
     { icon: 'analytics', label: 'Analytics', distance: 95 },
     { icon: 'code', label: 'Open Source', distance: 105 },

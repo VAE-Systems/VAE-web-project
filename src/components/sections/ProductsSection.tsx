@@ -31,47 +31,53 @@ const ProductsSection: React.FC = () => {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {productCategories.map(cat => (
-            <div
-              key={cat.key}
-              className={`group relative flex flex-col rounded-2xl overflow-hidden p-6 bg-gradient-to-br from-white/10 to-white/5 border border-white/15 backdrop-blur-xl hover:-translate-y-2 transition-all duration-300 hover:shadow-xl hover:shadow-vae-turquoise/15 will-change-transform ${cat.accent === 'core' ? 'border-vae-turquoise/40 from-vae-turquoise/15 to-bg-darker' : ''} ${cat.accent === 'built' ? 'from-bg-darker/90 to-vae-turquoise/10' : ''}`}
-            >
-              {/* Accent bar */}
-              <div className={`absolute inset-x-0 top-0 h-1 rounded-t-2xl origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ${cat.accent === 'core' ? 'bg-gradient-to-r from-vae-turquoise via-vae-turquoise-light to-vae-turquoise' : 'bg-gradient-to-r from-vae-turquoise/70 to-vae-turquoise-dark/70'}`} />
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-white leading-tight">{cat.title}</h3>
-                  <p className="text-xs uppercase tracking-wide text-vae-turquoise/80 mt-1">{cat.tagline}</p>
-                </div>
-                {cat.badge && (
-                  <span className="px-2 py-1 text-[10px] font-semibold rounded-full bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/30">
-                    {cat.badge}
-                  </span>
-                )}
-              </div>
-              <p className="text-sm text-text-secondary mb-5 flex-grow leading-relaxed group-hover:text-white/90 transition-colors">{cat.description}</p>
-              <ul className="space-y-2 mb-6 text-sm">
-                {cat.points.map(p => (
-                  <li key={p} className="flex items-start gap-2 text-text-secondary group-hover:text-white/80 transition-colors">
-                    <span className="mt-0.5 w-2 h-2 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
-                    <span>{p}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to={
-                  cat.key === 'solutions' ? '/products/solutions'
-                  : cat.key === 'tools' ? '/products/tools'
-                  : cat.key === 'core' ? '/products/vae-core'
-                  : cat.key === 'built' ? '/products/showcases'
-                  : '/products'
-                }
-                className="mt-auto w-full text-center rounded-lg py-3 text-sm font-medium bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/40 hover:bg-vae-turquoise hover:text-bg-darker hover:shadow-lg hover:shadow-vae-turquoise/30 transition-all"
+          {productCategories.map(cat => {
+            const link = cat.key === 'solutions' ? '/products/solutions'
+              : cat.key === 'tools' ? '/products/tools'
+              : cat.key === 'core' ? '/products/vae-core'
+              : cat.key === 'built' ? '/products/showcases'
+              : '/products'
+            return (
+              <div
+                key={cat.key}
+                className={`group relative flex flex-col rounded-2xl overflow-hidden p-6 bg-white/[0.04] border border-white/10 backdrop-blur-md hover:-translate-y-2 transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_8px_34px_-6px_rgba(0,255,165,0.35)]`}
               >
-                {cat.cta}
-              </Link>
-            </div>
-          ))}
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 32% 22%, rgba(0,255,165,0.18), transparent 65%)'}} />
+                <div className="flex items-start justify-between mb-5 relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-vae-turquoise/20 text-vae-turquoise`}>
+                      <span className="material-symbols-outlined text-xl">{cat.icon || 'apps'}</span>
+                    </div>
+                    <div>
+                      <h3 className="text-base font-semibold text-white leading-tight">{cat.title}</h3>
+                      <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
+                    </div>
+                  </div>
+                  {cat.badge && (
+                    <span className="px-2 py-1 text-[10px] font-semibold rounded-md bg-vae-turquoise/10 text-vae-turquoise border border-vae-turquoise/30">
+                      {cat.badge}
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm text-text-secondary mb-4 leading-relaxed flex-grow relative z-10">{cat.description}</p>
+                <ul className="space-y-2 mb-6 relative z-10">
+                  {cat.points.map(p => (
+                    <li key={p} className="flex items-center gap-2 text-[12px] text-text-secondary">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-vae-turquoise flex-shrink-0"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2"/></svg>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to={link}
+                  className="btn-convert mt-auto gap-2 relative z-10"
+                >
+                  {cat.cta}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg>
+                </Link>
+              </div>
+            )
+          })}
         </div>
 
         {/* Newsletter CTA */}

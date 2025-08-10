@@ -53,17 +53,19 @@ const ValuesPrinciplesSection: React.FC<ValuesPrinciplesSectionProps> = ({ class
         gsap.set(line, { scaleY: 0, transformOrigin: '0 0' })
         ScrollTrigger.create({
           trigger: el,
-            start: 'top 70%',
-            end: 'bottom 20%',
-            scrub: 0.6,
-            animation: gsap.to(line, { scaleY: 1, ease: 'none' })
+          // Start a bit earlier so first nodes feel present sooner
+          start: 'top 85%',
+          end: 'bottom 15%',
+          scrub: 0.55,
+          animation: gsap.to(line, { scaleY: 1, ease: 'none' })
         })
       }
       items.forEach((item, i) => {
         gsap.set(item, { autoAlpha: 0, y: 40 })
         ScrollTrigger.create({
           trigger: item,
-          start: 'top 78%',
+          // Trigger nearer to the viewport bottom so content erscheint früher beim ersten Scroll
+          start: 'top 90%',
           once: true,
           onEnter: () => gsap.to(item, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: i * 0.03 })
         })

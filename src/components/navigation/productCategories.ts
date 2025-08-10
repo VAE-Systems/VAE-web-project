@@ -7,6 +7,7 @@ export interface ProductCategory {
   points: string[]
   cta: string
   accent?: 'core' | 'built'
+  icon?: string // Material Symbols icon name
 }
 
 export const productCategories: ProductCategory[] = [
@@ -21,7 +22,8 @@ export const productCategories: ProductCategory[] = [
       'Dokumentation & Übergabe',
       'Vendor-lock-in frei'
     ],
-    cta: 'Details ansehen'
+  cta: 'Details ansehen',
+  icon: 'deployed_code'
   },
   {
     key: 'tools',
@@ -33,7 +35,8 @@ export const productCategories: ProductCategory[] = [
       'Klarer Nutzen (Plug‑in)',
       'Optionaler Support'
     ],
-    cta: 'Applikationen entdecken'
+  cta: 'Applikationen entdecken',
+  icon: 'widgets'
   },
   {
     key: 'core',
@@ -47,7 +50,8 @@ export const productCategories: ProductCategory[] = [
       'Observability integriert'
     ],
     cta: 'Mehr über CORE',
-    accent: 'core'
+  accent: 'core',
+  icon: 'hub'
   },
   {
     key: 'built',
@@ -60,6 +64,7 @@ export const productCategories: ProductCategory[] = [
       'Skalierte Deployments'
     ],
     cta: 'Showcases ansehen',
-    accent: 'built'
+  accent: 'built',
+  icon: 'layers'
   }
 ]

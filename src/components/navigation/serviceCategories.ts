@@ -37,7 +37,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     key: 'custom',
-    title: 'Zustrom Solutions',
+  title: 'Custom Solutions',
     tagline: 'Individuelle Umsetzung',
     description: 'Spezifische Integrationen, Automationspfade & Retrieval-Layer – modulare Bausteine statt generischer SaaS-Katalog.',
     points: [

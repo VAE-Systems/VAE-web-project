@@ -36,7 +36,7 @@ const ServicesPage: React.FC = () => {
   const categories = [
     { key:'trainings', title:'Schulungen', icon:'school', focus:'Wissenstransfer & Enablement – Teams schneller produktiv machen.', examples:['VAE CORE Admin-Schulung','Prompt Engineering Workshop','Datenarchitektur-Training'], to:'/services/trainings' },
     { key:'consulting', title:'Beratungen', icon:'handshake', focus:'Strategische Architektur-, Prozess- & Compliance-Begleitung.', examples:['KI-Integrations-Roadmap','Sicherheits- & Governance Audit','Machbarkeitsanalyse (EU AI Act / Data Act)'], to:'/services/consulting' },
-    { key:'custom', title:'Zustrom Solutions', icon:'extension', focus:'Individuelle Software & Integrationen – gezielte Umsetzung statt Produktkatalog.', examples:['API-Connector Bestandssystem','Spezial-Workflow Automatisierung','Domain-spez. Retrieval Layer'], to:'/services/custom-solutions' }
+  { key:'custom', title:'Custom Solutions', icon:'extension', focus:'Individuelle Software & Integrationen – gezielte Umsetzung statt Produktkatalog.', examples:['API-Connector Bestandssystem','Spezial-Workflow Automatisierung','Domain-spez. Retrieval Layer'], to:'/services/custom-solutions' }
   ]
 
   return (
@@ -79,7 +79,7 @@ const ServicesPage: React.FC = () => {
           <div className="max-w-3xl mb-16">
             <h2 className="text-3xl md:text-5xl font-bold heading-fix mb-6 text-gradient">Lifecycle statt Einzelleistung.</h2>
             <p className="text-text-secondary leading-relaxed mb-5 text-lg">Wir entwickeln nicht nur Software – wir begleiten den gesamten Lebenszyklus: Analyse, Architektur, Implementierung, Enablement, Betrieb & Übergabe. So entstehen keine „Abwurfprojekte“, sondern betreibbare Lösungen.</p>
-            <p className="text-text-secondary leading-relaxed mb-5 text-sm">Trainings bauen interne Kompetenz auf, Consulting schafft Klarheit & Richtung, Zustrom Solutions liefert präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.</p>
+            <p className="text-text-secondary leading-relaxed mb-5 text-sm">Trainings bauen interne Kompetenz auf, Consulting schafft Klarheit & Richtung, Custom Solutions liefern präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.</p>
             <p className="text-text-secondary leading-relaxed text-sm">Plattform‑ & Lizenzangebote unter <Link to="/products" className="text-vae-turquoise hover:underline">Products</Link>. Services adressieren Ihren spezifischen Kontext.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">

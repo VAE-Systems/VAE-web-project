@@ -1,6 +1,6 @@
 import React from 'react'
 import ContactSection from '../sections/ContactSection'
-import FAQSection from '../sections/FAQSection'
+const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 
 /**
  * ContactPage Component
@@ -124,7 +124,9 @@ const ContactPage: React.FC = () => {
       <ContactSection />
 
       {/* FAQ Section */}
-      <FAQSection />
+      <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
+        <FAQSection />
+      </React.Suspense>
     </div>
   )
 }

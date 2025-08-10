@@ -2,7 +2,7 @@ import React from 'react'
 import ProductsSection from '../sections/ProductsSection'
 import ProductsHeroSection from '../sections/ProductsHeroSection'
 import Seo from '../ui/Seo'
-import FAQSection from '../sections/FAQSection'
+const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 
 const jsonLd = [
   {
@@ -83,7 +83,8 @@ const ProductsPage: React.FC = () => {
         </div>
       </section>
       <ProductsSection />
-      <FAQSection
+      <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
+        <FAQSection
         id="products-faq"
         className="bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker/90 border-t border-white/5"
         title="Produkte – häufige Fragen"
@@ -106,6 +107,7 @@ const ProductsPage: React.FC = () => {
           ]}
         ]}
       />
+  </React.Suspense>
     </div>
   )
 }

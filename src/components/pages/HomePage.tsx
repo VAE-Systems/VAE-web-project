@@ -5,7 +5,7 @@ import ProductsSection from '../sections/ProductsSection'
 import TechStackSection from '../sections/TechStackSection'
 import AboutSection from '../sections/AboutSection'
 import CaseStudiesSection from '../sections/CaseStudiesSection'
-import FAQSection from '../sections/FAQSection'
+const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 import ContactSection from '../sections/ContactSection'
 
 /**
@@ -35,7 +35,9 @@ const HomePage: React.FC = () => {
   <CaseStudiesSection />
 
       {/* FAQ Section */}
-      <FAQSection />
+      <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
+        <FAQSection />
+      </React.Suspense>
 
       {/* Contact Section */}
       <ContactSection />

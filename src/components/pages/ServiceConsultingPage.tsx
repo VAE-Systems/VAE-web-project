@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import { TermHint } from '../ui/Glossary'
@@ -83,24 +83,7 @@ const ServiceConsultingPage: React.FC = () => {
           {/* Prozess & Deliverables */}
           <div className="mb-24">
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-10">Prozess & Deliverables</h2>
-            <div className="grid md:grid-cols-4 gap-6 mb-12">
-              {[
-                {t:'Discover',p:'Ziele, Stakeholder, Risiken, Ist-Landschaft.'},
-                {t:'Assess',p:'Optionen, Reifegrad, Risiko / Potenzial Modell.'},
-                {t:'Blueprint',p:'Architektur & Governance, KPI/TCO Modell.'},
-                {t:'Decision',p:'Roadmap + Priorisierung & nächste Schritte.'}
-              ].map((s,i) => (
-                <div key={s.t} className="relative group rounded-2xl border border-white/10 bg-white/[0.04] p-6 overflow-hidden">
-                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background:'radial-gradient(circle at 30% 25%, rgba(0,255,165,0.15), transparent 65%)'}} />
-                  <div className="flex items-center justify-between mb-4 relative z-10">
-                    <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-semibold">{String(i+1).padStart(2,'0')}</span>
-                    <span className="text-[11px] text-vae-turquoise/70 font-medium tracking-wide">Phase</span>
-                  </div>
-                  <h3 className="text-sm font-semibold text-white mb-2 relative z-10 leading-snug">{s.t}</h3>
-                  <p className="text-[11px] text-text-secondary leading-relaxed relative z-10">{s.p}</p>
-                </div>
-              ))}
-            </div>
+            <ConsultingProcessSpotlight />
             <div className="grid md:grid-cols-2 gap-10">
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">Deliverables</h3>
@@ -185,3 +168,59 @@ const ConsultingFAQ: React.FC = () => (
     dense
   />
 )
+
+// Spotlight Prozess (analog Lifecycle aus Custom Solutions)
+const consultingSteps = [
+  { key:'discover', title:'Discover', desc:'Ziele, Stakeholder, Risiken, Ist-Landschaft.' },
+  { key:'assess', title:'Assess', desc:'Optionen, Reifegrad, Risiko / Potenzial Modell.' },
+  { key:'blueprint', title:'Blueprint', desc:'Architektur & Governance, KPI/TCO Modell.' },
+  { key:'decision', title:'Decision', desc:'Roadmap + Priorisierung & nächste Schritte.' }
+]
+
+const ConsultingProcessSpotlight: React.FC = () => {
+  const [active, setActive] = useState<number | null>(null)
+
+  const handleMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    const el = e.currentTarget
+    const rect = el.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    el.style.setProperty('--mx', x + 'px')
+    el.style.setProperty('--my', y + 'px')
+  }
+
+  return (
+    <div className="mb-14" aria-labelledby="consulting-process-heading">
+      <div className="relative flex md:grid md:grid-cols-4 gap-5 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory px-1 -mx-1 pb-4 md:pb-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10">
+        {consultingSteps.map((s,i) => (
+          <div
+            key={s.key}
+            onMouseEnter={() => setActive(i)}
+            onMouseLeave={() => setActive(null)}
+            onFocus={() => setActive(i)}
+            onBlur={() => setActive(prev => prev===i ? null : prev)}
+            onMouseMove={handleMove}
+            className={`relative group rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col overflow-hidden transition-all duration-500 will-change-transform snap-start min-w-[78%] sm:min-w-[55%] md:min-w-0 ${active===i ? 'border-vae-turquoise/50 shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_14px_48px_-10px_rgba(0,255,165,0.45)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_10px_40px_-8px_rgba(0,255,165,0.4)]'}`}
+            style={{ ['--mx' as any]:'30%', ['--my' as any]:'25%' }}
+            tabIndex={0}
+          >
+            <div className="absolute -inset-px opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(600px circle at var(--mx) var(--my), rgba(0,255,165,0.22), transparent 70%)'}} />
+            <div className="flex items-center justify-between mb-4 relative z-10">
+              <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-semibold tracking-wider">{String(i+1).padStart(2,'0')}</span>
+              <span className="text-[11px] text-vae-turquoise/70 font-medium uppercase tracking-wide">Phase</span>
+            </div>
+            <div aria-hidden="true" className="w-full h-px bg-gradient-to-r from-transparent via-vae-turquoise/40 to-transparent mb-4 relative z-10" />
+            <h3 className="text-sm font-semibold text-white mb-2 relative z-10 leading-snug">{s.title}</h3>
+            <p className="text-[11px] text-text-secondary leading-relaxed relative z-10 flex-grow">{s.desc}</p>
+            <div className="mt-4 pt-3 border-t border-white/10 text-[10px] text-text-muted relative z-10">
+              {s.key === 'discover' && 'Workshops & Interviews'}
+              {s.key === 'assess' && 'Analyse & Bewertung'}
+              {s.key === 'blueprint' && 'Architektur & Governance Artefakte'}
+              {s.key === 'decision' && 'Entscheidungsvorlage & Roadmap'}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

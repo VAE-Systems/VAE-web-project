@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import { productCategories } from '../navigation/productCategories'
+import SpotlightCard from '../ui/SpotlightCard'
 import FAQSection, { FAQCategory } from '../sections/FAQSection'
 
 const ServiceCustomSolutionsPage: React.FC = () => {
@@ -88,36 +89,27 @@ const ServiceCustomSolutionsPage: React.FC = () => {
             <h2 className="text-2xl md:text-3xl font-semibold text-white">Verwandte Produkt-Suite</h2>
             <p className="text-sm text-text-secondary leading-relaxed max-w-3xl">Unsere Produktlandschaft kombiniert fertige <span className="text-white">Komplettlösungen</span>, modulare <span className="text-white">Applikationen & Lizenzen</span>, die Plattform <span className="text-white">VAE CORE</span> sowie <span className="text-white">Showcases</span> als Referenzen. Custom Build wird dort eingesetzt, wo spezifische Differenzierung oder Integrationstiefe nötig ist.</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {productCategories.map(cat => (
-                <div key={cat.key} className="group relative p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-vae-turquoise/40 transition-all duration-300 overflow-hidden">
-                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 28% 25%, rgba(0,255,165,0.16), transparent 65%)'}} />
-                  <div className="flex items-start justify-between mb-4 relative z-10">
-                    <div>
-                      <h3 className="text-sm font-semibold text-white leading-tight">{cat.title}</h3>
-                      <p className="text-[11px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
-                    </div>
-                    {cat.badge && <span className="px-2 py-1 text-[10px] font-semibold rounded-md bg-vae-turquoise/10 text-vae-turquoise border border-vae-turquoise/30">{cat.badge}</span>}
-                  </div>
-                  <p className="text-xs text-text-secondary leading-relaxed mb-4 relative z-10 line-clamp-4">{cat.description}</p>
-                  <ul className="space-y-1 mb-5 relative z-10">
-                    {cat.points.slice(0,3).map(p => (
-                      <li key={p} className="flex items-center gap-1.5 text-[11px] text-text-secondary">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-vae-turquoise flex-shrink-0"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2"/></svg>
-                        <span>{p}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link to={
-                    cat.key === 'solutions' ? '/products/solutions' :
-                    cat.key === 'tools' ? '/products/tools' :
-                    cat.key === 'core' ? '/products/vae-core' :
-                    cat.key === 'built' ? '/products/showcases' : '/products'
-                  } className="btn-convert gap-2 text-[10px] py-2 px-3 h-10 inline-flex items-center relative z-10">
-                    {cat.cta}
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg>
-                  </Link>
-                </div>
-              ))}
+              {productCategories.map(cat => {
+                const to = cat.key === 'solutions' ? '/products/solutions' :
+                  cat.key === 'tools' ? '/products/tools' :
+                  cat.key === 'core' ? '/products/vae-core' :
+                  cat.key === 'built' ? '/products/showcases' : '/products'
+                return (
+                  <SpotlightCard
+                    key={cat.key}
+                    title={cat.title}
+                    description={cat.description}
+                    to={to}
+                    cta={cat.cta}
+                    className="p-0"
+                    iconSlot={<div className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-semibold inline-flex items-center border border-vae-turquoise/30">{cat.badge || 'Suite'}</div>}
+                  >
+                    <ul className="list-disc list-inside">
+                      {cat.points.slice(0,3).map(p => <li key={p}>{p}</li>)}
+                    </ul>
+                  </SpotlightCard>
+                )
+              })}
             </div>
           </div>
         </div>

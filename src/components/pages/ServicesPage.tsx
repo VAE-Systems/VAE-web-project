@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Link } from 'react-router-dom'
+import SpotlightCard from '../ui/SpotlightCard'
 import MaterialIcon from '../ui/MaterialIcon'
 import ServicesHeroSection from '../sections/ServicesHeroSection'
 import Seo from '../ui/Seo'
-import FAQSection from '../sections/FAQSection'
+const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 /**
  * ServicesPage Component
  * 
@@ -54,21 +55,63 @@ const ServicesPage: React.FC = () => {
         <div className="container-vae max-w-7xl">
           <div className="grid md:grid-cols-3 gap-10">
             {categories.map(cat => (
-              <div key={cat.key} className="group relative bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col hover:border-vae-turquoise/40 transition-all duration-300">
-                <div className="w-14 h-14 rounded-xl bg-vae-turquoise/15 text-vae-turquoise flex items-center justify-center mb-6">
-                  <MaterialIcon icon={cat.icon} className="text-2xl" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-3 heading-fix">{cat.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-5 flex-grow">{cat.focus}</p>
-                <ul className="text-xs text-text-muted space-y-1 mb-6 list-disc list-inside">
+              <SpotlightCard
+                key={cat.key}
+                title={cat.title}
+                description={cat.focus}
+                to={cat.to}
+                cta="Mehr Details"
+                iconSlot={<div className="w-14 h-14 rounded-xl bg-vae-turquoise/15 text-vae-turquoise flex items-center justify-center"><MaterialIcon icon={cat.icon} className="text-2xl" /></div>}
+              >
+                <ul className="list-disc list-inside">
                   {cat.examples.map(ex => <li key={ex}>{ex}</li>)}
                 </ul>
-                <Link to={cat.to} className="mt-auto inline-flex items-center text-sm font-medium text-vae-turquoise hover:text-white transition-colors">
-                  Mehr Details
-                  <span className="material-symbols-outlined text-base ml-1 transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </Link>
-              </div>
+              </SpotlightCard>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Vergleich / Differenzierung Matrix */}
+      <section className="py-28 bg-bg-dark border-b border-white/5" id="vergleich">
+        <div className="container-vae max-w-6xl">
+          <header className="max-w-3xl mb-14">
+            <h2 className="text-3xl md:text-5xl font-bold heading-fix mb-6 text-gradient">Wann welches Format?</h2>
+            <p className="text-text-secondary leading-relaxed text-lg">Schnell erkennbare Zuordnung: Wissen aufbauen, Richtung festlegen oder spezifisch umsetzen. Überlappungen bewusst minimal.</p>
+          </header>
+          <div className="overflow-x-auto -mx-2 px-2">
+            <table className="w-full text-left text-[13px] md:text-sm border-collapse">
+              <thead>
+                <tr className="text-[10px] md:text-[11px] uppercase tracking-wide text-text-muted/80">
+                  <th className="py-2 pr-4 font-medium text-left text-text-secondary/70 w-[150px]">Kriterium</th>
+                  <th className="py-2 px-4 font-semibold text-white bg-white/[0.04] rounded-tl-xl">Trainings</th>
+                  <th className="py-2 px-4 font-semibold text-white bg-white/[0.04]">Consulting</th>
+                  <th className="py-2 px-4 font-semibold text-white bg-white/[0.04] rounded-tr-xl">Custom Solutions</th>
+                </tr>
+              </thead>
+              <tbody className="align-top">
+                {[
+                  { k:'Ziel', label:'Primäres Ziel', a:'Kompetenz & Routinen', b:'Entscheidung & Governance', c:'Produktiver Baustein' },
+                  { k:'Output', label:'Greifbarer Output', a:'Unterlagen, Übungen, Cheatsheets', b:'Roadmap, Architektur, KPI/Risiko', c:'Software, Runbooks, Dashboards' },
+                  { k:'Tiefe', label:'Technische Tiefe', a:'Fundament & Patterns', b:'Architektur & Optionen', c:'Implementierung & Integrationen' },
+                  { k:'Dauer', label:'Typische Dauer', a:'1 Tag / Modul', b:'Tage – wenige Wochen', c:'Wochen – Inkremente' },
+                  { k:'Team', label:'Interne Beteiligung', a:'Aktives Lernen', b:'Workshops & Entscheidungen', c:'Review + Co-Development' },
+                  { k:'Metriken', label:'Messpunkte', a:'Lernziele / Übungserfolg', b:'Reifegrad, Risiko, TCO', c:'Qualität, Latenz, Kosten' },
+                  { k:'Lockin', label:'Lock‑in Risiko', a:'Keins', b:'Sehr gering (Dokumente)', c:'Niedrig (Open-first Code)' }
+                ].map((r,i,arr) => (
+                  <tr key={r.k} className="border-b border-white/5 last:border-0">
+                    <th scope="row" className="text-[10px] md:text-[11px] font-medium text-text-muted py-3 pr-4 text-left align-top w-[150px]">{r.label}</th>
+                    <td className={`py-3 px-4 text-xs text-text-secondary bg-white/[0.035] border border-white/5 ${i===0 ? 'rounded-tl-xl' : ''} ${i===arr.length-1 ? 'rounded-bl-xl' : ''}`}>{r.a}</td>
+                    <td className="py-3 px-4 text-xs text-text-secondary bg-white/[0.035] border border-white/5">{r.b}</td>
+                    <td className={`py-3 px-4 text-xs text-text-secondary bg-white/[0.035] border border-white/5 ${i===0 ? 'rounded-tr-xl' : ''} ${i===arr.length-1 ? 'rounded-br-xl' : ''}`}>{r.c}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-8 text-[11px] text-text-muted max-w-4xl space-y-2">
+            <p>Bereiche können separat gebucht oder in direktem Kontakt sinnvoll kombiniert werden – abhängig von Reifegrad & Zielbild.</p>
+            <p className="text-text-secondary/70">Typische Sequenz: Klarheit (Consulting) → Enablement (Trainings) → Umsetzung spezifischer Bausteine (Custom Solutions).</p>
           </div>
         </div>
       </section>
@@ -107,29 +150,31 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* FAQ Section (Services Fokus) */}
-      <FAQSection
-        id="services-faq"
-        className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-white/5"
-        title="Services – häufige Fragen"
-        subtitle="Klarheit zu Umfang, Ablauf und Betrieb." 
-        categories={[
-          { category: 'Ablauf', questions: [
-            { question: 'Wie startet ein Services-Projekt?', answer: 'Kurz-Workshop (Ziel, Restriktionen, vorhandene Systeme), dann definierter Explorations- / Architektur-Sprint mit klaren Artefakten.' },
-            { question: 'Fixed Scope oder agil?', answer: 'Hybrid: definierte Kernziele + priorisierte Backlog-Optionen. Jede Iteration liefert überprüfbaren Mehrwert.' },
-            { question: 'Remote oder vor Ort?', answer: 'Primär remote, kritische Architektur- oder Enablement-Sessions optional vor Ort.' }
-          ]},
-          { category: 'Leistungstiefe', questions: [
-            { question: 'Nur Consulting möglich?', answer: 'Ja. Reine Architektur-/Governance Begleitung ohne Implementierung ist möglich – aber Integration & Enablement erhöhen Nachhaltigkeit.' },
-            { question: 'Hand Over Strategie?', answer: 'Früh dokumentierte Artefakte, Playbooks, Trainings. Ziel: internes Team kann Betrieb / Erweiterung souverän übernehmen.' },
-            { question: 'Toolchain Vorgaben?', answer: 'Wir adaptieren existierende Tooling-Landschaften sofern sie Transparenz & Reproduzierbarkeit erlauben.' }
-          ]},
-          { category: 'Betrieb', questions: [
-            { question: 'Nach Projekt Support?', answer: 'On-Demand Sprints, SLA für kritische Pfade oder Transfer-Begleitung bis definierter Reifegrad erreicht.' },
-            { question: 'Kostenkontrolle?', answer: 'Offene Kostentreiber identifiziert (Inference, Index, Orchestrierung). Metriken & Budget-Alerts optional integrierbar.' },
-            { question: 'Sicherheitsmodell?', answer: 'Rollen / Zugriff + Audit Logging + Evaluationspfade werden nicht nachträglich ergänzt, sondern konzeptionell vorgezogen.' }
+      <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
+        <FAQSection
+          id="services-faq"
+          className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-white/5"
+          title="Services – häufige Fragen"
+          subtitle="Klarheit zu Umfang, Ablauf und Betrieb." 
+          categories={[
+            { category: 'Ablauf', questions: [
+              { question: 'Wie startet ein Services-Projekt?', answer: 'Kurz-Workshop (Ziel, Restriktionen, vorhandene Systeme), dann definierter Explorations- / Architektur-Sprint mit klaren Artefakten.' },
+              { question: 'Fixed Scope oder agil?', answer: 'Hybrid: definierte Kernziele + priorisierte Backlog-Optionen. Jede Iteration liefert überprüfbaren Mehrwert.' },
+              { question: 'Remote oder vor Ort?', answer: 'Primär remote, kritische Architektur- oder Enablement-Sessions optional vor Ort.' }
+            ]},
+            { category: 'Leistungstiefe', questions: [
+              { question: 'Nur Consulting möglich?', answer: 'Ja. Reine Architektur-/Governance Begleitung ohne Implementierung ist möglich – aber Integration & Enablement erhöhen Nachhaltigkeit.' },
+              { question: 'Hand Over Strategie?', answer: 'Früh dokumentierte Artefakte, Playbooks, Trainings. Ziel: internes Team kann Betrieb / Erweiterung souverän übernehmen.' },
+              { question: 'Toolchain Vorgaben?', answer: 'Wir adaptieren existierende Tooling-Landschaften sofern sie Transparenz & Reproduzierbarkeit erlauben.' }
+            ]},
+              { category: 'Betrieb', questions: [
+              { question: 'Nach Projekt Support?', answer: 'On-Demand Sprints, SLA für kritische Pfade oder Transfer-Begleitung bis definierter Reifegrad erreicht.' },
+              { question: 'Kostenkontrolle?', answer: 'Offene Kostentreiber identifiziert (Inference, Index, Orchestrierung). Metriken & Budget-Alerts optional integrierbar.' },
+              { question: 'Sicherheitsmodell?', answer: 'Rollen / Zugriff + Audit Logging + Evaluationspfade werden nicht nachträglich ergänzt, sondern konzeptionell vorgezogen.' }
+            ]}
           ]}
-        ]}
-      />
+        />
+      </React.Suspense>
     </div>
   )
 }

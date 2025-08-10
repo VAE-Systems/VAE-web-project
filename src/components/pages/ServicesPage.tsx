@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import MaterialIcon from '../ui/MaterialIcon'
 import ServicesHeroSection from '../sections/ServicesHeroSection'
 import Seo from '../ui/Seo'
+import FAQSection from '../sections/FAQSection'
 /**
  * ServicesPage Component
  * 
@@ -104,6 +105,31 @@ const ServicesPage: React.FC = () => {
           <p className="mt-6 text-xs text-text-muted">PDF ist Vorab-Version – Inhalte können sich ändern.</p>
         </div>
       </section>
+
+      {/* FAQ Section (Services Fokus) */}
+      <FAQSection
+        id="services-faq"
+        className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-white/5"
+        title="Services – häufige Fragen"
+        subtitle="Klarheit zu Umfang, Ablauf und Betrieb." 
+        categories={[
+          { category: 'Ablauf', questions: [
+            { question: 'Wie startet ein Services-Projekt?', answer: 'Kurz-Workshop (Ziel, Restriktionen, vorhandene Systeme), dann definierter Explorations- / Architektur-Sprint mit klaren Artefakten.' },
+            { question: 'Fixed Scope oder agil?', answer: 'Hybrid: definierte Kernziele + priorisierte Backlog-Optionen. Jede Iteration liefert überprüfbaren Mehrwert.' },
+            { question: 'Remote oder vor Ort?', answer: 'Primär remote, kritische Architektur- oder Enablement-Sessions optional vor Ort.' }
+          ]},
+          { category: 'Leistungstiefe', questions: [
+            { question: 'Nur Consulting möglich?', answer: 'Ja. Reine Architektur-/Governance Begleitung ohne Implementierung ist möglich – aber Integration & Enablement erhöhen Nachhaltigkeit.' },
+            { question: 'Hand Over Strategie?', answer: 'Früh dokumentierte Artefakte, Playbooks, Trainings. Ziel: internes Team kann Betrieb / Erweiterung souverän übernehmen.' },
+            { question: 'Toolchain Vorgaben?', answer: 'Wir adaptieren existierende Tooling-Landschaften sofern sie Transparenz & Reproduzierbarkeit erlauben.' }
+          ]},
+          { category: 'Betrieb', questions: [
+            { question: 'Nach Projekt Support?', answer: 'On-Demand Sprints, SLA für kritische Pfade oder Transfer-Begleitung bis definierter Reifegrad erreicht.' },
+            { question: 'Kostenkontrolle?', answer: 'Offene Kostentreiber identifiziert (Inference, Index, Orchestrierung). Metriken & Budget-Alerts optional integrierbar.' },
+            { question: 'Sicherheitsmodell?', answer: 'Rollen / Zugriff + Audit Logging + Evaluationspfade werden nicht nachträglich ergänzt, sondern konzeptionell vorgezogen.' }
+          ]}
+        ]}
+      />
     </div>
   )
 }

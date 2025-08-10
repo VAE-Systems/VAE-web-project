@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CaseStudiesSection from '../sections/CaseStudiesSection'
 import TechStackSection from '../sections/TechStackSection'
+import ValuesPrinciplesSection from '../sections/ValuesPrinciplesSection'
 import Seo from '../ui/Seo'
 
 /**
@@ -13,6 +14,7 @@ import Seo from '../ui/Seo'
 const AboutPage: React.FC = () => {
   const rootRef = useRef<HTMLDivElement>(null)
 
+  // Base animation & lazy registration
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -86,8 +88,47 @@ const AboutPage: React.FC = () => {
     return () => ctx.revert()
   }, [])
 
+  // Accent color interpolation between sections (smooth theming)
+  useEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+    const accentMap: Record<string, string> = {
+      fruehphase: '157 100% 47%',
+      story: '160 90% 46%',
+      'mission-block': '158 82% 50%',
+      werte: '155 95% 52%',
+      warum: '157 100% 48%',
+      cta: '157 100% 60%'
+    }
+    const sections = Array.from(root.querySelectorAll<HTMLElement>('section[id]'))
+      .filter(s => accentMap[s.id])
+    if (!sections.length) return
+
+    // Fallback initial accent
+    root.style.setProperty('--about-accent', accentMap[sections[0].id])
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = (entry.target as HTMLElement).id
+            if (accentMap[id]) {
+              gsap.to(root, { duration: 1.2, ease: 'power2.out', onUpdate: () => {}, onStart: () => {},
+                // Use gsap quickSetter alternative: just set property inside onComplete chain
+              })
+              root.style.setProperty('--about-accent', accentMap[id])
+            }
+        }
+      })
+    }, { threshold: 0.5 })
+
+    sections.forEach(sec => observer.observe(sec))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div ref={rootRef} className="min-h-screen">
+    <div ref={rootRef} className="min-h-screen relative" style={{ ['--about-accent' as any]:'157 100% 47%' }}>
+      {/* Accent interpolation overlay */}
+      <div aria-hidden="true" className="about-accent-overlay fixed inset-0 z-0 pointer-events-none" />
       <Seo
         title="Über uns | VAE Systems"
         description="Gegründet 2025 in Heidelberg – interdisziplinäres KI & Automation Team. Open Source, Datenkontrolle, dokumentierte Systeme."
@@ -147,30 +188,11 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Extended About Content */}
-  <section className="relative py-32 overflow-hidden section-surface-alt" data-section>
-        {/* Enhanced Background Effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div 
-            className="absolute top-0 left-0 w-full h-full"
-            style={{
-              background: `
-                radial-gradient(circle at 25% 25%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, hsla(var(--color-vae-turquoise), 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, hsla(var(--color-vae-turquoise), 0.02) 0%, transparent 70%)
-              `
-            }}
-          />
-          {/* Floating particles effect */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-vae-turquoise/20 rounded-full animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-vae-turquoise/30 rounded-full animate-ping"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-vae-turquoise/25 rounded-full animate-pulse delay-1000"></div>
-        </div>
-
-        <div className="relative container-vae">
-          {/* 1. Hero-Statement - Magazine Style */}
-          <div className="mb-40 section-block" id="fruehphase" data-section>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+    {/* Section 1: Frühphase */}
+  <section id="fruehphase" className="relative py-32 about-section theme-a z-10" data-section>
+        <div className="about-surface-bg" aria-hidden="true" />
+        <div className="container-vae relative">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Text Content */}
               <div className="lg:pr-8">
                 <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 heading-fix" data-animate>
@@ -237,12 +259,16 @@ const AboutPage: React.FC = () => {
                 {/* Floating decoration */}
                 <div className="absolute -top-4 -right-4 w-24 h-24 bg-vae-turquoise/20 rounded-full blur-3xl animate-pulse"></div>
               </div>
-            </div>
           </div>
+        </div>
+        <div className="section-divider-horizontal" aria-hidden="true" />
+      </section>
 
-          {/* 2. Unsere Story - Magazine Layout (Right-aligned) */}
-          <div className="mb-40 section-block" id="story" data-section>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Section 2: Unsere Geschichte */}
+  <section id="story" className="relative py-32 about-section theme-b z-10" data-section>
+        <div className="about-surface-bg" aria-hidden="true" />
+        <div className="container-vae relative">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Visual Timeline */}
               <div className="lg:order-2 lg:pl-8">
                 <div className="relative" data-animate>
@@ -323,12 +349,16 @@ const AboutPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
           </div>
+        </div>
+        <div className="section-divider-horizontal" aria-hidden="true" />
+      </section>
 
-          {/* 3. Unsere Mission - Magazine Layout (Left-aligned) */}
-          <div className="mb-40" data-section>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Section 3: Mission */}
+  <section id="mission-block" className="relative py-32 about-section theme-c z-10" data-section>
+        <div className="about-surface-bg" aria-hidden="true" />
+        <div className="container-vae relative">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Text Content */}
               <div className="lg:pr-8">
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 heading-fix" id="mission" data-animate>
@@ -445,152 +475,25 @@ const AboutPage: React.FC = () => {
                 {/* Floating decoration */}
                 <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-vae-turquoise/20 rounded-full blur-2xl animate-pulse"></div>
               </div>
-            </div>
           </div>
+        </div>
+        <div className="section-divider-horizontal" aria-hidden="true" />
+      </section>
 
-          {/* 4. Unsere Werte - Magazine Layout (Right-aligned) */}
-          <div className="mb-40 section-block" id="werte" data-section>
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
-              {/* Left: Interactive Values Grid */}
-              <div className="lg:order-2 lg:pl-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 heading-fix" data-animate>
-                  Leitprinzipien
-                </h2>
-                <p className="text-xl text-text-secondary mb-12" data-animate>
-                  Was wir (noch) nicht mit Größe belegen, zeigen wir mit Haltung.
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Wert 1 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
-                    <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <span className="material-symbols-outlined text-xl text-vae-turquoise">
-                        code
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
-                      Technische Kompetenz
-                    </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
-                      Von Chatbots bis Prozessautomation – moderne KI mit sauberem Engineering.
-                    </p>
-                    <div className="mt-6 pt-4 border-t border-white/10">
-                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
-                        Mehr erfahren →
-                      </button>
-                    </div>
-                  </div>
+      {/* Section 4: Leitprinzipien (Timeline) */}
+  <section id="werte" className="relative py-32 about-section theme-d z-10" data-section>
+        <div className="about-surface-bg" aria-hidden="true" />
+        <div className="container-vae relative">
+          <ValuesPrinciplesSection className="mb-0" />
+        </div>
+        <div className="section-divider-horizontal" aria-hidden="true" />
+      </section>
 
-                  {/* Wert 2 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
-                    <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <span className="material-symbols-outlined text-xl text-vae-turquoise">
-                        verified_user
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
-                      Open Source & Unabhängigkeit
-                    </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
-                      Keine Vendor-Lock-ins. Volle Kontrolle. Software Made in Germany.
-                    </p>
-                    <div className="mt-6 pt-4 border-t border-white/10">
-                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
-                        Mehr erfahren →
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Wert 3 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
-                    <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <span className="material-symbols-outlined text-xl text-vae-turquoise">
-                        handshake
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
-                      Langfristige Partnerschaft
-                    </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
-                      Dokumentierte, nachhaltige Systeme für freiwillige Zusammenarbeit.
-                    </p>
-                    <div className="mt-6 pt-4 border-t border-white/10">
-                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
-                        Mehr erfahren →
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Wert 4 */}
-                  <div className="group card-vae hover:border-vae-turquoise/30 transition-all duration-300 flex flex-col h-full">
-                    <div className="w-12 h-12 bg-vae-turquoise/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <span className="material-symbols-outlined text-xl text-vae-turquoise">
-                        palette
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-3 group-hover:text-vae-turquoise transition-colors duration-300">
-                      Ästhetik & UX
-                    </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed group-hover:text-white transition-colors duration-300 flex-grow">
-                      Design und Klarheit als Teil des ROI. Systeme, die begeistern.
-                    </p>
-                    <div className="mt-6 pt-4 border-t border-white/10">
-                      <button className="w-full py-2 px-4 rounded-lg bg-vae-turquoise/15 text-vae-turquoise hover:bg-vae-turquoise/25 transition-all duration-300 text-sm font-medium">
-                        Mehr erfahren →
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Right: Feature Highlight */}
-              <div className="lg:order-1">
-                <div className="card-vae" data-animate>
-                  <div className="text-center mb-8">
-                    <div className="w-24 h-24 bg-vae-turquoise/30 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                      <span className="material-symbols-outlined text-4xl text-vae-turquoise">
-                        psychology
-                      </span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-4 heading-fix">Wertebasierte Entwicklung</h3>
-                    <p className="text-text-secondary leading-relaxed mb-8">
-                      Unsere Prinzipien fließen in jeden Code, jede Architektur-Entscheidung 
-                      und jeden Kundenkontakt ein.
-                    </p>
-                  </div>
-                  
-                  {/* Values Circle */}
-                  <div className="relative">
-                    <div className="grid grid-cols-2 gap-4 text-center">
-                      <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                        <div className="text-3xl font-bold text-vae-turquoise mb-1">100%</div>
-                        <div className="text-xs text-text-secondary">Open Source</div>
-                      </div>
-                      <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                        <div className="text-3xl font-bold text-vae-turquoise mb-1">0</div>
-                        <div className="text-xs text-text-secondary">Lock-ins</div>
-                      </div>
-                      <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                        <div className="text-3xl font-bold text-vae-turquoise mb-1">Docs</div>
-                        <div className="text-xs text-text-secondary">Pflicht</div>
-                      </div>
-                      <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                        <div className="text-3xl font-bold text-vae-turquoise mb-1">Audit</div>
-                        <div className="text-xs text-text-secondary">fähig</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Floating decoration */}
-                <div className="absolute -top-6 -right-6 w-32 h-32 bg-vae-turquoise/10 rounded-full blur-3xl animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-
-          {/* 5. Warum VAE? - Magazine Layout (Left-aligned with masonry) */}
-          <div className="mb-40 section-block relative" id="warum" data-section>
-            <div className="absolute inset-0 -z-10 opacity-70" aria-hidden="true">
+      {/* Section 5: Warum VAE */}
+  <section className="relative py-32 about-section theme-e z-10" id="warum" data-section>
+        <div className="about-surface-bg" aria-hidden="true" />
+        <div className="container-vae relative">
+      <div className="absolute inset-0 -z-10 opacity-70" aria-hidden="true">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(0,255,165,0.18),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(0,255,165,0.12),transparent_60%)]" />
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:70px_70px] mix-blend-overlay" />
             </div>
@@ -662,11 +565,16 @@ const AboutPage: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </div>
           </div>
+        </div>
+        <div className="section-divider-horizontal" aria-hidden="true" />
+      </section>
 
-          {/* 6. Enhanced Micro-CTA with premium styling */}
-          <div className="text-center section-block" id="cta" data-section>
+      {/* Section 6: CTA */}
+  <section className="relative py-32 about-section theme-b z-10" id="cta" data-section>
+        <div className="about-surface-bg" aria-hidden="true" />
+        <div className="container-vae relative">
+          <div className="text-center">
             <div className="relative inline-block">
               {/* Background decoration */}
               <div className="absolute -inset-4 bg-gradient-to-r from-vae-turquoise/20 to-vae-turquoise/20 rounded-3xl blur-2xl opacity-75"></div>

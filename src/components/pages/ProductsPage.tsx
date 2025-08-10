@@ -2,6 +2,7 @@ import React from 'react'
 import ProductsSection from '../sections/ProductsSection'
 import ProductsHeroSection from '../sections/ProductsHeroSection'
 import Seo from '../ui/Seo'
+import FAQSection from '../sections/FAQSection'
 
 const jsonLd = [
   {
@@ -82,6 +83,29 @@ const ProductsPage: React.FC = () => {
         </div>
       </section>
       <ProductsSection />
+      <FAQSection
+        id="products-faq"
+        className="bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker/90 border-t border-white/5"
+        title="Produkte – häufige Fragen"
+        subtitle="Einordnung von Modularität, Plattform & Betrieb." 
+        categories={[
+          { category: 'Modularität', questions: [
+            { question: 'Muss ich VAE CORE komplett einführen?', answer: 'Nein. Einzelne Module (z.B. Retrieval Hub) können isoliert starten und später integriert erweitert werden.' },
+            { question: 'Unterschied Lösung vs. Modul?', answer: 'Lösung = Ende‑zu‑Ende Use Case (z.B. Conversational Access). Modul = fokussierte Funktion (Index Layer, Evaluierung).' },
+            { question: 'Showcases produktiv nutzbar?', answer: 'Sie sind gehärtete Referenzen. Anpassung auf Domäne / Governance erfolgt projektbezogen.' }
+          ]},
+          { category: 'Technik', questions: [
+            { question: 'Welche Persistenz / Index Optionen?', answer: 'Austauschbare Adapter (pgvector, Milvus, Weaviate, lokale Embedding Caches). Auswahl nach Latenz + Betriebsmodell.' },
+            { question: 'Upgrade Weg?', answer: 'Semantische Versionierung + Migrationsskripte. Fokus: keine disruptive Re‑Implementierung.' },
+            { question: 'Vendor Lock‑in Risiko?', answer: 'Minimiert durch offene Schnittstellen, keine verpflichtenden proprietären SaaS Calls.' }
+          ]},
+          { category: 'Betrieb & Lizenz', questions: [
+            { question: 'Lizenzmodell?', answer: 'Transparente Source – kommerzielle Erweiterung für Support / SLA Ebenen. Kernfunktionen quelloffen nutzbar.' },
+            { question: 'On‑Prem Support?', answer: 'Ja – Deployment Templates (Kubernetes / Bare Metal) + Observability Bundles.' },
+            { question: 'Roadmap Transparenz?', answer: 'Öffentliche Milestone Overview + Early Access Kanal für bestehende Kunden.' }
+          ]}
+        ]}
+      />
     </div>
   )
 }

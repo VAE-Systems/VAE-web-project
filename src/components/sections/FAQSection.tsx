@@ -1,289 +1,220 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const FAQSection: React.FC = () => {
+// Types
+export interface FAQItem { question: string; answer: string }
+export interface FAQCategory { category: string; questions: FAQItem[] }
+interface FAQSectionProps {
+  id?: string
+  title?: string
+  subtitle?: string
+  categories?: FAQCategory[]
+  cta?: boolean
+  className?: string
+  dense?: boolean // kompakter Stil
+}
+
+const defaultCategories: FAQCategory[] = [
+  {
+    category: 'Allgemein',
+    questions: [
+      { question: 'Was zeichnet Ihren Ansatz aus?', answer: 'Architektur, Implementierung und Enablement verzahnt: Wir liefern nicht nur ein Artefakt, sondern schaffen betreibbare Systeme. Open Source & lokale Ausführbarkeit bleiben Grundprinzip.' },
+      { question: 'Wie steigt man ein?', answer: 'Meist mit einem fokussierten Use Case (Retrieval, Automatisierung, Dokumentenraum). Wir klären Ziel, Kontext & Restriktionen, dann folgt ein kleiner evaluierbarer Sprint statt monolithischem Konzeptpapier.' },
+      { question: 'Welche Laufzeiten sind typisch?', answer: 'Initiale Assessments 1–2 Wochen. MVP 3–5 Wochen. Skalierte Setups / Plattformebenen 3–6 Monate inkrementell. Frühe Teilnutzbarkeit hat Priorität.' }
+    ]
+  },
+  {
+    category: 'Technik & Betrieb',
+    questions: [
+      { question: 'Welche Modelle & Frameworks?', answer: 'Lokale LLMs (gguf/ollama), Embedding-Stacks, LangChain, eigene Retrieval Layer, Temporal für Orchestrierung. Austauschbarkeit und beobachtbarer Betrieb sind Kernanforderung.' },
+      { question: 'Compliance & Datenschutz?', answer: 'Primär On-Prem / Sovereign Cloud. Keine stillen Dritt-API Calls. Auditable Pipelines, Zugriffsklassen, Protokollierung. DSGVO & AI Act Vororientierung werden früh mitgedacht.' },
+      { question: 'Skalierung später möglich?', answer: 'Ja. Komponenten modular verschaltbar: Index, Workflow, Observability, Evaluierung. Start lean – später erweitern ohne Neuaufbau.' }
+    ]
+  },
+  {
+    category: 'Service',
+    questions: [
+      { question: 'Support nach Go-Live?', answer: 'Optionale Betriebs- und Verbesserungs-Sprints, SLAs für kritische Pfade, Wissensübergabe & Schulungen. Ziel: Interne Souveränität statt dauerhafte Abhängigkeit.' },
+      { question: 'Trainingsumfang?', answer: 'Role-based: Operator, Developer, Data/Knowledge Steward. Praxisnahe Labs & Artefakte (Playbooks, Evaluationsets). Wiederholbar und dokumentiert.' },
+      { question: 'Roadmap VAE CORE?', answer: 'Inkrementelle Module: Retrieval Hub, Policy & Access Layer, Evaluation Suite. Bestandssysteme profitieren früh via schrittweise Anbindung.' }
+    ]
+  }
+]
+
+const FAQSection: React.FC<FAQSectionProps> = ({
+  id = 'faq',
+  title = 'Häufige Fragen',
+  subtitle = 'Knappe Antworten für schnelle Einordnung.',
+  categories = defaultCategories,
+  cta = true,
+  className = '',
+  dense = false
+}) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
-  const faqsRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+  const answerRefs = useRef<Record<number, HTMLDivElement | null>>({})
+  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({})
 
   const [openFAQ, setOpenFAQ] = useState<number | null>(null)
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-
-    const ctx = gsap.context(() => {
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      
-      if (reduced) {
-        gsap.set([headerRef.current, faqsRef.current, ctaRef.current], { opacity: 1, y: 0 })
-        return
-      }
-
-      if (!sectionRef.current) return
-
-      // Header Animation mit scrub
-      gsap.fromTo(headerRef.current, 
-        {
-          opacity: 0,
-          y: 80
-        },
-        {
-          opacity: 1,
-          y: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 90%",
-            end: "top 70%",
-            scrub: 1,
-            toggleActions: "play none none reverse"
-          }
-        }
-      )
-
-      // FAQ Items Animation - jedes Item einzeln mit scrub
-      const faqItems = faqsRef.current?.children
-      if (faqItems) {
-        Array.from(faqItems).forEach((item) => {
-          gsap.fromTo(item as HTMLElement,
-            {
-              opacity: 0,
-              y: 60
-            },
-            {
-              opacity: 1,
-              y: 0,
-              ease: "none",
-              scrollTrigger: {
-                trigger: item as HTMLElement,
-                start: "top 95%",
-                end: "top 80%",
-                scrub: 1.2,
-                toggleActions: "play none none reverse"
-              }
-            }
-          )
-        })
-      }
-
-      // CTA Animation mit scrub
-      gsap.fromTo(ctaRef.current, 
-        {
-          opacity: 0,
-          y: 50
-        },
-        {
-          opacity: 1,
-          y: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ctaRef.current,
-            start: "top 90%",
-            end: "top 75%",
-            scrub: 1.4,
-            toggleActions: "play none none reverse"
-          }
-        }
-      )
-    }, sectionRef)
-
-    return () => ctx.revert()
+  const toggleFAQ = useCallback((index: number) => {
+    setOpenFAQ(prev => prev === index ? null : index)
   }, [])
 
-  const faqs = [
-    {
-      category: 'Allgemein',
-      questions: [
-        {
-          question: 'Was unterscheidet VAE Systems von anderen KI-Beratungen?',
-          answer: 'Wir setzen konsequent auf Open Source Technologien und lokale Infrastrukturen. Das bedeutet: keine Vendor-Lock-ins, volle Transparenz, komplette Datensouveränität und langfristige Kostenvorteile. Zudem bieten wir nicht nur Beratung, sondern auch komplette Implementierung und langfristigen Support.'
-        },
-        {
-          question: 'Für welche Unternehmensgrößen sind Ihre Lösungen geeignet?',
-          answer: 'Unsere Lösungen skalieren von Startups bis zu Großunternehmen. Für Startups bieten wir kosteneffiziente MVP-Lösungen, die mitwachsen. Für etablierte Unternehmen entwickeln wir enterprise-grade Infrastrukturen. Unser modularer Ansatz ermöglicht es, genau die Komplexität zu wählen, die Sie benötigen.'
-        },
-        {
-          question: 'Wie lange dauert eine typische Projektimplementierung?',
-          answer: 'Das hängt vom Projektumfang ab. Ein MVP-Setup kann in 2-4 Wochen realisiert werden. Komplexe KI-Infrastrukturen benötigen 3-6 Monate. Wir arbeiten agil in Sprints, sodass Sie bereits nach wenigen Wochen erste Ergebnisse sehen und nutzen können.'
-        }
-      ]
-    },
-    {
-      category: 'Technisch',
-      questions: [
-        {
-          question: 'Welche KI-Technologien setzen Sie ein?',
-          answer: 'Wir fokussieren uns auf Open Source KI-Frameworks wie Ollama, LangChain, Hugging Face Transformers und lokale LLMs. Für Workflow-Automatisierung nutzen wir Temporal. Alle Technologien können vollständig lokal betrieben werden, ohne externe API-Abhängigkeiten.'
-        },
-        {
-          question: 'Wie gewährleisten Sie Datensicherheit und DSGVO-Compliance?',
-          answer: 'Durch lokale Implementierung verlassen Ihre Daten niemals Ihre Infrastruktur. Wir implementieren umfassende Sicherheitsmaßnahmen, Verschlüsselung und Zugriffskontrolle. Unsere Lösungen sind standardmäßig DSGVO-konform, da keine Daten an Drittanbieter übertragen werden.'
-        },
-        {
-          question: 'Unterstützen Sie auch Cloud-Deployments?',
-          answer: 'Ja, wir können unsere Lösungen auch in Cloud-Umgebungen deployen. Allerdings empfehlen wir für maximale Datensouveränität lokale oder Private-Cloud-Lösungen. Bei Cloud-Deployments achten wir auf europäische Anbieter und entsprechende Compliance-Maßnahmen.'
-        }
-      ]
-    },
-    {
-      category: 'Service & Support',
-      questions: [
-        {
-          question: 'Welchen Support bieten Sie nach der Implementierung?',
-          answer: '24/7 Support für kritische Systeme, regelmäßige Updates und Wartung, Schulungen für Ihr Team und kontinuierliche Optimierung. Wir sehen uns als langfristige Partner, nicht nur als Implementierer. Unser Support-Team ist deutschsprachig und in europäischen Zeitzonen verfügbar.'
-        },
-        {
-          question: 'Bieten Sie auch Schulungen für interne Teams an?',
-          answer: 'Absolut! Knowledge Transfer ist ein wichtiger Teil unserer Projekte. Wir bieten Hands-on Workshops, technische Dokumentation, Video-Tutorials und fortlaufende Mentoring-Programme. Ziel ist es, Ihr Team zu befähigen, die Systeme eigenständig zu betreiben und weiterzuentwickeln.'
-        },
-        {
-          question: 'Wie funktioniert die Zusammenarbeit mit VAEKTRA CORE?',
-          answer: 'VAEKTRA CORE ist unsere All-in-One Enterprise-Suite (Launch Q1 2026). Sie vereint alle unsere Services in einer integrierten Plattform. Aktuelle Kunden erhalten bevorzugten Zugang und können schrittweise migrieren. Die Lösung wird vollständig rückwärtskompatibel zu bestehenden Implementierungen sein.'
-        }
-      ]
-    }
-  ]
+  // Animations (effizienter: wenige ScrollTrigger statt viele)
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const ctx = gsap.context(() => {
+      if (reduced) return
+      if (headerRef.current) {
+        gsap.from(headerRef.current, { opacity: 0, y: 40, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } })
+      }
+      if (listRef.current) {
+        gsap.from(listRef.current.children, {
+          opacity: 0,
+          y: 32,
+          stagger: 0.08,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: listRef.current, start: 'top 75%' }
+        })
+      }
+      if (cta && ctaRef.current) {
+        gsap.from(ctaRef.current, { opacity: 0, y: 32, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: ctaRef.current, start: 'top 85%' } })
+      }
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [cta])
 
-  const toggleFAQ = (index: number) => {
-    setOpenFAQ(openFAQ === index ? null : index)
+  // Open / close height animation w/ GSAP for smoother auto height
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
+    Object.entries(answerRefs.current).forEach(([key, el]) => {
+      if (!el) return
+      const idx = Number(key)
+      const isOpen = idx === openFAQ
+      gsap.killTweensOf(el)
+      if (isOpen) {
+        gsap.fromTo(el, { height: 0, opacity: 0 }, { height: el.scrollHeight, opacity: 1, duration: 0.4, ease: 'power2.out', onComplete: () => { el.style.height = 'auto' } })
+        cardRefs.current[idx]?.classList.add('ringed')
+      } else {
+        if (el.style.height === 'auto') el.style.height = `${el.scrollHeight}px`
+        gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: 'power1.out' })
+        cardRefs.current[idx]?.classList.remove('ringed')
+      }
+    })
+  }, [openFAQ])
+
+  // Keyboard accessibility
+  const onKey = (e: React.KeyboardEvent, idx: number) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      toggleFAQ(idx)
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      const next = document.querySelector<HTMLElement>(`[data-faq-button='${idx + 1}']`)
+      next?.focus()
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      const prev = document.querySelector<HTMLElement>(`[data-faq-button='${idx - 1}']`)
+      prev?.focus()
+    }
   }
 
+  // Flatten index mapping
+  const totalList: { cat: string; item: FAQItem; globalIndex: number }[] = []
+  categories.forEach((cat, ci) => cat.questions.forEach((q, qi) => totalList.push({ cat: cat.category, item: q, globalIndex: ci * 100 + qi })))
+
   return (
-    <section 
-      id="faq" 
-      className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary"
-      ref={sectionRef}
-    >
-      {/* Background Effects */}
+    <section id={id} ref={sectionRef} className={`relative py-24 ${className}`.trim()} aria-labelledby={`${id}-title`}>
       <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute top-0 left-0 w-full h-full"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 40%, hsla(var(--color-vae-turquoise), 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 80% 60%, hsla(var(--color-vae-turquoise), 0.04) 0%, transparent 50%)
-            `
-          }}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,hsla(var(--color-vae-turquoise),0.07),transparent_60%),radial-gradient(circle_at_80%_70%,hsla(var(--color-vae-turquoise),0.05),transparent_55%)]" />
       </div>
-
-      <div className="relative max-w-4xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16" ref={headerRef}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
-            Häufige Fragen
+      <div className="relative max-w-5xl mx-auto px-6">
+        <header ref={headerRef} className="text-center mb-16">
+          <h2 id={`${id}-title`} className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
+            {title}
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Antworten auf die wichtigsten Fragen zu unseren Services und Technologien.
-          </p>
-        </div>
+          {subtitle && <p className="text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto">{subtitle}</p>}
+        </header>
 
-        {/* FAQ Categories */}
-        <div ref={faqsRef} className="space-y-8">
-          {faqs.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="relative">
-              {/* Category Header with improved design */}
+        <div ref={listRef} className="space-y-14">
+          {categories.map((category, categoryIndex) => (
+            <div key={category.category} className="relative">
               <div className="flex items-center mb-6">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent"></div>
-                <div className="px-6 py-2 bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-full border border-vae-turquoise/20">
-                  <h3 className="text-lg font-semibold text-vae-turquoise uppercase tracking-wider">
-                    {category.category}
-                  </h3>
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
+                <div className="px-5 py-2 mx-4 bg-vae-turquoise/10 rounded-full border border-vae-turquoise/25">
+                  <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise uppercase">{category.category}</h3>
                 </div>
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent"></div>
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
               </div>
-              
-              {/* FAQ Items with better spacing */}
-              <div className="space-y-3">
+              <ul className={`space-y-3 ${dense ? 'md:space-y-2' : ''}`}>        
                 {category.questions.map((faq, questionIndex) => {
                   const faqIndex = categoryIndex * 100 + questionIndex
                   const isOpen = openFAQ === faqIndex
-                  
                   return (
-                    <div 
-                      key={questionIndex}
-                      className={`
-                        relative group transition-all duration-300
-                        ${isOpen ? 'transform scale-[1.02]' : ''}
-                      `}
-                    >
-                      {/* FAQ Card */}
-                      <div className={`
-                        bg-gradient-to-br from-white/8 to-white/4 backdrop-blur-xl 
-                        rounded-xl border border-white/15 overflow-hidden
-                        transition-all duration-300 hover:border-vae-turquoise/30
-                        ${isOpen ? 'border-vae-turquoise/40 shadow-lg shadow-vae-turquoise/10' : ''}
-                      `}>
-                        {/* Question Button */}
+                    <li key={faq.question} className="list-none">
+                      <div
+                        ref={el => (cardRefs.current[faqIndex] = el)}
+                        className={`group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur supports-[backdrop-filter]:bg-white/5 transition-colors duration-300 hover:border-vae-turquoise/35 focus-within:border-vae-turquoise/40 ${isOpen ? 'border-vae-turquoise/50' : ''}`}
+                      >
                         <button
-                          className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/5 transition-all duration-200"
+                          data-faq-button={faqIndex}
+                          aria-expanded={isOpen}
+                          aria-controls={`faq-answer-${faqIndex}`}
+                          id={`faq-button-${faqIndex}`}
                           onClick={() => toggleFAQ(faqIndex)}
+                          onKeyDown={(e) => onKey(e, faqIndex)}
+                          className="w-full text-left px-6 py-5 flex items-center justify-between gap-6 outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 rounded-xl"
                         >
-                          <span className="text-base font-medium text-white pr-4 leading-relaxed">
-                            {faq.question}
-                          </span>
-                          <div className={`
-                            flex-shrink-0 w-8 h-8 rounded-full bg-vae-turquoise/10 
-                            flex items-center justify-center transition-all duration-300
-                            ${isOpen ? 'rotate-180 bg-vae-turquoise/20' : 'group-hover:bg-vae-turquoise/15'}
-                          `}>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-vae-turquoise">
-                              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <span className="text-base font-medium text-white leading-relaxed flex-1 pr-2">{faq.question}</span>
+                          <span className={`relative flex items-center justify-center w-9 h-9 rounded-full bg-vae-turquoise/10 text-vae-turquoise transition-all duration-300 ${isOpen ? 'bg-vae-turquoise/20 rotate-180' : 'group-hover:bg-vae-turquoise/15'}`}>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="transition-transform duration-300">
+                              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
-                          </div>
+                          </span>
                         </button>
-                        
-                        {/* Answer */}
-                        <div className={`
-                          overflow-hidden transition-all duration-300 ease-out
-                          ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-                        `}>
-                          <div className="px-6 pb-6">
-                            <div className="w-full h-px bg-gradient-to-r from-vae-turquoise/20 via-vae-turquoise/40 to-vae-turquoise/20 mb-4"></div>
-                            <div className="text-gray-300 leading-relaxed text-sm">
-                              {faq.answer}
-                            </div>
+                        <div
+                          id={`faq-answer-${faqIndex}`}
+                          role="region"
+                          aria-labelledby={`faq-button-${faqIndex}`}
+                          ref={el => (answerRefs.current[faqIndex] = el)}
+                          style={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden px-6 will-change-[height,opacity]"
+                        >
+                          <div className="pt-0 pb-6 border-t border-vae-turquoise/20"> 
+                            <p className="text-sm text-text-secondary leading-relaxed">{faq.answer}</p>
                           </div>
                         </div>
+                        <div className="pointer-events-none absolute inset-0 rounded-xl ring-0 ring-vae-turquoise/0 transition-all duration-500 [ &.ringed]:ring-2 [ &.ringed]:ring-vae-turquoise/40" />
                       </div>
-                      
-                      {/* Subtle connection line for open items */}
-                      {isOpen && (
-                        <div className="absolute -left-2 top-1/2 w-1 h-8 bg-gradient-to-b from-vae-turquoise to-vae-turquoise-dark rounded-full transform -translate-y-1/2 opacity-50"></div>
-                      )}
-                    </div>
+                    </li>
                   )
                 })}
-              </div>
+              </ul>
             </div>
           ))}
         </div>
 
-        {/* Still have questions CTA */}
-        <div className="mt-16 text-center" ref={ctaRef}>
-          <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-8 border border-vae-turquoise/20">
-            <h3 className="text-2xl font-semibold text-white mb-4">
-              Noch Fragen?
-            </h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Wir beantworten gerne alle Ihre Fragen in einem persönlichen Gespräch. 
-              Kontaktieren Sie uns für eine unverbindliche Beratung.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
-                Beratungstermin buchen
-              </button>
-              <a 
-                href="mailto:info@vae.systems"
-                className="border border-vae-turquoise text-vae-turquoise px-8 py-3 rounded-lg font-semibold hover:bg-vae-turquoise/10 transition-all duration-300 inline-block"
-              >
-                Direkt per Email
-              </a>
+        {cta && (
+          <div ref={ctaRef} className="mt-20 text-center">
+            <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-10 border border-vae-turquoise/20">
+              <h3 className="text-2xl font-semibold text-white mb-4">Noch Fragen offen?</h3>
+              <p className="text-text-secondary mb-6 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">Kurzes Erstgespräch klärt meist 80% Ihrer offenen technische & organisatorischen Fragen. Unverbindlich & präzise.</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/contact" className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">Gespräch anfragen</a>
+                <a href="mailto:info@vae.systems" className="border border-vae-turquoise text-vae-turquoise px-8 py-3 rounded-lg font-semibold hover:bg-vae-turquoise/10 transition-all duration-300 inline-block">Direkt per Email</a>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )

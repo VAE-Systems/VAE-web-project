@@ -36,7 +36,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({ title, description, to, c
         <p className={`text-xs text-text-secondary leading-relaxed mb-4 ${children ? '' : 'line-clamp-4'} flex-grow ${small ? 'mb-3' : ''}`}>{description}</p>
         {children && <div className="mb-5 text-[11px] text-text-muted space-y-1">{children}</div>}
         {footerSlot && <div className="mt-auto mb-4 text-[10px] text-text-muted">{footerSlot}</div>}
-        <Link to={to} className="btn-convert text-[10px] gap-2 py-2 px-3 h-10 inline-flex items-center mt-auto">{cta}<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg></Link>
+  <Link to={to} className="btn-convert text-[10px] gap-2 py-2 px-3 h-10 inline-flex items-center mt-auto">{cta}<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></Link>
       </div>
     </div>
   )

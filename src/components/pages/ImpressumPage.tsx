@@ -29,7 +29,7 @@ Deutschland</p>
           </div>
           <div>
             <h2 className="h3 text-text-light mb-2">Umsatzsteuer-ID</h2>
-            <p>Umsatzsteuer-Identifikationsnummer gem. §27 a UStG: (beantragt)</p>
+            <p>Umsatzsteuer-Identifikationsnummer gem. §27 a UStG: nicht vergeben</p>
           </div>
           <div>
             <h2 className="h3 text-text-light mb-2">Haftung für Inhalte</h2>

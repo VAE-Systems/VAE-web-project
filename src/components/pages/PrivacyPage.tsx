@@ -99,7 +99,7 @@ const PrivacyPage: React.FC = () => {
                 <li>Widerruf erteilter Einwilligungen (Art. 7 Abs. 3 DSGVO)</li>
                 <li>Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
               </ul>
-              <p className="mt-3">Zur Ausübung Ihrer Rechte genügt eine formlose E‑Mail an <a href="mailto:info@vae-systems.com" className="text-vae-turquoise hover:underline">info@vae-systems.com</a>.</p>
+              <p className="mt-3">Zur Ausübung Ihrer Rechte genügt eine formlose E‑Mail an <a href="mailto:info@vae-systems.com" className="text-vae-turquoise hover:underline">juliandini@vae-systems.com</a>.</p>
             </section>
 
             <section id="aenderungen">

@@ -74,7 +74,7 @@ const ServiceConsultingPage: React.FC = () => {
                   </div>
                   <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-grow">{f.desc}</p>
                   <div className="text-white font-bold text-xl mb-6">{f.price}</div>
-                  <Link to="/contact" className="btn-convert text-[11px] inline-flex gap-2 mt-auto">Beratung anfragen<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg></Link>
+                  <Link to="/contact" className="btn-convert text-[11px] inline-flex gap-2 mt-auto">Beratung anfragen<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></Link>
                 </div>
               ))}
             </div>

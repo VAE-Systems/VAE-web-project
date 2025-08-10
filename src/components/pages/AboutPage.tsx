@@ -3,8 +3,11 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CaseStudiesSection from '../sections/CaseStudiesSection'
 import TechStackSection from '../sections/TechStackSection'
-import ValuesPrinciplesSection from '../sections/ValuesPrinciplesSection'
-import ProviderComparisonSection from '../sections/ProviderComparison'
+// ProviderComparison vorerst entfernt bis Redesign
+// import ProviderComparisonSection from '../sections/ProviderComparison'
+import ProcessSection from '../sections/ProcessSection'
+import StoryTeamSection from '../sections/StoryTeamSection'
+import WhyOutcomesSection from '../sections/WhyOutcomesSection'
 import Seo from '../ui/Seo'
 
 /**
@@ -95,12 +98,9 @@ const AboutPage: React.FC = () => {
     if (!root) return
     const accentMap: Record<string, string> = {
   angebote: '157 100% 47%',
-      fruehphase: '157 100% 47%',
-      story: '160 90% 46%',
-      'mission-block': '158 82% 50%',
-      werte: '155 95% 52%',
-      warum: '157 100% 48%',
-      cta: '157 100% 60%'
+  fruehphase: '157 100% 47%',
+  warum: '157 100% 48%',
+  cta: '157 100% 60%'
     }
     const sections = Array.from(root.querySelectorAll<HTMLElement>('section[id]'))
       .filter(s => accentMap[s.id])
@@ -225,7 +225,7 @@ const AboutPage: React.FC = () => {
                 </ul>
                 <a href={card.link} className="btn-convert inline-flex gap-2 text-[11px] mt-auto relative z-10" data-pulse={card.key==='consulting'}>
                   Mehr dazu
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
                 </a>
               </div>
             ))}
@@ -309,315 +309,16 @@ const AboutPage: React.FC = () => {
         <div className="section-divider-horizontal" aria-hidden="true" />
       </section>
 
-      {/* Section 2: Unsere Geschichte */}
-  <section id="story" className="relative py-32 about-section theme-b z-10" data-section>
-        <div className="about-surface-bg" aria-hidden="true" />
-        <div className="container-vae relative">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left: Visual Timeline */}
-              <div className="lg:order-2 lg:pl-8">
-                <div className="relative" data-animate>
-                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 heading-fix" data-animate>
-                    Unsere Geschichte
-                  </h2>
-                  
-                  {/* Timeline */}
-                  <div className="space-y-8">
-                    <div className="flex items-start space-x-6">
-                      <div className="w-12 h-12 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                        <span className="material-symbols-outlined text-vae-turquoise">
-                          school
-                        </span>
-                      </div>
-                      <div>
-                        <div className="text-lg font-semibold text-white mb-2">Universität Heidelberg</div>
-                        <div className="text-text-secondary">Gründung durch Studierende aus Mathematik, Informatik und VWL</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-6">
-                      <div className="w-12 h-12 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                        <span className="material-symbols-outlined text-vae-turquoise">
-                          rocket_launch
-                        </span>
-                      </div>
-                      <div>
-                        <div className="text-lg font-semibold text-white mb-2">Junges Tech-Unternehmen</div>
-                        <div className="text-text-secondary">Individuelle KI- und Automatisierungssysteme</div>
-                      </div>
-                    </div>
-                    
-          <div className="flex items-start space-x-6">
-                      <div className="w-12 h-12 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                        <span className="material-symbols-outlined text-vae-turquoise">
-                          integration_instructions
-                        </span>
-                      </div>
-                      <div>
-            <div className="text-lg font-semibold text-white mb-2">Praxisorientiert</div>
-            <div className="text-text-secondary">Verbindung aus Forschung & Umsetzung</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Right: Text Content */}
-              <div className="lg:order-1">
-                <div className="card-vae">
-                  <div className="space-y-6" data-animate>
-                    <p className="text-lg leading-relaxed text-text-secondary">
-                      <strong className="text-vae-turquoise">VAE Systems</strong> wurde von Studierenden der Universität Heidelberg aus Mathematik, Informatik und Volkswirtschaftslehre gegründet.
-                    </p>
-                    <p className="text-lg leading-relaxed text-text-secondary">
-                      Als <strong className="text-white">junges Technologieunternehmen</strong> entwickeln wir individuelle KI- und Automatisierungssysteme, die Unternehmen heute entlasten und morgen tragen.
-                    </p>
-                    <p className="text-lg leading-relaxed text-text-secondary">
-                      Statt Buzzword-Stapeln setzen wir auf klare Architekturen, nachvollziehbare Entscheidungen und iterative Auslieferung – für echte Betriebsfähigkeit.
-                    </p>
-                  </div>
-                  
-                  {/* Stats Row */}
-                  <div className="grid grid-cols-3 gap-6 mt-8 pt-8 border-t border-white/10 text-center">
-                    <div>
-                      <div className="text-sm font-semibold text-text-secondary mb-1">Gründung</div>
-                      <div className="text-xl font-bold text-vae-turquoise">2025</div>
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-text-secondary mb-1">Herkunft</div>
-                      <div className="text-xl font-bold text-vae-turquoise">Uni HD</div>
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-text-secondary mb-1">Lock-in</div>
-                      <div className="text-xl font-bold text-vae-turquoise">0%</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div>
-        <div className="section-divider-horizontal" aria-hidden="true" />
-      </section>
+  {/* Story / Mission / Werte vorerst entfernt für Reduktion & Repositioning */}
 
-      {/* Section 3: Mission */}
-  <section id="mission-block" className="relative py-32 about-section theme-c z-10" data-section>
-        <div className="about-surface-bg" aria-hidden="true" />
-        <div className="container-vae relative">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left: Text Content */}
-              <div className="lg:pr-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 heading-fix" id="mission" data-animate>
-                  Unsere Mission
-                </h2>
-                
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4" data-animate>
-                    <div className="w-8 h-8 bg-vae-turquoise/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="material-symbols-outlined text-vae-turquoise text-sm">
-                        lock_open
-                      </span>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-2">Datenkontrolle</h4>
-                      <p className="text-text-secondary leading-relaxed">
-                        Wir glauben daran, dass Unternehmen <strong className="text-white">Kontrolle über ihre Systeme und Daten</strong> behalten müssen. 
-                        Deshalb setzen wir auf Open Source, saubere Projektdokumentation und keine Vendor-Lock-ins.
-                      </p>
-                    </div>
-                  </div>
+  <ProcessSection />
 
-                  <div className="flex items-start space-x-4" data-animate>
-                    <div className="w-8 h-8 bg-vae-turquoise/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="material-symbols-outlined text-vae-turquoise text-sm">
-                        groups
-                      </span>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-2">Langfristige Nutzbarkeit</h4>
-                      <p className="text-text-secondary leading-relaxed">
-                        Unsere Systeme sind so gebaut, dass sie auch ohne uns <strong className="text-white">langfristig nutzbar bleiben</strong> – 
-                        weil wir an Qualität und freiwillige Partnerschaft glauben, nicht an Zwang.
-                      </p>
-                    </div>
-                  </div>
+  {/* Section 5: Warum VAE (Refactored Outcomes & Principles) */}
+  <WhyOutcomesSection />
 
-                  <div className="bg-gradient-to-r from-vae-turquoise/20 to-vae-turquoise/10 rounded-2xl p-6 border border-vae-turquoise/30" data-animate>
-                    <div className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-vae-turquoise/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="material-symbols-outlined text-vae-turquoise text-sm">
-                          public
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-white mb-2">Europäische Zukunft</h4>
-                        <p className="text-white leading-relaxed">
-                          Unser Ziel ist es, die <strong className="text-vae-turquoise">Unternehmenslandschaft in Deutschland und Europa</strong> zukunftsfähig zu machen – 
-                          mit Lösungen, die heute entlasten und morgen tragen.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Right: Visual Element */}
-              <div className="relative">
-                <div className="card-vae">
-                  {/* Infographic Style */}
-                  <div className="text-center mb-8">
-                    <div className="w-20 h-20 bg-vae-turquoise/30 rounded-3xl flex items-center justify-center mx-auto mb-4">
-                      <span className="material-symbols-outlined text-3xl text-vae-turquoise">
-                        public
-                      </span>
-                    </div>
-                    <div className="text-xl font-bold text-white">Deutschland & Europa</div>
-                    <div className="text-text-secondary">Zukunftsfähige Systeme</div>
-                  </div>
-                  
-                  {/* Connection Lines */}
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-vae-turquoise/20 rounded-lg flex items-center justify-center">
-                          <span className="material-symbols-outlined text-vae-turquoise text-sm">
-                            code
-                          </span>
-                        </div>
-                        <span className="text-white text-sm">Open Source</span>
-                      </div>
-                      <div className="flex-1 h-px bg-gradient-to-r from-vae-turquoise/50 to-transparent mx-4"></div>
-                      <div className="text-vae-turquoise text-sm">100%</div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-vae-turquoise/20 rounded-lg flex items-center justify-center">
-                          <span className="material-symbols-outlined text-vae-turquoise text-sm">
-                            description
-                          </span>
-                        </div>
-                        <span className="text-white text-sm">Dokumentation</span>
-                      </div>
-                      <div className="flex-1 h-px bg-gradient-to-r from-vae-turquoise/50 to-transparent mx-4"></div>
-                      <div className="text-vae-turquoise text-sm">Vollständig</div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-vae-turquoise/20 rounded-lg flex items-center justify-center">
-                          <span className="material-symbols-outlined text-vae-turquoise text-sm">
-                            shield
-                          </span>
-                        </div>
-                        <span className="text-white text-sm">Vendor Lock-ins</span>
-                      </div>
-                      <div className="flex-1 h-px bg-gradient-to-r from-red-500/50 to-transparent mx-4"></div>
-                      <div className="text-red-400 text-sm">0%</div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Floating decoration */}
-                <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-vae-turquoise/20 rounded-full blur-2xl animate-pulse"></div>
-              </div>
-          </div>
-        </div>
-        <div className="section-divider-horizontal" aria-hidden="true" />
-      </section>
+  {/* Story & Team Block (compact) */}
+  <StoryTeamSection />
 
-      {/* Section 4: Leitprinzipien (Timeline) */}
-  <section id="werte" className="relative py-32 about-section theme-d z-10" data-section>
-        <div className="about-surface-bg" aria-hidden="true" />
-        <div className="container-vae relative">
-          <ValuesPrinciplesSection className="mb-0" />
-        </div>
-        <div className="section-divider-horizontal" aria-hidden="true" />
-      </section>
-
-      {/* Section 5: Warum VAE */}
-  <section className="relative py-32 about-section theme-e z-10" id="warum" data-section>
-        <div className="about-surface-bg" aria-hidden="true" />
-        <div className="container-vae relative">
-      <div className="absolute inset-0 -z-10 opacity-70" aria-hidden="true">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(0,255,165,0.18),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(0,255,165,0.12),transparent_60%)]" />
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:70px_70px] mix-blend-overlay" />
-            </div>
-            <div className="max-w-6xl mx-auto">
-              <header className="max-w-3xl mb-16" data-heading-accent data-animate>
-                <h2 className="text-4xl md:text-5xl font-bold text-white heading-fix mb-6">
-                  Warum Unternehmen mit uns arbeiten
-                </h2>
-                <div className="heading-accent-bar h-[3px] w-32 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
-                <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
-                  Keine leeren Versprechen – sondern klare Prinzipien, wie wir Projekte bauen: offen, dokumentiert, überprüfbar und geschäftsorientiert.
-                </p>
-              </header>
-              <ul className="grid md:grid-cols-2 gap-8" role="list">
-                {[
-                  {
-                    icon: 'description',
-                    title: 'Offen & dokumentiert',
-                    body: 'Architekturen, Deployments & Entscheidungen sind nachvollziehbar – Systeme bleiben auch ohne uns betreibbar.',
-                    tags: ['Open Source','Dokumentiert','Übergabefähig']
-                  },
-                  {
-                    icon: 'rocket_launch',
-                    title: 'Iterativ & messbar',
-                    body: 'Kurze Zyklen, frühe Nutzbarkeit, klare Akzeptanzkriterien statt langem Stealth-Build.',
-                    tags: ['MVP','Feedback-Loops','ROI-Fokus']
-                  },
-                  {
-                    icon: 'hub',
-                    title: 'Architektur statt Basteln',
-                    body: 'Saubere Modularisierung (Pipelines, Adapter, Interfaces) statt fragilem Ad-hoc-Code.',
-                    tags: ['Modular','Erweiterbar','Testbar']
-                  },
-                  {
-                    icon: 'support_agent',
-                    title: 'Begleitende Beratung',
-                    body: 'Wir challengen Use-Cases, schärfen Prioritäten und vermeiden Over-Engineering.',
-                    tags: ['Sparring','Priorisierung','Transparenz']
-                  },
-                  {
-                    icon: 'lightbulb',
-                    title: 'Aktuell & selektiv',
-                    body: 'Wir integrieren, was stabil & sinnvoll ist – kein Hype-Stack, kein Legacy-Dump.',
-                    tags: ['Kuratiert','Stabil','Sinnvoll']
-                  }
-                ].map((r, idx) => (
-                  <li key={r.title} className="relative group" data-animate>
-                    <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-vae-turquoise/25 to-transparent opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 pointer-events-none" />
-                    <div className="h-full flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 md:p-7 transition-all duration-300 group-hover:border-vae-turquoise/40 group-hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_4px_30px_-6px_rgba(0,255,165,0.3)]">
-                      <div className="flex items-start justify-between mb-5">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-11 h-11 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise group-hover:scale-110 transition-transform duration-300">
-                            <span className="material-symbols-outlined text-[22px]">{r.icon}</span>
-                          </div>
-                          <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(idx+1).padStart(2,'0')}</span>
-                        </div>
-                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 group-hover:text-white group-hover:bg-white/10 transition-colors">
-                          <span className="material-symbols-outlined text-base">arrow_forward</span>
-                        </div>
-                      </div>
-                      <h3 className="text-lg font-semibold text-white mb-3 leading-tight">{r.title}</h3>
-                      <p className="text-sm text-text-secondary leading-relaxed flex-grow">{r.body}</p>
-                      <div className="flex flex-wrap gap-2 mt-5">
-                        {r.tags.map(t => (
-                          <span key={t} className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] tracking-wide text-white/70 group-hover:border-vae-turquoise/30 group-hover:text-white transition-colors">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-          </div>
-        </div>
-        <div className="section-divider-horizontal" aria-hidden="true" />
-      </section>
-
-      {/* Section 6: CTA */}
-  <ProviderComparisonSection className="about-section theme-b border-t border-white/5" headline="Vergleich: VAE & Alternativen" subtitle="Architektur & Ownership Fokus vs. Agentur- und Low-Code Limitierungen." />
-      
   {/* CTA */}
   <section className="relative py-32 about-section theme-b z-10" id="cta" data-section>
         <div className="about-surface-bg" aria-hidden="true" />

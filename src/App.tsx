@@ -20,6 +20,7 @@ import ProductVaeCorePage from '@components/pages/ProductVaeCorePage'
 import ProductShowcasesPage from '@components/pages/ProductShowcasesPage'
 import AboutPage from '@components/pages/AboutPage'
 import ContactPage from '@components/pages/ContactPage'
+import ImpressumPage from '@components/pages/ImpressumPage'
 
 /**
  * Main App Component
@@ -68,6 +69,7 @@ const App: React.FC = () => (
           <Route path="/products/showcases" element={<ProductShowcasesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/impressum" element={<ImpressumPage />} />
         </Routes>
       </main>
       <Footer />

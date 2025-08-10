@@ -10,7 +10,7 @@ import { NewsletterForm } from '../forms'
 const Footer: React.FC = () => {
   const techStack = [
     'Python', 'FastAPI', 'Temporal', 'Docker', 'K8s', 
-    'PostgreSQL', 'Open Source AI', 'VAEKTRA CORE'
+    'PostgreSQL', 'Open Source AI', 'VAE CORE'
   ]
 
   // Newsletter success/error handlers
@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
             <p className="text-text-muted mb-6 leading-relaxed">
               Individuelle KI-Automatisierungssysteme für Unternehmen, die ihre digitale 
               Infrastruktur selbst besitzen wollen. Lokales Hosting, Open-Source-KI und 
-              semantische Arbeitsräume mit VAEKTRA CORE.
+              semantische Arbeitsräume mit VAE CORE.
             </p>
             
             <div className="mb-6">
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <span className="text-text-secondary hover:text-vae-turquoise transition-colors cursor-pointer">
-                  VAEKTRA CORE
+                  VAE CORE Plattform
                 </span>
                 <span className="px-2 py-1 bg-vae-turquoise/20 text-vae-turquoise text-xs rounded-full">
                   Coming Soon
@@ -137,9 +137,9 @@ const Footer: React.FC = () => {
           <div className="space-y-8">
             {/* Newsletter */}
             <div>
-              <h4 className="text-lg font-semibold mb-4 text-gradient">VAEKTRA Updates</h4>
+              <h4 className="text-lg font-semibold mb-4 text-gradient">VAE News</h4>
               <p className="text-text-muted mb-4 text-sm">
-                Bleiben Sie informiert über neue Features und Tech-Updates.
+                Releases, Architektur-Notizen & Events (ca. 1× Monat).
               </p>
               
               <NewsletterForm
@@ -155,18 +155,10 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4 text-gradient">Unternehmen</h4>
               <div className="space-y-3">
-                <a href="#" className="block text-text-secondary hover:text-vae-turquoise transition-colors">
-                  Über uns
-                </a>
-                <a href="#" className="block text-text-secondary hover:text-vae-turquoise transition-colors">
-                  Kontakt
-                </a>
-                <a href="#" className="block text-text-secondary hover:text-vae-turquoise transition-colors">
-                  Datenschutz
-                </a>
-                <a href="#" className="block text-text-secondary hover:text-vae-turquoise transition-colors">
-                  Impressum
-                </a>
+                <a href="/about" className="block text-text-secondary hover:text-vae-turquoise transition-colors">Über uns</a>
+                <a href="/contact" className="block text-text-secondary hover:text-vae-turquoise transition-colors">Kontakt</a>
+                <a href="/privacy" className="block text-text-secondary hover:text-vae-turquoise transition-colors">Datenschutz</a>
+                <a href="/impressum" className="block text-text-secondary hover:text-vae-turquoise transition-colors">Impressum</a>
               </div>
             </div>
           </div>

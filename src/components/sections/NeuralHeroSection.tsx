@@ -246,7 +246,7 @@ const NeuralHeroSection: React.FC = () => {
               href="#services" 
               className="px-8 py-4 border-2 border-vae-turquoise text-vae-turquoise font-semibold rounded-full hover:bg-vae-turquoise hover:text-white transition-all duration-300 text-center"
             >
-              VAEKTRA CORE Demo
+              VAE CORE Demo
             </a>
           </motion.div>
         </motion.div>

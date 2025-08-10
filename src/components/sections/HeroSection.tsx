@@ -66,7 +66,7 @@ const HeroSection: React.FC = () => {
               >
                 Individuelle KI-Automatisierungssysteme für Unternehmen, die ihre digitale 
                 Infrastruktur selbst besitzen wollen. Lokales Hosting, Open-Source-KI und 
-                semantische Arbeitsräume mit <span className="text-vae-turquoise font-semibold">VAEKTRA CORE</span>.
+                semantische Arbeitsräume mit <span className="text-vae-turquoise font-semibold">VAE CORE</span>.
               </motion.p>
             </div>
 

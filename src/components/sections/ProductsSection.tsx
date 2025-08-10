@@ -2,7 +2,6 @@ import React from 'react'
 import { productCategories } from '../navigation/productCategories'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 import { Link } from 'react-router-dom'
-import NewsletterForm from '../forms/NewsletterForm'
 
 const ProductsSection: React.FC = () => {
   return (

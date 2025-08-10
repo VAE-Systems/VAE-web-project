@@ -12,13 +12,16 @@ interface SectionData {
   label: string
 }
 
+// Reihenfolge an neue Homepage-Story angepasst
 const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
+  { id: 'outcomes', iconName: 'insights', label: 'Outcomes' },
+  { id: 'case-studies', iconName: 'work', label: 'Cases' },
   { id: 'services', iconName: 'settings', label: 'Services' },
-  { id: 'products', iconName: 'inventory_2', label: 'Products' },
-  { id: 'tech-stack', iconName: 'code', label: 'Tech Stack' },
+  { id: 'process', iconName: 'timeline', label: 'Prozess' },
+  { id: 'products', iconName: 'inventory_2', label: 'Produkte' },
+  { id: 'tech-stack', iconName: 'code', label: 'Tech' },
   { id: 'about', iconName: 'people', label: 'Über Uns' },
-  { id: 'case-studies', iconName: 'work', label: 'Case Studies' },
   { id: 'faq', iconName: 'help_outline', label: 'FAQ' },
   { id: 'contact', iconName: 'email', label: 'Kontakt' }
 ]

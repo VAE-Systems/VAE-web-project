@@ -1,10 +1,12 @@
 import React from 'react'
 import HeroSection from '../sections/HeroSection'
+import CaseStudiesSection from '../sections/CaseStudiesSection'
 import ServicesSection from '../sections/ServicesSection'
+import HomeOutcomesSection from '../sections/HomeOutcomesSection'
+import HomeProcessTeaserSection from '../sections/HomeProcessTeaserSection'
 import ProductsSection from '../sections/ProductsSection'
 import TechStackSection from '../sections/TechStackSection'
 import AboutSection from '../sections/AboutSection'
-import CaseStudiesSection from '../sections/CaseStudiesSection'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 import ContactSection from '../sections/ContactSection'
 
@@ -16,30 +18,36 @@ import ContactSection from '../sections/ContactSection'
 const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* 1. Hero */}
       <HeroSection />
 
-      {/* Services Section */}
+      {/* 2. Outcomes / Warum (frühe Nutzen-Verankerung) */}
+  <HomeOutcomesSection className="pt-24 pb-24" />
+
+      {/* 3. Case Studies (Social Proof früh) */}
+      <CaseStudiesSection />
+
+      {/* 4. Services (Einordnung nach Problem & Proof) */}
       <ServicesSection />
 
-  {/* Products Section */}
-  <ProductsSection />
+      {/* 5. Prozess (Sicherheit & Transparenz des Vorgehens) */}
+  <HomeProcessTeaserSection className="pt-24" />
 
-      {/* Tech Stack Section */}
+      {/* 6. Products & Plattform (Skalierungsebene) */}
+      <ProductsSection />
+
+      {/* 7. Tech Stack (technische Tiefe nach Kontext) */}
       <TechStackSection />
 
-      {/* About Section */}
+      {/* 8. About (Kurz) */}
       <AboutSection />
 
-  {/* Case Studies Section */}
-  <CaseStudiesSection />
-
-      {/* FAQ Section */}
+      {/* 9. FAQ (Einwandbehandlung) */}
       <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
         <FAQSection />
       </React.Suspense>
 
-      {/* Contact Section */}
+      {/* 10. Kontakt (Conversion) */}
       <ContactSection />
     </div>
   )

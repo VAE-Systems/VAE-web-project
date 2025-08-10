@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
+import { caseStudies, upcomingCasePlaceholders } from '../../content/caseStudies'
 
 /**
  * CaseStudiesSection
@@ -32,25 +33,11 @@ const CaseStudiesSection: React.FC = () => {
     return () => ctx.revert()
   }, [])
 
-  const cases = [
-    {
-      slug: 'art-affair-qr-signage',
-      title: 'ART AFFAIR – QR Code Newsletter Automation @ art KARLSRUHE 2025',
-      type: 'Pilot Automation',
-      status: 'Live Pilot',
-      year: '2025',
-      tags: ['Event-Tech', 'Newsletter Funnel', 'On-Site Automation'],
-      challenge: 'Vor Ort qualifizierte Kontakte erfassen ohne Personal-Overhead & sofortigen digitalen Mehrwert liefern.',
-      solution: 'Dynamische QR-Codes an jedem Kunstwerk, Scan führt zu Micro-Flow: DSGVO-konforme Opt-in Oberfläche → Sofort E-Mail mit Stand-Infos & PDF → Segmentierung für Follow-up.',
-      outcome: 'Hohe Conversion bei minimalem Setup-Aufwand; Grundlage für wiederverwendbaren Event-Automations-Blueprint.',
-      metrics: [
-        { label: 'Avg. Scan→Opt-in', value: '38%', hint: 'First-day conversion (Pilot)' },
-        { label: 'Setup Zeit', value: '~2h', hint: 'On-site Aktivierung' },
-        { label: 'Manual Aufwand', value: '-70%', hint: 'vs. manuelle Erfassung' }
-      ],
-      narrative: 'Für ART AFFAIR wurde ein schneller, skalierbarer Messe-Funnel implementiert: Besucher scannen, erhalten kontextuelle Inhalte und sind sofort im Segment. Kein Vendor-Lock-in, vollständig adaptierbar für kommende Ausstellungen. Grundlage für spätere Integration mit VAE CORE Embedding-Katalogen.'
-    }
-  ]
+  const displayCases = [...caseStudies]
+  if (caseStudies.length < 3) {
+    displayCases.push(...upcomingCasePlaceholders.slice(0, 3 - caseStudies.length))
+  }
+  const single = caseStudies.length === 1
 
   return (
     <section id="case-studies" ref={sectionRef} className="relative py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top overflow-hidden">
@@ -64,52 +51,69 @@ const CaseStudiesSection: React.FC = () => {
           <p className="text-lg text-text-secondary leading-relaxed">Frühe produktive Umsetzungen & fokussierte Pilot-Initiativen – ausgerichtet auf belastbare Lernkurven und validierbare Outcomes statt künstlicher Referenz-Sammlungen.</p>
         </div>
 
-        <div ref={cardsRef} className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {cases.map(cs => (
-            <article key={cs.slug} className="group relative flex flex-col rounded-2xl p-7 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] backdrop-blur-xl border border-white/12 hover:border-vae-turquoise/40 transition-all duration-400 hover:-translate-y-2 shadow-lg shadow-black/30/">
+        <div ref={cardsRef} className={`grid gap-10 ${single ? 'md:grid-cols-1 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>  
+          {displayCases.map(cs => (
+            <article key={cs.slug} className={`group relative flex flex-col rounded-2xl p-7 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] backdrop-blur-xl border border-white/12 transition-all duration-400 ${cs.comingSoon ? 'opacity-75' : 'hover:border-vae-turquoise/40 hover:-translate-y-2 shadow-lg shadow-black/30/'}`}> 
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-screen pointer-events-none bg-[radial-gradient(circle_at_70%_30%,hsla(var(--color-vae-turquoise),0.25),transparent_60%)]" />
 
               <header className="mb-5 relative z-10">
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex flex-wrap items-center gap-2 mb-3">
                   <span className="px-3 py-1 text-[10px] tracking-wide font-semibold rounded-full bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/30">{cs.type}</span>
                   <span className="px-2 py-1 text-[10px] rounded-md bg-white/5 text-text-secondary border border-white/10">{cs.year}</span>
-                  <span className="px-2 py-1 text-[10px] rounded-md bg-vae-turquoise/10 text-vae-turquoise border border-vae-turquoise/30">{cs.status}</span>
+                  <span className={`px-2 py-1 text-[10px] rounded-md ${cs.comingSoon ? 'bg-white/5 text-text-muted border-white/10' : 'bg-vae-turquoise/10 text-vae-turquoise border-vae-turquoise/30'}`}>{cs.status}</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white leading-snug group-hover:text-vae-turquoise transition-colors">{cs.title}</h3>
+                <h3 className={`text-lg font-semibold leading-snug transition-colors ${cs.comingSoon ? 'text-white/80' : 'text-white group-hover:text-vae-turquoise'}`}>{cs.title}</h3>
               </header>
 
-              <div className="space-y-4 relative z-10 text-sm text-text-secondary">
-                <p><span className="text-vae-turquoise font-medium">Challenge:</span> {cs.challenge}</p>
-                <p><span className="text-vae-turquoise font-medium">Solution:</span> {cs.solution}</p>
-                <p className="text-text-muted italic">{cs.narrative}</p>
-              </div>
+              {cs.comingSoon ? (
+                <div className="space-y-3 relative z-10 text-sm text-text-secondary/70">
+                  <p>{cs.challenge}</p>
+                  <p className="text-text-muted text-[12px]">Details folgen – in Validierung / Aufbereitung.</p>
+                </div>
+              ) : (
+                <div className="space-y-4 relative z-10 text-sm text-text-secondary">
+                  <p><span className="text-vae-turquoise font-medium">Challenge:</span> {cs.challenge}</p>
+                  <p><span className="text-vae-turquoise font-medium">Solution:</span> {cs.solution}</p>
+                  {cs.narrative && <p className="text-text-muted italic">{cs.narrative}</p>}
+                </div>
+              )}
 
-              <ul className="grid grid-cols-3 gap-3 my-6 relative z-10">
-                {cs.metrics.map(m => (
-                  <li key={m.label} className="p-3 rounded-xl bg-white/5 border border-white/10 text-center flex flex-col">
-                    <span className="text-sm font-semibold text-vae-turquoise leading-tight">{m.value}</span>
-                    <span className="text-[10px] text-text-muted leading-tight mt-1">{m.label}</span>
-                  </li>
-                ))}
-              </ul>
+              {cs.metrics?.length > 0 && (
+                <ul className="grid grid-cols-3 gap-3 my-6 relative z-10">
+                  {cs.metrics.map(m => (
+                    <li key={m.label} className="p-3 rounded-xl bg-white/5 border border-white/10 text-center flex flex-col">
+                      <span className="text-sm font-semibold text-vae-turquoise leading-tight">{m.value}</span>
+                      <span className="text-[10px] text-text-muted leading-tight mt-1">{m.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               <div className="mt-auto flex flex-wrap gap-2 relative z-10">
                 {cs.tags.map(t => (
-                  <span key={t} className="px-2.5 py-1 rounded-full text-[10px] font-medium bg-vae-turquoise/10 text-vae-turquoise border border-vae-turquoise/30">{t}</span>
+                  <span key={t} className={`px-2.5 py-1 rounded-full text-[10px] font-medium border ${cs.comingSoon ? 'bg-white/5 text-text-muted border-white/10' : 'bg-vae-turquoise/10 text-vae-turquoise border-vae-turquoise/30'}`}>{t}</span>
                 ))}
               </div>
 
-              <footer className="relative z-10 mt-6">
-                <button className="w-full py-3 rounded-lg bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/40 text-sm font-medium hover:bg-vae-turquoise hover:text-bg-darker transition-all">Mehr erfahren</button>
+              <footer className="relative z-10 mt-6 min-h-[40px]">
+                {cs.comingSoon ? (
+                  <div className="text-center text-[11px] text-text-muted tracking-wide">Coming Soon</div>
+                ) : (
+                  <button className="w-full py-3 rounded-lg bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/40 text-sm font-medium hover:bg-vae-turquoise hover:text-bg-darker transition-all">Mehr erfahren</button>
+                )}
               </footer>
             </article>
           ))}
         </div>
 
         {/* CTA minimal for now */}
-        <div className="mt-24 text-center">
-          <p className="text-text-muted text-xs uppercase tracking-wider mb-4">Ausbau laufend</p>
-          <p className="text-sm text-text-secondary max-w-xl mx-auto leading-relaxed">Weitere Pilots (R&D Automation, Sovereign LLM Workflows, Secure Vector Analytics) folgen – Ausbau laufend. Fokus bleibt: Qualität, Validierung, Wiederverwendbarkeit.</p>
+        <div className="mt-24 text-center max-w-2xl mx-auto">
+          {caseStudies.length === 0 && (
+            <p className="text-text-secondary text-sm mb-6">Aktuell werden Pilots kuratiert & aufbereitet. Erste Referenzen werden zeitnah veröffentlicht.</p>
+          )}
+          <p className="text-text-muted text-xs uppercase tracking-wider mb-3">Pipeline</p>
+            <p className="text-sm text-text-secondary leading-relaxed mb-6">Fokus: Validierte Pilots statt künstlicher Referenz-Sammlung. Neue Einträge sobald Ergebnisse belastbar dokumentiert sind.</p>
+            <a href="/contact" className="inline-flex items-center gap-2 text-vae-turquoise text-sm hover:underline">Use Case prüfen lassen <span className="material-symbols-outlined text-[16px]">arrow_forward</span></a>
         </div>
       </div>
     </section>

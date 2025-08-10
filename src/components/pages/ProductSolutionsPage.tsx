@@ -1,12 +1,49 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ReferenceList from '../ui/ReferenceList'
+import { solutionsSuite } from '../../content/solutionsSuite'
 import ProviderComparisonSection from '../sections/ProviderComparison'
 import Seo from '../ui/Seo'
 
 const ProductSolutionsPage: React.FC = () => {
   return (
     <div className="min-h-screen">
+      {/* Re:* Suite Section */}
+      <section className="relative pt-32 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
+        <div className="container-vae max-w-5xl">
+          {/* Marketing-Bild als Hero */}
+          <div className="mb-12 flex flex-col items-center justify-center">
+            <img src="/Re_Section.png" alt="Re:* Suite Marketing" className="w-full max-w-2xl rounded-xl shadow-lg object-cover mb-6" loading="lazy" />
+            <h2 className="h2 heading-gradient text-center mb-2">Re:* Suite – Modular, betreibbar, transparent</h2>
+            <p className="text-lg text-text-secondary text-center max-w-2xl mx-auto mb-4">Alle Re:* Lösungen kombinieren VAE CORE Layer mit operativen Artefakten – für produktive, auditierbare KI- und Automationsprojekte.</p>
+          </div>
+          {/* Grid aller Lösungen */}
+          <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8 mb-16">
+            {solutionsSuite.map(sol => (
+              <div key={sol.slug} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-vae-turquoise/40 transition-all flex flex-col">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-semibold text-white text-lg">{sol.name}</span>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium border ml-2 ${sol.maturity==='GA'?'bg-vae-turquoise/10 text-vae-turquoise border-vae-turquoise/30':sol.maturity==='Beta'?'bg-violet-600/10 text-violet-400 border-violet-400/30':sol.maturity==='Pilot'?'bg-amber-500/10 text-amber-500 border-amber-500/30':'bg-slate-600/10 text-slate-400 border-slate-400/30'}`}>{sol.maturity}</span>
+                </div>
+                <div className="text-sm text-text-secondary mb-2">{sol.tagline}</div>
+                <div className="mb-2 text-xs text-text-muted"><span className="font-semibold">Pain:</span> {sol.pain}</div>
+                <div className="mb-2 text-xs text-text-muted"><span className="font-semibold">Approach:</span> {sol.approach}</div>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {sol.outcomes.map(o => (
+                    <span key={o} className="px-2 py-1 rounded-full text-[10px] font-medium border bg-vae-turquoise/10 text-vae-turquoise border-vae-turquoise/30">{o}</span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-1 mb-2">
+                  {sol.coreLayers.map(l => (
+                    <span key={l} className="px-2 py-1 rounded text-[10px] bg-white/10 text-text-muted border border-white/10">{l}</span>
+                  ))}
+                </div>
+                <div className="mt-auto text-xs text-text-muted">{sol.statusNote}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Seo
         title="Komplettlösungen | VAE Systems – End‑to‑End KI Umsetzung"
         description="Architektur, Implementierung, Betrieb & Handover für KI- und Automationslösungen – dokumentiert, vendor‑lock‑in frei, auditierbar."

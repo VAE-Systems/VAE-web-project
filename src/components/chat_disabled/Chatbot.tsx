@@ -1,2 +1,0 @@
-// Chatbot feature removed.
-export {}

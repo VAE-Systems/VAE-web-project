@@ -75,7 +75,7 @@ export const badges = [
 export const testimonial: TestimonialSnippet = {
   quote: 'Struktur & technische Tiefe statt Buzzword-Demo – genau das macht den Unterschied.',
   author: 'Platzhalter',
-  role: 'CTO / Beispiel',
+  role: 'CTO / Jakob Dünnebeil',
   company: '—'
 }
 

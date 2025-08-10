@@ -13,7 +13,7 @@ const ServiceTrainingsPage: React.FC = () => {
   return (
     <div className="min-h-screen">
       <Seo
-        title="Trainings | KI Enablement & Governance"
+        title="Schulungen & Workshops | KI Enablement & Governance"
         description="Drei fokussierte 1‑Tages Formate: Governance & AI Strategy, Prompt Patterns & Evaluation, Lokale KI-Infrastruktur mit VAE CORE. Praxistief + direkt anwendbare Artefakte."
         canonicalPath="/services/trainings"
         jsonLd={[
@@ -30,12 +30,12 @@ const ServiceTrainingsPage: React.FC = () => {
       />
   <section className="relative -mt-20 pt-44 pb-32 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
         <div className="container-vae max-w-5xl">
-          <h1 className="text-4xl md:text-6xl font-bold heading-fix mb-8">
-            <span className="block text-text-light">Schulungen</span>
+          <h1 className="h1 h-space-lg">
+            <span className="block text-text-light">Schulungen & Workshops</span>
             <span className="block text-gradient">Kompetenz. In 1 Tag vertieft.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">Praxisorientierte, dichte Formate statt Frontal-Marathon. Ziel: interne Handlungsfähigkeit, Governance Verankerung & sicherer Betrieb.</p>
-          <p className="text-sm text-text-muted max-w-3xl mb-12">Abgrenzung: <span className="text-white font-medium">Trainings</span> bauen Wissen & Routinen auf. <span className="text-white font-medium">Consulting</span> liefert Entscheidungsgrundlagen. <span className="text-white font-medium">Custom Solutions</span> setzt produktiv um.</p>
+          <p className="text-sm text-text-muted max-w-3xl mb-12">Abgrenzung: <span className="text-white font-medium">Schulungen & Workshops</span> bauen Wissen & Routinen auf. <span className="text-white font-medium">Beratung</span> liefert Entscheidungsgrundlagen. <span className="text-white font-medium">Custom Solutions</span> setzt produktiv um.</p>
 
           {/* Benefits quick grid */}
           <div className="grid md:grid-cols-4 gap-6 mb-20">
@@ -67,7 +67,7 @@ const ServiceTrainingsPage: React.FC = () => {
           {/* Core Trainings */}
           <div className="relative" id="core-trainings">
             <header className="max-w-3xl mb-14">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 heading-fix">Kern-Trainings (je 1 Tag)</h2>
+              <h2 className="h2 h-space text-white">Kern-Schulungen (je 1 Tag)</h2>
               <p className="text-lg text-text-secondary leading-relaxed">Fokussiert, intensiv & praxisnah – kombinierbar zu 2‑Tages Blöcken für beschleunigten Enablement Pfad.</p>
             </header>
             <div className="grid md:grid-cols-3 gap-10">
@@ -115,7 +115,7 @@ const ServiceTrainingsPage: React.FC = () => {
 
           {/* Crosslinks */}
           <div className="mt-24 grid md:grid-cols-3 gap-8">
-            <SpotlightCard title="Consulting – Richtung" description="Architektur, Kosten & Governance strukturiert entscheiden bevor Umsetzung startet." to="/services/consulting" cta="Consulting ansehen" />
+            <SpotlightCard title="Beratung – Richtung" description="Architektur, Kosten & Governance strukturiert entscheiden bevor Umsetzung startet." to="/services/consulting" cta="Beratung ansehen" />
             <SpotlightCard title="Custom Solutions – Umsetzung" description="Produktive Integrationen & Automationen – dokumentiert & übergebbar." to="/services/custom-solutions" cta="Projekt starten" />
             <SpotlightCard title="Products – Suite & CORE" description="Fertige Module & Plattform als Beschleuniger oder Alternative." to="/products/solutions" cta="Suite erkunden" />
           </div>
@@ -183,7 +183,7 @@ const trainingsFaqCategories: FAQCategory[] = [
 const TrainingsFAQ: React.FC = () => (
   <FAQSection
       id="trainings-faq"
-      title="FAQ zu Trainings"
+  title="FAQ zu Schulungen & Workshops"
       subtitle="Häufige Fragen zu Ablauf, Umfang & Kombination."
       categories={trainingsFaqCategories}
       cta={false}

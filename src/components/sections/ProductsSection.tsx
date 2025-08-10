@@ -21,7 +21,7 @@ const ProductsSection: React.FC = () => {
 
       <div className="container-vae relative">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-5 text-gradient">Produkte & Plattform</h2>
+          <h2 className="h2 heading-gradient mb-5">Produkte & Plattform</h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-4">
             Vier Erlebniswelten – Lösungen, Applikationen, Plattform & Ökosystem. Alles folgt einem Prinzip: pragmatischer Nutzen ohne versteckte Abhängigkeiten.
           </p>

@@ -1,59 +1,51 @@
 import React from 'react'
+import MaterialIcon from '../ui/MaterialIcon'
 
-interface ComparisonRow {
+interface DimensionCard {
   key: string
   label: string
+  icon: string
   vae: string
-  agency: string
-  lowcode: string
+  diff: string
 }
 
-const rows: ComparisonRow[] = [
-  { key:'depth', label:'Technische Tiefe', vae:'Architektur, Code & Infrastruktur (Retrieval, Pipelines, Observability).', agency:'Konzept + Workflow-Konfiguration, begrenzte System-Ebene.', lowcode:'Visuelle Flows innerhalb Plattform-Grenzen.' },
-  { key:'arch', label:'Architektur & Skalierbarkeit', vae:'Modular (Adapter, Schnittstellen, Open Source).', agency:'Projektbezogene Strukturen, spätere Skalierung oft neu.', lowcode:'Skalierung abhängig von Plattform-Limits.' },
-  { key:'focus', label:'Fokus', vae:'Langfristige Betriebsfähigkeit & Ownership.', agency:'Projektabschluss / Launch als primärer Meilenstein.', lowcode:'Schneller Prototyp / kurzfristige Entlastung.' },
-  { key:'reuse', label:'Reuse & Open Source', vae:'Gezielter Reuse + dokumentierte OSS-Komponenten.', agency:'Teilweise Reuse, weniger tiefe Dokumentation.', lowcode:'Proprietäre vorgefertigte Bausteine.' },
-  { key:'metrics', label:'Messbarkeit & Observability', vae:'Frühe KPIs, Guardrails, Dashboards, Logs & Traces.', agency:'Reporting nach Implementierung, operative Metriken begrenzt.', lowcode:'Plattform-Standard-Logs / Basis-Dashboards.' },
-  { key:'handover', label:'Übergabe & Dokumentation', vae:'Runbooks, Architektur-Skizzen, Evaluierungs-Sets.', agency:'Projekt-Dokumentation variiert, Betrieb teils extern.', lowcode:'Kaum tiefe System-Doku, Plattform UI als Referenz.' },
-  { key:'future', label:'Erweiterbarkeit / Zukunftsfähigkeit', vae:'Update-fähige Module + klare Integrationspunkte.', agency:'Nachträgliches Refactoring häufiger nötig.', lowcode:'Neue Anforderungen → Workarounds / Plattformwechsel.' },
-  { key:'costs', label:'Kostenstruktur langfristig', vae:'Planbare Opex (Transparenz: Latenz & Token / Nutzung).', agency:'Zusatzkosten bei Erweiterungen / Change Requests.', lowcode:'Abonnement + evtl. steigende Transaktionsgebühren.' },
-  { key:'lockin', label:'Lock‑in Risiko', vae:'Niedrig (Open-first, austauschbare Komponenten).', agency:'Mittel – Know-how liegt extern.', lowcode:'Höher – gebunden an Plattform.' },
-  { key:'security', label:'Sicherheit & Governance', vae:'Rollenmodell, Auditability & Data Scoping eingeplant.', agency:'Security-Aspekte nachgelagert integrierbar.', lowcode:'Plattform-Vorgaben, eingeschränkte Feinanpassung.' }
+// Vereinfachte, lesbare Matrix: Fokus auf Vorteil + kurzer Vergleichssatz
+const dimensions: DimensionCard[] = [
+  { key:'arch', label:'Architektur', icon:'architecture', vae:'Modularer Open-Source Stack mit klaren Integrationspunkten.', diff:'Alternativen oft Plattform-zentriert oder projektweise gewachsen.' },
+  { key:'enablement', label:'Enablement', icon:'school', vae:'Artefakte, Runbooks & Übergabe früh eingebaut.', diff:'Übergabe / Dokumentation häufig nach Projektende.' },
+  { key:'messbarkeit', label:'Messbarkeit', icon:'analytics', vae:'KPIs & Evaluierung ab Start (Retrieval, Qualität, Kosten).', diff:'Metriken später / begrenzt konfigurierbar.' },
+  { key:'lockin', label:'Lock‑in', icon:'link_off', vae:'Austauschbare Komponenten – niedriger Lock‑in.', diff:'Proprietäre Abhängigkeiten oder Know-how extern.' },
+  { key:'betrieb', label:'Betrieb & Observability', icon:'monitoring', vae:'Tracing, Logs & Guardrails integriert.', diff:'Oft nur Basis-Logs / zusätzliche Werkzeuge nötig.' },
+  { key:'skalierung', label:'Skalierung', icon:'trending_up', vae:'Skalierbar über modulare Services & Adapterschicht.', diff:'Refactoring bei Wachstum häufiger nötig.' },
+  { key:'kosten', label:'Kosten Transparenz', icon:'euro', vae:'Frühe Total Cost Sicht & Nutzungsmetriken.', diff:'Folgekosten bei Änderungen schwer früh sichtbar.' },
+  { key:'sicherheit', label:'Security & Governance', icon:'security', vae:'Rollen, Policies & Compliance früh adressiert.', diff:'Security Aspekte nachgelagert ergänzt.' }
 ]
 
-const ProviderComparisonSection: React.FC<{ id?: string; className?: string; headline?: string; subtitle?: string }> = ({ id='anbieter-vergleich', className='', headline='Vergleich: VAE Systems & typische Alternativen', subtitle='Orientierung – Muster & häufige Unterschiede. Ausnahmen existieren.' }) => {
+const ProviderComparisonSection: React.FC<{ id?: string; className?: string; headline?: string; subtitle?: string }> = ({ id='anbieter-vergleich', className='', headline='Vergleich auf einen Blick', subtitle='Warum VAE Systems – komprimierte Kerndimensionen.' }) => {
   return (
-    <section id={id} className={`py-28 ${className}`}>      
+    <section id={id} className={`py-24 ${className}`}>
       <div className="container-vae max-w-6xl">
-        <header className="max-w-3xl mb-14">
-          <h2 className="text-3xl md:text-5xl font-bold heading-fix text-white mb-6">{headline}</h2>
+        <header className="max-w-3xl mb-12">
+          <h2 className="h2 text-white mb-5">{headline}</h2>
           <p className="text-lg text-text-secondary leading-relaxed">{subtitle}</p>
         </header>
-        <div className="overflow-x-auto -mx-2 px-2">
-          <div className="min-w-[900px] rounded-2xl border border-white/10 bg-white/[0.03] relative">
-            <div className="grid grid-cols-[180px_repeat(3,1fr)] text-[11px] uppercase tracking-wide text-text-muted/70">
-              <div className="p-3 border-b border-white/10">Kriterium</div>
-              <div className="p-3 border-b border-white/10 font-semibold text-white">VAE Systems</div>
-              <div className="p-3 border-b border-white/10 font-semibold text-white">Generische Automations-Agentur</div>
-              <div className="p-3 border-b border-white/10 font-semibold text-white">Low-Code / Plattform Fokus</div>
-            </div>
-            {rows.map((r) => (
-              <div key={r.key} className="grid grid-cols-[180px_repeat(3,1fr)] border-t border-white/5 last:rounded-b-2xl">
-                <div className="p-4 text-[11px] font-medium text-text-muted/80 bg-white/2">{r.label}</div>
-                {[r.vae, r.agency, r.lowcode].map((val,ci) => (
-                  <div key={ci} className="p-4 text-xs leading-relaxed text-text-secondary relative group">
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" style={{background:'radial-gradient(420px circle at 25% 30%, rgba(0,255,165,0.12), transparent 70%)'}} />
-                    <span className="relative z-10 block">{val}</span>
-                  </div>
-                ))}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          {dimensions.map(d => (
+            <div key={d.key} className="group relative p-6 rounded-2xl bg-white/[0.035] border border-white/10 backdrop-blur-sm overflow-hidden transition-colors hover:border-vae-turquoise/40">
+              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 30% 22%, rgba(0,255,165,0.12), transparent 70%)'}} />
+              <div className="flex items-center gap-3 mb-4 relative z-10">
+                <MaterialIcon icon={d.icon} size={22} className="text-vae-turquoise" />
+                <h3 className="text-sm font-semibold text-white tracking-wide uppercase">{d.label}</h3>
               </div>
-            ))}
-            <div className="pointer-events-none absolute top-[42px] bottom-0 left-[180px] w-px bg-white/5" />
-            <div className="pointer-events-none absolute top-[42px] bottom-0 left-[calc(180px+33.333%)] w-px bg-white/5" />
-            <div className="pointer-events-none absolute top-[42px] bottom-0 left-[calc(180px+66.666%)] w-px bg-white/5" />
-          </div>
-          <p className="mt-6 text-[11px] text-text-muted max-w-3xl">Hinweis: Darstellung zeigt typische Muster – einzelne Anbieter können davon abweichen. Ziel: schnelle Orientierung für Auswahl & Erwartungsmanagement.</p>
+              <p className="text-xs text-text-secondary leading-relaxed mb-3 relative z-10">{d.vae}</p>
+              <div className="flex items-start gap-2 text-[11px] text-text-muted relative z-10">
+                <MaterialIcon icon="compare_arrows" size={16} className="text-vae-turquoise/70 mt-0.5" />
+                <span>{d.diff}</span>
+              </div>
+            </div>
+          ))}
         </div>
+        <p className="text-[11px] text-text-muted max-w-3xl">Hinweis: Muster – einzelne Anbieter können einzelne Punkte ebenfalls erfüllen. Ziel: schnelle Orientierung ohne Tabellen-Overload.</p>
       </div>
     </section>
   )

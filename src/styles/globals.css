@@ -342,6 +342,23 @@
 
 /* Utility Layer */
 @layer utilities {
+  /* ============================= */
+  /* Heading Design System (Tokens)*/
+  /* Einheitliche Skalierung für konsistente Typografie */
+  .h-display { @apply text-5xl md:text-7xl font-bold heading-fix; }
+  .h1 { @apply text-4xl md:text-6xl font-bold heading-fix; }
+  .h2 { @apply text-3xl md:text-5xl font-bold heading-fix; }
+  .h3 { @apply text-2xl md:text-3xl font-semibold; }
+  .h4 { @apply text-xl md:text-2xl font-semibold; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-wider text-vae-turquoise/80; }
+  .eyebrow-muted { @apply text-[11px] font-medium uppercase tracking-wide text-text-muted; }
+  /* Gradient Variante separat, damit nicht überall text-gradient dupliziert werden muss */
+  .heading-gradient { @apply bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent; }
+  /* Standard Abstände */
+  .h-space { @apply mb-6; }
+  .h-space-lg { @apply mb-8; }
+  .h-space-xl { @apply mb-12; }
+
   /* Prevent descender clipping for large headings (g, p, y). Adds slight negative overflow allowance and balanced line-height */
   .heading-fix { line-height:1.075; padding-bottom:0.14em; padding-top:0.18em; overflow:visible; }
   @supports (-webkit-background-clip:text) {

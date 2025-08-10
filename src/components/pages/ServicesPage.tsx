@@ -35,16 +35,16 @@ const ServicesPage: React.FC = () => {
   }, [])
 
   const categories = [
-    { key:'trainings', title:'Schulungen', icon:'school', focus:'Wissenstransfer & Enablement – Teams schneller produktiv machen.', examples:['VAE CORE Admin-Schulung','Prompt Engineering Workshop','Datenarchitektur-Training'], to:'/services/trainings' },
-    { key:'consulting', title:'Beratungen', icon:'handshake', focus:'Strategische Architektur-, Prozess- & Compliance-Begleitung.', examples:['KI-Integrations-Roadmap','Sicherheits- & Governance Audit','Machbarkeitsanalyse (EU AI Act / Data Act)'], to:'/services/consulting' },
-  { key:'custom', title:'Custom Solutions', icon:'extension', focus:'Individuelle Software & Integrationen – gezielte Umsetzung statt Produktkatalog.', examples:['API-Connector Bestandssystem','Spezial-Workflow Automatisierung','Domain-spez. Retrieval Layer'], to:'/services/custom-solutions' }
+    { key:'trainings', title:'Schulungen & Workshops', icon:'school', focus:'Enablement & Wissenstransfer – Teams schneller produktiv.', examples:['VAE CORE Admin','Prompt Patterns Lab','Architektur Grundlagen'], to:'/services/trainings' },
+    { key:'consulting', title:'Beratung', icon:'handshake', focus:'Strategische Architektur-, Prozess- & Compliance-Begleitung.', examples:['KI-Integrations-Roadmap','Security & Governance Audit','Regulatorische Analyse'], to:'/services/consulting' },
+    { key:'custom', title:'Custom Solutions', icon:'extension', focus:'Individuelle Software & Integrationen – gezielte Umsetzung statt Produktkatalog.', examples:['API-Connector','Workflow Automatisierung','Retrieval Layer'], to:'/services/custom-solutions' }
   ]
 
   return (
     <div className="min-h-screen">
       <Seo
-        title="Services | VAE Systems – Schulungen, Beratung, Individuelle Lösungen"
-        description="Trainings, strategische Beratung & individuelle KI-/Automationslösungen. Von Analyse bis Umsetzung – souverän & nachvollziehbar."
+  title="Services | VAE Systems – Schulungen, Beratung, Individuelle Lösungen"
+  description="Schulungen & Workshops, strategische Beratung & individuelle KI-/Automationslösungen. Von Analyse bis Umsetzung – souverän & nachvollziehbar."
         canonicalPath="/services"
         jsonLd={[{ '@context':'https://schema.org','@type':'CollectionPage', name:'VAE Services' }]}
       />
@@ -76,20 +76,20 @@ const ServicesPage: React.FC = () => {
       <section className="py-28 bg-bg-dark border-b border-white/5" id="vergleich">
         <div className="container-vae max-w-6xl">
           <header className="max-w-3xl mb-14">
-            <h2 className="text-3xl md:text-5xl font-bold heading-fix mb-6 text-gradient">Wann welches Format?</h2>
+            <h2 className="h2 heading-gradient h-space">Wann welches Format?</h2>
             <p className="text-text-secondary leading-relaxed text-lg">Schnell erkennbare Zuordnung: Wissen aufbauen, Richtung festlegen oder spezifisch umsetzen. Überlappungen bewusst minimal.</p>
           </header>
           <div className="overflow-x-auto -mx-2 px-2">
             <div className="min-w-[860px] grid grid-cols-[160px_repeat(3,1fr)] rounded-2xl border border-white/10 bg-white/[0.03] relative">
               {/* Column Headers */}
               <div className="p-3 text-[11px] uppercase tracking-wide text-text-muted/70 border-b border-white/10">Kriterium</div>
-              {['Trainings','Consulting','Custom Solutions'].map(h => (
+              {['Schulungen & Workshops','Beratung','Custom Solutions'].map(h => (
                 <div key={h} className="p-3 text-[11px] font-semibold uppercase tracking-wide text-white border-b border-white/10 bg-gradient-to-b from-white/10 to-transparent backdrop-blur-sm">
                   {h}
                 </div>
               ))}
               {[
-                { k:'ziel', label:'Primäres Ziel', a:'Kompetenz & Routinen', b:'Entscheidung & Governance', c:'Produktiver Baustein' },
+                { k:'ziel', label:'Primäres Ziel', a:'Kompetenz & Routinen', b:'Richtung & Governance', c:'Produktiver Baustein' },
                 { k:'output', label:'Output', a:'Unterlagen, Übungen, Cheatsheets', b:'Roadmap, Architektur, KPI/Risiko', c:'Software, Runbooks, Dashboards' },
                 { k:'tiefe', label:'Technische Tiefe', a:'Fundament & Patterns', b:'Architektur & Optionen', c:'Implementierung & Integrationen' },
                 { k:'dauer', label:'Typische Dauer', a:'1 Tag / Modul', b:'Tage – wenige Wochen', c:'Wochen – Inkremente' },
@@ -118,7 +118,7 @@ const ServicesPage: React.FC = () => {
           </div>
           <div className="mt-8 text-[11px] text-text-muted max-w-4xl space-y-2">
             <p>Bereiche können separat gebucht oder in direktem Kontakt sinnvoll kombiniert werden – abhängig von Reifegrad & Zielbild.</p>
-            <p className="text-text-secondary/70">Typische Sequenz: Klarheit (Consulting) → Enablement (Trainings) → Umsetzung spezifischer Bausteine (Custom Solutions).</p>
+            <p className="text-text-secondary/70">Typische Sequenz: Klarheit (Beratung) → Enablement (Schulungen & Workshops) → Umsetzung spezifischer Bausteine (Custom Solutions).</p>
           </div>
         </div>
       </section>
@@ -127,9 +127,9 @@ const ServicesPage: React.FC = () => {
       <section className="py-28 bg-bg-darker border-b border-white/5">
         <div className="container-vae max-w-5xl">
           <div className="max-w-3xl mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold heading-fix mb-6 text-gradient">Lifecycle statt Einzelleistung.</h2>
+            <h2 className="h2 heading-gradient h-space">Lifecycle statt Einzelleistung.</h2>
             <p className="text-text-secondary leading-relaxed mb-5 text-lg">Wir entwickeln nicht nur Software – wir begleiten den gesamten Lebenszyklus: Analyse, Architektur, Implementierung, Enablement, Betrieb & Übergabe. So entstehen keine „Abwurfprojekte“, sondern betreibbare Lösungen.</p>
-            <p className="text-text-secondary leading-relaxed mb-5 text-sm">Trainings bauen interne Kompetenz auf, Consulting schafft Klarheit & Richtung, Custom Solutions liefern präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.</p>
+            <p className="text-text-secondary leading-relaxed mb-5 text-sm">Schulungen & Workshops bauen interne Kompetenz auf, Beratung schafft Klarheit & Richtung, Custom Solutions liefern präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.</p>
             <p className="text-text-secondary leading-relaxed text-sm">Plattform‑ & Lizenzangebote unter <Link to="/products" className="text-vae-turquoise hover:underline">Products</Link>. Services adressieren Ihren spezifischen Kontext.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -146,7 +146,7 @@ const ServicesPage: React.FC = () => {
       {/* Final CTA */}
       <section className="py-24 bg-bg-dark">
         <div className="container-vae max-w-4xl text-center">
-          <h2 className="text-3xl md:text-5xl font-bold heading-fix mb-6 text-text-light">Nächster Schritt?</h2>
+          <h2 className="h2 h-space text-text-light">Nächster Schritt?</h2>
           <p className="text-lg text-text-secondary mb-10">Senden Sie uns Kernziel, Zeithorizont & vorhandene Systeme – wir melden uns innerhalb von 24h mit einem Vorschlag für das Erstgespräch.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="btn-primary px-10 py-4">Kontakt aufnehmen</Link>
@@ -170,7 +170,7 @@ const ServicesPage: React.FC = () => {
               { question: 'Remote oder vor Ort?', answer: 'Primär remote, kritische Architektur- oder Enablement-Sessions optional vor Ort.' }
             ]},
             { category: 'Leistungstiefe', questions: [
-              { question: 'Nur Consulting möglich?', answer: 'Ja. Reine Architektur-/Governance Begleitung ohne Implementierung ist möglich – aber Integration & Enablement erhöhen Nachhaltigkeit.' },
+              { question: 'Nur Beratung möglich?', answer: 'Ja. Reine Architektur-/Governance Begleitung ohne Implementierung ist möglich – aber Integration & Enablement erhöhen Nachhaltigkeit.' },
               { question: 'Hand Over Strategie?', answer: 'Früh dokumentierte Artefakte, Playbooks, Trainings. Ziel: internes Team kann Betrieb / Erweiterung souverän übernehmen.' },
               { question: 'Toolchain Vorgaben?', answer: 'Wir adaptieren existierende Tooling-Landschaften sofern sie Transparenz & Reproduzierbarkeit erlauben.' }
             ]},

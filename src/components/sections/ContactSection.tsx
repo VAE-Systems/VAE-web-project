@@ -173,9 +173,7 @@ const ContactSection: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16" ref={headerRef}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
-            Kontakt
-          </h2>
+          <h2 className="h2 heading-gradient mb-4">Kontakt</h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Bereit für Ihr nächstes Projekt? Lassen Sie uns über Ihre Anforderungen sprechen.
           </p>

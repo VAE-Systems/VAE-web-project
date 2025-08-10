@@ -342,19 +342,13 @@ const TechStackSection: React.FC = () => {
 
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h3 
+        <div className="text-center mb-14">
+          <h2
             ref={headingRef}
-            className="text-4xl font-bold mb-3"
-            style={{
-              background: 'linear-gradient(135deg, var(--vae-turquoise), var(--vae-turquoise))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}
+            className="h2 heading-gradient h-space mb-3"
           >
             Unser Technologie-Fundament
-          </h3>
+          </h2>
           <p 
             ref={subRef}
             className="text-xl text-text-secondary max-w-2xl mx-auto"

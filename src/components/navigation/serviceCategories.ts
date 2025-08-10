@@ -11,29 +11,29 @@ export interface ServiceCategory {
 export const serviceCategories: ServiceCategory[] = [
   {
     key: 'trainings',
-    title: 'Trainings',
-    tagline: 'Enablement',
-    description: 'Gezielte Schulungen & Workshops für schnellere interne Umsetzungskompetenz ohne dauerhafte externe Abhängigkeit.',
+  title: 'Schulungen & Workshops',
+  tagline: 'Enablement',
+  description: 'Fokussierte Schulungen & Workshops für schnellere interne Umsetzungskompetenz ohne dauerhafte externe Abhängigkeit.',
     points: [
       'VAE CORE Administration',
       'Prompt- & Retrieval-Strategien',
       'Architektur / Datenmodell Basics',
       'Hands-on Deployment Sessions'
     ],
-    cta: 'Workshop ansehen'
+  cta: 'Schulungen ansehen'
   },
   {
     key: 'consulting',
-    title: 'Consulting',
+  title: 'Beratung',
     tagline: 'Strategie & Governance',
-    description: 'Architektur, Roadmaps, Compliance & Security – faktenbasiert statt Hype. Entscheidungsgrundlagen klar dokumentiert.',
+  description: 'Architektur, Roadmaps, Compliance & Security – faktenbasiert statt Hype. Entscheidungsgrundlagen klar dokumentiert.',
     points: [
       'Architektur & Roadmap',
       'EU AI Act Orientierung',
       'Security & Operations',
       'Kosten / TCO Bewertung'
     ],
-    cta: 'Beratung entdecken'
+  cta: 'Beratung ansehen'
   },
   {
     key: 'custom',

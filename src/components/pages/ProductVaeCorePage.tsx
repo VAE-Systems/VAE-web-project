@@ -17,7 +17,7 @@ const ProductVaeCorePage: React.FC = () => {
       />
       <section className="relative pt-40 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">
-          <h1 className="text-4xl md:text-6xl font-bold heading-fix mb-8">
+          <h1 className="h1 mb-8">
             <span className="block text-text-light">VAE CORE</span>
             <span className="block text-gradient">Semantische Betriebsplattform.</span>
           </h1>

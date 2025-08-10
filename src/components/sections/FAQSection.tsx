@@ -139,7 +139,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
       </div>
       <div className="relative max-w-5xl mx-auto px-6">
         <header ref={headerRef} className="text-center mb-16">
-          <h2 id={`${id}-title`} className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent">
+          <h2 id={`${id}-title`} className="h2 heading-gradient h-space mb-4">
             {title}
           </h2>
           {subtitle && <p className="text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto">{subtitle}</p>}

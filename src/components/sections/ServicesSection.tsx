@@ -36,36 +36,19 @@ const ServicesSection: React.FC = () => {
   }, [])
 
   // Services (ohne Plattform-Karte – VE CORE gehört zu Products)
+  // Reihenfolge angepasst: erst Schulungen & Workshops, dann Beratung, dann Custom Solutions
   const services = [
     {
-      key: 'consulting',
-  badge: 'Core Säule',
-  title: 'Consulting – Architektur & Governance',
-      description: 'Architektur, Governance, Compliance & Roadmaps für souveräne KI- & Automationslandschaften. Fokus: Transparenz, Austauschbarkeit, Betrieb statt POC-Silos.',
-      stats: [
-        { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion¹' },
-        { value: '4-6x', desc: 'Schnellere Entscheidungszyklen²' }
-      ],
-      features: ['Architektur-Assessment', 'Roadmap & Reifegradmodell', 'Governance / AI Act Vororientierung'],
-      cta: 'Mehr erfahren',
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
-          <path d="M7 8h10M7 12h6" stroke="currentColor" strokeWidth="2" />
-        </svg>
-      )
-    },
-    {
       key: 'trainings',
-  badge: 'Core Säule',
-  title: 'Trainings – Enablement & Rollenkompetenz',
+      badge: 'Core Säule',
+      title: 'Schulungen & Workshops – Enablement & Rollenkompetenz',
       description: 'Hands-on Formate für Dev, Ops & Knowledge Steward. Schnelle interne Souveränität statt dauerhafte externe Abhängigkeit.',
       stats: [
         { value: '2–4', desc: 'Wochen initiales Setup³' },
-        { value: '100%', desc: 'Team Enablement Fokus' }
+        { value: '100%', desc: 'Enablement Fokus' }
       ],
       features: ['Workshops & Labs', 'Artefakte / Playbooks', 'Mentoring & Shadowing'],
-      cta: 'Training ansehen',
+      cta: 'Schulungen ansehen',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 7l8 4 8-4-8-4-8 4Zm0 4 8 4 8-4" stroke="currentColor" strokeWidth="2" />
@@ -74,9 +57,27 @@ const ServicesSection: React.FC = () => {
       )
     },
     {
+      key: 'consulting',
+      badge: 'Core Säule',
+      title: 'Beratung – Architektur & Governance',
+      description: 'Architektur, Governance, Compliance & Roadmaps für souveräne KI- & Automationslandschaften. Fokus: Transparenz, Austauschbarkeit, Betrieb statt POC-Silos.',
+      stats: [
+        { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion¹' },
+        { value: '4–6x', desc: 'Schnellere Entscheidungszyklen²' }
+      ],
+      features: ['Architektur-Assessment', 'Roadmap & Reifegradmodell', 'Governance / AI Act Vororientierung'],
+      cta: 'Beratung ansehen',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
+          <path d="M7 8h10M7 12h6" stroke="currentColor" strokeWidth="2" />
+        </svg>
+      )
+    },
+    {
       key: 'solutions',
-  badge: 'Core Säule',
-  title: 'Custom Solutions – Integration & Automation',
+      badge: 'Core Säule',
+      title: 'Custom Solutions – Integration & Automation',
       description: 'Gezielte Automations- & Retrieval-Bausteine. Von Connectoren über Evaluierung bis Observability – modular kombinierbar.',
       stats: [
         { value: '3–8', desc: 'Wochen MVP Umsetzung⁴' },
@@ -89,7 +90,7 @@ const ServicesSection: React.FC = () => {
           <path d="M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z" stroke="currentColor" strokeWidth="2" />
         </svg>
       )
-  }
+    }
   ]
 
   // Mapping paths for detail navigation
@@ -105,8 +106,8 @@ const ServicesSection: React.FC = () => {
       <div className="container-vae relative">
         {/* Header */}
         <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">Services – Architektur, Umsetzung, Enablement</h2>
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Von erster Einordnung bis souveränem Betrieb: Consulting für Klarheit, Trainings für interne Kompetenz & modulare <span className="text-white">Custom Solutions</span> für messbare Prozess‑ & Wissensautomatisierung. <span className="text-vae-turquoise">Open Source. Auditierbar. Austauschbar.</span></p>
+          <h2 className="h2 heading-gradient h-space">Services – Enablement, Beratung, Umsetzung</h2>
+          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Von erster Einordnung bis souveränem Betrieb: <span className="text-white font-medium">Schulungen & Workshops</span> für interne Kompetenz, <span className="text-white font-medium">Beratung</span> für Richtung & Governance sowie modulare <span className="text-white">Custom Solutions</span> für messbare Prozess‑ & Wissensautomatisierung. <span className="text-vae-turquoise">Open Source. Auditierbar. Austauschbar.</span></p>
         </div>
 
         {/* Grid */}
@@ -126,7 +127,7 @@ const ServicesSection: React.FC = () => {
                 </div>
                 <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-medium tracking-wide">{s.badge}</span>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white leading-snug relative z-10">{s.title}</h3>
+              <h3 className="h4 mb-3 text-white leading-snug relative z-10">{s.title}</h3>
               <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-grow relative z-10">{s.description}</p>
               <div className="grid grid-cols-2 gap-3 mb-6 text-center text-[11px] rounded-lg p-3 bg-vae-turquoise/5 relative z-10"> 
                 {s.stats.map(st => (

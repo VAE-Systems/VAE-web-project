@@ -144,7 +144,7 @@ const AboutPage: React.FC = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-15" />
         </div>
         <div className="container-vae relative text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-vae-turquoise mb-6 heading-fix" data-fade>
+          <h1 className="h1 text-vae-turquoise h-space-lg" data-fade>
             Über VAE Systems
           </h1>
           <p className="text-xl md:text-2xl text-text-secondary max-w-4xl mx-auto leading-relaxed mb-6" data-fade>
@@ -195,15 +195,15 @@ const AboutPage: React.FC = () => {
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
           <header className="max-w-4xl mb-14" data-heading-accent data-animate>
-            <h2 className="text-3xl md:text-5xl font-bold text-white heading-fix mb-6">Was wir für Unternehmen liefern</h2>
+            <h2 className="h2 text-white h-space">Was wir für Unternehmen liefern</h2>
             <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
           <div className="grid md:grid-cols-3 gap-8" data-stagger-group>
             {[{
-              key:'consulting', title:'Consulting', lead:'Architektur & Governance', body:'Strategische Einordnung, Architektur-Reviews, Roadmaps & AI Act Vororientierung – fundierte Entscheidungen statt Tool-Hopping.', bullets:['Architektur-Assessment','Roadmap & Reifegrad','Governance / Compliance'], link:'/services#consulting'
+              key:'trainings', title:'Schulungen & Workshops', lead:'Enablement & Rollenkompetenz', body:'Role-based Labs & Playbooks für Dev, Ops & Knowledge Steward – interne Souveränität statt externer Dauer-Abhängigkeit.', bullets:['Hands-on Workshops','Playbooks / Artefakte','Mentoring & Shadowing'], link:'/services#trainings'
             },{
-              key:'trainings', title:'Trainings', lead:'Enablement & Rollenkompetenz', body:'Role-based Labs & Playbooks für Dev, Ops & Knowledge Steward – interne Souveränität statt externer Dauer-Abhängigkeit.', bullets:['Hands-on Workshops','Playbooks / Artefakte','Mentoring & Shadowing'], link:'/services#trainings'
+              key:'consulting', title:'Beratung', lead:'Architektur & Governance', body:'Strategische Einordnung, Architektur-Reviews, Roadmaps & AI Act Vororientierung – fundierte Entscheidungen statt Tool-Hopping.', bullets:['Architektur-Assessment','Roadmap & Reifegrad','Governance / Compliance'], link:'/services#consulting'
             },{
               key:'solutions', title:'Custom Solutions', lead:'Integration & Automation', body:'Modulare Retrieval- & Workflow-Bausteine: Connectoren, Index / Eval, Observability. Schnell produktionsnah statt POC-Stau.', bullets:['Workflow Orchestrierung','Retrieval / Index Layer','Evaluierung & Monitoring'], link:'/services/custom-solutions'
             }].map(card => (

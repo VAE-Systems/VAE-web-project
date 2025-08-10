@@ -56,7 +56,7 @@ const ProductsHeroSection: React.FC = () => {
           <div className="space-y-6 max-w-3xl relative">
             {/* Kontrast-Panel */}
             <div className="absolute inset-0 -z-10 rounded-3xl bg-[linear-gradient(135deg,rgba(5,12,10,0.72),rgba(8,20,18,0.55))] backdrop-blur-sm border border-white/5 shadow-[0_0_40px_-10px_rgba(0,255,165,0.25)]" />
-            <h1 className="text-4xl md:text-6xl font-bold heading-fix">
+            <h1 className="h1">
               <span className="block text-text-light">Modulare KI-Produkte</span>
               <span className="block text-gradient">vom Kernel bis zur Plattform.</span>
             </h1>

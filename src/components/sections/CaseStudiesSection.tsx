@@ -60,7 +60,7 @@ const CaseStudiesSection: React.FC = () => {
       <div className="container-vae relative">
         {/* Header */}
         <div ref={headerRef} className="text-center mb-20 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">Case Studies & Pilots</h2>
+          <h2 className="h2 heading-gradient mb-6">Case Studies & Pilots</h2>
           <p className="text-lg text-text-secondary leading-relaxed">Frühe produktive Umsetzungen & fokussierte Pilot-Initiativen – ausgerichtet auf belastbare Lernkurven und validierbare Outcomes statt künstlicher Referenz-Sammlungen.</p>
         </div>
 

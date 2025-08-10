@@ -40,7 +40,7 @@ const HeroSection: React.FC = () => {
           >
             <div className="space-y-6">
               <motion.h1 
-                className="text-4xl lg:text-6xl font-bold heading-fix"
+                className="h1"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}

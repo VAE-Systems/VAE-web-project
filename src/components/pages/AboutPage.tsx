@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CaseStudiesSection from '../sections/CaseStudiesSection'
 import TechStackSection from '../sections/TechStackSection'
 import ValuesPrinciplesSection from '../sections/ValuesPrinciplesSection'
+import ProviderComparisonSection from '../sections/ProviderComparison'
 import Seo from '../ui/Seo'
 
 /**
@@ -615,6 +616,9 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Section 6: CTA */}
+  <ProviderComparisonSection className="about-section theme-b border-t border-white/5" headline="Vergleich: VAE & Alternativen" subtitle="Architektur & Ownership Fokus vs. Agentur- und Low-Code Limitierungen." />
+      
+  {/* CTA */}
   <section className="relative py-32 about-section theme-b z-10" id="cta" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">

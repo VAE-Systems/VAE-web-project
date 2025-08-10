@@ -105,7 +105,6 @@ const ServiceConsultingPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-24">
             <Link to="/contact" className="btn-primary">Erstgespräch buchen</Link>
             <Link to="#consulting-faq" className="btn-secondary">FAQ</Link>
-            <Link to="#glossar" className="btn-ghost">Glossar</Link>
             <Link to="/services/trainings" className="btn-outline">Trainings</Link>
             <Link to="/services/custom-solutions" className="btn-outline">Custom Solutions</Link>
           </div>

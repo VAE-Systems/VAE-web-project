@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ReferenceList from '../ui/ReferenceList'
+import ProviderComparisonSection from '../sections/ProviderComparison'
 import Seo from '../ui/Seo'
 
 const ProductSolutionsPage: React.FC = () => {
@@ -99,7 +100,8 @@ const ProductSolutionsPage: React.FC = () => {
               dense
             />
           </div>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <ProviderComparisonSection className="border-t border-white/5 mt-10" headline="Vergleich: Komplettlösungen" subtitle="End‑to‑End Umsetzung & Ownership vs. Agentur Stückwerk & Low-Code Grenzen." />
+          <div className="flex flex-col sm:flex-row gap-4 mt-10">
             <Link to="/contact" className="btn-primary">Projekt anfragen</Link>
             <Link to="/products/vae-core" className="btn-secondary">VAE CORE ansehen</Link>
           </div>

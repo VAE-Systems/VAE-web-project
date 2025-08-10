@@ -80,34 +80,41 @@ const ServicesPage: React.FC = () => {
             <p className="text-text-secondary leading-relaxed text-lg">Schnell erkennbare Zuordnung: Wissen aufbauen, Richtung festlegen oder spezifisch umsetzen. Überlappungen bewusst minimal.</p>
           </header>
           <div className="overflow-x-auto -mx-2 px-2">
-            <table className="w-full text-left text-[13px] md:text-sm border-collapse">
-              <thead>
-                <tr className="text-[10px] md:text-[11px] uppercase tracking-wide text-text-muted/80">
-                  <th className="py-2 pr-4 font-medium text-left text-text-secondary/70 w-[150px]">Kriterium</th>
-                  <th className="py-2 px-4 font-semibold text-white bg-white/[0.04] rounded-tl-xl">Trainings</th>
-                  <th className="py-2 px-4 font-semibold text-white bg-white/[0.04]">Consulting</th>
-                  <th className="py-2 px-4 font-semibold text-white bg-white/[0.04] rounded-tr-xl">Custom Solutions</th>
-                </tr>
-              </thead>
-              <tbody className="align-top">
-                {[
-                  { k:'Ziel', label:'Primäres Ziel', a:'Kompetenz & Routinen', b:'Entscheidung & Governance', c:'Produktiver Baustein' },
-                  { k:'Output', label:'Greifbarer Output', a:'Unterlagen, Übungen, Cheatsheets', b:'Roadmap, Architektur, KPI/Risiko', c:'Software, Runbooks, Dashboards' },
-                  { k:'Tiefe', label:'Technische Tiefe', a:'Fundament & Patterns', b:'Architektur & Optionen', c:'Implementierung & Integrationen' },
-                  { k:'Dauer', label:'Typische Dauer', a:'1 Tag / Modul', b:'Tage – wenige Wochen', c:'Wochen – Inkremente' },
-                  { k:'Team', label:'Interne Beteiligung', a:'Aktives Lernen', b:'Workshops & Entscheidungen', c:'Review + Co-Development' },
-                  { k:'Metriken', label:'Messpunkte', a:'Lernziele / Übungserfolg', b:'Reifegrad, Risiko, TCO', c:'Qualität, Latenz, Kosten' },
-                  { k:'Lockin', label:'Lock‑in Risiko', a:'Keins', b:'Sehr gering (Dokumente)', c:'Niedrig (Open-first Code)' }
-                ].map((r,i,arr) => (
-                  <tr key={r.k} className="border-b border-white/5 last:border-0">
-                    <th scope="row" className="text-[10px] md:text-[11px] font-medium text-text-muted py-3 pr-4 text-left align-top w-[150px]">{r.label}</th>
-                    <td className={`py-3 px-4 text-xs text-text-secondary bg-white/[0.035] border border-white/5 ${i===0 ? 'rounded-tl-xl' : ''} ${i===arr.length-1 ? 'rounded-bl-xl' : ''}`}>{r.a}</td>
-                    <td className="py-3 px-4 text-xs text-text-secondary bg-white/[0.035] border border-white/5">{r.b}</td>
-                    <td className={`py-3 px-4 text-xs text-text-secondary bg-white/[0.035] border border-white/5 ${i===0 ? 'rounded-tr-xl' : ''} ${i===arr.length-1 ? 'rounded-br-xl' : ''}`}>{r.c}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="min-w-[860px] grid grid-cols-[160px_repeat(3,1fr)] rounded-2xl border border-white/10 bg-white/[0.03] relative">
+              {/* Column Headers */}
+              <div className="p-3 text-[11px] uppercase tracking-wide text-text-muted/70 border-b border-white/10">Kriterium</div>
+              {['Trainings','Consulting','Custom Solutions'].map(h => (
+                <div key={h} className="p-3 text-[11px] font-semibold uppercase tracking-wide text-white border-b border-white/10 bg-gradient-to-b from-white/10 to-transparent backdrop-blur-sm">
+                  {h}
+                </div>
+              ))}
+              {[
+                { k:'ziel', label:'Primäres Ziel', a:'Kompetenz & Routinen', b:'Entscheidung & Governance', c:'Produktiver Baustein' },
+                { k:'output', label:'Output', a:'Unterlagen, Übungen, Cheatsheets', b:'Roadmap, Architektur, KPI/Risiko', c:'Software, Runbooks, Dashboards' },
+                { k:'tiefe', label:'Technische Tiefe', a:'Fundament & Patterns', b:'Architektur & Optionen', c:'Implementierung & Integrationen' },
+                { k:'dauer', label:'Typische Dauer', a:'1 Tag / Modul', b:'Tage – wenige Wochen', c:'Wochen – Inkremente' },
+                { k:'team', label:'Interne Beteiligung', a:'Aktives Lernen', b:'Workshops & Entscheidungen', c:'Review + Co-Development' },
+                { k:'metriken', label:'Messpunkte', a:'Lernziele / Erfolg', b:'Reifegrad, Risiko, TCO', c:'Qualität, Latenz, Kosten' },
+                { k:'lockin', label:'Lock‑in Risiko', a:'Keins', b:'Sehr gering', c:'Niedrig (Open-first)' }
+              ].map((r,i,arr) => (
+                <React.Fragment key={r.k}>
+                  <div className={`p-4 text-[11px] font-medium text-text-muted/70 border-t border-white/5 ${i===arr.length-1 ? 'rounded-bl-2xl' : ''}`}>{r.label}</div>
+                  {[r.a, r.b, r.c].map((val,ci) => (
+                    <div
+                      key={ci}
+                      className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
+                    >
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" style={{background:'radial-gradient(380px circle at 30% 30%, rgba(0,255,165,0.12), transparent 70%)'}} />
+                      <span className="relative z-10">{val}</span>
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+              {/* Vertical Separators */}
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[160px] w-px bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+33.333%)] w-px bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+66.666%)] w-px bg-white/5" />
+            </div>
           </div>
           <div className="mt-8 text-[11px] text-text-muted max-w-4xl space-y-2">
             <p>Bereiche können separat gebucht oder in direktem Kontakt sinnvoll kombiniert werden – abhängig von Reifegrad & Zielbild.</p>

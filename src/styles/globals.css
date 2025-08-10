@@ -343,7 +343,10 @@
 /* Utility Layer */
 @layer utilities {
   /* Prevent descender clipping for large headings (g, p, y). Adds slight negative overflow allowance and balanced line-height */
-  .heading-fix { line-height:1.075; padding-bottom:0.14em; }
+  .heading-fix { line-height:1.075; padding-bottom:0.14em; padding-top:0.18em; overflow:visible; }
+  @supports (-webkit-background-clip:text) {
+    .heading-fix { -webkit-font-smoothing:antialiased; }
+  }
   /* Section Background Utilities */
   .section-surface { position:relative; }
   .section-surface::before { content:""; position:absolute; inset:0; pointer-events:none; background:

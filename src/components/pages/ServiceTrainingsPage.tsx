@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import { TermHint } from '../ui/Glossary'
+import SpotlightCard from '../ui/SpotlightCard'
 import type { FAQCategory } from '../sections/FAQSection'
 
 // Lazy loaded heavy sections
@@ -114,20 +115,9 @@ const ServiceTrainingsPage: React.FC = () => {
 
           {/* Crosslinks */}
           <div className="mt-24 grid md:grid-cols-3 gap-8">
-            {[{
-              k:'consulting',h:'Consulting – Richtung & Governance',p:'Architektur, Kosten & Compliance strukturiert entscheiden bevor Implementation startet.',to:'/services/consulting',cta:'Consulting ansehen'
-            },{
-              k:'solutions',h:'Custom Solutions – Umsetzung',p:'Produktive Integrationen & Automationen – dokumentiert & übergebbar.',to:'/services/custom-solutions',cta:'Projekt starten'
-            },{
-              k:'products',h:'Products – Module & VAE CORE',p:'Fertige Komponenten & Plattform als Beschleuniger oder Alternative.',to:'/products/solutions',cta:'Suite erkunden'
-            }].map(x => (
-              <div key={x.k} className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:border-vae-turquoise/40 transition-all overflow-hidden">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background:'radial-gradient(circle at 25% 22%, rgba(0,255,165,0.16), transparent 65%)'}} />
-                <h3 className="text-sm font-semibold text-white mb-2 relative z-10">{x.h}</h3>
-                <p className="text-xs text-text-secondary leading-relaxed mb-4 relative z-10 line-clamp-4">{x.p}</p>
-                <Link to={x.to} className="btn-convert text-[10px] gap-2 py-2 px-3 h-10 inline-flex items-center relative z-10">{x.cta}<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg></Link>
-              </div>
-            ))}
+            <SpotlightCard title="Consulting – Richtung" description="Architektur, Kosten & Governance strukturiert entscheiden bevor Umsetzung startet." to="/services/consulting" cta="Consulting ansehen" />
+            <SpotlightCard title="Custom Solutions – Umsetzung" description="Produktive Integrationen & Automationen – dokumentiert & übergebbar." to="/services/custom-solutions" cta="Projekt starten" />
+            <SpotlightCard title="Products – Suite & CORE" description="Fertige Module & Plattform als Beschleuniger oder Alternative." to="/products/solutions" cta="Suite erkunden" />
           </div>
 
           <Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade Glossar…</div>}>

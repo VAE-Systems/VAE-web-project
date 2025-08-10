@@ -1,97 +1,37 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-interface Position { x: number; y: number }
-
-export interface SpotlightCardProps extends React.PropsWithChildren {
+export interface SpotlightCardProps {
+  title: string
+  description: string
+  to: string
+  cta: string
   className?: string
-  spotlightColor?: string // rgba(r,g,b,a)
-  intensity?: number // 0..1 multiplier for opacity
-  radius?: number // percentage fallback radius (default 70)
-  variant?: 'accent' | 'neutral' | 'subtle'
-  blur?: number // px blur amount
+  small?: boolean
 }
 
-/**
- * SpotlightCard
- * Interaktiver Hintergrund-Spot (radial gradient) folgt Mausposition.
- * Keyboard-Fokus erzeugt zentrierten Spot. Barrierefrei & performant.
- */
-const SpotlightCard: React.FC<SpotlightCardProps> = ({
-  children,
-  className = '',
-  spotlightColor,
-  intensity = 0.55,
-  radius = 70,
-  variant = 'accent',
-  blur = 40
-}) => {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isFocused, setIsFocused] = useState(false)
-  const [pos, setPos] = useState<Position>({ x: 0, y: 0 })
-  const [opacity, setOpacity] = useState(0)
-
-  const updatePosition: React.MouseEventHandler<HTMLDivElement> = e => {
-    if (!ref.current || isFocused) return
-    const rect = ref.current.getBoundingClientRect()
-    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+const SpotlightCard: React.FC<SpotlightCardProps> = ({ title, description, to, cta, className = '', small }) => {
+  const [coords, setCoords] = useState({ x: '50%', y: '40%' })
+  const handleMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
+    setCoords({ x: x + '%', y: y + '%' })
   }
-
-  const handleEnter = () => setOpacity(intensity)
-  const handleLeave = () => setOpacity(0)
-  const handleFocus = () => {
-    setIsFocused(true)
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect()
-      setPos({ x: rect.width / 2, y: rect.height / 2 })
-    }
-    setOpacity(intensity)
-  }
-  const handleBlur = () => {
-    setIsFocused(false)
-    setOpacity(0)
-  }
-
-  // derive color if not given
-  const derivedColor = spotlightColor || (
-    variant === 'accent'
-      ? 'rgba(0,239,213,0.38)'
-      : variant === 'neutral'
-      ? 'rgba(255,255,255,0.25)'
-      : 'rgba(255,255,255,0.15)'
-  )
-
-  const layeredGradient = `radial-gradient(circle at ${pos.x}px ${pos.y}px, ${derivedColor} 0%, rgba(0,0,0,0) ${radius}%)`
-
   return (
     <div
-      ref={ref}
-      onMouseMove={updatePosition}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      tabIndex={0}
-      className={`relative isolate overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] backdrop-blur-md transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/50 ${className}`}
+      onMouseMove={handleMove}
+      className={`relative group rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_12px_44px_-10px_rgba(0,255,165,0.4)] ${className}`}
+      style={{ ['--sx' as any]: coords.x, ['--sy' as any]: coords.y }}
     >
-      {/* Spotlight Layer */}
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 ease-out will-change-transform"
-        style={{
-          opacity,
-          background: layeredGradient,
-          filter: `blur(${blur}px)`,
-          mixBlendMode: 'plus-lighter'
-        }}
+        className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: 'radial-gradient(600px circle at var(--sx) var(--sy), rgba(0,255,165,0.18), transparent 70%)' }}
       />
-      {/* Soft ambient overlay to avoid harsh edges */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{ background: 'linear-gradient(140deg,rgba(255,255,255,0.02),rgba(255,255,255,0))' }}
-      />
-      <div className="relative z-10 flex flex-col h-full">
-        {children}
+      <div className="relative z-10 p-6 flex flex-col h-full">
+        <h3 className="text-sm font-semibold text-white mb-2 leading-snug">{title}</h3>
+        <p className={`text-xs text-text-secondary leading-relaxed mb-4 line-clamp-4 flex-grow ${small ? 'mb-3' : ''}`}>{description}</p>
+        <Link to={to} className="btn-convert text-[10px] gap-2 py-2 px-3 h-10 inline-flex items-center mt-auto">{cta}<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg></Link>
       </div>
     </div>
   )

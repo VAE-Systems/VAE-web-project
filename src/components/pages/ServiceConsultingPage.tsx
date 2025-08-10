@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import { TermHint } from '../ui/Glossary'
+import SpotlightCard from '../ui/SpotlightCard'
 import type { FAQCategory } from '../sections/FAQSection'
 
 // Lazy sections
@@ -110,9 +111,9 @@ const ServiceConsultingPage: React.FC = () => {
                 </ul>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <h3 className="text-sm font-semibold text-white mb-3">Abgrenzung</h3>
-                <p className="text-xs text-text-secondary leading-relaxed mb-3"><span className="text-white font-medium">Keine Umsetzung</span> – dafür existiert <Link to="/services/custom-solutions" className="underline text-vae-turquoise hover:text-white">Custom Solutions</Link>. Consulting liefert Entscheidungsobjekte & Governance.</p>
-                <p className="text-xs text-text-secondary leading-relaxed">Open Standards, vollständige Dokumentation & Ownership Transfer – <span className="text-white">kein Vendor Lock‑in</span>.</p>
+                <h3 className="text-sm font-semibold text-white mb-3">Kontext & Übergang</h3>
+                <p className="text-xs text-text-secondary leading-relaxed mb-3">Consulting liefert belastbare Entscheidungsgrundlagen. Umsetzung & produktive Integrationen erfolgen anschließend in <Link to="/services/custom-solutions" className="underline text-vae-turquoise hover:text-white">Custom Solutions</Link>; Kompetenzaufbau parallel über <Link to="/services/trainings" className="underline text-vae-turquoise hover:text-white">Trainings</Link>.</p>
+                <p className="text-xs text-text-secondary leading-relaxed">Offene Standards & vollständige Dokumentation ermöglichen späteren Eigenbetrieb – <span className="text-white">kein Lock‑in</span>.</p>
               </div>
             </div>
           </div>
@@ -136,20 +137,9 @@ const ServiceConsultingPage: React.FC = () => {
 
           {/* Crosslinks */}
           <div className="mt-24 grid md:grid-cols-3 gap-8">
-            {[{
-              k:'trainings',h:'Trainings – Kompetenz aufbauen',p:'Team befähigen & Grundlagen legen bevor tiefere Architekturentscheidungen anstehen.',to:'/services/trainings',cta:'Jetzt Platz sichern'
-            },{
-              k:'solutions',h:'Custom Solutions – Umsetzung starten',p:'Produktive Integrationen & Automationen implementieren – dokumentiert & übergebbar.',to:'/services/custom-solutions',cta:'Projekt anfragen'
-            },{
-              k:'products',h:'Products – Komplettlösungen & VAE CORE',p:'Suite fertiger Module & Plattform als Alternative oder Ergänzung zum Neubau.',to:'/products/solutions',cta:'Suite ansehen'
-            }].map(x => (
-              <div key={x.k} className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:border-vae-turquoise/40 transition-all overflow-hidden">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background:'radial-gradient(circle at 25% 22%, rgba(0,255,165,0.16), transparent 65%)'}} />
-                <h3 className="text-sm font-semibold text-white mb-2 relative z-10">{x.h}</h3>
-                <p className="text-xs text-text-secondary leading-relaxed mb-4 relative z-10 line-clamp-4">{x.p}</p>
-                <Link to={x.to} className="btn-convert text-[10px] gap-2 py-2 px-3 h-10 inline-flex items-center relative z-10">{x.cta}<svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7H7" stroke="currentColor" strokeWidth="2"/></svg></Link>
-              </div>
-            ))}
+            <SpotlightCard title="Trainings – Kompetenz aufbauen" description="Team befähigen & Grundlagen schaffen bevor tiefere Architekturentscheidungen anstehen." to="/services/trainings" cta="Trainings ansehen" />
+            <SpotlightCard title="Custom Solutions – Umsetzung" description="Produktive Integrationen & Automationen implementieren – dokumentiert & übergebbar." to="/services/custom-solutions" cta="Projekt anfragen" />
+            <SpotlightCard title="Products – Suite & VAE CORE" description="Fertige Module & Plattform als Beschleuniger oder Alternative zum gezielten Neubau." to="/products/solutions" cta="Suite ansehen" />
           </div>
         </div>
       </section>

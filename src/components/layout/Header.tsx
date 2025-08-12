@@ -156,6 +156,7 @@ const Header: React.FC = () => {
                     className={`nav-link flex items-center gap-1 ${isActivePath(item.path) ? 'active' : ''}`}
                     aria-haspopup="true"
                     aria-expanded={item.mega === 'products' ? productsOpen : servicesOpen}
+                    aria-controls={item.mega === 'products' ? 'products-mega' : 'services-mega'}
                     onClick={() => {
                       if (item.mega === 'products') {
                         setProductsOpen(false)
@@ -175,9 +176,11 @@ const Header: React.FC = () => {
                     >
                       <div 
                         ref={productsMegaRef}
+                        id="products-mega"
                         className="mega-panel w-[920px] rounded-2xl border border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/40 ring-1 ring-white/10 focus:outline-none"
                         role="dialog"
                         aria-label="Products Menu"
+                        aria-modal="false"
                       >
                         <div className="p-8 grid grid-cols-4 gap-6">
                         {productCategories.map(cat => (
@@ -232,9 +235,11 @@ const Header: React.FC = () => {
                     >
                       <div 
                         ref={servicesMegaRef}
+                        id="services-mega"
                         className="mega-panel w-[760px] rounded-2xl border border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/40 ring-1 ring-white/10 focus:outline-none"
                         role="dialog"
                         aria-label="Services Menu"
+                        aria-modal="false"
                       >
                         <div className="p-8 grid grid-cols-3 gap-6">
                         {serviceCategories.map(cat => (
@@ -302,9 +307,12 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button
+            id="mobile-menu-trigger"
             className="md:hidden p-2 text-text-light hover:text-vae-turquoise transition-colors duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <span className="material-symbols-outlined">
               {isMobileMenuOpen ? 'close' : 'menu'}
@@ -314,7 +322,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-bg-secondary backdrop-glass">
+          <div id="mobile-menu" role="navigation" className="md:hidden border-t border-bg-secondary backdrop-glass">
             <nav className="py-6 space-y-4">
               {navItems.map((item) => (
                 <Link

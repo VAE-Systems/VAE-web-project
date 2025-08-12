@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* Material Symbols - Outlined */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+/* Font is loaded via index.html to avoid duplicate requests */
 
 /* Tailwind CSS */
 @tailwind base;
@@ -148,6 +148,32 @@
       'opsz' 24;
   }
 }
+
+/* Accessibility: Skip-link (visible on keyboard focus) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: rgba(0,0,0,0.85);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  outline: none;
+}
+
+/* End of base layer */
 
 /* Component Layer */
 @layer components {

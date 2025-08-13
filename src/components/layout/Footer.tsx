@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 const Footer: React.FC = () => {
   const techStack = [
     'Python', 'FastAPI', 'Temporal', 'Docker', 'Kubernetes',
-    'PostgreSQL', 'Open Source AI', 'VAE CORE'
+    'PostgreSQL', 'Open Source AI', 'VAE Core'
   ]
 
   // Newsletter success/error handlers
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
             <p className="text-text-muted mb-6 leading-relaxed">
               Individuelle KI-Automatisierungssysteme für Unternehmen, die ihre digitale 
               Infrastruktur selbst besitzen wollen. Lokales Hosting, Open-Source-KI und 
-              semantische Arbeitsräume mit VAE CORE.
+              semantische Arbeitsräume mit VAE Core.
             </p>
             
             <div className="mb-6">
@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
               <h4 className="text-lg font-semibold text-gradient mb-4">Produkte</h4>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center space-x-2">
-                  <Link to="/products/vae-core" className="text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Plattform</Link>
+                  <Link to="/products/vae-core" className="text-text-secondary hover:text-vae-turquoise transition-colors">VAE Core Plattform</Link>
                   <span className="px-2 py-0.5 bg-vae-turquoise/20 text-vae-turquoise text-[10px] rounded-full tracking-wide">Beta</span>
                 </li>
                 <li><Link to="/products/solutions" className="text-text-secondary hover:text-vae-turquoise transition-colors">Solutions</Link></li>

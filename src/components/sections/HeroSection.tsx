@@ -66,7 +66,7 @@ const HeroSection: React.FC = () => {
               >
                 Individuelle KI-Automatisierungssysteme für Unternehmen, die ihre digitale 
                 Infrastruktur selbst besitzen wollen. Lokales Hosting, Open-Source-KI und 
-                semantische Arbeitsräume mit <span className="text-vae-turquoise font-semibold">VAE CORE</span>.
+                semantische Arbeitsräume mit <span className="text-vae-turquoise font-semibold">VAE Core</span>.
               </motion.p>
             </div>
 
@@ -188,12 +188,12 @@ const TypewriterEffect: React.FC<{ texts: string[] }> = ({ texts }) => {
  */
 const NetworkVisualization: React.FC = () => {
   const services = [
-    { icon: 'psychology', label: 'KI-Beratung', distance: 100 },
-    { icon: 'storage', label: 'VAE CORE', distance: 120 },
-    { icon: 'security', label: 'DSGVO-konform', distance: 110 },
-    { icon: 'analytics', label: 'Analytics', distance: 95 },
-    { icon: 'code', label: 'Open Source', distance: 105 },
-    { icon: 'cloud', label: 'Local Hosting', distance: 115 }
+    { icon: 'psychology', label: 'KI-Beratung', distance: 80 },
+    { icon: 'storage', label: 'VAE Core', distance: 80 },
+    { icon: 'security', label: 'DSGVO-konform', distance: 80 },
+    { icon: 'analytics', label: 'Analytics', distance: 100 },
+    { icon: 'code', label: 'Open Source', distance: 80 },
+    { icon: 'cloud', label: 'Local Hosting', distance: 80 }
   ]
 
   // Respect user preference for reduced motion

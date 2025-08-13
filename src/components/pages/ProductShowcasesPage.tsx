@@ -13,8 +13,8 @@ const ProductShowcasesPage: React.FC = () => {
   return (
     <div className="min-h-screen">
       <Seo
-        title="Showcases & Ökosystem | VAE Systems – Built with VAE CORE"
-        description="Reale Integrationen & Showcases auf Basis von VAE CORE – nachvollziehbare Muster für Betrieb, Qualität & Skalierung."
+        title="Showcases & Ökosystem | VAE Systems – Built with VAE Core"
+        description="Reale Integrationen & Showcases auf Basis von VAE Core – nachvollziehbare Muster für Betrieb, Qualität & Skalierung."
         canonicalPath="/products/showcases"
         jsonLd={[
           { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Showcases – Built with VAE CORE' },
@@ -24,7 +24,7 @@ const ProductShowcasesPage: React.FC = () => {
       <section className="relative pt-40 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-8">
-            <span className="block text-text-light">Built with VAE CORE</span>
+            <span className="block text-text-light">Built with VAE Core</span>
             <span className="block text-gradient">Showcases & Ökosystem.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">

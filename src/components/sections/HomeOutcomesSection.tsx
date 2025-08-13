@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { outcomes, badges } from '../../content/aboutWhy'
+import Card from '../ui/Card'
 
 /**
  * HomeOutcomesSection
@@ -44,7 +45,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
         </header>
         <div className="grid md:grid-cols-3 gap-8 mb-14">
           {primary.map((o, i) => (
-            <div key={o.key} data-outcome-card className="group relative rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-sm p-6 flex flex-col transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_6px_30px_-6px_rgba(0,255,165,0.35)]">
+            <Card as="div" key={o.key} data-outcome-card className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-11 h-11 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">
@@ -62,8 +63,8 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
                   ))}
                 </div>
               )}
-            </div>
-          ))}
+            </Card>
+          ))} 
         </div>
         <div className="flex flex-wrap gap-3 mb-10">
           {badges.slice(0,3).map(b => (

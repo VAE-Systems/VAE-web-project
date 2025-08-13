@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { processSteps } from '../../content/process'
+import Card from '../ui/Card'
 
 /**
  * HomeProcessTeaserSection
@@ -42,7 +43,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
         </header>
         <ol className="grid md:grid-cols-3 gap-8 mb-12">
           {steps.map((s,i) => (
-            <li key={s.key} data-step-card className="group relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col transition-all hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_6px_28px_-6px_rgba(0,255,165,0.3)]">
+            <Card as="li" key={s.key} data-step-card className="group relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col transition-all hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_6px_28px_-6px_rgba(0,255,165,0.3)]">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">
@@ -64,7 +65,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
               <div className="mt-auto pt-2">
                 <a href="/about#prozess" className="inline-flex items-center gap-1 text-[11px] font-medium text-vae-turquoise hover:underline">Kompletter Ablauf <span className="material-symbols-outlined text-[14px]">arrow_forward</span></a>
               </div>
-            </li>
+            </Card>
           ))}
         </ol>
         <div className="text-[12px] text-text-muted max-w-3xl">Spätere Schritte vertiefen Betrieb (Monitoring / Evaluierung / Erweiterung). Fokus bleibt: frühe Nutzbarkeit & interne Ownership.</div>

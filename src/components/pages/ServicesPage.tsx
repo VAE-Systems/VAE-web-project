@@ -49,6 +49,25 @@ const ServicesPage: React.FC = () => {
         jsonLd={[{ '@context':'https://schema.org','@type':'CollectionPage', name:'VAE Services' }]}
       />
       <ServicesHeroSection innerRef={heroRef} />
+      {/* Storytelling */}
+      <section className="py-28 bg-bg-darker border-b border-white/5">
+        <div className="container-vae max-w-5xl">
+          <div className="max-w-3xl mb-16">
+            <h2 className="h2 heading-gradient h-space">Lifecycle statt Einzelleistung.</h2>
+            <p className="text-text-secondary leading-relaxed mb-5 text-lg">Wir entwickeln nicht nur Software – wir begleiten den gesamten Lebenszyklus: Analyse, Architektur, Implementierung, Enablement, Betrieb & Übergabe. So entstehen keine „Abwurfprojekte“, sondern betreibbare Lösungen.</p>
+            <p className="text-text-secondary leading-relaxed mb-5 text-sm">Schulungen & Workshops bauen interne Kompetenz auf, Beratung schafft Klarheit & Richtung, Custom Solutions liefern präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.</p>
+            <p className="text-text-secondary leading-relaxed text-sm">Plattform‑ & Lizenzangebote unter <Link to="/products" className="text-vae-turquoise hover:underline">Products</Link>. Services adressieren Ihren spezifischen Kontext.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[{ h: 'Enablement', b: ['Team handlungsfähig', 'Reduktion externer Abhängigkeit', 'Dokumentierte Artefakte'] }, { h: 'Governance & Compliance', b: ['Frühe AI Act Orientierung', 'Sicherheitsmodell klar', 'Transparente Audits'] }, { h: 'Umsetzung', b: ['Fokus reale Engpässe', 'Messbare Qualitätskriterien', 'Souveräner Betrieb'] }].map(col => (
+              <div key={col.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <h3 className="text-sm font-semibold text-white mb-3">{col.h}</h3>
+                <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">{col.b.map(x => <li key={x}>{x}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Kategorie Grid */}
       <section id="categories" className="py-28 bg-bg-dark border-b border-white/5">
@@ -110,10 +129,10 @@ const ServicesPage: React.FC = () => {
                   ))}
                 </React.Fragment>
               ))}
-              {/* Vertical Separators */}
+              {/* Vertical Separators: exakt an den Grid-Spalten */}
               <div className="pointer-events-none absolute top-[40px] bottom-0 left-[160px] w-px bg-white/5" />
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+33.333%)] w-px bg-white/5" />
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+66.666%)] w-px bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+((100%-160px)/3))] w-px bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+2*((100%-160px)/3))] w-px bg-white/5" />
             </div>
           </div>
           <div className="mt-8 text-[11px] text-text-muted max-w-4xl space-y-2">
@@ -123,25 +142,7 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Storytelling */}
-      <section className="py-28 bg-bg-darker border-b border-white/5">
-        <div className="container-vae max-w-5xl">
-          <div className="max-w-3xl mb-16">
-            <h2 className="h2 heading-gradient h-space">Lifecycle statt Einzelleistung.</h2>
-            <p className="text-text-secondary leading-relaxed mb-5 text-lg">Wir entwickeln nicht nur Software – wir begleiten den gesamten Lebenszyklus: Analyse, Architektur, Implementierung, Enablement, Betrieb & Übergabe. So entstehen keine „Abwurfprojekte“, sondern betreibbare Lösungen.</p>
-            <p className="text-text-secondary leading-relaxed mb-5 text-sm">Schulungen & Workshops bauen interne Kompetenz auf, Beratung schafft Klarheit & Richtung, Custom Solutions liefern präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.</p>
-            <p className="text-text-secondary leading-relaxed text-sm">Plattform‑ & Lizenzangebote unter <Link to="/products" className="text-vae-turquoise hover:underline">Products</Link>. Services adressieren Ihren spezifischen Kontext.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[{h:'Enablement',b:['Team handlungsfähig','Reduktion externer Abhängigkeit','Dokumentierte Artefakte']},{h:'Governance & Compliance',b:['Frühe AI Act Orientierung','Sicherheitsmodell klar','Transparente Audits']},{h:'Umsetzung',b:['Fokus reale Engpässe','Messbare Qualitätskriterien','Souveräner Betrieb']}].map(col => (
-              <div key={col.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold text-white mb-3">{col.h}</h3>
-                <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">{col.b.map(x => <li key={x}>{x}</li>)}</ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Final CTA */}
       <section className="py-24 bg-bg-dark">

@@ -124,7 +124,7 @@ const Header: React.FC = () => {
           >
             <div className="h-10 group-hover:glow-turquoise transition-all duration-300">
               <img 
-                src="/LOGO_02_white.svg" 
+                src="/LOGO_01_white.svg" 
                 alt="VAE Systems Logo" 
                 className="h-full w-auto"
               />

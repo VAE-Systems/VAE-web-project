@@ -29,30 +29,6 @@ export interface NewsletterSubscription {
   source?: string
 }
 
-// ============================================================================
-// CHAT & AI TYPES
-// ============================================================================
-
-export interface ChatMessage {
-  id: string
-  content: string
-  role: 'user' | 'assistant' | 'system'
-  timestamp: Date
-  metadata?: {
-    confidence?: number
-    source?: string
-    tokens?: number
-  }
-}
-
-export interface ChatSession {
-  id: string
-  messages: ChatMessage[]
-  userId?: string
-  startedAt: Date
-  lastActivity: Date
-  status: 'active' | 'archived' | 'escalated'
-}
 
 // ============================================================================
 // API RESPONSE TYPES

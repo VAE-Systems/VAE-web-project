@@ -4,6 +4,7 @@ import Seo from '../ui/Seo'
 import { TermHint } from '../ui/Glossary'
 import SpotlightCard from '../ui/SpotlightCard'
 import type { FAQCategory } from '../sections/FAQSection'
+import Card from '../ui/Card'
 
 // Lazy sections
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
@@ -59,7 +60,7 @@ const ServiceConsultingPage: React.FC = () => {
           </div>
 
           {/* Formate & Preise */}
-          <div className="mb-24">
+            <div className="mb-24">
             <h2 className="h3 h-space text-white">Formate & Preise</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
@@ -67,15 +68,16 @@ const ServiceConsultingPage: React.FC = () => {
                 {k:'Intensiv-Workshop',d:'2 Tage Vor Ort',price:'3 800 €',desc:'Deep-Dive: Architektur & Governance, Entscheidungsvorlage.'},
                 {k:'Monatliche Begleitung',d:'laufend',price:'ab 5 000 €',desc:'Review-Zyklen, Vendor-Auswahl, Architektur & KPI Monitoring.'}
               ].map(f => (
-                <div key={f.k} className="group relative rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-md p-7 flex flex-col transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_8px_32px_-8px_rgba(0,255,165,0.35)]">
-                  <div className="flex items-start justify-between mb-5">
-                    <h3 className="text-lg font-semibold text-white leading-snug">{f.k}</h3>
-                    <span className="text-[11px] px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise font-medium tracking-wide">{f.d}</span>
-                  </div>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-grow">{f.desc}</p>
+                <Card
+                  key={f.k}
+                  title={f.k}
+                  badge={f.d}
+                  body={f.desc}
+                  link="/contact"
+                  cta="Beratung anfragen"
+                >
                   <div className="text-white font-bold text-xl mb-6">{f.price}</div>
-                  <Link to="/contact" className="btn-convert text-[11px] inline-flex gap-2 mt-auto">Beratung anfragen<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></Link>
-                </div>
+                </Card>
               ))}
             </div>
           </div>

@@ -27,7 +27,7 @@ const ProductsPage: React.FC = () => {
     <div className="min-h-screen">
       <Seo
         title="Produkte & Plattform | VAE Systems – Lösungen, Module, Plattform"
-        description="VAE Systems Produkt-Suite: Komplettlösungen, Applikationen, VAE CORE Plattform und reale Showcases. Modular, nachvollziehbar, souverän betreibbar."
+        description="VAE Systems Produkt-Suite: Komplettlösungen, Applikationen, VAE Core Plattform und reale Showcases. Modular, nachvollziehbar, souverän betreibbar."
         canonicalPath="/products"
         jsonLd={jsonLd}
       />
@@ -41,7 +41,7 @@ const ProductsPage: React.FC = () => {
             <ul className="list-disc list-inside text-sm text-text-muted space-y-2">
               <li>Komplettlösungen: wenn Geschwindigkeit + Betriebssicherheit kritisch sind</li>
               <li>Applikationen & Module: gezielte Lücken schließen statt Neuaufbau</li>
-              <li>VAE CORE: zentrales semantisches Fundament & Governance Layer</li>
+              <li>VAE Core: zentrales semantisches Fundament & Governance Layer</li>
               <li>Showcases: verifizierbare Beispiele & Integrationsmuster</li>
             </ul>
           </div>
@@ -53,7 +53,7 @@ const ProductsPage: React.FC = () => {
                 d: 'Re:spond bündelt Retrieval, Moderation, Evaluierung & Monitoring – Einstieg wenn Chat‑/Assistenzfunktion mit Auditierbarkeit benötigt wird.'
               }, {
                 t: 'Dokumenten & Wissensraum',
-                d: 'VAE CORE + Docs‑Lens (Preview) für strukturierte semantische Suche mit Zugriffsklassen & Index-Strategien.'
+                d: 'VAE Core + Docs‑Lens (Preview) für strukturierte semantische Suche mit Zugriffsklassen & Index-Strategien.'
               }, {
                 t: 'Betriebsautomatisierung',
                 d: 'Workflow orchestrieren (Temporal kompatibel) + Ops‑Copilot für wiederkehrende Runbook‑Schritte.'

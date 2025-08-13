@@ -66,7 +66,7 @@ const HeroSection: React.FC = () => {
               >
                 Individuelle KI-Automatisierungssysteme für Unternehmen, die ihre digitale 
                 Infrastruktur selbst besitzen wollen. Lokales Hosting, Open-Source-KI und 
-                semantische Arbeitsräume mit <span className="text-vae-turquoise font-semibold">VAE CORE</span>.
+                semantische Arbeitsräume mit <span className="text-vae-turquoise font-semibold">VAE Core</span>.
               </motion.p>
             </div>
 
@@ -138,7 +138,7 @@ const HeroSection: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
           >
-            <NetworkVisualization />
+     
           </motion.div>
         </div>
       </div>
@@ -183,137 +183,6 @@ const TypewriterEffect: React.FC<{ texts: string[] }> = ({ texts }) => {
   )
 }
 
-/**
- * Enhanced Network Visualization with growing nodes
- */
-const NetworkVisualization: React.FC = () => {
-  const services = [
-    { icon: 'psychology', label: 'KI-Beratung', distance: 100 },
-  { icon: 'storage', label: 'VAE CORE', distance: 120 },
-    { icon: 'security', label: 'DSGVO-konform', distance: 110 },
-    { icon: 'analytics', label: 'Analytics', distance: 95 },
-    { icon: 'code', label: 'Open Source', distance: 105 },
-    { icon: 'cloud', label: 'Local Hosting', distance: 115 }
-  ]
 
-  return (
-    <div className="relative w-full h-96 flex items-center justify-center overflow-hidden">
-      {/* Connection Lines Background */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <svg className="w-full h-full" viewBox="0 0 400 400">
-          {services.map((service, index) => {
-            const angle = (index * 60) * Math.PI / 180
-            const centerX = 200
-            const centerY = 200
-            const endX = centerX + Math.cos(angle) * service.distance
-            const endY = centerY + Math.sin(angle) * service.distance
-
-            return (
-              <motion.line
-                key={index}
-                x1={centerX}
-                y1={centerY}
-                x2={endX}
-                y2={endY}
-                stroke="url(#lineGradient)"
-                strokeWidth="2"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ 
-                  duration: 1.5, 
-                  delay: 0.8 + index * 0.15,
-                  ease: "easeOut"
-                }}
-              />
-            )
-          })}
-          
-          {/* Define gradient for lines */}
-          <defs>
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgba(0, 255, 165, 0.8)" />
-              <stop offset="100%" stopColor="rgba(0, 255, 165, 0.1)" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
-      {/* Central VAE Logo */}
-      <motion.div 
-        className="relative z-20 w-36 h-36 bg-gradient-to-br from-vae-turquoise via-vae-turquoise-light to-vae-turquoise rounded-3xl flex items-center justify-center shadow-2xl"
-        style={{ 
-          boxShadow: '0 0 40px rgba(0, 255, 165, 0.4), 0 0 80px rgba(0, 255, 165, 0.2)' 
-        }}
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <img 
-          src="/LOGO_02_white.svg" 
-          alt="VAE Systems" 
-          className="w-20 h-20 drop-shadow-lg"
-        />
-      </motion.div>
-
-      {/* Service Nodes */}
-      {services.map((service, index) => {
-        const angle = (index * 60) * Math.PI / 180
-        const x = Math.cos(angle) * service.distance
-        const y = Math.sin(angle) * service.distance
-
-        return (
-          <motion.div
-            key={index}
-            className="absolute w-16 h-16 bg-gradient-to-br from-bg-secondary to-bg-darker border-2 border-vae-turquoise/40 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm group hover:border-vae-turquoise hover:bg-vae-turquoise/10 transition-all duration-300 cursor-pointer z-10"
-            style={{
-              top: '50%',
-              left: '50%',
-              transform: `translate(${x - 32}px, ${y - 32}px)`
-            }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ 
-              duration: 0.6, 
-              delay: 1.2 + index * 0.1,
-              ease: "easeOut"
-            }}
-            whileHover={{ 
-              scale: 1.1,
-              boxShadow: '0 0 20px rgba(0, 255, 165, 0.3)'
-            }}
-          >
-            <span className="material-symbols-outlined text-vae-turquoise text-lg group-hover:scale-110 transition-transform">
-              {service.icon}
-            </span>
-            <span className="text-xs text-text-secondary group-hover:text-vae-turquoise transition-colors mt-1 font-medium text-center">
-              {service.label.split(' ')[0]}
-            </span>
-            
-            {/* Node Pulse Effect */}
-            <motion.div
-              className="absolute inset-0 bg-vae-turquoise/20 rounded-xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0, 0.3, 0]
-              }}
-              transition={{
-                duration: 2,
-                delay: 2 + index * 0.3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.div>
-        )
-      })}
-
-      {/* Central Glow Effect */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-80 h-80 bg-vae-turquoise/5 rounded-full blur-3xl animate-pulse"></div>
-      </div>
-    </div>
-  )
-}
 
 export default HeroSection

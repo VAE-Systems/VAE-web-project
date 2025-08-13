@@ -2,80 +2,104 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ReferenceList from '../ui/ReferenceList'
 import Seo from '../ui/Seo'
+import { vaeCoreContent } from '../../content/vaeCore'
 
 const ProductVaeCorePage: React.FC = () => {
+  const c = vaeCoreContent
+
   return (
     <div className="min-h-screen">
       <Seo
-        title="VAE CORE Plattform | VAE Systems – Semantische Betriebsplattform"
-        description="VAE CORE: Embeddings, Vektorsuche, Workflows, Zugriffskontrolle & Observability als souveränes Plattform-Fundament."
+        title="VAE Core – Das semantische Backend | VAE Systems"
+        description={c.hero.subline}
         canonicalPath="/products/vae-core"
         jsonLd={[
           { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'VAE CORE', applicationCategory: 'AI Platform', operatingSystem:'Cloud / On-Prem', publisher:{ '@type':'Organization', name:'VAE Systems' } },
           { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type':'ListItem', position:1, name:'Produkte', item:'https://www.vae-systems.com/products' }, { '@type':'ListItem', position:2, name:'VAE CORE', item:'https://www.vae-systems.com/products/vae-core' } ] }
         ]}
       />
-      <section className="relative pt-40 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
+
+      <section id="hero" className="relative pt-40 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">
-          <h1 className="h1 mb-8">
-            <span className="block text-text-light">VAE CORE</span>
-            <span className="block text-gradient">Semantische Betriebsplattform.</span>
+          <h1 className="h1 mb-6">
+            <span className="block text-text-light">{c.hero.titlePre}</span>
+            <span className="block text-gradient">{c.hero.titleMain}</span>
           </h1>
-          <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">
-            Backend-Fundament für datensouveräne KI‑Arbeitsräume: Embeddings, Vektor‑ & Hybrid-Suche, Zugriffsebenen, Workflow-Orchestrierung, Audit-Pfade & Observability. Verständliche Schnittstellen statt proprietärer Monolith.
+
+          <div className="flex items-center gap-4 mb-6">
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-vae-turquoise/10 text-vae-turquoise text-sm font-medium tracking-wide" role="status" aria-label="Release status">
+              {c.hero.badge}
+            </span>
+            <p className="text-sm text-text-muted leading-relaxed">{c.hero.subline}</p>
+          </div>
+
+          <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-8">
+            {c.hero.lead}
           </p>
-          <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-12">
-            Ziel: Einheitlicher semantischer Layer, klare Policies, austauschbare Infrastruktur‑Adapter. Architektur minimiert Kopplung & erleichtert spätere Migrationen.
-          </p>
-          <div className="grid md:grid-cols-2 gap-10 mb-16">
+
+          <div className="flex flex-col sm:flex-row gap-4 mb-16">
+            <Link to="/products/vae-core#open-source" className="btn-primary">
+              {c.cta.openSourceLabel}
+            </Link>
+            <Link to="/contact" className="btn-secondary">
+              {c.cta.enterpriseLabel}
+            </Link>
+            <Link to="/contact" className="btn-ghost">
+              {c.cta.demoLabel}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="was-ist" className="py-16">
+        <div className="container-vae max-w-5xl">
+          <h2 className="h3 mb-4">{c.sections.whatIs.title}</h2>
+          <p className="text-sm text-text-secondary leading-relaxed max-w-3xl mb-8">{c.sections.whatIs.text}</p>
+
+          <div id="features" className="grid md:grid-cols-2 gap-10">
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">Kernbausteine</h3>
               <ul className="space-y-2 text-sm text-text-secondary leading-relaxed list-disc list-inside">
-                <li>Embedding Layer & adaptive Index-Strategien</li>
-                <li>Vektor- & Hybrid Retrieval (Text / Struktur / Attribute)</li>
-                <li>Rollen- & Kontext-gebundene Zugriffskontrolle</li>
-                <li>Workflow Engine (Temporal kompatibel)</li>
-                <li>Events, Telemetrie, Metriken & Audit Trails</li>
+                {c.sections.features.clusters.flatMap(cluster => cluster.items).map((it, idx) => (
+                  <li key={idx}>{it}</li>
+                ))}
               </ul>
             </div>
+
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">Betriebsmodelle</h3>
               <ul className="space-y-2 text-sm text-text-secondary leading-relaxed list-disc list-inside">
                 <li>On‑Prem / Sovereign Cloud (lokale Kontrolle)</li>
                 <li>Konfigurierbare Datenresidenz</li>
                 <li>Erweiterbar via Plug‑in Layer</li>
-                <li>Observability & Kosten-Transparenz integriert</li>
-                <li>Klare Upgrade-Pfade / Migrations-Guides</li>
+                <li>Observability & Kosten‑Transparenz integriert</li>
+                <li>Klare Upgrade‑ & Migrationspfade</li>
               </ul>
             </div>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {[{
-              h:'Schichten',
-              b:['API / Gateway','Semantik & Index','Workflow / Orchestrierung','Observability & Policy']
-            },{
-              h:'Abgrenzung',
-              b:['Kein proprietärer Model-Host','Kein Vendor-spez. Lock‑in Layer','Keine Intransparente Telemetrie','Kein monolithischer UI-Zwang']
-            },{
-              h:'Use Cases',
-              b:['Wissensräume','Dokumenten-Assistenz','Prozessautomatisierung','Policy‑gesteuerte Retrieval-Flows']
-            }].map(b => (
-              <div key={b.h} className="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                <h3 className="text-sm font-semibold text-white mb-3">{b.h}</h3>
-                <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">
-                  {b.b.map(x => <li key={x}>{x}</li>)}
-                </ul>
-              </div>
+
+          <div id="architecture" className="bg-white/5 border border-white/10 rounded-2xl p-8 my-12">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">{c.sections.architecture.title}</h3>
+            {c.sections.architecture.paragraphs.map((p, i) => (
+              <p key={i} className="text-sm text-text-secondary leading-relaxed mb-3">{p}</p>
             ))}
+            <p className="text-sm text-text-secondary leading-relaxed italic">{c.sections.architecture.roadmapNote}</p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mb-16">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">Architektur-Ansatz</h3>
-            <p className="text-sm text-text-secondary leading-relaxed mb-3">Austauschbare Speicher‑ & Index‑Adapter, deklarative Konfiguration, explizite API-Verträge. Fokus auf Beobachtbarkeit jeder Pipeline‑Stufe.</p>
-            <p className="text-sm text-text-secondary leading-relaxed">Roadmap (Auszug): Policy Engine, Multi-Tenancy Hardening, integrierte Qualitäts-Evaluierung. Lizenz: kommerziell + ausgewählte Open‑Source Komponenten.</p>
+
+          <div id="open-source" className="p-8 rounded-2xl border border-white/10 bg-gradient-to-tr from-bg-dark to-bg-darker">
+            <h3 className="text-lg font-semibold text-white mb-3">{c.sections.openSource.title}</h3>
+            <p className="text-sm text-text-secondary mb-3">Wir glauben an offene Innovation. Deshalb wird VAE Core als Open Source veröffentlicht — {c.sections.openSource.releaseEstimate}.</p>
+            <ul className="list-disc list-inside text-sm text-text-secondary space-y-2 mb-4">
+              {c.sections.openSource.bullets.map((b, i) => <li key={i}>{b}</li>)}
+            </ul>
+            <div className="mt-4">
+              <span className="inline-block px-3 py-2 rounded bg-vae-turquoise/10 text-vae-turquoise text-sm font-medium">{c.sections.openSource.ctaNote}</span>
+            </div>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mb-20">
+
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mt-12">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">Kontext & Referenzen</h3>
-            <p className="text-sm text-text-secondary leading-relaxed mb-3">Reports betonen: Ohne durchgängige Sichtbarkeit & Governance scheitert Skalierung häufig an Sicherheits- & Compliance-Fragen. Ein konsistenter Plattform-Layer reduziert Reibung zwischen Entwicklung & Betrieb.</p>
+            <p className="text-sm text-text-secondary leading-relaxed mb-3">Reports betonen: Ohne durchgängige Sichtbarkeit & Governance scheitert Skalierung häufig an Sicherheits‑ & Compliance‑Fragen. Ein konsistenter Plattform‑Layer reduziert Reibung zwischen Entwicklung & Betrieb.</p>
             <ReferenceList
               items={[
                 { id: 'c1', label: 'CNCF Annual Survey – Observability & Plattform Patterns', url: 'https://www.cncf.io' },
@@ -86,9 +110,11 @@ const ProductVaeCorePage: React.FC = () => {
               dense
             />
           </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link to="/contact" className="btn-primary">Demo / Architekturgespräch</Link>
-            <Link to="/products/showcases" className="btn-secondary">Showcases ansehen</Link>
+
+          <div id="cta" className="flex flex-col sm:flex-row gap-4 mt-8">
+            <Link to="/products/vae-core#open-source" className="btn-primary">{c.cta.openSourceLabel}</Link>
+            <Link to="/contact" className="btn-secondary">{c.cta.enterpriseLabel}</Link>
+            <Link to="/contact" className="btn-ghost">{c.cta.demoLabel}</Link>
           </div>
         </div>
       </section>

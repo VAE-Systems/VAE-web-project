@@ -9,6 +9,9 @@ import ProcessSection from '../sections/ProcessSection'
 import StoryTeamSection from '../sections/StoryTeamSection'
 import WhyOutcomesSection from '../sections/WhyOutcomesSection'
 import Seo from '../ui/Seo'
+import ProductsCardsGrid from '../sections/ProductsCardsGrid'
+import Card from '../ui/Card'
+import { aboutServices } from '../../content/services'
 
 /**
  * AboutPage Component
@@ -205,36 +208,20 @@ const AboutPage: React.FC = () => {
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
           <div className="grid md:grid-cols-3 gap-8" data-stagger-group>
-            {[{
-              key:'trainings', title:'Schulungen & Workshops', lead:'Enablement & Rollenkompetenz', body:'Role-based Labs & Playbooks für Dev, Ops & Knowledge Steward – interne Souveränität statt externer Dauer-Abhängigkeit.', bullets:['Hands-on Workshops','Playbooks / Artefakte','Mentoring & Shadowing'], link:'/services#trainings'
-            },{
-              key:'consulting', title:'Beratung', lead:'Architektur & Governance', body:'Strategische Einordnung, Architektur-Reviews, Roadmaps & AI Act Vororientierung – fundierte Entscheidungen statt Tool-Hopping.', bullets:['Architektur-Assessment','Roadmap & Reifegrad','Governance / Compliance'], link:'/services#consulting'
-            },{
-              key:'solutions', title:'Custom Solutions', lead:'Integration & Automation', body:'Modulare Retrieval- & Workflow-Bausteine: Connectoren, Index / Eval, Observability. Schnell produktionsnah statt POC-Stau.', bullets:['Workflow Orchestrierung','Retrieval / Index Layer','Evaluierung & Monitoring'], link:'/services/custom-solutions'
-            }].map(card => (
-              <div key={card.key} className="group relative rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-md p-7 flex flex-col overflow-hidden transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_8px_36px_-8px_rgba(0,255,165,0.35)]" data-animate>
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 30% 25%, rgba(0,255,165,0.18), transparent 65%)'}} />
-                <div className="flex items-center justify-between mb-5 relative z-10">
-                  <span className="text-xs font-semibold tracking-wider uppercase text-vae-turquoise/80">{card.title}</span>
-                  <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-medium tracking-wide">Core Säule</span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-snug relative z-10">{card.lead}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-5 relative z-10">{card.body}</p>
-                <ul className="space-y-2 mb-6 relative z-10">
-                  {card.bullets.map(b => (
-                    <li key={b} className="flex items-center gap-2 text-[12px] text-text-secondary">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-vae-turquoise flex-shrink-0"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2"/></svg>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-                <a href={card.link} className="btn-convert inline-flex gap-2 text-[11px] mt-auto relative z-10" data-pulse={card.key==='consulting'}>
-                  Mehr dazu
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
-                </a>
-              </div>
+            {aboutServices.map(s => (
+              <Card
+                key={s.key}
+                title={s.title}
+                lead={s.lead}
+                body={s.body}
+                bullets={s.bullets}
+                link={s.link}
+                cta="Mehr dazu"
+                badge="Service"
+              />
             ))}
           </div>
+          <ProductsCardsGrid />
         </div>
       </section>
 

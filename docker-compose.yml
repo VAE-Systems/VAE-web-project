@@ -4,8 +4,8 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    ports:
-      - "8080:80"
+    networks:
+      - reverse_proxy
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/", ">/dev/null", "2>&1" ]
@@ -14,3 +14,7 @@ services:
       retries: 3
     # environment:
     #   - NODE_ENV=production
+
+networks:
+  reverse_proxy:
+    external: true

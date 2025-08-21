@@ -6,7 +6,7 @@ const AboutSection: React.FC = () => {
   // content now imported from aboutMini & aboutWhy (badges)
 
   return (
-    <section id="about" className="relative py-28 surface-dark border-t border-white/5 overlay-grid overlay-diag edge-glow-top overflow-hidden">
+    <section id="about" className="relative py-24 md:py-28 surface-dark border-t border-white/5 overlay-grid overlay-diag edge-glow-top overflow-hidden">
       {/* Layered interactive backdrop */}
       <ParallaxBackdrop strength={8} />
       <ParticleField count={16} />
@@ -26,7 +26,7 @@ const AboutSection: React.FC = () => {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="h2 heading-gradient mb-4">{miniTagline}</h2>

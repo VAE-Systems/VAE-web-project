@@ -6,6 +6,7 @@ import SpotlightCard from '../ui/SpotlightCard'
 import MaterialIcon from '../ui/MaterialIcon'
 import ServicesHeroSection from '../sections/ServicesHeroSection'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 /**
  * ServicesPage Component
@@ -47,6 +48,12 @@ const ServicesPage: React.FC = () => {
   description="Schulungen & Workshops, strategische Beratung & individuelle KI-/Automationslösungen. Von Analyse bis Umsetzung – souverän & nachvollziehbar."
         canonicalPath="/services"
         jsonLd={[{ '@context':'https://schema.org','@type':'CollectionPage', name:'VAE Services' }]}
+      />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Services', path: '/services' }
+        ]}
       />
       <ServicesHeroSection innerRef={heroRef} />
       {/* Storytelling */}

@@ -170,7 +170,7 @@ const ContactSection: React.FC = () => {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-16" ref={headerRef}>
           <h2 className="h2 heading-gradient mb-4">Kontakt</h2>
@@ -179,7 +179,7 @@ const ContactSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Form */}
           <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/15" ref={formRef}>
             <h3 className="text-2xl font-semibold text-white mb-6">
@@ -189,7 +189,7 @@ const ContactSection: React.FC = () => {
             {/* Original Design mit neuer Backend-Logik */}
             <form onSubmit={(e) => { e.preventDefault(); submitForm(); }} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+                <div className="w-full">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                     Name *
                   </label>
@@ -204,7 +204,7 @@ const ContactSection: React.FC = () => {
                     placeholder="Ihr Name"
                   />
                 </div>
-                <div>
+                <div className="w-full">
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                     Email *
                   </label>
@@ -222,7 +222,7 @@ const ContactSection: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+                <div className="w-full">
                   <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
                     Unternehmen
                   </label>
@@ -236,7 +236,7 @@ const ContactSection: React.FC = () => {
                     placeholder="Ihr Unternehmen"
                   />
                 </div>
-                <div>
+                <div className="w-full">
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
                     Betreff
                   </label>
@@ -252,7 +252,7 @@ const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              <div>
+              <div className="w-full">
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                   Nachricht *
                 </label>

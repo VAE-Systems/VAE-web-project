@@ -101,17 +101,17 @@ const ServicesSection: React.FC = () => {
   }
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-36 bg-[linear-gradient(140deg,#0b0b0b,#101010,#141414)] border-t border-white/5 overflow-hidden">
+    <section id="services" ref={sectionRef} className="relative py-24 md:py-36 bg-[linear-gradient(140deg,#0b0b0b,#101010,#141414)] border-t border-white/5 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-[0.15] bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.1),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.06),transparent_55%)]" />
       <div className="container-vae relative">
         {/* Header */}
-        <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-20">
+        <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
           <h2 className="h2 heading-gradient h-space">Services – Enablement, Beratung, Umsetzung</h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Von erster Einordnung bis souveränem Betrieb: <span className="text-white font-medium">Schulungen & Workshops</span> für interne Kompetenz, <span className="text-white font-medium">Beratung</span> für Richtung & Governance sowie modulare <span className="text-white">Custom Solutions</span> für messbare Prozess‑ & Wissensautomatisierung. <span className="text-vae-turquoise">Open Source. Auditierbar. Austauschbar.</span></p>
         </div>
 
         {/* Grid */}
-  <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+  <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-24">
           {services.map((s) => (
             <div
               key={s.key}

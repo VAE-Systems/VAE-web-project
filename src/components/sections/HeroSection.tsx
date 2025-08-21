@@ -176,9 +176,9 @@ const TypewriterEffect: React.FC<{ texts: string[] }> = ({ texts }) => {
   }, [currentText, currentIndex, isDeleting, texts])
 
   return (
-    <span className="inline-block">
+    <span className="inline-block" aria-live="polite">
       {currentText}
-      <span className="animate-pulse">|</span>
+      <span className="animate-pulse" aria-hidden="true">|</span>
     </span>
   )
 }

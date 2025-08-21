@@ -32,7 +32,12 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
   const steps = processSteps.slice(0,3)
 
   return (
-    <section id={id} ref={ref} className={`relative py-28 border-t border-white/5 bg-[linear-gradient(145deg,#0c1213,#0e1416,#0b1011)] overflow-hidden ${className}`.trim()} aria-labelledby="process-home-heading">
+    <section
+      id={id}
+      ref={ref}
+      className={`relative py-20 md:py-28 border-t border-white/5 bg-[linear-gradient(145deg,#0c1213,#0e1416,#0b1011)] overflow-hidden ${className}`.trim()}
+      aria-labelledby="process-home-heading"
+    >
       <div className="absolute inset-0 pointer-events-none opacity-60">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.12),transparent_55%),radial-gradient(circle_at_70%_75%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
       </div>

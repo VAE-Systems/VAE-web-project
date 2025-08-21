@@ -53,7 +53,7 @@ const NavigationSwitcher: React.FC = () => {
 const App: React.FC = () => (
   <Router>
     <ScrollToTop />
-    <div className="min-h-screen bg-bg-darker text-text-light">
+    <div className="min-h-[100dvh] bg-bg-darker text-text-light">
       <Header />
       <NavigationSwitcher />
       <main className="pt-20">

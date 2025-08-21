@@ -41,7 +41,7 @@ const ServicesPage: React.FC = () => {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
   title="Services | VAE Systems – Schulungen, Beratung, Individuelle Lösungen"
   description="Schulungen & Workshops, strategische Beratung & individuelle KI-/Automationslösungen. Von Analyse bis Umsetzung – souverän & nachvollziehbar."

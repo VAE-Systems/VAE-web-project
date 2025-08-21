@@ -133,7 +133,7 @@ const AboutPage: React.FC = () => {
   }, [])
 
   return (
-    <div ref={rootRef} className="min-h-screen relative" style={{ ['--about-accent' as any]:'157 100% 47%' }}>
+    <div ref={rootRef} className="min-h-[100dvh] relative" style={{ ['--about-accent' as any]:'157 100% 47%' }}>
       {/* Accent interpolation overlay */}
       <div aria-hidden="true" className="about-accent-overlay fixed inset-0 z-0 pointer-events-none" />
       <Seo

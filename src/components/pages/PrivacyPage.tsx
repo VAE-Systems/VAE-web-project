@@ -9,7 +9,7 @@ import Seo from '../ui/Seo'
  */
 const PrivacyPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-bg-darker">
+    <div className="min-h-[100dvh] bg-bg-darker">
       <Seo
         title="Datenschutz | VAE Systems"
         description="Datenschutzhinweise der VAE Systems UG (haftungsbeschränkt) – Informationen nach DSGVO zu Art, Umfang und Zweck der Verarbeitung personenbezogener Daten."

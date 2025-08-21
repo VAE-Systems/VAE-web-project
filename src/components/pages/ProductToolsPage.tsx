@@ -11,7 +11,7 @@ const placeholderTools = [
 
 const ProductToolsPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Applikationen & Module | VAE Systems – Schlanke Werkzeuge"
         description="Fokussierte Applikationen & Module – klarer Nutzen, integrativ, transparente Lizenzierung. Roadmap basiert auf realen Anforderungen."

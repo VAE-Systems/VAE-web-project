@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import NeuralNetworkBackground from './NeuralNetworkBackground'
+import { getHeroSubline, heroSublineVariants } from '../../content/homeHero'
 
 /**
  * Hero Section Component
@@ -16,6 +17,22 @@ const HeroSection: React.FC = () => {
     'Maximale Kontrolle',
     'Enterprise-Grade Security'
   ]
+
+  const [sublineVariant, setSublineVariant] = React.useState('A')
+
+  React.useEffect(() => {
+    const stored = localStorage.getItem('hero-subline-variant')
+    if (stored && getHeroSubline(stored)) {
+      setSublineVariant(stored)
+      return
+    }
+    const ids = heroSublineVariants.map(v => v.id)
+    const random = ids[Math.floor(Math.random() * ids.length)]
+    localStorage.setItem('hero-subline-variant', random)
+    setSublineVariant(random)
+  }, [])
+
+  const heroSubline = getHeroSubline(sublineVariant)
 
   return (
     <section 
@@ -39,14 +56,14 @@ const HeroSection: React.FC = () => {
             className="space-y-8"
           >
             <div className="space-y-6">
-              <motion.h1 
+              <motion.h1
                 className="h1"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <span className="block text-text-light">Lokale KI-Infrastruktur</span>
-                <span className="block text-gradient">für deutsche Unternehmen.</span>
+                <span className="block text-gradient">{heroSubline}</span>
               </motion.h1>
 
               <motion.div

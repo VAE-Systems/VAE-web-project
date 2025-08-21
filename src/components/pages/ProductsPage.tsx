@@ -36,16 +36,6 @@ const ProductsPage: React.FC = () => {
       <section className="py-24 border-b border-white/5 bg-gradient-to-b from-bg-dark to-bg-darker/70">
         <div className="container-vae max-w-5xl space-y-20">
           <div className="space-y-6">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white">Warum eine modulare Suite?</h2>
-            <p className="text-text-secondary leading-relaxed">Viele Organisationen starten mit einzelnen Skripten oder isolierten Proofs-of-Concept. Später zeigen sich Brüche: fehlende Observability, schwer reproduzierbare Datenaufbereitung, heterogene Rechte-Logik. Unsere Suite ist bewusst so strukturiert, dass Sie an dem Punkt einsteigen können, der Ihren Reifegrad abholt – ohne spätere Migrationen zu erschweren.</p>
-            <ul className="list-disc list-inside text-sm text-text-muted space-y-2">
-              <li>Komplettlösungen: wenn Geschwindigkeit + Betriebssicherheit kritisch sind</li>
-              <li>Applikationen & Module: gezielte Lücken schließen statt Neuaufbau</li>
-              <li>VAE Core: zentrales semantisches Fundament & Governance Layer</li>
-              <li>Showcases: verifizierbare Beispiele & Integrationsmuster</li>
-            </ul>
-          </div>
-          <div className="space-y-6">
             <h2 className="text-2xl md:text-3xl font-semibold text-white">Typische Startpunkte</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[{
@@ -64,6 +54,16 @@ const ProductsPage: React.FC = () => {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="space-y-6">
+            <h2 className="text-2xl md:text-3xl font-semibold text-white">Warum eine modulare Suite?</h2>
+            <p className="text-text-secondary leading-relaxed">Viele Organisationen starten mit einzelnen Skripten oder isolierten Proofs-of-Concept. Später zeigen sich Brüche: fehlende Observability, schwer reproduzierbare Datenaufbereitung, heterogene Rechte-Logik. Unsere Suite ist bewusst so strukturiert, dass Sie an dem Punkt einsteigen können, der Ihren Reifegrad abholt – ohne spätere Migrationen zu erschweren.</p>
+            <ul className="list-disc list-inside text-sm text-text-muted space-y-2">
+              <li>Komplettlösungen: wenn Geschwindigkeit + Betriebssicherheit kritisch sind</li>
+              <li>Applikationen & Module: gezielte Lücken schließen statt Neuaufbau</li>
+              <li>VAE Core: zentrales semantisches Fundament & Governance Layer</li>
+              <li>Showcases: verifizierbare Beispiele & Integrationsmuster</li>
+            </ul>
           </div>
           <div className="space-y-6">
             <h2 className="text-2xl md:text-3xl font-semibold text-white">Leitprinzipien</h2>

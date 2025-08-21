@@ -523,9 +523,9 @@ a
   .feature-grid > li:hover::after { opacity:.75; }
 
   /* Timeline Active State */
-  [data-timeline-item].is-active { border-color:hsla(var(--color-vae-turquoise),0.55); background:linear-gradient(140deg, rgba(0,255,165,0.08), rgba(0,255,165,0.02)); }
+  [data-timeline-item].is-active { border-color:hsla(var(--color-vae-turquoise),0.55); background:linear-gradient(140deg, rgba(var(--vae-turquoise-rgb),0.08), rgba(var(--vae-turquoise-rgb),0.02)); }
   [data-timeline-item].is-active h3 { color:#fff; }
-  [data-timeline-item].is-active .timeline-node { box-shadow:0 0 0 4px rgba(0,255,165,0.15), 0 0 0 1px rgba(0,255,165,0.55), 0 0 18px -4px rgba(0,255,165,0.8); }
+  [data-timeline-item].is-active .timeline-node { box-shadow:0 0 0 4px rgba(var(--vae-turquoise-rgb),0.15), 0 0 0 1px rgba(var(--vae-turquoise-rgb),0.55), 0 0 18px -4px rgba(var(--vae-turquoise-rgb),0.8); }
   .timeline-node { transition:box-shadow .5s, transform .5s; }
   [data-timeline-item].is-active .timeline-node { transform:scale(1.05); }
 
@@ -590,12 +590,12 @@ a
     transform-style:preserve-3d; 
     transform: translateY(var(--raise)) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz)) scale(var(--scale));
     will-change: transform;
-  box-shadow: 0 0 calc(50px * var(--glow-alpha)) rgba(0,255,165,calc(.65 * var(--glow-alpha))), 0 0 0 1px rgba(0,255,165,calc(.55 * var(--glow-alpha))); 
+  box-shadow: 0 0 calc(50px * var(--glow-alpha)) rgba(var(--vae-turquoise-rgb),calc(.65 * var(--glow-alpha))), 0 0 0 1px rgba(var(--vae-turquoise-rgb),calc(.55 * var(--glow-alpha)));
   }
   .tech-tile::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,50%), hsla(var(--color-vae-turquoise),0.35), transparent 70%); opacity:0; transition:opacity .5s ease; pointer-events:none; mix-blend-mode:overlay; }
   .tech-stack-active .tech-tile::after { opacity:.35; }
   /* Hover scale/raise only; box-shadow jetzt GSAP-gesteuert für schnell an / langsam aus */
-  .tech-tile:hover { --raise:-10px; --scale:1.06; border-color:rgba(0,255,165,0.55); }
+  .tech-tile:hover { --raise:-10px; --scale:1.06; border-color:rgba(var(--vae-turquoise-rgb),0.55); }
   .tech-tile:active { --raise:-4px; --scale:1.02; }
   .tech-tile img { filter:grayscale(100%) brightness(.9); transition:filter .6s ease, transform .6s ease; }
   .tech-tile:hover img { filter:grayscale(0%) brightness(1.05); transform:translateZ(20px) scale(1.08); }

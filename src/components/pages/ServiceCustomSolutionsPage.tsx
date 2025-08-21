@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import { productCategories } from '../navigation/productCategories'
 import SpotlightCard from '../ui/SpotlightCard'
-import FAQSection, { FAQCategory } from '../sections/FAQSection'
+import type { FAQCategory } from '../sections/FAQSection'
+
+const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 
 const ServiceCustomSolutionsPage: React.FC = () => {
   return (
@@ -81,7 +83,9 @@ const ServiceCustomSolutionsPage: React.FC = () => {
 
           {/* FAQ (Reusable Section) */}
           <div className="mt-10">
-            <CustomSolutionsFAQ />
+            <Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
+              <CustomSolutionsFAQ />
+            </Suspense>
           </div>
 
           {/* Cross-Suite Navigation */}

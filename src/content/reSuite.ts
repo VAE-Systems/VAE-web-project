@@ -18,10 +18,18 @@ export interface RePackage {
 }
 
 export const reSuiteIntro = {
-  title: 'VAE Re: Suite – Website & Data Spec – Kompaktversion',
+  title: 'Re: Suite – Modular, betreibbar, transparent',
   intro:
     'Re: – Unsere Antwort auf echte Probleme. In der E‑Mail heißt „Re:“ Antwort. Bei VAE steht es für Reaktion, Reflexion, Resultat. Re:-Bausteine sind betreibbare Komplettsysteme auf dem VAE CORE – einzeln wirksam, im Verbund stärker.',
-  bullets: ['Schnell produktiv', 'Messbar & auditierbar', 'Modular erweiterbar']
+  bullets: ['Schnell produktiv', 'Messbar & auditierbar', 'Modular erweiterbar'],
+  mailTeaser: {
+    from: 'ToldYou <toldyou@hidden.network>',
+    to: 'AlwaysBusy <alwaysbusy@somewhere.work>',
+    subject: 'Re: The problem you told me about.',
+    body: 'Ich muss ehrlich sein – eigentlich wollte ich’s für mich behalten.',
+    reveal: 'Aber ich erzähle dir jetzt von',
+    highlight: 'VAE Systems'
+  }
 }
 
 export const reModules: ReModule[] = [

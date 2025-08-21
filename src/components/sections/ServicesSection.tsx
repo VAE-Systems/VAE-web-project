@@ -8,6 +8,22 @@ const ServicesSection: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
+  const superscripts: Record<string, string> = {
+    '1': '¹',
+    '2': '²',
+    '3': '³',
+    '4': '⁴',
+    '5': '⁵'
+  }
+
+  const footnotes: Record<string, string> = {
+    '1': 'McKinsey: Value Capture Open Source (2023)',
+    '2': 'Forrester: Decision Velocity in Modular Architectures (2024)',
+    '3': 'Red Hat: Enterprise Open Source Report (2024)',
+    '4': 'Internal Case Aggregation (Median Implementierung)',
+    '5': 'MIT Sloan / Automations Benchmark (2024)'
+  }
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -44,7 +60,7 @@ const ServicesSection: React.FC = () => {
       title: 'Schulungen & Workshops – Enablement & Rollenkompetenz',
       description: 'Hands-on Formate für Dev, Ops & Knowledge Steward. Schnelle interne Souveränität statt dauerhafte externe Abhängigkeit.',
       stats: [
-        { value: '2–4', desc: 'Wochen initiales Setup³' },
+        { value: '2–4', desc: 'Wochen initiales Setup', note: '3' },
         { value: '100%', desc: 'Enablement Fokus' }
       ],
       features: ['Workshops & Labs', 'Artefakte / Playbooks', 'Mentoring & Shadowing'],
@@ -62,8 +78,8 @@ const ServicesSection: React.FC = () => {
       title: 'Beratung – Architektur & Governance',
       description: 'Architektur, Governance, Compliance & Roadmaps für souveräne KI- & Automationslandschaften. Fokus: Transparenz, Austauschbarkeit, Betrieb statt POC-Silos.',
       stats: [
-        { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion¹' },
-        { value: '4–6x', desc: 'Schnellere Entscheidungszyklen²' }
+        { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion', note: '1' },
+        { value: '4–6x', desc: 'Schnellere Entscheidungszyklen', note: '2' }
       ],
       features: ['Architektur-Assessment', 'Roadmap & Reifegradmodell', 'Governance / AI Act Vororientierung'],
       cta: 'Beratung ansehen',
@@ -80,8 +96,8 @@ const ServicesSection: React.FC = () => {
       title: 'Custom Solutions – Integration & Automation',
       description: 'Gezielte Automations- & Retrieval-Bausteine. Von Connectoren über Evaluierung bis Observability – modular kombinierbar.',
       stats: [
-        { value: '3–8', desc: 'Wochen MVP Umsetzung⁴' },
-        { value: '60%', desc: 'Avg. Effizienzgewinn⁵' }
+        { value: '3–8', desc: 'Wochen MVP Umsetzung', note: '4' },
+        { value: '60%', desc: 'Avg. Effizienzgewinn', note: '5' }
       ],
       features: ['Workflow Orchestrierung', 'Retrieval / Index Layer', 'Evaluierung & Monitoring'],
       cta: 'Use Cases',
@@ -129,11 +145,21 @@ const ServicesSection: React.FC = () => {
               </div>
               <h3 className="h4 mb-3 text-white leading-snug relative z-10">{s.title}</h3>
               <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-grow relative z-10">{s.description}</p>
-              <div className="grid grid-cols-2 gap-3 mb-6 text-center text-[11px] rounded-lg p-3 bg-vae-turquoise/5 relative z-10"> 
+              <div className="grid grid-cols-2 gap-3 mb-6 text-center text-[11px] rounded-lg p-3 bg-vae-turquoise/5 relative z-10">
                 {s.stats.map(st => (
                   <div key={st.desc}>
                     <div className="text-base font-bold text-vae-turquoise mb-0.5">{st.value}</div>
-                    <div className="text-[10px] leading-tight text-text-muted">{st.desc}</div>
+                    <div className="text-[10px] leading-tight text-text-muted">
+                      {st.desc}
+                      {st.note && (
+                        <sup
+                          className="ml-0.5 cursor-help text-vae-turquoise"
+                          title={footnotes[st.note]}
+                        >
+                          {superscripts[st.note]}
+                        </sup>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -173,21 +199,34 @@ const ServicesSection: React.FC = () => {
         <div className="relative bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-3xl p-10 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(circle_at_70%_30%,rgba(0,239,213,0.12),transparent_60%)]" />
           <div className="relative grid md:grid-cols-4 gap-8 mb-10">
-            {[{k:'< 6 Wochen',l:'Proof → produktiver Wert'},{k:'> 60%',l:'Prozess-Effizienzsteigerung (Automation)⁵'},{k:'4–6x',l:'Schnellere Architektur-Entscheidungen²'},{k:'65%',l:'Reduzierte Vendor-/Lizenzkosten¹'}].map(x => (
+            {[{k:'< 6 Wochen',l:'Proof → produktiver Wert'},{k:'> 60%',l:'Prozess-Effizienzsteigerung (Automation)',note:'5'},{k:'4–6x',l:'Schnellere Architektur-Entscheidungen',note:'2'},{k:'65%',l:'Reduzierte Vendor-/Lizenzkosten',note:'1'}].map(x => (
               <div key={x.l} className="text-center md:text-left">
                 <div className="text-2xl font-bold text-vae-turquoise mb-1">{x.k}</div>
-                <div className="text-[11px] uppercase tracking-wide text-text-muted">{x.l}</div>
+                <div className="text-[11px] uppercase tracking-wide text-text-muted">
+                  {x.l}
+                  {x.note && (
+                    <sup
+                      className="ml-0.5 cursor-help text-vae-turquoise"
+                      title={footnotes[x.note]}
+                    >
+                      {superscripts[x.note]}
+                    </sup>
+                  )}
+                </div>
               </div>
             ))}
           </div>
           <p className="relative text-xs text-text-secondary leading-relaxed max-w-4xl">Unsere Services kombinieren <span className="text-white">architektonische Klarheit</span>, <span className="text-white">schnelle operative Umsetzbarkeit</span> und <span className="text-white">Enablement</span>. So entsteht nachhaltige interne Kompetenz statt externer Black Box. Fokus auf <strong className="text-white font-semibold">Open Source KI, Retrieval Qualität, Workflow Robustheit</strong> und <strong className="text-white font-semibold">Compliance früh</strong>. Ergebnis: verkürzte Iterationen, geringeres Risiko, nachweisbarer ROI.</p>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-2 text-[10px] text-text-muted">
-            <span>¹ McKinsey: Value Capture Open Source (2023)</span>
-            <span>² Forrester: Decision Velocity in Modular Architectures (2024)</span>
-            <span>³ Red Hat: Enterprise Open Source Report (2024)</span>
-            <span>⁴ Internal Case Aggregation (Median Implementierung)</span>
-            <span>⁵ MIT Sloan / Automations Benchmark (2024)</span>
-            <span>Quelle: Synthese Branch Reports + interne Benchmarks</span>
+          <div className="mt-8 p-4 rounded-md bg-white/5 border border-white/10">
+            <h4 className="text-[11px] uppercase tracking-wide text-white mb-2">Quellen</h4>
+            <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-text-muted">
+              {Object.entries(footnotes).map(([k, v]) => (
+                <li key={k}>
+                  <span className="text-vae-turquoise">{superscripts[k]}</span> {v}
+                </li>
+              ))}
+              <li>Quelle: Synthese Branch Reports + interne Benchmarks</li>
+            </ul>
           </div>
         </div>
       </div>

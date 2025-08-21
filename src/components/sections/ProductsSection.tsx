@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const ProductsSection: React.FC = () => {
   return (
-  <section id="products" className="relative py-32 overflow-hidden border-t border-white/5 surface-alt">
+  <section id="products" className="relative py-24 md:py-32 overflow-hidden border-t border-white/5 surface-alt">
       <ParallaxBackdrop strength={10} />
       <ParticleField count={18} />
       {/* Background subtle gradient */}
@@ -26,7 +26,7 @@ const ProductsSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           {productCategories.map(cat => {
             const link = cat.key === 'solutions' ? '/products/solutions'
               : cat.key === 'tools' ? '/products/tools'

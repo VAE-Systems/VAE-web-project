@@ -3,7 +3,7 @@ import Seo from '../ui/Seo'
 
 const ImpressumPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-bg-darker">
+    <div className="min-h-[100dvh] bg-bg-darker">
       <Seo title="Impressum | VAE Systems" description="Impressum der VAE Systems UG (haftungsbeschränkt)." canonicalPath="/impressum" />
       <section className="pt-40 pb-24 container-vae max-w-4xl">
         <h1 className="h1 heading-gradient mb-10">Impressum</h1>

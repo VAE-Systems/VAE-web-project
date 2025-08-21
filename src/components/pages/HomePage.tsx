@@ -18,7 +18,7 @@ import Seo from '../ui/Seo'
  */
 const HomePage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="VAE Systems | KI & Automatisierung"
         description="Produktionsnahe KI- und Automatisierungslösungen – modular, dokumentiert und ohne Lock‑In."

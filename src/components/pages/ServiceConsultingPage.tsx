@@ -12,7 +12,7 @@ const GlossarySection = React.lazy(() => import('../ui/GlossarySection'))
 
 const ServiceConsultingPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Beratung | Strategie, Governance & Architektur"
         description="Strategische KI- & Automationsberatung: Roadmaps, EU AI Act Orientierung, TCO/ROI & Architektur – faktenbasiert statt Hype."

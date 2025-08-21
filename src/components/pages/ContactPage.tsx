@@ -11,7 +11,7 @@ import { contactHero, contactIntro, contactUsps, contactCta } from '../../conten
  */
 const ContactPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Kontakt | VAE Systems"
         description="Starten Sie Ihr KI-Projekt mit VAE Systems. Kontaktieren Sie uns für individuelle Automatisierungs- und KI-Lösungen."

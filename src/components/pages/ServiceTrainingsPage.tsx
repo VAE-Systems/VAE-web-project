@@ -12,7 +12,7 @@ const GlossarySection = React.lazy(() => import('../ui/GlossarySection'))
 
 const ServiceTrainingsPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Schulungen & Workshops | KI Enablement & Governance"
         description="Drei fokussierte 1‑Tages Formate: Governance & AI Strategy, Prompt Patterns & Evaluation, Lokale KI-Infrastruktur mit VAE CORE. Praxistief + direkt anwendbare Artefakte."

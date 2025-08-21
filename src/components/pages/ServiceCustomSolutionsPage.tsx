@@ -9,7 +9,7 @@ const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 
 const ServiceCustomSolutionsPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Custom Solutions | VAE Systems – Individuelle Umsetzung"
         description="Individuelle Software & Integrationen: API-Connectoren, Spezial-Workflows, domain-spezifische Retrieval Layer – präzise auf Ihren Use Case."

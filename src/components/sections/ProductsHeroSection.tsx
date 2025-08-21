@@ -12,8 +12,10 @@ const ProductsHeroSection: React.FC = () => {
 
   return (
     <>
-    {/* Negative top margin zieht das Hero unter den fixen Header (h-20=5rem); zusätzliche pt gleicht es optisch aus. */}
-    <section className="relative -mt-20 pt-52 pb-24 overflow-hidden border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
+    {/* Negative top margin zieht das Hero unter den fixen Header (h-20=5rem); zusätzliche pt gleicht es optisch aus.
+        Responsive paddings und Mindesthöhe sorgen dafür, dass Inhalt und Hintergrund-Animation auch auf kleineren
+        Viewports korrekt dargestellt werden. */}
+    <section className="relative -mt-20 overflow-hidden border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker min-h-[80vh] sm:min-h-[calc(100vh-5rem)] pt-32 pb-16 md:pt-52 md:pb-24">
       {/* Animated backdrop */}
       <div className="absolute inset-0 opacity-40 mix-blend-screen select-none">
         <FaultyTerminal 
@@ -38,12 +40,12 @@ const ProductsHeroSection: React.FC = () => {
         <div className="flex flex-col items-center text-center gap-8">
           <div className="relative flex items-center justify-center">
             <div
-              className="relative w-56 h-56 rounded-[3rem] flex flex-col items-center justify-center gap-3 shadow-[0_0_40px_-10px_rgba(0,255,165,0.45)] border border-white/10 bg-[linear-gradient(140deg,rgba(0,255,165,0.18),rgba(0,255,165,0.08)_40%,rgba(0,40,30,0.35))] backdrop-blur-xl"
+              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-[3rem] flex flex-col items-center justify-center gap-3 shadow-[0_0_40px_-10px_rgba(0,255,165,0.45)] border border-white/10 bg-[linear-gradient(140deg,rgba(0,255,165,0.18),rgba(0,255,165,0.08)_40%,rgba(0,40,30,0.35))] backdrop-blur-xl"
             >
               <img
                 src="/App_Logo_light.svg"
                 alt="VAE Systems App Icon"
-                className="w-40 h-40 drop-shadow-[0_0_22px_rgba(0,255,165,0.55)]"
+                className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 drop-shadow-[0_0_22px_rgba(0,255,165,0.55)]"
               />
               <div className="absolute inset-0 rounded-[3rem] ring-1 ring-vae-turquoise/30 pointer-events-none" />
               <div className="absolute -inset-4 rounded-[3.5rem] bg-vae-turquoise/15 blur-3xl opacity-60" />
@@ -60,7 +62,7 @@ const ProductsHeroSection: React.FC = () => {
               <span className="block text-text-light">Modulare KI-Produkte</span>
               <span className="block text-gradient">vom Kernel bis zur Plattform.</span>
             </h1>
-            <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed">
               Bausteine, Integrationslayer und vollständige Workflows: Stellen Sie sich Ihre lokale, souveräne KI-Infrastruktur zusammen – exakt so weit automatisiert wie Ihr aktueller Reifegrad es zulässt.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

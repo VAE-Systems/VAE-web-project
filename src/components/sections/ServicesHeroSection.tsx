@@ -12,9 +12,9 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
 		if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' })
 	}
 
-	return (
-		<section className="relative pt-32 pb-28 overflow-hidden border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
-			<div className="absolute inset-0 opacity-80 mix-blend-screen">
+        return (
+                <section className="relative overflow-hidden border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker min-h-[80vh] sm:min-h-[calc(100vh-5rem)] pt-24 pb-16 md:pt-32 md:pb-28">
+                        <div className="absolute inset-0 opacity-80 mix-blend-screen">
 				<RippleGrid
 					enableRainbow={false}
 						gridColor="#00ffa5"
@@ -27,14 +27,14 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
 				/>
 			</div>
 			<div className="relative container-vae" ref={innerRef}>
-				<div className="max-w-5xl mx-auto text-center space-y-10">
-					<h1 className="h1">
-						<span className="block text-text-light">Services &amp; Expertise</span>
-						<span className="block text-gradient">für nachhaltige KI-Infrastruktur.</span>
-					</h1>
-					<p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
-						Von Analyse über Implementierung bis Lifecycle-Optimierung – modulare Service-Pakete für souveräne, lokale und skalierbare Automatisierung.
-					</p>
+                                <div className="max-w-5xl mx-auto text-center space-y-10">
+                                        <h1 className="h1">
+                                                <span className="block text-text-light">Services &amp; Expertise</span>
+                                                <span className="block text-gradient">für nachhaltige KI-Infrastruktur.</span>
+                                        </h1>
+                                        <p className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
+                                                Von Analyse über Implementierung bis Lifecycle-Optimierung – modulare Service-Pakete für souveräne, lokale und skalierbare Automatisierung.
+                                        </p>
 					<div className="flex flex-wrap justify-center items-center gap-8 text-vae-turquoise">
 						<div className="flex items-center gap-2"><MaterialIcon icon="shield" className="text-2xl" /><span className="text-sm font-medium">Datensouverän</span></div>
 						<div className="flex items-center gap-2"><MaterialIcon icon="flash_on" className="text-2xl" /><span className="text-sm font-medium">Schnell</span></div>

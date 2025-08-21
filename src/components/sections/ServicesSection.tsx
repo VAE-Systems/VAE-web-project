@@ -127,7 +127,7 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* Grid */}
-  <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-24">
+      <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-24 items-stretch">
           {services.map((s) => (
             <div
               key={s.key}

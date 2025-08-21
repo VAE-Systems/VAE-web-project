@@ -54,7 +54,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
             <a href="/about#prozess" className="text-vae-turquoise hover:underline">Über Uns</a>.
           </p>
         </header>
-        <ol className="grid md:grid-cols-3 gap-8 mb-12">
+        <ol className="grid md:grid-cols-3 gap-8 mb-12 items-stretch">
           {steps.map((s,i) => (
             <Card as="li" key={s.key} data-step-card className="group relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col transition-all hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_6px_28px_-6px_rgba(var(--vae-turquoise-rgb),0.3)]">
               <div className="flex items-start justify-between mb-4">

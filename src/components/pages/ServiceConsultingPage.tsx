@@ -62,7 +62,7 @@ const ServiceConsultingPage: React.FC = () => {
           {/* Formate & Preise */}
             <div className="mb-24">
             <h2 className="h3 h-space text-white">Formate & Preise</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 items-stretch">
               {[
                 {k:'Kickstart',d:'½ Tag Remote',price:'1 100 €',desc:'Schnellcheck: Reifegrad, Priorisierung, nächste 2–3 Schritte.'},
                 {k:'Intensiv-Workshop',d:'2 Tage Vor Ort',price:'3 800 €',desc:'Deep-Dive: Architektur & Governance, Entscheidungsvorlage.'},

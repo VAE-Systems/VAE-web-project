@@ -39,7 +39,7 @@ const ServiceCustomSolutionsPage: React.FC = () => {
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">Wir bauen spezifische Software & Integrationsbausteine für Ihren konkreten Engpass. Fokus: tragfähige Architektur, Messbarkeit & späterer Eigenbetrieb ohne Lock‑in.</p>
           <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-10">Vielleicht existiert Ihr Bedarf aber bereits als <span className="text-white font-medium">Komplettlösung</span> (End‑to‑End Paket) in unserer Produkt-Suite. Unser Vorgehen: <span className="text-white">1. Engpass präzisieren</span> → <span className="text-white">2. Suite-Reuse prüfen</span> → <span className="text-white">3. Adaptieren oder gezielt neu entwickeln</span>. So vermeiden Sie unnötige Neubaustapel.</p>
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8 mb-16 items-stretch">
             {[{h:'Integrationen',b:['API-Connectoren','Webhook Orchestrierung','Legacy Brücken','Event Normalisierung']},{h:'Automatisierung',b:['Workflow Implementierung','Human-in-the-loop Pfade','Kosten / Latenz Budgets','Fallback / Degradation']},{h:'Retrieval & Data',b:['Domain Embeddings','Index Strategie','Sicherheits-Scoping','Evaluation Hooks']}].map(c => (
               <div key={c.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
                 <h3 className="text-sm font-semibold text-white mb-3">{c.h}</h3>
@@ -67,7 +67,7 @@ const ServiceCustomSolutionsPage: React.FC = () => {
           {/* KPI & Monitoring */}
           <div className="mb-24">
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-6">Messbarkeit & Optimierung</h2>
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="grid md:grid-cols-3 gap-6 mb-10 items-stretch">
               {[{h:'Kern-KPIs',p:['Qualitäts-Score','Durchlaufzeit / Latenz','Kosten / Aufruf']},{h:'Guardrails',p:['Fehlerraten','Token / Ressourcen Budget','Security / Zugriff']},{h:'Observability',p:['Dashboards','Alerting Schwellen','Drilldown Queries']}].map(b => (
                 <div key={b.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
                   <h3 className="text-sm font-semibold text-white mb-3">{b.h}</h3>

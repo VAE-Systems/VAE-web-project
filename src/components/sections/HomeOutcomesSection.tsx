@@ -48,7 +48,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
             {homeOutcomesDescription.after}
           </p>
         </header>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mb-14">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mb-14 items-stretch">
           {primary.map((o, i) => (
             <Card as="div" key={o.key} data-outcome-card className="p-6">
               <div className="flex items-start justify-between mb-4">

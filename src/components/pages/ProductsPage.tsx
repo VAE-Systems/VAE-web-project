@@ -46,7 +46,7 @@ const ProductsPage: React.FC = () => {
             </ul>
           </div>
           <div className="space-y-6">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white">Typische Startpunkte</h2>
+            <h2 id="core" className="text-2xl md:text-3xl font-semibold text-white">Typische Startpunkte</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[{
                 t: 'Conversational Access',

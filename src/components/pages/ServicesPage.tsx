@@ -151,7 +151,7 @@ const ServicesPage: React.FC = () => {
           <p className="text-lg text-text-secondary mb-10">Senden Sie uns Kernziel, Zeithorizont & vorhandene Systeme – wir melden uns innerhalb von 24h mit einem Vorschlag für das Erstgespräch.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="btn-primary px-10 py-4">Kontakt aufnehmen</Link>
-            <a href="/service-katalog.pdf" className="btn-secondary px-10 py-4" target="_blank" rel="noopener">Service-Katalog (PDF)</a>
+            <a href="/service-katalog.pdf" className="btn-secondary px-10 py-4" target="_blank" rel="noopener" aria-label="Service-Katalog als PDF herunterladen (1.2 MB)">Service-Katalog (PDF, 1.2 MB)</a>
           </div>
           <p className="mt-6 text-xs text-text-muted">PDF ist Vorab-Version – Inhalte können sich ändern.</p>
         </div>

@@ -68,9 +68,9 @@ const CaseStudiesSection: React.FC = () => {
           <p className="text-lg text-text-secondary leading-relaxed">Frühe produktive Umsetzungen & fokussierte Pilot-Initiativen – ausgerichtet auf belastbare Lernkurven und validierbare Outcomes statt künstlicher Referenz-Sammlungen.</p>
         </div>
 
-        <div ref={cardsRef} className={`grid gap-10 ${single ? 'md:grid-cols-1 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+        <div ref={cardsRef} className={`grid items-stretch gap-10 ${single ? 'md:grid-cols-1 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
           {displayCases.map(cs => (
-            <article key={cs.slug} className={`group relative flex flex-col rounded-2xl p-7 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] backdrop-blur-xl border border-white/12 transition-all duration-400 ${cs.comingSoon ? 'opacity-75' : 'hover:border-vae-turquoise/40 hover:-translate-y-2 shadow-lg shadow-black/30/'}`}>
+            <article key={cs.slug} className={`group relative flex flex-col h-full rounded-2xl p-7 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] backdrop-blur-xl border border-white/12 transition-all duration-400 ${cs.comingSoon ? 'opacity-75' : 'hover:border-vae-turquoise/40 hover:-translate-y-2 shadow-lg shadow-black/30/'}`}>
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-screen pointer-events-none bg-[radial-gradient(circle_at_70%_30%,hsla(var(--color-vae-turquoise),0.25),transparent_60%)]" />
 
               <header className="mb-5 relative z-10">

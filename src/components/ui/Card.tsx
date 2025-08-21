@@ -25,7 +25,7 @@ interface CardProps extends React.HTMLAttributes<HTMLElement> {
  */
 const Card: React.FC<CardProps> = ({ as = 'article', title, lead, body, bullets = [], badge, link, cta = 'Mehr dazu', children, className = '', animate = true, ...rest }) => {
   const Tag = as
-  const baseClass = `group relative rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-md p-7 flex flex-col overflow-hidden transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] ${className}`.trim()
+  const baseClass = `group relative rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-md p-7 flex flex-col h-full overflow-hidden transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] ${className}`.trim()
 
   return React.createElement(
     Tag,

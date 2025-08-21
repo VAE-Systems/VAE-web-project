@@ -207,7 +207,7 @@ const AboutPage: React.FC = () => {
             <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
-          <div className="grid md:grid-cols-3 gap-8" data-stagger-group>
+          <div className="grid md:grid-cols-3 gap-8 items-stretch" data-stagger-group>
             {aboutServices.map(s => (
               <Card
                 key={s.key}

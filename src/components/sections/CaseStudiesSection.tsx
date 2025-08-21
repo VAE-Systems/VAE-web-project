@@ -40,7 +40,7 @@ const CaseStudiesSection: React.FC = () => {
   const single = caseStudies.length === 1
 
   return (
-    <section id="case-studies" ref={sectionRef} className="relative py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top overflow-hidden">
+    <section id="case-studies" ref={sectionRef} className="relative py-24 sm:py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top overflow-hidden">
       <ParallaxBackdrop strength={7} />
       <ParticleField count={14} />
 
@@ -79,7 +79,7 @@ const CaseStudiesSection: React.FC = () => {
               )}
 
               {cs.metrics?.length > 0 && (
-                <ul className="grid grid-cols-3 gap-3 my-6 relative z-10">
+                <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-6 relative z-10">
                   {cs.metrics.map(m => (
                     <li key={m.label} className="p-3 rounded-xl bg-white/5 border border-white/10 text-center flex flex-col">
                       <span className="text-sm font-semibold text-vae-turquoise leading-tight">{m.value}</span>

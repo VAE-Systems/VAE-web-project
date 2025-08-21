@@ -42,19 +42,17 @@ const ScrollProgress: React.FC = () => {
     <div className="fixed top-1/2 right-4 -translate-y-1/2 z-40 select-none" aria-label={`Scroll Fortschritt ${pct}%`}>
       <div className="relative h-[340px] w-2 rounded-full bg-white/8 overflow-hidden border border-white/15 backdrop-blur-sm">
         {/* Track subtle glow */}
-        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_8%,rgba(0,255,165,0.35),transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)] pointer-events-none" />
         {/* Fill (top -> down) */}
         <div
-          className="absolute top-0 left-0 w-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise/80 to-vae-turquoise-dark transition-[height] duration-150 ease-out shadow-[0_0_8px_-2px_rgba(0,255,165,0.6)]"
-          style={{ height: `${pct}%` }}
+          className="absolute top-0 left-0 w-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise/80 to-vae-turquoise-dark transition-[height] duration-150 ease-out shadow-[0_0_8px_-2px_rgba(var(--vae-turquoise-rgb),0.6)] [height:var(--progress)]"
+          style={{ '--progress': `${pct}%` } as React.CSSProperties }
         />
         {/* Circular badge (static) */}
         <div className="absolute -left-20 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3">
           <div
-            className="relative w-16 h-16 rounded-full p-[3px] bg-[radial-gradient(circle_at_30%_30%,rgba(0,255,165,0.4),rgba(0,255,165,0.05))] backdrop-blur-md border border-vae-turquoise/40 shadow-[0_0_18px_-4px_rgba(0,255,165,0.6)]"
-            style={{
-              backgroundImage: `conic-gradient(rgba(0,255,165,0.85) ${pct}%, rgba(255,255,255,0.07) ${pct}% 100%)`
-            }}
+            className="relative w-16 h-16 rounded-full p-[3px] bg-[conic-gradient(rgba(var(--vae-turquoise-rgb),0.85)_var(--pct),rgba(255,255,255,0.07)_var(--pct)_100%),radial-gradient(circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.4),rgba(var(--vae-turquoise-rgb),0.05))] backdrop-blur-md border border-vae-turquoise/40 shadow-[0_0_18px_-4px_rgba(var(--vae-turquoise-rgb),0.6)]"
+            style={{ '--pct': `${pct}%` } as React.CSSProperties }
           >
             <div className="absolute inset-[4px] rounded-full bg-[linear-gradient(145deg,rgba(8,24,22,0.9),rgba(6,18,16,0.65))] flex items-center justify-center text-vae-turquoise font-semibold text-sm tracking-wide">
               {pct}%

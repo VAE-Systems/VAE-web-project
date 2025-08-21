@@ -18,7 +18,7 @@ const ProductsCardsGrid: React.FC = () => {
           {items.map(cat => (
             <article
               key={cat.key}
-              className="group relative rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-md p-5 sm:p-6 flex flex-col overflow-hidden transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.12),0_10px_40px_-10px_rgba(0,255,165,0.28)]"
+              className="group relative rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-md p-5 sm:p-6 flex flex-col overflow-hidden transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.12),0_10px_40px_-10px_rgba(var(--vae-turquoise-rgb),0.28)]"
             >
               <div className="flex items-start justify-between mb-3 relative z-10">
                 <div className="flex items-center gap-3">

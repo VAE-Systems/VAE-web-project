@@ -145,7 +145,7 @@ const AboutPage: React.FC = () => {
       {/* Page Hero (aligned style with ContactPage) */}
   <section className="about-hero bg-bg-darker pt-32 pb-16 relative overflow-hidden section-surface" data-section>
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(0,255,165,0.10),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(0,255,165,0.06),transparent_60%)]" data-parallax-bg />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]" data-parallax-bg />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-15" />
         </div>
         <div className="container-vae relative text-center">

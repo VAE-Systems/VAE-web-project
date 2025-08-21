@@ -200,10 +200,9 @@ const NeuralHeroSection: React.FC = () => {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-bg-darker">
       {/* Neural Network Background */}
-      <div 
-        ref={mountRef} 
-        className="absolute inset-0 w-full h-full"
-        style={{ background: 'rgba(10, 10, 10, 0.85)' }}
+      <div
+        ref={mountRef}
+        className="absolute inset-0 w-full h-full bg-[rgba(10,10,10,0.85)]"
       />
       
       {/* Content Container */}

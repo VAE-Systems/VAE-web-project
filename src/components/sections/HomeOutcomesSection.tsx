@@ -36,7 +36,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
   return (
     <section id={id} ref={ref} className={`relative py-28 border-t border-white/5 bg-[linear-gradient(140deg,#0b0f10,#101416,#0d1112)] overflow-hidden ${className}`.trim()} aria-labelledby="outcomes-heading">
       <div className="absolute inset-0 pointer-events-none opacity-60">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(0,255,165,0.14),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(0,255,165,0.10),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(var(--vae-turquoise-rgb),0.14),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%)]" />
       </div>
       <div className="container-vae relative">
         <header className="max-w-4xl mb-16">

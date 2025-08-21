@@ -102,7 +102,7 @@ const ServicesSection: React.FC = () => {
 
   return (
     <section id="services" ref={sectionRef} className="relative py-36 bg-[linear-gradient(140deg,#0b0b0b,#101010,#141414)] border-t border-white/5 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-[0.15] bg-[radial-gradient(circle_at_20%_30%,#00efd51a,transparent_60%),radial-gradient(circle_at_80%_70%,#00efd50f,transparent_55%)]" />
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-[0.15] bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.1),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.06),transparent_55%)]" />
       <div className="container-vae relative">
         {/* Header */}
         <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-20">
@@ -115,9 +115,9 @@ const ServicesSection: React.FC = () => {
           {services.map((s) => (
             <div
               key={s.key}
-              className={`group relative overflow-hidden rounded-2xl p-7 bg-white/[0.035] backdrop-blur-md border border-white/10 flex flex-col h-full transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_8px_36px_-8px_rgba(0,255,165,0.35)] hover:-translate-y-2`}
+              className={`group relative overflow-hidden rounded-2xl p-7 bg-white/[0.035] backdrop-blur-md border border-white/10 flex flex-col h-full transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] hover:-translate-y-2`}
             >
-              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 30% 25%, rgba(0,255,165,0.18), transparent 65%)'}} />
+              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
               <div className="flex items-start justify-between mb-6 relative z-10">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-vae-turquoise/20 text-vae-turquoise flex items-center justify-center">
@@ -154,7 +154,7 @@ const ServicesSection: React.FC = () => {
                 {s.cta}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
               </Link>
-              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_22%,rgba(0,239,213,0.10),transparent_70%)]" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_22%,rgba(var(--vae-turquoise-rgb),0.10),transparent_70%)]" />
             </div>
           ))}
         </div>

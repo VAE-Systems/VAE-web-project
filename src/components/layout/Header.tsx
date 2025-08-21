@@ -184,7 +184,18 @@ const Header: React.FC = () => {
                       >
                         <div className="p-8 grid grid-cols-4 gap-6">
                         {productCategories.map(cat => (
-                          <div key={cat.key} className="group flex flex-col text-left">
+                          <Link
+                            key={cat.key}
+                            to={
+                              cat.key === 'solutions' ? '/products/solutions'
+                              : cat.key === 'tools' ? '/products/tools'
+                              : cat.key === 'core' ? '/products/vae-core'
+                              : cat.key === 'built' ? '/products/showcases'
+                              : '/products'
+                            }
+                            className="group flex flex-col text-left"
+                            onClick={() => setProductsOpen(false)}
+                          >
                             <div className="flex items-start justify-between mb-3">
                               <div>
                                 <h3 className="text-sm font-semibold text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
@@ -203,21 +214,11 @@ const Header: React.FC = () => {
                                 </li>
                               ))}
                             </ul>
-                            <Link 
-                              to={
-                                cat.key === 'solutions' ? '/products/solutions'
-                                : cat.key === 'tools' ? '/products/tools'
-                                : cat.key === 'core' ? '/products/vae-core'
-                                : cat.key === 'built' ? '/products/showcases'
-                                : '/products'
-                              }
-                              className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise hover:text-white transition-colors group/link"
-                              onClick={() => setProductsOpen(false)}
-                            >
+                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-white transition-colors">
                               {cat.cta}
-                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover/link:translate-x-1">arrow_forward</span>
-                            </Link>
-                          </div>
+                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                            </div>
+                          </Link>
                         ))}
                         </div>
                         <div className="px-8 pb-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-text-muted">
@@ -243,7 +244,17 @@ const Header: React.FC = () => {
                       >
                         <div className="p-8 grid grid-cols-3 gap-6">
                         {serviceCategories.map(cat => (
-                          <div key={cat.key} className="group flex flex-col text-left">
+                          <Link
+                            key={cat.key}
+                            to={
+                              cat.key === 'trainings' ? '/services/trainings'
+                              : cat.key === 'consulting' ? '/services/consulting'
+                              : cat.key === 'custom' ? '/services/custom-solutions'
+                              : '/services'
+                            }
+                            className="group flex flex-col text-left"
+                            onClick={() => setServicesOpen(false)}
+                          >
                             <div className="flex items-start justify-between mb-3">
                               <div>
                                 <h3 className="text-sm font-semibold text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
@@ -259,20 +270,11 @@ const Header: React.FC = () => {
                                 </li>
                               ))}
                             </ul>
-                            <Link 
-                              to={
-                                cat.key === 'trainings' ? '/services/trainings'
-                                : cat.key === 'consulting' ? '/services/consulting'
-                                : cat.key === 'custom' ? '/services/custom-solutions'
-                                : '/services'
-                              }
-                              className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise hover:text-white transition-colors group/link"
-                              onClick={() => setServicesOpen(false)}
-                            >
+                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-white transition-colors">
                               {cat.cta}
-                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover/link:translate-x-1">arrow_forward</span>
-                            </Link>
-                          </div>
+                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                            </div>
+                          </Link>
                         ))}
                         </div>
                         <div className="px-8 pb-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-text-muted">
@@ -296,14 +298,15 @@ const Header: React.FC = () => {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link to="/contact" className="btn-primary">
-              <span className="material-symbols-outlined mr-2">
-                rocket_launch
-              </span>
-              Projekt starten
-            </Link>
-          </div>
+          <Link
+            to="/contact"
+            className="btn-primary hidden md:inline-flex items-center space-x-4"
+          >
+            <span className="material-symbols-outlined mr-2">
+              rocket_launch
+            </span>
+            Projekt starten
+          </Link>
 
           {/* Mobile Menu Button */}
           <button

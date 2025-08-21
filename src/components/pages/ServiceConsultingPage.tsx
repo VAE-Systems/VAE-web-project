@@ -8,7 +8,7 @@ import Card from '../ui/Card'
 
 // Lazy sections
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
-const GlossarySection = React.lazy(() => import('../ui/Glossary'))
+const GlossarySection = React.lazy(() => import('../ui/GlossarySection'))
 
 const ServiceConsultingPage: React.FC = () => {
   return (

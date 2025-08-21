@@ -20,8 +20,8 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen">
       <Seo
-        title="VAE Systems | KI & Automatisierung"
-        description="Produktionsnahe KI- und Automatisierungslösungen – modular, dokumentiert und ohne Lock‑In."
+        title="VAE Systems – Produktionsnahe KI & Automation"
+        description="Produktionsnahe KI & Automation – modular, dokumentiert, ohne Lock‑In."
         canonicalPath="/"
       />
       {/* 1. Hero */}

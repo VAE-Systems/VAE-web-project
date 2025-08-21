@@ -2,6 +2,7 @@ import React from 'react'
 import ProductsSection from '../sections/ProductsSection'
 import ProductsHeroSection from '../sections/ProductsHeroSection'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 
 const jsonLd = [
@@ -30,6 +31,12 @@ const ProductsPage: React.FC = () => {
         description="VAE Systems Produkt-Suite: Komplettlösungen, Applikationen, VAE Core Plattform und reale Showcases. Modular, nachvollziehbar, souverän betreibbar."
         canonicalPath="/products"
         jsonLd={jsonLd}
+      />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Produkte & Plattform', path: '/products' }
+        ]}
       />
       <ProductsHeroSection />
       {/* Additional overview content (textual depth for SEO & Nutzerorientierung) */}

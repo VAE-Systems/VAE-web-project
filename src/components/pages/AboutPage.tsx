@@ -12,6 +12,7 @@ import Seo from '../ui/Seo'
 import ProductsCardsGrid from '../sections/ProductsCardsGrid'
 import Card from '../ui/Card'
 import { aboutServices } from '../../content/services'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 
 /**
  * AboutPage Component
@@ -141,6 +142,12 @@ const AboutPage: React.FC = () => {
         description="Gegründet 2025 in Heidelberg – interdisziplinäres KI & Automation Team. Open Source, Datenkontrolle, dokumentierte Systeme."
         canonicalPath="/about"
         jsonLd={[{ '@context':'https://schema.org','@type':'Organization','name':'VAE Systems','foundingDate':'2025','address':{ '@type':'PostalAddress','addressLocality':'Heidelberg','addressCountry':'DE' }}]}
+      />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'About', path: '/about' }
+        ]}
       />
       {/* Page Hero (aligned style with ContactPage) */}
   <section className="about-hero bg-bg-darker pt-32 pb-16 relative overflow-hidden section-surface" data-section>

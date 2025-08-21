@@ -160,7 +160,12 @@ const AboutPage: React.FC = () => {
           </p>
         </div>
         <div className="mt-14 px-4">
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto" data-stagger-group id="founders" data-chip-group>
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            data-stagger-group
+            id="founders"
+            data-chip-group
+          >
             {[
               {
         name: 'Julian Darius Goertz-Dini', role: 'CEO & Gründer', focus: 'Unternehmensführung, Sales, strategische Vision', email: 'juliandini@vae-systems.com', linkedin: 'https://www.linkedin.com/in/julian-darius-goertz-dini-8a716a277'
@@ -195,9 +200,6 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-  {/* Warum / Outcomes früher platzieren */}
-  <WhyOutcomesSection />
-
   {/* Unified Services Summary */}
   <section id="angebote" className="relative py-24 about-section theme-b z-10" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
@@ -224,6 +226,9 @@ const AboutPage: React.FC = () => {
           <ProductsCardsGrid />
         </div>
       </section>
+
+  {/* Warum / Outcomes Section */}
+  <WhyOutcomesSection />
 
     {/* Prozess vor Frühphase (konkret vor Kontext) */}
     <ProcessSection />

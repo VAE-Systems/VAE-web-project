@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { reSuiteIntro, reModules } from '../../content/reSuite'
+import PackagesGrid from './reSuite/PackagesGrid'
 
 const ReSuiteSection: React.FC = () => {
   return (
@@ -115,10 +116,7 @@ const ReSuiteSection: React.FC = () => {
 
         {/* Packages / CTA */}
         <div className="grid md:grid-cols-2 gap-8 mb-10">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <h4 className="text-sm font-semibold text-white mb-3">Packages</h4>
-            <p className="text-sm text-text-secondary">Konfigurierte Bündel für typische Einsatzszenarien – modular kombinierbar.</p>
-          </div>
+          <PackagesGrid />
           <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
             <div>
               <h4 className="text-sm font-semibold text-white mb-3">Interesse geweckt?</h4>

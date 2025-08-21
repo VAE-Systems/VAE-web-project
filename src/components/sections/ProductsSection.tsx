@@ -34,8 +34,9 @@ const ProductsSection: React.FC = () => {
               : cat.key === 'built' ? '/products/showcases'
               : '/products'
             return (
-              <div
+              <Link
                 key={cat.key}
+                to={link}
                 className={`group relative flex flex-col rounded-2xl overflow-hidden p-6 bg-white/[0.04] border border-white/10 backdrop-blur-md hover:-translate-y-2 transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_34px_-6px_rgba(var(--vae-turquoise-rgb),0.35)]`}
               >
                 <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_32%_22%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
@@ -64,14 +65,13 @@ const ProductsSection: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  to={link}
-                  className="btn-convert mt-auto gap-2 relative z-10"
+                <span
+                  className="btn-convert mt-auto gap-2 relative z-10 inline-flex items-center"
                 >
                   {cat.cta}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
-                </Link>
-              </div>
+                </span>
+              </Link>
             )
           })}
         </div>

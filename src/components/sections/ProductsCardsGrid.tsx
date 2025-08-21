@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { productCategories } from '../navigation/productCategories'
 
 const ProductsCardsGrid: React.FC = () => {
   const visibleKeys = ['solutions', 'tools', 'core'] // Reihenfolge wie gewünscht
   const items = productCategories.filter(p => visibleKeys.includes(p.key))
+  const navigate = useNavigate()
 
   return (
     <div className="mt-8 sm:mt-10">
@@ -15,9 +16,15 @@ const ProductsCardsGrid: React.FC = () => {
         </header>
 
         <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 sm:gap-8" data-animate>
-          {items.map(cat => (
-            <article
+          {items.map(cat => {
+            const link = cat.key === 'solutions' ? '/products/solutions'
+              : cat.key === 'tools' ? '/products/tools'
+              : cat.key === 'core' ? '/products/vae-core'
+              : '/products'
+            return (
+            <Link
               key={cat.key}
+              to={link}
               className="group relative rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-md p-5 sm:p-6 flex flex-col overflow-hidden transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.12),0_10px_40px_-10px_rgba(var(--vae-turquoise-rgb),0.28)]"
             >
               <div className="flex items-start justify-between mb-3 relative z-10">
@@ -48,11 +55,18 @@ const ProductsCardsGrid: React.FC = () => {
               </ul>
 
               <div className="mt-auto flex items-center gap-3">
-                <Link to={`/products/${cat.key}`} className="btn-primary">Ansehen</Link>
-                <Link to="/contact" className="btn-secondary">Kontakt</Link>
+                <span className="btn-primary">Ansehen</span>
+                <button
+                  type="button"
+                  onClick={e => { e.preventDefault(); e.stopPropagation(); navigate('/contact') }}
+                  className="btn-secondary"
+                >
+                  Kontakt
+                </button>
               </div>
-            </article>
-          ))}
+            </Link>
+            )
+          })}
         </div>
       </div>
     </div>

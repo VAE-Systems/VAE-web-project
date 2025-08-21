@@ -29,7 +29,7 @@ const HeroSection: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-bg-darker/80 via-bg-dark/70 to-bg-darker/80" style={{ zIndex: 2 }}></div>
 
       <div className="container-vae relative" style={{ zIndex: 10 }}>
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Content Section */}
           <motion.div
@@ -50,7 +50,7 @@ const HeroSection: React.FC = () => {
               </motion.h1>
 
               <motion.div
-                className="text-xl lg:text-2xl text-vae-turquoise font-medium min-h-[2rem]"
+                className="text-lg md:text-xl lg:text-2xl text-vae-turquoise font-medium min-h-[2rem]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -59,7 +59,7 @@ const HeroSection: React.FC = () => {
               </motion.div>
 
               <motion.p
-                className="text-lg text-text-secondary max-w-xl leading-relaxed"
+                className="text-base sm:text-lg text-text-secondary max-w-xl leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}

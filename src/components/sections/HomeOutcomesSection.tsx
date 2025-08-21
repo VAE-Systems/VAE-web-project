@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { outcomes, badges } from '../../content/aboutWhy'
+import { homeOutcomesHeading, homeOutcomesDescription } from '../../content/home'
 import Card from '../ui/Card'
 
 /**
@@ -40,8 +41,12 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
       </div>
       <div className="container-vae relative">
         <header className="max-w-4xl mb-16">
-          <h2 id="outcomes-heading" className="h2 heading-gradient h-space mb-4">Messbarer Nutzen. Erweiterbare Architektur. Kontrollierte KI.</h2>
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei frühe Effekte, die Kunden sehen – ohne proprietären Lock‑In oder späteren Rebuild. Tiefer erklärbar auf der <a href="/about#warum" className="text-vae-turquoise hover:underline">Über Uns</a> Seite.</p>
+          <h2 id="outcomes-heading" className="h2 heading-gradient h-space mb-4">{homeOutcomesHeading}</h2>
+          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
+            {homeOutcomesDescription.before}
+            <a href="/about#warum" className="text-vae-turquoise hover:underline">Über Uns</a>
+            {homeOutcomesDescription.after}
+          </p>
         </header>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mb-14">
           {primary.map((o, i) => (

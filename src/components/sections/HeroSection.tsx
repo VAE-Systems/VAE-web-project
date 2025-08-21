@@ -2,6 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import NeuralNetworkBackground from './NeuralNetworkBackground'
+import {
+  heroTitle,
+  heroTypewriterTexts,
+  heroDescription
+} from '../../content/home'
 
 /**
  * Hero Section Component
@@ -10,12 +15,7 @@ import NeuralNetworkBackground from './NeuralNetworkBackground'
  * Simplified version without Three.js for better performance and maintainability
  */
 const HeroSection: React.FC = () => {
-  const typewriterTexts = [
-    '100% Open Source',
-    'DSGVO-konform',
-    'Maximale Kontrolle',
-    'Enterprise-Grade Security'
-  ]
+  const typewriterTexts = [...heroTypewriterTexts]
 
   return (
     <section 
@@ -45,8 +45,8 @@ const HeroSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <span className="block text-text-light">Lokale KI-Infrastruktur</span>
-                <span className="block text-gradient">für deutsche Unternehmen.</span>
+                <span className="block text-text-light">{heroTitle[0]}</span>
+                <span className="block text-gradient">{heroTitle[1]}</span>
               </motion.h1>
 
               <motion.div
@@ -64,9 +64,11 @@ const HeroSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Individuelle KI-Automatisierungssysteme für Unternehmen, die ihre digitale 
-                Infrastruktur selbst besitzen wollen. Lokales Hosting, Open-Source-KI und 
-                semantische Arbeitsräume mit <span className="text-vae-turquoise font-semibold">VAE Core</span>.
+                {heroDescription.before}
+                <span className="text-vae-turquoise font-semibold">
+                  {heroDescription.highlight}
+                </span>
+                {heroDescription.after}
               </motion.p>
             </div>
 

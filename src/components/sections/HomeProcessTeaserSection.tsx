@@ -2,6 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { processSteps } from '../../content/process'
+import {
+  homeProcessHeading,
+  homeProcessDescription,
+  homeProcessNote
+} from '../../content/home'
 import Card from '../ui/Card'
 
 /**
@@ -43,8 +48,11 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
       </div>
       <div className="container-vae relative max-w-6xl mx-auto">
         <header className="max-w-3xl mb-14">
-          <h2 id="process-home-heading" className="h2 heading-gradient h-space mb-4">Von erster Einordnung zu belastbarem Betrieb</h2>
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Struktur statt Zufall: definierte Artefakte je Schritt – vollständig einsehbar und transferierbar. Voller Ablauf auf <a href="/about#prozess" className="text-vae-turquoise hover:underline">Über Uns</a>.</p>
+          <h2 id="process-home-heading" className="h2 heading-gradient h-space mb-4">{homeProcessHeading}</h2>
+          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
+            {homeProcessDescription}
+            <a href="/about#prozess" className="text-vae-turquoise hover:underline">Über Uns</a>.
+          </p>
         </header>
         <ol className="grid md:grid-cols-3 gap-8 mb-12">
           {steps.map((s,i) => (
@@ -73,7 +81,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
             </Card>
           ))}
         </ol>
-        <div className="text-[12px] text-text-muted max-w-3xl">Spätere Schritte vertiefen Betrieb (Monitoring / Evaluierung / Erweiterung). Fokus bleibt: frühe Nutzbarkeit & interne Ownership.</div>
+        <div className="text-[12px] text-text-muted max-w-3xl">{homeProcessNote}</div>
       </div>
     </section>
   )

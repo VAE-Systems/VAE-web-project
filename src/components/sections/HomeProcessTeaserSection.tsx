@@ -34,7 +34,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
   return (
     <section id={id} ref={ref} className={`relative py-28 border-t border-white/5 bg-[linear-gradient(145deg,#0c1213,#0e1416,#0b1011)] overflow-hidden ${className}`.trim()} aria-labelledby="process-home-heading">
       <div className="absolute inset-0 pointer-events-none opacity-60">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(0,255,165,0.12),transparent_55%),radial-gradient(circle_at_70%_75%,rgba(0,255,165,0.08),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.12),transparent_55%),radial-gradient(circle_at_70%_75%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
       </div>
       <div className="container-vae relative max-w-6xl mx-auto">
         <header className="max-w-3xl mb-14">
@@ -43,7 +43,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
         </header>
         <ol className="grid md:grid-cols-3 gap-8 mb-12">
           {steps.map((s,i) => (
-            <Card as="li" key={s.key} data-step-card className="group relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col transition-all hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_6px_28px_-6px_rgba(0,255,165,0.3)]">
+            <Card as="li" key={s.key} data-step-card className="group relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col transition-all hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_6px_28px_-6px_rgba(var(--vae-turquoise-rgb),0.3)]">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">

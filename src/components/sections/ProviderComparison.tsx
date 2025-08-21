@@ -32,7 +32,7 @@ const ProviderComparisonSection: React.FC<{ id?: string; className?: string; hea
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {dimensions.map(d => (
             <div key={d.key} className="group relative p-6 rounded-2xl bg-white/[0.035] border border-white/10 backdrop-blur-sm overflow-hidden transition-colors hover:border-vae-turquoise/40">
-              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 30% 22%, rgba(0,255,165,0.12), transparent 70%)'}} />
+              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_30%_22%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
               <div className="flex items-center gap-3 mb-4 relative z-10">
                 <MaterialIcon icon={d.icon} size={22} className="text-vae-turquoise" />
                 <h3 className="text-sm font-semibold text-white tracking-wide uppercase">{d.label}</h3>

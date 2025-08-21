@@ -23,12 +23,11 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({ title, description, to, c
   return (
     <div
       onMouseMove={handleMove}
-      className={`relative group rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_12px_44px_-10px_rgba(0,255,165,0.4)] ${className}`}
+      className={`relative group rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)] ${className}`}
       style={{ ['--sx' as any]: coords.x, ['--sy' as any]: coords.y }}
     >
       <div
-        className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: 'radial-gradient(600px circle at var(--sx) var(--sy), rgba(0,255,165,0.18), transparent 70%)' }}
+        className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(600px_circle_at_var(--sx)_var(--sy),rgba(var(--vae-turquoise-rgb),0.18),transparent_70%)]"
       />
       <div className="relative z-10 p-6 flex flex-col h-full">
         {iconSlot && <div className="mb-4">{iconSlot}</div>}

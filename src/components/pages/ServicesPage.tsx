@@ -123,7 +123,7 @@ const ServicesPage: React.FC = () => {
                       key={ci}
                       className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
                     >
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" style={{background:'radial-gradient(380px circle at 30% 30%, rgba(0,255,165,0.12), transparent 70%)'}} />
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
                       <span className="relative z-10">{val}</span>
                     </div>
                   ))}

@@ -27,8 +27,8 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-bg-darker border-t border-bg-secondary" role="contentinfo">
-      <div className="container-vae py-16">
-        <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-12 mb-12">
+      <div className="container-vae py-12 md:py-16">
+        <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-8 sm:gap-12 mb-12">
           
           {/* Brand Section */}
           <div className="xl:col-span-2 lg:col-span-2 md:col-span-3">
@@ -162,7 +162,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-bg-secondary pt-8">
           <div className="space-y-3 text-center">
             <p className="text-text-secondary text-sm">&copy; 2025 VAE Systems UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
-            <p className="text-text-muted text-[11px]">Alle Marken & Logos gehören ihren jeweiligen Inhabern. Nutzung dient ausschließlich der referenziellen Nennung eingesetzter Technologien.</p>
+            <p className="text-text-muted text-xs md:text-[11px]">Alle Marken & Logos gehören ihren jeweiligen Inhabern. Nutzung dient ausschließlich der referenziellen Nennung eingesetzter Technologien.</p>
             <p className="text-text-secondary text-xs">DSGVO-konforme Datenverarbeitung • Made in Germany</p>
           </div>
         </div>

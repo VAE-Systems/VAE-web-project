@@ -34,7 +34,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
   const primary = outcomes.slice(0, 3)
 
   return (
-    <section id={id} ref={ref} className={`relative py-28 border-t border-white/5 bg-[linear-gradient(140deg,#0b0f10,#101416,#0d1112)] overflow-hidden ${className}`.trim()} aria-labelledby="outcomes-heading">
+    <section id={id} ref={ref} className={`relative py-20 sm:py-28 border-t border-white/5 bg-[linear-gradient(140deg,#0b0f10,#101416,#0d1112)] overflow-hidden ${className}`.trim()} aria-labelledby="outcomes-heading">
       <div className="absolute inset-0 pointer-events-none opacity-60">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(var(--vae-turquoise-rgb),0.14),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%)]" />
       </div>
@@ -43,7 +43,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
           <h2 id="outcomes-heading" className="h2 heading-gradient h-space mb-4">Messbarer Nutzen. Erweiterbare Architektur. Kontrollierte KI.</h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei frühe Effekte, die Kunden sehen – ohne proprietären Lock‑In oder späteren Rebuild. Tiefer erklärbar auf der <a href="/about#warum" className="text-vae-turquoise hover:underline">Über Uns</a> Seite.</p>
         </header>
-        <div className="grid md:grid-cols-3 gap-8 mb-14">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mb-14">
           {primary.map((o, i) => (
             <Card as="div" key={o.key} data-outcome-card className="p-6">
               <div className="flex items-start justify-between mb-4">

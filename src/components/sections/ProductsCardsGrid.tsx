@@ -7,18 +7,18 @@ const ProductsCardsGrid: React.FC = () => {
   const items = productCategories.filter(p => visibleKeys.includes(p.key))
 
   return (
-    <div className="mt-10">
+    <div className="mt-8 sm:mt-10">
       <div className="container-vae">
-        <header className="mb-8" data-animate>
-          <h3 className="text-lg font-semibold text-white">Produkte & Plattform</h3>
-          <p className="text-sm text-text-secondary">Schnell einsatzfähige Applikationen, Lizenzmodelle und das VAE CORE als Betriebsplattform.</p>
+        <header className="mb-6 sm:mb-8" data-animate>
+          <h3 className="text-base sm:text-lg font-semibold text-white">Produkte & Plattform</h3>
+          <p className="text-base md:text-sm text-text-secondary">Schnell einsatzfähige Applikationen, Lizenzmodelle und das VAE CORE als Betriebsplattform.</p>
         </header>
 
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8" data-animate>
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 sm:gap-8 items-stretch" data-animate>
           {items.map(cat => (
             <article
               key={cat.key}
-              className="group relative rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-md p-6 flex flex-col overflow-hidden transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.12),0_10px_40px_-10px_rgba(0,255,165,0.28)]"
+              className="group relative rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-md p-5 sm:p-6 flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.12),0_10px_40px_-10px_rgba(var(--vae-turquoise-rgb),0.28)]"
             >
               <div className="flex items-start justify-between mb-3 relative z-10">
                 <div className="flex items-center gap-3">
@@ -27,7 +27,7 @@ const ProductsCardsGrid: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-white font-semibold text-lg">{cat.title}</h4>
-                    <p className="text-xs text-vae-turquoise/70 uppercase tracking-wide mt-1">{cat.tagline}</p>
+                    <p className="text-sm md:text-xs text-vae-turquoise/70 uppercase tracking-wide mt-1">{cat.tagline}</p>
                   </div>
                 </div>
 
@@ -36,9 +36,9 @@ const ProductsCardsGrid: React.FC = () => {
                 )}
               </div>
 
-              <p className="text-sm text-text-secondary mb-4">{cat.description}</p>
+              <p className="text-base md:text-sm text-text-secondary mb-4">{cat.description}</p>
 
-              <ul className="mb-4 space-y-2 text-[13px] text-text-secondary">
+              <ul className="mb-4 space-y-2 text-sm md:text-[13px] text-text-secondary">
                 {cat.points.slice(0, 3).map(p => (
                   <li key={p} className="flex items-center gap-2">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-vae-turquoise flex-shrink-0"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2"/></svg>

@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import { productCategories } from '../navigation/productCategories'
 import SpotlightCard from '../ui/SpotlightCard'
-import FAQSection, { FAQCategory } from '../sections/FAQSection'
+import type { FAQCategory } from '../sections/FAQSection'
+
+const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 
 const ServiceCustomSolutionsPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Custom Solutions | VAE Systems – Individuelle Umsetzung"
         description="Individuelle Software & Integrationen: API-Connectoren, Spezial-Workflows, domain-spezifische Retrieval Layer – präzise auf Ihren Use Case."
@@ -37,7 +39,7 @@ const ServiceCustomSolutionsPage: React.FC = () => {
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">Wir bauen spezifische Software & Integrationsbausteine für Ihren konkreten Engpass. Fokus: tragfähige Architektur, Messbarkeit & späterer Eigenbetrieb ohne Lock‑in.</p>
           <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-10">Vielleicht existiert Ihr Bedarf aber bereits als <span className="text-white font-medium">Komplettlösung</span> (End‑to‑End Paket) in unserer Produkt-Suite. Unser Vorgehen: <span className="text-white">1. Engpass präzisieren</span> → <span className="text-white">2. Suite-Reuse prüfen</span> → <span className="text-white">3. Adaptieren oder gezielt neu entwickeln</span>. So vermeiden Sie unnötige Neubaustapel.</p>
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8 mb-16 items-stretch">
             {[{h:'Integrationen',b:['API-Connectoren','Webhook Orchestrierung','Legacy Brücken','Event Normalisierung']},{h:'Automatisierung',b:['Workflow Implementierung','Human-in-the-loop Pfade','Kosten / Latenz Budgets','Fallback / Degradation']},{h:'Retrieval & Data',b:['Domain Embeddings','Index Strategie','Sicherheits-Scoping','Evaluation Hooks']}].map(c => (
               <div key={c.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
                 <h3 className="text-sm font-semibold text-white mb-3">{c.h}</h3>
@@ -65,7 +67,7 @@ const ServiceCustomSolutionsPage: React.FC = () => {
           {/* KPI & Monitoring */}
           <div className="mb-24">
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-6">Messbarkeit & Optimierung</h2>
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="grid md:grid-cols-3 gap-6 mb-10 items-stretch">
               {[{h:'Kern-KPIs',p:['Qualitäts-Score','Durchlaufzeit / Latenz','Kosten / Aufruf']},{h:'Guardrails',p:['Fehlerraten','Token / Ressourcen Budget','Security / Zugriff']},{h:'Observability',p:['Dashboards','Alerting Schwellen','Drilldown Queries']}].map(b => (
                 <div key={b.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
                   <h3 className="text-sm font-semibold text-white mb-3">{b.h}</h3>
@@ -81,7 +83,9 @@ const ServiceCustomSolutionsPage: React.FC = () => {
 
           {/* FAQ (Reusable Section) */}
           <div className="mt-10">
-            <CustomSolutionsFAQ />
+            <Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
+              <CustomSolutionsFAQ />
+            </Suspense>
           </div>
 
           {/* Cross-Suite Navigation */}
@@ -156,11 +160,11 @@ const LifecycleSpotlight: React.FC = () => {
               onFocus={() => setActive(i)}
               onBlur={() => setActive(prev => prev===i ? null : prev)}
               onMouseMove={handleMove}
-              className={`relative group rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col overflow-hidden transition-all duration-500 will-change-transform snap-start min-w-[78%] sm:min-w-[55%] md:min-w-0 ${active===i ? 'border-vae-turquoise/50 shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_14px_48px_-10px_rgba(0,255,165,0.45)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_10px_40px_-8px_rgba(0,255,165,0.4)]'}`}
+              className={`relative group rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col overflow-hidden transition-all duration-500 will-change-transform snap-start min-w-[78%] sm:min-w-[55%] md:min-w-0 ${active===i ? 'border-vae-turquoise/50 shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_14px_48px_-10px_rgba(var(--vae-turquoise-rgb),0.45)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_10px_40px_-8px_rgba(var(--vae-turquoise-rgb),0.4)]'}`}
               style={{ ['--mx' as any]:'30%', ['--my' as any]:'25%' }}
               tabIndex={0}
             >
-              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(600px circle at var(--mx) var(--my), rgba(0,255,165,0.22), transparent 70%)'}} />
+              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(600px_circle_at_var(--mx)_var(--my),rgba(var(--vae-turquoise-rgb),0.22),transparent_70%)]" />
               <div className="flex items-center justify-between mb-4 relative z-10">
                 <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-semibold tracking-wider">{String(i+1).padStart(2,'0')}</span>
                 <span className="text-[11px] text-vae-turquoise/70 font-medium uppercase tracking-wide">Phase</span>

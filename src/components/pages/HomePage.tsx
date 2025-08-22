@@ -9,6 +9,7 @@ import TechStackSection from '../sections/TechStackSection'
 import AboutSection from '../sections/AboutSection'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 import ContactSection from '../sections/ContactSection'
+import Seo from '../ui/Seo'
 
 /**
  * HomePage Component
@@ -17,7 +18,12 @@ import ContactSection from '../sections/ContactSection'
  */
 const HomePage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
+      <Seo
+        title="VAE Systems – Produktionsnahe KI & Automation"
+        description="Produktionsnahe KI & Automation – modular, dokumentiert, ohne Lock‑In."
+        canonicalPath="/"
+      />
       {/* 1. Hero */}
       <HeroSection />
 

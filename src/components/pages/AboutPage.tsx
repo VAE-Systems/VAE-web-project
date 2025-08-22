@@ -12,6 +12,7 @@ import Seo from '../ui/Seo'
 import ProductsCardsGrid from '../sections/ProductsCardsGrid'
 import Card from '../ui/Card'
 import { aboutServices } from '../../content/services'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 
 /**
  * AboutPage Component
@@ -133,7 +134,7 @@ const AboutPage: React.FC = () => {
   }, [])
 
   return (
-    <div ref={rootRef} className="min-h-screen relative" style={{ ['--about-accent' as any]:'157 100% 47%' }}>
+    <div ref={rootRef} className="min-h-[100dvh] relative" style={{ ['--about-accent' as any]:'157 100% 47%' }}>
       {/* Accent interpolation overlay */}
       <div aria-hidden="true" className="about-accent-overlay fixed inset-0 z-0 pointer-events-none" />
       <Seo
@@ -142,10 +143,16 @@ const AboutPage: React.FC = () => {
         canonicalPath="/about"
         jsonLd={[{ '@context':'https://schema.org','@type':'Organization','name':'VAE Systems','foundingDate':'2025','address':{ '@type':'PostalAddress','addressLocality':'Heidelberg','addressCountry':'DE' }}]}
       />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'About', path: '/about' }
+        ]}
+      />
       {/* Page Hero (aligned style with ContactPage) */}
   <section className="about-hero bg-bg-darker pt-32 pb-16 relative overflow-hidden section-surface" data-section>
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(0,255,165,0.10),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(0,255,165,0.06),transparent_60%)]" data-parallax-bg />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]" data-parallax-bg />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-15" />
         </div>
         <div className="container-vae relative text-center">
@@ -160,7 +167,12 @@ const AboutPage: React.FC = () => {
           </p>
         </div>
         <div className="mt-14 px-4">
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto" data-stagger-group id="founders" data-chip-group>
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            data-stagger-group
+            id="founders"
+            data-chip-group
+          >
             {[
               {
         name: 'Julian Darius Goertz-Dini', role: 'CEO & Gründer', focus: 'Unternehmensführung, Sales, strategische Vision', email: 'juliandini@vae-systems.com', linkedin: 'https://www.linkedin.com/in/julian-darius-goertz-dini-8a716a277'
@@ -195,9 +207,6 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-  {/* Warum / Outcomes früher platzieren */}
-  <WhyOutcomesSection />
-
   {/* Unified Services Summary */}
   <section id="angebote" className="relative py-24 about-section theme-b z-10" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
@@ -207,7 +216,7 @@ const AboutPage: React.FC = () => {
             <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
-          <div className="grid md:grid-cols-3 gap-8" data-stagger-group>
+          <div className="grid md:grid-cols-3 gap-8 items-stretch" data-stagger-group>
             {aboutServices.map(s => (
               <Card
                 key={s.key}
@@ -224,6 +233,9 @@ const AboutPage: React.FC = () => {
           <ProductsCardsGrid />
         </div>
       </section>
+
+  {/* Warum / Outcomes Section */}
+  <WhyOutcomesSection />
 
     {/* Prozess vor Frühphase (konkret vor Kontext) */}
     <ProcessSection />

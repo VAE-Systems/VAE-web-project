@@ -47,7 +47,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
     <section id={id} className={`relative py-32 about-section theme-e z-10 ${className}`} data-section ref={rootRef} aria-labelledby="why-heading">
       <div className="about-surface-bg" aria-hidden="true" />
       <div className="absolute inset-0 -z-10 opacity-70 pointer-events-none" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(0,255,165,0.18),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(0,255,165,0.12),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(var(--vae-turquoise-rgb),0.18),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:70px_70px] mix-blend-overlay" />
       </div>
       <div className="container-vae relative">
@@ -67,7 +67,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
               {outcomes.map((o, idx) => (
                 <div key={o.key} className="relative group" data-outcome>
                   <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-vae-turquoise/25 to-transparent opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 pointer-events-none" />
-                  <div className="h-full flex flex-col rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-sm p-6 md:p-7 transition-all duration-300 group-hover:border-vae-turquoise/40 group-hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_4px_30px_-6px_rgba(0,255,165,0.3)]">
+                  <div className="h-full flex flex-col rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-sm p-6 md:p-7 transition-all duration-300 group-hover:border-vae-turquoise/40 group-hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_4px_30px_-6px_rgba(var(--vae-turquoise-rgb),0.3)]">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-3">
                         <div className="w-11 h-11 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise group-hover:scale-110 transition-transform duration-300">

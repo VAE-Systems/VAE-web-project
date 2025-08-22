@@ -6,6 +6,7 @@ import SpotlightCard from '../ui/SpotlightCard'
 import MaterialIcon from '../ui/MaterialIcon'
 import ServicesHeroSection from '../sections/ServicesHeroSection'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 /**
  * ServicesPage Component
@@ -41,12 +42,18 @@ const ServicesPage: React.FC = () => {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
   title="Services | VAE Systems – Schulungen, Beratung, Individuelle Lösungen"
   description="Schulungen & Workshops, strategische Beratung & individuelle KI-/Automationslösungen. Von Analyse bis Umsetzung – souverän & nachvollziehbar."
         canonicalPath="/services"
         jsonLd={[{ '@context':'https://schema.org','@type':'CollectionPage', name:'VAE Services' }]}
+      />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Services', path: '/services' }
+        ]}
       />
       <ServicesHeroSection innerRef={heroRef} />
       {/* Storytelling */}
@@ -123,7 +130,7 @@ const ServicesPage: React.FC = () => {
                       key={ci}
                       className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
                     >
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" style={{background:'radial-gradient(380px circle at 30% 30%, rgba(0,255,165,0.12), transparent 70%)'}} />
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
                       <span className="relative z-10">{val}</span>
                     </div>
                   ))}
@@ -151,7 +158,7 @@ const ServicesPage: React.FC = () => {
           <p className="text-lg text-text-secondary mb-10">Senden Sie uns Kernziel, Zeithorizont & vorhandene Systeme – wir melden uns innerhalb von 24h mit einem Vorschlag für das Erstgespräch.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="btn-primary px-10 py-4">Kontakt aufnehmen</Link>
-            <a href="/service-katalog.pdf" className="btn-secondary px-10 py-4" target="_blank" rel="noopener">Service-Katalog (PDF)</a>
+            <a href="/service-katalog.pdf" className="btn-secondary px-10 py-4" target="_blank" rel="noopener" aria-label="Service-Katalog als PDF herunterladen (1.2 MB)">Service-Katalog (PDF, 1.2 MB)</a>
           </div>
           <p className="mt-6 text-xs text-text-muted">PDF ist Vorab-Version – Inhalte können sich ändern.</p>
         </div>

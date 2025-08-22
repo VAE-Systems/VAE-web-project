@@ -8,11 +8,11 @@ import Card from '../ui/Card'
 
 // Lazy sections
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
-const GlossarySection = React.lazy(() => import('../ui/Glossary'))
+const GlossarySection = React.lazy(() => import('../ui/GlossarySection'))
 
 const ServiceConsultingPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Beratung | Strategie, Governance & Architektur"
         description="Strategische KI- & Automationsberatung: Roadmaps, EU AI Act Orientierung, TCO/ROI & Architektur – faktenbasiert statt Hype."
@@ -62,7 +62,7 @@ const ServiceConsultingPage: React.FC = () => {
           {/* Formate & Preise */}
             <div className="mb-24">
             <h2 className="h3 h-space text-white">Formate & Preise</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 items-stretch">
               {[
                 {k:'Kickstart',d:'½ Tag Remote',price:'1 100 €',desc:'Schnellcheck: Reifegrad, Priorisierung, nächste 2–3 Schritte.'},
                 {k:'Intensiv-Workshop',d:'2 Tage Vor Ort',price:'3 800 €',desc:'Deep-Dive: Architektur & Governance, Entscheidungsvorlage.'},
@@ -201,11 +201,11 @@ const ConsultingProcessSpotlight: React.FC = () => {
             onFocus={() => setActive(i)}
             onBlur={() => setActive(prev => prev===i ? null : prev)}
             onMouseMove={handleMove}
-            className={`relative group rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col overflow-hidden transition-all duration-500 will-change-transform snap-start min-w-[78%] sm:min-w-[55%] md:min-w-0 ${active===i ? 'border-vae-turquoise/50 shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_14px_48px_-10px_rgba(0,255,165,0.45)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_10px_40px_-8px_rgba(0,255,165,0.4)]'}`}
+            className={`relative group rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col overflow-hidden transition-all duration-500 will-change-transform snap-start min-w-[78%] sm:min-w-[55%] md:min-w-0 ${active===i ? 'border-vae-turquoise/50 shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_14px_48px_-10px_rgba(var(--vae-turquoise-rgb),0.45)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_10px_40px_-8px_rgba(var(--vae-turquoise-rgb),0.4)]'}`}
             style={{ ['--mx' as any]:'30%', ['--my' as any]:'25%' }}
             tabIndex={0}
           >
-            <div className="absolute -inset-px opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(600px circle at var(--mx) var(--my), rgba(0,255,165,0.22), transparent 70%)'}} />
+            <div className="absolute -inset-px opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(600px_circle_at_var(--mx)_var(--my),rgba(var(--vae-turquoise-rgb),0.22),transparent_70%)]" />
             <div className="flex items-center justify-between mb-4 relative z-10">
               <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-semibold tracking-wider">{String(i+1).padStart(2,'0')}</span>
               <span className="text-[11px] text-vae-turquoise/70 font-medium uppercase tracking-wide">Phase</span>

@@ -53,10 +53,10 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
         </header>
 
         {/* Founders */}
-        <div className="grid md:grid-cols-3 gap-8" data-block>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" data-block>
           {founders.map(f => (
             <div key={f.key} className="relative group rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-sm p-6 flex flex-col">
-              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" style={{ background: 'radial-gradient(circle at 30% 25%, rgba(0,255,165,0.18), transparent 65%)' }} />
+              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
               <div className="mb-4 relative z-10">
                 <h3 className="text-white font-semibold text-lg leading-snug tracking-tight flex items-center gap-2">
                   <span className="material-symbols-outlined text-base text-vae-turquoise">{f.icon}</span>

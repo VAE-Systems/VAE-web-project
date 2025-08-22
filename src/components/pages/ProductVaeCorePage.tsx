@@ -8,7 +8,7 @@ const ProductVaeCorePage: React.FC = () => {
   const c = vaeCoreContent
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="VAE Core – Das semantische Backend | VAE Systems"
         description={c.hero.subline}

@@ -9,12 +9,29 @@ import { caseStudies, upcomingCasePlaceholders } from '../../content/caseStudies
  * Replaces old Testimonials with authentic / evolving project stories.
  */
 const CaseStudiesSection: React.FC = () => {
+  // Early exit with notice when no case studies are available
+  if (caseStudies.length === 0) {
+    return (
+      <section id="case-studies" className="relative py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top">
+        <div className="container-vae text-center">
+          <h2 className="h2 heading-gradient mb-6">Case Studies & Pilots</h2>
+          <p className="text-text-secondary text-sm mb-6">Aktuell werden Pilots kuratiert & aufbereitet. Bleib informiert oder nimm direkt Kontakt auf.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/newsletter" className="px-6 py-3 rounded-lg bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/40 text-sm font-medium hover:bg-vae-turquoise hover:text-bg-darker transition-all">Newsletter abonnieren</a>
+            <a href="/contact" className="px-6 py-3 rounded-lg bg-white/5 text-text-secondary border border-white/10 text-sm font-medium hover:border-vae-turquoise/40 hover:text-vae-turquoise transition-all">Kontakt aufnehmen</a>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    if (caseStudies.length === 0) return
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) {
@@ -40,7 +57,7 @@ const CaseStudiesSection: React.FC = () => {
   const single = caseStudies.length === 1
 
   return (
-    <section id="case-studies" ref={sectionRef} className="relative py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top overflow-hidden">
+    <section id="case-studies" ref={sectionRef} className="relative py-24 sm:py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top overflow-hidden">
       <ParallaxBackdrop strength={7} />
       <ParticleField count={14} />
 
@@ -51,9 +68,9 @@ const CaseStudiesSection: React.FC = () => {
           <p className="text-lg text-text-secondary leading-relaxed">Frühe produktive Umsetzungen & fokussierte Pilot-Initiativen – ausgerichtet auf belastbare Lernkurven und validierbare Outcomes statt künstlicher Referenz-Sammlungen.</p>
         </div>
 
-        <div ref={cardsRef} className={`grid gap-10 ${single ? 'md:grid-cols-1 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>  
+        <div ref={cardsRef} className={`grid items-stretch gap-10 ${single ? 'md:grid-cols-1 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
           {displayCases.map(cs => (
-            <article key={cs.slug} className={`group relative flex flex-col rounded-2xl p-7 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] backdrop-blur-xl border border-white/12 transition-all duration-400 ${cs.comingSoon ? 'opacity-75' : 'hover:border-vae-turquoise/40 hover:-translate-y-2 shadow-lg shadow-black/30/'}`}> 
+            <article key={cs.slug} className={`group relative flex flex-col h-full rounded-2xl p-7 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] backdrop-blur-xl border border-white/12 transition-all duration-400 ${cs.comingSoon ? 'opacity-75' : 'hover:border-vae-turquoise/40 hover:-translate-y-2 shadow-lg shadow-black/30/'}`}>
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-screen pointer-events-none bg-[radial-gradient(circle_at_70%_30%,hsla(var(--color-vae-turquoise),0.25),transparent_60%)]" />
 
               <header className="mb-5 relative z-10">
@@ -79,7 +96,7 @@ const CaseStudiesSection: React.FC = () => {
               )}
 
               {cs.metrics?.length > 0 && (
-                <ul className="grid grid-cols-3 gap-3 my-6 relative z-10">
+                <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-6 relative z-10">
                   {cs.metrics.map(m => (
                     <li key={m.label} className="p-3 rounded-xl bg-white/5 border border-white/10 text-center flex flex-col">
                       <span className="text-sm font-semibold text-vae-turquoise leading-tight">{m.value}</span>
@@ -108,12 +125,9 @@ const CaseStudiesSection: React.FC = () => {
 
         {/* CTA minimal for now */}
         <div className="mt-24 text-center max-w-2xl mx-auto">
-          {caseStudies.length === 0 && (
-            <p className="text-text-secondary text-sm mb-6">Aktuell werden Pilots kuratiert & aufbereitet. Erste Referenzen werden zeitnah veröffentlicht.</p>
-          )}
           <p className="text-text-muted text-xs uppercase tracking-wider mb-3">Pipeline</p>
-            <p className="text-sm text-text-secondary leading-relaxed mb-6">Fokus: Validierte Pilots statt künstlicher Referenz-Sammlung. Neue Einträge sobald Ergebnisse belastbar dokumentiert sind.</p>
-            <a href="/contact" className="inline-flex items-center gap-2 text-vae-turquoise text-sm hover:underline">Use Case prüfen lassen <span className="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+          <p className="text-sm text-text-secondary leading-relaxed mb-6">Fokus: Validierte Pilots statt künstlicher Referenz-Sammlung. Neue Einträge sobald Ergebnisse belastbar dokumentiert sind.</p>
+          <a href="/contact" className="inline-flex items-center gap-2 text-vae-turquoise text-sm hover:underline">Use Case prüfen lassen <span className="material-symbols-outlined text-[16px]">arrow_forward</span></a>
         </div>
       </div>
     </section>

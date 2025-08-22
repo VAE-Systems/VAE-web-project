@@ -128,8 +128,9 @@
   
   html {
     scroll-behavior: smooth;
+    font-size: clamp(15px, 2vw, 16px);
   }
-  
+
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background: theme('colors.bg-darker');
@@ -137,6 +138,13 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
   
   /* Material Symbols Configuration */
@@ -184,25 +192,25 @@
   
   /* VAE Button Components */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-3 text-base font-semibold rounded-xl bg-vae-turquoise text-bg-darker transition-all duration-300 hover:bg-vae-turquoise-400 hover:shadow-lg hover:shadow-vae-turquoise/25 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+    @apply inline-flex items-center justify-center px-6 py-2 text-sm md:px-8 md:py-3 md:text-base font-semibold rounded-xl bg-vae-turquoise text-bg-darker transition-all duration-300 hover:bg-vae-turquoise-400 hover:shadow-lg hover:shadow-vae-turquoise/25 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-8 py-3 text-base font-semibold rounded-xl border border-vae-turquoise text-vae-turquoise bg-transparent transition-all duration-300 hover:bg-vae-turquoise hover:text-bg-darker hover:shadow-lg hover:shadow-vae-turquoise/25 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+    @apply inline-flex items-center justify-center px-6 py-2 text-sm md:px-8 md:py-3 md:text-base font-semibold rounded-xl border border-vae-turquoise text-vae-turquoise bg-transparent transition-all duration-300 hover:bg-vae-turquoise hover:text-bg-darker hover:shadow-lg hover:shadow-vae-turquoise/25 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center px-6 py-3 text-text-light font-medium rounded-lg transition-all duration-300 hover:bg-vae-turquoise/10 hover:text-vae-turquoise border border-white/20 hover:border-vae-turquoise/40 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm md:px-6 md:py-3 md:text-base text-text-light font-medium rounded-lg transition-all duration-300 hover:bg-vae-turquoise/10 hover:text-vae-turquoise border border-white/20 hover:border-vae-turquoise/40 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
   }
 
   /* Subtle outline button (neutral surface) */
   .btn-outline {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg border border-white/15 text-text-secondary bg-transparent transition-all duration-300 hover:border-vae-turquoise/60 hover:text-vae-turquoise hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-medium rounded-lg border border-white/15 text-text-secondary bg-transparent transition-all duration-300 hover:border-vae-turquoise/60 hover:text-vae-turquoise hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
   }
 
   /* High-conversion magnetic CTA (Services cards) */
   .btn-convert {
-    @apply relative inline-flex items-center justify-center rounded-lg font-semibold uppercase tracking-wider text-[11px] px-4 py-3 overflow-hidden transition-all duration-500 focus:outline-none;
+    @apply relative inline-flex items-center justify-center rounded-lg font-semibold uppercase tracking-wider text-xs md:text-[11px] px-3 py-2 md:px-4 md:py-3 overflow-hidden transition-all duration-500 focus:outline-none;
     background: linear-gradient(135deg, rgba(var(--vae-turquoise-rgb),0.18), rgba(var(--vae-turquoise-rgb),0.10));
     border: 1px solid rgba(var(--vae-turquoise-rgb),0.45);
     color: hsl(var(--color-vae-turquoise));
@@ -515,9 +523,9 @@ a
   .feature-grid > li:hover::after { opacity:.75; }
 
   /* Timeline Active State */
-  [data-timeline-item].is-active { border-color:hsla(var(--color-vae-turquoise),0.55); background:linear-gradient(140deg, rgba(0,255,165,0.08), rgba(0,255,165,0.02)); }
+  [data-timeline-item].is-active { border-color:hsla(var(--color-vae-turquoise),0.55); background:linear-gradient(140deg, rgba(var(--vae-turquoise-rgb),0.08), rgba(var(--vae-turquoise-rgb),0.02)); }
   [data-timeline-item].is-active h3 { color:#fff; }
-  [data-timeline-item].is-active .timeline-node { box-shadow:0 0 0 4px rgba(0,255,165,0.15), 0 0 0 1px rgba(0,255,165,0.55), 0 0 18px -4px rgba(0,255,165,0.8); }
+  [data-timeline-item].is-active .timeline-node { box-shadow:0 0 0 4px rgba(var(--vae-turquoise-rgb),0.15), 0 0 0 1px rgba(var(--vae-turquoise-rgb),0.55), 0 0 18px -4px rgba(var(--vae-turquoise-rgb),0.8); }
   .timeline-node { transition:box-shadow .5s, transform .5s; }
   [data-timeline-item].is-active .timeline-node { transform:scale(1.05); }
 
@@ -582,12 +590,12 @@ a
     transform-style:preserve-3d; 
     transform: translateY(var(--raise)) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz)) scale(var(--scale));
     will-change: transform;
-  box-shadow: 0 0 calc(50px * var(--glow-alpha)) rgba(0,255,165,calc(.65 * var(--glow-alpha))), 0 0 0 1px rgba(0,255,165,calc(.55 * var(--glow-alpha))); 
+  box-shadow: 0 0 calc(50px * var(--glow-alpha)) rgba(var(--vae-turquoise-rgb),calc(.65 * var(--glow-alpha))), 0 0 0 1px rgba(var(--vae-turquoise-rgb),calc(.55 * var(--glow-alpha)));
   }
   .tech-tile::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,50%), hsla(var(--color-vae-turquoise),0.35), transparent 70%); opacity:0; transition:opacity .5s ease; pointer-events:none; mix-blend-mode:overlay; }
   .tech-stack-active .tech-tile::after { opacity:.35; }
   /* Hover scale/raise only; box-shadow jetzt GSAP-gesteuert für schnell an / langsam aus */
-  .tech-tile:hover { --raise:-10px; --scale:1.06; border-color:rgba(0,255,165,0.55); }
+  .tech-tile:hover { --raise:-10px; --scale:1.06; border-color:rgba(var(--vae-turquoise-rgb),0.55); }
   .tech-tile:active { --raise:-4px; --scale:1.02; }
   .tech-tile img { filter:grayscale(100%) brightness(.9); transition:filter .6s ease, transform .6s ease; }
   .tech-tile:hover img { filter:grayscale(0%) brightness(1.05); transform:translateZ(20px) scale(1.08); }

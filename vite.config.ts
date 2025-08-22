@@ -35,6 +35,8 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           animations: ['framer-motion', 'gsap'],
           routing: ['react-router-dom'],
+          three: ['three'],
+          ogl: ['ogl'],
         },
       },
     },

@@ -5,16 +5,13 @@ import { Link } from 'react-router-dom'
 
 const ProductsSection: React.FC = () => {
   return (
-  <section id="products" className="relative py-32 overflow-hidden border-t border-white/5 surface-alt">
+  <section id="products" className="relative py-24 md:py-32 overflow-hidden border-t border-white/5 surface-alt">
       <ParallaxBackdrop strength={10} />
       <ParticleField count={18} />
       {/* Background subtle gradient */}
       <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: `radial-gradient(circle at 70% 20%, hsla(var(--color-vae-turquoise),0.12), transparent 55%)`
-          }}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,hsla(var(--color-vae-turquoise),0.12),transparent_55%)]"
         />
       </div>
 
@@ -29,7 +26,7 @@ const ProductsSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           {productCategories.map(cat => {
             const link = cat.key === 'solutions' ? '/products/solutions'
               : cat.key === 'tools' ? '/products/tools'
@@ -39,9 +36,9 @@ const ProductsSection: React.FC = () => {
             return (
               <div
                 key={cat.key}
-                className={`group relative flex flex-col rounded-2xl overflow-hidden p-6 bg-white/[0.04] border border-white/10 backdrop-blur-md hover:-translate-y-2 transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_8px_34px_-6px_rgba(0,255,165,0.35)]`}
+                className={`group relative flex flex-col rounded-2xl overflow-hidden p-6 bg-white/[0.04] border border-white/10 backdrop-blur-md hover:-translate-y-2 transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_34px_-6px_rgba(var(--vae-turquoise-rgb),0.35)]`}
               >
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 32% 22%, rgba(0,255,165,0.18), transparent 65%)'}} />
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_32%_22%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
                 <div className="flex items-start justify-between mb-5 relative z-10">
                   <div className="flex items-center gap-3">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-vae-turquoise/20 text-vae-turquoise`}>

@@ -8,11 +8,11 @@ import Card from '../ui/Card'
 
 // Lazy loaded heavy sections
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
-const GlossarySection = React.lazy(() => import('../ui/Glossary'))
+const GlossarySection = React.lazy(() => import('../ui/GlossarySection'))
 
 const ServiceTrainingsPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Schulungen & Workshops | KI Enablement & Governance"
         description="Drei fokussierte 1‑Tages Formate: Governance & AI Strategy, Prompt Patterns & Evaluation, Lokale KI-Infrastruktur mit VAE CORE. Praxistief + direkt anwendbare Artefakte."
@@ -71,7 +71,7 @@ const ServiceTrainingsPage: React.FC = () => {
               <h2 className="h2 h-space text-white">Kern-Schulungen (je 1 Tag)</h2>
               <p className="text-lg text-text-secondary leading-relaxed">Fokussiert, intensiv & praxisnah – kombinierbar zu 2‑Tages Blöcken für beschleunigten Enablement Pfad.</p>
             </header>
-            <div className="grid md:grid-cols-3 gap-10">
+              <div className="grid md:grid-cols-3 gap-10 items-stretch">
               {coreTrainings.map((t) => (
                 <Card
                   key={t.key}
@@ -105,7 +105,7 @@ const ServiceTrainingsPage: React.FC = () => {
           </Suspense>
 
           {/* Crosslinks */}
-          <div className="mt-24 grid md:grid-cols-3 gap-8">
+          <div className="mt-24 grid md:grid-cols-3 gap-8 items-stretch">
             <SpotlightCard title="Beratung – Richtung" description="Architektur, Kosten & Governance strukturiert entscheiden bevor Umsetzung startet." to="/services/consulting" cta="Beratung ansehen" />
             <SpotlightCard title="Custom Solutions – Umsetzung" description="Produktive Integrationen & Automationen – dokumentiert & übergebbar." to="/services/custom-solutions" cta="Projekt starten" />
             <SpotlightCard title="Products – Suite & CORE" description="Fertige Module & Plattform als Beschleuniger oder Alternative." to="/products/solutions" cta="Suite erkunden" />

@@ -8,6 +8,22 @@ const ServicesSection: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
+  const superscripts: Record<string, string> = {
+    '1': '¹',
+    '2': '²',
+    '3': '³',
+    '4': '⁴',
+    '5': '⁵'
+  }
+
+  const footnotes: Record<string, string> = {
+    '1': 'McKinsey: Value Capture Open Source (2023)',
+    '2': 'Forrester: Decision Velocity in Modular Architectures (2024)',
+    '3': 'Red Hat: Enterprise Open Source Report (2024)',
+    '4': 'Internal Case Aggregation (Median Implementierung)',
+    '5': 'MIT Sloan / Automations Benchmark (2024)'
+  }
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -44,7 +60,7 @@ const ServicesSection: React.FC = () => {
       title: 'Schulungen & Workshops – Enablement & Rollenkompetenz',
       description: 'Hands-on Formate für Dev, Ops & Knowledge Steward. Schnelle interne Souveränität statt dauerhafte externe Abhängigkeit.',
       stats: [
-        { value: '2–4', desc: 'Wochen initiales Setup³' },
+        { value: '2–4', desc: 'Wochen initiales Setup', note: '3' },
         { value: '100%', desc: 'Enablement Fokus' }
       ],
       features: ['Workshops & Labs', 'Artefakte / Playbooks', 'Mentoring & Shadowing'],
@@ -62,8 +78,8 @@ const ServicesSection: React.FC = () => {
       title: 'Beratung – Architektur & Governance',
       description: 'Architektur, Governance, Compliance & Roadmaps für souveräne KI- & Automationslandschaften. Fokus: Transparenz, Austauschbarkeit, Betrieb statt POC-Silos.',
       stats: [
-        { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion¹' },
-        { value: '4–6x', desc: 'Schnellere Entscheidungszyklen²' }
+        { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion', note: '1' },
+        { value: '4–6x', desc: 'Schnellere Entscheidungszyklen', note: '2' }
       ],
       features: ['Architektur-Assessment', 'Roadmap & Reifegradmodell', 'Governance / AI Act Vororientierung'],
       cta: 'Beratung ansehen',
@@ -80,8 +96,8 @@ const ServicesSection: React.FC = () => {
       title: 'Custom Solutions – Integration & Automation',
       description: 'Gezielte Automations- & Retrieval-Bausteine. Von Connectoren über Evaluierung bis Observability – modular kombinierbar.',
       stats: [
-        { value: '3–8', desc: 'Wochen MVP Umsetzung⁴' },
-        { value: '60%', desc: 'Avg. Effizienzgewinn⁵' }
+        { value: '3–8', desc: 'Wochen MVP Umsetzung', note: '4' },
+        { value: '60%', desc: 'Avg. Effizienzgewinn', note: '5' }
       ],
       features: ['Workflow Orchestrierung', 'Retrieval / Index Layer', 'Evaluierung & Monitoring'],
       cta: 'Use Cases',
@@ -101,23 +117,23 @@ const ServicesSection: React.FC = () => {
   }
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-36 bg-[linear-gradient(140deg,#0b0b0b,#101010,#141414)] border-t border-white/5 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-[0.15] bg-[radial-gradient(circle_at_20%_30%,#00efd51a,transparent_60%),radial-gradient(circle_at_80%_70%,#00efd50f,transparent_55%)]" />
+    <section id="services" ref={sectionRef} className="relative py-24 md:py-36 bg-[linear-gradient(140deg,#0b0b0b,#101010,#141414)] border-t border-white/5 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-[0.15] bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.1),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.06),transparent_55%)]" />
       <div className="container-vae relative">
         {/* Header */}
-        <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-20">
+        <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
           <h2 className="h2 heading-gradient h-space">Services – Enablement, Beratung, Umsetzung</h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Von erster Einordnung bis souveränem Betrieb: <span className="text-white font-medium">Schulungen & Workshops</span> für interne Kompetenz, <span className="text-white font-medium">Beratung</span> für Richtung & Governance sowie modulare <span className="text-white">Custom Solutions</span> für messbare Prozess‑ & Wissensautomatisierung. <span className="text-vae-turquoise">Open Source. Auditierbar. Austauschbar.</span></p>
         </div>
 
         {/* Grid */}
-  <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+      <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-24 items-stretch">
           {services.map((s) => (
             <div
               key={s.key}
-              className={`group relative overflow-hidden rounded-2xl p-7 bg-white/[0.035] backdrop-blur-md border border-white/10 flex flex-col h-full transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(0,255,165,0.25),0_8px_36px_-8px_rgba(0,255,165,0.35)] hover:-translate-y-2`}
+              className={`group relative overflow-hidden rounded-2xl p-7 bg-white/[0.035] backdrop-blur-md border border-white/10 flex flex-col h-full transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] hover:-translate-y-2`}
             >
-              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{background:'radial-gradient(circle at 30% 25%, rgba(0,255,165,0.18), transparent 65%)'}} />
+              <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
               <div className="flex items-start justify-between mb-6 relative z-10">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-vae-turquoise/20 text-vae-turquoise flex items-center justify-center">
@@ -129,11 +145,21 @@ const ServicesSection: React.FC = () => {
               </div>
               <h3 className="h4 mb-3 text-white leading-snug relative z-10">{s.title}</h3>
               <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-grow relative z-10">{s.description}</p>
-              <div className="grid grid-cols-2 gap-3 mb-6 text-center text-[11px] rounded-lg p-3 bg-vae-turquoise/5 relative z-10"> 
+              <div className="grid grid-cols-2 gap-3 mb-6 text-center text-[11px] rounded-lg p-3 bg-vae-turquoise/5 relative z-10">
                 {s.stats.map(st => (
                   <div key={st.desc}>
                     <div className="text-base font-bold text-vae-turquoise mb-0.5">{st.value}</div>
-                    <div className="text-[10px] leading-tight text-text-muted">{st.desc}</div>
+                    <div className="text-[10px] leading-tight text-text-muted">
+                      {st.desc}
+                      {st.note && (
+                        <sup
+                          className="ml-0.5 cursor-help text-vae-turquoise"
+                          title={footnotes[st.note]}
+                        >
+                          {superscripts[st.note]}
+                        </sup>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -154,7 +180,7 @@ const ServicesSection: React.FC = () => {
                 {s.cta}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
               </Link>
-              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_22%,rgba(0,239,213,0.10),transparent_70%)]" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_22%,rgba(var(--vae-turquoise-rgb),0.10),transparent_70%)]" />
             </div>
           ))}
         </div>
@@ -173,21 +199,34 @@ const ServicesSection: React.FC = () => {
         <div className="relative bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-3xl p-10 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(circle_at_70%_30%,rgba(0,239,213,0.12),transparent_60%)]" />
           <div className="relative grid md:grid-cols-4 gap-8 mb-10">
-            {[{k:'< 6 Wochen',l:'Proof → produktiver Wert'},{k:'> 60%',l:'Prozess-Effizienzsteigerung (Automation)⁵'},{k:'4–6x',l:'Schnellere Architektur-Entscheidungen²'},{k:'65%',l:'Reduzierte Vendor-/Lizenzkosten¹'}].map(x => (
+            {[{k:'< 6 Wochen',l:'Proof → produktiver Wert'},{k:'> 60%',l:'Prozess-Effizienzsteigerung (Automation)',note:'5'},{k:'4–6x',l:'Schnellere Architektur-Entscheidungen',note:'2'},{k:'65%',l:'Reduzierte Vendor-/Lizenzkosten',note:'1'}].map(x => (
               <div key={x.l} className="text-center md:text-left">
                 <div className="text-2xl font-bold text-vae-turquoise mb-1">{x.k}</div>
-                <div className="text-[11px] uppercase tracking-wide text-text-muted">{x.l}</div>
+                <div className="text-[11px] uppercase tracking-wide text-text-muted">
+                  {x.l}
+                  {x.note && (
+                    <sup
+                      className="ml-0.5 cursor-help text-vae-turquoise"
+                      title={footnotes[x.note]}
+                    >
+                      {superscripts[x.note]}
+                    </sup>
+                  )}
+                </div>
               </div>
             ))}
           </div>
           <p className="relative text-xs text-text-secondary leading-relaxed max-w-4xl">Unsere Services kombinieren <span className="text-white">architektonische Klarheit</span>, <span className="text-white">schnelle operative Umsetzbarkeit</span> und <span className="text-white">Enablement</span>. So entsteht nachhaltige interne Kompetenz statt externer Black Box. Fokus auf <strong className="text-white font-semibold">Open Source KI, Retrieval Qualität, Workflow Robustheit</strong> und <strong className="text-white font-semibold">Compliance früh</strong>. Ergebnis: verkürzte Iterationen, geringeres Risiko, nachweisbarer ROI.</p>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-2 text-[10px] text-text-muted">
-            <span>¹ McKinsey: Value Capture Open Source (2023)</span>
-            <span>² Forrester: Decision Velocity in Modular Architectures (2024)</span>
-            <span>³ Red Hat: Enterprise Open Source Report (2024)</span>
-            <span>⁴ Internal Case Aggregation (Median Implementierung)</span>
-            <span>⁵ MIT Sloan / Automations Benchmark (2024)</span>
-            <span>Quelle: Synthese Branch Reports + interne Benchmarks</span>
+          <div className="mt-8 p-4 rounded-md bg-white/5 border border-white/10">
+            <h4 className="text-[11px] uppercase tracking-wide text-white mb-2">Quellen</h4>
+            <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-text-muted">
+              {Object.entries(footnotes).map(([k, v]) => (
+                <li key={k}>
+                  <span className="text-vae-turquoise">{superscripts[k]}</span> {v}
+                </li>
+              ))}
+              <li>Quelle: Synthese Branch Reports + interne Benchmarks</li>
+            </ul>
           </div>
         </div>
       </div>

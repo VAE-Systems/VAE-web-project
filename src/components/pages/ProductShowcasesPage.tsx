@@ -11,7 +11,7 @@ const showcasePlaceholders = [
 
 const ProductShowcasesPage: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <Seo
         title="Showcases & Ökosystem | VAE Systems – Built with VAE Core"
         description="Reale Integrationen & Showcases auf Basis von VAE Core – nachvollziehbare Muster für Betrieb, Qualität & Skalierung."

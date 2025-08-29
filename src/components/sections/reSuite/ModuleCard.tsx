@@ -6,27 +6,27 @@ interface ModuleCardProps {
   module: ReModule
 }
 
-const baseCard = 'p-6 rounded-2xl bg-white/5 border border-white/10'
+const baseCard = 'p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10'
 
 const ModuleCard: React.FC<ModuleCardProps> = ({ module }) => (
   <article className={`${baseCard} hover:border-vae-turquoise/40 transition-all flex flex-col`}>
     <header className="flex items-start justify-between mb-3">
       <div>
-        <h3 className="font-semibold text-white text-lg">{module.name}</h3>
+        <h3 className="font-semibold text-text-light dark:text-white text-lg">{module.name}</h3>
         <p className="text-xs uppercase tracking-wide text-vae-turquoise/70 mt-1">{module.tagline}</p>
       </div>
-      <span className="px-2 py-1 rounded-full text-xs font-medium border bg-slate-700/10 text-slate-200 border-slate-700/20">
+      <span className="px-2 py-1 rounded-full text-xs font-medium border bg-bg-primary/10 dark:bg-slate-700/10 text-text-secondary dark:text-slate-200 border-border-primary dark:border-slate-700/20">
         {module.status || 'Concept'}
       </span>
     </header>
 
     <div className="text-sm text-text-secondary mb-3">
       <div className="mb-1">
-        <span className="font-semibold text-white">Pain:</span>{' '}
+        <span className="font-semibold text-text-light dark:text-white">Pain:</span>{' '}
         <span className="text-text-muted">{module.pain}</span>
       </div>
       <div className="mb-2">
-        <span className="font-semibold text-white">Approach:</span>{' '}
+        <span className="font-semibold text-text-light dark:text-white">Approach:</span>{' '}
         <span className="text-text-muted">{module.approach}</span>
       </div>
     </div>
@@ -44,7 +44,7 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module }) => (
 
     <div className="flex flex-wrap gap-2 mb-3">
       {module.coreLayers.map((layer) => (
-        <span key={layer} className="px-2 py-1 rounded text-[10px] bg-white/10 text-text-muted border border-white/10">
+        <span key={layer} className="px-2 py-1 rounded text-[10px] bg-bg-primary/10 dark:bg-white/10 text-text-muted border border-border-primary dark:border-white/10">
           {layer}
         </span>
       ))}
@@ -52,7 +52,7 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module }) => (
 
     <div className="flex flex-wrap gap-2 mb-4">
       {module.integrations.map((i) => (
-        <span key={i} className="px-2 py-1 rounded-full text-[10px] font-medium border bg-white/5 text-text-secondary">
+        <span key={i} className="px-2 py-1 rounded-full text-[10px] font-medium border bg-bg-primary/5 dark:bg-white/5 text-text-secondary">
           {i}
         </span>
       ))}
@@ -60,7 +60,7 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module }) => (
 
     <div className="flex flex-wrap gap-2 mb-4">
       {module.demoFlow.map((step) => (
-        <span key={step} className="px-3 py-1 rounded-full bg-white/3 text-xs text-white/90">
+        <span key={step} className="px-3 py-1 rounded-full bg-bg-primary/3 dark:bg-white/3 text-xs text-text-secondary dark:text-white/90">
           {step}
         </span>
       ))}

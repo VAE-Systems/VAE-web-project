@@ -116,8 +116,8 @@ const SectionNavigation: React.FC = () => {
                   hover:border-vae-turquoise hover:bg-white/15
                   outline-none
                   ${isActive
-                    ? 'bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark text-bg-darker shadow-lg shadow-vae-turquoise/30 scale-105 border-vae-turquoise'
-                    : 'bg-white/8 border-white/15 text-white'
+                    ? 'bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark text-bg-darker dark:text-white shadow-lg shadow-vae-turquoise/30 scale-105 border-vae-turquoise'
+                    : 'bg-bg-primary/8 dark:bg-white/8 border-border-primary dark:border-white/15 text-text-light dark:text-white'
                   }
                 `}
                 aria-label={`Zu ${section.label} scrollen`}
@@ -140,7 +140,7 @@ const SectionNavigation: React.FC = () => {
                 className="
                   absolute right-full mr-3 top-1/2 -translate-y-1/2
                   px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap
-                  bg-bg-darker/95 backdrop-blur-xl border border-white/10 text-white
+                  bg-bg-primary/95 dark:bg-bg-darker/95 backdrop-blur-xl border border-border-primary dark:border-white/10 text-text-light dark:text-white
                   opacity-0 pointer-events-none transition-all duration-150
                   group-hover:opacity-100 group-hover:-translate-x-1
                   shadow-lg z-10
@@ -157,7 +157,7 @@ const SectionNavigation: React.FC = () => {
       </div>
 
       {/* Progress indicator - reagiert sofort */}
-      <div className="absolute -right-1 top-0 bottom-0 w-0.5 bg-white/10 rounded-full overflow-hidden">
+      <div className="absolute -right-1 top-0 bottom-0 w-0.5 bg-border-primary/10 dark:bg-white/10 rounded-full overflow-hidden">
         <div 
           className="w-full bg-gradient-to-b from-vae-turquoise to-vae-turquoise-dark transition-all duration-200 ease-out"
           style={{

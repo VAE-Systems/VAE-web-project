@@ -35,7 +35,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
   const primary = outcomes.slice(0, 3)
 
   return (
-    <section id={id} ref={ref} className={`relative py-20 sm:py-28 border-t border-vae-turquoise/10 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary overflow-hidden ${className}`.trim()} aria-labelledby="outcomes-heading">
+    <section id={id} ref={ref} className={`relative py-20 sm:py-28 border-t border-vae-turquoise/10 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-secondary overflow-hidden ${className}`.trim()} aria-labelledby="outcomes-heading">
       <div className="absolute inset-0 pointer-events-none opacity-60">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(var(--vae-turquoise-rgb),0.14),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%)]" />
       </div>

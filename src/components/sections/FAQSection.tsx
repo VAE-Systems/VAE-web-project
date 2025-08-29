@@ -163,7 +163,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                     <li key={faq.question} className="list-none">
                       <div
                         ref={el => (cardRefs.current[faqIndex] = el)}
-                        className={`group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur supports-[backdrop-filter]:bg-white/5 transition-colors duration-300 hover:border-vae-turquoise/35 focus-within:border-vae-turquoise/40 ${isOpen ? 'border-vae-turquoise/50' : ''}`}
+                        className={`group relative rounded-xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/5 backdrop-blur supports-[backdrop-filter]:bg-bg-primary/5 dark:supports-[backdrop-filter]:bg-white/5 transition-colors duration-300 hover:border-vae-turquoise/35 focus-within:border-vae-turquoise/40 ${isOpen ? 'border-vae-turquoise/50' : ''}`}
                       >
                         <button
                           data-faq-button={faqIndex}
@@ -174,7 +174,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                           onKeyDown={(e) => onKey(e, faqIndex)}
                           className="w-full text-left px-6 py-5 flex items-center justify-between gap-6 outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 rounded-xl"
                         >
-                          <span className="text-base font-medium text-white leading-relaxed flex-1 pr-2">{faq.question}</span>
+                          <span className="text-base font-medium text-text-light dark:text-white leading-relaxed flex-1 pr-2">{faq.question}</span>
                           <span className={`relative flex items-center justify-center w-9 h-9 rounded-full bg-vae-turquoise/10 text-vae-turquoise transition-all duration-300 ${isOpen ? 'bg-vae-turquoise/20 rotate-180' : 'group-hover:bg-vae-turquoise/15'}`}>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="transition-transform duration-300">
                               <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
@@ -205,11 +205,11 @@ const FAQSection: React.FC<FAQSectionProps> = ({
 
         {cta && (
           <div ref={ctaRef} className="mt-20 text-center">
-            <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-10 border border-vae-turquoise/20">
-              <h3 className="text-2xl font-semibold text-white mb-4">Noch Fragen offen?</h3>
+            <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-10 border border-vae-turquoise/20 bg-bg-primary/5 dark:bg-white/5">
+              <h3 className="text-2xl font-semibold text-text-light dark:text-white mb-4">Noch Fragen offen?</h3>
               <p className="text-text-secondary mb-6 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">Kurzes Erstgespräch klärt meist 80% Ihrer offenen technische & organisatorischen Fragen. Unverbindlich & präzise.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/contact" className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">Gespräch anfragen</a>
+                <a href="/contact" className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-bg-darker dark:text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">Gespräch anfragen</a>
                 <a href="mailto:info@vae.systems" className="border border-vae-turquoise text-vae-turquoise px-8 py-3 rounded-lg font-semibold hover:bg-vae-turquoise/10 transition-all duration-300 inline-block">Direkt per Email</a>
               </div>
             </div>

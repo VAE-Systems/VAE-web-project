@@ -187,16 +187,16 @@ const AboutPage: React.FC = () => {
               <div key={f.name} className="card-vae flex flex-col relative group" data-i>
                 <div className="absolute -top-5 -right-5 w-20 h-20 bg-vae-turquoise/25 blur-3xl rounded-full opacity-0 group-hover:opacity-70 transition-opacity" aria-hidden="true" />
                 <div className="mb-3 text-left">
-                  <h3 className="text-white font-semibold text-lg leading-snug tracking-tight">{f.name}</h3>
+                  <h3 className="text-text-light dark:text-white font-semibold text-lg leading-snug tracking-tight">{f.name}</h3>
                   <p className="text-vae-turquoise/90 text-xs font-medium uppercase tracking-wide mt-1">{f.role}</p>
                 </div>
-                <p className="text-white/80 text-sm leading-relaxed flex-grow mb-4">{f.focus}</p>
+                <p className="text-text-secondary dark:text-white/80 text-sm leading-relaxed flex-grow mb-4">{f.focus}</p>
                 <div className="mt-auto space-y-2 text-sm text-left">
-                  <a href={`mailto:${f.email}`} className="flex items-center text-vae-turquoise hover:text-white transition-colors">
+                  <a href={`mailto:${f.email}`} className="flex items-center text-vae-turquoise hover:text-text-light dark:hover:text-white transition-colors">
                     <span className="material-symbols-outlined text-base mr-2">forward_to_inbox</span>
                     <span>{f.email}</span>
                   </a>
-                  <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center text-white/60 hover:text-white transition-colors">
+                  <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center text-text-muted dark:text-white/60 hover:text-text-light dark:hover:text-white transition-colors">
                     <span className="material-symbols-outlined text-base mr-2">link</span>
                     <span>LinkedIn</span>
                   </a>
@@ -212,9 +212,9 @@ const AboutPage: React.FC = () => {
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
           <header className="max-w-4xl mb-14" data-heading-accent data-animate>
-            <h2 className="h2 text-white h-space">Was wir für Unternehmen bieten</h2>
+            <h2 className="h2 text-text-light dark:text-white h-space">Was wir für Unternehmen bieten</h2>
             <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
-            <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
+            <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-text-light dark:text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
           <div className="grid md:grid-cols-3 gap-8 items-stretch" data-stagger-group>
             {aboutServices.map(s => (
@@ -247,10 +247,10 @@ const AboutPage: React.FC = () => {
       <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Text Content */}
               <div className="lg:pr-8">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 heading-fix" data-animate>
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-text-light dark:text-white mb-8 heading-fix" data-animate>
                   Frühphase –<span className="text-gradient"> bewusst fokussiert</span>
                 </h2>
-                <p className="text-xl md:text-2xl text-white font-medium mb-6" data-animate>
+                <p className="text-xl md:text-2xl text-text-light dark:text-white font-medium mb-6" data-animate>
                   Präzise auf Wirkung ausgerichtet.
                 </p>
                 <div className="flex items-center space-x-4 text-lg text-text-secondary mb-8" data-animate>
@@ -259,10 +259,10 @@ const AboutPage: React.FC = () => {
                   </span>
                   <span>KI, Automation und Infrastruktur aus Heidelberg</span>
                 </div>
-                <div className="flex flex-wrap gap-3 text-[13px] text-white/90" data-stagger-group data-chip-group>
-                  <span className="bg-white/10 px-3 py-1.5 rounded-full border border-white/10" data-i>Pragmatisch</span>
-                  <span className="bg-white/10 px-3 py-1.5 rounded-full border border-white/10" data-i>Offen</span>
-                  <span className="bg-white/10 px-3 py-1.5 rounded-full border border-white/10" data-i>Partnerschaftlich</span>
+                <div className="flex flex-wrap gap-3 text-[13px] text-text-secondary dark:text-white/90" data-stagger-group data-chip-group>
+                  <span className="bg-bg-primary/10 dark:bg-white/10 px-3 py-1.5 rounded-full border border-border-primary dark:border-white/10" data-i>Pragmatisch</span>
+                  <span className="bg-bg-primary/10 dark:bg-white/10 px-3 py-1.5 rounded-full border border-border-primary dark:border-white/10" data-i>Offen</span>
+                  <span className="bg-bg-primary/10 dark:bg-white/10 px-3 py-1.5 rounded-full border border-border-primary dark:border-white/10" data-i>Partnerschaftlich</span>
                 </div>
               </div>
               
@@ -276,7 +276,7 @@ const AboutPage: React.FC = () => {
                           psychology
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-white">KI-Systeme</div>
+                      <div className="text-2xl font-bold text-text-light dark:text-white">KI-Systeme</div>
                       <div className="text-sm text-text-secondary">Intelligent</div>
                     </div>
                     <div className="text-center">
@@ -285,7 +285,7 @@ const AboutPage: React.FC = () => {
                           precision_manufacturing
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-white">Automation</div>
+                      <div className="text-2xl font-bold text-text-light dark:text-white">Automation</div>
                       <div className="text-sm text-text-secondary">Effizient</div>
                     </div>
                     <div className="text-center">
@@ -294,7 +294,7 @@ const AboutPage: React.FC = () => {
                           cloud_sync
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-white">Infrastruktur</div>
+                      <div className="text-2xl font-bold text-text-light dark:text-white">Infrastruktur</div>
                       <div className="text-sm text-text-secondary">Skalierbar</div>
                     </div>
                     <div className="text-center">
@@ -303,7 +303,7 @@ const AboutPage: React.FC = () => {
                           verified_user
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-white">Open Source</div>
+                      <div className="text-2xl font-bold text-text-light dark:text-white">Open Source</div>
                       <div className="text-sm text-text-secondary">Transparent</div>
                     </div>
                   </div>
@@ -345,7 +345,7 @@ const AboutPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4" data-animate>
+                <h3 className="text-3xl md:text-4xl font-bold text-text-light dark:text-white mb-4" data-animate>
                   Erstes Gespräch – unverbindlich & konkret
                 </h3>
                 <p className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto" data-animate>

@@ -179,7 +179,7 @@ const Header: React.FC = () => {
                       <div
                         ref={productsMegaRef}
                         id="products-mega"
-                        className="mega-panel w-[920px] rounded-2xl border border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/40 ring-1 ring-white/10 focus:outline-none"
+                        className="mega-panel w-[920px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/40 ring-1 ring-border-primary dark:ring-white/10 focus:outline-none"
                         role="dialog"
                         aria-label="Products Menu"
                         aria-modal="false"
@@ -200,32 +200,32 @@ const Header: React.FC = () => {
                           >
                             <div className="flex items-start justify-between mb-3">
                               <div>
-                                <h3 className="text-sm font-semibold text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
+                                <h3 className="text-sm font-semibold text-text-light dark:text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
                                 <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
                               </div>
                               {cat.badge && (
                                 <span className="px-2 py-0.5 text-[9px] font-semibold rounded-full bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/30">{cat.badge}</span>
                               )}
                             </div>
-                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
+                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
                             <ul className="space-y-1.5 mb-4 text-[11px]">
                               {cat.points.slice(0,3).map(p => (
-                                <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-white/80 transition-colors">
+                                <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-text-light dark:group-hover:text-white/80 transition-colors">
                                   <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
                                   <span>{p}</span>
                                 </li>
                               ))}
                             </ul>
-                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-white transition-colors">
+                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
                               <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                             </div>
                           </Link>
                         ))}
                         </div>
-                        <div className="px-8 pb-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-text-muted">
+                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-[11px] text-text-muted">
                           <span className="uppercase tracking-wider">VAE Product Suite</span>
-                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
                         </div>
                       </div>
                     </div>
@@ -235,7 +235,7 @@ const Header: React.FC = () => {
                       <div
                         ref={servicesMegaRef}
                         id="services-mega"
-                        className="mega-panel w-[760px] rounded-2xl border border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/40 ring-1 ring-white/10 focus:outline-none"
+                        className="mega-panel w-[760px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/40 ring-1 ring-border-primary dark:ring-white/10 focus:outline-none"
                         role="dialog"
                         aria-label="Services Menu"
                         aria-modal="false"
@@ -255,29 +255,29 @@ const Header: React.FC = () => {
                           >
                             <div className="flex items-start justify-between mb-3">
                               <div>
-                                <h3 className="text-sm font-semibold text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
+                                <h3 className="text-sm font-semibold text-text-light dark:text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
                                 <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
                               </div>
                             </div>
-                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-white/90 transition-colors">{cat.description}</p>
+                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors">{cat.description}</p>
                             <ul className="space-y-1.5 mb-4 text-[11px]">
                               {cat.points.slice(0,4).map(p => (
-                                <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-white/80 transition-colors">
+                                <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-text-light dark:group-hover:text-white/80 transition-colors">
                                   <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
                                   <span>{p}</span>
                                 </li>
                               ))}
                             </ul>
-                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-white transition-colors">
+                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
                               <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                             </div>
                           </Link>
                         ))}
                         </div>
-                        <div className="px-8 pb-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-text-muted">
+                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-[11px] text-text-muted">
                           <span className="uppercase tracking-wider">VAE Services</span>
-                          <Link to="/services" onClick={() => setServicesOpen(false)} className="text-vae-turquoise hover:text-white font-medium inline-flex items-center">Alle Services<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                          <Link to="/services" onClick={() => setServicesOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Services<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
                         </div>
                       </div>
                     </div>

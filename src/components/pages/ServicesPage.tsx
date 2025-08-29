@@ -128,7 +128,7 @@ const ServicesPage: React.FC = () => {
                   {[r.a, r.b, r.c].map((val,ci) => (
                     <div
                       key={ci}
-                      className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
+                      className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-border-primary dark:border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
                     >
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
                       <span className="relative z-10">{val}</span>
@@ -137,9 +137,9 @@ const ServicesPage: React.FC = () => {
                 </React.Fragment>
               ))}
               {/* Vertical Separators: exakt an den Grid-Spalten */}
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[160px] w-px bg-white/5" />
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+((100%-160px)/3))] w-px bg-white/5" />
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+2*((100%-160px)/3))] w-px bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[160px] w-px bg-border-primary/20 dark:bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+((100%-160px)/3))] w-px bg-border-primary/20 dark:bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+2*((100%-160px)/3))] w-px bg-border-primary/20 dark:bg-white/5" />
             </div>
           </div>
           <div className="mt-8 text-[11px] text-text-muted max-w-4xl space-y-2">
@@ -168,7 +168,7 @@ const ServicesPage: React.FC = () => {
       <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
         <FAQSection
           id="services-faq"
-          className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-white/5"
+          className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-border-primary dark:border-white/5"
           title="Services – häufige Fragen"
           subtitle="Klarheit zu Umfang, Ablauf und Betrieb." 
           categories={[

@@ -18,7 +18,7 @@ const ProductSolutionsPage: React.FC = () => {
           { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type':'ListItem', position:1, name:'Produkte', item:'https://www.vae-systems.com/products' }, { '@type':'ListItem', position:2, name:'Komplettlösungen', item:'https://www.vae-systems.com/products/solutions' } ] }
         ]}
       />
-      <section className="relative pt-40 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
+      <section className="relative pt-40 pb-24 border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-8">
             <span className="block text-text-light">Komplettlösungen</span>
@@ -36,14 +36,14 @@ const ProductSolutionsPage: React.FC = () => {
               { title:'Implementierung & Integration', desc:'Adaptierte Open‑Source‑Bausteine, Automatisierung & Handover-fähige Pipelines.' },
               { title:'Übergabe & Enablement', desc:'Dokumentation, Schulung, Betriebsleitfäden, optionale Begleitung für Skalierungsphase.' }
             ].map(card => (
-              <div key={card.title} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-vae-turquoise/40 transition-all">
-                <h3 className="font-semibold mb-2 text-white text-lg">{card.title}</h3>
+              <div key={card.title} className="p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 hover:border-vae-turquoise/40 transition-all">
+                <h3 className="font-semibold mb-2 text-text-light dark:text-white text-lg">{card.title}</h3>
                 <p className="text-sm text-text-secondary leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
           <div className="space-y-5 mb-16">
-            <h2 className="text-2xl font-semibold text-white">Re:spond – Conversational Delivery</h2>
+            <h2 className="text-2xl font-semibold text-text-light dark:text-white">Re:spond – Conversational Delivery</h2>
             <p className="text-text-secondary leading-relaxed max-w-3xl">
               Re:spond ist kein „Chatbot-Baukasten“, sondern ein betreibbares Paket: Datenaufbereitung, Vektorisierung, Retrieval‑Strategien, Moderation, Evaluierung & Betriebs-Metriken. Kontrolliertes Lernen, auditierbar, rollenbasiert. Setup → Betrieb → Handover – modular erweiterbar. Für tiefergehende Integration der semantischen Schicht siehe <Link to="/products/vae-core" className="text-vae-turquoise hover:underline">VAE CORE</Link>.
             </p>
@@ -60,8 +60,8 @@ const ProductSolutionsPage: React.FC = () => {
               h:'Ergebnis',
               b:['Schneller produktiv','Geringere Re‑Engineering-Kosten','Auditierbarer Lifecycle','Team Empowerment']
             }].map(col => (
-              <div key={col.h} className="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                <h3 className="text-sm font-semibold text-white mb-3">{col.h}</h3>
+              <div key={col.h} className="p-6 bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 rounded-2xl">
+                <h3 className="text-sm font-semibold text-text-light dark:text-white mb-3">{col.h}</h3>
                 <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">
                   {col.b.map(x => <li key={x}>{x}</li>)}
                 </ul>
@@ -70,7 +70,7 @@ const ProductSolutionsPage: React.FC = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-10 mb-20">
             <div>
-              <h3 className="text-lg font-semibold text-white mb-3">Warum Komplett statt Stückwerk?</h3>
+              <h3 className="text-lg font-semibold text-text-light dark:text-white mb-3">Warum Komplett statt Stückwerk?</h3>
               <ul className="space-y-2 text-sm text-text-secondary leading-relaxed list-disc list-inside">
                 <li>Reduktion von Integrations-Reibung & Schattenabhängigkeiten</li>
                 <li>Frühe Sichtbarkeit von Betriebs- & Sicherheitsfragen</li>
@@ -79,12 +79,12 @@ const ProductSolutionsPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-white mb-3">Transparenz-Prinzip</h3>
+              <h3 className="text-lg font-semibold text-text-light dark:text-white mb-3">Transparenz-Prinzip</h3>
               <p className="text-sm text-text-secondary leading-relaxed mb-3">Keine versteckten Dienste, klare Open‑Source‑Anteile, definierte Übergabepunkte, Security-by-Design. Ziel: Sie betreiben souverän – wir bleiben optional.</p>
               <p className="text-sm text-text-secondary leading-relaxed">Qualitätskriterien: Reproduzierbarkeit, Observability, Metriken (Antwortqualität, Latenz, Abdeckung), Laufzeitkosten‑Transparenz.</p>
             </div>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mb-20">
+          <div className="bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 rounded-2xl p-8 mb-20">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">Kontext & Marktperspektive</h3>
             <p className="text-sm text-text-secondary leading-relaxed mb-3">
               Häufige Muster: Parallel entstandene Skripte statt betreibbarer Pipelines, fehlende Metriken zur Qualitätsbewertung und unklare Übergaben zwischen Experiment & Betrieb. Wir strukturieren früh: Schnittstellen, Observability, Governance‑Artefakte.
@@ -105,7 +105,7 @@ const ProductSolutionsPage: React.FC = () => {
           
     <ReSuiteSection />
 
-          <ProviderComparisonSection className="border-t border-white/5 mt-10" headline="Vergleich: Komplettlösungen" subtitle="End‑to‑End Umsetzung & Ownership vs. Agentur Stückwerk & Low-Code Grenzen." />
+          <ProviderComparisonSection className="border-t border-border-primary dark:border-white/5 mt-10" headline="Vergleich: Komplettlösungen" subtitle="End‑to‑End Umsetzung & Ownership vs. Agentur Stückwerk & Low-Code Grenzen." />
           <div className="flex flex-col sm:flex-row gap-4 mt-10">
             <Link to="/contact" className="btn-primary">Projekt anfragen</Link>
             <Link to="/products/vae-core" className="btn-secondary">VAE CORE ansehen</Link>

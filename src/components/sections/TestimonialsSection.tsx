@@ -219,12 +219,12 @@ const TestimonialsSection: React.FC = () => {
           {successMetrics.map((metric, index) => (
             <div 
               key={index}
-              className="text-center bg-gradient-to-br from-white/5 to-white/2 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              className="text-center bg-gradient-to-br from-bg-primary/5 dark:from-white/5 to-bg-primary/2 dark:to-white/2 backdrop-blur-xl rounded-2xl p-6 border border-border-primary dark:border-white/10"
             >
               <div className="text-3xl md:text-4xl font-bold text-vae-turquoise mb-2">
                 {metric.value}
               </div>
-              <div className="text-white font-semibold mb-1">
+              <div className="text-text-light dark:text-white font-semibold mb-1">
                 {metric.label}
               </div>
               <div className="text-gray-400 text-sm">
@@ -239,7 +239,7 @@ const TestimonialsSection: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}
-              className="bg-gradient-to-br from-white/8 to-white/4 backdrop-blur-xl rounded-2xl p-8 border border-white/15 hover:border-vae-turquoise/30 transition-all duration-300"
+              className="bg-gradient-to-br from-bg-primary/8 dark:from-white/8 to-bg-primary/4 dark:to-white/4 backdrop-blur-xl rounded-2xl p-8 border border-border-primary dark:border-white/15 hover:border-vae-turquoise/30 transition-all duration-300"
             >
               {/* Rating */}
               <div className="flex items-center gap-1 mb-4">
@@ -257,8 +257,8 @@ const TestimonialsSection: React.FC = () => {
               </div>
 
               {/* Author */}
-              <div className="border-t border-white/10 pt-4">
-                <div className="font-semibold text-white">
+              <div className="border-t border-border-primary dark:border-white/10 pt-4">
+                <div className="font-semibold text-text-light dark:text-white">
                   {testimonial.name}
                 </div>
                 <div className="text-sm text-gray-400">
@@ -275,7 +275,7 @@ const TestimonialsSection: React.FC = () => {
         {/* Call to Action */}
         <div className="mt-16 text-center" ref={ctaRef}>
           <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-8 border border-vae-turquoise/20">
-            <h3 className="text-2xl font-semibold text-white mb-4">
+            <h3 className="text-2xl font-semibold text-text-light dark:text-white mb-4">
               Werden Sie unser nächster Erfolg
             </h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
@@ -283,7 +283,7 @@ const TestimonialsSection: React.FC = () => {
               Kostenloses Erstgespräch und unverbindliche Beratung.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
+              <button className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-bg-darker dark:text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
                 Projekt besprechen
               </button>
               <button className="border border-vae-turquoise text-vae-turquoise px-8 py-3 rounded-lg font-semibold hover:bg-vae-turquoise/10 transition-all duration-300">

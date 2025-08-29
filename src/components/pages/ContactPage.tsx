@@ -47,7 +47,7 @@ const ContactPage: React.FC = () => {
         <div className="relative container-vae">
           {/* Element 1: Intro-Textblock */}
           <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-text-light dark:text-white mb-6">
               {contactIntro.title}
             </h2>
             <p className="text-xl text-text-secondary max-w-4xl mx-auto leading-relaxed">
@@ -64,7 +64,7 @@ const ContactPage: React.FC = () => {
                     {usp.icon}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-4">
+                <h3 className="text-xl font-semibold text-text-light dark:text-white mb-4">
                   {usp.title}
                 </h3>
                 <p className="text-text-secondary leading-relaxed">
@@ -77,7 +77,7 @@ const ContactPage: React.FC = () => {
           {/* Element 3: Micro-CTA */}
           <div className="text-center">
             <div className="inline-block bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-8 border border-vae-turquoise/20">
-              <h3 className="text-2xl font-semibold text-white mb-2">
+              <h3 className="text-2xl font-semibold text-text-light dark:text-white mb-2">
                 {contactCta.title}
               </h3>
               <p className="text-text-secondary mb-4">

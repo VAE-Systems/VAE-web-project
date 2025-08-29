@@ -19,7 +19,7 @@ const ProductVaeCorePage: React.FC = () => {
         ]}
       />
 
-      <section id="hero" className="relative pt-40 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
+      <section id="hero" className="relative pt-40 pb-24 border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-6">
             <span className="block text-text-light">{c.hero.titlePre}</span>
@@ -58,7 +58,7 @@ const ProductVaeCorePage: React.FC = () => {
 
           <div id="features" className="grid md:grid-cols-2 gap-10">
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Kernbausteine</h3>
+              <h3 className="text-lg font-semibold text-text-light dark:text-white mb-4">Kernbausteine</h3>
               <ul className="space-y-2 text-sm text-text-secondary leading-relaxed list-disc list-inside">
                 {c.sections.features.clusters.flatMap(cluster => cluster.items).map((it, idx) => (
                   <li key={idx}>{it}</li>
@@ -67,7 +67,7 @@ const ProductVaeCorePage: React.FC = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Betriebsmodelle</h3>
+              <h3 className="text-lg font-semibold text-text-light dark:text-white mb-4">Betriebsmodelle</h3>
               <ul className="space-y-2 text-sm text-text-secondary leading-relaxed list-disc list-inside">
                 <li>On‑Prem / Sovereign Cloud (lokale Kontrolle)</li>
                 <li>Konfigurierbare Datenresidenz</li>
@@ -78,7 +78,7 @@ const ProductVaeCorePage: React.FC = () => {
             </div>
           </div>
 
-          <div id="architecture" className="bg-white/5 border border-white/10 rounded-2xl p-8 my-12">
+          <div id="architecture" className="bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 rounded-2xl p-8 my-12">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">{c.sections.architecture.title}</h3>
             {c.sections.architecture.paragraphs.map((p, i) => (
               <p key={i} className="text-sm text-text-secondary leading-relaxed mb-3">{p}</p>
@@ -86,8 +86,8 @@ const ProductVaeCorePage: React.FC = () => {
             <p className="text-sm text-text-secondary leading-relaxed italic">{c.sections.architecture.roadmapNote}</p>
           </div>
 
-          <div id="open-source" className="p-8 rounded-2xl border border-white/10 bg-gradient-to-tr from-bg-dark to-bg-darker">
-            <h3 className="text-lg font-semibold text-white mb-3">{c.sections.openSource.title}</h3>
+          <div id="open-source" className="p-8 rounded-2xl border border-border-primary dark:border-white/10 bg-gradient-to-tr from-bg-primary dark:from-bg-dark to-bg-primary dark:to-bg-darker">
+            <h3 className="text-lg font-semibold text-text-light dark:text-white mb-3">{c.sections.openSource.title}</h3>
             <p className="text-sm text-text-secondary mb-3">Wir glauben an offene Innovation. Deshalb wird VAE Core als Open Source veröffentlicht — {c.sections.openSource.releaseEstimate}.</p>
             <ul className="list-disc list-inside text-sm text-text-secondary space-y-2 mb-4">
               {c.sections.openSource.bullets.map((b, i) => <li key={i}>{b}</li>)}
@@ -97,7 +97,7 @@ const ProductVaeCorePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mt-12">
+          <div className="bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 rounded-2xl p-8 mt-12">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">Kontext & Referenzen</h3>
             <p className="text-sm text-text-secondary leading-relaxed mb-3">Reports betonen: Ohne durchgängige Sichtbarkeit & Governance scheitert Skalierung häufig an Sicherheits‑ & Compliance‑Fragen. Ein konsistenter Plattform‑Layer reduziert Reibung zwischen Entwicklung & Betrieb.</p>
             <ReferenceList

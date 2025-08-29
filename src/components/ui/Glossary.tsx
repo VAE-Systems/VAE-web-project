@@ -106,7 +106,7 @@ export const TermHint: React.FC<TermHintProps> = ({ term, className, variant = '
   const ref = React.useRef<HTMLSpanElement | null>(null)
   if (!data) return <>{term}</>
   const base = variant === 'chip'
-    ? 'inline-flex items-center px-2 py-1 rounded-md border border-white/10 bg-white/5 text-white/70 text-[11px] gap-1 hover:border-vae-turquoise/40 hover:text-white'
+    ? 'inline-flex items-center px-2 py-1 rounded-md border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/5 text-text-muted dark:text-white/70 text-[11px] gap-1 hover:border-vae-turquoise/40 hover:text-text-light dark:hover:text-white'
     : 'underline decoration-dotted underline-offset-2'
   return (
     <span
@@ -142,9 +142,9 @@ export const TermHint: React.FC<TermHintProps> = ({ term, className, variant = '
           style={{ top: pos.top, left: pos.left }}
           className="absolute z-[200] pointer-events-none w-[280px]"
         >
-          <div className="relative p-3 rounded-lg border border-white/10 bg-bg-darker/95 backdrop-blur-md shadow-xl text-[11px] leading-relaxed text-text-secondary animate-fade-in">
+          <div className="relative p-3 rounded-lg border border-border-primary dark:border-white/10 bg-bg-primary/95 dark:bg-bg-darker/95 backdrop-blur-md shadow-xl text-[11px] leading-relaxed text-text-secondary animate-fade-in">
             <span className="block text-[10px] uppercase tracking-wide text-vae-turquoise mb-1">Begriff</span>
-            <span className="text-white font-medium text-xs mb-1 block">{data.term}{data.short ? ` – ${data.short}` : ''}</span>
+            <span className="text-text-light dark:text-white font-medium text-xs mb-1 block">{data.term}{data.short ? ` – ${data.short}` : ''}</span>
             {data.definition}
           </div>
         </div>,

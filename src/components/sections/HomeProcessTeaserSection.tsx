@@ -40,7 +40,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
     <section
       id={id}
       ref={ref}
-      className={`relative py-20 md:py-28 border-t border-white/5 bg-[linear-gradient(145deg,#0c1213,#0e1416,#0b1011)] overflow-hidden ${className}`.trim()}
+      className={`relative py-20 md:py-28 border-t border-border-primary dark:border-white/5 bg-[linear-gradient(145deg,var(--color-bg-primary),var(--color-bg-secondary),var(--color-bg-primary))] dark:bg-[linear-gradient(145deg,#0c1213,#0e1416,#0b1011)] overflow-hidden ${className}`.trim()}
       aria-labelledby="process-home-heading"
     >
       <div className="absolute inset-0 pointer-events-none opacity-60">
@@ -56,7 +56,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
         </header>
         <ol className="grid md:grid-cols-3 gap-8 mb-12 items-stretch">
           {steps.map((s,i) => (
-            <Card as="li" key={s.key} data-step-card className="group relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col transition-all hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_6px_28px_-6px_rgba(var(--vae-turquoise-rgb),0.3)]">
+            <Card as="li" key={s.key} data-step-card className="group relative rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/4 dark:bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col transition-all hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_6px_28px_-6px_rgba(var(--vae-turquoise-rgb),0.3)]">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">
@@ -64,9 +64,9 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
                   </div>
                   <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(i+1).padStart(2,'0')}</span>
                 </div>
-                {s.durationHint && <span className="text-[10px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-white/60">{s.durationHint}</span>}
+                {s.durationHint && <span className="text-[10px] px-2 py-1 rounded-md bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 text-text-muted dark:text-white/60">{s.durationHint}</span>}
               </div>
-              <h3 className="text-base font-semibold text-white mb-2 leading-snug">{s.title}</h3>
+              <h3 className="text-base font-semibold text-text-light dark:text-white mb-2 leading-snug">{s.title}</h3>
               <p className="text-[13px] text-text-secondary leading-relaxed mb-4 flex-grow">{s.summary}</p>
               {s.deliverables.slice(0,2).length > 0 && (
                 <ul className="space-y-1.5 text-[11px] text-text-secondary mb-3">

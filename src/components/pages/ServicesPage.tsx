@@ -57,7 +57,7 @@ const ServicesPage: React.FC = () => {
       />
       <ServicesHeroSection innerRef={heroRef} />
       {/* Storytelling */}
-      <section className="py-28 bg-bg-darker border-b border-white/5">
+      <section className="py-28 bg-bg-primary dark:bg-bg-darker border-b border-border-primary dark:border-white/5">
         <div className="container-vae max-w-5xl">
           <div className="max-w-3xl mb-16">
             <h2 className="h2 heading-gradient h-space">Lifecycle statt Einzelleistung.</h2>
@@ -67,8 +67,8 @@ const ServicesPage: React.FC = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[{ h: 'Enablement', b: ['Team handlungsfähig', 'Reduktion externer Abhängigkeit', 'Dokumentierte Artefakte'] }, { h: 'Governance & Compliance', b: ['Frühe AI Act Orientierung', 'Sicherheitsmodell klar', 'Transparente Audits'] }, { h: 'Umsetzung', b: ['Fokus reale Engpässe', 'Messbare Qualitätskriterien', 'Souveräner Betrieb'] }].map(col => (
-              <div key={col.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold text-white mb-3">{col.h}</h3>
+              <div key={col.h} className="p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10">
+                <h3 className="text-sm font-semibold text-text-light dark:text-white mb-3">{col.h}</h3>
                 <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">{col.b.map(x => <li key={x}>{x}</li>)}</ul>
               </div>
             ))}
@@ -77,7 +77,7 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Kategorie Grid */}
-      <section id="categories" className="py-28 bg-bg-dark border-b border-white/5">
+      <section id="categories" className="py-28 bg-bg-secondary dark:bg-bg-dark border-b border-border-primary dark:border-white/5">
         <div className="container-vae max-w-7xl">
           <div className="grid md:grid-cols-3 gap-10">
             {categories.map(cat => (
@@ -99,18 +99,18 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Vergleich / Differenzierung Matrix */}
-      <section className="py-28 bg-bg-dark border-b border-white/5" id="vergleich">
+      <section className="py-28 bg-bg-secondary dark:bg-bg-dark border-b border-border-primary dark:border-white/5" id="vergleich">
         <div className="container-vae max-w-6xl">
           <header className="max-w-3xl mb-14">
             <h2 className="h2 heading-gradient h-space">Wann welches Format?</h2>
             <p className="text-text-secondary leading-relaxed text-lg">Schnell erkennbare Zuordnung: Wissen aufbauen, Richtung festlegen oder spezifisch umsetzen. Überlappungen bewusst minimal.</p>
           </header>
           <div className="overflow-x-auto -mx-2 px-2">
-            <div className="min-w-[860px] grid grid-cols-[160px_repeat(3,1fr)] rounded-2xl border border-white/10 bg-white/[0.03] relative">
+            <div className="min-w-[860px] grid grid-cols-[160px_repeat(3,1fr)] rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/3 dark:bg-white/[0.03] relative">
               {/* Column Headers */}
-              <div className="p-3 text-[11px] uppercase tracking-wide text-text-muted/70 border-b border-white/10">Kriterium</div>
+              <div className="p-3 text-[11px] uppercase tracking-wide text-text-muted/70 border-b border-border-primary dark:border-white/10">Kriterium</div>
               {['Schulungen & Workshops','Beratung','Custom Solutions'].map(h => (
-                <div key={h} className="p-3 text-[11px] font-semibold uppercase tracking-wide text-white border-b border-white/10 bg-gradient-to-b from-white/10 to-transparent backdrop-blur-sm">
+                <div key={h} className="p-3 text-[11px] font-semibold uppercase tracking-wide text-text-light dark:text-white border-b border-border-primary dark:border-white/10 bg-gradient-to-b from-bg-primary/10 dark:from-white/10 to-transparent backdrop-blur-sm">
                   {h}
                 </div>
               ))}
@@ -124,7 +124,7 @@ const ServicesPage: React.FC = () => {
                 { k:'lockin', label:'Lock‑in Risiko', a:'Keins', b:'Sehr gering', c:'Niedrig (Open-first)' }
               ].map((r,i,arr) => (
                 <React.Fragment key={r.k}>
-                  <div className={`p-4 text-[11px] font-medium text-text-muted/70 border-t border-white/5 ${i===arr.length-1 ? 'rounded-bl-2xl' : ''}`}>{r.label}</div>
+                  <div className={`p-4 text-[11px] font-medium text-text-muted/70 border-t border-border-primary dark:border-white/5 ${i===arr.length-1 ? 'rounded-bl-2xl' : ''}`}>{r.label}</div>
                   {[r.a, r.b, r.c].map((val,ci) => (
                     <div
                       key={ci}

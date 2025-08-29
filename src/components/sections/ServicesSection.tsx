@@ -216,9 +216,9 @@ const ServicesSection: React.FC = () => {
               </div>
             ))}
           </div>
-          <p className="relative text-xs text-text-secondary leading-relaxed max-w-4xl">Unsere Services kombinieren <span className="text-white">architektonische Klarheit</span>, <span className="text-white">schnelle operative Umsetzbarkeit</span> und <span className="text-white">Enablement</span>. So entsteht nachhaltige interne Kompetenz statt externer Black Box. Fokus auf <strong className="text-white font-semibold">Open Source KI, Retrieval Qualität, Workflow Robustheit</strong> und <strong className="text-white font-semibold">Compliance früh</strong>. Ergebnis: verkürzte Iterationen, geringeres Risiko, nachweisbarer ROI.</p>
-          <div className="mt-8 p-4 rounded-md bg-white/5 border border-white/10">
-            <h4 className="text-[11px] uppercase tracking-wide text-white mb-2">Quellen</h4>
+          <p className="relative text-xs text-text-secondary leading-relaxed max-w-4xl">Unsere Services kombinieren <span className="text-text-light dark:text-white">architektonische Klarheit</span>, <span className="text-text-light dark:text-white">schnelle operative Umsetzbarkeit</span> und <span className="text-text-light dark:text-white">Enablement</span>. So entsteht nachhaltige interne Kompetenz statt externer Black Box. Fokus auf <strong className="text-text-light dark:text-white font-semibold">Open Source KI, Retrieval Qualität, Workflow Robustheit</strong> und <strong className="text-text-light dark:text-white font-semibold">Compliance früh</strong>. Ergebnis: verkürzte Iterationen, geringeres Risiko, nachweisbarer ROI.</p>
+          <div className="mt-8 p-4 rounded-md bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10">
+            <h4 className="text-[11px] uppercase tracking-wide text-text-light dark:text-white mb-2">Quellen</h4>
             <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-text-muted">
               {Object.entries(footnotes).map(([k, v]) => (
                 <li key={k}>

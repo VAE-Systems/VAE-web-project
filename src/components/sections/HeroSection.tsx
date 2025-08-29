@@ -20,13 +20,13 @@ const HeroSection: React.FC = () => {
   return (
     <section 
       id="hero"
-      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker"
+      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker"
     >
       {/* Neural Network Background Animation */}
       <NeuralNetworkBackground />
       
       {/* Additional Background Layer for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bg-darker/80 via-bg-dark/70 to-bg-darker/80" style={{ zIndex: 2 }}></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-bg-primary/80 via-bg-secondary/70 to-bg-primary/80 dark:from-bg-darker/80 dark:via-bg-dark/70 dark:to-bg-darker/80" style={{ zIndex: 2 }}></div>
 
       <div className="container-vae relative" style={{ zIndex: 10 }}>
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -98,7 +98,7 @@ const HeroSection: React.FC = () => {
                 <Link to="/services" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Services Übersicht</Link>
                 <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Custom Solutions</Link>
                 <Link to="/products#core" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Architektur</Link>
-                <a href="mailto:kontakt@vae-systems.com?subject=Kurzfrage%20zu%20KI%20Projekt" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Direkte Frage per Mail</a>
+                <a href="mailto:kontakt@vae-systems.com?subject=Kurzfrage%20zu%20KI%20Projekt" className="px-4 py-2 rounded-full bg-bg-primary/5 hover:bg-bg-primary/10 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-text-light dark:hover:text-white transition-colors">Direkte Frage per Mail</a>
               </div>
               <p className="text-[11px] text-text-muted leading-relaxed max-w-md">
                 Unverbindlich & fokussiert: In <span className="text-text-secondary font-medium">15–30 Minuten</span> klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.
@@ -107,7 +107,7 @@ const HeroSection: React.FC = () => {
 
             {/* Trust Indicators */}
             <motion.div
-              className="flex flex-wrap items-center gap-6 pt-8 border-t border-bg-secondary"
+              className="flex flex-wrap items-center gap-6 pt-8 border-t border-border-primary dark:border-bg-secondary"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}

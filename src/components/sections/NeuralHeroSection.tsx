@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
+import { useTheme } from '../../contexts/ThemeContext'
 
 const NeuralHeroSection: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const { theme } = useTheme()
 
   useEffect(() => {
     if (!mountRef.current) return
@@ -30,21 +32,24 @@ const NeuralHeroSection: React.FC = () => {
     renderer.setPixelRatio(window.devicePixelRatio)
     currentMount.appendChild(renderer.domElement)
 
-    // Neural Network Setup - Using VAE turquoise color
+    // Neural Network Setup - Using theme-aware colors
+    const isDark = theme === 'dark'
+    const primaryColor = isDark ? 0x00ffa5 : 0x006b5a // VAE turquoise for dark, darker version for light
+    
     const neurons = new THREE.Group()
     const neuronGeometry = new THREE.SphereGeometry(0.03, 8, 6)
     const neuronMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x00ffa5, // VAE turquoise
+      color: primaryColor,
       transparent: true,
-      opacity: 0.6 
+      opacity: isDark ? 0.6 : 0.4
     })
 
     // Connection Lines
     const connections = new THREE.Group()
     const lineMaterial = new THREE.LineBasicMaterial({ 
-      color: 0x00ffa5, // VAE turquoise
+      color: primaryColor,
       transparent: true, 
-      opacity: 0.2 
+      opacity: isDark ? 0.2 : 0.15
     })
 
     // Particle System
@@ -61,10 +66,10 @@ const NeuralHeroSection: React.FC = () => {
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     
     const particleMaterial = new THREE.PointsMaterial({
-      color: 0x00ffa5, // VAE turquoise
+      color: primaryColor,
       size: 1,
       transparent: true,
-      opacity: 0.3,
+      opacity: isDark ? 0.3 : 0.2,
       blending: THREE.AdditiveBlending
     })
     
@@ -198,11 +203,11 @@ const NeuralHeroSection: React.FC = () => {
   }, [mousePosition.x, mousePosition.y])
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-bg-darker">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-bg-primary dark:bg-bg-darker">
       {/* Neural Network Background */}
       <div
         ref={mountRef}
-        className="absolute inset-0 w-full h-full bg-[rgba(10,10,10,0.85)]"
+        className="absolute inset-0 w-full h-full bg-bg-primary/85 dark:bg-[rgba(10,10,10,0.85)]"
       />
       
       {/* Content Container */}
@@ -237,13 +242,13 @@ const NeuralHeroSection: React.FC = () => {
           >
             <a 
               href="mailto:info@vae.systems?subject=Kostenlose%20KI-Beratung%20Anfrage&body=Hallo%20VAE%20Systems%20Team,%0A%0AIch%20interessiere%20mich%20für%20eine%20kostenlose%20KI-Beratung.%0A%0AMein%20Name:%20%0AMein%20Unternehmen:%20%0AMeine%20Telefonnummer:%20%0A%0AKurze%20Beschreibung%20meines%20Projekts:%0A%0A%0AVielen%20Dank!"
-              className="px-8 py-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-white font-semibold rounded-full hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30 text-center"
+              className="px-8 py-4 bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark text-bg-darker dark:text-white font-semibold rounded-full hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30 text-center"
             >
               Kostenlose KI-Beratung
             </a>
             <a 
               href="#services" 
-              className="px-8 py-4 border-2 border-vae-turquoise text-vae-turquoise font-semibold rounded-full hover:bg-vae-turquoise hover:text-white transition-all duration-300 text-center"
+              className="px-8 py-4 border-2 border-vae-turquoise text-vae-turquoise font-semibold rounded-full hover:bg-vae-turquoise hover:text-bg-darker dark:hover:text-white transition-all duration-300 text-center"
             >
               VAE CORE Demo
             </a>

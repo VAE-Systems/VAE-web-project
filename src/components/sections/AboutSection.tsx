@@ -6,7 +6,7 @@ const AboutSection: React.FC = () => {
   // content now imported from aboutMini & aboutWhy (badges)
 
   return (
-    <section id="about" className="relative py-24 md:py-28 surface-dark border-t border-white/5 overlay-grid overlay-diag edge-glow-top overflow-hidden">
+    <section id="about" className="relative py-24 md:py-28 surface-dark border-t border-border-primary dark:border-white/5 overlay-grid overlay-diag edge-glow-top overflow-hidden">
       {/* Layered interactive backdrop */}
       <ParallaxBackdrop strength={8} />
       <ParticleField count={16} />

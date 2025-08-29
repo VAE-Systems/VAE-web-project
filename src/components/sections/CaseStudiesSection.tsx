@@ -12,7 +12,7 @@ const CaseStudiesSection: React.FC = () => {
   // Early exit with notice when no case studies are available
   if (caseStudies.length === 0) {
     return (
-      <section id="case-studies" className="relative py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top">
+      <section id="case-studies" className="relative py-32 border-t border-border-primary dark:border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top">
         <div className="container-vae text-center">
           <h2 className="h2 heading-gradient mb-6">Case Studies & Pilots</h2>
           <p className="text-text-secondary text-sm mb-6">Aktuell werden Pilots kuratiert & aufbereitet. Bleib informiert oder nimm direkt Kontakt auf.</p>
@@ -57,7 +57,7 @@ const CaseStudiesSection: React.FC = () => {
   const single = caseStudies.length === 1
 
   return (
-    <section id="case-studies" ref={sectionRef} className="relative py-24 sm:py-32 border-t border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top overflow-hidden">
+    <section id="case-studies" ref={sectionRef} className="relative py-24 sm:py-32 border-t border-border-primary dark:border-white/5 surface-dark overlay-grid overlay-diag edge-glow-top overflow-hidden">
       <ParallaxBackdrop strength={7} />
       <ParticleField count={14} />
 
@@ -98,7 +98,7 @@ const CaseStudiesSection: React.FC = () => {
               {cs.metrics?.length > 0 && (
                 <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-6 relative z-10">
                   {cs.metrics.map(m => (
-                    <li key={m.label} className="p-3 rounded-xl bg-white/5 border border-white/10 text-center flex flex-col">
+                    <li key={m.label} className="p-3 rounded-xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 text-center flex flex-col">
                       <span className="text-sm font-semibold text-vae-turquoise leading-tight">{m.value}</span>
                       <span className="text-[10px] text-text-muted leading-tight mt-1">{m.label}</span>
                     </li>
@@ -108,7 +108,7 @@ const CaseStudiesSection: React.FC = () => {
 
               <div className="mt-auto flex flex-wrap gap-2 relative z-10">
                 {cs.tags.map(t => (
-                  <span key={t} className={`px-2.5 py-1 rounded-full text-[10px] font-medium border ${cs.comingSoon ? 'bg-white/5 text-text-muted border-white/10' : 'bg-vae-turquoise/10 text-vae-turquoise border-vae-turquoise/30'}`}>{t}</span>
+                  <span key={t} className={`px-2.5 py-1 rounded-full text-[10px] font-medium border ${cs.comingSoon ? 'bg-bg-primary/5 dark:bg-white/5 text-text-muted border-border-primary dark:border-white/10' : 'bg-vae-turquoise/10 text-vae-turquoise border-vae-turquoise/30'}`}>{t}</span>
                 ))}
               </div>
 

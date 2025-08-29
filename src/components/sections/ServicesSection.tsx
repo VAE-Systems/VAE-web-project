@@ -117,13 +117,13 @@ const ServicesSection: React.FC = () => {
   }
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-24 md:py-36 bg-[linear-gradient(140deg,#0b0b0b,#101010,#141414)] border-t border-white/5 overflow-hidden">
+    <section id="services" ref={sectionRef} className="relative py-24 md:py-36 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary border-t border-vae-turquoise/10 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-[0.15] bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.1),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.06),transparent_55%)]" />
       <div className="container-vae relative">
         {/* Header */}
         <div ref={headerRef} className="max-w-4xl mx-auto text-center mb-12 md:mb-20">
           <h2 className="h2 heading-gradient h-space">Services – Enablement, Beratung, Umsetzung</h2>
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Von erster Einordnung bis souveränem Betrieb: <span className="text-white font-medium">Schulungen & Workshops</span> für interne Kompetenz, <span className="text-white font-medium">Beratung</span> für Richtung & Governance sowie modulare <span className="text-white">Custom Solutions</span> für messbare Prozess‑ & Wissensautomatisierung. <span className="text-vae-turquoise">Open Source. Auditierbar. Austauschbar.</span></p>
+          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Von erster Einordnung bis souveränem Betrieb: <span className="text-text-light font-medium">Schulungen & Workshops</span> für interne Kompetenz, <span className="text-text-light font-medium">Beratung</span> für Richtung & Governance sowie modulare <span className="text-text-light">Custom Solutions</span> für messbare Prozess‑ & Wissensautomatisierung. <span className="text-vae-turquoise">Open Source. Auditierbar. Austauschbar.</span></p>
         </div>
 
         {/* Grid */}
@@ -131,7 +131,7 @@ const ServicesSection: React.FC = () => {
           {services.map((s) => (
             <div
               key={s.key}
-              className={`group relative overflow-hidden rounded-2xl p-7 bg-white/[0.035] backdrop-blur-md border border-white/10 flex flex-col h-full transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] hover:-translate-y-2`}
+              className={`group relative overflow-hidden rounded-2xl p-7 bg-vae-turquoise/5 backdrop-blur-md border border-vae-turquoise/20 flex flex-col h-full transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] hover:-translate-y-2`}
             >
               <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
               <div className="flex items-start justify-between mb-6 relative z-10">
@@ -143,7 +143,7 @@ const ServicesSection: React.FC = () => {
                 </div>
                 <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-medium tracking-wide">{s.badge}</span>
               </div>
-              <h3 className="h4 mb-3 text-white leading-snug relative z-10">{s.title}</h3>
+              <h3 className="h4 mb-3 text-text-light leading-snug relative z-10">{s.title}</h3>
               <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-grow relative z-10">{s.description}</p>
               <div className="grid grid-cols-2 gap-3 mb-6 text-center text-[11px] rounded-lg p-3 bg-vae-turquoise/5 relative z-10">
                 {s.stats.map(st => (
@@ -188,15 +188,15 @@ const ServicesSection: React.FC = () => {
         {/* Lifecycle / Value Blocks */}
         <div className="grid md:grid-cols-3 gap-10 mb-24">
           {[{h:'Lifecycle Ansatz',d:'Analyse → Architektur → Umsetzung → Enablement → Betrieb. Keine „Throwaway“ POCs – inkrementell produktionsfähig.'},{h:'Messbarkeit',d:'Evaluationssets, Quality Gates & Betriebsmesswerte eingebaut statt nachgelagert. Entscheidungen werden datenbasiert.'},{h:'Souveränität',d:'Open Source & lokale Ausführbarkeit verhindern unerwünschten Lock‑in. Austauschbare Index & Modell Layer.'}].map(b => (
-            <div key={b.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <h3 className="text-sm font-semibold text-white mb-3">{b.h}</h3>
+            <div key={b.h} className="p-6 rounded-2xl bg-vae-turquoise/5 border border-vae-turquoise/20">
+              <h3 className="text-sm font-semibold text-text-light mb-3">{b.h}</h3>
               <p className="text-xs text-text-secondary leading-relaxed">{b.d}</p>
             </div>
           ))}
         </div>
 
         {/* KPI / Studien Panel */}
-        <div className="relative bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-3xl p-10 overflow-hidden">
+        <div className="relative bg-gradient-to-br from-vae-turquoise/5 to-vae-turquoise/2 border border-vae-turquoise/20 rounded-3xl p-10 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(circle_at_70%_30%,rgba(0,239,213,0.12),transparent_60%)]" />
           <div className="relative grid md:grid-cols-4 gap-8 mb-10">
             {[{k:'< 6 Wochen',l:'Proof → produktiver Wert'},{k:'> 60%',l:'Prozess-Effizienzsteigerung (Automation)',note:'5'},{k:'4–6x',l:'Schnellere Architektur-Entscheidungen',note:'2'},{k:'65%',l:'Reduzierte Vendor-/Lizenzkosten',note:'1'}].map(x => (

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { productCategories } from '../navigation/productCategories'
 import { serviceCategories } from '../navigation/serviceCategories'
 import { useFocusTrap } from '@/hooks'
+import { useTheme } from '@/contexts/ThemeContext'
 
 /**
  * Header Component
@@ -24,6 +25,7 @@ const Header: React.FC = () => {
   const servicesTriggerRef = useRef<HTMLButtonElement>(null)
   const productsMegaRef = useRef<HTMLDivElement>(null)
   const servicesMegaRef = useRef<HTMLDivElement>(null)
+  const { theme, toggleTheme } = useTheme()
   useFocusTrap(
     productsOpen,
     productsMegaRef,
@@ -304,6 +306,17 @@ const Header: React.FC = () => {
             Projekt starten
           </Link>
 
+          {/* Theme Toggle Button */}
+          <button
+            className="p-2 text-text-light hover:text-vae-turquoise transition-colors duration-300"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            <span className="material-symbols-outlined">
+              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+            </span>
+          </button>
+
           {/* Mobile Menu Button */}
           <button
             id="mobile-menu-trigger"
@@ -339,7 +352,21 @@ const Header: React.FC = () => {
               ))}
               
               {/* Mobile CTA */}
-              <div className="px-4 pt-4">
+              <div className="px-4 pt-4 space-y-4">
+                {/* Theme Toggle in Mobile Menu */}
+                <button
+                  className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary transition-colors duration-300"
+                  onClick={() => {
+                    toggleTheme()
+                    setIsMobileMenuOpen(false)
+                  }}
+                >
+                  <span className="material-symbols-outlined mr-2">
+                    {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+                  </span>
+                  {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                </button>
+                
                 <Link 
                   to="/contact" 
                   className="btn-primary w-full justify-center"

@@ -25,7 +25,7 @@ interface CardProps extends React.HTMLAttributes<HTMLElement> {
  */
 const Card: React.FC<CardProps> = ({ as = 'article', title, lead, body, bullets = [], badge, link, cta = 'Mehr dazu', children, className = '', animate = true, ...rest }) => {
   const Tag = as
-  const baseClass = `group relative rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-md p-7 flex flex-col h-full overflow-hidden transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] ${className}`.trim()
+  const baseClass = `group relative rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/5 backdrop-blur-md p-7 flex flex-col h-full overflow-hidden transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)] ${className}`.trim()
 
   return React.createElement(
     Tag,
@@ -37,7 +37,7 @@ const Card: React.FC<CardProps> = ({ as = 'article', title, lead, body, bullets 
         {badge && <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-medium tracking-wide">{badge}</span>}
       </div>
 
-      {lead && <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-snug relative z-10">{lead}</h3>}
+      {lead && <h3 className="text-xl md:text-2xl font-bold text-text-light mb-3 leading-snug relative z-10">{lead}</h3>}
       {body && <p className="text-sm text-text-secondary leading-relaxed mb-5 relative z-10">{body}</p>}
 
       {bullets.length > 0 && (

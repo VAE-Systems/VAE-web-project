@@ -95,9 +95,9 @@ const HeroSection: React.FC = () => {
                 </Link>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link to="/services" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Services Übersicht</Link>
-                <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Custom Solutions</Link>
-                <Link to="/products#core" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">VAE CORE Architektur</Link>
+                <Link to="/services" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Services Übersicht</Link>
+                <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Custom Solutions</Link>
+                <Link to="/products#core" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Architektur</Link>
                 <a href="mailto:kontakt@vae-systems.com?subject=Kurzfrage%20zu%20KI%20Projekt" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Direkte Frage per Mail</a>
               </div>
               <p className="text-[11px] text-text-muted leading-relaxed max-w-md">

@@ -8,6 +8,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class', // Enable class-based dark mode
   theme: {
     extend: {
       // VAE Design System - Colors from Reference
@@ -17,32 +18,32 @@ export default {
         'vae-black-soft': 'hsl(0, 0%, 6%)',
         'vae-black-lighter': 'hsl(0, 0%, 10%)',
         
-        // VAE Turquoise Palette
+        // VAE Turquoise Palette - Theme-aware
         'vae-turquoise': {
-          DEFAULT: 'hsl(157, 100%, 47%)', // #00ffa5 - Main brand color
-          50: 'hsl(157, 100%, 95%)',      // Ultra light
-          100: 'hsl(157, 100%, 85%)',     // Very light
-          200: 'hsl(157, 100%, 75%)',     // Light
-          300: 'hsl(157, 100%, 65%)',     // Medium light
-          400: 'hsl(157, 100%, 55%)',     // Medium
-          500: 'hsl(157, 100%, 47%)',     // Main color (DEFAULT)
-          600: 'hsl(157, 100%, 40%)',     // Medium dark
-          700: 'hsl(157, 100%, 35%)',     // Dark
-          800: 'hsl(157, 100%, 30%)',     // Very dark
-          900: 'hsl(157, 100%, 25%)',     // Ultra dark
-          'light': 'hsl(157, 100%, 60%)', // Shorthand for light variant
-          'dark': 'hsl(157, 100%, 35%)',  // Shorthand for dark variant
+          DEFAULT: 'hsl(var(--color-vae-turquoise) / <alpha-value>)', // #00ffa5 - Main brand color
+          50: 'hsl(var(--color-vae-turquoise) / 0.05)',      // Ultra light
+          100: 'hsl(var(--color-vae-turquoise) / 0.1)',     // Very light
+          200: 'hsl(var(--color-vae-turquoise) / 0.2)',     // Light
+          300: 'hsl(var(--color-vae-turquoise) / 0.3)',     // Medium light
+          400: 'hsl(var(--color-vae-turquoise) / 0.4)',     // Medium
+          500: 'hsl(var(--color-vae-turquoise) / <alpha-value>)',     // Main color (DEFAULT)
+          600: 'hsl(var(--color-vae-turquoise) / 0.6)',     // Medium dark
+          700: 'hsl(var(--color-vae-turquoise) / 0.7)',     // Dark
+          800: 'hsl(var(--color-vae-turquoise) / 0.8)',     // Very dark
+          900: 'hsl(var(--color-vae-turquoise) / 0.9)',     // Ultra dark
+          'light': 'hsl(var(--color-vae-turquoise) / 0.6)', // Shorthand for light variant
+          'dark': 'hsl(var(--color-vae-turquoise) / 0.7)',  // Shorthand for dark variant
         },
         
-        // Background Colors
-        'bg-dark': 'hsl(0, 0%, 8%)',
-        'bg-darker': 'hsl(0, 0%, 4%)',
-        'bg-secondary': 'hsl(0, 0%, 12%)',
+        // Background Colors - Theme-aware
+        'bg-dark': 'hsl(var(--color-bg-dark) / <alpha-value>)',
+        'bg-darker': 'hsl(var(--color-bg-darker) / <alpha-value>)',
+        'bg-secondary': 'hsl(var(--color-bg-secondary) / <alpha-value>)',
         
-        // Text Colors
-        'text-light': 'hsl(0, 0%, 95%)',
-        'text-muted': 'hsla(0, 0%, 80%, 0.8)',
-        'text-secondary': 'hsla(0, 0%, 100%, 0.7)',
+        // Text Colors - Theme-aware
+        'text-light': 'hsl(var(--color-text-light) / <alpha-value>)',
+        'text-muted': 'hsl(var(--color-text-muted) / <alpha-value>)',
+        'text-secondary': 'hsl(var(--color-text-secondary) / <alpha-value>)',
       },
       
       // Typography

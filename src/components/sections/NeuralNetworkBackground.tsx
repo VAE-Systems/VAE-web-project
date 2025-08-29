@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { useTheme } from '@/contexts/ThemeContext'
 
 interface NeuralNetworkBackgroundProps {
   className?: string
@@ -8,6 +9,7 @@ interface NeuralNetworkBackgroundProps {
 const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ className = '' }) => {
   const mountRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const { theme } = useTheme()
 
   useEffect(() => {
     if (!mountRef.current) return
@@ -34,11 +36,12 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
     renderer.setClearColor(0x000000, 0) // Transparent background
     currentMount.appendChild(renderer.domElement)
 
-    // Neural Network Setup - Using VAE turquoise color
+    // Neural Network Setup - Theme-aware colors
+    const turquoiseColor = theme === 'dark' ? 0x00ffa5 : 0x006b4a // Darker turquoise for light mode
     const neurons = new THREE.Group()
     const neuronGeometry = new THREE.SphereGeometry(0.03, 8, 6)
     const neuronMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x00ffa5, // VAE turquoise
+      color: turquoiseColor,
       transparent: true,
       opacity: 0.6 
     })
@@ -46,7 +49,7 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
     // Connection Lines
     const connections = new THREE.Group()
     const lineMaterial = new THREE.LineBasicMaterial({ 
-      color: 0x00ffa5, // VAE turquoise
+      color: turquoiseColor,
       transparent: true, 
       opacity: 0.2 
     })
@@ -65,7 +68,7 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     
     const particleMaterial = new THREE.PointsMaterial({
-      color: 0x00ffa5, // VAE turquoise
+      color: turquoiseColor,
       size: 1,
       transparent: true,
       opacity: 0.3,

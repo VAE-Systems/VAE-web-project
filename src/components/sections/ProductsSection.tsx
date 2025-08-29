@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const ProductsSection: React.FC = () => {
   return (
-  <section id="products" className="relative py-24 md:py-32 overflow-hidden border-t border-white/5 surface-alt">
+  <section id="products" className="relative py-24 md:py-32 overflow-hidden border-t border-vae-turquoise/10 surface-alt">
       <ParallaxBackdrop strength={10} />
       <ParticleField count={18} />
       {/* Background subtle gradient */}
@@ -36,7 +36,7 @@ const ProductsSection: React.FC = () => {
             return (
               <div
                 key={cat.key}
-                className={`group relative flex flex-col rounded-2xl overflow-hidden p-6 bg-white/[0.04] border border-white/10 backdrop-blur-md hover:-translate-y-2 transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_34px_-6px_rgba(var(--vae-turquoise-rgb),0.35)]`}
+                className={`group relative flex flex-col rounded-2xl overflow-hidden p-6 bg-vae-turquoise/5 border border-vae-turquoise/20 backdrop-blur-md hover:-translate-y-2 transition-all duration-400 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_34px_-6px_rgba(var(--vae-turquoise-rgb),0.35)]`}
               >
                 <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_32%_22%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
                 <div className="flex items-start justify-between mb-5 relative z-10">
@@ -45,7 +45,7 @@ const ProductsSection: React.FC = () => {
                       <span className="material-symbols-outlined text-xl">{cat.icon || 'apps'}</span>
                     </div>
                     <div>
-                      <h3 className="text-base font-semibold text-white leading-tight">{cat.title}</h3>
+                      <h3 className="text-base font-semibold text-text-light leading-tight">{cat.title}</h3>
                       <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
                     </div>
                   </div>

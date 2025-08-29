@@ -30,7 +30,7 @@ const AboutSection: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="h2 heading-gradient mb-4">{miniTagline}</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">{miniSubline}</p>
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">{miniSubline}</p>
         </div>
 
         {/* Core Grid */}
@@ -41,12 +41,12 @@ const AboutSection: React.FC = () => {
               <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise/80 uppercase mb-4">Wofür es wirkt</h3>
               <div className="grid sm:grid-cols-2 gap-6">
                 {miniOutcomes.map(o => (
-                  <div key={o.key} className="group relative rounded-xl border border-white/10 bg-white/[0.035] p-5 backdrop-blur-sm hover:border-vae-turquoise/40 transition-colors">
+                  <div key={o.key} className="group relative rounded-xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-5 backdrop-blur-sm hover:border-vae-turquoise/40 transition-colors">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-10 h-10 rounded-lg bg-vae-turquoise/20 flex items-center justify-center text-vae-turquoise">
                         <span className="material-symbols-outlined text-base">{o.icon}</span>
                       </div>
-                      <h4 className="text-sm font-semibold text-white leading-snug">{o.title}</h4>
+                      <h4 className="text-sm font-semibold text-text-light leading-snug">{o.title}</h4>
                     </div>
                     <p className="text-[12px] text-text-secondary leading-relaxed">{o.body}</p>
                   </div>
@@ -55,13 +55,13 @@ const AboutSection: React.FC = () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise/80 uppercase mb-4">Wie wir starten</h3>
-              <ol className="flex flex-wrap gap-3 text-[11px] text-white/70">
+              <ol className="flex flex-wrap gap-3 text-[11px] text-text-secondary">
                 {miniProcess.map((s,i) => (
-                  <li key={s.key} className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-white/5">
+                  <li key={s.key} className="flex items-center gap-2 px-3 py-2 rounded-lg border border-vae-turquoise/20 bg-vae-turquoise/5">
                     <span className="text-vae-turquoise/70 font-semibold">{String(i+1).padStart(2,'0')}</span>
-                    <span className="text-white/90">{s.label}</span>
-                    <span className="text-white/30">·</span>
-                    <span className="text-white/60">{s.hint}</span>
+                    <span className="text-text-light">{s.label}</span>
+                    <span className="text-text-muted">·</span>
+                    <span className="text-text-secondary">{s.hint}</span>
                   </li>
                 ))}
               </ol>
@@ -74,7 +74,7 @@ const AboutSection: React.FC = () => {
               <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise/80 uppercase mb-4">Vertrauen & Prinzipien</h3>
               <div className="flex flex-wrap gap-3">
                 {badges.slice(0,4).map(b => (
-                  <div key={b.key} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[12px] text-white/70">
+                  <div key={b.key} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-vae-turquoise/10 border border-vae-turquoise/20 text-[12px] text-vae-turquoise">
                     <span className="material-symbols-outlined text-[16px] text-vae-turquoise">{b.icon}</span>
                     <span>{b.label}</span>
                   </div>
@@ -92,8 +92,8 @@ const AboutSection: React.FC = () => {
                 ))}
               </ul>
             </div>
-            <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-sm text-center">
-              <h3 className="text-xl font-semibold text-white mb-3">Use‑Case kurz prüfen?</h3>
+            <div className="p-6 rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/5 backdrop-blur-sm text-center">
+              <h3 className="text-xl font-semibold text-text-light mb-3">Use‑Case kurz prüfen?</h3>
               <p className="text-sm text-text-secondary mb-5">15 Minuten Gespräch: Ziel, aktuelle Systeme & erstes Inkrement grob abstecken.</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a href="/contact" className="btn-primary text-[12px]">Gespräch anfragen</a>

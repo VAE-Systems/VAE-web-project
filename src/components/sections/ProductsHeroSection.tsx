@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { useTheme } from '@/contexts/ThemeContext'
 import FaultyTerminal from './effects/FaultyTerminal'
 
 /**
@@ -7,6 +8,7 @@ import FaultyTerminal from './effects/FaultyTerminal'
  */
 const ProductsHeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const { theme } = useTheme()
 
   // (Optional future: GSAP or Intersection observers can be added here.)
 
@@ -14,22 +16,22 @@ const ProductsHeroSection: React.FC = () => {
     <>
     {/* Negative top margin zieht das Hero unter den fixen Header (h-20=5rem).
         Viewport based Mindesthöhe + responsive Innenabstände sorgen für bessere Responsivität. */}
-    <section className="relative -mt-20 flex items-center min-h-[calc(100vh-5rem)] pt-32 pb-16 sm:pt-40 sm:pb-20 md:pt-52 md:pb-24 overflow-hidden border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
+    <section className="relative -mt-20 flex items-center min-h-[calc(100vh-5rem)] pt-32 pb-16 sm:pt-40 sm:pb-20 md:pt-52 md:pb-24 overflow-hidden border-b border-border-primary dark:border-white/5 hero-surface bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overlay-diag overlay-grid">
       {/* Animated backdrop */}
-      <div className="absolute inset-0 opacity-40 mix-blend-screen select-none">
+      <div className={`absolute inset-0 z-0 select-none ${theme === 'dark' ? 'opacity-40 mix-blend-screen' : 'opacity-40 mix-blend-multiply'}`}>
         <FaultyTerminal 
           scale={1.2}
           gridMul={[2,1]}
           digitSize={1.1}
           timeScale={0.35}
-          scanlineIntensity={0.6}
-          glitchAmount={0.9}
-          flickerAmount={0.8}
-          noiseAmp={0.4}
-          brightness={0.9}
-          tint="#00ffa5"
+          scanlineIntensity={theme === 'dark' ? 0.6 : 0.35}
+          glitchAmount={theme === 'dark' ? 0.9 : 0.6}
+          flickerAmount={theme === 'dark' ? 0.8 : 0.4}
+          noiseAmp={theme === 'dark' ? 0.4 : 0.25}
+          brightness={theme === 'dark' ? 0.9 : 0.8}
+          tint={theme === 'dark' ? '#00ffa5' : '#006b5a'}
           mouseReact={true}
-          mouseStrength={0.5} /* stärkeres Hover/Bewegungs‑Feedback */
+          mouseStrength={0.5}
           className="w-full h-full"
         />
       </div>
@@ -40,7 +42,7 @@ const ProductsHeroSection: React.FC = () => {
           <div className="relative flex items-center justify-center">
             <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-[3rem] flex flex-col items-center justify-center gap-3 shadow-[0_0_40px_-10px_rgba(var(--vae-turquoise-rgb),0.45)] border border-border-primary dark:border-white/10 bg-[linear-gradient(140deg,rgba(var(--vae-turquoise-rgb),0.18),rgba(var(--vae-turquoise-rgb),0.08)_40%,rgba(0,40,30,0.35))] backdrop-blur-xl">
               <img
-                src="/App_Logo_light.svg"
+                src={theme === 'dark' ? '/LOGO_01_white.svg' : '/App_Logo_light.svg'}
                 alt="VAE Systems App Icon"
                 className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-[3rem] flex flex-col items-center justify-center gap-3 shadow-[0_0_40px_-10px_rgba(var(--vae-turquoise-rgb),0.45)] border border-border-primary dark:border-white/10 bg-[linear-gradient(140deg,rgba(var(--vae-turquoise-rgb),0.18),rgba(var(--vae-turquoise-rgb),0.08)_40%,rgba(0,40,30,0.35))] backdrop-blur-xl"
               />

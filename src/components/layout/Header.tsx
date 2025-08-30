@@ -127,9 +127,9 @@ const Header: React.FC = () => {
           >
             <div className="h-10 group-hover:glow-turquoise transition-all duration-300">
               <img 
-                src="/LOGO_01_white.svg" 
+                src={'/LOGO_01_white.svg'} 
                 alt="VAE Systems Logo" 
-                className="h-full w-auto"
+                className="h-full w-auto light-invert"
               />
             </div>
             <div className="hidden md:block border-l border-vae-turquoise/30 pl-4">
@@ -179,7 +179,7 @@ const Header: React.FC = () => {
                       <div
                         ref={productsMegaRef}
                         id="products-mega"
-                        className="mega-panel w-[920px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/40 ring-1 ring-border-primary dark:ring-white/10 focus:outline-none"
+                        className="mega-panel w-[920px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(255,255,255,0.98),rgba(248,248,248,0.96))] dark:bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/10 dark:shadow-black/40 ring-1 ring-black/5 dark:ring-white/10 focus:outline-none surface-glass-panel"
                         role="dialog"
                         aria-label="Products Menu"
                         aria-modal="false"
@@ -235,7 +235,7 @@ const Header: React.FC = () => {
                       <div
                         ref={servicesMegaRef}
                         id="services-mega"
-                        className="mega-panel w-[760px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/40 ring-1 ring-border-primary dark:ring-white/10 focus:outline-none"
+                        className="mega-panel w-[760px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(255,255,255,0.98),rgba(248,248,248,0.96))] dark:bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/10 dark:shadow-black/40 ring-1 ring-black/5 dark:ring-white/10 focus:outline-none surface-glass-panel"
                         role="dialog"
                         aria-label="Services Menu"
                         aria-modal="false"

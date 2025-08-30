@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Motion } from '@/utils/motion'
 
 
 const techStack = [
@@ -69,7 +70,7 @@ const TechStackSection: React.FC = () => {
       gsap.fromTo(
         '.radial-bg',
         { scale: 0, opacity: 0.6 },
-        { scale: 1, opacity: 1, duration: 2, ease: 'power2.out', scrollTrigger: trig }
+        { scale: 1, opacity: 1, duration: Motion.long, ease: Motion.ease, scrollTrigger: trig }
       )
 
       cableRefs.current.forEach((path, i) => {
@@ -79,7 +80,7 @@ const TechStackSection: React.FC = () => {
         gsap.to(path, {
           strokeDashoffset: 0,
           duration: 3,
-          ease: 'power2.out',
+          ease: Motion.ease,
           delay: i * 0.05,
           scrollTrigger: trig
         })
@@ -146,7 +147,7 @@ const TechStackSection: React.FC = () => {
         const y = radius * Math.sin(angle)
         gsap.fromTo(el,
           { x, y, opacity: 0, scale: 0.85 },
-          { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out', delay: i * 0.04, scrollTrigger: trig }
+          { x: 0, y: 0, opacity: 1, scale: 1, duration: Motion.enter, ease: Motion.ease, delay: i * Motion.stagger, scrollTrigger: trig }
         )
         const imgEl = el.querySelector('img')
         if (imgEl) {

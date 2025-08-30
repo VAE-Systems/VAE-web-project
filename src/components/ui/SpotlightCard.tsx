@@ -56,7 +56,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       id={slug}
       aria-labelledby={headingId}
       onMouseMove={reducedMotion ? undefined : handleMove}
-      className={`relative ${!reducedMotion ? 'group hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]' : ''} rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-md overflow-hidden transition-all duration-500 ${className}`.trim()}
+      className={`relative ${!reducedMotion ? 'group hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]' : ''} rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/5 backdrop-blur-md overflow-hidden transition-all duration-500 ${className}`.trim()}
       style={
         reducedMotion
           ? undefined
@@ -68,7 +68,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       )}
       <div className="relative z-10 p-6 flex flex-col h-full">
         {iconSlot && <div className="mb-4">{iconSlot}</div>}
-        <h3 id={headingId} className="text-sm font-semibold text-white mb-2 leading-snug">
+        <h3 id={headingId} className="text-sm font-semibold text-text-light dark:text-white mb-2 leading-snug">
           {title}
         </h3>
         <p

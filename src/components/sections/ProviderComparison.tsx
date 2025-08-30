@@ -78,7 +78,7 @@ const ProviderComparisonSection: React.FC<{ id?: string; className?: string; hea
         <div className="hidden md:block mb-10">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {rows.map(d => (
-              <div key={d.key} className="group relative p-6 rounded-2xl bg-bg-primary/[0.035] dark:bg-white/[0.035] border border-border-primary/10 dark:border-white/10 backdrop-blur-sm overflow-hidden transition-colors hover:border-vae-turquoise/40">
+              <div key={d.key} className="group relative p-6 rounded-2xl bg-bg-primary/10 dark:bg-white/[0.035] border border-border-primary/10 dark:border-white/10 backdrop-blur-sm overflow-hidden transition-colors hover:border-vae-turquoise/40">
                 <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_30%_22%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
                 <div className="flex items-center gap-3 mb-4 relative z-10">
                   <MaterialIcon icon={d.icon} size={22} className="text-vae-turquoise" />

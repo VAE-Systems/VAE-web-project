@@ -207,8 +207,8 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
   return (
     <div 
       ref={mountRef} 
-      className={`absolute inset-0 pointer-events-none ${className}`}
-      style={{ zIndex: 1 }}
+      className={`absolute inset-0 z-0 pointer-events-none ${className}`}
+      style={{}}
     />
   )
 }

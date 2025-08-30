@@ -10,7 +10,7 @@ const ProductsCardsGrid: React.FC = () => {
     <div className="mt-8 sm:mt-10">
       <div className="container-vae">
         <header className="mb-6 sm:mb-8" data-animate>
-          <h3 className="text-base sm:text-lg font-semibold text-white">Produkte & Plattform</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-text-light dark:text-white">Produkte & Plattform</h3>
           <p className="text-base md:text-sm text-text-secondary">Schnell einsatzfähige Applikationen, Lizenzmodelle und das VAE CORE als Betriebsplattform.</p>
         </header>
 
@@ -18,7 +18,7 @@ const ProductsCardsGrid: React.FC = () => {
           {items.map(cat => (
             <article
               key={cat.key}
-              className="group relative rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-md p-5 sm:p-6 flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.12),0_10px_40px_-10px_rgba(var(--vae-turquoise-rgb),0.28)]"
+              className="group relative rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/5 backdrop-blur-md p-5 sm:p-6 flex flex-col h-full overflow-hidden transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.12),0_10px_40px_-10px_rgba(var(--vae-turquoise-rgb),0.28)]"
             >
               <div className="flex items-start justify-between mb-3 relative z-10">
                 <div className="flex items-center gap-3">
@@ -26,7 +26,7 @@ const ProductsCardsGrid: React.FC = () => {
                     <span className="material-symbols-outlined">{cat.icon || 'layers'}</span>
                   </div>
                   <div>
-                    <h4 className="text-white font-semibold text-lg">{cat.title}</h4>
+                    <h4 className="text-text-light dark:text-white font-semibold text-lg">{cat.title}</h4>
                     <p className="text-sm md:text-xs text-vae-turquoise/70 uppercase tracking-wide mt-1">{cat.tagline}</p>
                   </div>
                 </div>

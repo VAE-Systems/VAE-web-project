@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Motion } from '@/utils/motion'
 import { pilotScenario } from '../../content/pilotScenario'
 
 const PilotScenarioSection: React.FC = () => {
@@ -16,7 +17,7 @@ const PilotScenarioSection: React.FC = () => {
       gsap.set(cols, { opacity: 0, y: 40 })
       ScrollTrigger.batch(cols, {
         start: 'top 85%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.08 }),
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: Motion.enter, ease: Motion.ease, stagger: Motion.stagger }),
         once: true
       })
     }, ref)
@@ -30,12 +31,12 @@ const PilotScenarioSection: React.FC = () => {
       <div className="about-surface-bg" aria-hidden="true" />
       <div className="container-vae max-w-6xl mx-auto relative">
         <header className="max-w-3xl mb-14" data-heading-accent>
-          <h2 id="pilot-heading" className="text-4xl md:text-5xl font-bold text-white heading-fix mb-6">{title}</h2>
+          <h2 id="pilot-heading" className="text-4xl md:text-5xl font-bold text-text-light dark:text-white heading-fix mb-6">{title}</h2>
           <div className="heading-accent-bar h-[3px] w-40 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed">{intro}</p>
         </header>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div data-col className="rounded-2xl border border-white/10 bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
+          <div data-col className="rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
             <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise/80 uppercase mb-3">Ausgangslage</h3>
             <p className="text-sm text-text-secondary leading-relaxed mb-4">{context}</p>
             <ul className="space-y-2 text-[12px] text-text-secondary">
@@ -44,7 +45,7 @@ const PilotScenarioSection: React.FC = () => {
               ))}
             </ul>
           </div>
-          <div data-col className="rounded-2xl border border-white/10 bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
+          <div data-col className="rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
             <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise/80 uppercase mb-3">Ansatz</h3>
             <ul className="space-y-2 text-[12px] text-text-secondary mb-4">
               {approach.map(a => (
@@ -52,7 +53,7 @@ const PilotScenarioSection: React.FC = () => {
               ))}
             </ul>
           </div>
-          <div data-col className="rounded-2xl border border-white/10 bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
+          <div data-col className="rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
             <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise/80 uppercase mb-3">Ergebnis (Qualitativ)</h3>
             <ul className="space-y-2 text-[12px] text-text-secondary mb-4">
               {resultQualitative.map(r => (
@@ -60,7 +61,7 @@ const PilotScenarioSection: React.FC = () => {
               ))}
             </ul>
           </div>
-          <div data-col className="rounded-2xl border border-white/10 bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
+          <div data-col className="rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/[0.035] p-6 backdrop-blur-sm flex flex-col">
             <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise/80 uppercase mb-3">Ausbaupfad</h3>
             <ul className="space-y-2 text-[12px] text-text-secondary mb-4">
               {nextSteps.map(n => (

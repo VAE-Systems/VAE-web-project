@@ -13,8 +13,8 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
 	}
 
         return (
-                <section className="relative flex items-center min-h-[calc(100vh-5rem)] pt-24 pb-16 sm:pt-32 sm:pb-24 md:pb-28 overflow-hidden border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
-                        <div className="absolute inset-0 opacity-80 mix-blend-screen">
+                <section className="relative flex items-center min-h-[calc(100vh-5rem)] pt-24 pb-16 sm:pt-32 sm:pb-24 md:pb-28 overflow-hidden border-b border-border-primary dark:border-white/5 hero-surface bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overlay-diag overlay-grid">
+                        <div className="absolute inset-0 z-0 opacity-80 mix-blend-screen">
                                 <RippleGrid
                                         enableRainbow={false}
                                         gridColor="#00ffa5"
@@ -51,4 +51,3 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
 }
 
 export default ServicesHeroSection
-

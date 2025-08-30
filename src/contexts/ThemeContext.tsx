@@ -31,10 +31,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const root = document.documentElement
 
     // Remove previous theme classes
-    root.classList.remove('theme-dark', 'theme-light')
+    root.classList.remove('theme-dark', 'theme-light', 'dark')
 
     // Add current theme class
     root.classList.add(`theme-${theme}`)
+    // Ensure Tailwind dark: variants work by toggling the 'dark' class
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
 
     // Update CSS custom properties based on theme
     if (theme === 'light') {
@@ -45,7 +51,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       root.style.setProperty('--color-text-light', '0 0% 10%')
       root.style.setProperty('--color-text-secondary', '0 0% 30%')
       root.style.setProperty('--color-text-muted', '0 0% 50%')
-      root.style.setProperty('--color-vae-turquoise', '157 100% 35%') // Darker turquoise for light backgrounds
+      root.style.setProperty('--color-vae-turquoise', '157 85% 32%') // Calmer turquoise on light backgrounds
       root.style.setProperty('--color-vae-black', '0 0% 10%')
     } else {
       // Dark mode colors (original)

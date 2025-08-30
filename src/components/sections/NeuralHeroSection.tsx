@@ -203,11 +203,11 @@ const NeuralHeroSection: React.FC = () => {
   }, [mousePosition.x, mousePosition.y])
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-bg-primary dark:bg-bg-darker">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden hero-surface bg-bg-primary dark:bg-bg-darker overlay-diag overlay-grid">
       {/* Neural Network Background */}
       <div
         ref={mountRef}
-        className="absolute inset-0 w-full h-full bg-bg-primary/85 dark:bg-[rgba(10,10,10,0.85)]"
+        className="absolute inset-0 z-0 w-full h-full bg-bg-primary/85 dark:bg-[rgba(10,10,10,0.85)]"
       />
       
       {/* Content Container */}

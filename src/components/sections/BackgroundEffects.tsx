@@ -6,6 +6,11 @@ export const ParallaxBackdrop: React.FC<{ strength?: number }> = ({ strength = 1
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
+
+    // Respect prefers-reduced-motion
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
+
     const handler = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window
       const x = (e.clientX / innerWidth - 0.5) * strength

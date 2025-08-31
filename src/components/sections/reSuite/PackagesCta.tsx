@@ -19,10 +19,10 @@ const PackagesCta: React.FC = () => (
         </p>
       </div>
       <div className="flex gap-3">
-        <Link to="/contact" className="btn-primary">
+        <Link to="/contact" className="btn-primary btn-compact whitespace-nowrap">
           Demo anfragen
         </Link>
-        <Link to="/products/vae-core" className="btn-secondary">
+        <Link to="/products/vae-core" className="btn-secondary btn-compact whitespace-nowrap">
           VAE CORE ansehen
         </Link>
       </div>
@@ -31,4 +31,3 @@ const PackagesCta: React.FC = () => (
 )
 
 export default PackagesCta
-

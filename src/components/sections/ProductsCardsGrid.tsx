@@ -48,8 +48,8 @@ const ProductsCardsGrid: React.FC = () => {
               </ul>
 
               <div className="mt-auto flex items-center gap-3">
-                <Link to={`/products/${cat.key}`} className="btn-primary">Ansehen</Link>
-                <Link to="/contact" className="btn-secondary">Kontakt</Link>
+                <Link to={`/products/${cat.key}`} className="btn-primary btn-compact whitespace-nowrap">Ansehen</Link>
+                <Link to="/contact" className="btn-secondary btn-compact whitespace-nowrap">Kontakt</Link>
               </div>
             </article>
           ))}

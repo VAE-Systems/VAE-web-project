@@ -14,14 +14,15 @@ const NeuralHeroSection: React.FC = () => {
     const currentMount = mountRef.current
 
     const handleMouseMove = (event: MouseEvent) => {
+      console.log('Mouse move:', event.clientX, event.clientY)
       const rect = currentMount.getBoundingClientRect()
       const x = ((event.clientX - rect.left) / currentMount.clientWidth) * 2 - 1
       const y = -(((event.clientY - rect.top) / currentMount.clientHeight) * 2 - 1)
       setMousePosition({ x, y })
     }
-
-    currentMount.addEventListener('mousemove', handleMouseMove)
-
+    
+    document.addEventListener('mousemove', handleMouseMove)
+    
     let frameId: number
 
     // Scene Setup
@@ -111,9 +112,49 @@ const NeuralHeroSection: React.FC = () => {
     }
 
     scene.add(neurons)
-    scene.add(connections)
-    scene.add(particleSystem)
+    // scene.add(connections)
+    // scene.add(particleSystem)
+    
+    // Lighting setup - theme-aware
+    const ambientLight = new THREE.AmbientLight(isDark ? 0x404040 : 0x606060, 0.6)
+    scene.add(ambientLight)
+    
+    const pointLight = new THREE.PointLight(isDark ? primaryColor : 0x006b5a, 1, 100)
+    pointLight.position.set(10, 10, 10)
+    scene.add(pointLight)
+    
+    const pointLight2 = new THREE.PointLight(isDark ? primaryColor : 0x006b5a, 0.5, 50)
+    pointLight2.position.set(-10, -10, 10)
+    scene.add(pointLight2)
+    
     camera.position.z = 12
+
+    // Click interaction setup
+    const raycaster = new THREE.Raycaster()
+    const mouse = new THREE.Vector2()
+    const clickEffects = new Map<number, number>() // index -> effect timer
+    
+    const handleClick = (event: MouseEvent) => {
+      console.log('Click detected at:', event.clientX, event.clientY)
+      const rect = currentMount.getBoundingClientRect()
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+      
+      raycaster.setFromCamera(mouse, camera)
+      const intersects = raycaster.intersectObjects(neurons.children)
+      console.log('Intersects:', intersects.length)
+      
+      if (intersects.length > 0) {
+        const intersected = intersects[0]
+        const index = neurons.children.indexOf(intersected.object as THREE.Mesh)
+        console.log('Clicked neuron index:', index)
+        if (index !== -1) {
+          clickEffects.set(index, 30) // 30 frames effect
+        }
+      }
+    }
+    
+    document.addEventListener('click', handleClick)
 
     // Animation Loop
     const animate = () => {
@@ -159,6 +200,23 @@ const NeuralHeroSection: React.FC = () => {
         const scale = 1 + pulse * 0.1 + magneticForce * 0.2
         mesh.scale.setScalar(scale)
       })
+      
+      // Click effects
+      clickEffects.forEach((timer, index) => {
+        if (timer > 0) {
+          const mesh = neurons.children[index] as THREE.Mesh
+          const material = mesh.material as THREE.MeshBasicMaterial
+          
+          // Flash effect: brighter color and larger scale
+          const flashIntensity = timer / 30
+          material.color.setHex(isDark ? 0x00ffa5 : 0x006b5a).multiplyScalar(1 + flashIntensity * 2)
+          mesh.scale.multiplyScalar(1 + flashIntensity * 0.5)
+          
+          clickEffects.set(index, timer - 1)
+        } else {
+          clickEffects.delete(index)
+        }
+      })
 
       // Connection opacity with cursor highlight
       connections.children.forEach((connection) => {
@@ -192,9 +250,8 @@ const NeuralHeroSection: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize)
-      if (currentMount) {
-        currentMount.removeEventListener('mousemove', handleMouseMove)
-      }
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('click', handleClick)
       cancelAnimationFrame(frameId)
       if (currentMount && renderer.domElement) {
         currentMount.removeChild(renderer.domElement)
@@ -203,7 +260,7 @@ const NeuralHeroSection: React.FC = () => {
   }, [mousePosition.x, mousePosition.y])
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden hero-surface bg-bg-primary dark:bg-bg-darker overlay-diag overlay-grid">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden hero-surface bg-bg-primary dark:bg-bg-darker ">
       {/* Neural Network Background */}
       <div
         ref={mountRef}

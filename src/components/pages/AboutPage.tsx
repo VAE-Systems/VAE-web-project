@@ -50,11 +50,13 @@ const AboutPage: React.FC = () => {
         })
       }
 
-      // Hero distinct entry
+      // Hero distinct entry (use data-fade as in markup)
       const hero = document.querySelector('.about-hero') as HTMLElement | null
       if (hero) {
-        const heroItems = hero.querySelectorAll('[data-hero-fade]')
-        gsap.from(heroItems, { opacity: 0, y: 46, duration: 1, ease: 'power3.out', stagger: 0.12 })
+        const heroItems = hero.querySelectorAll('[data-fade]')
+        if (heroItems.length) {
+          gsap.from(heroItems, { opacity: 0, y: 46, duration: 1, ease: 'power3.out', stagger: 0.12 })
+        }
       }
 
       // Sections flagged with data-section

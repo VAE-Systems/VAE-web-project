@@ -112,9 +112,9 @@ const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'backdrop-glass border-b border-vae-turquoise/30' 
-          : 'bg-transparent border-b border-vae-turquoise/10'
+        isScrolled
+          ? `${theme === 'light' ? 'bg-white/85' : ''} backdrop-glass border-b ${theme === 'light' ? 'border-black/10' : 'border-vae-turquoise/30'}`
+          : `bg-transparent border-b ${theme === 'light' ? 'border-black/10' : 'border-vae-turquoise/10'}`
       }`}
     >
       <div className="container-vae">
@@ -298,12 +298,13 @@ const Header: React.FC = () => {
           {/* CTA Button */}
           <Link
             to="/contact"
-            className="btn-primary hidden md:inline-flex items-center space-x-4"
+            className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} hidden md:inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-5 font-medium`}
+            data-green-signal="true"
           >
             <span className="material-symbols-outlined mr-2">
-              rocket_launch
+              schedule
             </span>
-            Projekt starten
+            Kostenloses Erstgespräch
           </Link>
 
           {/* Theme Toggle Button */}
@@ -369,13 +370,11 @@ const Header: React.FC = () => {
                 
                 <Link 
                   to="/contact" 
-                  className="btn-primary w-full justify-center"
+                  className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} w-full justify-center`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <span className="material-symbols-outlined mr-2">
-                    rocket_launch
-                  </span>
-                  Projekt starten
+                  <span className="material-symbols-outlined mr-2">schedule</span>
+                  Erstgespräch buchen
                 </Link>
               </div>
             </nav>

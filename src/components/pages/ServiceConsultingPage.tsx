@@ -70,13 +70,15 @@ const ServiceConsultingPage: React.FC = () => {
               ].map(f => (
                 <Card
                   key={f.k}
-                  title={f.k}
+                  title={undefined}
+                  lead={f.k}
                   badge={f.d}
                   body={f.desc}
                   link="/contact"
                   cta="Beratung anfragen"
+                  accent
                 >
-                  <div className="text-text-light dark:text-white font-bold text-xl mb-6">{f.price}</div>
+                  <div className="font-bold text-xl mb-6 text-vae-turquoise dark:text-vae-turquoise">{f.price}</div>
                 </Card>
               ))}
             </div>

@@ -37,7 +37,8 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
     currentMount.appendChild(renderer.domElement)
 
     // Neural Network Setup - Theme-aware colors
-    const turquoiseColor = theme === 'dark' ? 0x00ffa5 : 0x006b4a // Darker turquoise for light mode
+    // Use brand turquoise in both themes; slightly calmer in light to avoid harshness
+    const turquoiseColor = theme === 'dark' ? 0x00ffa5 : 0x00d3a1
     const neurons = new THREE.Group()
     const neuronGeometry = new THREE.SphereGeometry(0.03, 8, 6)
     const neuronMaterial = new THREE.MeshBasicMaterial({ 

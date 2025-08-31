@@ -28,14 +28,14 @@ const HeroSection: React.FC = () => {
       {/* Additional Background Layer for better text readability */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-bg-primary/85 via-bg-secondary/75 to-bg-primary/85 dark:from-bg-darker/80 dark:via-bg-dark/70 dark:to-bg-darker/80"></div>
 
-      {/* Subtle floating dots for light mode visual interest */}
+      {/* Light mode: neutral floating dots (no green) */}
       <div aria-hidden className="light-only absolute inset-0 z-0">
-        <div className="floating-dot absolute top-[18%] left-[12%] w-2 h-2 rounded-full bg-vae-turquoise/30" />
-        <div className="floating-dot absolute top-[36%] left-[78%] w-3 h-3 rounded-md bg-vae-turquoise/20" />
-        <div className="floating-dot absolute top-[62%] left-[28%] w-2 h-2 rounded-full bg-vae-turquoise/25" />
-        <div className="floating-dot absolute top-[72%] left-[62%] w-2 h-2 rounded-full bg-vae-turquoise/20" />
-        <div className="floating-dot absolute top-[44%] left-[8%] w-1.5 h-1.5 rounded-full bg-vae-turquoise/25" />
-        <div className="floating-dot absolute top-[14%] left-[58%] w-2 h-2 rounded-full bg-vae-turquoise/25" />
+        <div className="floating-dot absolute top-[18%] left-[12%] w-2 h-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[36%] left-[78%] w-3 h-3 rounded-md bg-black/8" />
+        <div className="floating-dot absolute top-[62%] left-[28%] w-2 h-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[72%] left-[62%] w-2 h-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[44%] left-[8%] w-1.5 h-1.5 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[14%] left-[58%] w-2 h-2 rounded-full bg-black/10" />
       </div>
 
       <div className="container-vae relative" style={{ zIndex: 10 }}>
@@ -92,6 +92,7 @@ const HeroSection: React.FC = () => {
                 <Link 
                   to="/contact"
                   className="btn-primary text-center flex-1 flex items-center justify-center"
+                  data-green-signal="true"
                 >
                   <span className="material-symbols-outlined mr-2">schedule</span>
                   30‑Min Strategie‑Gespräch buchen

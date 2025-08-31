@@ -51,7 +51,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       root.style.setProperty('--color-text-light', '0 0% 10%')
       root.style.setProperty('--color-text-secondary', '0 0% 30%')
       root.style.setProperty('--color-text-muted', '0 0% 50%')
-      root.style.setProperty('--color-vae-turquoise', '157 85% 32%') // Calmer turquoise on light backgrounds
+      // Calmer, klarer Mint‑Ton für Aktionen & Akzente
+      root.style.setProperty('--color-vae-turquoise', '157 72% 42%')
       root.style.setProperty('--color-vae-black', '0 0% 10%')
     } else {
       // Dark mode colors (original)
@@ -67,6 +68,25 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
     // Save to localStorage
     localStorage.setItem('vae-theme', theme)
+
+    // Optional: Light-mode green budget telemetry
+    // Telemetrie optional: nur wenn Flag aktiv (vermeidet Rauschen)
+    const devFlag = (window as any).__VAE_DEV?.logGreenBudget || localStorage.getItem('vae:logGreenBudget') === '1'
+    if (theme === 'light' && devFlag) {
+      setTimeout(() => {
+        try {
+          const candidates = Array.from(document.querySelectorAll('[data-green-signal="true"]')) as HTMLElement[]
+          const inView = candidates.filter(el => {
+            const r = el.getBoundingClientRect()
+            return r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < (window.innerHeight || 0) && r.left < (window.innerWidth || 0)
+          })
+          const count = inView.length
+          if (count > 2) {
+            console.warn(`LIGHT_MODE_GREEN_BUDGET_EXCEEDED: route=${location.pathname} count=${count}`)
+          }
+        } catch { /* noop */ }
+      }, 0)
+    }
   }, [theme])
 
   const toggleTheme = () => {

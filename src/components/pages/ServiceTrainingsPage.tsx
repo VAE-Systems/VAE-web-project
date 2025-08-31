@@ -107,7 +107,7 @@ const ServiceTrainingsPage: React.FC = () => {
           {/* Crosslinks */}
           <div className="mt-24 grid md:grid-cols-3 gap-8 items-stretch">
             <SpotlightCard title="Beratung – Richtung" description="Architektur, Kosten & Governance strukturiert entscheiden bevor Umsetzung startet." to="/services/consulting" cta="Beratung ansehen" />
-            <SpotlightCard title="Custom Solutions – Umsetzung" description="Produktive Integrationen & Automationen – dokumentiert & übergebbar." to="/services/custom-solutions" cta="Projekt starten" />
+            <SpotlightCard title="Custom Solutions – Umsetzung" description="Produktive Integrationen & Automationen – dokumentiert & übergebbar." to="/services/custom-solutions" cta="Erstgespräch buchen" />
             <SpotlightCard title="Products – Suite & CORE" description="Fertige Module & Plattform als Beschleuniger oder Alternative." to="/products/solutions" cta="Suite erkunden" />
           </div>
 

@@ -22,12 +22,11 @@ const techStack = [
   { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', website: 'https://mongodb.com' },
   { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', website: 'https://docker.com' },
   { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', website: 'https://kubernetes.io' },
-  { name: 'AWS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', website: 'https://aws.amazon.com' },
-  { name: 'Temporal', logo: 'https://temporal.io/logo-font-straight-dark.svg', website: 'https://temporal.io' },
+  { name: 'AWS', logo: 'https://e7.pngegg.com/pngimages/628/589/png-clipart-amazon-web-services-amazon-com-logo-plataform-computer-network-text.png', website: 'https://aws.amazon.com' },
+  { name: 'Temporal', logo: 'https://images.ctfassets.net/0uuz8ydxyd9p/2W8B7bcLSPX9YaSwkfrhmv/eade3fc61520b8cee84cf8605dce3056/Temporal_Symbol_dark_1_2x.png', website: 'https://temporal.io' },
   { name: 'Pinecone', logo: 'https://www.pinecone.io/images/pinecone-logo.svg', website: 'https://pinecone.io' },
   { name: 'Supabase', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg', website: 'https://supabase.com' },
-  { name: 'Corteza', logo: 'https://cortezaproject.org/images/logo.svg', website: 'https://cortezaproject.org' },
-  { name: 'Lowcoder', logo: 'https://raw.githubusercontent.com/lowcoder-org/lowcoder/main/public/logo.svg', website: 'https://lowcoder.dev' }
+  { name: 'Corteza', logo: 'https://cortezaproject.org/wp-content/uploads/2024/10/Corteza-logo-340-300x138.png', website: 'https://cortezaproject.org' }
 ] as const
 
 /**

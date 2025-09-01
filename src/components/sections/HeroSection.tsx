@@ -56,7 +56,7 @@ const HeroSection: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <span className="block text-text-light">{heroTitle[0]}</span>
-                <span className="block text-gradient">{heroTitle[1]}</span>
+                <span className="block text-vae-turquoise">{heroTitle[1]}</span>
               </motion.h1>
 
               <motion.div

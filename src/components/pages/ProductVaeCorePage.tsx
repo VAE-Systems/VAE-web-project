@@ -23,7 +23,7 @@ const ProductVaeCorePage: React.FC = () => {
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-6">
             <span className="block text-text-light">{c.hero.titlePre}</span>
-            <span className="block text-gradient">{c.hero.titleMain}</span>
+            <span className="block text-vae-turquoise">{c.hero.titleMain}</span>
           </h1>
 
           <div className="flex items-center gap-4 mb-6">

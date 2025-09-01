@@ -25,7 +25,7 @@ const ProductToolsPage: React.FC = () => {
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-8">
             <span className="block text-text-light">Applikationen & Module</span>
-            <span className="block text-gradient">Klarer Nutzen. Coming Soon.</span>
+            <span className="block text-vae-turquoise">Klarer Nutzen. Coming Soon.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">
             Fokussierte Applikationen & Module – klarer Nutzen, schlanke Schnittstellen, transparente Lizenzierung. Qualität & Wartbarkeit vor Feature‑Breite.

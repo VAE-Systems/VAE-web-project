@@ -33,7 +33,7 @@ const ServiceTrainingsPage: React.FC = () => {
         <div className="container-vae max-w-5xl">
           <h1 className="h1 h-space-lg">
             <span className="block text-text-light">Schulungen & Workshops</span>
-            <span className="block text-gradient">Kompetenz. In 1 Tag vertieft.</span>
+            <span className="block text-vae-turquoise">Kompetenz. In 1 Tag vertieft.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">Praxisorientierte, dichte Formate statt Frontal-Marathon. Ziel: interne Handlungsfähigkeit, Governance Verankerung & sicherer Betrieb.</p>
           <p className="text-sm text-text-muted max-w-3xl mb-12">Abgrenzung: <span className="text-text-light dark:text-white font-medium">Schulungen & Workshops</span> bauen Wissen & Routinen auf. <span className="text-text-light dark:text-white font-medium">Beratung</span> liefert Entscheidungsgrundlagen. <span className="text-text-light dark:text-white font-medium">Custom Solutions</span> setzt produktiv um.</p>

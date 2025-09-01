@@ -161,10 +161,10 @@ const AboutPage: React.FC = () => {
           <h1 className="h1 text-vae-turquoise h-space-lg" data-fade>
             Über VAE Systems
           </h1>
-          <p className="text-xl md:text-2xl text-text-secondary max-w-4xl mx-auto leading-relaxed mb-6" data-fade>
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-white/90 max-w-4xl mx-auto leading-relaxed mb-6" data-fade>
             Lokale & sichere KI-Infrastruktur und Automatisierung – modular, dokumentiert, erweiterbar.
           </p>
-          <p className="text-lg md:text-xl text-text-secondary max-w-4xl mx-auto leading-relaxed" data-fade>
+          <p className="text-lg md:text-xl text-gray-500 dark:text-white/70 max-w-4xl mx-auto leading-relaxed" data-fade>
             Fokus auf Ownership statt Abhängigkeit: transparente Architekturen, saubere Deployments (On‑Prem & souveräne Cloud) und klare Übergaben.
           </p>
         </div>
@@ -214,9 +214,9 @@ const AboutPage: React.FC = () => {
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
           <header className="max-w-4xl mb-14" data-heading-accent data-animate>
-            <h2 className="h2 text-text-light dark:text-white h-space">Was wir für Unternehmen bieten</h2>
+            <h2 className="h2 text-gray-900 dark:text-white h-space">Was wir für Unternehmen bieten</h2>
             <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
-            <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-text-light dark:text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
+            <p className="text-lg md:text-xl text-gray-700 dark:text-white/80 leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-gray-900 dark:text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
           <div className="grid md:grid-cols-3 gap-8 items-stretch" data-stagger-group>
             {aboutServices.map(s => (
@@ -249,13 +249,13 @@ const AboutPage: React.FC = () => {
       <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Text Content */}
               <div className="lg:pr-8">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-text-light dark:text-white mb-8 heading-fix" data-animate>
-                  Frühphase –<span className="text-gradient"> bewusst fokussiert</span>
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8 heading-fix" data-animate>
+                  Frühphase –<span className="text-vae-turquoise"> bewusst fokussiert</span>
                 </h2>
-                <p className="text-xl md:text-2xl text-text-light dark:text-white font-medium mb-6" data-animate>
+                <p className="text-xl md:text-2xl text-gray-900 dark:text-white font-medium mb-6" data-animate>
                   Präzise auf Wirkung ausgerichtet.
                 </p>
-                <div className="flex items-center space-x-4 text-lg text-text-secondary mb-8" data-animate>
+                <div className="flex items-center space-x-4 text-lg text-gray-700 dark:text-white/80 mb-8" data-animate>
                   <span className="material-symbols-outlined text-vae-turquoise">
                     location_on
                   </span>

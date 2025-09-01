@@ -25,7 +25,7 @@ const ProductShowcasesPage: React.FC = () => {
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-8">
             <span className="block text-text-light">Built with VAE Core</span>
-            <span className="block text-gradient">Showcases & Ökosystem.</span>
+            <span className="block text-vae-turquoise">Showcases & Ökosystem.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">
             Praxisbeispiele & Integrationen, die reale Probleme adressieren. Keine künstlichen Demos – sondern belastbare Muster für Betrieb & Skalierung.

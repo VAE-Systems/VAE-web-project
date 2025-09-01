@@ -35,7 +35,7 @@ const ServiceCustomSolutionsPage: React.FC = () => {
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-8">
             <span className="block text-text-light">Custom Solutions</span>
-            <span className="block text-gradient">Präzise Umsetzung.</span>
+            <span className="block text-vae-turquoise">Präzise Umsetzung.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">Wir bauen spezifische Software & Integrationsbausteine für Ihren konkreten Engpass. Fokus: tragfähige Architektur, Messbarkeit & späterer Eigenbetrieb ohne Lock‑in.</p>
           <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-10">Vielleicht existiert Ihr Bedarf aber bereits als <span className="text-white font-medium">Komplettlösung</span> (End‑to‑End Paket) in unserer Produkt-Suite. Unser Vorgehen: <span className="text-white">1. Engpass präzisieren</span> → <span className="text-white">2. Suite-Reuse prüfen</span> → <span className="text-white">3. Adaptieren oder gezielt neu entwickeln</span>. So vermeiden Sie unnötige Neubaustapel.</p>

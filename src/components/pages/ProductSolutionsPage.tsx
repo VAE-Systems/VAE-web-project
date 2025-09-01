@@ -22,7 +22,7 @@ const ProductSolutionsPage: React.FC = () => {
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-8">
             <span className="block text-text-light">Komplettlösungen</span>
-            <span className="block text-gradient">End‑to‑End umgesetzt.</span>
+            <span className="block text-vae-turquoise">End‑to‑End umgesetzt.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">
             Wenn interne Kapazitäten oder spezialisierte Erfahrungswerte fehlen, braucht es mehr als einzelne Module: Architektur, Implementierung, Betriebsübergabe – als zusammenhängender Pfad. Keine versteckten Lizenzmodelle, kein proprietäres Black‑Box‑Gerüst. Ziel: Sie betreiben souverän.

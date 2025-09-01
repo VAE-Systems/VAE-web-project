@@ -38,7 +38,7 @@ const ServiceConsultingPage: React.FC = () => {
           {/* Hero */}
           <h1 className="h1 h-space-lg">
             <span className="block text-text-light">Beratung</span>
-            <span className="block text-gradient">Strategie. Governance. Architektur.</span>
+            <span className="block text-vae-turquoise">Strategie. Governance. Architektur.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-4xl mb-6">Entscheiden mit Klarheit: <TermHint term="Roadmap" />, <TermHint term="TCO" /> & Compliance – technologie‑agnostisch, dokumentiert, open‑first. Keine Buzzword-Decks, sondern belastbare Entscheidungsgrundlagen.</p>
           <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-12">Abgrenzung: <span className="text-text-light dark:text-white font-medium">Schulungen & Workshops</span> bauen interne Kompetenz auf. <span className="text-text-light dark:text-white font-medium">Beratung</span> liefert Richtung & Governance. <span className="text-text-light dark:text-white font-medium">Custom Solutions</span> setzt produktiv um.</p>

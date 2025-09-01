@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
           {/* Services */}
           <nav aria-label="Services" className="space-y-6">
             <div>
-              <h4 className="text-lg font-semibold text-gradient mb-4">Services</h4>
+              <h4 className="text-lg font-semibold text-text-light mb-4">Services</h4>
               <ul className="space-y-2 text-sm">
                 <li><Link to="/services/consulting" className="text-text-secondary hover:text-vae-turquoise transition-colors">Beratung</Link></li>
                 <li><Link to="/services/trainings" className="text-text-secondary hover:text-vae-turquoise transition-colors">Schulungen & Workshops</Link></li>
@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
           {/* Produkte */}
           <nav aria-label="Produkte" className="space-y-6">
             <div>
-              <h4 className="text-lg font-semibold text-gradient mb-4">Produkte</h4>
+              <h4 className="text-lg font-semibold text-text-light mb-4">Produkte</h4>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center space-x-2">
                   <Link to="/products/vae-core" className="text-text-secondary hover:text-vae-turquoise transition-colors">VAE Core Plattform</Link>
@@ -122,7 +122,7 @@ const Footer: React.FC = () => {
 
           {/* Tech Stack (Badges) */}
           <div aria-label="Technologien">
-            <h4 className="text-lg font-semibold mb-4 text-gradient">Tech Stack</h4>
+            <h4 className="text-lg font-semibold mb-4 text-text-light">Tech Stack</h4>
             <ul className="flex flex-wrap gap-2 text-sm">
               {techStack.map((tech) => (
                 <li key={tech} className="px-3 py-1 bg-bg-secondary text-text-light rounded-lg border border-bg-secondary hover:border-vae-turquoise/30 transition-colors" title={tech}>{tech}</li>
@@ -133,7 +133,7 @@ const Footer: React.FC = () => {
           {/* Unternehmen & Rechtliches + Newsletter */}
           <div className="space-y-10 xl:col-span-1 lg:col-span-1">
             <div>
-              <h4 className="text-lg font-semibold mb-4 text-gradient">Unternehmen</h4>
+              <h4 className="text-lg font-semibold mb-4 text-text-light">Unternehmen</h4>
               <ul className="space-y-2 text-sm">
                 <li><Link to="/about" className="text-text-secondary hover:text-vae-turquoise transition-colors">Über uns</Link></li>
                 <li><Link to="/contact" className="text-text-secondary hover:text-vae-turquoise transition-colors">Kontakt</Link></li>
@@ -142,7 +142,7 @@ const Footer: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4 text-gradient">VAE News</h4>
+              <h4 className="text-lg font-semibold mb-4 text-text-light">VAE News</h4>
               <p className="text-text-muted mb-4 text-xs leading-relaxed">
                 Releases, Architektur-Notizen & Events (ca. 1× Monat). Abmeldung jederzeit.
               </p>

@@ -74,7 +74,7 @@ const ProductsHeroSection: React.FC = () => {
             />
             <h1 className="h1">
               <span className="block text-text-light">Modulare KI-Produkte</span>
-              <span className="block text-gradient">vom Kernel bis zur Plattform.</span>
+              <span className="block text-vae-turquoise">vom Kernel bis zur Plattform.</span>
             </h1>
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
               Bausteine, Integrationslayer und vollständige Workflows: Stellen Sie sich Ihre lokale, souveräne KI-Infrastruktur zusammen – exakt so weit automatisiert wie Ihr aktueller Reifegrad es zulässt.

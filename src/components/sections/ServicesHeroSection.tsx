@@ -39,8 +39,8 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                         <div className="relative container-vae" ref={innerRef}>
                                 <div className="max-w-5xl mx-auto text-center space-y-8 sm:space-y-10">
                                         <h1 className="h1">
-                                                <span className="block text-text-light">Services &amp; Expertise</span>
-                                                <span className="block text-gradient">für nachhaltige KI-Infrastruktur.</span>
+                                                <span className="block text-text-light">Services & Expertise</span>
+                                                <span className="block text-vae-turquoise">für nachhaltige KI-Infrastruktur.</span>
                                         </h1>
                                         <p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
                                                 Von Analyse über Implementierung bis Lifecycle-Optimierung – modulare Service-Pakete für souveräne, lokale und skalierbare Automatisierung.

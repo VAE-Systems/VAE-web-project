@@ -146,10 +146,8 @@ const ServicesPage: React.FC = () => {
             <p>Bereiche können separat gebucht oder in direktem Kontakt sinnvoll kombiniert werden – abhängig von Reifegrad & Zielbild.</p>
             <p className="text-text-secondary/70">Typische Sequenz: Klarheit (Beratung) → Enablement (Schulungen & Workshops) → Umsetzung spezifischer Bausteine (Custom Solutions).</p>
           </div>
-        </div>
+                </div>
       </section>
-
-
 
       {/* Final CTA */}
       <section className="py-24 bg-bg-dark">

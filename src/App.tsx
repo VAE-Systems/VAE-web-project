@@ -8,6 +8,9 @@ import SectionNavigation from '@components/navigation/SectionNavigation'
 import ScrollProgress from '@components/navigation/ScrollProgress'
 import ErrorBoundary from '@components/ErrorBoundary'
 
+// Privacy Components
+import CookieBanner from '@components/privacy/CookieBanner'
+
 // Theme Context
 import { ThemeProvider } from '@/contexts/ThemeContext'
 
@@ -29,6 +32,7 @@ const AboutPage = React.lazy(() => import('@components/pages/AboutPage'))
 const ContactPage = React.lazy(() => import('@components/pages/ContactPage'))
 const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage'))
 const PrivacyPage = React.lazy(() => import('@components/pages/PrivacyPage'))
+const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySettings'))
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
@@ -95,10 +99,12 @@ const App: React.FC = () => {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/impressum" element={<ImpressumPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/privacy/settings" element={<PrivacySettings />} />
               </Routes>
             </Suspense>
           </main>
           <Footer />
+          <CookieBanner />
         </div>
       </Router>
     </ThemeProvider>

@@ -81,14 +81,14 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                                                                                                 </Link>
                                                                                                 <Link
                                                                                                         to="/products"
-                                                                                                        className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'border border-white/15 text-text-secondary hover:text-text-light bg-white/5 hover:bg-white/10'}`}
+                                                                                                        className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}
                                                                                                 >
                                                                                                         <span className="material-symbols-outlined mr-2">apps</span>
                                                                                                         Produkte & Plattform
                                                                                                 </Link>
                                                                                                 <a
                                                                                                         href="#categories"
-                                                                                                        className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'border border-white/15 text-text-secondary hover:text-text-light bg-white/5 hover:bg-white/10'}`}
+                                                                                                        className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}
                                                                                                 >
                                                                                                         <span className="material-symbols-outlined mr-2">travel_explore</span>
                                                                                                         Services erkunden

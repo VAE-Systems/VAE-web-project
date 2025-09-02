@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({ as = 'article', title, lead, body, bullets 
   const baseClass = (
     `group relative rounded-2xl border ${isLight ? 'border-border-primary' : 'border-vae-turquoise/20'} ` +
     `${isLight ? 'bg-white/60' : 'bg-vae-turquoise/5'} backdrop-blur-md p-7 flex flex-col h-full overflow-hidden transition-all duration-400 ` +
-    `${isLight ? 'hover:border-black/15 hover:shadow-[0_12px_40px_-14px_rgba(0,0,0,0.30)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)]'} ` +
+    `${isLight ? 'hover:border-black/15 hover:shadow-[0_12px_40px_-14px_rgba(var(--color-black-rgb),0.30)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)]'} ` +
     className
   ).trim()
 

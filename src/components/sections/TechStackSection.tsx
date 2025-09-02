@@ -258,10 +258,7 @@ const TechStackSection: React.FC = () => {
       <ParticleField count={22} />
       {/* Radial Background */}
       <div 
-        className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20"
-        style={{
-          background: 'radial-gradient(circle at center, hsla(var(--color-vae-turquoise), 0.2), transparent 70%)'
-        }}
+        className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20 bg-[radial-gradient(circle_at_center,hsla(var(--color-vae-turquoise),0.2),transparent_70%)]"
       />
 
       {/* Animated Cables */}

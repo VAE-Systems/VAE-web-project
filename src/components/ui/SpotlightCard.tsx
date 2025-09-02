@@ -59,7 +59,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       id={slug}
       aria-labelledby={headingId}
       onMouseMove={reducedMotion ? undefined : handleMove}
-      className={`relative group rounded-2xl border border-border-primary dark:border-white/10 ${isLight ? 'bg-white/60' : 'bg-bg-primary/5 dark:bg-white/5'} backdrop-blur-md overflow-hidden transition-all duration-500 ${className} ${!reducedMotion ? (isLight ? 'hover:border-black/15 hover:shadow-[0_14px_46px_-14px_rgba(0,0,0,0.32)]' : 'hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]') : ''}`.trim()}
+      className={`relative group rounded-2xl border border-border-primary dark:border-white/10 ${isLight ? 'bg-white/60' : 'bg-bg-primary/5 dark:bg-white/5'} backdrop-blur-md overflow-hidden transition-all duration-500 ${className} ${!reducedMotion ? (isLight ? 'hover:border-black/15 hover:shadow-[0_14px_46px_-14px_rgba(var(--color-black-rgb),0.32)]' : 'hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]') : ''}`.trim()}
       style={
         reducedMotion
           ? undefined

@@ -11,6 +11,9 @@ import ErrorBoundary from '@components/ErrorBoundary'
 // Theme Context
 import { ThemeProvider } from '@/contexts/ThemeContext'
 
+// Focus Management
+import { initializeFocusManager } from '@/utils/focusManagement'
+
 // Lazy-loaded Pages
 const HomePage = React.lazy(() => import('@components/pages/HomePage'))
 const ServicesPage = React.lazy(() => import('@components/pages/ServicesPage'))
@@ -61,10 +64,16 @@ const NavigationSwitcher: React.FC = () => {
   return pathname === '/' ? <SectionNavigation /> : <ScrollProgress />
 }
 
-const App: React.FC = () => (
-  <ErrorBoundary>
-    <ThemeProvider>
-      <Router>
+const App: React.FC = () => {
+  // Initialize focus management on app start
+  useEffect(() => {
+    initializeFocusManager()
+  }, [])
+
+  return (
+    <ErrorBoundary>
+      <ThemeProvider>
+        <Router>
         <ScrollToTop />
         <div className="min-h-[100dvh] bg-bg-darker text-text-light">
           <Header />
@@ -94,6 +103,7 @@ const App: React.FC = () => (
       </Router>
     </ThemeProvider>
   </ErrorBoundary>
-)
+  )
+}
 
 export default App

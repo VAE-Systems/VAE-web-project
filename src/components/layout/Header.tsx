@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { productCategories } from '../navigation/productCategories'
 import { serviceCategories } from '../navigation/serviceCategories'
-import { useFocusTrap } from '@/hooks'
+import { useAttentionSignal, useFocusTrap } from '@/hooks'
 import { useTheme } from '@/contexts/ThemeContext'
 
 /**
@@ -21,11 +21,36 @@ const Header: React.FC = () => {
   const location = useLocation()
   const [productsOpen, setProductsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
-  const productsTriggerRef = useRef<HTMLButtonElement>(null)
-  const servicesTriggerRef = useRef<HTMLButtonElement>(null)
+  const productsTriggerRef = useRef<HTMLElement>(null)
+  const servicesTriggerRef = useRef<HTMLElement>(null)
   const productsMegaRef = useRef<HTMLDivElement>(null)
   const servicesMegaRef = useRef<HTMLDivElement>(null)
   const { theme, toggleTheme } = useTheme()
+  const ctaRef = React.useRef<HTMLAnchorElement>(null)
+  
+  // Hover-intent helpers: add a small close delay to avoid flicker
+  const hoverTimers = useRef<{ products?: ReturnType<typeof setTimeout>; services?: ReturnType<typeof setTimeout> }>({})
+  const openMenu = (menu: 'products' | 'services') => {
+    if (menu === 'products' && hoverTimers.current.products) {
+      clearTimeout(hoverTimers.current.products)
+      hoverTimers.current.products = undefined
+    }
+    if (menu === 'services' && hoverTimers.current.services) {
+      clearTimeout(hoverTimers.current.services)
+      hoverTimers.current.services = undefined
+    }
+    if (menu === 'products') { setProductsOpen(true); setServicesOpen(false) }
+    if (menu === 'services') { setServicesOpen(true); setProductsOpen(false) }
+  }
+  const scheduleClose = (menu: 'products' | 'services', delay = 180) => {
+    if (menu === 'products') {
+      if (hoverTimers.current.products) clearTimeout(hoverTimers.current.products)
+      hoverTimers.current.products = setTimeout(() => setProductsOpen(false), delay)
+    } else {
+      if (hoverTimers.current.services) clearTimeout(hoverTimers.current.services)
+      hoverTimers.current.services = setTimeout(() => setServicesOpen(false), delay)
+    }
+  }
   useFocusTrap(
     productsOpen,
     productsMegaRef,
@@ -44,6 +69,9 @@ const Header: React.FC = () => {
     },
     { initialFocus: 'first' }
   )
+
+  // Attention signal for CTA
+  useAttentionSignal(ctaRef, { intervalMs: 60_000, initialDelayMs: 7_000, jitterMs: 10_000, maxRuns: 6, nudgeAfter: 3 })
 
   // Close on outside click
   useEffect(() => {
@@ -145,26 +173,22 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex items-center space-x-8 relative">
             {navItems.map((item) => (
               item.hasMega ? (
-                <div key={item.path} className="relative">
-                  <button
+                <div
+                  key={item.path}
+                  className="relative"
+                  onMouseEnter={() => openMenu(item.mega)}
+                  onMouseLeave={() => scheduleClose(item.mega)}
+                >
+                  <Link
                     id={item.mega === 'products' ? 'products-trigger' : 'services-trigger'}
-                    ref={item.mega === 'products' ? productsTriggerRef : servicesTriggerRef}
-                    type="button"
+                    ref={item.mega === 'products' ? (productsTriggerRef as any) : (servicesTriggerRef as any)}
+                    to={item.path}
                     className={`nav-link flex items-center gap-1 ${isActivePath(item.path) ? 'active' : ''}`}
                     aria-haspopup="dialog"
                     aria-expanded={item.mega === 'products' ? productsOpen : servicesOpen}
                     aria-controls={item.mega === 'products' ? 'products-mega' : 'services-mega'}
-                    onClick={() => {
-                      if (item.mega === 'products') {
-                        const next = !productsOpen
-                        setProductsOpen(next)
-                        if (next) setServicesOpen(false)
-                      } else {
-                        const next = !servicesOpen
-                        setServicesOpen(next)
-                        if (next) setProductsOpen(false)
-                      }
-                    }}
+                    onFocus={() => openMenu(item.mega)}
+                    onBlur={() => scheduleClose(item.mega)}
                   >
                     {item.label}
                     <span
@@ -173,16 +197,18 @@ const Header: React.FC = () => {
                     >
                       expand_more
                     </span>
-                  </button>
+                  </Link>
                   {item.mega === 'products' && productsOpen && (
                     <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-[var(--z-dropdown)]">
                       <div
                         ref={productsMegaRef}
                         id="products-mega"
-                        className="mega-panel w-[920px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(255,255,255,0.98),rgba(248,248,248,0.96))] dark:bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/10 dark:shadow-black/40 ring-1 ring-black/5 dark:ring-white/10 focus:outline-none surface-glass-panel"
+                        className="mega-panel w-[920px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(var(--color-white-rgb),0.98),rgba(248,248,248,0.96))] dark:bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/10 dark:shadow-black/40 ring-1 ring-black/5 dark:ring-white/10 focus:outline-none surface-glass-panel"
                         role="dialog"
                         aria-label="Products Menu"
                         aria-modal="false"
+                        onMouseEnter={() => openMenu('products')}
+                        onMouseLeave={() => scheduleClose('products')}
                       >
                         <div className="p-8 grid grid-cols-4 gap-6">
                         {productCategories.map(cat => (
@@ -235,10 +261,12 @@ const Header: React.FC = () => {
                       <div
                         ref={servicesMegaRef}
                         id="services-mega"
-                        className="mega-panel w-[760px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(255,255,255,0.98),rgba(248,248,248,0.96))] dark:bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/10 dark:shadow-black/40 ring-1 ring-black/5 dark:ring-white/10 focus:outline-none surface-glass-panel"
+                        className="mega-panel w-[760px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(var(--color-white-rgb),0.98),rgba(248,248,248,0.96))] dark:bg-[linear-gradient(135deg,rgba(15,15,18,0.92),rgba(10,30,25,0.90))] shadow-2xl shadow-black/10 dark:shadow-black/40 ring-1 ring-black/5 dark:ring-white/10 focus:outline-none surface-glass-panel"
                         role="dialog"
                         aria-label="Services Menu"
                         aria-modal="false"
+                        onMouseEnter={() => openMenu('services')}
+                        onMouseLeave={() => scheduleClose('services')}
                       >
                         <div className="p-8 grid grid-cols-3 gap-6">
                         {serviceCategories.map(cat => (
@@ -297,8 +325,9 @@ const Header: React.FC = () => {
 
           {/* CTA Button */}
           <Link
+            ref={ctaRef}
             to="/contact"
-            className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} hidden md:inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-5 font-medium`}
+            className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} hidden md:inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-6 font-medium`}
             data-green-signal="true"
           >
             <span className="material-symbols-outlined mr-2">

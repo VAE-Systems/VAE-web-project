@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ReferenceList from '../ui/ReferenceList'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 import { vaeCoreContent } from '../../content/vaeCore'
 
 const ProductVaeCorePage: React.FC = () => {
@@ -9,7 +10,7 @@ const ProductVaeCorePage: React.FC = () => {
 
   return (
     <div className="min-h-[100dvh]">
-      <Seo
+  <Seo
         title="VAE Core – Das semantische Backend | VAE Systems"
         description={c.hero.subline}
         canonicalPath="/products/vae-core"
@@ -19,6 +20,14 @@ const ProductVaeCorePage: React.FC = () => {
         ]}
       />
 
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Produkte & Plattform', path: '/products' },
+          { label: 'VAE CORE', path: '/products/vae-core' }
+        ]}
+        className="pt-6"
+      />
       <section id="hero" className="relative pt-40 pb-24 border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-6">

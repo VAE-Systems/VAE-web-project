@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTheme } from '@/contexts/ThemeContext'
 import ContactSection from '../sections/ContactSection'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 import Seo from '../ui/Seo'
@@ -10,6 +11,9 @@ import { contactHero, contactIntro, contactUsps, contactCta } from '../../conten
  * Dedicated page for Contact with related sections
  */
 const ContactPage: React.FC = () => {
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
+  
   return (
     <div className="min-h-[100dvh]">
       <Seo
@@ -18,8 +22,14 @@ const ContactPage: React.FC = () => {
         canonicalPath="/contact"
       />
       {/* Page Hero */}
-      <section className="hero-section bg-bg-darker pt-32 pb-16">
-        <div className="container-vae text-center">
+      <section className={`hero-section pt-32 pb-16 ${isLight ? 'bg-gradient-to-b from-white to-white/95' : 'bg-bg-darker'}`}>
+        {/* Conditional overlay for light mode */}
+        {!isLight && (
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/15" />
+          </div>
+        )}
+        <div className="container-vae text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold text-vae-turquoise mb-6">
             {contactHero.title}
           </h1>
@@ -30,13 +40,16 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* Pre-Contact Trust Section */}
-      <section className="py-24 bg-gradient-to-br from-bg-dark via-bg-secondary to-bg-darker">
+      <section className={`py-24 ${isLight ? 'bg-gradient-to-br from-white via-white/98 to-white/95' : 'bg-gradient-to-br from-bg-dark via-bg-secondary to-bg-darker'}`}>
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
           <div 
             className="absolute top-0 left-0 w-full h-full"
             style={{
-              background: `
+              background: isLight ? `
+                radial-gradient(circle at 20% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%)
+              ` : `
                 radial-gradient(circle at 20% 30%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, hsla(var(--color-vae-turquoise), 0.03) 0%, transparent 50%)
               `

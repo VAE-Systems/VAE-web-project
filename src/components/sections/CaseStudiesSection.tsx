@@ -39,11 +39,11 @@ const CaseStudiesSection: React.FC = () => {
         return
       }
       if (!sectionRef.current) return
-      gsap.fromTo(headerRef.current, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: headerRef.current, start: 'top 85%' } })
+      gsap.fromTo(headerRef.current, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: headerRef.current, start: 'top 85%' }, force3D: true })
       const cards = cardsRef.current?.children
       if (cards) {
         Array.from(cards).forEach((c, i) => {
-          gsap.fromTo(c, { opacity: 0, y: 80, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out', delay: i * 0.08, scrollTrigger: { trigger: c as HTMLElement, start: 'top 88%' } })
+          gsap.fromTo(c, { opacity: 0, y: 80, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out', delay: i * 0.08, scrollTrigger: { trigger: c as HTMLElement, start: 'top 88%' }, force3D: true })
         })
       }
     }, sectionRef)

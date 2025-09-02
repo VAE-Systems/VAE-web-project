@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { servicesData, lifecycleBlocks } from '../../content/services';
+import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { servicesData, lifecycleBlocks } from '../../content/services'
 
 const ServicesSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -81,7 +81,7 @@ const ServicesSection: React.FC = () => {
           {servicesData.map((s) => (
             <div
               key={s.key}
-              className="group relative p-8 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 backdrop-blur-sm overflow-hidden flex flex-col h-full transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]"
+              className="group relative p-8 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]"
             >
               <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
               <div className="flex items-start justify-between mb-6 relative z-10">
@@ -94,7 +94,7 @@ const ServicesSection: React.FC = () => {
                 <span className="px-2 py-1 rounded-md bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-medium tracking-wide">{s.badge}</span>
               </div>
 
-              <div className="relative z-10 flex-1">
+              <div className="relative z-10">
                 <h3 className="text-lg font-semibold text-text-light dark:text-white mb-3 leading-tight">{s.title}</h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-6">{s.description}</p>
 
@@ -105,7 +105,7 @@ const ServicesSection: React.FC = () => {
                       <div className="text-lg font-bold text-vae-turquoise mb-1">{st.value}</div>
                       <div className="text-[11px] text-text-muted leading-tight">
                         {st.desc}
-                        {st.note && <sup className="text-vae-turquoise/60 text-[10px] ml-1">{superscripts[st.note]}</sup>}
+                        {st.note && <sup className="text-vae-turquoise/60">{superscripts[st.note]}</sup>}
                       </div>
                     </div>
                   ))}
@@ -157,7 +157,7 @@ const ServicesSection: React.FC = () => {
                 <div className="text-2xl font-bold text-vae-turquoise mb-1">{x.k}</div>
                 <div className="text-[11px] uppercase tracking-wide text-text-muted">
                   {x.l}
-                  {x.note && <sup className="text-vae-turquoise/60 text-[10px] ml-1">{superscripts[x.note]}</sup>}
+                  {x.note && <sup className="text-vae-turquoise/60">{superscripts[x.note]}</sup>}
                 </div>
               </div>
             ))}
@@ -171,7 +171,7 @@ const ServicesSection: React.FC = () => {
         <div className="mt-8 text-[10px] text-text-muted space-y-1">
           {Object.entries(footnotes).map(([key, text]) => (
             <div key={key} className="flex items-start gap-2">
-              <sup className="text-vae-turquoise/60 text-[10px] mt-[-2px]">{superscripts[key]}</sup>
+              <sup className="text-vae-turquoise/60 mt-[-2px]">{superscripts[key]}</sup>
               <span>{text}</span>
             </div>
           ))}

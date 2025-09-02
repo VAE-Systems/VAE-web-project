@@ -27,7 +27,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
       gsap.set(cards, { opacity: 0, y: 32 })
       ScrollTrigger.batch(cards, {
         start: 'top 82%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.07 }),
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.07, force3D: true }),
         once: true
       })
     }, ref)
@@ -64,7 +64,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
                   </div>
                   <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(i+1).padStart(2,'0')}</span>
                 </div>
-                {s.durationHint && <span className="text-[10px] px-2 py-1 rounded-md bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 text-text-muted dark:text-white/60">{s.durationHint}</span>}
+                {s.durationHint && <span className="text-[10px] px-2 py-1 rounded-md bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 text-text-muted">{s.durationHint}</span>}
               </div>
               <h3 className="text-base font-semibold text-text-light dark:text-white mb-2 leading-snug">{s.title}</h3>
               <p className="text-[13px] text-text-secondary leading-relaxed mb-4 flex-grow">{s.summary}</p>

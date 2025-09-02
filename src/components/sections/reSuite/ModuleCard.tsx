@@ -13,7 +13,7 @@ const ModuleCard: React.FC<ModuleCardProps> = ({ module }) => {
   const { theme } = useTheme()
   const isLight = theme === 'light'
   return (
-  <article className={`${baseCard} ${isLight ? 'hover:border-black/15 hover:shadow-[0_12px_40px_-14px_rgba(0,0,0,0.30)]' : 'hover:border-vae-turquoise/40'} transition-all flex flex-col`}>
+  <article className={`${baseCard} ${isLight ? 'hover:border-black/15 hover:shadow-[0_12px_40px_-14px_rgba(var(--color-black-rgb),0.30)]' : 'hover:border-vae-turquoise/40'} transition-all flex flex-col`}>
     <header className="flex items-start justify-between mb-3">
       <div>
         <h3 className="font-semibold text-text-light dark:text-white text-lg">{module.name}</h3>

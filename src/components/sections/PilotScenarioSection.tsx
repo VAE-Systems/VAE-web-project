@@ -17,7 +17,7 @@ const PilotScenarioSection: React.FC = () => {
       gsap.set(cols, { opacity: 0, y: 40 })
       ScrollTrigger.batch(cols, {
         start: 'top 85%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: Motion.enter, ease: Motion.ease, stagger: Motion.stagger }),
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: Motion.enter, ease: Motion.ease, stagger: Motion.stagger, force3D: true }),
         once: true
       })
     }, ref)

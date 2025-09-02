@@ -158,17 +158,7 @@ const ContactSection: React.FC = () => {
       ref={sectionRef}
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute top-0 left-0 w-full h-full"
-          style={{
-            background: `
-              radial-gradient(circle at 40% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 60% 70%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%)
-            `
-          }}
-        />
-      </div>
+      <div className="absolute inset-0 pointer-events-none bg-contact-radial" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}

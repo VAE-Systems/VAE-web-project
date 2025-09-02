@@ -24,7 +24,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
       gsap.set(cards, { opacity: 0, y: 34 })
       ScrollTrigger.batch(cards, {
         start: 'top 80%',
-        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06 }),
+        onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06, force3D: true }),
         once: true
       })
     }, ref)

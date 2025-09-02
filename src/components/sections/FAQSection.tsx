@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { defaultFAQCategories } from '@/content/faqData'
 
 // Types
 export interface FAQItem { question: string; answer: string }
@@ -15,38 +16,11 @@ interface FAQSectionProps {
   dense?: boolean // kompakter Stil
 }
 
-const defaultCategories: FAQCategory[] = [
-  {
-    category: 'Allgemein',
-    questions: [
-      { question: 'Was zeichnet Ihren Ansatz aus?', answer: 'Architektur, Implementierung und Enablement verzahnt: Wir liefern nicht nur ein Artefakt, sondern schaffen betreibbare Systeme. Open Source & lokale Ausführbarkeit bleiben Grundprinzip.' },
-      { question: 'Wie steigt man ein?', answer: 'Meist mit einem fokussierten Use Case (Retrieval, Automatisierung, Dokumentenraum). Wir klären Ziel, Kontext & Restriktionen, dann folgt ein kleiner evaluierbarer Sprint statt monolithischem Konzeptpapier.' },
-      { question: 'Welche Laufzeiten sind typisch?', answer: 'Initiale Assessments 1–2 Wochen. MVP 3–5 Wochen. Skalierte Setups / Plattformebenen 3–6 Monate inkrementell. Frühe Teilnutzbarkeit hat Priorität.' }
-    ]
-  },
-  {
-    category: 'Technik & Betrieb',
-    questions: [
-      { question: 'Welche Modelle & Frameworks?', answer: 'Lokale LLMs (gguf/ollama), Embedding-Stacks, LangChain, eigene Retrieval Layer, Temporal für Orchestrierung. Austauschbarkeit und beobachtbarer Betrieb sind Kernanforderung.' },
-      { question: 'Compliance & Datenschutz?', answer: 'Primär On-Prem / Sovereign Cloud. Keine stillen Dritt-API Calls. Auditable Pipelines, Zugriffsklassen, Protokollierung. DSGVO & AI Act Vororientierung werden früh mitgedacht.' },
-      { question: 'Skalierung später möglich?', answer: 'Ja. Komponenten modular verschaltbar: Index, Workflow, Observability, Evaluierung. Start lean – später erweitern ohne Neuaufbau.' }
-    ]
-  },
-  {
-    category: 'Service',
-    questions: [
-      { question: 'Support nach Go-Live?', answer: 'Optionale Betriebs- und Verbesserungs-Sprints, SLAs für kritische Pfade, Wissensübergabe & Schulungen. Ziel: Interne Souveränität statt dauerhafte Abhängigkeit.' },
-      { question: 'Trainingsumfang?', answer: 'Role-based: Operator, Developer, Data/Knowledge Steward. Praxisnahe Labs & Artefakte (Playbooks, Evaluationsets). Wiederholbar und dokumentiert.' },
-      { question: 'Roadmap VAE CORE?', answer: 'Inkrementelle Module: Retrieval Hub, Policy & Access Layer, Evaluation Suite. Bestandssysteme profitieren früh via schrittweise Anbindung.' }
-    ]
-  }
-]
-
 const FAQSection: React.FC<FAQSectionProps> = ({
   id = 'faq',
   title = 'Häufige Fragen',
   subtitle = 'Knappe Antworten für schnelle Einordnung.',
-  categories = defaultCategories,
+  categories = defaultFAQCategories,
   cta = true,
   className = '',
   dense = false
@@ -71,7 +45,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
     const ctx = gsap.context(() => {
       if (reduced) return
       if (headerRef.current) {
-        gsap.from(headerRef.current, { opacity: 0, y: 40, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } })
+        gsap.from(headerRef.current, { opacity: 0, y: 40, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' }, force3D: true })
       }
       if (listRef.current) {
         gsap.from(listRef.current.children, {
@@ -80,11 +54,12 @@ const FAQSection: React.FC<FAQSectionProps> = ({
           stagger: 0.08,
           duration: 0.6,
           ease: 'power2.out',
-          scrollTrigger: { trigger: listRef.current, start: 'top 75%' }
+          scrollTrigger: { trigger: listRef.current, start: 'top 75%' },
+          force3D: true
         })
       }
       if (cta && ctaRef.current) {
-        gsap.from(ctaRef.current, { opacity: 0, y: 32, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: ctaRef.current, start: 'top 85%' } })
+        gsap.from(ctaRef.current, { opacity: 0, y: 32, duration: 0.6, ease: 'power2.out', scrollTrigger: { trigger: ctaRef.current, start: 'top 85%' }, force3D: true })
       }
     }, sectionRef)
     return () => ctx.revert()
@@ -100,11 +75,11 @@ const FAQSection: React.FC<FAQSectionProps> = ({
       const isOpen = idx === openFAQ
       gsap.killTweensOf(el)
       if (isOpen) {
-        gsap.fromTo(el, { height: 0, opacity: 0 }, { height: el.scrollHeight, opacity: 1, duration: 0.4, ease: 'power2.out', onComplete: () => { el.style.height = 'auto' } })
+        gsap.fromTo(el, { height: 0, opacity: 0 }, { height: el.scrollHeight, opacity: 1, duration: 0.4, ease: 'power2.out', onComplete: () => { el.style.height = 'auto' }, force3D: true })
         cardRefs.current[idx]?.classList.add('ringed')
       } else {
         if (el.style.height === 'auto') el.style.height = `${el.scrollHeight}px`
-        gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: 'power1.out' })
+        gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: 'power1.out', force3D: true })
         cardRefs.current[idx]?.classList.remove('ringed')
       }
     })
@@ -130,7 +105,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
 
   // Flatten index mapping
   const totalList: { cat: string; item: FAQItem; globalIndex: number }[] = []
-  categories.forEach((cat, ci) => cat.questions.forEach((q, qi) => totalList.push({ cat: cat.category, item: q, globalIndex: ci * 100 + qi })))
+  categories.forEach((cat: FAQCategory, ci: number) => cat.questions.forEach((q: FAQItem, qi: number) => totalList.push({ cat: cat.category, item: q, globalIndex: ci * 100 + qi })))
 
   return (
     <section id={id} ref={sectionRef} className={`relative py-24 ${className}`.trim()} aria-labelledby={`${id}-title`}>
@@ -146,17 +121,17 @@ const FAQSection: React.FC<FAQSectionProps> = ({
         </header>
 
         <div ref={listRef} className="space-y-14">
-          {categories.map((category, categoryIndex) => (
+          {categories.map((category: FAQCategory, categoryIndex: number) => (
             <div key={category.category} className="relative">
               <div className="flex items-center mb-6">
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
-                <div className="px-5 py-2 mx-4 bg-vae-turquoise/10 rounded-full border border-vae-turquoise/25">
+                <div className="px-6 py-2 mx-4 bg-vae-turquoise/10 rounded-full border border-vae-turquoise/25">
                   <h3 className="text-sm font-semibold tracking-wider text-vae-turquoise uppercase">{category.category}</h3>
                 </div>
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
               </div>
               <ul className={`space-y-3 ${dense ? 'md:space-y-2' : ''}`}>        
-                {category.questions.map((faq, questionIndex) => {
+                {category.questions.map((faq: FAQItem, questionIndex: number) => {
                   const faqIndex = categoryIndex * 100 + questionIndex
                   const isOpen = openFAQ === faqIndex
                   return (
@@ -186,8 +161,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                           role="region"
                           aria-labelledby={`faq-button-${faqIndex}`}
                           ref={el => (answerRefs.current[faqIndex] = el)}
-                          style={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden px-6 will-change-[height,opacity]"
+                          className="h-0 opacity-0 overflow-hidden px-6 will-change-[height,opacity]"
                         >
                           <div className="pt-0 pb-6 border-t border-vae-turquoise/20"> 
                             <p className="text-sm text-text-secondary leading-relaxed">{faq.answer}</p>

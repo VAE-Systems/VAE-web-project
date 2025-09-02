@@ -1,6 +1,7 @@
 import React, { Suspense, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 import { TermHint } from '../ui/Glossary'
 import SpotlightCard from '../ui/SpotlightCard'
 import type { FAQCategory } from '../sections/FAQSection'
@@ -13,7 +14,7 @@ const GlossarySection = React.lazy(() => import('../ui/GlossarySection'))
 const ServiceConsultingPage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
-      <Seo
+  <Seo
         title="Beratung | Strategie, Governance & Architektur"
         description="Strategische KI- & Automationsberatung: Roadmaps, EU AI Act Orientierung, TCO/ROI & Architektur – faktenbasiert statt Hype."
         canonicalPath="/services/consulting"
@@ -34,6 +35,17 @@ const ServiceConsultingPage: React.FC = () => {
         ]}
       />
       <section className="relative -mt-20 pt-44 pb-28 border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_65%_35%,rgba(0,255,165,0.08),transparent_60%)]" />
+        <div className="container-vae max-w-6xl -mt-24 mb-10">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', path: '/' },
+              { label: 'Services', path: '/services' },
+              { label: 'Beratung', path: '/services/consulting' }
+            ]}
+            className="py-4 relative z-[2] text-xs"
+          />
+        </div>
         <div className="container-vae max-w-6xl">
           {/* Hero */}
           <h1 className="h1 h-space-lg">

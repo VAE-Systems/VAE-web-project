@@ -232,6 +232,49 @@
   outline: none;
 }
 
+/* Smart focus management: only show focus rings when using keyboard navigation */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+.js-focus-visible .focus-visible {
+  outline: 2px solid rgba(var(--vae-turquoise-rgb), 0.6);
+  outline-offset: 2px;
+  transition: outline 0.15s ease-in-out;
+}
+
+/* Auto-hide focus after 3 seconds of inactivity */
+.focus-visible {
+  animation: focusAutoHide 3s ease-in-out forwards;
+}
+
+@keyframes focusAutoHide {
+  0%, 90% {
+    outline: 2px solid rgba(var(--vae-turquoise-rgb), 0.6);
+    outline-offset: 2px;
+  }
+  100% {
+    outline: none;
+    outline-offset: 0;
+  }
+}
+
+/* Reset animation on user interaction */
+.focus-visible:focus {
+  animation: none;
+}
+
+/* Remove default browser focus for non-keyboard navigation */
+*:focus {
+  outline: none;
+}
+
+/* Only show focus when navigating with keyboard */
+body.using-keyboard *:focus {
+  outline: 2px solid rgba(var(--vae-turquoise-rgb), 0.6);
+  outline-offset: 2px;
+}
+
 /* End of base layer */
 
 /* Component Layer */
@@ -312,6 +355,31 @@
   .theme-light .btn-outline { border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.02); }
   .btn-outline:hover { transform: translateY(-2px); }
   .theme-light .btn-outline:hover { border-color: hsla(var(--color-vae-turquoise),0.45); color: hsl(var(--color-vae-turquoise)); background: rgba(0,0,0,0.02); box-shadow: 0 0 0 1px hsla(var(--color-vae-turquoise),0.35); }
+
+  /* Triggered attention sheen for CTA buttons (JS-controlled) */
+  [data-green-signal="true"] { position: relative; }
+  [data-green-signal="true"]::after {
+    content: ""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+    background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.65) 48%, transparent 70%);
+    mix-blend-mode: screen;
+    transform: translateX(-140%) skewX(-20deg); opacity: 0;
+  }
+  /* Stronger during dark mode for contrast */
+  .theme-light [data-green-signal="true"]::after { background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.45) 48%, transparent 70%); }
+  
+  [data-green-signal="true"][data-signal-state="on"]::after { animation: vae-sheen-run 1.3s cubic-bezier(.16,.84,.44,1) forwards; }
+  @keyframes vae-sheen-run {
+    0% { opacity: 0; transform: translateX(-140%) skewX(-20deg); }
+    10% { opacity: .9; }
+    60% { opacity: .45; }
+    100% { opacity: 0; transform: translateX(160%) skewX(-20deg); }
+  }
+  /* Optional micro-nudge scale (applied briefly by JS after a few missed sheens) */
+  .signal-nudge { animation: vae-nudge 140ms ease-out 1; }
+  @keyframes vae-nudge { from { transform: translateY(0) scale(1.0); } to { transform: translateY(-1px) scale(1.01); } }
+  @media (prefers-reduced-motion: reduce) {
+    [data-green-signal="true"][data-signal-state="on"]::after, .signal-nudge { animation: none !important; }
+  }
 
   /* High-conversion magnetic CTA (Services cards) */
   .btn-convert {

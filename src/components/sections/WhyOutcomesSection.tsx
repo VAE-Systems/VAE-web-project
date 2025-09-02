@@ -48,7 +48,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
       <div className="about-surface-bg" aria-hidden="true" />
       <div className="absolute inset-0 -z-10 opacity-70 pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(var(--vae-turquoise-rgb),0.18),transparent_60%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:70px_70px] mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(var(--color-white-rgb),0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--color-white-rgb),0.05)_1px,transparent_1px)] bg-[size:70px_70px] mix-blend-overlay" />
       </div>
       <div className="container-vae relative">
         <div className="max-w-6xl mx-auto">

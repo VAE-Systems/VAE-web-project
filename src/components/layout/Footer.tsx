@@ -131,7 +131,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Unternehmen & Rechtliches + Newsletter */}
-          <div className="space-y-10 xl:col-span-1 lg:col-span-1">
+          <div className="space-y-10 xl:col-span-1 lg:col-span-1 min-w-0">
             <div>
               <h4 className="text-lg font-semibold mb-4 text-text-light">Unternehmen</h4>
               <ul className="space-y-2 text-sm">

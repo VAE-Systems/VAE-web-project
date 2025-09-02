@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ReferenceList from '../ui/ReferenceList'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 
 const placeholderTools = [
   { name: 'VAE CRM (Preview)', desc: 'Fokus auf Beziehungsdaten & Interaktions-Kontext statt reiner Tabellenansicht.' },
@@ -12,7 +13,7 @@ const placeholderTools = [
 const ProductToolsPage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
-      <Seo
+  <Seo
         title="Applikationen & Module | VAE Systems – Schlanke Werkzeuge"
         description="Fokussierte Applikationen & Module – klarer Nutzen, integrativ, transparente Lizenzierung. Roadmap basiert auf realen Anforderungen."
         canonicalPath="/products/tools"
@@ -20,6 +21,14 @@ const ProductToolsPage: React.FC = () => {
           { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Applikationen & Module', about: 'Softwaremodule & Applikationen für KI‑gestützte Arbeitsabläufe' },
           { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type':'ListItem', position:1, name:'Produkte', item:'https://www.vae-systems.com/products' }, { '@type':'ListItem', position:2, name:'Applikationen & Module', item:'https://www.vae-systems.com/products/tools' } ] }
         ]}
+      />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Produkte & Plattform', path: '/products' },
+          { label: 'Applikationen & Module', path: '/products/tools' }
+        ]}
+        className="pt-6"
       />
       <section className="relative pt-40 pb-24 border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">

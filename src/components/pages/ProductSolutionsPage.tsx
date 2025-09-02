@@ -4,12 +4,13 @@ import ReferenceList from '../ui/ReferenceList'
 import ProviderComparisonSection from '../sections/ProviderComparison'
 import ReSuiteSection from '../sections/ReSuiteSection'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 
 const ProductSolutionsPage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
       
-      <Seo
+  <Seo
         title="Komplettlösungen | VAE Systems – End‑to‑End KI Umsetzung"
         description="Architektur, Implementierung, Betrieb & Handover für KI- und Automationslösungen – dokumentiert, vendor‑lock‑in frei, auditierbar."
         canonicalPath="/products/solutions"
@@ -17,6 +18,14 @@ const ProductSolutionsPage: React.FC = () => {
           { '@context': 'https://schema.org', '@type': 'Service', name: 'Komplettlösungen KI & Automation', provider: { '@type': 'Organization', name: 'VAE Systems' } },
           { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type':'ListItem', position:1, name:'Produkte', item:'https://www.vae-systems.com/products' }, { '@type':'ListItem', position:2, name:'Komplettlösungen', item:'https://www.vae-systems.com/products/solutions' } ] }
         ]}
+      />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Produkte & Plattform', path: '/products' },
+          { label: 'Komplettlösungen', path: '/products/solutions' }
+        ]}
+        className="pt-6"
       />
       <section className="relative pt-40 pb-24 border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker overflow-hidden">
         <div className="container-vae max-w-5xl">

@@ -24,7 +24,10 @@ export const useServiceWorker = () => {
   })
 
   useEffect(() => {
-    if (!state.isSupported) return
+    // Do not register service workers during local development.
+    // Vite's HMR relies on a websocket that can be broken by a SW caching the app shell,
+    // which may also lead to duplicate React versions being loaded.
+    if (!state.isSupported || import.meta.env.DEV) return
 
     const registerServiceWorker = async () => {
       try {

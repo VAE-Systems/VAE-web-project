@@ -6,7 +6,7 @@ import HomeOutcomesSection from '../sections/HomeOutcomesSection'
 import HomeProcessTeaserSection from '../sections/HomeProcessTeaserSection'
 import ProductsSection from '../sections/ProductsSection'
 import TechStackSection from '../sections/TechStackSection'
-import AboutSection from '../sections/AboutSection'
+import AboutMiniSection from '../sections/AboutMiniSection'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 import ContactSection from '../sections/ContactSection'
 import Seo from '../ui/Seo'
@@ -45,8 +45,8 @@ const HomePage: React.FC = () => {
       {/* 7. Tech Stack (technische Tiefe nach Kontext) */}
       <TechStackSection />
 
-      {/* 8. About (Kurz) */}
-      <AboutSection />
+  {/* 8. About (Mini Enhanced) */}
+  <AboutMiniSection />
 
       {/* 9. FAQ (Einwandbehandlung) */}
       <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>

@@ -522,9 +522,11 @@ body.using-keyboard *:focus {
   /* VAE Navigation Components */
   .nav-link { @apply text-text-secondary transition-colors duration-300 font-medium; }
   .nav-link.active { @apply text-vae-turquoise; }
-  /* Light mode: hover uses green underline only */
-  .theme-light .nav-link:hover { color: hsl(var(--color-text-secondary)); text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: hsl(var(--color-vae-turquoise)); }
-  .theme-light .nav-link.active { color: hsl(var(--color-text-light)); text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: hsl(var(--color-vae-turquoise)); }
+  /* Light mode: underline only the textual part of nav links (icons remain untouched) */
+  .theme-light .nav-link:hover { color: hsl(var(--color-text-secondary)); }
+  .theme-light .nav-link:hover .nav-link-text { text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: hsl(var(--color-vae-turquoise)); }
+  .theme-light .nav-link.active { color: hsl(var(--color-text-light)); }
+  .theme-light .nav-link.active .nav-link-text { text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: hsl(var(--color-vae-turquoise)); }
   
   /* Focus Ring Helper */
   .focus-ring {

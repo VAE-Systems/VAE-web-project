@@ -41,7 +41,7 @@ export const homeProcessHeading =
   'Von erster Einordnung zu belastbarem Betrieb'
 
 export const homeProcessDescription =
-  'Struktur statt Zufall: definierte Artefakte je Schritt – vollständig einsehbar und transferierbar. Voller Ablauf auf Über Uns.'
+  'Struktur statt Zufall: definierte Artefakte je Schritt – vollständig einsehbar und transferierbar. Voller Ablauf auf '
 
 export const homeProcessNote =
   'Spätere Schritte vertiefen Betrieb (Monitoring / Evaluierung / Erweiterung). Fokus bleibt: frühe Nutzbarkeit & interne Ownership.'

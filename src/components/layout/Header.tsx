@@ -240,19 +240,19 @@ const Header: React.FC = () => {
                   onMouseLeave={() => scheduleClose(item.mega)}
                 >
                   <Link
-                    id={item.mega === 'products' ? 'products-trigger' : 'services-trigger'}
-                    ref={item.mega === 'products' ? (productsTriggerRef as any) : (servicesTriggerRef as any)}
+                    id={item.mega === 'products' ? 'products-trigger' : item.mega === 'services' ? 'services-trigger' : 'blog-trigger'}
+                    ref={item.mega === 'products' ? (productsTriggerRef as any) : item.mega === 'services' ? (servicesTriggerRef as any) : (blogTriggerRef as any)}
                     to={item.path}
                     className={`nav-link flex items-center gap-1 ${isActivePath(item.path) ? 'active' : ''}`}
                     aria-haspopup="dialog"
-                    aria-expanded={item.mega === 'products' ? productsOpen : servicesOpen}
-                    aria-controls={item.mega === 'products' ? 'products-mega' : 'services-mega'}
+                    aria-expanded={item.mega === 'products' ? productsOpen : item.mega === 'services' ? servicesOpen : blogOpen}
+                    aria-controls={item.mega === 'products' ? 'products-mega' : item.mega === 'services' ? 'services-mega' : 'blog-mega'}
                     onFocus={() => openMenu(item.mega)}
                     onBlur={() => scheduleClose(item.mega)}
                   >
-                    {item.label}
+                    <span className="nav-link-text">{item.label}</span>
                     <span
-                      className={`material-symbols-outlined text-base transition-transform duration-300 ${(item.mega === 'products' ? productsOpen : servicesOpen) ? 'rotate-180' : ''}`}
+                      className={`material-symbols-outlined text-base transition-transform duration-300 ${item.mega === 'products' ? (productsOpen ? 'rotate-180' : '') : item.mega === 'services' ? (servicesOpen ? 'rotate-180' : '') : (blogOpen ? 'rotate-180' : '')}`}
                       aria-hidden="true"
                     >
                       expand_more
@@ -446,7 +446,7 @@ const Header: React.FC = () => {
                   to={item.path}
                   className={`nav-link ${isActivePath(item.path) ? 'active' : ''}`}
                 >
-                  {item.label}
+                  <span className="nav-link-text">{item.label}</span>
                 </Link>
               )
             ))}

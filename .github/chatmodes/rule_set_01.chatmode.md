@@ -1,6 +1,6 @@
 ---
 description: 'VAE Web Project Chatmode: Enforces design, SEO, and code hygiene rules.'
-tools: []
+tools: ['codebase', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'terminalSelection', 'terminalLastCommand', 'openSimpleBrowser', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'extensions', 'runTests', 'editFiles', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'pylance mcp server', 'dtdUri', 'getPythonEnvironmentInfo', 'getPythonExecutableCommand', 'installPythonPackage', 'configurePythonEnvironment']
 ---
 - Rule: Use semantic HTML tags for better accessibility and SEO.
   Reason: Semantic tags improve the structure and readability of the code.

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { productCategories } from '../navigation/productCategories'
 import { serviceCategories } from '../navigation/serviceCategories'
+import { blogCategories } from '../navigation/blogCategories'
 import { useAttentionSignal, useFocusTrap } from '@/hooks'
 import { useTheme } from '@/contexts/ThemeContext'
 
@@ -21,16 +22,19 @@ const Header: React.FC = () => {
   const location = useLocation()
   const [productsOpen, setProductsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [blogOpen, setBlogOpen] = useState(false)
   const productsTriggerRef = useRef<HTMLElement>(null)
   const servicesTriggerRef = useRef<HTMLElement>(null)
+  const blogTriggerRef = useRef<HTMLElement>(null)
   const productsMegaRef = useRef<HTMLDivElement>(null)
   const servicesMegaRef = useRef<HTMLDivElement>(null)
+  const blogMegaRef = useRef<HTMLDivElement>(null)
   const { theme, toggleTheme } = useTheme()
   const ctaRef = React.useRef<HTMLAnchorElement>(null)
   
   // Hover-intent helpers: add a small close delay to avoid flicker
-  const hoverTimers = useRef<{ products?: ReturnType<typeof setTimeout>; services?: ReturnType<typeof setTimeout> }>({})
-  const openMenu = (menu: 'products' | 'services') => {
+  const hoverTimers = useRef<{ products?: ReturnType<typeof setTimeout>; services?: ReturnType<typeof setTimeout>; blog?: ReturnType<typeof setTimeout> }>({})
+  const openMenu = (menu: 'products' | 'services' | 'blog') => {
     if (menu === 'products' && hoverTimers.current.products) {
       clearTimeout(hoverTimers.current.products)
       hoverTimers.current.products = undefined
@@ -39,16 +43,24 @@ const Header: React.FC = () => {
       clearTimeout(hoverTimers.current.services)
       hoverTimers.current.services = undefined
     }
-    if (menu === 'products') { setProductsOpen(true); setServicesOpen(false) }
-    if (menu === 'services') { setServicesOpen(true); setProductsOpen(false) }
+    if (menu === 'blog' && hoverTimers.current.blog) {
+      clearTimeout(hoverTimers.current.blog)
+      hoverTimers.current.blog = undefined
+    }
+    if (menu === 'products') { setProductsOpen(true); setServicesOpen(false); setBlogOpen(false) }
+    if (menu === 'services') { setServicesOpen(true); setProductsOpen(false); setBlogOpen(false) }
+    if (menu === 'blog') { setBlogOpen(true); setProductsOpen(false); setServicesOpen(false) }
   }
-  const scheduleClose = (menu: 'products' | 'services', delay = 180) => {
+  const scheduleClose = (menu: 'products' | 'services' | 'blog', delay = 180) => {
     if (menu === 'products') {
       if (hoverTimers.current.products) clearTimeout(hoverTimers.current.products)
       hoverTimers.current.products = setTimeout(() => setProductsOpen(false), delay)
-    } else {
+    } else if (menu === 'services') {
       if (hoverTimers.current.services) clearTimeout(hoverTimers.current.services)
       hoverTimers.current.services = setTimeout(() => setServicesOpen(false), delay)
+    } else if (menu === 'blog') {
+      if (hoverTimers.current.blog) clearTimeout(hoverTimers.current.blog)
+      hoverTimers.current.blog = setTimeout(() => setBlogOpen(false), delay)
     }
   }
   useFocusTrap(
@@ -66,6 +78,15 @@ const Header: React.FC = () => {
     () => {
       setServicesOpen(false)
       servicesTriggerRef.current?.focus()
+    },
+    { initialFocus: 'first' }
+  )
+  useFocusTrap(
+    blogOpen,
+    blogMegaRef,
+    () => {
+      setBlogOpen(false)
+      blogTriggerRef.current?.focus()
     },
     { initialFocus: 'first' }
   )
@@ -104,11 +125,27 @@ const Header: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [servicesOpen])
 
+  useEffect(() => {
+    if (!blogOpen) return
+    const handleClick = (e: MouseEvent) => {
+      if (
+        blogMegaRef.current &&
+        !blogMegaRef.current.contains(e.target as Node) &&
+        !blogTriggerRef.current?.contains(e.target as Node)
+      ) {
+        setBlogOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [blogOpen])
+
   // Handle scroll effect
   // Close on location (route) change
   useEffect(() => {
   setProductsOpen(false)
   setServicesOpen(false)
+  setBlogOpen(false)
   }, [location.pathname, location.hash])
 
   useEffect(() => {
@@ -116,6 +153,7 @@ const Header: React.FC = () => {
       setIsScrolled(window.scrollY > 50)
   if (productsOpen) setProductsOpen(false)
   if (servicesOpen) setServicesOpen(false)
+  if (blogOpen) setBlogOpen(false)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -127,6 +165,7 @@ const Header: React.FC = () => {
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services', hasMega: true, mega: 'services' as const },
     { path: '/products', label: 'Products', hasMega: true, mega: 'products' as const },
+    { path: '/blog', label: 'Blog', hasMega: true, mega: 'blog' as const },
     { path: '/about', label: 'Über uns' },
     { path: '/contact', label: 'Kontakt' },
   ]
@@ -310,6 +349,75 @@ const Header: React.FC = () => {
                       </div>
                     </div>
                   )}
+                  {item.mega === 'blog' && blogOpen && (
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-[var(--z-dropdown)]">
+                      <div
+                        ref={blogMegaRef}
+                        id="blog-mega"
+                        className="mega-panel w-[920px] rounded-2xl border border-border-primary dark:border-white/10 backdrop-blur-xl bg-[linear-gradient(135deg,rgba(var(--color-white-rgb),0.98),rgba(248,248,248,0.96))] dark:bg-[linear-gradient(135deg,rgba(10,15,15,0.92),rgba(10,25,20,0.90))] shadow-2xl shadow-black/10 dark:shadow-black/40 ring-1 ring-black/5 dark:ring-white/10 focus:outline-none surface-glass-panel"
+                        role="dialog"
+                        aria-label="Blog Menu"
+                        aria-modal="false"
+                        onMouseEnter={() => openMenu('blog')}
+                        onMouseLeave={() => scheduleClose('blog')}
+                      >
+                        <div className="p-8 grid grid-cols-4 gap-6">
+                        {blogCategories.map(cat => (
+                          <Link
+                            key={cat.key}
+                            to={
+                              cat.key === 'blog' ? '/blog'
+                              : cat.key === 'aktuelles' ? '/blog/aktuelles'
+                              : cat.key === 'media' ? '/blog/media'
+                              : cat.key === 'kurse' ? '/blog/kurse'
+                              : '/blog'
+                            }
+                            className="group flex flex-col text-left"
+                            onClick={() => setBlogOpen(false)}
+                          >
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h3 className="text-sm font-semibold text-text-light dark:text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
+                                <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
+                              </div>
+                              {cat.badge && (
+                                <span className={`px-2 py-0.5 text-[9px] font-semibold rounded-full border ${
+                                  cat.badge === 'Live'
+                                    ? 'bg-vae-turquoise/15 text-vae-turquoise border-vae-turquoise/30'
+                                    : 'bg-orange-500/15 text-orange-400 border-orange-500/30'
+                                }`}>
+                                  {cat.badge}
+                                </span>
+                              )}
+                              {cat.comingSoon && (
+                                <span className="px-2 py-0.5 text-[9px] font-semibold rounded-full bg-gray-500/15 text-gray-400 border border-gray-500/30">
+                                  Soon
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
+                            <ul className="space-y-1.5 mb-4 text-[11px]">
+                              {cat.points.slice(0,3).map(p => (
+                                <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-text-light dark:group-hover:text-white/80 transition-colors">
+                                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
+                                  <span>{p}</span>
+                                </li>
+                              ))}
+                            </ul>
+                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
+                              {cat.cta}
+                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                            </div>
+                          </Link>
+                        ))}
+                        </div>
+                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-[11px] text-text-muted">
+                          <span className="uppercase tracking-wider">VAE Blog</span>
+                          <Link to="/blog" onClick={() => setBlogOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Beiträge<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <Link
@@ -383,6 +491,18 @@ const Header: React.FC = () => {
               
               {/* Mobile CTA */}
               <div className="px-4 pt-4 space-y-4">
+                {/* Blog Button in Mobile Menu */}
+                <Link
+                  to="/blog"
+                  className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary transition-colors duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined mr-2">
+                    article
+                  </span>
+                  Blog
+                </Link>
+
                 {/* Theme Toggle in Mobile Menu */}
                 <button
                   className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary transition-colors duration-300"

@@ -5,6 +5,8 @@ import { serviceCategories } from '../navigation/serviceCategories'
 import { blogCategories } from '../navigation/blogCategories'
 import { useAttentionSignal, useFocusTrap } from '@/hooks'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useSwipeGesture } from '@/hooks/useSwipeGesture'
+import { useMobileMenu } from '@/hooks/useMobileMenu'
 
 /**
  * Header Component
@@ -18,7 +20,6 @@ import { useTheme } from '@/contexts/ThemeContext'
  */
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
   const [productsOpen, setProductsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
@@ -31,6 +32,25 @@ const Header: React.FC = () => {
   const blogMegaRef = useRef<HTMLDivElement>(null)
   const { theme, toggleTheme } = useTheme()
   const ctaRef = React.useRef<HTMLAnchorElement>(null)
+
+  // Mobile menu with swipe gestures
+  const {
+    isOpen: isMobileMenuOpen,
+    close: closeMobileMenu,
+    toggle: toggleMobileMenu,
+    handleSwipeLeft,
+    handleSwipeRight,
+    handleRouteChange
+  } = useMobileMenu()
+
+  // Swipe gesture handling for mobile menu
+  const mobileMenuRef = useSwipeGesture(
+    handleSwipeLeft, // Swipe left to close
+    handleSwipeRight, // Swipe right to open
+    undefined, // No up swipe
+    undefined, // No down swipe
+    { threshold: 50, restraint: 100, allowedTime: 300 }
+  ) as React.RefObject<HTMLDivElement>
   
   // Hover-intent helpers: add a small close delay to avoid flicker
   const hoverTimers = useRef<{ products?: ReturnType<typeof setTimeout>; services?: ReturnType<typeof setTimeout>; blog?: ReturnType<typeof setTimeout> }>({})
@@ -143,10 +163,11 @@ const Header: React.FC = () => {
   // Handle scroll effect
   // Close on location (route) change
   useEffect(() => {
-  setProductsOpen(false)
-  setServicesOpen(false)
-  setBlogOpen(false)
-  }, [location.pathname, location.hash])
+    setProductsOpen(false)
+    setServicesOpen(false)
+    setBlogOpen(false)
+    handleRouteChange()
+  }, [location.pathname, location.hash, handleRouteChange])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -187,10 +208,10 @@ const Header: React.FC = () => {
       <div className="container-vae">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo/Brand */}
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="flex items-center space-x-4 group"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => closeMobileMenu()}
           >
             <div className="h-10 group-hover:glow-turquoise transition-all duration-300">
               <img 
@@ -459,7 +480,7 @@ const Header: React.FC = () => {
           <button
             id="mobile-menu-trigger"
             className="md:hidden p-2 text-text-light hover:text-vae-turquoise transition-colors duration-300"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => toggleMobileMenu()}
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -472,7 +493,12 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div id="mobile-menu" role="navigation" className="md:hidden border-t border-bg-secondary backdrop-glass">
+          <div
+            ref={mobileMenuRef}
+            id="mobile-menu"
+            role="navigation"
+            className="md:hidden border-t border-bg-secondary backdrop-glass"
+          >
             <nav className="py-6 space-y-4">
               {navItems.map((item) => (
                 <Link
@@ -483,19 +509,19 @@ const Header: React.FC = () => {
                       ? 'text-vae-turquoise bg-vae-turquoise/10'
                       : 'text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary'
                   }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => closeMobileMenu()}
                 >
                   {item.label}
                 </Link>
               ))}
-              
+
               {/* Mobile CTA */}
               <div className="px-4 pt-4 space-y-4">
                 {/* Blog Button in Mobile Menu */}
                 <Link
                   to="/blog"
                   className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary transition-colors duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => closeMobileMenu()}
                 >
                   <span className="material-symbols-outlined mr-2">
                     article
@@ -508,7 +534,7 @@ const Header: React.FC = () => {
                   className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary transition-colors duration-300"
                   onClick={() => {
                     toggleTheme()
-                    setIsMobileMenuOpen(false)
+                    closeMobileMenu()
                   }}
                 >
                   <span className="material-symbols-outlined mr-2">
@@ -517,10 +543,10 @@ const Header: React.FC = () => {
                   {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
                 </button>
                 
-                <Link 
-                  to="/contact" 
+                <Link
+                  to="/contact"
                   className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} w-full justify-center`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => closeMobileMenu()}
                 >
                   <span className="material-symbols-outlined mr-2">schedule</span>
                   Erstgespräch buchen

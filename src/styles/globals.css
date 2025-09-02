@@ -48,6 +48,8 @@
     /* Modern Tailwind compatibility - Dark Mode */
     --color-vae-turquoise: 157 100% 47%;
     --color-vae-turquoise-rgb: 0, 255, 165;
+    --color-white-rgb: 255, 255, 255;
+    --color-black-rgb: 0, 0, 0;
     --color-vae-black: 0 0% 4%;
     
     /* Background Colors */
@@ -238,6 +240,38 @@
   .container-vae {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+  
+  /* Neutralize Safari/Chrome autofill yellow for inputs */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: hsl(var(--color-text-light)) !important;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: 0 0 0 1000px hsl(var(--color-bg-secondary)) inset !important;
+    border: 1px solid hsl(var(--color-bg-tertiary)) !important;
+    caret-color: hsl(var(--color-text-light));
+  }
+  .theme-light input:-webkit-autofill,
+  .theme-light input:-webkit-autofill:hover,
+  .theme-light input:-webkit-autofill:focus,
+  .theme-light textarea:-webkit-autofill,
+  .theme-light textarea:-webkit-autofill:hover,
+  .theme-light textarea:-webkit-autofill:focus,
+  .theme-light select:-webkit-autofill,
+  .theme-light select:-webkit-autofill:hover,
+  .theme-light select:-webkit-autofill:focus {
+    -webkit-text-fill-color: hsl(0 0% 10%) !important;
+    box-shadow: 0 0 0 1000px hsl(0 0% 96%) inset !important;
+    border: 1px solid rgba(0,0,0,0.12) !important;
+    caret-color: hsl(0 0% 10%);
+  }
+  input::-webkit-contacts-auto-fill-button { opacity: 0; }
   /* Motion tokens for consistent easing */
   :root { --ease-spring-out: cubic-bezier(.16,1,.3,1); --ease-bounce-soft: cubic-bezier(.34,1.56,.64,1); }
   
@@ -777,6 +811,12 @@ a
   .surface-card-strong { background: var(--surface-5); border: var(--surface-border-strong); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 1rem; }
   .glass-surface { background: var(--surface-glass); border: var(--surface-border); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 1rem; }
   .glass-surface-strong { background: var(--surface-glass-strong); border: var(--surface-border-strong); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 1rem; }
+
+  /* Contact radial background utility */
+  .bg-contact-radial {
+    background: radial-gradient(circle at 40% 30% , hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 60% 70%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%);
+  }
 
   /* Light-mode compatibility overrides for legacy dark-first classes */
   .theme-light .text-white { color: hsl(var(--color-text-light)) !important; }

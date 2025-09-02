@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 
 // Layout Components
@@ -6,22 +6,40 @@ import Header from '@components/layout/Header'
 import Footer from '@components/layout/Footer'
 import SectionNavigation from '@components/navigation/SectionNavigation'
 import ScrollProgress from '@components/navigation/ScrollProgress'
+import ErrorBoundary from '@components/ErrorBoundary'
 
-// Pages
-import HomePage from '@components/pages/HomePage'
-import ServicesPage from '@components/pages/ServicesPage'
-import ServiceTrainingsPage from '@components/pages/ServiceTrainingsPage'
-import ServiceConsultingPage from '@components/pages/ServiceConsultingPage'
-import ServiceCustomSolutionsPage from '@components/pages/ServiceCustomSolutionsPage'
-import ProductsPage from '@components/pages/ProductsPage'
-import ProductSolutionsPage from '@components/pages/ProductSolutionsPage'
-import ProductToolsPage from '@components/pages/ProductToolsPage'
-import ProductVaeCorePage from '@components/pages/ProductVaeCorePage'
-import ProductShowcasesPage from '@components/pages/ProductShowcasesPage'
-import AboutPage from '@components/pages/AboutPage'
-import ContactPage from '@components/pages/ContactPage'
-import ImpressumPage from '@components/pages/ImpressumPage'
-import PrivacyPage from '@components/pages/PrivacyPage'
+// Privacy Components
+import CookieBanner from '@components/privacy/CookieBanner'
+
+// Theme Context
+import { ThemeProvider } from '@/contexts/ThemeContext'
+
+// Focus Management
+import { initializeFocusManager } from '@/utils/focusManagement'
+
+// Lazy-loaded Pages
+const HomePage = React.lazy(() => import('@components/pages/HomePage'))
+const ServicesPage = React.lazy(() => import('@components/pages/ServicesPage'))
+const ServiceTrainingsPage = React.lazy(() => import('@components/pages/ServiceTrainingsPage'))
+const ServiceConsultingPage = React.lazy(() => import('@components/pages/ServiceConsultingPage'))
+const ServiceCustomSolutionsPage = React.lazy(() => import('@components/pages/ServiceCustomSolutionsPage'))
+const ProductsPage = React.lazy(() => import('@components/pages/ProductsPage'))
+const ProductSolutionsPage = React.lazy(() => import('@components/pages/ProductSolutionsPage'))
+const ProductToolsPage = React.lazy(() => import('@components/pages/ProductToolsPage'))
+const ProductVaeCorePage = React.lazy(() => import('@components/pages/ProductVaeCorePage'))
+const ProductShowcasesPage = React.lazy(() => import('@components/pages/ProductShowcasesPage'))
+const AboutPage = React.lazy(() => import('@components/pages/AboutPage'))
+const ContactPage = React.lazy(() => import('@components/pages/ContactPage'))
+const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage'))
+const PrivacyPage = React.lazy(() => import('@components/pages/PrivacyPage'))
+const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySettings'))
+
+// Loading Component
+const LoadingSpinner: React.FC = () => (
+  <div className="min-h-screen flex items-center justify-center bg-bg-darker">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-turquoise"></div>
+  </div>
+)
 
 /**
  * Main App Component
@@ -50,33 +68,48 @@ const NavigationSwitcher: React.FC = () => {
   return pathname === '/' ? <SectionNavigation /> : <ScrollProgress />
 }
 
-const App: React.FC = () => (
-  <Router>
-    <ScrollToTop />
-    <div className="min-h-[100dvh] bg-bg-darker text-text-light">
-      <Header />
-      <NavigationSwitcher />
-      <main className="pt-20">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
-          <Route path="/services/consulting" element={<ServiceConsultingPage />} />
-          <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/products/solutions" element={<ProductSolutionsPage />} />
-          <Route path="/products/tools" element={<ProductToolsPage />} />
-          <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
-          <Route path="/products/showcases" element={<ProductShowcasesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/impressum" element={<ImpressumPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
-  </Router>
-)
+const App: React.FC = () => {
+  // Initialize focus management on app start
+  useEffect(() => {
+    initializeFocusManager()
+  }, [])
+
+  return (
+    <ErrorBoundary>
+      <ThemeProvider>
+        <Router>
+        <ScrollToTop />
+        <div className="min-h-[100dvh] bg-bg-darker text-text-light">
+          <Header />
+          <NavigationSwitcher />
+          <main className="pt-20">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
+                <Route path="/services/consulting" element={<ServiceConsultingPage />} />
+                <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/products/solutions" element={<ProductSolutionsPage />} />
+                <Route path="/products/tools" element={<ProductToolsPage />} />
+                <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
+                <Route path="/products/showcases" element={<ProductShowcasesPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/impressum" element={<ImpressumPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/privacy/settings" element={<PrivacySettings />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+          <CookieBanner />
+        </div>
+      </Router>
+    </ThemeProvider>
+  </ErrorBoundary>
+  )
+}
 
 export default App

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import { privacyContent } from '../../content/privacy'
 
@@ -18,6 +19,21 @@ const PrivacyPage: React.FC = () => {
       />
       <section className="pt-40 pb-24 container-vae max-w-4xl">
         <h1 className="h1 heading-gradient mb-10">Datenschutzerklärung</h1>
+
+        {/* Privacy Settings Link */}
+        <div className="mb-8 p-6 bg-bg-secondary border border-border-primary rounded-lg">
+          <h2 className="text-lg font-semibold text-text-light mb-2">Ihre Datenschutz-Einstellungen</h2>
+          <p className="text-text-muted mb-4">
+            Verwalten Sie Ihre Cookie-Einstellungen und Datenschutz-Präferenzen individuell.
+          </p>
+          <Link
+            to="/privacy/settings"
+            className="btn-primary inline-block"
+          >
+            Datenschutz-Einstellungen öffnen
+          </Link>
+        </div>
+
         <div className="space-y-10 text-sm leading-relaxed text-text-secondary">
           {privacyContent.sections.map(section => (
             <section id={section.id} key={section.id}>

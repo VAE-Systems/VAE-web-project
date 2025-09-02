@@ -7,6 +7,13 @@ import MaterialIcon from '../ui/MaterialIcon'
 import ServicesHeroSection from '../sections/ServicesHeroSection'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
+import {
+  servicesLifecycle,
+  lifecycleBenefits,
+  servicesCategories,
+  comparisonMatrix,
+  finalCta
+} from '../../content/services'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 /**
  * ServicesPage Component
@@ -28,18 +35,14 @@ const ServicesPage: React.FC = () => {
       if (heroRef.current) {
         gsap.fromTo(heroRef.current.children,
           { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'expo.out' }
+          { opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'expo.out', force3D: true }
         )
       }
     })
     return () => ctx.revert()
   }, [])
 
-  const categories = [
-    { key:'trainings', title:'Schulungen & Workshops', icon:'school', focus:'Enablement & Wissenstransfer – Teams schneller produktiv.', examples:['VAE CORE Admin','Prompt Patterns Lab','Architektur Grundlagen'], to:'/services/trainings' },
-    { key:'consulting', title:'Beratung', icon:'handshake', focus:'Strategische Architektur-, Prozess- & Compliance-Begleitung.', examples:['KI-Integrations-Roadmap','Security & Governance Audit','Regulatorische Analyse'], to:'/services/consulting' },
-    { key:'custom', title:'Custom Solutions', icon:'extension', focus:'Individuelle Software & Integrationen – gezielte Umsetzung statt Produktkatalog.', examples:['API-Connector','Workflow Automatisierung','Retrieval Layer'], to:'/services/custom-solutions' }
-  ]
+
 
   return (
     <div className="min-h-[100dvh]">
@@ -57,19 +60,21 @@ const ServicesPage: React.FC = () => {
       />
       <ServicesHeroSection innerRef={heroRef} />
       {/* Storytelling */}
-      <section className="py-28 bg-bg-darker border-b border-white/5">
+      <section className="py-28 bg-bg-primary dark:bg-bg-darker border-b border-border-primary dark:border-white/5">
         <div className="container-vae max-w-5xl">
           <div className="max-w-3xl mb-16">
-            <h2 className="h2 heading-gradient h-space">Lifecycle statt Einzelleistung.</h2>
-            <p className="text-text-secondary leading-relaxed mb-5 text-lg">Wir entwickeln nicht nur Software – wir begleiten den gesamten Lebenszyklus: Analyse, Architektur, Implementierung, Enablement, Betrieb & Übergabe. So entstehen keine „Abwurfprojekte“, sondern betreibbare Lösungen.</p>
-            <p className="text-text-secondary leading-relaxed mb-5 text-sm">Schulungen & Workshops bauen interne Kompetenz auf, Beratung schafft Klarheit & Richtung, Custom Solutions liefern präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.</p>
-            <p className="text-text-secondary leading-relaxed text-sm">Plattform‑ & Lizenzangebote unter <Link to="/products" className="text-vae-turquoise hover:underline">Products</Link>. Services adressieren Ihren spezifischen Kontext.</p>
+            <h2 className="h2 heading-gradient h-space">{servicesLifecycle.title}</h2>
+            <p className="text-text-secondary leading-relaxed mb-5 text-lg">{servicesLifecycle.description1}</p>
+            <p className="text-text-secondary leading-relaxed mb-5 text-sm">{servicesLifecycle.description2}</p>
+            <p className="text-text-secondary leading-relaxed text-sm">{servicesLifecycle.platformLink} <Link to="/products" className="text-vae-turquoise hover:underline">Products</Link>.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {[{ h: 'Enablement', b: ['Team handlungsfähig', 'Reduktion externer Abhängigkeit', 'Dokumentierte Artefakte'] }, { h: 'Governance & Compliance', b: ['Frühe AI Act Orientierung', 'Sicherheitsmodell klar', 'Transparente Audits'] }, { h: 'Umsetzung', b: ['Fokus reale Engpässe', 'Messbare Qualitätskriterien', 'Souveräner Betrieb'] }].map(col => (
-              <div key={col.h} className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold text-white mb-3">{col.h}</h3>
-                <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">{col.b.map(x => <li key={x}>{x}</li>)}</ul>
+            {lifecycleBenefits.map(benefit => (
+              <div key={benefit.title} className="p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10">
+                <h3 className="text-sm font-semibold text-text-light dark:text-white mb-3">{benefit.title}</h3>
+                <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">
+                  {benefit.benefits.map(item => <li key={item}>{item}</li>)}
+                </ul>
               </div>
             ))}
           </div>
@@ -77,10 +82,10 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Kategorie Grid */}
-      <section id="categories" className="py-28 bg-bg-dark border-b border-white/5">
+      <section id="categories" className="py-28 bg-bg-secondary dark:bg-bg-dark border-b border-border-primary dark:border-white/5">
         <div className="container-vae max-w-7xl">
           <div className="grid md:grid-cols-3 gap-10">
-            {categories.map(cat => (
+            {servicesCategories.map(cat => (
               <SpotlightCard
                 key={cat.key}
                 title={cat.title}
@@ -90,7 +95,7 @@ const ServicesPage: React.FC = () => {
                 iconSlot={<div className="w-14 h-14 rounded-xl bg-vae-turquoise/15 text-vae-turquoise flex items-center justify-center"><MaterialIcon icon={cat.icon} className="text-2xl" /></div>}
               >
                 <ul className="list-disc list-inside">
-                  {cat.examples.map(ex => <li key={ex}>{ex}</li>)}
+                  {cat.examples.map(example => <li key={example}>{example}</li>)}
                 </ul>
               </SpotlightCard>
             ))}
@@ -99,36 +104,28 @@ const ServicesPage: React.FC = () => {
       </section>
 
       {/* Vergleich / Differenzierung Matrix */}
-      <section className="py-28 bg-bg-dark border-b border-white/5" id="vergleich">
+      <section className="py-28 bg-bg-secondary dark:bg-bg-dark border-b border-border-primary dark:border-white/5" id="vergleich">
         <div className="container-vae max-w-6xl">
           <header className="max-w-3xl mb-14">
-            <h2 className="h2 heading-gradient h-space">Wann welches Format?</h2>
-            <p className="text-text-secondary leading-relaxed text-lg">Schnell erkennbare Zuordnung: Wissen aufbauen, Richtung festlegen oder spezifisch umsetzen. Überlappungen bewusst minimal.</p>
+            <h2 className="h2 heading-gradient h-space">{comparisonMatrix.title}</h2>
+            <p className="text-text-secondary leading-relaxed text-lg">{comparisonMatrix.subtitle}</p>
           </header>
           <div className="overflow-x-auto -mx-2 px-2">
-            <div className="min-w-[860px] grid grid-cols-[160px_repeat(3,1fr)] rounded-2xl border border-white/10 bg-white/[0.03] relative">
+            <div className="min-w-[860px] grid grid-cols-[160px_repeat(3,1fr)] rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/3 dark:bg-white/[0.03] relative">
               {/* Column Headers */}
-              <div className="p-3 text-[11px] uppercase tracking-wide text-text-muted/70 border-b border-white/10">Kriterium</div>
+              <div className="p-3 text-[11px] uppercase tracking-wide text-text-muted/70 border-b border-border-primary dark:border-white/10">Kriterium</div>
               {['Schulungen & Workshops','Beratung','Custom Solutions'].map(h => (
-                <div key={h} className="p-3 text-[11px] font-semibold uppercase tracking-wide text-white border-b border-white/10 bg-gradient-to-b from-white/10 to-transparent backdrop-blur-sm">
+                <div key={h} className="p-3 text-[11px] font-semibold uppercase tracking-wide text-text-light dark:text-white border-b border-border-primary dark:border-white/10 bg-gradient-to-b from-bg-primary/10 dark:from-white/10 to-transparent backdrop-blur-sm">
                   {h}
                 </div>
               ))}
-              {[
-                { k:'ziel', label:'Primäres Ziel', a:'Kompetenz & Routinen', b:'Richtung & Governance', c:'Produktiver Baustein' },
-                { k:'output', label:'Output', a:'Unterlagen, Übungen, Cheatsheets', b:'Roadmap, Architektur, KPI/Risiko', c:'Software, Runbooks, Dashboards' },
-                { k:'tiefe', label:'Technische Tiefe', a:'Fundament & Patterns', b:'Architektur & Optionen', c:'Implementierung & Integrationen' },
-                { k:'dauer', label:'Typische Dauer', a:'1 Tag / Modul', b:'Tage – wenige Wochen', c:'Wochen – Inkremente' },
-                { k:'team', label:'Interne Beteiligung', a:'Aktives Lernen', b:'Workshops & Entscheidungen', c:'Review + Co-Development' },
-                { k:'metriken', label:'Messpunkte', a:'Lernziele / Erfolg', b:'Reifegrad, Risiko, TCO', c:'Qualität, Latenz, Kosten' },
-                { k:'lockin', label:'Lock‑in Risiko', a:'Keins', b:'Sehr gering', c:'Niedrig (Open-first)' }
-              ].map((r,i,arr) => (
-                <React.Fragment key={r.k}>
-                  <div className={`p-4 text-[11px] font-medium text-text-muted/70 border-t border-white/5 ${i===arr.length-1 ? 'rounded-bl-2xl' : ''}`}>{r.label}</div>
-                  {[r.a, r.b, r.c].map((val,ci) => (
+              {comparisonMatrix.criteria.map((r, i, arr) => (
+                <React.Fragment key={r.key}>
+                  <div className={`p-4 text-[11px] font-medium text-text-muted/70 border-t border-border-primary dark:border-white/5 ${i===arr.length-1 ? 'rounded-bl-2xl' : ''}`}>{r.label}</div>
+                  {[r.trainings, r.consulting, r.custom].map((val,ci) => (
                     <div
                       key={ci}
-                      className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
+                      className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-border-primary dark:border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
                     >
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
                       <span className="relative z-10">{val}</span>
@@ -137,30 +134,33 @@ const ServicesPage: React.FC = () => {
                 </React.Fragment>
               ))}
               {/* Vertical Separators: exakt an den Grid-Spalten */}
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[160px] w-px bg-white/5" />
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+((100%-160px)/3))] w-px bg-white/5" />
-              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+2*((100%-160px)/3))] w-px bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[160px] w-px bg-border-primary/20 dark:bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+((100%-160px)/3))] w-px bg-border-primary/20 dark:bg-white/5" />
+              <div className="pointer-events-none absolute top-[40px] bottom-0 left-[calc(160px+2*((100%-160px)/3))] w-px bg-border-primary/20 dark:bg-white/5" />
             </div>
           </div>
           <div className="mt-8 text-[11px] text-text-muted max-w-4xl space-y-2">
-            <p>Bereiche können separat gebucht oder in direktem Kontakt sinnvoll kombiniert werden – abhängig von Reifegrad & Zielbild.</p>
-            <p className="text-text-secondary/70">Typische Sequenz: Klarheit (Beratung) → Enablement (Schulungen & Workshops) → Umsetzung spezifischer Bausteine (Custom Solutions).</p>
+            <p>{comparisonMatrix.footnote}</p>
+            <p className="text-text-secondary/70">{comparisonMatrix.sequenceNote}</p>
           </div>
-        </div>
+                </div>
       </section>
-
-
 
       {/* Final CTA */}
       <section className="py-24 bg-bg-dark">
         <div className="container-vae max-w-4xl text-center">
-          <h2 className="h2 h-space text-text-light">Nächster Schritt?</h2>
-          <p className="text-lg text-text-secondary mb-10">Senden Sie uns Kernziel, Zeithorizont & vorhandene Systeme – wir melden uns innerhalb von 24h mit einem Vorschlag für das Erstgespräch.</p>
+          <h2 className="h2 h-space text-text-light">{finalCta.title}</h2>
+          <p className="text-lg text-text-secondary mb-10">{finalCta.subtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="btn-primary px-10 py-4">Kontakt aufnehmen</Link>
-            <a href="/service-katalog.pdf" className="btn-secondary px-10 py-4" target="_blank" rel="noopener" aria-label="Service-Katalog als PDF herunterladen (1.2 MB)">Service-Katalog (PDF, 1.2 MB)</a>
+            {finalCta.buttons.map(btn => (
+              btn.primary ? (
+                <Link key={btn.text} to={btn.to || "/contact"} className={`btn-primary px-8 py-4`}>{btn.text}</Link>
+              ) : (
+                <a key={btn.text} href={btn.href || "#"} className="btn-secondary px-8 py-4" target="_blank" rel="noopener" aria-label={`${btn.text}`}>{btn.text}</a>
+              )
+            ))}
           </div>
-          <p className="mt-6 text-xs text-text-muted">PDF ist Vorab-Version – Inhalte können sich ändern.</p>
+          <p className="mt-6 text-xs text-text-muted">{finalCta.disclaimer}</p>
         </div>
       </section>
 
@@ -168,7 +168,7 @@ const ServicesPage: React.FC = () => {
       <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
         <FAQSection
           id="services-faq"
-          className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-white/5"
+          className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-border-primary dark:border-white/5"
           title="Services – häufige Fragen"
           subtitle="Klarheit zu Umfang, Ablauf und Betrieb." 
           categories={[

@@ -1,6 +1,7 @@
 import React, { Suspense, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 import { TermHint } from '../ui/Glossary'
 import SpotlightCard from '../ui/SpotlightCard'
 import type { FAQCategory } from '../sections/FAQSection'
@@ -13,7 +14,7 @@ const GlossarySection = React.lazy(() => import('../ui/GlossarySection'))
 const ServiceConsultingPage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
-      <Seo
+  <Seo
         title="Beratung | Strategie, Governance & Architektur"
         description="Strategische KI- & Automationsberatung: Roadmaps, EU AI Act Orientierung, TCO/ROI & Architektur – faktenbasiert statt Hype."
         canonicalPath="/services/consulting"
@@ -33,15 +34,26 @@ const ServiceConsultingPage: React.FC = () => {
           ]}
         ]}
       />
-      <section className="relative -mt-20 pt-44 pb-28 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
+      <section className="relative -mt-20 pt-44 pb-28 border-b border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_65%_35%,rgba(0,255,165,0.08),transparent_60%)]" />
+        <div className="container-vae max-w-6xl -mt-24 mb-10">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', path: '/' },
+              { label: 'Services', path: '/services' },
+              { label: 'Beratung', path: '/services/consulting' }
+            ]}
+            className="py-4 relative z-[2] text-xs"
+          />
+        </div>
         <div className="container-vae max-w-6xl">
           {/* Hero */}
           <h1 className="h1 h-space-lg">
             <span className="block text-text-light">Beratung</span>
-            <span className="block text-gradient">Strategie. Governance. Architektur.</span>
+            <span className="block text-vae-turquoise">Strategie. Governance. Architektur.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-4xl mb-6">Entscheiden mit Klarheit: <TermHint term="Roadmap" />, <TermHint term="TCO" /> & Compliance – technologie‑agnostisch, dokumentiert, open‑first. Keine Buzzword-Decks, sondern belastbare Entscheidungsgrundlagen.</p>
-          <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-12">Abgrenzung: <span className="text-white font-medium">Schulungen & Workshops</span> bauen interne Kompetenz auf. <span className="text-white font-medium">Beratung</span> liefert Richtung & Governance. <span className="text-white font-medium">Custom Solutions</span> setzt produktiv um.</p>
+          <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-12">Abgrenzung: <span className="text-text-light dark:text-white font-medium">Schulungen & Workshops</span> bauen interne Kompetenz auf. <span className="text-text-light dark:text-white font-medium">Beratung</span> liefert Richtung & Governance. <span className="text-text-light dark:text-white font-medium">Custom Solutions</span> setzt produktiv um.</p>
 
           {/* Nutzen / Value Bullets */}
           <div className="grid md:grid-cols-5 gap-6 mb-20">
@@ -52,8 +64,8 @@ const ServiceConsultingPage: React.FC = () => {
               {h:'Integrationen',p:'ERP / CRM / DB / Legacy Anbindung & Datenflüsse.'},
               {h:'Security & Ops',p:'Zugriffe, Auditability, Observability, Betriebspfad.'}
             ].map(v => (
-              <div key={v.h} className="rounded-2xl p-5 bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold text-white mb-2">{v.h}</h3>
+              <div key={v.h} className="rounded-2xl p-5 bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10">
+                <h3 className="text-sm font-semibold text-text-light dark:text-white mb-2">{v.h}</h3>
                 <p className="text-xs text-text-secondary leading-relaxed">{v.p}</p>
               </div>
             ))}
@@ -61,7 +73,7 @@ const ServiceConsultingPage: React.FC = () => {
 
           {/* Formate & Preise */}
             <div className="mb-24">
-            <h2 className="h3 h-space text-white">Formate & Preise</h2>
+            <h2 className="h3 h-space text-text-light dark:text-white">Formate & Preise</h2>
             <div className="grid md:grid-cols-3 gap-8 items-stretch">
               {[
                 {k:'Kickstart',d:'½ Tag Remote',price:'1 100 €',desc:'Schnellcheck: Reifegrad, Priorisierung, nächste 2–3 Schritte.'},
@@ -70,13 +82,15 @@ const ServiceConsultingPage: React.FC = () => {
               ].map(f => (
                 <Card
                   key={f.k}
-                  title={f.k}
+                  title={undefined}
+                  lead={f.k}
                   badge={f.d}
                   body={f.desc}
                   link="/contact"
                   cta="Beratung anfragen"
+                  accent
                 >
-                  <div className="text-white font-bold text-xl mb-6">{f.price}</div>
+                  <div className="font-bold text-xl mb-6 text-vae-turquoise dark:text-vae-turquoise">{f.price}</div>
                 </Card>
               ))}
             </div>
@@ -84,7 +98,7 @@ const ServiceConsultingPage: React.FC = () => {
 
           {/* Prozess & Deliverables */}
           <div className="mb-24">
-            <h2 className="h3 h-space text-white mb-6">Prozess & Deliverables</h2>
+            <h2 className="h3 h-space text-text-light dark:text-white mb-6">Prozess & Deliverables</h2>
             <ConsultingProcessSpotlight />
             <div className="grid md:grid-cols-2 gap-10">
               <div>
@@ -95,10 +109,10 @@ const ServiceConsultingPage: React.FC = () => {
                   ))}
                 </ul>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <h3 className="text-sm font-semibold text-white mb-3">Kontext & Übergang</h3>
-                <p className="text-xs text-text-secondary leading-relaxed mb-3">Beratung liefert belastbare Entscheidungsgrundlagen. Umsetzung & produktive Integrationen erfolgen anschließend in <Link to="/services/custom-solutions" className="underline text-vae-turquoise hover:text-white">Custom Solutions</Link>; Kompetenzaufbau parallel über <Link to="/services/trainings" className="underline text-vae-turquoise hover:text-white">Schulungen & Workshops</Link>.</p>
-                <p className="text-xs text-text-secondary leading-relaxed">Offene Standards & vollständige Dokumentation ermöglichen späteren Eigenbetrieb – <span className="text-white">kein Lock‑in</span>.</p>
+              <div className="bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 rounded-2xl p-6">
+                <h3 className="text-sm font-semibold text-text-light dark:text-white mb-3">Kontext & Übergang</h3>
+                <p className="text-xs text-text-secondary leading-relaxed mb-3">Beratung liefert belastbare Entscheidungsgrundlagen. Umsetzung & produktive Integrationen erfolgen anschließend in <Link to="/services/custom-solutions" className="underline text-vae-turquoise hover:text-text-light dark:hover:text-white">Custom Solutions</Link>; Kompetenzaufbau parallel über <Link to="/services/trainings" className="underline text-vae-turquoise hover:text-text-light dark:hover:text-white">Schulungen & Workshops</Link>.</p>
+                <p className="text-xs text-text-secondary leading-relaxed">Offene Standards & vollständige Dokumentation ermöglichen späteren Eigenbetrieb – <span className="text-text-light dark:text-white">kein Lock‑in</span>.</p>
               </div>
             </div>
           </div>
@@ -116,7 +130,7 @@ const ServiceConsultingPage: React.FC = () => {
             <ConsultingFAQ />
           </Suspense>
           <Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade Glossar…</div>}>
-            <GlossarySection className="border-t border-white/5 mt-10" limit={6} />
+            <GlossarySection className="border-t border-border-primary dark:border-white/5 mt-10" limit={6} />
           </Suspense>
 
           {/* Crosslinks */}
@@ -201,7 +215,7 @@ const ConsultingProcessSpotlight: React.FC = () => {
             onFocus={() => setActive(i)}
             onBlur={() => setActive(prev => prev===i ? null : prev)}
             onMouseMove={handleMove}
-            className={`relative group rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col overflow-hidden transition-all duration-500 will-change-transform snap-start min-w-[78%] sm:min-w-[55%] md:min-w-0 ${active===i ? 'border-vae-turquoise/50 shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_14px_48px_-10px_rgba(var(--vae-turquoise-rgb),0.45)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_10px_40px_-8px_rgba(var(--vae-turquoise-rgb),0.4)]'}`}
+            className={`relative group rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/[0.04] dark:bg-white/[0.04] backdrop-blur-sm p-6 flex flex-col overflow-hidden transition-all duration-500 will-change-transform snap-start min-w-[78%] sm:min-w-[55%] md:min-w-0 ${active===i ? 'border-vae-turquoise/50 shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_14px_48px_-10px_rgba(var(--vae-turquoise-rgb),0.45)]' : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_10px_40px_-8px_rgba(var(--vae-turquoise-rgb),0.4)]'}`}
             style={{ ['--mx' as any]:'30%', ['--my' as any]:'25%' }}
             tabIndex={0}
           >
@@ -211,9 +225,9 @@ const ConsultingProcessSpotlight: React.FC = () => {
               <span className="text-[11px] text-vae-turquoise/70 font-medium uppercase tracking-wide">Phase</span>
             </div>
             <div aria-hidden="true" className="w-full h-px bg-gradient-to-r from-transparent via-vae-turquoise/40 to-transparent mb-4 relative z-10" />
-            <h3 className="text-sm font-semibold text-white mb-2 relative z-10 leading-snug">{s.title}</h3>
+            <h3 className="text-sm font-semibold text-text-light dark:text-white mb-2 relative z-10 leading-snug">{s.title}</h3>
             <p className="text-[11px] text-text-secondary leading-relaxed relative z-10 flex-grow">{s.desc}</p>
-            <div className="mt-4 pt-3 border-t border-white/10 text-[10px] text-text-muted relative z-10">
+            <div className="mt-4 pt-3 border-t border-border-primary dark:border-white/10 text-[10px] text-text-muted relative z-10">
               {s.key === 'discover' && 'Workshops & Interviews'}
               {s.key === 'assess' && 'Analyse & Bewertung'}
               {s.key === 'blueprint' && 'Architektur & Governance Artefakte'}

@@ -40,7 +40,7 @@ const ScrollProgress: React.FC = () => {
 
   return (
     <div className="fixed top-1/2 right-4 -translate-y-1/2 z-40 select-none" aria-label={`Scroll Fortschritt ${pct}%`}>
-      <div className="relative h-[340px] w-2 rounded-full bg-white/8 overflow-hidden border border-white/15 backdrop-blur-sm">
+      <div className="relative h-[340px] w-2 rounded-full bg-bg-primary/8 dark:bg-white/8 overflow-hidden border border-border-primary/15 dark:border-white/15 backdrop-blur-sm">
         {/* Track subtle glow */}
         <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)] pointer-events-none" />
         {/* Fill (top -> down) */}

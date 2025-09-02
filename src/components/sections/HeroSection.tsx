@@ -20,15 +20,25 @@ const HeroSection: React.FC = () => {
   return (
     <section 
       id="hero"
-      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker"
+      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden hero-surface bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overlay-diag overlay-grid"
     >
       {/* Neural Network Background Animation */}
       <NeuralNetworkBackground />
       
       {/* Additional Background Layer for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bg-darker/80 via-bg-dark/70 to-bg-darker/80" style={{ zIndex: 2 }}></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-bg-primary/85 via-bg-secondary/75 to-bg-primary/85 dark:from-bg-darker/80 dark:via-bg-dark/70 dark:to-bg-darker/80"></div>
 
-      <div className="container-vae relative" style={{ zIndex: 10 }}>
+      {/* Light mode: neutral floating dots (no green) */}
+      <div aria-hidden className="light-only absolute inset-0 z-0">
+        <div className="floating-dot absolute top-[18%] left-[12%] w-2 h-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[36%] left-[78%] w-3 h-3 rounded-md bg-black/8" />
+        <div className="floating-dot absolute top-[62%] left-[28%] w-2 h-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[72%] left-[62%] w-2 h-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[44%] left-[8%] w-1.5 h-1.5 rounded-full bg-black/10" />
+        <div className="floating-dot absolute top-[14%] left-[58%] w-2 h-2 rounded-full bg-black/10" />
+      </div>
+
+      <div className="container-vae relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Content Section */}
@@ -46,7 +56,7 @@ const HeroSection: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <span className="block text-text-light">{heroTitle[0]}</span>
-                <span className="block text-gradient">{heroTitle[1]}</span>
+                <span className="block text-vae-turquoise">{heroTitle[1]}</span>
               </motion.h1>
 
               <motion.div
@@ -82,6 +92,7 @@ const HeroSection: React.FC = () => {
                 <Link 
                   to="/contact"
                   className="btn-primary text-center flex-1 flex items-center justify-center"
+                  data-green-signal="true"
                 >
                   <span className="material-symbols-outlined mr-2">schedule</span>
                   30‑Min Strategie‑Gespräch buchen
@@ -93,12 +104,18 @@ const HeroSection: React.FC = () => {
                   <span className="material-symbols-outlined mr-2">apps</span>
                   Produkte & Plattform ansehen
                 </Link>
+                <Link
+                  to="/services"
+                  className="btn-outline flex-1 text-center flex items-center justify-center"
+                >
+                  <span className="material-symbols-outlined mr-2">handshake</span>
+                  Services entdecken
+                </Link>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link to="/services" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Services Übersicht</Link>
-                <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Custom Solutions</Link>
-                <Link to="/products#core" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">VAE CORE Architektur</Link>
-                <a href="mailto:kontakt@vae-systems.com?subject=Kurzfrage%20zu%20KI%20Projekt" className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-white transition-colors">Direkte Frage per Mail</a>
+                <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Custom Solutions</Link>
+                <Link to="/products#core" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Architektur</Link>
+                <a href="mailto:kontakt@vae-systems.com?subject=Kurzfrage%20zu%20KI%20Projekt" className="px-4 py-2 rounded-full bg-bg-primary/5 hover:bg-bg-primary/10 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-text-light dark:hover:text-white transition-colors">Direkte Frage per Mail</a>
               </div>
               <p className="text-[11px] text-text-muted leading-relaxed max-w-md">
                 Unverbindlich & fokussiert: In <span className="text-text-secondary font-medium">15–30 Minuten</span> klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.
@@ -107,7 +124,7 @@ const HeroSection: React.FC = () => {
 
             {/* Trust Indicators */}
             <motion.div
-              className="flex flex-wrap items-center gap-6 pt-8 border-t border-bg-secondary"
+              className="flex flex-wrap items-center gap-6 pt-8 border-t border-border-primary dark:border-bg-secondary"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}

@@ -4,7 +4,8 @@
  * Compact newsletter subscription form with preferences
  */
 
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useNewsletter } from '../../hooks/useNewsletter'
 import type { FormComponentProps } from '../../types'
 
@@ -34,7 +35,9 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
   showPreferences = false,
   showLabels = true
 }) => {
-  
+  // Centered success overlay visibility
+  const [showOverlay, setShowOverlay] = useState(false)
+
   const {
     formData,
     formState,
@@ -49,6 +52,61 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
     onError,
     useMockApi
   }) as any // Type assertion to handle the updatePreference issue
+
+  // Show centered success overlay when subscription succeeded
+  useEffect(() => {
+    if (loadingState === 'success') {
+      setShowOverlay(true)
+      const t = setTimeout(() => setShowOverlay(false), 4200)
+      return () => clearTimeout(t)
+    }
+  }, [loadingState])
+
+  // Close on Escape
+  useEffect(() => {
+    if (!showOverlay) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowOverlay(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [showOverlay])
+
+  // Portal root memo
+  const portalRoot = useMemo(() => (typeof document !== 'undefined' ? document.body : null), [])
+
+  const SuccessOverlay = (
+    showOverlay && portalRoot
+      ? createPortal(
+          <div aria-live="polite" aria-atomic="true">
+            <div className="fixed inset-0 z-[100] pointer-events-none flex items-center justify-center">
+              {/* No blocking backdrop, just subtle vignette */}
+              <div className="pointer-events-none absolute inset-0 bg-black/20 md:bg-black/10" />
+              <div
+                role="status"
+                className="pointer-events-auto relative mx-4 w-full max-w-md rounded-2xl border border-white/10 bg-bg-secondary/80 backdrop-blur-xl shadow-2xl p-5 md:p-6 text-center"
+              >
+                <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/20 text-vae-turquoise">
+                  ✓
+                </div>
+                <h3 className="text-base md:text-lg font-semibold text-text-light mb-1">Newsletter-Anmeldung erfolgreich</h3>
+                <p className="text-xs md:text-sm text-text-muted mb-4">
+                  Bitte bestätige die Anmeldung über den Link in deiner E‑Mail.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setShowOverlay(false)}
+                  className="px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95"
+                >
+                  Schließen
+                </button>
+              </div>
+            </div>
+          </div>,
+          portalRoot
+        )
+      : null
+  )
 
   // ============================================================================
   // EVENT HANDLERS
@@ -79,23 +137,29 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
     disabled:opacity-50 disabled:cursor-not-allowed
   `
 
+  const inlineInputClasses = `
+    px-4 py-2 bg-bg-secondary border border-bg-tertiary rounded-lg
+    text-text-light placeholder-text-muted
+    focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50 focus:border-vae-turquoise
+    transition-all duration-200
+    disabled:opacity-50 disabled:cursor-not-allowed
+  `
+
   const errorInputClasses = hasErrors ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : ''
 
   // ============================================================================
   // SUCCESS STATE
   // ============================================================================
 
-  if (loadingState === 'success') {
+  // For full form we still show inline success; for inline footer we avoid layout shift
+  if (!inline && loadingState === 'success') {
     return (
       <div className={`${className}`}>
+        {SuccessOverlay}
         <div className="text-center p-6 bg-vae-turquoise/10 border border-vae-turquoise/30 rounded-lg">
           <div className="text-vae-turquoise text-xl mb-3">✓</div>
-          <h3 className="font-medium text-text-light mb-2">
-            Newsletter-Anmeldung erfolgreich!
-          </h3>
-          <p className="text-sm text-text-muted">
-            Bitte prüfen Sie Ihr E-Mail-Postfach für die Bestätigungsmail.
-          </p>
+          <h3 className="font-medium text-text-light mb-2">Newsletter-Anmeldung erfolgreich!</h3>
+          <p className="text-sm text-text-muted">Bitte prüfen Sie Ihr E-Mail-Postfach für die Bestätigungsmail.</p>
         </div>
       </div>
     )
@@ -108,15 +172,22 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
   if (inline) {
     return (
       <form onSubmit={handleSubmit} className={`${className}`}>
-        <div className="flex space-x-3">
-          <div className="flex-1">
+        {SuccessOverlay}
+        {/*
+          Inline layout notes:
+          - Use min-w-0 on the flex-1 wrapper to allow the input to shrink in Safari.
+          - Allow wrapping on very small widths; stack vertically on mobile, row on >= sm.
+          - Keep the button from shrinking and let it be full width when stacked.
+        */}
+        <div className="flex flex-col gap-2 items-stretch">
+          <div className="flex-1 min-w-0">
             <input
               type="email"
               value={formData.email}
               onChange={handleInputChange('email')}
               placeholder="Ihre E-Mail-Adresse"
               disabled={disabled || isSubmitting}
-              className={`w-full ${baseInputClasses} ${errorInputClasses}`}
+              className={`w-full min-w-0 ${inlineInputClasses} ${errorInputClasses}`}
               required
             />
           </div>
@@ -124,7 +195,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
             type="submit"
             disabled={!canSubmit || disabled}
             className={`
-              px-6 py-3 rounded-lg font-medium transition-all duration-200 whitespace-nowrap
+              px-4 py-2 rounded-lg font-medium transition-all duration-200 flex-none w-full
               ${canSubmit && !disabled
                 ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95'
                 : 'bg-bg-tertiary text-text-muted cursor-not-allowed'
@@ -133,7 +204,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
             `}
           >
             {isSubmitting ? (
-              <div className="w-5 h-5 border-2 border-bg-darker border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-4 h-4 border-2 border-bg-darker border-t-transparent rounded-full animate-spin"></div>
             ) : (
               'Anmelden'
             )}

@@ -30,12 +30,12 @@ const ProviderComparisonSection: React.FC<{ id?: string; className?: string; hea
     <section id={id} className={`py-24 ${className}`}>
       <div className="container-vae max-w-6xl">
         <header className="max-w-3xl mb-12">
-          <h2 className="h2 text-white mb-5">{headline}</h2>
+          <h2 className="h2 text-text-light dark:text-white mb-5">{headline}</h2>
           <p className="text-lg text-text-secondary leading-relaxed">{subtitle}</p>
         </header>
 
         {/* Accordion for small screens */}
-        <div className="md:hidden mb-10 divide-y divide-white/10 border border-white/10 rounded-xl">
+        <div className="md:hidden mb-10 divide-y divide-border-primary dark:divide-white/10 border border-border-primary dark:border-white/10 rounded-xl">
           {rows.map(r => {
             const isOpen = open === r.key
             return (
@@ -48,7 +48,7 @@ const ProviderComparisonSection: React.FC<{ id?: string; className?: string; hea
                 >
                   <span className="flex items-center gap-3">
                     <MaterialIcon icon={r.icon} size={22} className="text-vae-turquoise" />
-                    <span className="text-sm font-semibold text-white tracking-wide uppercase">{r.label}</span>
+                    <span className="text-sm font-semibold text-text-light dark:text-white tracking-wide uppercase">{r.label}</span>
                   </span>
                   <svg
                     width="18"
@@ -78,11 +78,11 @@ const ProviderComparisonSection: React.FC<{ id?: string; className?: string; hea
         <div className="hidden md:block mb-10">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {rows.map(d => (
-              <div key={d.key} className="group relative p-6 rounded-2xl bg-white/[0.035] border border-white/10 backdrop-blur-sm overflow-hidden transition-colors hover:border-vae-turquoise/40">
+              <div key={d.key} className="group relative p-6 rounded-2xl bg-bg-primary/10 dark:bg-white/[0.035] border border-border-primary/10 dark:border-white/10 backdrop-blur-sm overflow-hidden transition-colors hover:border-vae-turquoise/40">
                 <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_30%_22%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
                 <div className="flex items-center gap-3 mb-4 relative z-10">
                   <MaterialIcon icon={d.icon} size={22} className="text-vae-turquoise" />
-                  <h3 className="text-sm font-semibold text-white tracking-wide uppercase">{d.label}</h3>
+                  <h3 className="text-sm font-semibold text-text-light dark:text-white tracking-wide uppercase">{d.label}</h3>
                 </div>
                 <p className="text-xs text-text-secondary leading-relaxed mb-3 relative z-10">{d.vae}</p>
                 <div className="flex items-start gap-2 text-[11px] text-text-muted relative z-10">

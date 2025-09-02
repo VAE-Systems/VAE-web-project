@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Motion } from '@/utils/motion'
 
 
 const techStack = [
@@ -21,12 +22,11 @@ const techStack = [
   { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', website: 'https://mongodb.com' },
   { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', website: 'https://docker.com' },
   { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', website: 'https://kubernetes.io' },
-  { name: 'AWS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', website: 'https://aws.amazon.com' },
-  { name: 'Temporal', logo: 'https://temporal.io/logo-font-straight-dark.svg', website: 'https://temporal.io' },
+  { name: 'AWS', logo: 'https://e7.pngegg.com/pngimages/628/589/png-clipart-amazon-web-services-amazon-com-logo-plataform-computer-network-text.png', website: 'https://aws.amazon.com' },
+  { name: 'Temporal', logo: 'https://images.ctfassets.net/0uuz8ydxyd9p/2W8B7bcLSPX9YaSwkfrhmv/eade3fc61520b8cee84cf8605dce3056/Temporal_Symbol_dark_1_2x.png', website: 'https://temporal.io' },
   { name: 'Pinecone', logo: 'https://www.pinecone.io/images/pinecone-logo.svg', website: 'https://pinecone.io' },
   { name: 'Supabase', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg', website: 'https://supabase.com' },
-  { name: 'Corteza', logo: 'https://cortezaproject.org/images/logo.svg', website: 'https://cortezaproject.org' },
-  { name: 'Lowcoder', logo: 'https://raw.githubusercontent.com/lowcoder-org/lowcoder/main/public/logo.svg', website: 'https://lowcoder.dev' }
+  { name: 'Corteza', logo: 'https://cortezaproject.org/wp-content/uploads/2024/10/Corteza-logo-340-300x138.png', website: 'https://cortezaproject.org' }
 ] as const
 
 /**
@@ -69,7 +69,7 @@ const TechStackSection: React.FC = () => {
       gsap.fromTo(
         '.radial-bg',
         { scale: 0, opacity: 0.6 },
-        { scale: 1, opacity: 1, duration: 2, ease: 'power2.out', scrollTrigger: trig }
+        { scale: 1, opacity: 1, duration: Motion.long, ease: Motion.ease, scrollTrigger: trig }
       )
 
       cableRefs.current.forEach((path, i) => {
@@ -79,7 +79,7 @@ const TechStackSection: React.FC = () => {
         gsap.to(path, {
           strokeDashoffset: 0,
           duration: 3,
-          ease: 'power2.out',
+          ease: Motion.ease,
           delay: i * 0.05,
           scrollTrigger: trig
         })
@@ -146,7 +146,7 @@ const TechStackSection: React.FC = () => {
         const y = radius * Math.sin(angle)
         gsap.fromTo(el,
           { x, y, opacity: 0, scale: 0.85 },
-          { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out', delay: i * 0.04, scrollTrigger: trig }
+          { x: 0, y: 0, opacity: 1, scale: 1, duration: Motion.enter, ease: Motion.ease, delay: i * Motion.stagger, scrollTrigger: trig }
         )
         const imgEl = el.querySelector('img')
         if (imgEl) {
@@ -247,7 +247,7 @@ const TechStackSection: React.FC = () => {
     <section 
       id="tech-stack"
       className={
-        "relative py-24 md:py-32 surface-alt overflow-hidden border-t border-white/5 overlay-grid overlay-diag edge-glow-top tech-stack-interactive " +
+        "relative py-24 md:py-32 surface-alt overflow-hidden border-t border-vae-turquoise/10 overlay-grid overlay-diag edge-glow-top tech-stack-interactive " +
         (active ? 'tech-stack-active' : '')
       }
       ref={sectionRef}
@@ -258,10 +258,7 @@ const TechStackSection: React.FC = () => {
       <ParticleField count={22} />
       {/* Radial Background */}
       <div 
-        className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20"
-        style={{
-          background: 'radial-gradient(circle at center, hsla(var(--color-vae-turquoise), 0.2), transparent 70%)'
-        }}
+        className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20 bg-[radial-gradient(circle_at_center,hsla(var(--color-vae-turquoise),0.2),transparent_70%)]"
       />
 
       {/* Animated Cables */}

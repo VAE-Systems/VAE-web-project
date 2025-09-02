@@ -1,0 +1,20 @@
+{
+  "name": "VAE Systems",
+  "short_name": "VAE",
+  "description": "VAE Systems - Innovative KI-Lösungen und Automatisierung",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00ffa5",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "/LOGO_01_white.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

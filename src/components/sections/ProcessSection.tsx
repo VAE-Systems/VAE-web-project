@@ -68,9 +68,9 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
                     </div>
                     <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(i + 1).padStart(2, '0')}</span>
                   </div>
-                  {s.durationHint && <span className="text-[11px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-white/60">{s.durationHint}</span>}
+                  {s.durationHint && <span className="text-[11px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-text-secondary dark:text-white/60">{s.durationHint}</span>}
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-3 leading-snug">{s.title}</h3>
+                <h3 className="text-lg font-semibold text-text-light dark:text-white mb-3 leading-snug">{s.title}</h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-grow">
                   {annotateWithHints(s.summary, (s.glossary || []).map(g => g.term))}
                 </p>

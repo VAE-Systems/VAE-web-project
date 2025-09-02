@@ -158,31 +158,21 @@ const ContactSection: React.FC = () => {
       ref={sectionRef}
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute top-0 left-0 w-full h-full"
-          style={{
-            background: `
-              radial-gradient(circle at 40% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 60% 70%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%)
-            `
-          }}
-        />
-      </div>
+      <div className="absolute inset-0 pointer-events-none bg-contact-radial" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-16" ref={headerRef}>
           <h2 className="h2 heading-gradient mb-4">Kontakt</h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
             Bereit für Ihr nächstes Projekt? Lassen Sie uns über Ihre Anforderungen sprechen.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Form */}
-          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/15" ref={formRef}>
-            <h3 className="text-2xl font-semibold text-white mb-6">
+          <div className="bg-gradient-to-br from-vae-turquoise/10 to-vae-turquoise/5 backdrop-blur-xl rounded-2xl p-8 border border-vae-turquoise/20" ref={formRef}>
+            <h3 className="text-2xl font-semibold text-text-light mb-6">
               Nachricht senden
             </h3>
             
@@ -190,7 +180,7 @@ const ContactSection: React.FC = () => {
             <form onSubmit={(e) => { e.preventDefault(); submitForm(); }} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="w-full">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-text-secondary mb-2">
                     Name *
                   </label>
                   <input
@@ -200,12 +190,12 @@ const ContactSection: React.FC = () => {
                     value={formData.name}
                     onChange={(e) => updateField('name', e.target.value)}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-vae-turquoise/5 border border-vae-turquoise/20 rounded-lg text-text-light placeholder-text-muted focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
                     placeholder="Ihr Name"
                   />
                 </div>
                 <div className="w-full">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-2">
                     Email *
                   </label>
                   <input
@@ -215,7 +205,7 @@ const ContactSection: React.FC = () => {
                     value={formData.email}
                     onChange={(e) => updateField('email', e.target.value)}
                     required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-vae-turquoise/5 border border-vae-turquoise/20 rounded-lg text-text-light placeholder-text-muted focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
                     placeholder="ihre.email@unternehmen.de"
                   />
                 </div>
@@ -223,7 +213,7 @@ const ContactSection: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="w-full">
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="company" className="block text-sm font-medium text-text-secondary mb-2">
                     Unternehmen
                   </label>
                   <input
@@ -232,12 +222,12 @@ const ContactSection: React.FC = () => {
                     name="company"
                     value={formData.company || ''}
                     onChange={(e) => updateField('company', e.target.value)}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-vae-turquoise/5 border border-vae-turquoise/20 rounded-lg text-text-light placeholder-text-muted focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
                     placeholder="Ihr Unternehmen"
                   />
                 </div>
                 <div className="w-full">
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="subject" className="block text-sm font-medium text-text-secondary mb-2">
                     Betreff
                   </label>
                   <input
@@ -246,14 +236,14 @@ const ContactSection: React.FC = () => {
                     name="subject"
                     value={formData.subject || ''}
                     onChange={(e) => updateField('subject', e.target.value)}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-vae-turquoise/5 border border-vae-turquoise/20 rounded-lg text-text-light placeholder-text-muted focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors"
                     placeholder="Worum geht es?"
                   />
                 </div>
               </div>
 
               <div className="w-full">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-text-secondary mb-2">
                   Nachricht *
                 </label>
                 <textarea
@@ -263,7 +253,7 @@ const ContactSection: React.FC = () => {
                   onChange={(e) => updateField('message', e.target.value)}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-vae-turquoise/5 border border-vae-turquoise/20 rounded-lg text-text-light placeholder-text-muted focus:border-vae-turquoise focus:ring-1 focus:ring-vae-turquoise focus:outline-none transition-colors resize-none"
                   placeholder="Beschreiben Sie Ihr Projekt oder Ihre Anfrage..."
                 />
               </div>
@@ -278,7 +268,7 @@ const ContactSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className="w-full py-3 px-6 bg-vae-turquoise hover:bg-vae-turquoise-dark text-white font-semibold rounded-lg hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="w-full py-3 px-6 bg-vae-turquoise hover:bg-vae-turquoise-dark text-bg-darker font-semibold rounded-lg hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
               </button>
@@ -300,7 +290,7 @@ const ContactSection: React.FC = () => {
           {/* Contact Information */}
           <div className="space-y-8" ref={contactInfoRef}>
             <div>
-              <h3 className="text-2xl font-semibold text-white mb-6">
+              <h3 className="text-2xl font-semibold text-text-light mb-6">
                 Kontaktinformationen
               </h3>
               <div className="space-y-6">
@@ -310,18 +300,18 @@ const ContactSection: React.FC = () => {
                       {info.icon}
                     </div>
                     <div>
-                      <div className="text-sm text-gray-400 mb-1">
+                      <div className="text-sm text-text-muted mb-1">
                         {info.label}
                       </div>
                       {info.link ? (
                         <a 
                           href={info.link}
-                          className="text-white hover:text-vae-turquoise transition-colors"
+                          className="text-text-light hover:text-vae-turquoise transition-colors"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <div className="text-white">
+                        <div className="text-text-light">
                           {info.value}
                         </div>
                       )}
@@ -333,10 +323,10 @@ const ContactSection: React.FC = () => {
 
             {/* Quick Response Promise */}
             <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-6 border border-vae-turquoise/20">
-              <h4 className="text-lg font-semibold text-white mb-2">
+              <h4 className="text-lg font-semibold text-text-light mb-2">
                 Schnelle Antwort garantiert
               </h4>
-              <p className="text-gray-300 text-sm">
+              <p className="text-text-secondary text-sm">
                 Wir antworten innerhalb von 24 Stunden auf alle Anfragen. 
                 Bei dringenden Anliegen rufen Sie uns gerne direkt an.
               </p>

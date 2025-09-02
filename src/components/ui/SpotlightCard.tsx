@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export interface SpotlightCardProps extends React.PropsWithChildren {
   title: string
@@ -29,6 +30,8 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
   iconSlot,
   footerSlot
 }) => {
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
   const [coords, setCoords] = useState({ x: '50%', y: '40%' })
   const [reducedMotion, setReducedMotion] = useState(false)
 
@@ -56,19 +59,19 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       id={slug}
       aria-labelledby={headingId}
       onMouseMove={reducedMotion ? undefined : handleMove}
-      className={`relative ${!reducedMotion ? 'group hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]' : ''} rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-md overflow-hidden transition-all duration-500 ${className}`.trim()}
+      className={`relative group rounded-2xl border border-border-primary dark:border-white/10 ${isLight ? 'bg-white/60' : 'bg-bg-primary/5 dark:bg-white/5'} backdrop-blur-md overflow-hidden transition-all duration-500 ${className} ${!reducedMotion ? (isLight ? 'hover:border-black/15 hover:shadow-[0_14px_46px_-14px_rgba(var(--color-black-rgb),0.32)]' : 'hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]') : ''}`.trim()}
       style={
         reducedMotion
           ? undefined
           : ({ ['--sx' as any]: coords.x, ['--sy' as any]: coords.y } as React.CSSProperties)
       }
     >
-      {!reducedMotion && (
+      {!reducedMotion && !isLight && (
         <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(600px_circle_at_var(--sx)_var(--sy),rgba(var(--vae-turquoise-rgb),0.18),transparent_70%)]" />
       )}
       <div className="relative z-10 p-6 flex flex-col h-full">
         {iconSlot && <div className="mb-4">{iconSlot}</div>}
-        <h3 id={headingId} className="text-sm font-semibold text-white mb-2 leading-snug">
+        <h3 id={headingId} className="text-sm font-semibold text-text-light dark:text-white mb-2 leading-snug">
           {title}
         </h3>
         <p

@@ -1,6 +1,7 @@
 import React, { useState, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
+import Breadcrumbs from '../navigation/Breadcrumbs'
 import { productCategories } from '../navigation/productCategories'
 import SpotlightCard from '../ui/SpotlightCard'
 import type { FAQCategory } from '../sections/FAQSection'
@@ -10,7 +11,7 @@ const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 const ServiceCustomSolutionsPage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
-      <Seo
+  <Seo
         title="Custom Solutions | VAE Systems – Individuelle Umsetzung"
         description="Individuelle Software & Integrationen: API-Connectoren, Spezial-Workflows, domain-spezifische Retrieval Layer – präzise auf Ihren Use Case."
         canonicalPath="/services/custom-solutions"
@@ -32,10 +33,21 @@ const ServiceCustomSolutionsPage: React.FC = () => {
         ]}
       />
       <section className="relative -mt-20 pt-44 pb-24 border-b border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker">
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_65%_35%,rgba(0,255,165,0.08),transparent_60%)]" />
+        <div className="container-vae max-w-5xl -mt-24 mb-6">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', path: '/' },
+              { label: 'Services', path: '/services' },
+              { label: 'Custom Solutions', path: '/services/custom-solutions' }
+            ]}
+            className="py-4 relative z-[2] text-xs"
+          />
+        </div>
         <div className="container-vae max-w-5xl">
           <h1 className="h1 mb-8">
             <span className="block text-text-light">Custom Solutions</span>
-            <span className="block text-gradient">Präzise Umsetzung.</span>
+            <span className="block text-vae-turquoise">Präzise Umsetzung.</span>
           </h1>
           <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mb-6">Wir bauen spezifische Software & Integrationsbausteine für Ihren konkreten Engpass. Fokus: tragfähige Architektur, Messbarkeit & späterer Eigenbetrieb ohne Lock‑in.</p>
           <p className="text-sm text-text-muted leading-relaxed max-w-3xl mb-10">Vielleicht existiert Ihr Bedarf aber bereits als <span className="text-white font-medium">Komplettlösung</span> (End‑to‑End Paket) in unserer Produkt-Suite. Unser Vorgehen: <span className="text-white">1. Engpass präzisieren</span> → <span className="text-white">2. Suite-Reuse prüfen</span> → <span className="text-white">3. Adaptieren oder gezielt neu entwickeln</span>. So vermeiden Sie unnötige Neubaustapel.</p>

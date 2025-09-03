@@ -8,7 +8,7 @@ import { Settings, TrendingUp, Shield, Link as LinkIcon, Layers, Lock, RefreshCw
 import { useAttentionSignal } from '../../hooks/useAttentionSignal'
 
 /**
- * ProductVaeCorePage Component
+ * Product                  <div className="bg-bg-secondary/40 dark:bg-bg-darker/20 border border-vae-turquoise/40 dark:border-vae-turquoise/50 rounded-2xl p-8 hover:shadow-lg transition-all duration-500 ease-out">   <p className="text-sm text-text-muted bg-bg-secondary/30 rounded-2xl p-4 border border-vae-turquoise/40 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.final_cta.secondary_info}</p>aeCorePage Component
  * 
  * Sales-focused VAE Core product page with segment targeting and pricing
  */
@@ -68,21 +68,7 @@ const ProductVaeCorePage: React.FC = () => {
   // Subtle attention signal on the primary CTA (sheen + micro nudge)
   useAttentionSignal(primaryCtaRef, { initialDelayMs: 9000, intervalMs: 60000, jitterMs: 12000, maxRuns: 4, nudgeAfter: 2 })
 
-  // Soft reveal on scroll for elements marked with data-reveal
-  useEffect(() => {
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'))
-    if (!nodes.length) return
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible')
-          io.unobserve(e.target)
-        }
-      })
-    }, { threshold: 0.2 })
-    nodes.forEach(n => io.observe(n))
-    return () => io.disconnect()
-  }, [])
+  // No extra reveal animations; rely on card-vae + hover transitions only
 
   return (
     <div className="min-h-[100dvh]">
@@ -107,13 +93,13 @@ const ProductVaeCorePage: React.FC = () => {
 
       {/* HERO - Sales Focused */}
       <header id="hero" className="relative pt-32 pb-20 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-vae-turquoise/5 to-transparent pointer-events-none animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-vae-turquoise/5 to-transparent pointer-events-none"></div>
         <div className="absolute top-20 left-10 w-32 h-32 bg-vae-turquoise/10 rounded-full blur-3xl animate-float opacity-30"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-400/5 rounded-full blur-3xl animate-float-delayed opacity-20"></div>
         <div ref={heroRef} className="container-vae max-w-7xl relative z-10">
           {/* Segment Selector — desktop centered above hero */}
           <div className="hidden md:flex justify-center mb-8">
-            <div role="tablist" aria-label="Zielgruppe wählen" className="flex gap-2 p-2 bg-bg-primary/25 rounded-2xl border border-border-primary/20 shadow-lg backdrop-blur-sm">
+            <div role="tablist" aria-label="Zielgruppe wählen" className="flex gap-2 p-2 bg-bg-secondary/60 rounded-2xl border border-border-primary/30 shadow-lg backdrop-blur-sm">
               {tabs.map((tab: any) => (
                 <button
                   key={tab.id}
@@ -123,7 +109,7 @@ const ProductVaeCorePage: React.FC = () => {
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-500 ease-out shadow-md ${
                     activeTab === tab.id
                       ? 'bg-vae-turquoise text-bg-dark shadow-xl'
-                      : 'text-text-secondary hover:text-text-light hover:bg-bg-primary/30 hover:shadow-lg'
+                      : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30 hover:shadow-lg'
                   }`}
                 >
                   {tab.label}
@@ -150,7 +136,7 @@ const ProductVaeCorePage: React.FC = () => {
 
             {/* Segment Selector — mobile centered (same small size) */}
             <div className="md:hidden flex justify-center mb-10">
-              <div role="tablist" aria-label="Zielgruppe wählen" className="flex gap-2 p-2 bg-bg-primary/20 rounded-2xl border border-border-primary/20 shadow-lg">
+              <div role="tablist" aria-label="Zielgruppe wählen" className="flex gap-2 p-2 bg-bg-secondary/50 rounded-2xl border border-border-primary/30 shadow-lg">
                 {tabs.map((tab: any) => (
                   <button
                     key={tab.id}
@@ -160,7 +146,7 @@ const ProductVaeCorePage: React.FC = () => {
                     className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-500 ease-out shadow-md ${
                       activeTab === tab.id
                         ? 'bg-vae-turquoise text-bg-dark shadow-xl'
-                        : 'text-text-secondary hover:text-text-light hover:bg-bg-primary/30 hover:shadow-lg'
+                        : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30 hover:shadow-lg'
                     }`}
                   >
                     {tab.label}
@@ -172,7 +158,7 @@ const ProductVaeCorePage: React.FC = () => {
             {/* Stats */}
             <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto mb-12">
               {safeView.hero.stats.map((stat: any, i: number) => (
-                <div key={i} className="card-vae reveal-soft text-center p-6" data-reveal>
+                <div key={i} className="card-vae text-center p-6">
                   <div className="text-3xl md:text-4xl font-bold text-vae-turquoise mb-2">{stat.value}</div>
                   <div className="text-sm text-text-secondary">{stat.label}</div>
                 </div>
@@ -181,13 +167,13 @@ const ProductVaeCorePage: React.FC = () => {
             
             {/* Primary CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact?intent=demo" className="btn-primary btn-lg shadow-xl hover:shadow-2xl transition-all duration-500 ease-out">
+              <Link ref={primaryCtaRef} to="/contact?intent=demo" className="btn-primary btn-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 ease-out" id="cta-hero-primary" aria-label="Kostenloses Beratungsgespräch – 15–20 Minuten" data-green-signal="true">
                 Kostenlose Demo buchen
               </Link>
-              <Link to="#pricing" className="btn-secondary btn-lg shadow-lg hover:shadow-xl transition-all duration-500 ease-out">
+              <Link to="#pricing" className="btn-secondary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-out">
                 Preise ansehen
               </Link>
-              <Link to="https://github.com/vae-systems/vae-core" className="btn-ghost btn-lg shadow-md hover:shadow-lg transition-all duration-500 ease-out">
+              <Link to="https://github.com/vae-systems/vae-core" className="btn-ghost btn-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-out">
                 GitHub Repository
               </Link>
             </div>
@@ -199,7 +185,7 @@ const ProductVaeCorePage: React.FC = () => {
       <div className={`hidden md:block fixed left-0 right-0 top-24 z-[45] transition-all duration-300 ${showSticky ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
         <div className="container-vae max-w-7xl">
           <div className="flex justify-center">
-            <div role="tablist" aria-label="Zielgruppe wählen (sticky)" className="flex gap-1 p-1 bg-bg-primary/50 rounded-2xl border border-border-primary/20 shadow-lg backdrop-blur-sm">
+            <div role="tablist" aria-label="Zielgruppe wählen (sticky)" className="flex gap-1 p-1 bg-bg-secondary/70 rounded-2xl border border-border-primary/30 shadow-lg backdrop-blur-sm">
               {tabs.map((tab: any) => (
                 <button
                   key={tab.id}
@@ -209,7 +195,7 @@ const ProductVaeCorePage: React.FC = () => {
                   className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-500 ease-out ${
                     activeTab === tab.id
                       ? 'bg-vae-turquoise text-bg-dark shadow'
-                      : 'text-text-secondary hover:text-text-light hover:bg-bg-primary/30'
+                      : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30'
                   }`}
                 >
                   {tab.label}
@@ -235,8 +221,8 @@ const ProductVaeCorePage: React.FC = () => {
                                    pain.icon === 'Shield' ? Shield :
                                    pain.icon === 'Link' ? LinkIcon : Settings;
               return (
-                <div key={i} className="text-center p-8 rounded-2xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-red-400/40 dark:border-red-400/40 shadow-lg hover:shadow-2xl hover:border-red-500 hover:-translate-y-1 transition-all duration-500 ease-out transform-gpu">
-                  <IconComponent className="w-12 h-12 text-red-400 mx-auto mb-6 animate-bounce-subtle" />
+                <div key={i} className="card-vae text-center">
+                  <IconComponent className="w-12 h-12 text-red-400 mx-auto mb-6" />
                   <h3 className="text-lg font-semibold text-text-light mb-3">{pain.title}</h3>
                   <p className="text-sm text-text-secondary leading-relaxed">{pain.desc}</p>
                 </div>
@@ -260,8 +246,8 @@ const ProductVaeCorePage: React.FC = () => {
                                    pillar.icon === 'RefreshCw' ? RefreshCw :
                                    pillar.icon === 'ShieldCheck' ? ShieldCheck : Layers;
               return (
-                <div key={i} className="p-8 rounded-2xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-lg hover:shadow-2xl hover:border-vae-turquoise/60 hover:-translate-y-2 hover:rotate-1 transition-all duration-500 ease-out transform-gpu">
-                  <IconComponent className="w-12 h-12 text-vae-turquoise mx-auto mb-6 animate-spin-slow" />
+                <div key={i} className="card-vae">
+                  <IconComponent className="w-12 h-12 text-vae-turquoise mx-auto mb-6" />
                   <h3 className="text-xl font-bold text-text-light mb-4">{pillar.title}</h3>
                   <p className="text-base text-text-secondary mb-4 leading-relaxed">{pillar.body}</p>
                   <p className="text-sm text-text-muted italic">{pillar.detail}</p>
@@ -288,7 +274,7 @@ const ProductVaeCorePage: React.FC = () => {
                 
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div className="space-y-6">
-                    <div className="p-6 rounded-xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">
+                    <div className="card-vae p-6">
                       <h4 className="font-semibold text-text-light mb-3 flex items-center gap-2">
                         <X className="w-5 h-5 text-red-400" />
                         Das Problem
@@ -296,7 +282,7 @@ const ProductVaeCorePage: React.FC = () => {
                       <p className="text-sm text-text-secondary leading-relaxed">{tab.pain}</p>
                     </div>
                     
-                    <div className="p-6 rounded-xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">
+                    <div className="card-vae p-6">
                       <h4 className="font-semibold text-text-light mb-3 flex items-center gap-2">
                         <Check className="w-5 h-5 text-green-400" />
                         Die Lösung
@@ -318,7 +304,7 @@ const ProductVaeCorePage: React.FC = () => {
                       </ul>
                     </div>
                     
-                    <div className="p-6 rounded-xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">
+                    <div className="card-vae p-6">
                       <h4 className="font-semibold text-vae-turquoise mb-3 flex items-center gap-2">
                         <Euro className="w-5 h-5 text-green-400" />
                         ROI Impact
@@ -348,11 +334,7 @@ const ProductVaeCorePage: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {safeView.pricing.tiers.map((tier: any, i: number) => (
-              <div key={i} className={`relative p-8 rounded-2xl border-2 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out ${
-                tier.popular 
-                  ? 'border-vae-turquoise bg-gradient-to-br from-vae-turquoise/5 to-vae-turquoise/10 scale-105' 
-                  : 'border-vae-turquoise/30 dark:border-vae-turquoise/50 bg-bg-primary/10 hover:border-vae-turquoise/60'
-              }`}>
+              <div key={i} className="card-vae relative">
                 {tier.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-gradient-to-r from-vae-turquoise to-vae-turquoise/80 text-bg-dark px-6 py-2 rounded-full text-sm font-bold shadow-lg">
@@ -381,7 +363,7 @@ const ProductVaeCorePage: React.FC = () => {
                 
                 <Link 
                   to={tier.name === 'Open Source' ? 'https://github.com/vae-systems/vae-core' : '/contact'}
-                  className={`btn w-full shadow-md hover:shadow-lg transition-all duration-500 ease-out ${tier.popular ? 'btn-primary hover:scale-105' : 'btn-secondary'}`}
+                  className={`btn w-full shadow-md hover:shadow-lg transition-all duration-500 ease-out ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}
                 >
                   {tier.cta}
                 </Link>
@@ -391,7 +373,7 @@ const ProductVaeCorePage: React.FC = () => {
           
           <div className="text-center">
 
-            <p className="text-sm text-text-muted bg-bg-primary/20 rounded-2xl p-6 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.pricing.guarantee}</p>
+            <p className="text-sm text-text-muted bg-bg-secondary/20 rounded-2xl p-6 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.pricing.guarantee}</p>
           </div>
         </div>
       </section>
@@ -405,27 +387,27 @@ const ProductVaeCorePage: React.FC = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="p-8 rounded-2xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-105 transition-all duration-500 ease-out transform-gpu">
+            <div className="card-vae">
               <h3 className="text-xl font-bold text-text-light mb-6">Architektur-Vorteile</h3>
               <ul className="space-y-4">
                 {safeView.tech_deep_dive.architecture_benefits.map((benefit: any, i: number) => (
                   <li key={i} className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                    <Check className="w-5 h-5 text-vae-turquoise mt-0.5 flex-shrink-0 animate-pulse" />
+                    <Check className="w-5 h-5 text-vae-turquoise mt-0.5 flex-shrink-0" />
                     <span className="text-sm text-text-secondary leading-relaxed">{benefit}</span>
                   </li>
                 ))}
               </ul>
             </div>
             
-            <div className="p-8 rounded-2xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-105 transition-all duration-500 ease-out transform-gpu">
+            <div className="card-vae">
               <h3 className="text-xl font-bold text-text-light mb-6">Tech Stack</h3>
               <div className="space-y-4">
                 {safeView.tech_deep_dive.tech_stack.map((category: any, i: number) => (
-                  <div key={i} className="p-6 rounded-xl bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 border border-vae-turquoise/20 hover:border-vae-turquoise/40 transition-all duration-300">
+                  <div key={i} className="card-vae p-6">
                     <h4 className="font-semibold text-text-light mb-3">{category.name}</h4>
                     <div className="flex flex-wrap gap-2">
                       {category.techs.map((tech: any, j: number) => (
-                        <span key={j} className="px-4 py-2 text-xs bg-vae-turquoise/20 text-vae-turquoise rounded-full font-medium shadow-sm hover:bg-vae-turquoise/30 hover:scale-110 transition-all duration-200">
+                        <span key={j} className="px-4 py-2 text-xs bg-vae-turquoise/20 text-vae-turquoise rounded-full font-medium shadow-sm hover:bg-vae-turquoise/30 transition-colors duration-200">
                           {tech}
                         </span>
                       ))}
@@ -448,7 +430,7 @@ const ProductVaeCorePage: React.FC = () => {
           
           <div className="space-y-6">
             {safeView.comparison_brief.comparisons.map((comp: any, i: number) => (
-              <div key={i} className="grid md:grid-cols-3 gap-6 p-8 rounded-2xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:rotate-1 transition-all duration-500 ease-out transform-gpu">
+              <div key={i} className="card-vae grid md:grid-cols-3 gap-6">
                 <div>
                   <h4 className="font-semibold text-text-light text-lg">{comp.alternative}</h4>
                 </div>
@@ -456,7 +438,7 @@ const ProductVaeCorePage: React.FC = () => {
                   <span className="text-sm text-text-secondary leading-relaxed">{comp.vae_advantage}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-vae-turquoise animate-pulse" />
+                  <Zap className="w-5 h-5 text-vae-turquoise" />
                   <span className="text-sm text-vae-turquoise font-medium">{comp.time_saved}</span>
                 </div>
               </div>
@@ -475,13 +457,13 @@ const ProductVaeCorePage: React.FC = () => {
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {safeView.roadmap.phases.map((phase: any, i: number) => (
-              <div key={i} className="p-8 rounded-2xl bg-bg-primary/10 dark:bg-bg-darker/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-500 ease-out transform-gpu">
+              <div key={i} className="card-vae">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-text-light text-lg">{phase.quarter}</h3>
-                  <span className={`px-4 py-2 text-xs rounded-full font-medium hover:scale-110 transition-transform duration-300 ${
+                  <span className={`px-4 py-2 text-xs rounded-full font-medium transition-transform duration-300 ${
                     phase.status === 'Ziel'
                       ? 'bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/25'
-                      : 'bg-bg-primary/20 text-text-secondary border border-border-primary/30'
+                      : 'bg-bg-secondary/20 text-text-secondary border border-border-primary/30'
                   }`}>
                     {phase.status}
                   </span>
@@ -490,7 +472,7 @@ const ProductVaeCorePage: React.FC = () => {
                 <ul className="space-y-3">
                   {phase.items.map((item: any, j: number) => (
                     <li key={j} className="text-sm text-text-secondary flex items-start gap-2 hover:translate-x-1 transition-transform duration-200">
-                      <span className="text-vae-turquoise mt-0.5 animate-pulse">•</span>
+                      <span className="text-vae-turquoise mt-0.5">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -527,7 +509,7 @@ const ProductVaeCorePage: React.FC = () => {
               ))}
             </div>
             
-            <p className="text-sm text-text-muted bg-bg-primary/20 rounded-2xl p-4 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.final_cta.secondary_info}</p>
+            <p className="text-sm text-text-muted bg-bg-secondary/20 rounded-2xl p-4 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.final_cta.secondary_info}</p>
           </div>
         </div>
       </section>
@@ -535,7 +517,7 @@ const ProductVaeCorePage: React.FC = () => {
       {/* Reference Sources */}
       <aside className="py-16 border-t border-border-primary/5">
         <div className="container-vae max-w-5xl">
-          <div className="bg-bg-primary/5 dark:bg-bg-darker/20 border border-vae-turquoise/30 dark:border-vae-turquoise/50 rounded-2xl p-8 hover:shadow-lg transition-all duration-500 ease-out">
+          <div className="bg-bg-secondary/5 dark:bg-bg-darker/20 border border-vae-turquoise/30 dark:border-vae-turquoise/50 rounded-2xl p-8 hover:shadow-lg transition-all duration-500 ease-out">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">Quellen & Kontext</h3>
             <p className="text-sm text-text-secondary leading-relaxed mb-3">Marktanalysen bestätigen: Ohne integrierte Governance & Observability scheitern KI-Projekte bei der Skalierung. Produktionsreife Plattformen reduzieren diese Reibung erheblich.</p>
             <ReferenceList

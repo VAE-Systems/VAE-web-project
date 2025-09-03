@@ -1,5 +1,4 @@
-/* Google Fonts - Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Google Fonts loaded via index.html (preconnect + swap) */
 
 /* Material Symbols - Outlined */
 /* Font is loaded via index.html to avoid duplicate requests */
@@ -279,6 +278,11 @@ body.using-keyboard *:focus {
 
 /* Component Layer */
 @layer components {
+  /* Disable all transitions/animations within a scope */
+  .no-animations *,
+  .no-animations *::before,
+  .no-animations *::after { transition: none !important; animation: none !important; }
+  .no-animations .card-vae:hover { transform: none !important; box-shadow: none !important; border: var(--surface-border) !important; }
   /* Container */
   .container-vae {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -331,14 +335,29 @@ body.using-keyboard *:focus {
   .theme-light .btn-primary:hover { box-shadow: 0 12px 22px -12px rgba(0,0,0,0.26), 0 0 0 1px rgba(0,0,0,0.12); }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-2 text-sm md:px-8 md:py-3 md:text-base font-semibold rounded-xl border border-vae-turquoise text-vae-turquoise bg-transparent transition-transform duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+    @apply inline-flex items-center justify-center px-6 py-2 text-sm md:px-8 md:py-3 md:text-base font-semibold rounded-xl border-2 border-vae-turquoise text-vae-turquoise bg-transparent transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
     transition-timing-function: var(--ease-spring-out);
   }
-  .btn-secondary:hover { background: hsla(var(--color-vae-turquoise), 0.10); color: hsl(var(--color-vae-turquoise)); box-shadow: 0 10px 24px -12px rgba(var(--vae-turquoise-rgb),0.35); }
-  .btn-secondary:active { transform: translateY(-2px) scale(0.985); transition-duration:120ms; }
-  /* Light mode: secondary button stays neutral */
-  .theme-light .btn-secondary { border-color: rgba(0,0,0,0.12); color: hsl(var(--color-text-light)); }
-  .theme-light .btn-secondary:hover { background: hsla(var(--color-vae-turquoise), 0.08); color: hsl(var(--color-vae-turquoise)); border-color: hsla(var(--color-vae-turquoise),0.45); box-shadow: 0 8px 18px -10px rgba(0,0,0,0.20), 0 0 0 1px hsla(var(--color-vae-turquoise),0.35); }
+  .btn-secondary:hover {
+    background: hsla(var(--color-vae-turquoise), 0.12);
+    color: hsl(var(--color-vae-turquoise));
+    border-color: hsl(var(--color-vae-turquoise));
+    box-shadow: 0 8px 20px -8px rgba(var(--vae-turquoise-rgb),0.4), 0 0 0 1px hsla(var(--color-vae-turquoise),0.3);
+    transform: translateY(-2px);
+  }
+  .btn-secondary:active { transform: translateY(-1px) scale(0.98); transition-duration:120ms; }
+  /* Light mode: secondary button keeps strong design */
+  .theme-light .btn-secondary {
+    border-color: hsl(var(--color-vae-turquoise));
+    color: hsl(var(--color-vae-turquoise));
+    background: rgba(0,0,0,0.02);
+  }
+  .theme-light .btn-secondary:hover {
+    background: hsla(var(--color-vae-turquoise), 0.10);
+    color: hsl(var(--color-vae-turquoise));
+    border-color: hsl(var(--color-vae-turquoise));
+    box-shadow: 0 8px 20px -8px rgba(0,0,0,0.25), 0 0 0 1px hsla(var(--color-vae-turquoise),0.4);
+  }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center px-4 py-2 text-sm md:px-6 md:py-3 md:text-base text-text-light font-medium rounded-lg transition-transform duration-300 hover:bg-vae-turquoise/10 hover:text-vae-turquoise border border-white/20 hover:border-vae-turquoise/40 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
@@ -347,14 +366,29 @@ body.using-keyboard *:focus {
   .theme-light .btn-ghost { border-color: rgba(0,0,0,0.12); }
   .theme-light .btn-ghost:hover { background: rgba(0,0,0,0.04); color: hsl(var(--color-text-light)); border-color: rgba(0,0,0,0.20); }
 
-  /* Subtle outline button (neutral surface) */
+  /* Strong outline button (consistent with secondary) */
   .btn-outline {
-    @apply inline-flex items-center justify-center px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-medium rounded-lg border border-white/15 text-text-secondary bg-transparent transition-transform duration-300 hover:border-vae-turquoise/60 hover:text-vae-turquoise hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
+    @apply inline-flex items-center justify-center px-6 py-2 text-sm md:px-8 md:py-3 md:text-base font-semibold rounded-xl border-2 border-vae-turquoise/60 text-vae-turquoise bg-transparent transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker;
     transition-timing-function: var(--ease-spring-out);
   }
-  .theme-light .btn-outline { border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.02); }
-  .btn-outline:hover { transform: translateY(-2px); }
-  .theme-light .btn-outline:hover { border-color: hsla(var(--color-vae-turquoise),0.45); color: hsl(var(--color-vae-turquoise)); background: rgba(0,0,0,0.02); box-shadow: 0 0 0 1px hsla(var(--color-vae-turquoise),0.35); }
+  .theme-light .btn-outline {
+    border-color: hsl(var(--color-vae-turquoise));
+    color: hsl(var(--color-vae-turquoise));
+    background: rgba(0,0,0,0.02);
+  }
+  .btn-outline:hover {
+    border-color: hsl(var(--color-vae-turquoise));
+    color: hsl(var(--color-vae-turquoise));
+    background: hsla(var(--color-vae-turquoise), 0.08);
+    box-shadow: 0 8px 20px -8px rgba(var(--vae-turquoise-rgb),0.3), 0 0 0 1px hsla(var(--color-vae-turquoise),0.25);
+    transform: translateY(-2px);
+  }
+  .theme-light .btn-outline:hover {
+    border-color: hsl(var(--color-vae-turquoise));
+    color: hsl(var(--color-vae-turquoise));
+    background: hsla(var(--color-vae-turquoise), 0.08);
+    box-shadow: 0 8px 20px -8px rgba(0,0,0,0.20), 0 0 0 1px hsla(var(--color-vae-turquoise),0.35);
+  }
 
   /* Triggered CTA signal (JS-controlled) */
   [data-green-signal="true"] { position: relative; }
@@ -440,17 +474,22 @@ body.using-keyboard *:focus {
     background: var(--surface-glass);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: var(--surface-border);
-    transition: transform 300ms var(--ease-spring-out), border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
-    will-change: transform, box-shadow, border-color, background-color;
+    border: 1px solid transparent; /* Start with transparent border */
+    transition: transform 250ms ease-out, border-color 250ms ease, box-shadow 250ms ease;
+    will-change: transform, box-shadow, border-color;
+    cursor: default; /* Prevent cursor from showing as clickable */
   }
   .card-vae:hover {
-    transform: translateY(-4px);
-    border: 1px solid hsla(var(--color-vae-turquoise), 0.45);
-    box-shadow: 0 4px 28px -8px hsla(var(--color-vae-turquoise), 0.25), 0 0 0 1px hsla(var(--color-vae-turquoise), 0.18);
+    transform: translateY(-2px); /* Reduced lift for smoother feel */
+    border-color: hsla(var(--color-vae-turquoise), 0.3); /* Softer border */
+    box-shadow: 0 8px 25px -5px hsla(var(--color-vae-turquoise), 0.15), 
+                0 0 0 1px hsla(var(--color-vae-turquoise), 0.1);
   }
   /* Light mode: card hover stays neutral (no green borders/shadows) */
-  .theme-light .card-vae:hover { border: 1px solid rgba(0,0,0,0.18); box-shadow: 0 6px 24px -10px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.08); }
+  .theme-light .card-vae:hover { 
+    border-color: rgba(0,0,0,0.08); 
+    box-shadow: 0 6px 20px -5px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05); 
+  }
   
   /* Tech Stack Components */
   .tech-logo-item {

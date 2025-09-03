@@ -52,6 +52,8 @@ const Footer: React.FC = () => {
                   src={'/LOGO_01_white.svg'} 
                   alt="VAE Systems Logo" 
                   className="h-full w-auto light-invert"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="border-l border-vae-turquoise/30 pl-4">

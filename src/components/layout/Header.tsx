@@ -218,6 +218,9 @@ const Header: React.FC = () => {
                 src={'/LOGO_01_white.svg'} 
                 alt="VAE Systems Logo" 
                 className="h-full w-auto light-invert"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
             <div className="hidden md:block border-l border-vae-turquoise/30 pl-4">

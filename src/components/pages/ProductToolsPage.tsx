@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
 import ReferenceList from '../ui/ReferenceList'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
@@ -85,7 +86,11 @@ const ProductToolsPage: React.FC = () => {
             <p className="text-xs text-text-muted mt-4">Hinweis: Inhalte dieser Seite sind Ausblick und können angepasst werden.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link to="/contact" className="btn-primary">Early Interest anmelden</Link>
+            <CtaLink
+              ctaId="products.tools.early_interest_email"
+              ctx={{ product: 'Applikationen & Module', fromPage: 'products-tools', intent: 'early-access' }}
+              variant="primary"
+            />
             <Link to="/products/vae-core" className="btn-secondary">VAE CORE ansehen</Link>
           </div>
         </div>

@@ -15,9 +15,7 @@ export const vaeCoreContent = {
           'Transparenz: Open‑Source‑Kern, klare Schnittstellen, Dokumentation',
           'Skalierung: Projekte wachsen reibungsarm mit Ihrem Bedarf'
         ],
-        cta: 'Kontakt aufnehmen',
-        roi: 'Im Schnitt 30–60% geringere Gesamtprojektkosten',
-        case_study: 'KMU modernisiert Service‑Prozesse: 6 Wochen statt 4 Monate – 45% Budgetersparnis'
+        cta: 'Kontakt aufnehmen'
       },
       {
         id: 'builders',
@@ -32,9 +30,7 @@ export const vaeCoreContent = {
           'Built‑in Token‑/Kosten‑Tracking pro Nutzer/Tenant',
           'Sichere Tool‑Execution (MCP) für echte Automationen'
         ],
-        cta: 'Demo / Tech‑Call buchen',
-        roi: '3–6 Monate schneller zum Launch',
-        case_study: 'SaaS‑Team spart €180k Entwicklungskosten via VAE Core'
+        cta: 'Demo / Tech‑Call buchen'
       },
       {
         id: 'agencies',
@@ -49,9 +45,7 @@ export const vaeCoreContent = {
           'Partner‑Programm mit Enablement und Go‑To‑Market‑Playbooks',
           'Provider‑Agnostik ohne Lock‑in'
         ],
-        cta: 'Partner‑Programm anfragen',
-        roi: '40–60% höhere Projektmargen',
-        case_study: 'Agentur liefert 5 KI‑Projekte parallel – planbar, profitabel'
+        cta: 'Partner‑Programm anfragen'
       },
       {
         id: 'oss',
@@ -66,9 +60,7 @@ export const vaeCoreContent = {
           'Beitragen willkommen – Issues, PRs, Docs',
           'Klarer Upgrade‑Pfad auf Managed & Enterprise'
         ],
-        cta: 'Zu GitHub & Docs',
-        roi: 'Schneller lernen mit produktionsreifer Basis',
-        case_study: 'Studierendenprojekt: Chatbot + Tools in 2 Tagen produktiv'
+        cta: 'Zu GitHub & Docs'
       }
     ]
   },

@@ -379,6 +379,8 @@ const TechStackSection: React.FC = () => {
                   src={tech.logo} 
                   alt={tech.name}
                   className="w-12 h-12 object-contain will-change-transform"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span className="text-sm font-medium text-text-light">{tech.name}</span>
               </a>

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
 import { motion } from 'framer-motion'
-import NeuralNetworkBackground from './NeuralNetworkBackground'
+const NeuralNetworkBackground = React.lazy(() => import('./NeuralNetworkBackground'))
 import {
   heroTitle,
   heroTypewriterTexts,
@@ -16,14 +17,30 @@ import {
  */
 const HeroSection: React.FC = () => {
   const typewriterTexts = [...heroTypewriterTexts]
+  // Defer heavy WebGL background for LCP and respect reduced motion
+  const [enableBg, setEnableBg] = React.useState(false)
+  const reducedMotion = React.useMemo(
+    () => (typeof window !== 'undefined' && window.matchMedia) ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false,
+    []
+  )
+  React.useEffect(() => {
+    if (!reducedMotion) {
+      const t = window.setTimeout(() => setEnableBg(true), 0)
+      return () => window.clearTimeout(t)
+    }
+  }, [reducedMotion])
 
   return (
     <section 
       id="hero"
       className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden hero-surface bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overlay-diag overlay-grid"
     >
-      {/* Neural Network Background Animation */}
-      <NeuralNetworkBackground />
+      {/* Neural Network Background Animation (lazy + optional) */}
+      {!reducedMotion && enableBg && (
+        <React.Suspense fallback={null}>
+          <NeuralNetworkBackground />
+        </React.Suspense>
+      )}
       
       {/* Additional Background Layer for better text readability */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-bg-primary/85 via-bg-secondary/75 to-bg-primary/85 dark:from-bg-darker/80 dark:via-bg-dark/70 dark:to-bg-darker/80"></div>
@@ -89,14 +106,16 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
-                  to="/contact"
-                  className="btn-primary text-center flex-1 flex items-center justify-center"
+                <CtaLink
+                  ctaId="contact.demo"
+                  ctx={{ fromPage: 'home' }}
+                  variant="primary"
+                  className="text-center flex-1 flex items-center justify-center"
                   data-green-signal="true"
                 >
                   <span className="material-symbols-outlined mr-2">schedule</span>
                   30‑Min Strategie‑Gespräch buchen
-                </Link>
+                </CtaLink>
                 <Link 
                   to="/products"
                   className="btn-secondary flex-1 text-center flex items-center justify-center"
@@ -115,7 +134,12 @@ const HeroSection: React.FC = () => {
               <div className="flex flex-wrap gap-2">
                 <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Custom Solutions</Link>
                 <Link to="/products#core" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Architektur</Link>
-                <a href="mailto:kontakt@vae-systems.com?subject=Kurzfrage%20zu%20KI%20Projekt" className="px-4 py-2 rounded-full bg-bg-primary/5 hover:bg-bg-primary/10 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-text-light dark:hover:text-white transition-colors">Direkte Frage per Mail</a>
+                <CtaLink
+                  ctaId="contact.quick_email"
+                  ctx={{ fromPage: 'home' }}
+                  variant="ghost"
+                  className="px-4 py-2 rounded-full bg-bg-primary/5 hover:bg-bg-primary/10 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-text-light dark:hover:text-white transition-colors"
+                />
               </div>
               <p className="text-[11px] text-text-muted leading-relaxed max-w-md">
                 Unverbindlich & fokussiert: In <span className="text-text-secondary font-medium">15–30 Minuten</span> klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.

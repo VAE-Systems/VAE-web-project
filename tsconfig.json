@@ -16,6 +16,7 @@
 
     /* Linting */
     "strict": true,
+    
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
@@ -28,7 +29,10 @@
       "@styles/*": ["./src/styles/*"],
       "@assets/*": ["./src/assets/*"],
       "@types/*": ["./src/types/*"]
-    }
+    },
+
+    /* Vite environment types */
+    "types": ["vite/client", "node"]
   },
   "include": ["src"],
   "exclude": ["node_modules"],

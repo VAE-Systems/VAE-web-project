@@ -1,22 +1,22 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
 import ReferenceList from '../ui/ReferenceList'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
 import { vaeCoreContent } from '../../content/vaeCore'
-import { Settings, TrendingUp, Shield, Link as LinkIcon, Layers, Lock, RefreshCw, ShieldCheck, X, Check, Euro, Zap } from 'lucide-react'
-import { useAttentionSignal } from '../../hooks/useAttentionSignal'
+import { Settings, TrendingUp, Shield, Link as LinkIcon, Layers, Lock, RefreshCw, ShieldCheck, X, Check, Zap } from 'lucide-react'
 
 /**
- * Product                  <div className="bg-bg-secondary/40 dark:bg-bg-darker/20 border border-vae-turquoise/40 dark:border-vae-turquoise/50 rounded-2xl p-8 hover:shadow-lg transition-all duration-500 ease-out">   <p className="text-sm text-text-muted bg-bg-secondary/30 rounded-2xl p-4 border border-vae-turquoise/40 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.final_cta.secondary_info}</p>aeCorePage Component
- * 
+ * ProductVaeCorePage Component
+ *
  * Sales-focused VAE Core product page with segment targeting and pricing
  */
 const ProductVaeCorePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('interested')
 
-  const tabs = (vaeCoreContent as any)?.target_segments?.tabs ?? []
-  const view = (vaeCoreContent as any)?.views?.[activeTab] as any
+  // Memoize expensive computations
+  const tabs = useMemo(() => (vaeCoreContent as any)?.target_segments?.tabs ?? [], [])
 
   // Fallbacks für robuste Darstellung
   const viewFallback = useMemo(
@@ -42,7 +42,8 @@ const ProductVaeCorePage: React.FC = () => {
     []
   )
 
-  const safeView = view || viewFallback
+  const view = useMemo(() => (vaeCoreContent as any)?.views?.[activeTab] as any, [activeTab])
+  const safeView = useMemo(() => view || viewFallback, [view])
   const heroRef = useRef<HTMLDivElement>(null)
   const [showSticky, setShowSticky] = useState(false)
   const primaryCtaRef = useRef<HTMLAnchorElement>(null)
@@ -65,10 +66,13 @@ const ProductVaeCorePage: React.FC = () => {
     return () => observer.disconnect()
   }, [])
 
-  // Subtle attention signal on the primary CTA (sheen + micro nudge)
-  useAttentionSignal(primaryCtaRef, { initialDelayMs: 9000, intervalMs: 60000, jitterMs: 12000, maxRuns: 4, nudgeAfter: 2 })
-
-  // No extra reveal animations; rely on card-vae + hover transitions only
+  // Scroll to pricing section
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing')
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <div className="min-h-[100dvh]">
@@ -92,10 +96,9 @@ const ProductVaeCorePage: React.FC = () => {
       />
 
       {/* HERO - Sales Focused */}
-      <header id="hero" className="relative pt-32 pb-20 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-vae-turquoise/5 to-transparent pointer-events-none"></div>
-        <div className="absolute top-20 left-10 w-32 h-32 bg-vae-turquoise/10 rounded-full blur-3xl animate-float opacity-30"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-400/5 rounded-full blur-3xl animate-float-delayed opacity-20"></div>
+      <header id="hero" className="relative pt-32 pb-20 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overflow-hidden" role="banner" aria-labelledby="hero-heading">
+        <div className="absolute inset-0 bg-gradient-to-r from-vae-turquoise/5 to-transparent pointer-events-none" aria-hidden="true"></div>
+        {/* Decorative floaters removed for no-motion requirement */}
         <div ref={heroRef} className="container-vae max-w-7xl relative z-10">
           {/* Segment Selector — desktop centered above hero */}
           <div className="hidden md:flex justify-center mb-8">
@@ -106,7 +109,7 @@ const ProductVaeCorePage: React.FC = () => {
                   onClick={() => setActiveTab(tab.id)}
                   role="tab"
                   aria-selected={activeTab === tab.id}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-500 ease-out shadow-md ${
+                  className={`px-4 py-2 rounded-xl text-sm font-medium shadow-md ${
                     activeTab === tab.id
                       ? 'bg-vae-turquoise text-bg-dark shadow-xl'
                       : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30 hover:shadow-lg'
@@ -125,7 +128,7 @@ const ProductVaeCorePage: React.FC = () => {
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <h1 id="hero-heading" className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="block text-text-light">{safeView.hero.titlePre}</span>
               <span className="block text-vae-turquoise drop-shadow-lg">{safeView.hero.titleMain}</span>
             </h1>
@@ -143,7 +146,7 @@ const ProductVaeCorePage: React.FC = () => {
                     onClick={() => setActiveTab(tab.id)}
                     role="tab"
                     aria-selected={activeTab === tab.id}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-500 ease-out shadow-md ${
+                    className={`px-4 py-2 rounded-xl text-sm font-medium shadow-md ${
                       activeTab === tab.id
                         ? 'bg-vae-turquoise text-bg-dark shadow-xl'
                         : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30 hover:shadow-lg'
@@ -156,24 +159,43 @@ const ProductVaeCorePage: React.FC = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto mb-12">
               {safeView.hero.stats.map((stat: any, i: number) => (
-                <div key={i} className="card-vae text-center p-6">
-                  <div className="text-3xl md:text-4xl font-bold text-vae-turquoise mb-2">{stat.value}</div>
+                <div key={i} className="card-vae text-center p-6" role="region" aria-labelledby={`stat-${i}`}>
+                  <div id={`stat-${i}`} className="text-3xl md:text-4xl font-bold text-vae-turquoise mb-2" aria-label={`${stat.value} ${stat.label}`}>
+                    {stat.value}
+                  </div>
                   <div className="text-sm text-text-secondary">{stat.label}</div>
                 </div>
               ))}
             </div>
             
             {/* Primary CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link ref={primaryCtaRef} to="/contact?intent=demo" className="btn-primary btn-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 ease-out" id="cta-hero-primary" aria-label="Kostenloses Beratungsgespräch – 15–20 Minuten" data-green-signal="true">
-                Kostenlose Demo buchen
-              </Link>
-              <Link to="#pricing" className="btn-secondary btn-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-out">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <CtaLink
+                ctaId="product.vae-core.demo"
+                ctx={{ product: 'VAE CORE', fromPage: 'product-core', intent: 'demo' }}
+                variant="primary"
+                ref={primaryCtaRef as unknown as React.Ref<HTMLAnchorElement>}
+                className="btn-lg shadow-xl focus:outline-none focus:ring-4 focus:ring-vae-turquoise/50"
+                id="cta-hero-primary"
+                aria-label="Kostenloses Beratungsgespräch – 15–20 Minuten"
+                data-green-signal="true"
+              />
+              <button
+                onClick={scrollToPricing}
+                className="btn-secondary btn-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-vae-turquoise/30"
+                aria-label="Zu den Preisen springen"
+              >
                 Preise ansehen
-              </Link>
-              <Link to="https://github.com/vae-systems/vae-core" className="btn-ghost btn-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-out">
+              </button>
+              <Link
+                to="https://github.com/vae-systems/vae-core"
+                className="btn-ghost btn-lg shadow-md focus:outline-none focus:ring-4 focus:ring-vae-turquoise/20"
+                aria-label="VAE Core Repository auf GitHub öffnen (externer Link)"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 GitHub Repository
               </Link>
             </div>
@@ -182,7 +204,7 @@ const ProductVaeCorePage: React.FC = () => {
       </header>
 
       {/* Sticky Mini Selector (fixed) */}
-      <div className={`hidden md:block fixed left-0 right-0 top-24 z-[45] transition-all duration-300 ${showSticky ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+      <div className={`hidden md:block fixed left-0 right-0 top-24 z-[45] ${showSticky ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         <div className="container-vae max-w-7xl">
           <div className="flex justify-center">
             <div role="tablist" aria-label="Zielgruppe wählen (sticky)" className="flex gap-1 p-1 bg-bg-secondary/70 rounded-2xl border border-border-primary/30 shadow-lg backdrop-blur-sm">
@@ -192,7 +214,7 @@ const ProductVaeCorePage: React.FC = () => {
                   onClick={() => setActiveTab(tab.id)}
                   role="tab"
                   aria-selected={activeTab === tab.id}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-500 ease-out ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium ${
                     activeTab === tab.id
                       ? 'bg-vae-turquoise text-bg-dark shadow'
                       : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30'
@@ -304,18 +326,14 @@ const ProductVaeCorePage: React.FC = () => {
                       </ul>
                     </div>
                     
-                    <div className="card-vae p-6">
-                      <h4 className="font-semibold text-vae-turquoise mb-3 flex items-center gap-2">
-                        <Euro className="w-5 h-5 text-green-400" />
-                        ROI Impact
-                      </h4>
-                      <p className="text-sm text-text-secondary mb-4">{tab.roi}</p>
-                      <p className="text-xs text-text-muted italic">{tab.case_study}</p>
-                    </div>
-                    
-                    <Link to="/contact" className="btn-primary btn-lg w-full shadow-lg hover:shadow-xl transition-all duration-500 ease-out">
-                      {tab.cta}
-                    </Link>
+                <CtaLink
+                  ctaId="product.vae-core.contact_email"
+                  ctx={{ product: 'VAE CORE', fromPage: `product-core:${tab.id}`, intent: 'contact' }}
+                  variant="primary"
+                  className="btn-lg w-full shadow-lg"
+                >
+                  {tab.cta}
+                </CtaLink>
                   </div>
                 </div>
               </div>
@@ -363,7 +381,7 @@ const ProductVaeCorePage: React.FC = () => {
                 
                 <Link 
                   to={tier.name === 'Open Source' ? 'https://github.com/vae-systems/vae-core' : '/contact'}
-                  className={`btn w-full shadow-md hover:shadow-lg transition-all duration-500 ease-out ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}
+                  className={`btn w-full shadow-md ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}
                 >
                   {tier.cta}
                 </Link>
@@ -373,7 +391,7 @@ const ProductVaeCorePage: React.FC = () => {
           
           <div className="text-center">
 
-            <p className="text-sm text-text-muted bg-bg-secondary/20 rounded-2xl p-6 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.pricing.guarantee}</p>
+            <p className="text-sm text-text-muted bg-bg-secondary/20 rounded-2xl p-6 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md">{safeView.pricing.guarantee}</p>
           </div>
         </div>
       </section>
@@ -391,7 +409,7 @@ const ProductVaeCorePage: React.FC = () => {
               <h3 className="text-xl font-bold text-text-light mb-6">Architektur-Vorteile</h3>
               <ul className="space-y-4">
                 {safeView.tech_deep_dive.architecture_benefits.map((benefit: any, i: number) => (
-                  <li key={i} className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
+                  <li key={i} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-vae-turquoise mt-0.5 flex-shrink-0" />
                     <span className="text-sm text-text-secondary leading-relaxed">{benefit}</span>
                   </li>
@@ -407,7 +425,7 @@ const ProductVaeCorePage: React.FC = () => {
                     <h4 className="font-semibold text-text-light mb-3">{category.name}</h4>
                     <div className="flex flex-wrap gap-2">
                       {category.techs.map((tech: any, j: number) => (
-                        <span key={j} className="px-4 py-2 text-xs bg-vae-turquoise/20 text-vae-turquoise rounded-full font-medium shadow-sm hover:bg-vae-turquoise/30 transition-colors duration-200">
+                        <span key={j} className="px-4 py-2 text-xs bg-vae-turquoise/20 text-vae-turquoise rounded-full font-medium shadow-sm">
                           {tech}
                         </span>
                       ))}
@@ -460,7 +478,7 @@ const ProductVaeCorePage: React.FC = () => {
               <div key={i} className="card-vae">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-text-light text-lg">{phase.quarter}</h3>
-                  <span className={`px-4 py-2 text-xs rounded-full font-medium transition-transform duration-300 ${
+                  <span className={`px-4 py-2 text-xs rounded-full font-medium ${
                     phase.status === 'Ziel'
                       ? 'bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/25'
                       : 'bg-bg-secondary/20 text-text-secondary border border-border-primary/30'
@@ -471,7 +489,7 @@ const ProductVaeCorePage: React.FC = () => {
                 <h4 className="text-lg font-semibold text-vae-turquoise mb-4">{phase.title}</h4>
                 <ul className="space-y-3">
                   {phase.items.map((item: any, j: number) => (
-                    <li key={j} className="text-sm text-text-secondary flex items-start gap-2 hover:translate-x-1 transition-transform duration-200">
+                    <li key={j} className="text-sm text-text-secondary flex items-start gap-2">
                       <span className="text-vae-turquoise mt-0.5">•</span>
                       <span>{item}</span>
                     </li>
@@ -481,7 +499,7 @@ const ProductVaeCorePage: React.FC = () => {
             ))}
           </div>
           
-          <div className="text-center p-8 rounded-2xl bg-vae-turquoise/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-lg hover:shadow-xl transition-all duration-500 ease-out">
+          <div className="text-center p-8 rounded-2xl bg-vae-turquoise/10 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-lg">
             <p className="text-sm text-text-secondary leading-relaxed">{safeView.roadmap.early_access}</p>
           </div>
         </div>
@@ -499,7 +517,7 @@ const ProductVaeCorePage: React.FC = () => {
                 <Link 
                   key={i}
                   to={cta.href} 
-                  className={`btn btn-lg shadow-xl hover:shadow-2xl transition-all duration-500 ease-out ${
+                  className={`btn btn-lg shadow-xl ${
                     cta.style === 'primary' ? 'btn-primary' : 
                     cta.style === 'secondary' ? 'btn-secondary' : 'btn-ghost'
                   }`}
@@ -509,7 +527,7 @@ const ProductVaeCorePage: React.FC = () => {
               ))}
             </div>
             
-            <p className="text-sm text-text-muted bg-bg-secondary/20 rounded-2xl p-4 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md hover:shadow-lg transition-all duration-500 ease-out">{safeView.final_cta.secondary_info}</p>
+            <p className="text-sm text-text-muted bg-bg-secondary/20 rounded-2xl p-4 border border-vae-turquoise/30 dark:border-vae-turquoise/50 shadow-md">{safeView.final_cta.secondary_info}</p>
           </div>
         </div>
       </section>
@@ -517,15 +535,17 @@ const ProductVaeCorePage: React.FC = () => {
       {/* Reference Sources */}
       <aside className="py-16 border-t border-border-primary/5">
         <div className="container-vae max-w-5xl">
-          <div className="bg-bg-secondary/5 dark:bg-bg-darker/20 border border-vae-turquoise/30 dark:border-vae-turquoise/50 rounded-2xl p-8 hover:shadow-lg transition-all duration-500 ease-out">
+          <div className="bg-bg-secondary/5 dark:bg-bg-darker/20 border border-vae-turquoise/30 dark:border-vae-turquoise/50 rounded-2xl p-8">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-vae-turquoise mb-4">Quellen & Kontext</h3>
-            <p className="text-sm text-text-secondary leading-relaxed mb-3">Marktanalysen bestätigen: Ohne integrierte Governance & Observability scheitern KI-Projekte bei der Skalierung. Produktionsreife Plattformen reduzieren diese Reibung erheblich.</p>
+            <p className="text-sm text-text-secondary leading-relaxed mb-3">Marktanalysen bestätigen: Ohne integrierte Governance & Observability scheitern KI-Projekte bei der Skalierung. Produktionsreife Plattformen reduzieren diese Reibung erheblich. (Stanford AI Index 2024, Gartner Trends)</p>
             <ReferenceList
               items={[
-                { id: 'c1', label: 'CNCF – Platform Engineering Reports', url: 'https://www.cncf.io' },
-                { id: 'c2', label: 'Gartner – AI Infrastructure Trends', url: 'https://www.gartner.com' },
+                { id: 'c1', label: 'CNCF – Platform Engineering Reports 2024', url: 'https://www.cncf.io' },
+                { id: 'c2', label: 'Gartner – AI Infrastructure Trends 2025', url: 'https://www.gartner.com' },
                 { id: 'c3', label: 'EU Data Act – Sovereignty Requirements', url: 'https://eur-lex.europa.eu' },
-                { id: 'c4', label: 'EU AI Act – Governance Standards', url: 'https://eur-lex.europa.eu' }
+                { id: 'c4', label: 'EU AI Act – Governance Standards', url: 'https://eur-lex.europa.eu' },
+                { id: 'c5', label: 'Stanford AI Index 2024 – Platform Efficiency', url: 'https://aiindex.stanford.edu' },
+                { id: 'c6', label: 'MIT Technology Review – AI Scaling Challenges', url: 'https://www.technologyreview.com' }
               ]}
               dense
             />

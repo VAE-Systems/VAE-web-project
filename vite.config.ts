@@ -29,6 +29,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    cssCodeSplit: true,
+    reportCompressedSize: true,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -40,5 +42,6 @@ export default defineConfig({
         },
       },
     },
+    chunkSizeWarningLimit: 700,
   },
 })

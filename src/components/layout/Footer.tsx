@@ -139,7 +139,7 @@ const Footer: React.FC = () => {
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center space-x-2">
                   <Link to="/products/vae-core" className="text-text-secondary hover:text-vae-turquoise transition-colors">VAE Core Plattform</Link>
-                  <span className="px-2 py-0.5 bg-vae-turquoise/20 text-vae-turquoise text-[10px] rounded-full tracking-wide">Q1/2026</span>
+                  <span className="px-2 py-0.5 bg-vae-turquoise/20 text-vae-turquoise text-[10px] rounded-full tracking-wide">Q2/2026</span>
                 </li>
                 <li><Link to="/products/solutions" className="text-text-secondary hover:text-vae-turquoise transition-colors">Solutions</Link></li>
                 <li><Link to="/products/tools" className="text-text-secondary hover:text-vae-turquoise transition-colors">Tools & Komponenten</Link></li>

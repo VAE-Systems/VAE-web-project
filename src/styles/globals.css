@@ -4,6 +4,9 @@
 /* Material Symbols - Outlined */
 /* Font is loaded via index.html to avoid duplicate requests */
 
+/* Custom Animations */
+@import './animations.css';
+
 /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
@@ -441,7 +444,8 @@ body.using-keyboard *:focus {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: var(--surface-border);
-    transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+    transition: transform 300ms var(--ease-spring-out), border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
+    will-change: transform, box-shadow, border-color, background-color;
   }
   .card-vae:hover {
     transform: translateY(-4px);
@@ -628,8 +632,28 @@ a
   .theme-light .eyebrow { @apply text-text-muted; }
   .eyebrow-muted { @apply text-[11px] font-medium uppercase tracking-wide text-text-muted; }
   /* Gradient Variante separat, damit nicht überall text-gradient dupliziert werden muss */
-  .heading-gradient { @apply bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent; }
-  .theme-light .heading-gradient { background-image: none !important; color: hsl(var(--color-text-light)) !important; }
+  /* Headings with brand accent get a subtle glow for readability on light backgrounds */
+  .heading-gradient { @apply bg-gradient-to-r from-vae-turquoise to-vae-turquoise bg-clip-text text-transparent drop-shadow-lg; }
+  .theme-light .heading-gradient { background-image: none !important; color: hsl(var(--color-text-light)) !important; @apply drop-shadow-lg; }
+
+  /* Softer borders and surfaces in dark mode to avoid high-contrast white lines */
+  html:not(.theme-light) .border-white\/10 { border-color: rgba(255,255,255,0.05) !important; }
+  html:not(.theme-light) .border-white\/15 { border-color: rgba(255,255,255,0.06) !important; }
+  html:not(.theme-light) .border-white\/20 { border-color: rgba(255,255,255,0.08) !important; }
+  html:not(.theme-light) .bg-white\/5 { background-color: rgba(255,255,255,0.025) !important; }
+  html:not(.theme-light) .bg-white\/\[0\.04\] { background-color: rgba(255,255,255,0.03) !important; }
+  html:not(.theme-light) .bg-white\/\[0\.035\] { background-color: rgba(255,255,255,0.02) !important; }
+  html:not(.theme-light) .ring-white\/10 { --tw-ring-color: rgba(255,255,255,0.05) !important; }
+
+  /* Reduce divide-white intensity in dark mode for cleaner look */
+  html:not(.theme-light) .divide-white\/5 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255,255,255,0.04) !important; }
+  html:not(.theme-light) .divide-white\/10 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255,255,255,0.05) !important; }
+  html:not(.theme-light) .divide-white\/15 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255,255,255,0.06) !important; }
+  html:not(.theme-light) .divide-white\/20 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255,255,255,0.08) !important; }
+
+  /* Light mode: subtle glow for turquoise headings for professional emphasis */
+  .theme-light h1 .text-vae-turquoise,
+  .theme-light h2 .text-vae-turquoise { filter: drop-shadow(0 2px 8px rgba(0,255,165,0.25)); }
   /* Standard Abstände */
   .h-space { @apply mb-6; }
   .h-space-lg { @apply mb-8; }

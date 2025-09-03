@@ -107,8 +107,8 @@ const HeroSection: React.FC = () => {
             >
               <div className="flex flex-col sm:flex-row gap-4">
                 <CtaLink
-                  ctaId="contact.demo"
-                  ctx={{ fromPage: 'home' }}
+                  ctaId="contact.schedule_call"
+                  ctx={{ fromPage: 'home', intent: 'strategy-call' }}
                   variant="primary"
                   className="text-center flex-1 flex items-center justify-center"
                   data-green-signal="true"

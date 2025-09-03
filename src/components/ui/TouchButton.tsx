@@ -42,14 +42,12 @@ const TouchButton: React.FC<TouchButtonProps> = ({
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${widthClass} ${disabledClass} ${className}`}
+      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${widthClass} ${disabledClass} touch-manipulation select-none ${className}`}
       disabled={disabled}
       style={{
-        touchAction: 'manipulation',
         WebkitTapHighlightColor: 'transparent',
         WebkitTouchCallout: 'none',
-        WebkitUserSelect: 'none',
-        userSelect: 'none'
+        WebkitUserSelect: 'none'
       }}
       {...props}
     >

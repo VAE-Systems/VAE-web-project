@@ -172,7 +172,7 @@ export const vaeCoreContent = {
         stats: [
           { value: '90%', label: 'weniger Multi‑Tenant Code' },
           { value: '60%', label: 'schneller zum Launch' },
-          { value: '€180k', label: 'gesparte Entwicklungskosten' }
+          { value: '> 20%', label: 'gesparte Entwicklungskosten' }
         ]
       },
       problem: {

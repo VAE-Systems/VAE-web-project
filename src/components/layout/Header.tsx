@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import CtaLink from '@/components/ui/CtaLink'
 import { Link, useLocation } from 'react-router-dom'
 import { productCategories } from '../navigation/productCategories'
 import { serviceCategories } from '../navigation/serviceCategories'
@@ -456,17 +457,16 @@ const Header: React.FC = () => {
           </nav>
 
           {/* CTA Button */}
-          <Link
-            ref={ctaRef}
-            to="/contact"
+          <CtaLink
+            ctaId="contact.schedule_call"
+            ref={ctaRef as unknown as React.Ref<HTMLAnchorElement>}
             className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} hidden md:inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-6 font-medium`}
             data-green-signal="true"
+            aria-label="Direkt Termin buchen (extern)"
           >
-            <span className="material-symbols-outlined mr-2">
-              schedule
-            </span>
+            <span className="material-symbols-outlined mr-2">schedule</span>
             Kostenloses Erstgespräch
-          </Link>
+          </CtaLink>
 
           {/* Theme Toggle Button */}
           <button

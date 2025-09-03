@@ -153,14 +153,12 @@ const TouchHandler: React.FC<TouchHandlerProps> = ({
   return (
     <div
       ref={elementRef}
-      className={`touch-handler ${className}`}
+      className={`touch-handler touch-manipulation select-none ${className}`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchCancel}
       style={{
-        touchAction: 'manipulation',
-        userSelect: 'none',
         WebkitTapHighlightColor: 'transparent'
       }}
       aria-disabled={disabled}

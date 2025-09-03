@@ -4,6 +4,7 @@ import RippleGrid from './effects/RippleGrid'
 import { useTheme } from '@/contexts/ThemeContext'
 import MaterialIcon from '../ui/MaterialIcon'
 import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
 
 interface ServicesHeroSectionProps {
 	innerRef?: React.Ref<HTMLDivElement>
@@ -71,14 +72,15 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                                                                                 {/* CTA Block (aligned with main landing hero style) */}
                                                                                 <div className="space-y-5">
                                                                                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                                                                                <Link
-                                                                                                        to="/contact"
+                                                                                                <CtaLink
+                                                                                                        ctaId="contact.schedule_call"
+                                                                                                        ctx={{ fromPage: 'services', intent: 'strategy-call' }}
                                                                                                         className="btn-primary flex-1 text-center flex items-center justify-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
                                                                                                         data-green-signal="true"
                                                                                                 >
                                                                                                         <span className="material-symbols-outlined mr-2">schedule</span>
                                                                                                         30‑Min Strategie‑Gespräch buchen
-                                                                                                </Link>
+                                                                                                </CtaLink>
                                                                                                 <Link
                                                                                                         to="/products"
                                                                                                         className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}

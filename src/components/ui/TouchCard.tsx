@@ -62,14 +62,14 @@ const TouchCard: React.FC<TouchCardProps> = ({
     }
   }
 
+  const minHeightClass = interactive ? 'min-h-[44px]' : ''
+
   const cardContent = (
     <div
-      className={`${baseClasses} ${paddingClasses[padding]} ${interactiveClasses} ${disabledClass} ${className}`}
+      className={`${baseClasses} ${paddingClasses[padding]} ${interactiveClasses} ${disabledClass} ${minHeightClass} touch-manipulation ${className}`}
       onClick={interactive ? handleClick : undefined}
       style={{
-        touchAction: 'manipulation',
-        WebkitTapHighlightColor: 'transparent',
-        minHeight: interactive ? '44px' : 'auto' // Minimum touch target
+        WebkitTapHighlightColor: 'transparent'
       }}
       role={interactive ? 'button' : undefined}
       tabIndex={interactive ? 0 : undefined}

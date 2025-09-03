@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import CtaLink from '@/components/ui/CtaLink'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Link } from 'react-router-dom'
@@ -123,13 +124,10 @@ const ServicesPage: React.FC = () => {
                 <React.Fragment key={r.key}>
                   <div className={`p-4 text-[11px] font-medium text-text-muted/70 border-t border-border-primary dark:border-white/5 ${i===arr.length-1 ? 'rounded-bl-2xl' : ''}`}>{r.label}</div>
                   {[r.trainings, r.consulting, r.custom].map((val,ci) => (
-                    <div
-                      key={ci}
-                      className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-border-primary dark:border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`}
-                    >
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
-                      <span className="relative z-10">{val}</span>
-                    </div>
+                    <div className={`p-4 text-xs leading-relaxed text-text-secondary border-t border-border-primary dark:border-white/5 relative group ${i===arr.length-1 && ci===2 ? 'rounded-br-2xl' : ''}`} aria-label={`${r.label} für ${['Schulungen & Workshops','Beratung','Custom Solutions'][ci]}: ${val}`}>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)]" />
+                    <span className="relative z-10">{val}</span>
+                  </div>
                   ))}
                 </React.Fragment>
               ))}
@@ -151,14 +149,49 @@ const ServicesPage: React.FC = () => {
         <div className="container-vae max-w-4xl text-center">
           <h2 className="h2 h-space text-text-light">{finalCta.title}</h2>
           <p className="text-lg text-text-secondary mb-10">{finalCta.subtitle}</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
             {finalCta.buttons.map(btn => (
               btn.primary ? (
                 <Link key={btn.text} to={btn.to || "/contact"} className={`btn-primary px-8 py-4`}>{btn.text}</Link>
               ) : (
-                <a key={btn.text} href={btn.href || "#"} className="btn-secondary px-8 py-4" target="_blank" rel="noopener" aria-label={`${btn.text}`}>{btn.text}</a>
+                <a key={btn.text} href={btn.href || "#"} className="btn-secondary px-8 py-4" target="_blank" rel="noopener noreferrer" aria-label={`${btn.text}`}>{btn.text}</a>
               )
             ))}
+          </div>
+          {/* Added consulting direct mail CTAs */}
+          <div className="grid md:grid-cols-2 gap-4 text-left mb-8" aria-label="Direkte Beratungs-Anfragen">
+            <CtaLink
+              ctaId="consulting.initial_call"
+              ctx={{ fromPage: 'services', intent: 'initial-call' }}
+              className="btn-secondary justify-start"
+            >
+              <span className="material-symbols-outlined mr-2">call</span>
+              Erstgespräch (15–20 Min) buchen
+            </CtaLink>
+            <CtaLink
+              ctaId="consulting.two_days_workshop"
+              ctx={{ fromPage: 'services', intent: 'workshop' }}
+              className="btn-secondary justify-start"
+            >
+              <span className="material-symbols-outlined mr-2">event_available</span>
+              2 Tage Intensiv‑Workshop anfragen
+            </CtaLink>
+            <CtaLink
+              ctaId="consulting.deep_dive_architecture"
+              ctx={{ fromPage: 'services', intent: 'deep-dive' }}
+              className="btn-outline justify-start"
+            >
+              <span className="material-symbols-outlined mr-2">architecture</span>
+              Deep‑Dive Architektur & Governance
+            </CtaLink>
+            <CtaLink
+              ctaId="consulting.monthly_support"
+              ctx={{ fromPage: 'services', intent: 'monthly-support' }}
+              className="btn-outline justify-start"
+            >
+              <span className="material-symbols-outlined mr-2">support_agent</span>
+              Monatliche Begleitung anfragen
+            </CtaLink>
           </div>
           <p className="mt-6 text-xs text-text-muted">{finalCta.disclaimer}</p>
         </div>
@@ -169,7 +202,7 @@ const ServicesPage: React.FC = () => {
         <FAQSection
           id="services-faq"
           className="bg-gradient-to-b from-bg-darker to-bg-dark/90 border-t border-border-primary dark:border-white/5"
-          title="Services – häufige Fragen"
+          title="Services – Häufige Fragen"
           subtitle="Klarheit zu Umfang, Ablauf und Betrieb." 
           categories={[
             { category: 'Ablauf', questions: [

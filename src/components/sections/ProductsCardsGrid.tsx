@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
 import { productCategories } from '../navigation/productCategories'
 
 const ProductsCardsGrid: React.FC = () => {
@@ -49,7 +50,12 @@ const ProductsCardsGrid: React.FC = () => {
 
               <div className="mt-auto flex items-center gap-3">
                 <Link to={`/products/${cat.key}`} className="btn-primary btn-compact whitespace-nowrap">Ansehen</Link>
-                <Link to="/contact" className="btn-secondary btn-compact whitespace-nowrap">Kontakt</Link>
+                <CtaLink
+                  ctaId="products.contact_email"
+                  ctx={{ product: cat.title, fromPage: 'products-grid' }}
+                  variant="secondary"
+                  className="btn-compact whitespace-nowrap"
+                />
               </div>
             </article>
           ))}

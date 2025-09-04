@@ -20,7 +20,7 @@ export const defaultFAQCategories = [
     questions: [
       { question: 'Support nach Go-Live?', answer: 'Optionale Betriebs- und Verbesserungs-Sprints, SLAs für kritische Pfade, Wissensübergabe & Schulungen. Ziel: Interne Souveränität statt dauerhafte Abhängigkeit.' },
       { question: 'Trainingsumfang?', answer: 'Role-based: Operator, Developer, Data/Knowledge Steward. Praxisnahe Labs & Artefakte (Playbooks, Evaluationsets). Wiederholbar und dokumentiert.' },
-      { question: 'Roadmap VAE CORE?', answer: 'Inkrementelle Module: Retrieval Hub, Policy & Access Layer, Evaluation Suite. Bestandssysteme profitieren früh via schrittweise Anbindung.' }
+  { question: 'Roadmap VAE CORE?', answer: 'Public Preview angezielt Q2 2026: Fokus zuerst auf Tool/MCP Workflow Stabilität, Policy & Multi‑Tenancy Hardening, Vector API Abstraktion, Gateway Routing & frühe Evaluierungsmetriken. Früh nutzbar via schrittweise Anbindung vorhandener Systeme.' }
     ]
   }
 ]

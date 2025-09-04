@@ -1,5 +1,6 @@
 import React, { Suspense, useState } from 'react'
 import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
 import { TermHint } from '../ui/Glossary'
@@ -119,7 +120,7 @@ const ServiceConsultingPage: React.FC = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-24">
-            <Link to="/contact" className="btn-primary">Erstgespräch buchen</Link>
+            <CtaLink ctaId="contact.schedule_call" ctx={{ fromPage: 'services-consulting', intent: 'initial-call' }} className="btn-primary">Erstgespräch buchen</CtaLink>
             <Link to="#consulting-faq" className="btn-secondary">FAQ</Link>
             <Link to="/services/trainings" className="btn-outline">Schulungen & Workshops</Link>
             <Link to="/services/custom-solutions" className="btn-outline">Custom Solutions</Link>

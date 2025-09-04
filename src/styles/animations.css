@@ -1,0 +1,33 @@
+/* Motion tokens and micro-interactions */
+
+@keyframes sheen-sweep {
+  0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
+  40% { opacity: .6; }
+  100% { transform: translateX(150%) skewX(-20deg); opacity: 0; }
+}
+
+@keyframes nudge {
+  0% { transform: translate3d(0,0,0); }
+  40% { transform: translate3d(2px,0,0); }
+  100% { transform: translate3d(0,0,0); }
+}
+
+.cta-sheen { position: relative; overflow: hidden; }
+.cta-sheen::after {
+  content: "";
+  position: absolute; inset: 0;
+  transform: translateX(-150%) skewX(-20deg);
+  background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.35) 50%, transparent 60%);
+  pointer-events: none; opacity: 0;
+}
+.cta-sheen[data-signal-state="on"]::after { animation: sheen-sweep 1s ease-out forwards; }
+.signal-nudge { animation: nudge .16s ease-out; }
+
+/* Reveal-on-scroll utility */
+.reveal-soft { opacity: 0; transform: translateY(12px); transition: transform .7s cubic-bezier(.16,1,.3,1), opacity .7s ease; }
+.reveal-soft.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-sheen::after { display: none; }
+  .signal-nudge, .reveal-soft { animation: none !important; transition: none !important; transform: none !important; opacity: 1 !important; }
+}

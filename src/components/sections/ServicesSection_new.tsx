@@ -71,7 +71,7 @@ const ServicesSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16" ref={headerRef}>
           <h2 className="h2 heading-gradient mb-4">Services</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
             Von erster Einordnung bis souveränem Betrieb: <span className="text-text-light font-medium">Schulungen & Workshops</span> für interne Kompetenz, <span className="text-text-light font-medium">Beratung</span> für Richtung & Governance sowie modulare <span className="text-text-light">Custom Solutions</span> für messbare Prozess‑ & Wissensautomatisierung. <span className="text-vae-turquoise">Open Source. Auditierbar. Austauschbar.</span>
           </p>
         </div>

@@ -4,6 +4,7 @@ import FaultyTerminal from './effects/FaultyTerminal'
 // ParallaxBackdrop removed in light mode redesign
 import { productsHeroContent } from '@/content/productsHero'
 import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
 
 /**
  * ProductsHeroSection
@@ -85,10 +86,15 @@ const ProductsHeroSection: React.FC = () => {
             {/* CTA block moved outside panel to mirror Services hero layout */}
             <div className="space-y-5">
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/contact" data-green-signal="true" className="btn-primary flex-1 text-center flex items-center justify-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]">
+                <CtaLink
+                  ctaId="contact.schedule_call"
+                  ctx={{ fromPage: 'products', intent: 'strategy-call' }}
+                  className="btn-primary flex-1 text-center flex items-center justify-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
+                  data-green-signal="true"
+                >
                   <span className="material-symbols-outlined mr-2">schedule</span>
                   30‑Min Strategie‑Gespräch buchen
-                </Link>
+                </CtaLink>
                 <Link to="/services" className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}>
                   <span className="material-symbols-outlined mr-2">handshake</span>
                   Services & Expertise

@@ -1,7 +1,7 @@
 {
-  "name": "VAE Systems",
-  "short_name": "VAE",
-  "description": "VAE Systems - Innovative KI-Lösungen und Automatisierung",
+  "name": "VAE Systems - Innovative KI-Lösungen",
+  "short_name": "VAE Systems",
+  "description": "VAE Systems UG (haftungsbeschränkt) - Innovative KI-Lösungen und Automatisierung für Unternehmen",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
@@ -9,12 +9,63 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "de",
+  "categories": ["business", "productivity", "utilities"],
   "icons": [
     {
       "src": "/LOGO_01_white.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/App_Logo_light.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/App_Logo_light.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "description": "Unsere Dienstleistungen entdecken",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/LOGO_01_white.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Produkte",
+      "short_name": "Produkte",
+      "description": "Unsere Produkte ansehen",
+      "url": "/products",
+      "icons": [
+        {
+          "src": "/LOGO_01_white.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Kontakt",
+      "short_name": "Kontakt",
+      "description": "Kontakt aufnehmen",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/LOGO_01_white.svg",
+          "sizes": "96x96"
+        }
+      ]
     }
   ]
 }

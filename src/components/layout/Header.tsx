@@ -460,7 +460,7 @@ const Header: React.FC = () => {
           <CtaLink
             ctaId="contact.schedule_call"
             ref={ctaRef as unknown as React.Ref<HTMLAnchorElement>}
-            className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} hidden md:inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-6 font-medium`}
+            className={`${theme === 'light' ? 'box-decoration-clone' : 'btn-primary'} hidden md:inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-6 font-medium`}
             data-green-signal="true"
             aria-label="Direkt Termin buchen (extern)"
           >

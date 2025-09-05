@@ -71,12 +71,12 @@ const AboutMiniSection: React.FC = () => {
                 )}
                 <div className="relative w-14 h-14 mx-auto mb-4 rounded-2xl grid place-items-center bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 dark:from-vae-turquoise/30 dark:to-vae-turquoise/20 border border-vae-turquoise/30 dark:border-vae-turquoise/20 text-vae-turquoise dark:text-vae-turquoise-light shadow-[0_0_0_3px_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_3px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_0_8px_rgba(var(--vae-turquoise-rgb),0.25)] group-hover:border-vae-turquoise/50 dark:group-hover:border-vae-turquoise/40 group-hover:bg-gradient-to-br group-hover:from-vae-turquoise/30 group-hover:to-vae-turquoise/20 dark:group-hover:from-vae-turquoise/40 dark:group-hover:to-vae-turquoise/30 transition-all duration-300 hover:scale-110">
                   <span className="material-symbols-outlined text-[26px]">{step.icon}</span>
-                  <span className="absolute -top-2 -right-2 w-5 h-5 text-[10px] rounded-full bg-vae-turquoise/80 text-bg-dark flex items-center justify-center font-semibold backdrop-blur-sm border border-vae-turquoise/60 group-hover:bg-vae-turquoise transition-colors duration-300">
+                  <span className="absolute -top-2 -right-2 w-5 h-5 text-xs rounded-full bg-vae-turquoise/80 text-bg-dark flex items-center justify-center font-semibold backdrop-blur-sm border border-vae-turquoise/60 group-hover:bg-vae-turquoise transition-colors duration-300">
                     {String(idx + 1).padStart(2, '0')}
                   </span>
                 </div>
                 <h4 className="text-sm font-medium text-white mb-1 tracking-wide group-hover:text-vae-turquoise transition-colors duration-300">{step.label}</h4>
-                <p className="text-xs text-text-secondary/80 leading-snug max-w-[160px] mx-auto group-hover:text-text-secondary transition-colors duration-300">{step.hint}</p>
+                <p className="text-sm text-text-secondary/80 leading-snug max-w-[160px] mx-auto group-hover:text-text-secondary transition-colors duration-300">{step.hint}</p>
               </div>
             ))}
           </div>

@@ -60,7 +60,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
                 </div>
               </div>
               <h3 className="text-lg font-semibold text-text-light mb-3 leading-snug">{o.headline}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed flex-grow">{o.body}</p>
+              <p className="text-base text-text-secondary leading-relaxed flex-grow">{o.body}</p>
               {o.evidence && (
                 <div className="flex flex-wrap gap-2 mt-5">
                   {o.evidence.slice(0,3).map(tag => (

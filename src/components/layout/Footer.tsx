@@ -183,7 +183,7 @@ const Footer: React.FC = () => {
                 useMockApi={true}
                 className="mb-3"
               />
-              <p className="text-[10px] text-text-muted">Mit Absenden bestätigst du unsere <a href="/privacy#newsletter" className="text-vae-turquoise hover:underline">Datenschutzhinweise</a>.</p>
+              <p className="text-xs text-text-muted">Mit Absenden bestätigst du unsere <a href="/privacy#newsletter" className="text-vae-turquoise hover:underline">Datenschutzhinweise</a>.</p>
             </div>
           </div>
         </div>

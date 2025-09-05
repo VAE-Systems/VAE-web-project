@@ -272,72 +272,42 @@ const TechStackSection: React.FC = () => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C60 40,80 30,90 10"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0
-          }}
+          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C55 60,70 80,90 90"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0
-          }}
+          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C40 60,20 80,10 90"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0
-          }}
+          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C40 40,20 30,10 10"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0
-          }}
+          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C50 30,50 10,50 0"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0
-          }}
+          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
         />
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
           }}
           d="M50 50 C60 50,80 50,100 50"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0
-          }}
+          className="stroke-vae-turquoise/30 stroke-[1.5] fill-none opacity-0"
         />
       </svg>
 
@@ -360,11 +330,8 @@ const TechStackSection: React.FC = () => {
 
         {/* Tech Grid */}
         <div ref={spotlightRef} className="tech-spotlight">
-          <div 
-            className="tech-stack-grid grid gap-8 max-w-5xl mx-auto"
-            style={{ 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))'
-            }}
+          <div
+            className="tech-stack-grid grid gap-8 max-w-5xl mx-auto grid-cols-[repeat(auto-fit,minmax(120px,1fr))]"
           >
             {techStack.map((tech, i) => (
               <a

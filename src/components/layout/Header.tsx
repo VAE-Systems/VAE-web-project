@@ -25,6 +25,10 @@ const Header: React.FC = () => {
   const [productsOpen, setProductsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [blogOpen, setBlogOpen] = useState(false)
+  
+  // Debug: Simple local state for mobile menu
+  const [debugMobileMenuOpen, setDebugMobileMenuOpen] = useState(false)
+  
   const productsTriggerRef = useRef<HTMLElement>(null)
   const servicesTriggerRef = useRef<HTMLElement>(null)
   const blogTriggerRef = useRef<HTMLElement>(null)
@@ -40,8 +44,7 @@ const Header: React.FC = () => {
     close: closeMobileMenu,
     toggle: toggleMobileMenu,
     handleSwipeLeft,
-    handleSwipeRight,
-    handleRouteChange
+    handleSwipeRight
   } = useMobileMenu()
 
   // Swipe gesture handling for mobile menu
@@ -162,13 +165,11 @@ const Header: React.FC = () => {
   }, [blogOpen])
 
   // Handle scroll effect
-  // Close on location (route) change
+  // Close mobile menu on location (route) change
   useEffect(() => {
-    setProductsOpen(false)
-    setServicesOpen(false)
-    setBlogOpen(false)
-    handleRouteChange()
-  }, [location.pathname, location.hash, handleRouteChange])
+    console.log('Route change effect triggered, closing mobile menu')
+    closeMobileMenu()
+  }, [location.pathname, location.hash, closeMobileMenu])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -206,7 +207,7 @@ const Header: React.FC = () => {
           : `bg-transparent border-b ${theme === 'light' ? 'border-black/10' : 'border-vae-turquoise/10'}`
       }`}
     >
-      <div className="container-vae">
+      <div className="container-vae relative">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo/Brand */}
           <Link
@@ -221,7 +222,6 @@ const Header: React.FC = () => {
                 className="h-full w-auto light-invert"
                 loading="eager"
                 decoding="async"
-                fetchPriority="high"
               />
             </div>
             <div className="hidden md:block border-l border-vae-turquoise/30 pl-4">
@@ -291,14 +291,14 @@ const Header: React.FC = () => {
                             <div className="flex items-start justify-between mb-3">
                               <div>
                                 <h3 className="text-sm font-semibold text-text-light dark:text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
-                                <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
+                                <p className="text-xs uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
                               </div>
                               {cat.badge && (
                                 <span className="px-2 py-0.5 text-[9px] font-semibold rounded-full bg-vae-turquoise/15 text-vae-turquoise border border-vae-turquoise/30">{cat.badge}</span>
                               )}
                             </div>
-                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
-                            <ul className="space-y-1.5 mb-4 text-[11px]">
+                            <p className="text-xs text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
+                            <ul className="space-y-1.5 mb-4 text-xs">
                               {cat.points.slice(0,3).map(p => (
                                 <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-text-light dark:group-hover:text-white/80 transition-colors">
                                   <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
@@ -306,14 +306,14 @@ const Header: React.FC = () => {
                                 </li>
                               ))}
                             </ul>
-                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
+                            <div className="mt-auto inline-flex items-center text-xs font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
                               <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                             </div>
                           </Link>
                         ))}
                         </div>
-                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-[11px] text-text-muted">
+                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-xs text-text-muted">
                           <span className="uppercase tracking-wider">VAE Product Suite</span>
                           <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
                         </div>
@@ -348,28 +348,28 @@ const Header: React.FC = () => {
                             <div className="flex items-start justify-between mb-3">
                               <div>
                                 <h3 className="text-sm font-semibold text-text-light dark:text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
-                                <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
+                                <p className="text-xs uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
                               </div>
                             </div>
-                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors">{cat.description}</p>
-                            <ul className="space-y-1.5 mb-4 text-[11px]">
-                              {cat.points.slice(0,4).map(p => (
+                            <p className="text-xs text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors">{cat.description}</p>
+                            <ul className="space-y-1.5 mb-4 text-xs">
+                              {cat.points.slice(0,3).map(p => (
                                 <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-text-light dark:group-hover:text-white/80 transition-colors">
                                   <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
                                   <span>{p}</span>
                                 </li>
                               ))}
                             </ul>
-                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
+                            <div className="mt-auto inline-flex items-center text-xs font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
                               <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                             </div>
                           </Link>
                         ))}
                         </div>
-                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-[11px] text-text-muted">
-                          <span className="uppercase tracking-wider">VAE Services</span>
-                          <Link to="/services" onClick={() => setServicesOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Services<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-xs text-text-muted">
+                          <span className="uppercase tracking-wider">VAE Product Suite</span>
+                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
                         </div>
                       </div>
                     </div>
@@ -403,7 +403,7 @@ const Header: React.FC = () => {
                             <div className="flex items-start justify-between mb-3">
                               <div>
                                 <h3 className="text-sm font-semibold text-text-light dark:text-white leading-tight group-hover:text-vae-turquoise transition-colors">{cat.title}</h3>
-                                <p className="text-[10px] uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
+                                <p className="text-xs uppercase tracking-wide text-vae-turquoise/70 mt-1">{cat.tagline}</p>
                               </div>
                               {cat.badge && (
                                 <span className={`px-2 py-0.5 text-[9px] font-semibold rounded-full border ${
@@ -420,8 +420,8 @@ const Header: React.FC = () => {
                                 </span>
                               )}
                             </div>
-                            <p className="text-[11px] text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
-                            <ul className="space-y-1.5 mb-4 text-[11px]">
+                            <p className="text-xs text-text-secondary leading-relaxed mb-3 line-clamp-4 group-hover:text-text-light dark:group-hover:text-white/90 transition-colors motion-safe:transition-opacity motion-safe:duration-300">{cat.description}</p>
+                            <ul className="space-y-1.5 mb-4 text-xs">
                               {cat.points.slice(0,3).map(p => (
                                 <li key={p} className="flex items-start gap-1.5 text-text-muted group-hover:text-text-light dark:group-hover:text-white/80 transition-colors">
                                   <span className="mt-1 w-1.5 h-1.5 rounded-full bg-vae-turquoise/70 group-hover:bg-vae-turquoise" />
@@ -429,14 +429,14 @@ const Header: React.FC = () => {
                                 </li>
                               ))}
                             </ul>
-                            <div className="mt-auto inline-flex items-center text-[11px] font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
+                            <div className="mt-auto inline-flex items-center text-xs font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
                               <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                             </div>
                           </Link>
                         ))}
                         </div>
-                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-[11px] text-text-muted">
+                        <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-xs text-text-muted">
                           <span className="uppercase tracking-wider">VAE Blog</span>
                           <Link to="/blog" onClick={() => setBlogOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Beiträge<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
                         </div>
@@ -456,107 +456,148 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <CtaLink
-            ctaId="contact.schedule_call"
-            ref={ctaRef as unknown as React.Ref<HTMLAnchorElement>}
-            className={`${theme === 'light' ? 'box-decoration-clone' : 'btn-primary'} hidden md:inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-6 font-medium`}
-            data-green-signal="true"
-            aria-label="Direkt Termin buchen (extern)"
-          >
-            <span className="material-symbols-outlined mr-2">schedule</span>
-            Kostenloses Erstgespräch
-          </CtaLink>
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center space-x-4">
+            {/* CTA Button */}
+            <CtaLink
+              ctaId="contact.schedule_call"
+              ref={ctaRef as unknown as React.Ref<HTMLAnchorElement>}
+              className={`${theme === 'light' ? 'box-decoration-clone' : 'btn-primary'} inline-flex items-center space-x-3 !text-sm md:!py-2 md:!px-6 font-medium`}
+              data-green-signal="true"
+              aria-label="Direkt Termin buchen (extern)"
+            >
+              <span className="material-symbols-outlined mr-2">schedule</span>
+              30-Min Strategie-Gespräch
+            </CtaLink>
 
-          {/* Theme Toggle Button */}
-          <button
-            className="p-2 text-text-light hover:text-vae-turquoise transition-colors duration-300"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-          >
-            <span className="material-symbols-outlined">
-              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-            </span>
-          </button>
+            {/* Theme Toggle Button */}
+            <button
+              className="p-2 text-text-light hover:text-vae-turquoise transition-colors duration-300 rounded-lg hover:bg-bg-secondary"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              <span className="material-symbols-outlined">
+                {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+              </span>
+            </button>
+          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            id="mobile-menu-trigger"
-            className="md:hidden p-2 text-text-light hover:text-vae-turquoise transition-colors duration-300"
-            onClick={() => toggleMobileMenu()}
-            aria-label="Toggle mobile menu"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <span className="material-symbols-outlined">
-              {isMobileMenuOpen ? 'close' : 'menu'}
-            </span>
-          </button>
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Theme Toggle Button - Mobile */}
+            <button
+              className="p-2 text-text-light hover:text-vae-turquoise transition-colors duration-300 rounded-lg hover:bg-bg-secondary active:bg-bg-secondary touch-manipulation"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              <span className="material-symbols-outlined text-xl">
+                {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+              </span>
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              id="mobile-menu-trigger"
+              className="p-3 text-text-light hover:text-vae-turquoise transition-all duration-300 rounded-lg hover:bg-bg-secondary active:bg-bg-secondary touch-manipulation relative z-50 group"
+              onClick={() => {
+                console.log('Mobile menu button clicked, current state:', isMobileMenuOpen)
+                console.log('Debug state:', debugMobileMenuOpen)
+                setDebugMobileMenuOpen(!debugMobileMenuOpen)
+                toggleMobileMenu()
+              }}
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen || debugMobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              <span className={`material-symbols-outlined text-2xl transition-transform duration-300 ${
+                (isMobileMenuOpen || debugMobileMenuOpen) ? 'rotate-180' : 'rotate-0'
+              }`}>
+                {(isMobileMenuOpen || debugMobileMenuOpen) ? 'close' : 'menu'}
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div
-            ref={mobileMenuRef}
-            id="mobile-menu"
-            role="navigation"
-            className="md:hidden border-t border-bg-secondary backdrop-glass"
-          >
-            <nav className="py-6 space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block px-4 py-2 rounded-lg transition-colors duration-300 ${
-                    isActivePath(item.path)
-                      ? 'text-vae-turquoise bg-vae-turquoise/10'
-                      : 'text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary'
-                  }`}
-                  onClick={() => closeMobileMenu()}
-                >
-                  {item.label}
-                </Link>
-              ))}
+        {(isMobileMenuOpen || debugMobileMenuOpen) && (
+          <>
+            {/* Backdrop Overlay */}
+            <div 
+              className="md:hidden fixed inset-0 top-16 z-30 bg-black/50 dark:bg-black/70 backdrop-blur-sm"
+              onClick={() => {
+                closeMobileMenu()
+                setDebugMobileMenuOpen(false)
+              }}
+              aria-hidden="true"
+            />
+            
+            {/* Menu Panel */}
+            <div
+              ref={mobileMenuRef}
+              id="mobile-menu"
+              role="navigation"
+              aria-label="Mobile navigation menu"
+              className="md:hidden fixed inset-x-0 top-16 z-40 h-[calc(100vh-4rem)] overflow-hidden"
+            >
+              {/* Slide-in panel */}
+              <div className={`h-full bg-white dark:bg-bg-darker border-t border-border-primary dark:border-vae-turquoise/30 shadow-2xl dark:shadow-black/40 transform transition-transform duration-300 ease-out ${
+                (isMobileMenuOpen || debugMobileMenuOpen) ? 'translate-x-0' : 'translate-x-full'
+              }`}>
+                <nav className="h-full flex flex-col py-6 px-4 overflow-y-auto overscroll-contain">
+                  {/* Navigation Links */}
+                  <div className="space-y-2 mb-8">
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`flex items-center px-6 py-4 rounded-xl transition-all duration-300 text-base font-medium min-h-[52px] touch-manipulation group ${
+                          isActivePath(item.path)
+                            ? 'text-white bg-vae-turquoise shadow-lg shadow-vae-turquoise/20'
+                            : 'text-text-light dark:text-text-light hover:text-vae-turquoise hover:bg-bg-secondary dark:hover:bg-white/5 active:bg-bg-secondary/80 dark:active:bg-white/10'
+                        }`}
+                        onClick={() => {
+                          closeMobileMenu()
+                          setDebugMobileMenuOpen(false)
+                        }}
+                      >
+                        <span className="flex-1">{item.label}</span>
+                        {isActivePath(item.path) && (
+                          <span className="material-symbols-outlined text-sm opacity-80">
+                            check
+                          </span>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
 
-              {/* Mobile CTA */}
-              <div className="px-4 pt-4 space-y-4">
-                {/* Blog Button in Mobile Menu */}
-                <Link
-                  to="/blog"
-                  className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary transition-colors duration-300"
-                  onClick={() => closeMobileMenu()}
-                >
-                  <span className="material-symbols-outlined mr-2">
-                    article
-                  </span>
-                  Blog
-                </Link>
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-transparent via-border-primary dark:via-white/20 to-transparent mb-8" />
 
-                {/* Theme Toggle in Mobile Menu */}
-                <button
-                  className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-text-secondary hover:text-vae-turquoise hover:bg-bg-secondary transition-colors duration-300"
-                  onClick={() => {
-                    toggleTheme()
-                    closeMobileMenu()
-                  }}
-                >
-                  <span className="material-symbols-outlined mr-2">
-                    {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-                  </span>
-                  {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-                </button>
-                
-                <Link
-                  to="/contact"
-                  className={`${theme === 'light' ? 'btn-outline' : 'btn-primary'} w-full justify-center`}
-                  onClick={() => closeMobileMenu()}
-                >
-                  <span className="material-symbols-outlined mr-2">schedule</span>
-                  Erstgespräch buchen
-                </Link>
+                  {/* CTA Section */}
+                  <div className="space-y-4 mt-auto">
+                    <CtaLink
+                      ctaId="contact.schedule_call"
+                      className="w-full flex items-center justify-center px-6 py-4 rounded-xl bg-vae-turquoise hover:bg-vae-turquoise-dark active:bg-vae-turquoise-dark text-white transition-all duration-300 text-base font-semibold shadow-lg shadow-vae-turquoise/30 hover:shadow-vae-turquoise/40 min-h-[52px] touch-manipulation"
+                      onClick={() => {
+                        closeMobileMenu()
+                        setDebugMobileMenuOpen(false)
+                      }}
+                      aria-label="Direkt Termin buchen (extern)"
+                    >
+                      <span className="material-symbols-outlined mr-3 text-xl">schedule</span>
+                      30-Min Strategie-Gespräch
+                    </CtaLink>
+                    
+                    {/* Company Info */}
+                    <div className="text-center pt-4">
+                      <p className="text-xs text-text-secondary mb-2">VAE Systems</p>
+                      <p className="text-xs text-text-muted">Versatile AI Enhanced Systems</p>
+                    </div>
+                  </div>
+                </nav>
               </div>
-            </nav>
-          </div>
+            </div>
+          </>
         )}
       </div>
     </header>

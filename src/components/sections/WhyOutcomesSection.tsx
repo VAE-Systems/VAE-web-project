@@ -77,7 +77,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
                       </div>
                     </div>
                     <h3 className="text-lg font-semibold text-text-light dark:text-white mb-3 leading-snug">{o.headline}</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed flex-grow">{o.body}</p>
+                    <p className="text-base text-text-secondary leading-relaxed flex-grow">{o.body}</p>
                     {o.evidence && (
                       <div className="flex flex-wrap gap-2 mt-5" data-chip-group>
                         {o.evidence.map(tag => (

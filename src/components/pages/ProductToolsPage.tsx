@@ -48,7 +48,7 @@ const ProductToolsPage: React.FC = () => {
               <div key={t.name} className="p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 hover:border-vae-turquoise/40 transition-all">
                 <h3 className="font-semibold text-text-light dark:text-white mb-2 text-sm">{t.name}</h3>
                 <p className="text-xs text-text-secondary leading-relaxed">{t.desc}</p>
-                <div className="mt-4 inline-flex px-3 py-1 rounded-full bg-vae-turquoise/10 text-vae-turquoise text-[10px] font-medium border border-vae-turquoise/30">Preview</div>
+                <div className="mt-4 inline-flex px-3 py-1 rounded-full bg-vae-turquoise/10 text-vae-turquoise text-xs font-medium border border-vae-turquoise/30">Preview</div>
               </div>
             ))}
           </div>

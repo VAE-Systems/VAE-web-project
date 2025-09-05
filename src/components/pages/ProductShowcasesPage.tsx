@@ -46,8 +46,8 @@ const ProductShowcasesPage: React.FC = () => {
             {showcasePlaceholders.map(s => (
               <div key={s.name} className="p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 hover:border-vae-turquoise/40 transition-all">
                 <h3 className="font-semibold text-text-light dark:text-white mb-2 text-sm">{s.name}</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">{s.hint}</p>
-                <div className="mt-4 text-[10px] inline-flex px-2 py-1 rounded-full bg-vae-turquoise/10 text-vae-turquoise border border-vae-turquoise/30">In Aufbereitung</div>
+                <p className="text-sm text-text-secondary leading-relaxed">{s.hint}</p>
+                <div className="mt-4 text-xs inline-flex px-2 py-1 rounded-full bg-vae-turquoise/10 text-vae-turquoise border border-vae-turquoise/30">In Aufbereitung</div>
               </div>
             ))}
           </div>
@@ -64,7 +64,7 @@ const ProductShowcasesPage: React.FC = () => {
             }].map(c => (
               <div key={c.h} className="p-6 bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 rounded-2xl">
                 <h3 className="text-sm font-semibold text-text-light dark:text-white mb-3">{c.h}</h3>
-                <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">
+                <ul className="text-sm text-text-secondary space-y-1 leading-relaxed list-disc list-inside">
                   {c.b.map(x => <li key={x}>{x}</li>)}
                 </ul>
               </div>

@@ -142,11 +142,11 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* Lifecycle / Value Blocks */}
-        <div className="grid md:grid-cols-3 gap-10 mb-24">
+        <div className="grid md:grid-cols-3 gap-12 mb-24">
           {lifecycleBlocks.map(b => (
-            <div key={b.title} className="p-6 rounded-2xl bg-vae-turquoise/5 border border-vae-turquoise/20">
-              <h3 className="text-sm font-semibold text-text-light mb-3">{b.title}</h3>
-              <p className="text-xs text-text-secondary leading-relaxed">{b.description}</p>
+            <div key={b.title} className="p-8 rounded-2xl bg-vae-turquoise/5 border border-vae-turquoise/20 transition-all duration-300 hover:bg-vae-turquoise/10 hover:border-vae-turquoise/30 hover:shadow-lg">
+              <h3 className="text-lg font-bold text-text-light mb-4 leading-tight">{b.title}</h3>
+              <p className="text-sm text-text-secondary leading-relaxed">{b.description}</p>
             </div>
           ))}
         </div>
@@ -165,17 +165,17 @@ const ServicesSection: React.FC = () => {
               </div>
             ))}
           </div>
-          <div className="relative text-xs text-text-secondary leading-relaxed max-w-4xl">
+          <div className="relative text-sm text-text-secondary leading-relaxed max-w-4xl">
             Unsere Services kombinieren <span className="text-text-light dark:text-white">architektonische Klarheit</span>, <span className="text-text-light dark:text-white">schnelle operative Umsetzbarkeit</span> und <span className="text-text-light dark:text-white">Enablement</span>. So entsteht nachhaltige interne Kompetenz statt externer Black Box. Fokus auf <strong className="text-text-light dark:text-white font-semibold">Open Source KI, Retrieval Qualität, Workflow Robustheit</strong> und <strong className="text-text-light dark:text-white font-semibold">Compliance früh</strong>. Ergebnis: verkürzte Iterationen, geringeres Risiko, nachweisbarer ROI.
           </div>
         </div>
 
         {/* Footnotes */}
-        <div className="mt-8 text-[10px] text-text-muted space-y-1">
+        <div className="mt-8 text-xs text-text-muted space-y-2">
           {Object.entries(footnotes).map(([key, text]) => (
             <div key={key} className="flex items-start gap-2">
-              <sup className="text-vae-turquoise/60 text-[10px] mt-[-2px]">{superscripts[key]}</sup>
-              <span>{text}</span>
+              <sup className="text-vae-turquoise/60 text-xs mt-[-1px]">{superscripts[key]}</sup>
+              <span className="leading-relaxed">{text}</span>
             </div>
           ))}
         </div>

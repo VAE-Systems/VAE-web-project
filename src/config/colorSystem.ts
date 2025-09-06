@@ -13,7 +13,7 @@
  * dass sie die Markenidentität von VAE (Vollständige Automatisierte Erfassung)
  * widerspiegeln und gleichzeitig eine hohe Lesbarkeit für Blog-Inhalte bieten.
  *
- * SCHLÜSSELPRINZIPIEN:
+ * SCHLÜSSELPRINZIPIEN: 
  * - Türkis als Brand-Farbe: Symbolisiert Innovation und Technologie, wie sie in
  *   der VAE-Methodik verwendet wird.
  * - Grautöne für Neutralität: Ermöglichen eine ruhige, lesefreundliche Umgebung

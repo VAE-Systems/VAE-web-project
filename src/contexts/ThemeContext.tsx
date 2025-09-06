@@ -1,11 +1,27 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
 type Theme = 'dark' | 'light'
+type ThemeMode = 'light' | 'dark' | 'auto'
+type ColorScheme = 'default' | 'high-contrast' | 'colorblind'
 
 interface ThemeContextType {
   theme: Theme
+  mode: ThemeMode
+  colorScheme: ColorScheme
   toggleTheme: () => void
   setTheme: (theme: Theme) => void
+  setMode: (mode: ThemeMode) => void
+  setColorScheme: (scheme: ColorScheme) => void
+  isDark: boolean
+  colors: {
+    primary: string
+    secondary: string
+    accent: string
+    background: string
+    surface: string
+    text: string
+    muted: string
+  }
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -26,6 +42,74 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
     return 'dark'
   })
+
+  const [mode, setModeState] = useState<ThemeMode>(() => {
+    const saved = localStorage.getItem('vae-theme-mode') as ThemeMode
+    return saved || 'auto'
+  })
+
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme>(() => {
+    const saved = localStorage.getItem('vae-color-scheme') as ColorScheme
+    return saved || 'default'
+  })
+
+  // Detect system preference
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const isDark = mode === 'dark' || (mode === 'auto' && prefersDark)
+
+  // Dynamic color schemes
+  const getColors = () => {
+    const baseColors = {
+      light: {
+        primary: '#00ffa5',
+        secondary: '#00a5ff',
+        accent: '#a500ff',
+        background: '#ffffff',
+        surface: '#f8fafc',
+        text: '#1e293b',
+        muted: '#64748b'
+      },
+      dark: {
+        primary: '#00ffa5',
+        secondary: '#00a5ff',
+        accent: '#a500ff',
+        background: '#0a0a0a',
+        surface: '#1a1a1a',
+        text: '#f1f5f9',
+        muted: '#94a3b8'
+      }
+    }
+
+    const currentBase = baseColors[isDark ? 'dark' : 'light']
+
+    // Apply color scheme modifications
+    switch (colorScheme) {
+      case 'high-contrast':
+        return {
+          ...currentBase,
+          primary: isDark ? '#00ff88' : '#008844',
+          secondary: isDark ? '#0088ff' : '#004466',
+          accent: isDark ? '#aa00ff' : '#6600aa',
+          text: isDark ? '#ffffff' : '#000000',
+          muted: isDark ? '#cccccc' : '#333333'
+        }
+
+      case 'colorblind':
+        return {
+          ...currentBase,
+          primary: '#ff6b35',
+          secondary: '#f7931e',
+          accent: '#0066cc',
+          text: currentBase.text,
+          muted: currentBase.muted
+        }
+
+      default:
+        return currentBase
+    }
+  }
+
+  const colors = getColors()
 
   useEffect(() => {
     const root = document.documentElement
@@ -95,10 +179,31 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme)
+    localStorage.setItem('vae-theme', newTheme)
+  }
+
+  const setMode = (newMode: ThemeMode) => {
+    setModeState(newMode)
+    localStorage.setItem('vae-theme-mode', newMode)
+  }
+
+  const setColorScheme = (newScheme: ColorScheme) => {
+    setColorSchemeState(newScheme)
+    localStorage.setItem('vae-color-scheme', newScheme)
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{
+      theme,
+      mode,
+      colorScheme,
+      toggleTheme,
+      setTheme,
+      setMode,
+      setColorScheme,
+      isDark,
+      colors
+    }}>
       {children}
     </ThemeContext.Provider>
   )

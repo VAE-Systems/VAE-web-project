@@ -31,6 +31,32 @@ export interface NewsletterSubscription {
 
 
 // ============================================================================
+// SERVICE TYPES
+// ============================================================================
+
+export interface ServiceStat {
+  value: string
+  desc: string
+  note?: string
+}
+
+export interface ServiceData {
+  key: string
+  title: string
+  description: string
+  iconName: string
+  badge: string
+  stats: ServiceStat[]
+  features: string[]
+  cta: string
+}
+
+export interface LifecycleBlock {
+  title: string
+  description: string
+}
+
+// ============================================================================
 // API RESPONSE TYPES
 // ============================================================================
 

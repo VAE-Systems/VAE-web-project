@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
+import MagneticButton from '@/components/ui/MagneticButton'
 import { motion } from 'framer-motion'
 const NeuralNetworkBackground = React.lazy(() => import('./NeuralNetworkBackground'))
 import {
@@ -106,40 +107,52 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <div className="flex flex-col sm:flex-row gap-4">
-                <CtaLink
-                  ctaId="contact.schedule_call"
-                  ctx={{ fromPage: 'home', intent: 'strategy-call' }}
-                  variant="primary"
-                  className="text-center flex-1 flex items-center justify-center"
-                  data-green-signal="true"
-                >
-                  <span className="material-symbols-outlined mr-2">schedule</span>
-                  30‑Min Strategie‑Gespräch buchen
-                </CtaLink>
-                <Link 
-                  to="/products"
-                  className="btn-secondary flex-1 text-center flex items-center justify-center"
-                >
-                  <span className="material-symbols-outlined mr-2">apps</span>
-                  Produkte & Plattform ansehen
-                </Link>
-                <Link
-                  to="/services"
-                  className="btn-outline flex-1 text-center flex items-center justify-center"
-                >
-                  <span className="material-symbols-outlined mr-2">handshake</span>
-                  Services entdecken
-                </Link>
+                <MagneticButton>
+                  <CtaLink
+                    ctaId="contact.schedule_call"
+                    ctx={{ fromPage: 'home', intent: 'strategy-call' }}
+                    variant="primary"
+                    className="text-center flex-1 flex items-center justify-center"
+                    data-green-signal="true"
+                  >
+                    <span className="material-symbols-outlined mr-2">schedule</span>
+                    30‑Min Strategie‑Gespräch buchen
+                  </CtaLink>
+                </MagneticButton>
+                <MagneticButton>
+                  <Link 
+                    to="/products"
+                    className="btn-secondary flex-1 text-center flex items-center justify-center"
+                  >
+                    <span className="material-symbols-outlined mr-2">apps</span>
+                    Produkte & Plattform ansehen
+                  </Link>
+                </MagneticButton>
+                <MagneticButton>
+                  <Link
+                    to="/services"
+                    className="btn-outline flex-1 text-center flex items-center justify-center"
+                  >
+                    <span className="material-symbols-outlined mr-2">handshake</span>
+                    Services entdecken
+                  </Link>
+                </MagneticButton>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Custom Solutions</Link>
-                <Link to="/products#core" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Architektur</Link>
-                <CtaLink
-                  ctaId="contact.quick_email"
-                  ctx={{ fromPage: 'home' }}
-                  variant="ghost"
-                  className="px-4 py-2 rounded-full bg-bg-primary/5 hover:bg-bg-primary/10 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-text-light dark:hover:text-white transition-colors"
-                />
+                <MagneticButton intensity={0.03}>
+                  <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Custom Solutions</Link>
+                </MagneticButton>
+                <MagneticButton intensity={0.03}>
+                  <Link to="/products#core" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Architektur</Link>
+                </MagneticButton>
+                <MagneticButton intensity={0.03}>
+                  <CtaLink
+                    ctaId="contact.quick_email"
+                    ctx={{ fromPage: 'home' }}
+                    variant="ghost"
+                    className="px-4 py-2 rounded-full bg-bg-primary/5 hover:bg-bg-primary/10 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-text-light dark:hover:text-white transition-colors"
+                  />
+                </MagneticButton>
               </div>
               <p className="text-[11px] text-text-muted leading-relaxed max-w-md">
                 Unverbindlich & fokussiert: In <span className="text-text-secondary font-medium">15–30 Minuten</span> klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.

@@ -1,0 +1,171 @@
+/* Enhanced Theme System with CSS Custom Properties */
+
+/* Base theme variables - will be overridden by JavaScript */
+:root {
+  /* Default light theme */
+  --theme-primary: #00ffa5;
+  --theme-secondary: #00a5ff;
+  --theme-accent: #a500ff;
+  --theme-background: #ffffff;
+  --theme-surface: #f8fafc;
+  --theme-text: #1e293b;
+  --theme-muted: #64748b;
+
+  /* Spacing and sizing */
+  --theme-border-radius: 8px;
+  --theme-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --theme-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --theme-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark theme overrides */
+[data-theme-mode="dark"] {
+  --theme-background: #0a0a0a;
+  --theme-surface: #1a1a1a;
+  --theme-text: #f1f5f9;
+  --theme-muted: #94a3b8;
+  --theme-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --theme-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* High contrast theme */
+[data-color-scheme="high-contrast"] {
+  --theme-primary: #00ff88;
+  --theme-secondary: #0088ff;
+  --theme-accent: #aa00ff;
+}
+
+[data-theme-mode="dark"][data-color-scheme="high-contrast"] {
+  --theme-primary: #00ff88;
+  --theme-secondary: #0088ff;
+  --theme-accent: #aa00ff;
+  --theme-text: #ffffff;
+  --theme-muted: #cccccc;
+}
+
+[data-theme-mode="light"][data-color-scheme="high-contrast"] {
+  --theme-primary: #008844;
+  --theme-secondary: #004466;
+  --theme-accent: #6600aa;
+  --theme-text: #000000;
+  --theme-muted: #333333;
+}
+
+/* Colorblind friendly theme */
+[data-color-scheme="colorblind"] {
+  --theme-primary: #ff6b35;
+  --theme-secondary: #f7931e;
+  --theme-accent: #0066cc;
+}
+
+/* Utility classes for theme usage */
+.theme-bg-primary { background-color: var(--theme-primary); }
+.theme-bg-secondary { background-color: var(--theme-secondary); }
+.theme-bg-accent { background-color: var(--theme-accent); }
+.theme-bg-background { background-color: var(--theme-background); }
+.theme-bg-surface { background-color: var(--theme-surface); }
+
+.theme-text-primary { color: var(--theme-primary); }
+.theme-text-secondary { color: var(--theme-secondary); }
+.theme-text-accent { color: var(--theme-accent); }
+.theme-text-text { color: var(--theme-text); }
+.theme-text-muted { color: var(--theme-muted); }
+
+.theme-border-primary { border-color: var(--theme-primary); }
+.theme-border-secondary { border-color: var(--theme-secondary); }
+.theme-border-accent { border-color: var(--theme-accent); }
+.theme-border-muted { border-color: var(--theme-muted); }
+
+/* Component specific theme styles */
+.theme-button {
+  background-color: var(--theme-primary);
+  color: var(--theme-background);
+  border-radius: var(--theme-border-radius);
+  padding: 0.75rem 1.5rem;
+  transition: var(--theme-transition);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.theme-button:hover {
+  background-color: var(--theme-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--theme-shadow-lg);
+}
+
+.theme-button:active {
+  transform: translateY(0);
+}
+
+.theme-card {
+  background-color: var(--theme-surface);
+  color: var(--theme-text);
+  border-radius: var(--theme-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--theme-shadow);
+  transition: var(--theme-transition);
+}
+
+.theme-card:hover {
+  box-shadow: var(--theme-shadow-lg);
+  transform: translateY(-4px);
+}
+
+.theme-input {
+  background-color: var(--theme-background);
+  color: var(--theme-text);
+  border: 2px solid var(--theme-muted);
+  border-radius: var(--theme-border-radius);
+  padding: 0.75rem;
+  transition: var(--theme-transition);
+}
+
+.theme-input:focus {
+  outline: none;
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 3px rgba(0, 255, 165, 0.1);
+}
+
+/* Animation classes for theme transitions */
+.theme-transition {
+  transition: var(--theme-transition);
+}
+
+.theme-transition-fast {
+  transition: var(--theme-transition-fast);
+}
+
+/* Gradient backgrounds */
+.theme-gradient-primary {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+}
+
+.theme-gradient-accent {
+  background: linear-gradient(135deg, var(--theme-accent), var(--theme-primary));
+}
+
+/* Responsive theme adjustments */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --theme-transition: none;
+    --theme-transition-fast: none;
+  }
+
+  .theme-button:hover,
+  .theme-card:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  :root {
+    --theme-background: white;
+    --theme-text: black;
+    --theme-surface: white;
+  }
+}

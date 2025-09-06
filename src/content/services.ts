@@ -1,3 +1,5 @@
+import { PERCENTAGES, TIME_ESTIMATES } from '../config'
+
 // Services Content - Zentralisiert lange Texte aus ServicesPage.tsx
 export const servicesHero = {
   title: "Services",
@@ -100,8 +102,8 @@ export const servicesData = [
     title: 'Beratung – Architektur & Governance',
     description: 'Architektur, Governance, Compliance & Roadmaps für souveräne KI- & Automationslandschaften. Fokus: Transparenz, Austauschbarkeit, Betrieb statt POC-Silos.',
     stats: [
-      { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion', note: '1' },
-      { value: '4–6x', desc: 'Schnellere Entscheidungszyklen', note: '2' }
+      { value: PERCENTAGES.COST_REDUCTION_LICENSE, desc: 'ø Lizenz-/Vendor Kosten Reduktion', note: '1' },
+      { value: TIME_ESTIMATES.DECISION_CYCLE_IMPROVEMENT, desc: 'Schnellere Entscheidungszyklen', note: '2' }
     ],
     features: ['Architektur-Assessment', 'Roadmap & Reifegradmodell', 'Governance / AI Act Vororientierung'],
     cta: 'Beratung ansehen',
@@ -113,8 +115,8 @@ export const servicesData = [
     title: 'Custom Solutions – Integration & Automation',
     description: 'Gezielte Automations- & Retrieval-Bausteine. Von Connectoren über Evaluierung bis Observability – modular kombinierbar.',
     stats: [
-      { value: '3–8', desc: 'Wochen MVP Umsetzung', note: '4' },
-      { value: '60%', desc: 'Avg. Effizienzgewinn', note: '5' }
+      { value: TIME_ESTIMATES.MVP_IMPLEMENTATION, desc: 'Wochen MVP Umsetzung', note: '4' },
+      { value: PERCENTAGES.EFFICIENCY_GAIN_AVERAGE, desc: 'Avg. Effizienzgewinn', note: '5' }
     ],
     features: ['Workflow Orchestrierung', 'Retrieval / Index Layer', 'Evaluierung & Monitoring'],
     cta: 'Use Cases',

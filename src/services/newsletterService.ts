@@ -5,6 +5,7 @@
  */
 
 import type { NewsletterSubscription, NewsletterResponse } from '../types'
+import { NETWORK_DELAY } from '../config'
 
 // ============================================================================
 // VALIDATION FUNCTIONS
@@ -110,7 +111,7 @@ const generateSubscriptionId = (): string => {
 
 export const mockNewsletterSubscription = async (): Promise<NewsletterResponse> => {
   // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 500))
+  await new Promise(resolve => setTimeout(resolve, NETWORK_DELAY.NEWSLETTER_FORM.MIN + Math.random() * (NETWORK_DELAY.NEWSLETTER_FORM.MAX - NETWORK_DELAY.NEWSLETTER_FORM.MIN)))
   
   // Simulate occasional errors for testing
   if (Math.random() < 0.05) {

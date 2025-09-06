@@ -1,3 +1,5 @@
+import { PERCENTAGES } from '../config'
+
 export const vaeCoreContent = {
   target_segments: {
     headline: 'Für jedes Team die richtige Lösung',
@@ -25,7 +27,7 @@ export const vaeCoreContent = {
         pain: 'LLM‑Features bauen ist einfach – produktionsreif skalieren mit Mandantentrennung, Kostenkontrolle und Observability ist schwer.',
         solution: 'VAE Core liefert Tenant‑Isolation, Token‑Accounting, Provider‑Agnostik und Audit‑Trails – ohne Ihr Backend neu zu schreiben.',
         benefits: [
-          '90% weniger Multi‑Tenant‑Code durch RLS und Policies',
+          `${PERCENTAGES.MULTI_TENANT_CODE_REDUCTION} weniger Multi‑Tenant‑Code durch RLS und Policies`,
           'Provider wechseln ohne Rewrites (OpenAI‑kompatibles Gateway)',
           'Built‑in Token‑/Kosten‑Tracking pro Nutzer/Tenant',
           'Sichere Tool‑Execution (MCP) für echte Automationen'
@@ -40,7 +42,7 @@ export const vaeCoreContent = {
         pain: 'Jedes Projekt beginnt bei Null – Setup‑Zeit, Wartung und Nacharbeiten drücken die Marge und Skalierbarkeit.',
         solution: 'VAE Core ist Ihr wiederverwendbares Fundament. Module, Templates und Best Practices machen Delivery vorhersehbar und profitabel.',
         benefits: [
-          '70% weniger Setup‑Zeit, mehr Projekte parallel',
+          `${PERCENTAGES.SETUP_TIME_REDUCTION} weniger Setup‑Zeit, mehr Projekte parallel`,
           'Standardisierte Qualität, weniger Overhead im Betrieb',
           'Partner‑Programm mit Enablement und Go‑To‑Market‑Playbooks',
           'Provider‑Agnostik ohne Lock‑in'

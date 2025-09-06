@@ -5,6 +5,7 @@
  */
 
 import type { ContactFormData, ContactSubmissionResponse } from '../types'
+import { NETWORK_DELAY } from '../config'
 
 // ============================================================================
 // VALIDATION FUNCTIONS
@@ -127,7 +128,7 @@ const generateSubmissionId = (): string => {
 
 export const mockContactSubmission = async (): Promise<ContactSubmissionResponse> => {
   // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000))
+  await new Promise(resolve => setTimeout(resolve, NETWORK_DELAY.CONTACT_FORM.MIN + Math.random() * (NETWORK_DELAY.CONTACT_FORM.MAX - NETWORK_DELAY.CONTACT_FORM.MIN)))
   
   // Simulate occasional errors for testing
   if (Math.random() < 0.1) {

@@ -12,6 +12,7 @@
  */
 
 import { useEffect, useRef } from 'react'
+import { ANIMATION } from '../config'
 
 export interface AttentionSignalOptions {
   intervalMs?: number
@@ -24,8 +25,8 @@ export interface AttentionSignalOptions {
 export const useAttentionSignal = (
   elRef: React.RefObject<HTMLElement>,
   {
-    intervalMs = 60_000,
-    initialDelayMs = 7_000,
+    intervalMs = ANIMATION.DELAY.SIGNAL_INTERVAL,
+    initialDelayMs = ANIMATION.DELAY.INITIAL_SIGNAL,
     jitterMs = 10_000,
     maxRuns = 6,
     nudgeAfter = 3,

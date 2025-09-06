@@ -1,12 +1,12 @@
-import React, { useEffect, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import React, { Suspense, useEffect } from 'react'
+import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom'
 
 // Layout Components
-import Header from '@components/layout/Header'
-import Footer from '@components/layout/Footer'
-import SectionNavigation from '@components/navigation/SectionNavigation'
-import ScrollProgress from '@components/navigation/ScrollProgress'
 import ErrorBoundary from '@components/ErrorBoundary'
+import Footer from '@components/layout/Footer'
+import Header from '@components/layout/Header'
+import ScrollProgress from '@components/navigation/ScrollProgress'
+import SectionNavigation from '@components/navigation/SectionNavigation'
 
 // Privacy Components
 import CookieBanner from '@components/privacy/CookieBanner'
@@ -33,6 +33,7 @@ const ContactPage = React.lazy(() => import('@components/pages/ContactPage'))
 const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage'))
 const PrivacyPage = React.lazy(() => import('@components/pages/PrivacyPage'))
 const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySettings'))
+const DesignSystemDemo = React.lazy(() => import('@/pages/DesignSystemDemo'))
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
@@ -43,7 +44,7 @@ const LoadingSpinner: React.FC = () => (
 
 /**
  * Main App Component
- * 
+ *
  * Provides routing structure and layout for VAE Systems website
  * Uses React Router for client-side navigation
  */
@@ -78,37 +79,38 @@ const App: React.FC = () => {
     <ErrorBoundary>
       <ThemeProvider>
         <Router>
-        <ScrollToTop />
-        <div className="min-h-[100dvh] bg-bg-darker text-text-light">
-          <Header />
-          <NavigationSwitcher />
-          <main className="pt-20">
-            <Suspense fallback={<LoadingSpinner />}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/services" element={<ServicesPage />} />
-                <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
-                <Route path="/services/consulting" element={<ServiceConsultingPage />} />
-                <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/products/solutions" element={<ProductSolutionsPage />} />
-                <Route path="/products/tools" element={<ProductToolsPage />} />
-                <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
-                <Route path="/products/showcases" element={<ProductShowcasesPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/impressum" element={<ImpressumPage />} />
-                <Route path="/privacy" element={<PrivacyPage />} />
-                <Route path="/privacy/settings" element={<PrivacySettings />} />
-              </Routes>
-            </Suspense>
-          </main>
-          <Footer />
-          <CookieBanner />
-        </div>
-      </Router>
-    </ThemeProvider>
-  </ErrorBoundary>
+          <ScrollToTop />
+          <div className="min-h-[100dvh] bg-bg-darker text-text-light">
+            <Header />
+            <NavigationSwitcher />
+            <main className="pt-20">
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
+                  <Route path="/services/consulting" element={<ServiceConsultingPage />} />
+                  <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
+                  <Route path="/products" element={<ProductsPage />} />
+                  <Route path="/products/solutions" element={<ProductSolutionsPage />} />
+                  <Route path="/products/tools" element={<ProductToolsPage />} />
+                  <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
+                  <Route path="/products/showcases" element={<ProductShowcasesPage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/impressum" element={<ImpressumPage />} />
+                  <Route path="/privacy" element={<PrivacyPage />} />
+                  <Route path="/privacy/settings" element={<PrivacySettings />} />
+                  <Route path="/design-system" element={<DesignSystemDemo />} />
+                </Routes>
+              </Suspense>
+            </main>
+            <Footer />
+            <CookieBanner />
+          </div>
+        </Router>
+      </ThemeProvider>
+    </ErrorBoundary>
   )
 }
 

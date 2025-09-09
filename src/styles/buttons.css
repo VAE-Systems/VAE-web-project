@@ -123,7 +123,27 @@
   50% { box-shadow: 0 0 0 0 rgba(var(--vae-turquoise-rgb),0.4), 0 0 0 32px -6px rgba(var(--vae-turquoise-rgb),0.55); }
 }
 
+/* Wobble / pop micro-interaction used for call-to-action signals
+   Applied when an element has data-green-signal="true" (e.g. external booking link)
+   Duration aligns with ANIMATION.DURATION.POP_WOBBLE (650ms) in the JS config.
+*/
+@keyframes wobble {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  15% { transform: translateY(-6px) rotate(-2deg) scale(1.02); }
+  40% { transform: translateY(3px) rotate(2deg) scale(0.995); }
+  60% { transform: translateY(-2px) rotate(-1deg) scale(1.01); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* Apply wobble when data attribute signals green (non-persistent, single pop)
+   Use both forwards and ease to make it feel snappy. */
+.btn-primary[data-green-signal="true"] {
+  animation: wobble 650ms cubic-bezier(.2,.8,.25,1) both;
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .btn-convert, .btn-convert:hover { transform: none !important; animation: none !important; }
   .btn-convert::after { display: none; }
+  .btn-primary[data-green-signal="true"] { animation: none !important; }
 }

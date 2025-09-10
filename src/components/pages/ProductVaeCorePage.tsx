@@ -4,6 +4,7 @@ import CtaLink from '@/components/ui/CtaLink'
 import ReferenceList from '../ui/ReferenceList'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
+import MagneticButton from '../ui/MagneticButton'
 import { vaeCoreContent } from '../../content/vaeCore'
 import { Settings, TrendingUp, Shield, Link as LinkIcon, Layers, Lock, RefreshCw, ShieldCheck, X, Check, Zap } from 'lucide-react'
 
@@ -104,19 +105,20 @@ const ProductVaeCorePage: React.FC = () => {
           <div className="hidden md:flex justify-center mb-8">
             <div role="tablist" aria-label="Zielgruppe wählen" className="flex gap-2 p-2 bg-bg-secondary/60 rounded-2xl border border-border-primary/30 shadow-lg backdrop-blur-sm">
               {tabs.map((tab: any) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  role="tab"
-                  aria-selected={activeTab === tab.id}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium shadow-md ${
-                    activeTab === tab.id
-                      ? 'bg-vae-turquoise text-bg-dark shadow-xl'
-                      : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30 hover:shadow-lg'
-                  }`}
-                >
-                  {tab.label}
-                </button>
+                <MagneticButton key={tab.id}>
+                  <button
+                    onClick={() => setActiveTab(tab.id)}
+                    role="tab"
+                    aria-selected={activeTab === tab.id}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium shadow-md ${
+                      activeTab === tab.id
+                        ? 'bg-vae-turquoise text-bg-dark shadow-xl'
+                        : 'text-text-secondary hover:text-text-light hover:bg-bg-secondary/30 hover:shadow-lg'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                </MagneticButton>
               ))}
             </div>
           </div>
@@ -172,32 +174,38 @@ const ProductVaeCorePage: React.FC = () => {
             
             {/* Primary CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <CtaLink
-                ctaId="product.vae-core.demo"
-                ctx={{ product: 'VAE CORE', fromPage: 'product-core', intent: 'demo' }}
-                variant="primary"
-                ref={primaryCtaRef as unknown as React.Ref<HTMLAnchorElement>}
-                className="btn-lg shadow-xl focus:outline-none focus:ring-4 focus:ring-vae-turquoise/50"
-                id="cta-hero-primary"
-                aria-label="Kostenloses Beratungsgespräch – 15–20 Minuten"
-                data-green-signal="true"
-              />
-              <button
-                onClick={scrollToPricing}
-                className="btn-secondary btn-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-vae-turquoise/30"
-                aria-label="Zu den Preisen springen"
-              >
-                Preise ansehen
-              </button>
-              <Link
-                to="https://github.com/vae-systems/vae-core"
-                className="btn-ghost btn-lg shadow-md focus:outline-none focus:ring-4 focus:ring-vae-turquoise/20"
-                aria-label="VAE Core Repository auf GitHub öffnen (externer Link)"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub Repository
-              </Link>
+              <MagneticButton>
+                <CtaLink
+                  ctaId="product.vae-core.demo"
+                  ctx={{ product: 'VAE CORE', fromPage: 'product-core', intent: 'demo' }}
+                  variant="primary"
+                  ref={primaryCtaRef as unknown as React.Ref<HTMLAnchorElement>}
+                  className="btn-lg shadow-xl focus:outline-none focus:ring-4 focus:ring-vae-turquoise/50"
+                  id="cta-hero-primary"
+                  aria-label="Kostenloses Beratungsgespräch – 15–20 Minuten"
+                  data-green-signal="true"
+                />
+              </MagneticButton>
+              <MagneticButton>
+                <button
+                  onClick={scrollToPricing}
+                  className="btn-secondary btn-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-vae-turquoise/30"
+                  aria-label="Zu den Preisen springen"
+                >
+                  Preise ansehen
+                </button>
+              </MagneticButton>
+              <MagneticButton>
+                <Link
+                  to="https://github.com/vae-systems/vae-core"
+                  className="btn-ghost btn-lg shadow-md focus:outline-none focus:ring-4 focus:ring-vae-turquoise/20"
+                  aria-label="VAE Core Repository auf GitHub öffnen (externer Link)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub Repository
+                </Link>
+              </MagneticButton>
             </div>
           </div>
         </div>
@@ -379,12 +387,14 @@ const ProductVaeCorePage: React.FC = () => {
                   ))}
                 </ul>
                 
-                <Link 
-                  to={tier.name === 'Open Source' ? 'https://github.com/vae-systems/vae-core' : '/contact'}
-                  className={`btn w-full shadow-md ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}
-                >
-                  {tier.cta}
-                </Link>
+                <MagneticButton>
+                  <Link 
+                    to={tier.name === 'Open Source' ? 'https://github.com/vae-systems/vae-core' : '/contact'}
+                    className={`btn w-full shadow-md ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}
+                  >
+                    {tier.cta}
+                  </Link>
+                </MagneticButton>
               </div>
             ))}
           </div>
@@ -514,16 +524,17 @@ const ProductVaeCorePage: React.FC = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               {safeView.final_cta.primary_ctas.map((cta: any, i: number) => (
-                <Link 
-                  key={i}
-                  to={cta.href} 
-                  className={`btn btn-lg shadow-xl ${
-                    cta.style === 'primary' ? 'btn-primary' : 
-                    cta.style === 'secondary' ? 'btn-secondary' : 'btn-ghost'
-                  }`}
-                >
-                  {cta.text}
-                </Link>
+                <MagneticButton key={i}>
+                  <Link 
+                    to={cta.href} 
+                    className={`btn btn-lg shadow-xl ${
+                      cta.style === 'primary' ? 'btn-primary' : 
+                      cta.style === 'secondary' ? 'btn-secondary' : 'btn-ghost'
+                    }`}
+                  >
+                    {cta.text}
+                  </Link>
+                </MagneticButton>
               ))}
             </div>
             

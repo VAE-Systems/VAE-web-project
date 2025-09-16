@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import CtaLink from '@/components/ui/CtaLink'
 import { Link, useLocation } from 'react-router-dom'
 import { productCategories } from '../navigation/productCategories'
+import { ChevronDown, ArrowRight, CalendarClock, Sun, Moon, Menu as MenuIcon, X, Check as CheckIcon } from 'lucide-react'
 import { serviceCategories } from '../navigation/serviceCategories'
 import { blogCategories } from '../navigation/blogCategories'
 import { useAttentionSignal, useFocusTrap } from '@/hooks'
@@ -255,12 +256,11 @@ const Header: React.FC = () => {
                     onBlur={() => scheduleClose(item.mega)}
                   >
                     <span className="nav-link-text">{item.label}</span>
-                    <span
-                      className={`material-symbols-outlined text-base transition-transform duration-300 ${item.mega === 'products' ? (productsOpen ? 'rotate-180' : '') : item.mega === 'services' ? (servicesOpen ? 'rotate-180' : '') : (blogOpen ? 'rotate-180' : '')}`}
+                    <ChevronDown
+                      className={`text-base transition-transform duration-300 ${item.mega === 'products' ? (productsOpen ? 'rotate-180' : '') : item.mega === 'services' ? (servicesOpen ? 'rotate-180' : '') : (blogOpen ? 'rotate-180' : '')}`}
                       aria-hidden="true"
-                    >
-                      expand_more
-                    </span>
+                      size={18}
+                    />
                   </Link>
                   {item.mega === 'products' && productsOpen && (
                     <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-[var(--z-dropdown)]">
@@ -308,14 +308,14 @@ const Header: React.FC = () => {
                             </ul>
                             <div className="mt-auto inline-flex items-center text-xs font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
-                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                              <ArrowRight className="text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1" size={14} />
                             </div>
                           </Link>
                         ))}
                         </div>
                         <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-xs text-text-muted">
                           <span className="uppercase tracking-wider">VAE Product Suite</span>
-                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Produkte<ArrowRight className="text-xs ml-1" size={14} /></Link>
                         </div>
                       </div>
                     </div>
@@ -362,14 +362,14 @@ const Header: React.FC = () => {
                             </ul>
                             <div className="mt-auto inline-flex items-center text-xs font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
-                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                              <ArrowRight className="text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1" size={14} />
                             </div>
                           </Link>
                         ))}
                         </div>
                         <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-xs text-text-muted">
                           <span className="uppercase tracking-wider">VAE Product Suite</span>
-                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Produkte<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                          <Link to="/products" onClick={() => setProductsOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Produkte<ArrowRight className="text-xs ml-1" size={14} /></Link>
                         </div>
                       </div>
                     </div>
@@ -431,14 +431,14 @@ const Header: React.FC = () => {
                             </ul>
                             <div className="mt-auto inline-flex items-center text-xs font-medium text-vae-turquoise group-hover:text-text-light dark:group-hover:text-white transition-colors">
                               {cat.cta}
-                              <span className="material-symbols-outlined text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                              <ArrowRight className="text-xs ml-1 transition-transform duration-300 group-hover:translate-x-1" size={14} />
                             </div>
                           </Link>
                         ))}
                         </div>
                         <div className="px-8 pb-6 pt-4 border-t border-border-primary dark:border-white/10 flex items-center justify-between text-xs text-text-muted">
                           <span className="uppercase tracking-wider">VAE Blog</span>
-                          <Link to="/blog" onClick={() => setBlogOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Beiträge<span className="material-symbols-outlined text-xs ml-1">arrow_forward</span></Link>
+                          <Link to="/blog" onClick={() => setBlogOpen(false)} className="text-vae-turquoise hover:text-text-light dark:hover:text-white font-medium inline-flex items-center">Alle Beiträge<ArrowRight className="text-xs ml-1" size={14} /></Link>
                         </div>
                       </div>
                     </div>
@@ -466,7 +466,7 @@ const Header: React.FC = () => {
               data-green-signal="true"
               aria-label="Direkt Termin buchen (extern)"
             >
-              <span className="material-symbols-outlined mr-2">schedule</span>
+              <CalendarClock className="w-4 h-4 mr-2" />
               30-Min Strategie-Gespräch
             </CtaLink>
 
@@ -476,9 +476,7 @@ const Header: React.FC = () => {
               onClick={toggleTheme}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
-              <span className="material-symbols-outlined">
-                {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-              </span>
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
           </div>
 
@@ -490,9 +488,7 @@ const Header: React.FC = () => {
               onClick={toggleTheme}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
-              <span className="material-symbols-outlined text-xl">
-                {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-              </span>
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
 
             {/* Mobile Menu Button */}
@@ -509,11 +505,11 @@ const Header: React.FC = () => {
               aria-expanded={isMobileMenuOpen || debugMobileMenuOpen}
               aria-controls="mobile-menu"
             >
-              <span className={`material-symbols-outlined text-2xl transition-transform duration-300 ${
-                (isMobileMenuOpen || debugMobileMenuOpen) ? 'rotate-180' : 'rotate-0'
-              }`}>
-                {(isMobileMenuOpen || debugMobileMenuOpen) ? 'close' : 'menu'}
-              </span>
+              {(isMobileMenuOpen || debugMobileMenuOpen) ? (
+                <X className="w-6 h-6 transition-transform duration-300 rotate-180" />
+              ) : (
+                <MenuIcon className="w-6 h-6 transition-transform duration-300" />
+              )}
             </button>
           </div>
         </div>
@@ -562,9 +558,7 @@ const Header: React.FC = () => {
                       >
                         <span className="flex-1">{item.label}</span>
                         {isActivePath(item.path) && (
-                          <span className="material-symbols-outlined text-sm opacity-80">
-                            check
-                          </span>
+                          <CheckIcon className="w-4 h-4 opacity-80" />
                         )}
                       </Link>
                     ))}
@@ -584,7 +578,7 @@ const Header: React.FC = () => {
                       }}
                       aria-label="Direkt Termin buchen (extern)"
                     >
-                      <span className="material-symbols-outlined mr-3 text-xl">schedule</span>
+                      <CalendarClock className="w-5 h-5 mr-3" />
                       30-Min Strategie-Gespräch
                     </CtaLink>
                     

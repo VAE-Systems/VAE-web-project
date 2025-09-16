@@ -5,9 +5,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Link } from 'react-router-dom'
 import SpotlightCard from '../ui/SpotlightCard'
 import MaterialIcon from '../ui/MaterialIcon'
+import Icon from '@/components/ui/Icon'
 import ServicesHeroSection from '../sections/ServicesHeroSection'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
+import Reveal from '@/components/ui/Reveal'
+import { motion } from 'framer-motion'
+import { useScrollScrub } from '@/hooks/useScrollScrub'
 import {
   servicesLifecycle,
   lifecycleBenefits,
@@ -23,6 +27,8 @@ const FAQSection = React.lazy(() => import('../sections/FAQSection'))
  */
 const ServicesPage: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null)
+  const storyHeaderRef = useRef<HTMLDivElement>(null)
+  const { opacity, y } = useScrollScrub({ target: storyHeaderRef })
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -63,44 +69,45 @@ const ServicesPage: React.FC = () => {
       {/* Storytelling */}
       <section className="py-28 bg-bg-primary dark:bg-bg-darker border-b border-border-primary dark:border-white/5">
         <div className="container-vae max-w-5xl">
-          <div className="max-w-3xl mb-16">
-            <h2 className="h2 heading-gradient h-space">{servicesLifecycle.title}</h2>
+          <motion.div ref={storyHeaderRef} style={{ opacity, y }} className="max-w-3xl mb-16">
+            <h2 className="h2 fluid-h2 heading-gradient h-space">{servicesLifecycle.title}</h2>
             <p className="text-text-secondary leading-relaxed mb-5 text-lg">{servicesLifecycle.description1}</p>
             <p className="text-text-secondary leading-relaxed mb-5 text-sm">{servicesLifecycle.description2}</p>
             <p className="text-text-secondary leading-relaxed text-sm">{servicesLifecycle.platformLink} <Link to="/products" className="text-vae-turquoise hover:underline">Products</Link>.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          </motion.div>
+          <Reveal.Group stagger={0.08} className="grid md:grid-cols-3 gap-8">
             {lifecycleBenefits.map(benefit => (
-              <div key={benefit.title} className="p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10">
+              <Reveal key={benefit.title} preset="fadeUp" className="p-6 rounded-2xl bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10">
                 <h3 className="text-sm font-semibold text-text-light dark:text-white mb-3">{benefit.title}</h3>
                 <ul className="text-xs text-text-secondary space-y-1 leading-relaxed list-disc list-inside">
                   {benefit.benefits.map(item => <li key={item}>{item}</li>)}
                 </ul>
-              </div>
+              </Reveal>
             ))}
-          </div>
+          </Reveal.Group>
         </div>
       </section>
 
       {/* Kategorie Grid */}
       <section id="categories" className="py-28 bg-bg-secondary dark:bg-bg-dark border-b border-border-primary dark:border-white/5">
         <div className="container-vae max-w-7xl">
-          <div className="grid md:grid-cols-3 gap-10">
+          <Reveal.Group stagger={0.08} className="grid md:grid-cols-3 gap-10">
             {servicesCategories.map(cat => (
-              <SpotlightCard
-                key={cat.key}
-                title={cat.title}
-                description={cat.focus}
-                to={cat.to}
-                cta="Mehr Details"
-                iconSlot={<div className="w-14 h-14 rounded-xl bg-vae-turquoise/15 text-vae-turquoise flex items-center justify-center"><MaterialIcon icon={cat.icon} className="text-2xl" /></div>}
-              >
-                <ul className="list-disc list-inside">
-                  {cat.examples.map(example => <li key={example}>{example}</li>)}
-                </ul>
-              </SpotlightCard>
+              <Reveal key={cat.key} preset="fadeUp">
+                <SpotlightCard
+                  title={cat.title}
+                  description={cat.focus}
+                  to={cat.to}
+                  cta="Mehr Details"
+                  iconSlot={<div className="w-14 h-14 rounded-xl bg-vae-turquoise/15 text-vae-turquoise flex items-center justify-center"><Icon name={cat.icon} size={24} /></div>}
+                >
+                  <ul className="list-disc list-inside">
+                    {cat.examples.map(example => <li key={example}>{example}</li>)}
+                  </ul>
+                </SpotlightCard>
+              </Reveal>
             ))}
-          </div>
+          </Reveal.Group>
         </div>
       </section>
 
@@ -163,33 +170,33 @@ const ServicesPage: React.FC = () => {
             <CtaLink
               ctaId="consulting.initial_call"
               ctx={{ fromPage: 'services', intent: 'initial-call' }}
-              className="btn-secondary justify-start"
+              className="btn-secondary justify-start hover-lift press-bounce"
             >
-              <span className="material-symbols-outlined mr-2">call</span>
+              <Icon name="call" className="mr-2" />
               Erstgespräch (15–20 Min) buchen
             </CtaLink>
             <CtaLink
               ctaId="consulting.two_days_workshop"
               ctx={{ fromPage: 'services', intent: 'workshop' }}
-              className="btn-secondary justify-start"
+              className="btn-secondary justify-start hover-lift press-bounce"
             >
-              <span className="material-symbols-outlined mr-2">event_available</span>
+              <Icon name="event_available" className="mr-2" />
               2 Tage Intensiv‑Workshop anfragen
             </CtaLink>
             <CtaLink
               ctaId="consulting.deep_dive_architecture"
               ctx={{ fromPage: 'services', intent: 'deep-dive' }}
-              className="btn-outline justify-start"
+              className="btn-outline justify-start hover-lift press-bounce"
             >
-              <span className="material-symbols-outlined mr-2">architecture</span>
+              <Icon name="architecture" className="mr-2" />
               Deep‑Dive Architektur & Governance
             </CtaLink>
             <CtaLink
               ctaId="consulting.monthly_support"
               ctx={{ fromPage: 'services', intent: 'monthly-support' }}
-              className="btn-outline justify-start"
+              className="btn-outline justify-start hover-lift press-bounce"
             >
-              <span className="material-symbols-outlined mr-2">support_agent</span>
+              <Icon name="support_agent" className="mr-2" />
               Monatliche Begleitung anfragen
             </CtaLink>
           </div>

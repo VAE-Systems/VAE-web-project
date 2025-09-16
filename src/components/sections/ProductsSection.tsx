@@ -2,6 +2,7 @@ import React from 'react'
 import { productCategories } from '../navigation/productCategories'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 import { Link } from 'react-router-dom'
+import Icon from '@/components/ui/Icon'
 
 const ProductsSection: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const ProductsSection: React.FC = () => {
 
       <div className="container-vae relative">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="h2 heading-gradient mb-5">Produkte & Plattform</h2>
+          <h2 className="h2 fluid-h2 heading-gradient mb-5">Produkte & Plattform</h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-4">
             Vier Erlebniswelten – Lösungen, Applikationen, Plattform & Ökosystem. Alles folgt einem Prinzip: pragmatischer Nutzen ohne versteckte Abhängigkeiten.
           </p>
@@ -42,7 +43,7 @@ const ProductsSection: React.FC = () => {
                 <div className="flex items-start justify-between mb-5 relative z-10">
                   <div className="flex items-center gap-3">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-vae-turquoise/20 text-vae-turquoise`}>
-                      <span className="material-symbols-outlined text-xl">{cat.icon || 'apps'}</span>
+                      <Icon name={cat.icon || 'apps'} className="text-vae-turquoise" size={20} />
                     </div>
                     <div>
                       <h3 className="text-base font-semibold text-text-light leading-tight">{cat.title}</h3>

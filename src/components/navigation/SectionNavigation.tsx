@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import MaterialIcon from '../ui/MaterialIcon'
+import Icon from '@/components/ui/Icon'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
@@ -112,7 +112,7 @@ const SectionNavigation: React.FC = () => {
                   relative w-12 h-12 rounded-full 
                   backdrop-blur-xl border transition-all duration-150
                   flex items-center justify-center
-                  hover:scale-105 hover:-translate-x-1
+                  hover:scale-105 hover:-translate-x-1 hover-lift press-bounce
                   hover:border-vae-turquoise hover:bg-white/15
                   outline-none
                   ${isActive
@@ -122,12 +122,7 @@ const SectionNavigation: React.FC = () => {
                 `}
                 aria-label={`Zu ${section.label} scrollen`}
               >
-                <MaterialIcon 
-                  icon={section.iconName}
-                  size={18} 
-                  weight={isActive ? 600 : 400}
-                  filled={isActive}
-                />
+                <Icon name={section.iconName} size={18} />
                 
                 {/* Active indicator */}
                 {isActive && (

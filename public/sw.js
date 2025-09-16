@@ -20,14 +20,27 @@ const STATIC_FILES = [
 self.addEventListener('install', (event) => {
   console.log('[SW] Install event')
   event.waitUntil(
-    caches.open(STATIC_CACHE)
-      .then(cache => {
+    (async () => {
+      try {
+        const cache = await caches.open(STATIC_CACHE)
         console.log('[SW] Caching static files')
-        return cache.addAll(STATIC_FILES)
-      })
-      .catch(error => {
+        await cache.addAll(STATIC_FILES)
+      } catch (error) {
         console.error('[SW] Error caching static files:', error)
-      })
+      }
+      // Opportunistic font caching (local Inter fonts if present)
+      try {
+        const fontCache = await caches.open(STATIC_CACHE)
+        const fontUrls = [
+          '/fonts/inter/Inter-Variable.woff2',
+          '/fonts/inter/Inter-Regular.woff2',
+          '/fonts/inter/Inter-SemiBold.woff2',
+        ]
+        await Promise.all(fontUrls.map(async (url) => {
+          try { await fontCache.add(url) } catch { /* ignore missing fonts */ }
+        }))
+      } catch (e) { /* ignore */ }
+    })()
   )
   // Force activation
   self.skipWaiting()

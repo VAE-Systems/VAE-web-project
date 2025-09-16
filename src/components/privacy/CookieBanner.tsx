@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useConsent } from '../../hooks/useConsent'
 import { COOKIE_CATEGORIES } from '../../types/privacy'
+import Icon from '@/components/ui/Icon'
 
 const CookieBanner: React.FC = () => {
   const { consent, acceptAll, rejectAll, acceptNecessary, updateConsent, hasConsent, isConsentGiven } = useConsent()
@@ -92,7 +93,7 @@ const CookieBanner: React.FC = () => {
                   className="text-text-muted hover:text-text-light p-1"
                   aria-label="Einstellungen schließen"
                 >
-                  <span className="material-symbols-outlined">close</span>
+                  <Icon name="close" />
                 </button>
               </div>
 

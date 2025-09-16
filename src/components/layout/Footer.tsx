@@ -1,6 +1,8 @@
 import React from 'react'
+import { Mail } from 'lucide-react'
 import { NewsletterForm } from '../forms'
 import { Link } from 'react-router-dom'
+import Reveal from '@/components/ui/Reveal'
 
 /**
  * Footer Component
@@ -42,10 +44,10 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-bg-darker border-t border-bg-secondary" role="contentinfo">
       <div className="container-vae py-12 md:py-16">
-        <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-8 sm:gap-12 mb-12">
+        <Reveal.Group stagger={0.08} className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-8 sm:gap-12 mb-12">
           
           {/* Brand Section */}
-          <div className="xl:col-span-2 lg:col-span-2 md:col-span-3">
+          <Reveal preset="fadeUp" className="xl:col-span-2 lg:col-span-2 md:col-span-3">
             <div className="flex items-center space-x-4 mb-6">
               <div className="h-12">
                 <img 
@@ -74,10 +76,10 @@ const Footer: React.FC = () => {
             <div className="mb-6">
               <a
                 href="mailto:juliandini@vae-systems.com"
-                className="text-vae-turquoise hover:text-vae-turquoise-300 transition-colors duration-200 inline-flex items-center gap-2"
+                className="text-vae-turquoise hover:text-vae-turquoise-300 transition-colors duration-200 inline-flex items-center gap-2 hover-lift press-bounce"
                 data-analytics="contact-email"
               >
-                <span className="material-symbols-outlined text-sm" aria-hidden="true">mail</span>
+                <Mail className="w-4 h-4" aria-hidden="true" />
                 <span>juliandini@vae-systems.com</span>
               </a>
             </div>
@@ -88,7 +90,7 @@ const Footer: React.FC = () => {
                 href="https://github.com/VAE-Systems"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-muted hover:text-vae-turquoise transition-colors duration-200"
+                className="text-text-muted hover:text-vae-turquoise transition-colors duration-200 hover-lift press-bounce"
                 title="GitHub - VAE Systems Open Source"
                 data-analytics="social-github"
               >
@@ -102,7 +104,7 @@ const Footer: React.FC = () => {
                 href="https://www.linkedin.com/company/vae-systems"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-muted hover:text-vae-turquoise transition-colors duration-200"
+                className="text-text-muted hover:text-vae-turquoise transition-colors duration-200 hover-lift press-bounce"
                 title="LinkedIn - VAE Systems Unternehmensprofil"
                 data-analytics="social-linkedin"
               >
@@ -119,10 +121,10 @@ const Footer: React.FC = () => {
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-sm text-text-secondary">Alle Systeme operativ</span>
             </div>
-          </div>
+          </Reveal>
 
           {/* Services */}
-          <nav aria-label="Services" className="space-y-6">
+          <Reveal preset="fadeUp" as="nav" aria-label="Services" className="space-y-6">
             <div>
               <h4 className="text-lg font-semibold text-text-light mb-4">Services</h4>
               <ul className="space-y-2 text-sm">
@@ -132,10 +134,10 @@ const Footer: React.FC = () => {
                 <li><Link to="/services#comparison" className="text-text-secondary hover:text-vae-turquoise transition-colors">Vergleich & Reifegrad</Link></li>
               </ul>
             </div>
-          </nav>
+          </Reveal>
 
           {/* Produkte */}
-          <nav aria-label="Produkte" className="space-y-6">
+          <Reveal preset="fadeUp" as="nav" aria-label="Produkte" className="space-y-6">
             <div>
               <h4 className="text-lg font-semibold text-text-light mb-4">Produkte</h4>
               <ul className="space-y-2 text-sm">
@@ -148,20 +150,20 @@ const Footer: React.FC = () => {
                 <li><Link to="/products/showcases" className="text-text-secondary hover:text-vae-turquoise transition-colors">Showcases</Link></li>
               </ul>
             </div>
-          </nav>
+          </Reveal>
 
           {/* Tech Stack (Badges) */}
-          <div aria-label="Technologien">
+          <Reveal preset="fadeUp" aria-label="Technologien">
             <h4 className="text-lg font-semibold mb-4 text-text-light">Tech Stack</h4>
             <ul className="flex flex-wrap gap-2 text-sm">
               {techStack.map((tech) => (
                 <li key={tech} className="px-3 py-1 bg-bg-secondary text-text-light rounded-lg border border-bg-secondary hover:border-vae-turquoise/30 transition-colors" title={tech}>{tech}</li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
           {/* Unternehmen & Rechtliches + Newsletter */}
-          <div className="space-y-10 xl:col-span-1 lg:col-span-1 min-w-0">
+          <Reveal preset="fadeUp" className="space-y-10 xl:col-span-1 lg:col-span-1 min-w-0">
             <div>
               <h4 className="text-lg font-semibold mb-4 text-text-light">Unternehmen</h4>
               <ul className="space-y-2 text-sm">
@@ -185,8 +187,8 @@ const Footer: React.FC = () => {
               />
               <p className="text-[10px] text-text-muted">Mit Absenden bestätigst du unsere <a href="/privacy#newsletter" className="text-vae-turquoise hover:underline">Datenschutzhinweise</a>.</p>
             </div>
-          </div>
-        </div>
+          </Reveal>
+        </Reveal.Group>
 
         {/* Footer Bottom */}
         <div className="border-t border-bg-secondary pt-8">

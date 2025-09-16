@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Icon from '@/components/ui/Icon'
 
 /**
  * Werte / Leitprinzipien als vertikale Timeline mit dezentem Story-Verlauf.
@@ -88,7 +89,7 @@ const ValuesPrinciplesSection: React.FC<ValuesPrinciplesSectionProps> = ({ class
     <section id="werte" className={className ? className : 'mb-40 section-block'} data-section ref={wrapperRef} aria-labelledby="werte-heading">
       <div className="max-w-6xl mx-auto">
         <header className="max-w-3xl mb-20" data-animate>
-          <h2 id="werte-heading" className="text-4xl md:text-5xl font-bold text-white heading-fix mb-6">Leitprinzipien</h2>
+          <h2 id="werte-heading" className="fluid-h2 font-bold text-white heading-fix mb-6">Leitprinzipien</h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
             Haltung vor Hype: Substanz, Nachvollziehbarkeit und nachhaltiger Betrieb. Jedes Projekt unterliegt denselben Standards – unabhängig von Größe oder Laufzeit.
           </p>
@@ -104,7 +105,7 @@ const ValuesPrinciplesSection: React.FC<ValuesPrinciplesSectionProps> = ({ class
                 {/* Node */}
                 <div aria-hidden="true" className="absolute -left-[38px] md:-left-[46px] top-1.5">
                   <div className="timeline-node w-8 h-8 rounded-full bg-vae-turquoise/20 border border-vae-turquoise/40 flex items-center justify-center backdrop-blur-sm">
-                    <span className="material-symbols-outlined text-vae-turquoise text-base">{p.icon}</span>
+                    <Icon name={p.icon} className="text-vae-turquoise" size={16} />
                   </div>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 md:p-8 transition-colors hover:border-vae-turquoise/40">

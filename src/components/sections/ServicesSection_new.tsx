@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { servicesData, lifecycleBlocks } from '../../content/services'
+import Icon from '@/components/ui/Icon'
 
 const ServicesSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -87,7 +88,7 @@ const ServicesSection: React.FC = () => {
               <div className="flex items-start justify-between mb-6 relative z-10">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-vae-turquoise/20 text-vae-turquoise flex items-center justify-center">
-                    <span className="material-symbols-outlined text-xl">{s.iconName}</span>
+                    <Icon name={s.iconName} className="text-vae-turquoise" size={20} />
                   </div>
                   <span className="text-xs font-semibold tracking-wider uppercase text-vae-turquoise/80">{s.title.split(' – ')[0]}</span>
                 </div>

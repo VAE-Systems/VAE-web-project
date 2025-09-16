@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
+import Icon from '@/components/ui/Icon'
 import { caseStudies, upcomingCasePlaceholders } from '../../content/caseStudies'
 
 /**
@@ -127,7 +128,7 @@ const CaseStudiesSection: React.FC = () => {
         <div className="mt-24 text-center max-w-2xl mx-auto">
           <p className="text-text-muted text-xs uppercase tracking-wider mb-3">Pipeline</p>
           <p className="text-sm text-text-secondary leading-relaxed mb-6">Fokus: Validierte Pilots statt künstlicher Referenz-Sammlung. Neue Einträge sobald Ergebnisse belastbar dokumentiert sind.</p>
-          <a href="/contact" className="inline-flex items-center gap-2 text-vae-turquoise text-sm hover:underline">Use Case prüfen lassen <span className="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+          <a href="/contact" className="inline-flex items-center gap-2 text-vae-turquoise text-sm hover:underline">Use Case prüfen lassen <Icon name="arrow_forward" size={16} /></a>
         </div>
       </div>
     </section>

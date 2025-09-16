@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon from '@/components/ui/Icon'
 import { miniTagline, miniSubline, miniOutcomes, miniProcess, miniMetrics } from '../../content/aboutMini'
 
 // Visuell verstärkte Mini-About Sektion (Teaser)
@@ -42,11 +43,11 @@ const AboutMiniSection: React.FC = () => {
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 bg-[radial-gradient(circle_at_35%_30%,rgba(var(--vae-turquoise-rgb),0.25),transparent_70%)]" />
               <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-vae-turquoise/20 group-hover:bg-vae-turquoise/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100">
-                <span className="material-symbols-outlined text-sm text-vae-turquoise">arrow_outward</span>
+                <Icon name="arrow_outward" className="text-vae-turquoise" size={14} />
               </div>
                             <div className="relative flex items-start gap-4 mb-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 dark:from-vae-turquoise/30 dark:to-vae-turquoise/20 text-vae-turquoise dark:text-vae-turquoise-light flex items-center justify-center ring-1 ring-vae-turquoise/30 dark:ring-vae-turquoise/20 shadow-inner">
-                  <span className="material-symbols-outlined text-[26px]">{o.icon}</span>
+                  <Icon name={o.icon} className="text-vae-turquoise" size={22} />
                 </div>
                 <h3 className="text-lg font-semibold text-white leading-snug tracking-tight group-hover:text-vae-turquoise transition-colors duration-300">
                   {o.title}
@@ -70,7 +71,7 @@ const AboutMiniSection: React.FC = () => {
                   <div className="hidden md:block absolute top-8 left-[55%] right-[-12%] h-px bg-gradient-to-r from-vae-turquoise/30 via-vae-turquoise/20 to-transparent group-hover:from-vae-turquoise/60 group-hover:via-vae-turquoise/40 transition-all duration-300" />
                 )}
                 <div className="relative w-14 h-14 mx-auto mb-4 rounded-2xl grid place-items-center bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 dark:from-vae-turquoise/30 dark:to-vae-turquoise/20 border border-vae-turquoise/30 dark:border-vae-turquoise/20 text-vae-turquoise dark:text-vae-turquoise-light shadow-[0_0_0_3px_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_3px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_0_8px_rgba(var(--vae-turquoise-rgb),0.25)] group-hover:border-vae-turquoise/50 dark:group-hover:border-vae-turquoise/40 group-hover:bg-gradient-to-br group-hover:from-vae-turquoise/30 group-hover:to-vae-turquoise/20 dark:group-hover:from-vae-turquoise/40 dark:group-hover:to-vae-turquoise/30 transition-all duration-300 hover:scale-110">
-                  <span className="material-symbols-outlined text-[26px]">{step.icon}</span>
+                  <Icon name={step.icon} size={22} className="text-vae-turquoise" />
                   <span className="absolute -top-2 -right-2 w-5 h-5 text-[10px] rounded-full bg-vae-turquoise/80 text-bg-dark flex items-center justify-center font-semibold backdrop-blur-sm border border-vae-turquoise/60 group-hover:bg-vae-turquoise transition-colors duration-300">
                     {String(idx + 1).padStart(2, '0')}
                   </span>
@@ -103,7 +104,7 @@ const AboutMiniSection: React.FC = () => {
                   </div>
                   <div className="relative text-center">
                     <div className="w-10 h-10 mx-auto mb-3 rounded-xl bg-vae-turquoise/20 group-hover:bg-vae-turquoise/30 transition-colors duration-300 flex items-center justify-center dark:bg-vae-turquoise/15 dark:group-hover:bg-vae-turquoise/25">
-                      <span className="material-symbols-outlined text-lg text-vae-turquoise">{icon}</span>
+                      <Icon name={icon} size={18} className="text-vae-turquoise" />
                     </div>
                     <div className="text-sm font-semibold text-vae-turquoise group-hover:text-white transition-colors duration-300 tracking-tight dark:group-hover:text-bg-primary">
                       {m}

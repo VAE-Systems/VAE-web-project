@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
 import { productCategories } from '../navigation/productCategories'
+import Icon from '@/components/ui/Icon'
 
 const ProductsCardsGrid: React.FC = () => {
   const visibleKeys = ['solutions', 'tools', 'core'] // Reihenfolge wie gewünscht
@@ -24,7 +25,7 @@ const ProductsCardsGrid: React.FC = () => {
               <div className="flex items-start justify-between mb-3 relative z-10">
                 <div className="flex items-center gap-3">
                   <div className="w-11 h-11 rounded-xl bg-vae-turquoise/10 flex items-center justify-center text-2xl text-vae-turquoise">
-                    <span className="material-symbols-outlined">{cat.icon || 'layers'}</span>
+                    <Icon name={cat.icon || 'layers'} className="text-vae-turquoise" size={20} />
                   </div>
                   <div>
                     <h4 className="text-text-light dark:text-white font-semibold text-lg">{cat.title}</h4>

@@ -7,6 +7,7 @@
 import React, { useState, useEffect } from 'react'
 import { usePWA } from '../../hooks/usePWA'
 import TouchButton from '../ui/TouchButton'
+import Icon from '@/components/ui/Icon'
 
 const PWAInstallPrompt: React.FC = () => {
   const { canInstall, install, isInstalled, isInstallable } = usePWA()
@@ -112,7 +113,7 @@ const PWAInstallPrompt: React.FC = () => {
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0">
           <div className="w-10 h-10 bg-vae-turquoise/20 rounded-lg flex items-center justify-center">
-            <span className="material-symbols-outlined text-vae-turquoise">download</span>
+            <Icon name="download" className="text-vae-turquoise" size={20} />
           </div>
         </div>
 
@@ -171,7 +172,7 @@ const PWAInstallPrompt: React.FC = () => {
           className="flex-shrink-0 text-text-muted hover:text-text-light p-1"
           aria-label="Installationsaufforderung schließen"
         >
-          <span className="material-symbols-outlined">close</span>
+          <Icon name="close" />
         </button>
       </div>
     </div>

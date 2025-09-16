@@ -8,6 +8,7 @@ import {
   homeProcessNote
 } from '../../content/home'
 import Card from '../ui/Card'
+import Icon from '@/components/ui/Icon'
 
 /**
  * HomeProcessTeaserSection
@@ -40,7 +41,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
     <section
       id={id}
       ref={ref}
-      className={`relative py-20 md:py-28 border-t border-border-primary dark:border-white/5 bg-[linear-gradient(145deg,var(--color-bg-primary),var(--color-bg-secondary),var(--color-bg-primary))] dark:bg-[linear-gradient(145deg,#0c1213,#0e1416,#0b1011)] overflow-hidden ${className}`.trim()}
+      className={`relative py-20 md:py-28 border-t border-border-primary dark:border-white/5 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overflow-hidden ${className}`.trim()}
       aria-labelledby="process-home-heading"
     >
       <div className="absolute inset-0 pointer-events-none opacity-60">
@@ -60,7 +61,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">
-                    <span className="material-symbols-outlined text-[20px]">{s.icon}</span>
+                    <Icon name={s.icon} className="text-vae-turquoise" size={18} />
                   </div>
                   <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(i+1).padStart(2,'0')}</span>
                 </div>
@@ -76,7 +77,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
                 </ul>
               )}
               <div className="mt-auto pt-2">
-                <a href="/about#prozess" className="inline-flex items-center gap-1 text-[11px] font-medium text-vae-turquoise hover:underline">Kompletter Ablauf <span className="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+                <a href="/about#prozess" className="inline-flex items-center gap-1 text-[11px] font-medium text-vae-turquoise hover:underline">Kompletter Ablauf <Icon name="arrow_forward" size={14} /></a>
               </div>
             </Card>
           ))}

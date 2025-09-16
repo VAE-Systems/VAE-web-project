@@ -5,6 +5,7 @@ import FaultyTerminal from './effects/FaultyTerminal'
 import { productsHeroContent } from '@/content/productsHero'
 import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
+import Icon from '@/components/ui/Icon'
 
 /**
  * ProductsHeroSection
@@ -75,7 +76,7 @@ const ProductsHeroSection: React.FC = () => {
           <div className="space-y-8 max-w-4xl relative">
             {/* Panel now mirrors Services hero style */}
             <div className={`inline-block px-8 py-6 rounded-[2rem] backdrop-blur-md ${isLight ? 'bg-white/85 border border-black/10 ring-1 ring-black/10 shadow-[0_8px_40px_-18px_rgba(0,0,0,0.25)]' : 'bg-[linear-gradient(160deg,rgba(0,15,12,0.92),rgba(0,32,26,0.78))] ring-1 ring-vae-turquoise/25 border border-vae-turquoise/30 shadow-[0_0_60px_-18px_rgba(var(--vae-turquoise-rgb),0.5)]'} space-y-4 text-center w-full`}>
-              <h1 className="h1 mb-4">
+              <h1 className="h1 fluid-h1 mb-4">
                 <span className="block text-text-light">{productsHeroContent.title.main}</span>
                 <span className="block text-vae-turquoise">{productsHeroContent.title.sub}</span>
               </h1>
@@ -92,15 +93,15 @@ const ProductsHeroSection: React.FC = () => {
                   className="btn-primary flex-1 text-center flex items-center justify-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
                   data-green-signal="true"
                 >
-                  <span className="material-symbols-outlined mr-2">schedule</span>
+                  <Icon name="schedule" className="mr-2" />
                   30‑Min Strategie‑Gespräch buchen
                 </CtaLink>
                 <Link to="/services" className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}>
-                  <span className="material-symbols-outlined mr-2">handshake</span>
+                  <Icon name="handshake" className="mr-2" />
                   Services & Expertise
                 </Link>
                 <a href="#products" className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}> 
-                  <span className="material-symbols-outlined mr-2">category</span>
+                  <Icon name="category" className="mr-2" />
                   Produkte entdecken
                 </a>
               </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { processSteps, processDisclaimer } from '../../content/process'
+import Icon from '@/components/ui/Icon'
 import { TermHint } from '../ui/Glossary'
 
 // Wrap glossary term occurrences inside text with TermHint (underline hover) – only terms defined in each step glossary.
@@ -64,7 +65,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">
-                      <span className="material-symbols-outlined text-[22px]">{s.icon}</span>
+                      <Icon name={s.icon} className="text-vae-turquoise" size={22} />
                     </div>
                     <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(i + 1).padStart(2, '0')}</span>
                   </div>

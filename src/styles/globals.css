@@ -1,4 +1,33 @@
-/* Google Fonts loaded via index.html (preconnect + swap) */
+/* Local Fonts (Inter) via @font-face; Material Symbols temporary via index.html */
+
+/* Inter Variable font (preferred) */
+@font-face {
+  font-family: 'Inter';
+  src:
+    url('/fonts/inter/Inter-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Static fallbacks (if variable not available) */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: url('/fonts/inter/Inter-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Fallback';
+  src: url('/fonts/inter/Inter-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Use Inter (or fallback family) */
+:root { --font-family-sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; }
 
 /* Material Symbols - Outlined */
 /* Font is loaded via index.html to avoid duplicate requests */
@@ -94,14 +123,14 @@
     --shadow-glow-strong: 0 0 30px hsla(var(--color-vae-turquoise), 0.5);
     --blur-glass: 16px;
     
-    /* Z-Index Scale */
-    --z-dropdown: 1000;
-    --z-sticky: 1020;
-    --z-fixed: 1030;
-    --z-modal-backdrop: 1040;
-    --z-modal: 1050;
-    --z-popover: 1060;
-    --z-tooltip: 1070;
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
     
     /* Animation Durations */
     --duration-fast: 150ms;
@@ -182,7 +211,7 @@
   }
 
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-family-sans);
     background: theme('colors.bg-darker');
     color: theme('colors.text-light');
     line-height: 1.6;
@@ -197,15 +226,10 @@
     display: block;
   }
   
-  /* Material Symbols Configuration */
-  .material-symbols-outlined {
-    font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
-  }
 }
+
+/* Utility: pause particle animations when out of view */
+.particle-field.paused span { animation-play-state: paused !important; }
 
 /* Accessibility: Skip-link (visible on keyboard focus) */
 .skip-link {
@@ -656,6 +680,20 @@ a
 
 /* Utility Layer */
 @layer utilities {
+  /* Spatial Hierarchy */
+  .z-dropdown { z-index: var(--z-dropdown); }
+  .z-sticky { z-index: var(--z-sticky); }
+  .z-fixed { z-index: var(--z-fixed); }
+  .z-modal-backdrop { z-index: var(--z-modal-backdrop); }
+  .z-modal { z-index: var(--z-modal); }
+  .z-popover { z-index: var(--z-popover); }
+  .z-tooltip { z-index: var(--z-tooltip); }
+
+  /* Fluid type scale (optional adoption) */
+  .fluid-display { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); line-height: 1.05; }
+  .fluid-h1 { font-size: clamp(2rem, 3.6vw + 0.5rem, 3.75rem); line-height: 1.08; }
+  .fluid-h2 { font-size: clamp(1.625rem, 2.8vw + 0.25rem, 3rem); line-height: 1.1; }
+  .fluid-h3 { font-size: clamp(1.375rem, 2.2vw, 2.25rem); line-height: 1.15; }
   /* ============================= */
   /* Heading Design System (Tokens)*/
   /* Einheitliche Skalierung für konsistente Typografie */
@@ -1108,4 +1146,4 @@ a
 }
   /* Size modifier for compact CTAs inside cards */
   .btn-compact { @apply text-xs md:text-[13px] px-3 py-2 rounded-lg; }
-  .btn-compact .material-symbols-outlined { font-size: 18px; }
+  

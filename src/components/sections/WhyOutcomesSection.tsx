@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { outcomes, principles, badges, testimonial, tagline } from '../../content/aboutWhy'
+import Icon from '@/components/ui/Icon'
 
 interface WhyOutcomesSectionProps {
   className?: string
@@ -53,7 +54,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
       <div className="container-vae relative">
         <div className="max-w-6xl mx-auto">
           <header className="max-w-3xl mb-14" data-heading-accent>
-            <h2 id="why-heading" className="text-4xl md:text-5xl font-bold text-text-light dark:text-white heading-fix mb-6">
+            <h2 id="why-heading" className="fluid-h2 font-bold text-text-light dark:text-white heading-fix mb-6">
               {tagline}
             </h2>
             <div className="heading-accent-bar h-[3px] w-40 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
@@ -71,7 +72,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-3">
                         <div className="w-11 h-11 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise group-hover:scale-110 transition-transform duration-300">
-                          <span className="material-symbols-outlined text-[22px]">{o.icon}</span>
+                          <Icon name={o.icon} className="text-vae-turquoise" size={22} />
                         </div>
                         <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(idx + 1).padStart(2, '0')}</span>
                       </div>
@@ -97,7 +98,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
                   {principles.map(p => (
                     <li key={p.key} className="flex items-start space-x-3" data-principle>
                       <div className="w-8 h-8 rounded-lg bg-vae-turquoise/20 flex items-center justify-center flex-shrink-0">
-                        <span className="material-symbols-outlined text-vae-turquoise text-sm">{p.icon}</span>
+                        <Icon name={p.icon} className="text-vae-turquoise" size={16} />
                       </div>
                       <div>
                         <div className="text-text-light dark:text-white text-sm font-medium leading-tight">{p.title}</div>
@@ -120,7 +121,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
           <div className="mt-14 flex flex-wrap gap-3" data-badges>
             {badges.map(b => (
               <div key={b.key} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg-primary/5 dark:bg-white/5 border border-border-primary dark:border-white/10 text-[12px] text-text-muted dark:text-white/70">
-                <span className="material-symbols-outlined text-base text-vae-turquoise">{b.icon}</span>
+                <Icon name={b.icon} className="text-vae-turquoise" size={16} />
                 <span>{b.label}</span>
               </div>
             ))}

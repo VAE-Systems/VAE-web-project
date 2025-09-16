@@ -4,6 +4,7 @@ import ContactSection from '../sections/ContactSection'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 import Seo from '../ui/Seo'
 import { contactHero, contactIntro, contactUsps, contactCta } from '../../content/contact'
+import Icon from '@/components/ui/Icon'
 
 /**
  * ContactPage Component
@@ -73,9 +74,7 @@ const ContactPage: React.FC = () => {
             {contactUsps.map(usp => (
               <div key={usp.key} className="group text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-vae-turquoise motion-safe:group-hover:scale-110 transition-transform duration-300">
-                  <span className="material-symbols-outlined text-3xl">
-                    {usp.icon}
-                  </span>
+                  <Icon name={usp.icon} className="text-vae-turquoise" size={28} />
                 </div>
                 <h3 className="text-xl font-semibold text-text-light dark:text-white mb-4">
                   {usp.title}
@@ -98,9 +97,7 @@ const ContactPage: React.FC = () => {
               </p>
               <div className="flex items-center justify-center text-vae-turquoise">
                 <span className="mr-2">{contactCta.prompt}</span>
-                <span className="material-symbols-outlined animate-bounce">
-                  keyboard_arrow_down
-                </span>
+                <Icon name="keyboard_arrow_down" className="animate-bounce" />
               </div>
             </div>
           </div>

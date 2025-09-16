@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react'
+import Icon from '@/components/ui/Icon'
 import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
@@ -102,7 +103,7 @@ const ServiceTrainingsPage: React.FC = () => {
                   </div>
                   <div className="relative overflow-hidden transition-all duration-500 max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100">
                     <div className="mt-2 mb-4 text-[11px] flex items-start gap-2 text-text-muted leading-relaxed">
-                      <span className="material-symbols-outlined text-vae-turquoise text-base mt-0.5">info</span>
+                      <Icon name="info" className="text-vae-turquoise mt-0.5" size={16} />
                       <span>{t.info}</span>
                     </div>
                   </div>

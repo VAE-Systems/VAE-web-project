@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { outcomes, badges } from '../../content/aboutWhy'
 import { homeOutcomesHeading, homeOutcomesDescription } from '../../content/home'
 import Card from '../ui/Card'
+import Icon from '@/components/ui/Icon'
 
 /**
  * HomeOutcomesSection
@@ -41,7 +42,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
       </div>
       <div className="container-vae relative">
         <header className="max-w-4xl mb-16">
-          <h2 id="outcomes-heading" className="h2 heading-gradient h-space mb-4">{homeOutcomesHeading}</h2>
+          <h2 id="outcomes-heading" className="h2 fluid-h2 heading-gradient h-space mb-4">{homeOutcomesHeading}</h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
             {homeOutcomesDescription.before}
             <a href="/about#warum" className="text-vae-turquoise hover:underline">Über Uns</a>
@@ -54,7 +55,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-11 h-11 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">
-                    <span className="material-symbols-outlined text-[22px]">{o.icon || 'hub'}</span>
+                    <Icon name={o.icon || 'hub'} className="text-vae-turquoise" size={22} />
                   </div>
                   <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(i+1).padStart(2,'0')}</span>
                 </div>
@@ -74,13 +75,13 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
         <div className="flex flex-wrap gap-3 mb-10">
           {badges.slice(0,3).map(b => (
             <div key={b.key} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-vae-turquoise/10 border border-vae-turquoise/20 text-[12px] text-vae-turquoise">
-              <span className="material-symbols-outlined text-base text-vae-turquoise">{b.icon}</span>
+              <Icon name={b.icon} className="text-vae-turquoise" size={16} />
               <span>{b.label}</span>
             </div>
           ))}
         </div>
         <div className="text-sm text-text-muted">
-          <a href="/about#warum" className="inline-flex items-center gap-1 text-vae-turquoise hover:underline">Mehr Outcomes & Prinzipien ansehen <span className="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+          <a href="/about#warum" className="inline-flex items-center gap-1 text-vae-turquoise hover:underline">Mehr Outcomes & Prinzipien ansehen <Icon name="arrow_forward" size={16} /></a>
         </div>
       </div>
     </section>

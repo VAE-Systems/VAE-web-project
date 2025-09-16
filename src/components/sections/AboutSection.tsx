@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTheme } from '@/contexts/ThemeContext'
+import Icon from '@/components/ui/Icon'
 import { miniOutcomes, miniProcess, miniMetrics, miniTagline, miniSubline } from '../../content/aboutMini'
 
 interface AboutSectionProps {
@@ -44,7 +45,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
             {miniOutcomes.map(outcome => (
               <div key={outcome.key} className="text-left p-4 rounded-lg bg-white/5 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="material-symbols-outlined text-vae-turquoise">{outcome.icon}</span>
+                  <Icon name={outcome.icon} className="text-vae-turquoise" />
                   <h3 className="font-semibold text-white">{outcome.title}</h3>
                 </div>
                 <p className="text-sm text-text-secondary">{outcome.body}</p>
@@ -59,7 +60,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
               {miniProcess.map(step => (
                 <div key={step.key} className="text-center">
                   <div className="w-12 h-12 rounded-full bg-vae-turquoise/20 flex items-center justify-center mb-2 mx-auto">
-                    <span className="material-symbols-outlined text-vae-turquoise text-lg">{step.icon}</span>
+                    <Icon name={step.icon} className="text-vae-turquoise" size={18} />
                   </div>
                   <div className="text-sm font-medium text-white">{step.label}</div>
                   <div className="text-xs text-text-secondary">{step.hint}</div>
@@ -82,7 +83,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
 
           <a href="/about" className="inline-flex items-center gap-2 btn-outline mt-2">
             Mehr erfahren
-            <span className="material-symbols-outlined text-base">arrow_outward</span>
+            <Icon name="arrow_outward" />
           </a>
         </div>
       </div>
@@ -91,4 +92,3 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
 }
 
 export default AboutSection
-

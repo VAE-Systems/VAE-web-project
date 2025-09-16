@@ -3,6 +3,7 @@ import RippleGrid from './effects/RippleGrid'
 // ParallaxBackdrop removed in light mode redesign
 import { useTheme } from '@/contexts/ThemeContext'
 import MaterialIcon from '../ui/MaterialIcon'
+import Icon from '@/components/ui/Icon'
 import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
 
@@ -56,7 +57,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                         <div className="relative container-vae z-[2]" ref={innerRef}>
                                 <div className="max-w-5xl mx-auto text-center space-y-8 sm:space-y-10">
                                         <div className={`inline-block px-8 py-6 rounded-[2rem] backdrop-blur-md ${isLight ? 'bg-white/85 border border-black/10 ring-1 ring-black/10 shadow-[0_8px_40px_-18px_rgba(0,0,0,0.25)]' : 'bg-[linear-gradient(160deg,rgba(0,15,12,0.92),rgba(0,32,26,0.78))] ring-1 ring-vae-turquoise/25 border border-vae-turquoise/30 shadow-[0_0_60px_-18px_rgba(var(--vae-turquoise-rgb),0.5)]'}`}>
-                                                <h1 className="h1 mb-4">
+                                                <h1 className="h1 fluid-h1 mb-4">
                                                         <span className="block text-text-light">Services & Expertise</span>
                                                         <span className="block text-vae-turquoise">für nachhaltige KI-Infrastruktur.</span>
                                                 </h1>
@@ -65,9 +66,9 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                                                 </p>
                                         </div>
                                         <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 text-vae-turquoise">
-                                                <div className="flex items-center gap-2"><MaterialIcon icon="shield" className="text-xl sm:text-2xl" /><span className="text-xs sm:text-sm font-medium">Datensouverän</span></div>
-                                                <div className="flex items-center gap-2"><MaterialIcon icon="flash_on" className="text-xl sm:text-2xl" /><span className="text-xs sm:text-sm font-medium">Schnell</span></div>
-                                                <div className="flex items-center gap-2"><MaterialIcon icon="auto_awesome" className="text-xl sm:text-2xl" /><span className="text-xs sm:text-sm font-medium">KI-powered</span></div>
+                                                <div className="flex items-center gap-2"><MaterialIcon icon="shield" className="w-7 h-7 sm:w-8 sm:h-8" /><span className="text-xs sm:text-sm font-medium">Datensouverän</span></div>
+                                                <div className="flex items-center gap-2"><MaterialIcon icon="flash_on" className="w-7 h-7 sm:w-8 sm:h-8" /><span className="text-xs sm:text-sm font-medium">Schnell</span></div>
+                                                <div className="flex items-center gap-2"><MaterialIcon icon="auto_awesome" className="w-7 h-7 sm:w-8 sm:h-8" /><span className="text-xs sm:text-sm font-medium">KI-powered</span></div>
                                         </div>
                                                                                 {/* CTA Block (aligned with main landing hero style) */}
                                                                                 <div className="space-y-5">
@@ -78,21 +79,21 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                                                                                                         className="btn-primary flex-1 text-center flex items-center justify-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
                                                                                                         data-green-signal="true"
                                                                                                 >
-                                                                                                        <span className="material-symbols-outlined mr-2">schedule</span>
+                                                                                                       <Icon name="schedule" className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
                                                                                                         30‑Min Strategie‑Gespräch buchen
                                                                                                 </CtaLink>
                                                                                                 <Link
                                                                                                         to="/products"
                                                                                                         className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}
                                                                                                 >
-                                                                                                        <span className="material-symbols-outlined mr-2">apps</span>
+                                                                                                       <Icon name="apps" className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
                                                                                                         Produkte & Plattform
                                                                                                 </Link>
                                                                                                 <a
                                                                                                         href="#categories"
                                                                                                         className={`flex-1 text-center flex items-center justify-center rounded-xl transition-colors ${isLight ? 'border border-black/10 text-text-secondary bg-white/60 hover:bg-white/80 hover:border-black/20' : 'backdrop-blur-sm border border-white/20 text-text-secondary hover:text-text-light bg-white/10 hover:bg-white/20'}`}
                                                                                                 >
-                                                                                                        <span className="material-symbols-outlined mr-2">travel_explore</span>
+                                                                                                       <Icon name="travel_explore" className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
                                                                                                         Services erkunden
                                                                                                 </a>
                                                                                         </div>

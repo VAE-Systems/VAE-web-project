@@ -11,9 +11,11 @@ import StoryTeamSection from '../sections/StoryTeamSection'
 import WhyOutcomesSection from '../sections/WhyOutcomesSection'
 import Seo from '../ui/Seo'
 import ProductsCardsGrid from '../sections/ProductsCardsGrid'
+import Reveal from '@/components/ui/Reveal'
 import Card from '../ui/Card'
 import { servicesCategories } from '../../content/services'
 import Breadcrumbs from '../navigation/Breadcrumbs'
+import Icon from '@/components/ui/Icon'
 
 /**
  * AboutPage Component
@@ -174,7 +176,7 @@ const AboutPage: React.FC = () => {
           )}
         </div>
         <div className="container-vae relative text-center">
-          <h1 className="h1 text-vae-turquoise h-space-lg" data-fade>
+          <h1 className="h1 fluid-h1 text-vae-turquoise h-space-lg" data-fade>
             Über VAE Systems
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-white/90 max-w-4xl mx-auto leading-relaxed mb-6" data-fade>
@@ -211,11 +213,11 @@ const AboutPage: React.FC = () => {
                 <p className="text-text-secondary text-sm leading-relaxed flex-grow mb-4 theme-light:text-text-light">{f.focus}</p>
                 <div className="mt-auto space-y-2 text-sm text-left">
                   <a href={`mailto:${f.email}`} className="flex items-center text-vae-turquoise hover:text-text-light dark:hover:text-white transition-colors">
-                    <span className="material-symbols-outlined text-base mr-2">forward_to_inbox</span>
+                    <Icon name="forward_to_inbox" className="mr-2" />
                     <span>{f.email}</span>
                   </a>
                   <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center text-text-muted dark:text-white/60 hover:text-text-light dark:hover:text-white transition-colors">
-                    <span className="material-symbols-outlined text-base mr-2">link</span>
+                    <Icon name="link" className="mr-2" />
                     <span>LinkedIn</span>
                   </a>
                 </div>
@@ -234,20 +236,21 @@ const AboutPage: React.FC = () => {
             <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
             <p className="text-lg md:text-xl text-gray-700 dark:text-white/80 leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-gray-900 dark:text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
           </header>
-          <div className="grid md:grid-cols-3 gap-8 items-stretch" data-stagger-group>
+          <Reveal.Group stagger={0.08} className="grid md:grid-cols-3 gap-8 items-stretch">
             {servicesCategories.map((s: { key: string; title: string; focus: string; examples: string[]; to: string }) => (
-              <Card
-                key={s.key}
-                title={s.title}
-                lead={s.focus}
-                body={s.focus}
-                bullets={s.examples}
-                link={s.to}
-                cta="Mehr dazu"
-                badge="Service"
-              />
+              <Reveal key={s.key} preset="fadeUp">
+                <Card
+                  title={s.title}
+                  lead={s.focus}
+                  body={s.focus}
+                  bullets={s.examples}
+                  link={s.to}
+                  cta="Mehr dazu"
+                  badge="Service"
+                />
+              </Reveal>
             ))}
-          </div>
+          </Reveal.Group>
           <ProductsCardsGrid />
         </div>
       </section>
@@ -272,9 +275,7 @@ const AboutPage: React.FC = () => {
                   Präzise auf Wirkung ausgerichtet.
                 </p>
                 <div className="flex items-center space-x-4 text-lg text-gray-700 dark:text-white/80 mb-8" data-animate>
-                  <span className="material-symbols-outlined text-vae-turquoise">
-                    location_on
-                  </span>
+                  <Icon name="location_on" className="text-vae-turquoise" />
                   <span>KI, Automation und Infrastruktur aus Heidelberg</span>
                 </div>
                 <div className="flex flex-wrap gap-3 text-[13px] text-text-secondary dark:text-white/90" data-stagger-group data-chip-group>
@@ -290,36 +291,28 @@ const AboutPage: React.FC = () => {
                   <div className="grid grid-cols-2 gap-6">
                     <div className="text-center">
                       <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span className="material-symbols-outlined text-2xl text-vae-turquoise">
-                          psychology
-                        </span>
+                        <Icon name="psychology" className="text-vae-turquoise" size={22} />
                       </div>
                       <div className="text-2xl font-bold text-text-light dark:text-white">KI-Systeme</div>
                       <div className="text-sm text-text-secondary">Intelligent</div>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span className="material-symbols-outlined text-2xl text-vae-turquoise">
-                          precision_manufacturing
-                        </span>
+                        <Icon name="precision_manufacturing" className="text-vae-turquoise" size={22} />
                       </div>
                       <div className="text-2xl font-bold text-text-light dark:text-white">Automation</div>
                       <div className="text-sm text-text-secondary">Effizient</div>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span className="material-symbols-outlined text-2xl text-vae-turquoise">
-                          cloud_sync
-                        </span>
+                        <Icon name="cloud_sync" className="text-vae-turquoise" size={22} />
                       </div>
                       <div className="text-2xl font-bold text-text-light dark:text-white">Infrastruktur</div>
                       <div className="text-sm text-text-secondary">Skalierbar</div>
                     </div>
                     <div className="text-center">
                       <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span className="material-symbols-outlined text-2xl text-vae-turquoise">
-                          verified_user
-                        </span>
+                        <Icon name="verified_user" className="text-vae-turquoise" size={22} />
                       </div>
                       <div className="text-2xl font-bold text-text-light dark:text-white">Open Source</div>
                       <div className="text-sm text-text-secondary">Transparent</div>
@@ -357,9 +350,7 @@ const AboutPage: React.FC = () => {
                 
                 <div className="flex items-center justify-center mb-6">
                   <div className="w-16 h-16 bg-vae-turquoise/30 rounded-2xl flex items-center justify-center">
-                    <span className="material-symbols-outlined text-2xl text-vae-turquoise animate-pulse">
-                      rocket_launch
-                    </span>
+                    <Icon name="rocket_launch" className="text-vae-turquoise animate-pulse" size={22} />
                   </div>
                 </div>
                 
@@ -373,18 +364,14 @@ const AboutPage: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                   <a 
                     href="/contact"
-                    className="btn-primary"
+                    className="btn-primary hover-lift press-bounce"
                   >
                     Jetzt Kontakt aufnehmen
-                    <span className="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform duration-300">
-                      arrow_forward
-                    </span>
+                    <Icon name="arrow_forward" className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </a>
                   
                   <div className="flex items-center text-text-secondary">
-                    <span className="material-symbols-outlined mr-2 text-vae-turquoise">
-                      schedule
-                    </span>
+                    <Icon name="schedule" className="mr-2 text-vae-turquoise" />
                     <span className="text-sm">24h Antwortzeit garantiert</span>
                   </div>
                 </div>

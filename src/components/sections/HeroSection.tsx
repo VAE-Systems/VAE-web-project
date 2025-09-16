@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
 import { motion } from 'framer-motion'
+import { CalendarClock, Grid3x3, Handshake, ShieldCheck, MapPin, Code as CodeIcon } from 'lucide-react'
 const NeuralNetworkBackground = React.lazy(() => import('./NeuralNetworkBackground'))
 import {
   heroTitle,
@@ -82,7 +83,7 @@ const HeroSection: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <TypewriterEffect texts={typewriterTexts} />
+                <TypewriterEffect texts={typewriterTexts} reducedMotion={reducedMotion} />
               </motion.div>
 
               <motion.p
@@ -113,21 +114,21 @@ const HeroSection: React.FC = () => {
                   className="text-center flex-1 flex items-center justify-center"
                   data-green-signal="true"
                 >
-                  <span className="material-symbols-outlined mr-2">schedule</span>
+                  <CalendarClock className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
                   30‑Min Strategie‑Gespräch buchen
                 </CtaLink>
                 <Link 
                   to="/products"
                   className="btn-secondary flex-1 text-center flex items-center justify-center"
                 >
-                  <span className="material-symbols-outlined mr-2">apps</span>
+                  <Grid3x3 className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
                   Produkte & Plattform ansehen
                 </Link>
                 <Link
                   to="/services"
                   className="btn-outline flex-1 text-center flex items-center justify-center"
                 >
-                  <span className="material-symbols-outlined mr-2">handshake</span>
+                  <Handshake className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
                   Services entdecken
                 </Link>
               </div>
@@ -154,21 +155,15 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 1 }}
             >
               <div className="flex items-center space-x-2">
-                <span className="material-symbols-outlined text-vae-turquoise">
-                  security
-                </span>
+                <ShieldCheck className="w-6 h-6 text-vae-turquoise" />
                 <span className="text-sm text-text-secondary">DSGVO-konform</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="material-symbols-outlined text-vae-turquoise">
-                  location_on
-                </span>
+                <MapPin className="w-6 h-6 text-vae-turquoise" />
                 <span className="text-sm text-text-secondary">Made in Germany</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="material-symbols-outlined text-vae-turquoise">
-                  code
-                </span>
+                <CodeIcon className="w-6 h-6 text-vae-turquoise" />
                 <span className="text-sm text-text-secondary">100% Open Source</span>
               </div>
             </motion.div>
@@ -192,12 +187,17 @@ const HeroSection: React.FC = () => {
 /**
  * Simple Typewriter Effect Component
  */
-const TypewriterEffect: React.FC<{ texts: string[] }> = ({ texts }) => {
+const TypewriterEffect: React.FC<{ texts: string[]; reducedMotion?: boolean }> = ({ texts, reducedMotion }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [currentText, setCurrentText] = React.useState('')
   const [isDeleting, setIsDeleting] = React.useState(false)
 
   React.useEffect(() => {
+    if (reducedMotion) {
+      // Render static headline without animation
+      setCurrentText(texts[0] || '')
+      return
+    }
     const timeout = setTimeout(() => {
       const fullText = texts[currentIndex]
       
@@ -216,7 +216,7 @@ const TypewriterEffect: React.FC<{ texts: string[] }> = ({ texts }) => {
     }, isDeleting ? 50 : 100)
 
     return () => clearTimeout(timeout)
-  }, [currentText, currentIndex, isDeleting, texts])
+  }, [currentText, currentIndex, isDeleting, texts, reducedMotion])
 
   return (
     <span className="inline-block" aria-live="polite">

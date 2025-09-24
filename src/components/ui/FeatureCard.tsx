@@ -1,5 +1,5 @@
 import React from 'react'
-import MagneticButton from './MagneticButton'
+import MagneticButton from './buttons/MagneticButton'
 
 interface FeatureCardProps {
   title: string

@@ -1,113 +1,134 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode
+} from 'react'
 
-type Theme = 'dark' | 'light'
+import {
+  applyTheme,
+  defaultTheme,
+  getStoredTheme,
+  getSystemTheme,
+  initialiseTheme,
+  listAvailableThemes,
+  persistTheme,
+  resolveTheme,
+  type ThemeDefinition,
+  type ThemeMode
+} from '@design-system/index'
 
-interface ThemeContextType {
-  theme: Theme
+interface ThemeContextValue {
+  theme: ThemeMode
+  definition: ThemeDefinition
+  availableThemes: ThemeMode[]
   toggleTheme: () => void
-  setTheme: (theme: Theme) => void
+  setTheme: (mode: ThemeMode) => void
+  isReady: boolean
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
+
+const isBrowser = () => typeof window !== 'undefined'
 
 interface ThemeProviderProps {
   children: ReactNode
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    // Check localStorage or system preference
-    const saved = localStorage.getItem('vae-theme')
-    if (saved === 'light' || saved === 'dark') return saved
+  const [theme, setTheme] = useState<ThemeMode>(defaultTheme)
+  const [isReady, setIsReady] = useState(false)
+  const hasExplicitPreference = useRef<boolean>(!!getStoredTheme())
 
-    // Check system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light'
-    }
-    return 'dark'
-  })
-
+  // Hydrate theme on client once DOM APIs are available
   useEffect(() => {
-    const root = document.documentElement
+    if (!isBrowser()) return
+    const mode = initialiseTheme()
+    setTheme(mode)
+    hasExplicitPreference.current = !!getStoredTheme()
+    setIsReady(true)
+  }, [])
 
-    // Remove previous theme classes
-    root.classList.remove('theme-dark', 'theme-light', 'dark')
+  // Re-apply theme whenever the mode changes (after hydration)
+  useEffect(() => {
+    if (!isBrowser() || !isReady) return
+    applyTheme(theme)
+    if (hasExplicitPreference.current) {
+      persistTheme(theme)
+    }
+  }, [theme, isReady])
 
-    // Add current theme class
-    root.classList.add(`theme-${theme}`)
-    // Ensure Tailwind dark: variants work by toggling the 'dark' class
-    if (theme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
+  // Respond to system theme changes when user has not set an explicit preference
+  useEffect(() => {
+    if (!isBrowser()) return
+    if (hasExplicitPreference.current) return
+
+    const media = window.matchMedia('(prefers-color-scheme: light)')
+    const handleChange = () => {
+      const systemTheme = media.matches ? 'light' : 'dark'
+      setTheme(systemTheme)
     }
 
-    // Update CSS custom properties based on theme
-    if (theme === 'light') {
-      // Light mode colors
-      root.style.setProperty('--color-bg-darker', '0 0% 98%')
-      root.style.setProperty('--color-bg-dark', '0 0% 95%')
-      root.style.setProperty('--color-bg-secondary', '0 0% 92%')
-      root.style.setProperty('--color-text-light', '0 0% 10%')
-      root.style.setProperty('--color-text-secondary', '0 0% 30%')
-      root.style.setProperty('--color-text-muted', '0 0% 50%')
-      // Calmer, klarer Mint‑Ton für Aktionen & Akzente
-      root.style.setProperty('--color-vae-turquoise', '157 72% 42%')
-      root.style.setProperty('--color-vae-black', '0 0% 10%')
-    } else {
-      // Dark mode colors (original)
-      root.style.setProperty('--color-bg-darker', '0 0% 4%')
-      root.style.setProperty('--color-bg-dark', '0 0% 8%')
-      root.style.setProperty('--color-bg-secondary', '0 0% 12%')
-      root.style.setProperty('--color-text-light', '0 0% 95%')
-      root.style.setProperty('--color-text-secondary', '0 0% 70%')
-      root.style.setProperty('--color-text-muted', '0 0% 50%')
-      root.style.setProperty('--color-vae-turquoise', '157 100% 47%')
-      root.style.setProperty('--color-vae-black', '0 0% 4%')
+    try {
+      media.addEventListener('change', handleChange)
+      return () => media.removeEventListener('change', handleChange)
+    } catch {
+      // Fallback for older browsers
+      media.onchange = handleChange
+      return () => {
+        media.onchange = null
+      }
     }
+  }, [])
 
-    // Save to localStorage
-    localStorage.setItem('vae-theme', theme)
+  const availableThemes = useMemo(() => listAvailableThemes(), [])
+  const definition = useMemo(() => resolveTheme(theme), [theme])
 
-    // Optional: Light-mode green budget telemetry
-    // Telemetrie optional: nur wenn Flag aktiv (vermeidet Rauschen)
-    const devFlag = (window as any).__VAE_DEV?.logGreenBudget || localStorage.getItem('vae:logGreenBudget') === '1'
-    if (theme === 'light' && devFlag) {
-      setTimeout(() => {
-        try {
-          const candidates = Array.from(document.querySelectorAll('[data-green-signal="true"]')) as HTMLElement[]
-          const inView = candidates.filter(el => {
-            const r = el.getBoundingClientRect()
-            return r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < (window.innerHeight || 0) && r.left < (window.innerWidth || 0)
-          })
-          const count = inView.length
-          if (count > 2) {
-            console.warn(`LIGHT_MODE_GREEN_BUDGET_EXCEEDED: route=${location.pathname} count=${count}`)
-          }
-        } catch { /* noop */ }
-      }, 0)
-    }
-  }, [theme])
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark'
+      hasExplicitPreference.current = true
+      persistTheme(next)
+      return next
+    })
+  }, [])
 
-  const toggleTheme = () => {
-    setThemeState(prev => prev === 'dark' ? 'light' : 'dark')
-  }
+  const setThemeSafe = useCallback((mode: ThemeMode) => {
+    const next = resolveTheme(mode).mode
+    hasExplicitPreference.current = true
+    persistTheme(next)
+    setTheme(next)
+  }, [])
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme)
-  }
+  const value = useMemo<ThemeContextValue>(() => ({
+    theme,
+    definition,
+    availableThemes,
+    toggleTheme,
+    setTheme: setThemeSafe,
+    isReady
+  }), [theme, definition, availableThemes, toggleTheme, setThemeSafe, isReady])
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   )
 }
 
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext)
-  if (context === undefined) {
+export const useTheme = (): ThemeContextValue => {
+  const ctx = useContext(ThemeContext)
+  if (!ctx) {
     throw new Error('useTheme must be used within a ThemeProvider')
   }
-  return context
+  return ctx
+}
+
+export const getInitialTheme = (): ThemeMode => {
+  if (!isBrowser()) return defaultTheme
+  return getStoredTheme() ?? getSystemTheme()
 }

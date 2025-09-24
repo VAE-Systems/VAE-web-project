@@ -14,10 +14,11 @@
 ## ✨ Features
 
 ### 🎨 **Modern Design System**
-- **VAE Corporate Identity** - Authentic turquoise branding (`#00ffa5`)
-- **Glassmorphism Effects** - Modern translucent UI elements
-- **Responsive Design** - Mobile-first approach for all devices
-- **Dark Theme** - Professional dark mode with accent colors
+- **Design Tokens** – Farbschemata, Typografie & Spacing zentral in `src/design-system`
+- **VAE Corporate Identity** – Authentisches Türkis (`#00ffa5`) als Primary
+- **Glassmorphism Effects** – Moderne translucent UI Elemente
+- **Responsive Design** – Mobile-first für alle Viewports
+- **Dual Theme** – Light & Dark Mode mit robustem Theme Manager
 
 ### 🏗️ **Technical Architecture**
 - **React 18** - Latest React with concurrent features
@@ -82,19 +83,18 @@ vae-web-project/
 │   ├── LOGO_02.svg
 │   └── logo.svg
 ├── 📁 src/
-│   ├── 📄 App.tsx              # Main application component
-│   ├── 📄 main.tsx             # Application entry point
+│   ├── 📄 App.tsx               # Haupt-App inkl. Routing & ThemeProvider
+│   ├── 📄 main.tsx              # Entry-Point (ReactDOM.createRoot)
 │   ├── 📁 components/
-│   │   ├── 📁 layout/
-│   │   │   ├── Header.tsx      # Navigation header
-│   │   │   └── Footer.tsx      # Site footer
-│   │   ├── 📁 pages/
-│   │   │   └── HomePage.tsx    # Main landing page
-│   │   └── 📁 sections/
-│   │       ├── HeroSection.tsx     # Hero with animations
-│   │       └── ServicesSection.tsx # Service portfolio
-│   └── 📁 styles/
-│       └── globals.css         # Design system & custom styles
+│   │   ├── 📁 layout/           # Header, Footer, globale Navigation
+│   │   ├── 📁 pages/            # Page-Container (Routing Targets)
+│   │   ├── 📁 sections/         # Inhaltliche Sektionen (Hero, Services, ...)
+│   │   └── 📁 ui/               # Wiederverwendbare UI-Bausteine
+│   │       └── 📁 buttons/      # Interaktive Buttons (z. B. MagneticButton)
+│   ├── 📁 design-system/        # Tokens, ThemeManager & Typografie-Helfer
+│   ├── 📁 contexts/             # React Contexts (ThemeContext, ...)
+│   ├── 📁 hooks/                # Wiederverwendbare Hooks (Animation, Scroll ...)
+│   └── 📁 styles/               # Globale Styles, Animationen & Theme-CSS
 ├── 📄 tailwind.config.js       # Tailwind configuration
 ├── 📄 vite.config.ts          # Vite build configuration
 └── 📄 tsconfig.json           # TypeScript configuration
@@ -102,17 +102,29 @@ vae-web-project/
 
 ## 🎨 Design System
 
-### Colors
-```css
---vae-turquoise: #00ffa5        /* Primary brand color */
---vae-turquoise-dark: #00cc84   /* Darker variant */
---vae-turquoise-light: #33ffb8  /* Lighter variant */
+### Theme & Tokens
+
+Alle Designparameter leben in `src/design-system`:
+
+- `tokens.ts` – Light/Dark Themes (Farben, Spacing, Radii, Schatten, Transitions)
+- `themeManager.ts` – Wendet Tokens auf den DOM an & synchronisiert `data-theme-mode`
+- `typography.ts` – Helfer um Typografiestile (`getTypographyStyle`) konsistent zu nutzen
+
+**Nutzung im Code**
+
+```tsx
+import { MagneticButton } from '@/components/ui'
+import { getTypographyStyle } from '@design-system/typography'
+
+<MagneticButton textStyle="headline" glowEffect>
+  Jetzt starten
+</MagneticButton>
+
+const headlineStyles = getTypographyStyle('headline')
 ```
 
-### Typography
-- **Font Family**: Inter (Google Fonts)
-- **Responsive Scale**: 14px → 96px
-- **Font Weights**: 400, 500, 600, 700
+**Farben** werden als CSS-Custom-Properties zur Verfügung gestellt (`--ds-color-*`).
+Bestehende Legacy-Variablen (`--theme-*`) bleiben für Abwärtskompatibilität erhalten.
 
 ## 📞 Contact
 

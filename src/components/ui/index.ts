@@ -1,43 +1,31 @@
 /**
- * UI Components Barrel Export
- * ===========================
+ * Zentraler Export für UI-Komponenten.
  *
- * Centralized exports for all UI components to simplify imports
- * and maintain clean import statements throughout the application.
- *
- * Usage:
- * ```tsx
- * import { Text, MagneticButton, Heading1 } from '@/components/ui'
- * ```
+ * Halte Importe konsistent über `@/components/ui` und kapsle interne Struktur.
  */
 
-// Typography Components
-export {
-  Body,
-  BodyLarge,
-  BodySmall, ButtonText, Caption, Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6, Label, Text
-} from './Text'
-
-// Interactive Components
-export { default as DesignSystemControls } from './DesignSystemControls'
-export { default as MagneticButton } from './MagneticButton'
-
-// Theme Components
-export { ThemeDemo } from './ThemeDemo'
+export { default as Button } from './Button'
+export { default as Card } from './Card'
+export { default as CtaLink } from './CtaLink'
+export { default as FeatureCard } from './FeatureCard'
+export { default as FloatingElement } from './FloatingElement'
+export { default as GlossarySection } from './GlossarySection'
+export { default as Icon } from './Icon'
+export { default as LoadingSpinner } from './LoadingSpinner'
+export { default as MaterialIcon } from './MaterialIcon'
+export { default as ReferenceList } from './ReferenceList'
+export { default as Reveal } from './Reveal'
+export { default as SpotlightCard } from './SpotlightCard'
 export { ThemeToggle } from './ThemeToggle'
+export { default as TouchButton } from './TouchButton'
+export { default as TouchCard } from './TouchCard'
+export { default as Seo } from './Seo'
 
-// Re-export types for convenience
-export type {
-  FontSize,
-  FontWeight, LetterSpacing, LineHeight, TypographyProps
-} from '../../types/typography'
+export { MagneticButton } from './buttons'
 
-// Component type exports
-export type { DesignSystemControlsProps } from './DesignSystemControls'
-export type { MagneticButtonProps } from './MagneticButton'
+export type { MagneticButtonProps } from './buttons/MagneticButton'
+export type { ThemeToggleProps } from './ThemeToggle'
 
+// Named exports
+export * from './Glossary'
+export * from './LazyComponents'

@@ -4,7 +4,7 @@ import CtaLink from '@/components/ui/CtaLink'
 import ReferenceList from '../ui/ReferenceList'
 import Seo from '../ui/Seo'
 import Breadcrumbs from '../navigation/Breadcrumbs'
-import MagneticButton from '../ui/MagneticButton'
+import MagneticButton from '../ui/buttons/MagneticButton'
 import { vaeCoreContent } from '../../content/vaeCore'
 import { Settings, TrendingUp, Shield, Link as LinkIcon, Layers, Lock, RefreshCw, ShieldCheck, X, Check, Zap } from 'lucide-react'
 

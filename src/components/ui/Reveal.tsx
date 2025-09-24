@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { motion, type Variants as FMVariants } from 'framer-motion'
 import { DefaultViewport, Variants as PresetVariants, Springs } from '@/utils/motion'
 
 type Preset = keyof typeof PresetVariants
 
-interface RevealProps extends React.HTMLAttributes<HTMLDivElement> {
+interface RevealProps extends React.HTMLAttributes<HTMLElement> {
   as?: keyof JSX.IntrinsicElements
   preset?: Preset
   delay?: number
@@ -30,19 +30,20 @@ export const Reveal: React.FC<RevealProps> & { Group: React.FC<RevealGroupProps>
     ? (customVariants(delay) as any)
     : (customVariants ?? (PresetVariants[preset] as any))
 
+  const MotionComponent = useMemo(() => motion(Tag as any), [Tag]) as unknown as React.ComponentType<any>
+
   return (
-    <motion.div
-      {...rest}
+    <MotionComponent
+      {...(rest as Record<string, unknown>)}
       className={className}
       initial="hidden"
       whileInView="visible"
       viewport={{ once, amount, margin }}
       variants={variants}
       custom={delay}
-      as={Tag as any}
     >
       {children}
-    </motion.div>
+    </MotionComponent>
   )
 }
 
@@ -71,7 +72,7 @@ const RevealGroup: React.FC<RevealGroupProps> = ({
 
   return (
     <motion.div
-      {...rest}
+      {...(rest as Record<string, unknown>)}
       className={className}
       initial="hidden"
       whileInView="visible"
@@ -87,4 +88,3 @@ const RevealGroup: React.FC<RevealGroupProps> = ({
 Reveal.Group = RevealGroup
 
 export default Reveal
-

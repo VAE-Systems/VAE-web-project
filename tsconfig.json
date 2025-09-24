@@ -28,7 +28,8 @@
       "@components/*": ["./src/components/*"],
       "@styles/*": ["./src/styles/*"],
       "@assets/*": ["./src/assets/*"],
-      "@types/*": ["./src/types/*"]
+      "@types/*": ["./src/types/*"],
+      "@design-system/*": ["./src/design-system/*"]
     },
 
     /* Vite environment types */

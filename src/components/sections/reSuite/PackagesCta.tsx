@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom'
 const cardBase = 'p-6 rounded-2xl bg-white/5 border border-white/10'
 
 const PackagesCta: React.FC = () => (
-  <div className="grid md:grid-cols-2 gap-8 mb-10">
+  <div className="mb-10 grid gap-8 md:grid-cols-2">
     <div className={cardBase}>
-      <h4 className="text-sm font-semibold text-white mb-3">Packages</h4>
+      <h4 className="mb-3 text-sm font-semibold text-white">Packages</h4>
       <p className="text-sm text-text-secondary">
         Konfigurierte Bündel für typische Einsatzszenarien – modular kombinierbar.
       </p>
     </div>
     <div className={`${cardBase} flex flex-col justify-between`}>
       <div>
-        <h4 className="text-sm font-semibold text-white mb-3">Interesse geweckt?</h4>
-        <p className="text-sm text-text-secondary mb-4">
+        <h4 className="mb-3 text-sm font-semibold text-white">Interesse geweckt?</h4>
+        <p className="mb-4 text-sm text-text-secondary">
           Vereinbare eine Demo oder ein unverbindliches Beratungsgespräch.
         </p>
       </div>

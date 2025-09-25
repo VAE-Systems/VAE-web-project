@@ -35,8 +35,10 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, currentStep
     <nav aria-label="Breadcrumb" className={['container-vae py-4', className].filter(Boolean).join(' ')}>
       {showProgress && (
         <div className="mb-2 flex items-center gap-2 text-xs text-text-muted">
-          <span>Schritt {currentStep} von {totalSteps}</span>
-          <div className="flex-1 h-1 bg-bg-primary/20 rounded-full overflow-hidden">
+          <span>
+            Schritt {currentStep} von {totalSteps}
+          </span>
+          <div className="bg-bg-primary/20 h-1 flex-1 overflow-hidden rounded-full">
             <div
               className="h-full bg-vae-turquoise transition-all duration-300 ease-out"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
@@ -49,7 +51,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, currentStep
           <li key={item.path} className="flex items-center">
             {idx > 0 && <span className="mx-2 text-text-muted/60">/</span>}
             {idx === items.length - 1 ? (
-              <span className="text-text-secondary font-medium" aria-current="page">{item.label}</span>
+              <span className="font-medium text-text-secondary" aria-current="page">
+                {item.label}
+              </span>
             ) : (
               <Link to={item.path} className="text-vae-turquoise hover:underline">
                 {item.label}

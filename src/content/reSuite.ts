@@ -21,7 +21,7 @@ export const reSuiteIntro = {
   title: 'VAE Re: Suite – Website & Data Spec – Kompaktversion',
   intro:
     'Re: – Unsere Antwort auf echte Probleme. In der E‑Mail heißt „Re:“ Antwort. Bei VAE steht es für Reaktion, Reflexion, Resultat. Re:-Bausteine sind betreibbare Komplettsysteme auf dem VAE CORE – einzeln wirksam, im Verbund stärker.',
-  bullets: ['Schnell produktiv', 'Messbar & auditierbar', 'Modular erweiterbar']
+  bullets: ['Schnell produktiv', 'Messbar & auditierbar', 'Modular erweiterbar'],
 }
 
 export const reModules: ReModule[] = [
@@ -35,12 +35,12 @@ export const reModules: ReModule[] = [
       'Website‑Widget & E‑Mail‑Antwortsystem',
       'Erweiterbar um WhatsApp/Telegram/Slack',
       'Quellen‑Zitation & Feedback‑Loop',
-      'Marken‑ & Policy‑gesteuert'
+      'Marken‑ & Policy‑gesteuert',
     ],
     coreLayers: ['Ingestion', 'Retrieval', 'Orchestration', 'Observability'],
     integrations: ['Zendesk', 'HubSpot', 'Notion', 'Confluence'],
     demoFlow: ['Frage', 'Suchen & Finden', 'Antwort mit Quelle', 'Feedback'],
-    status: 'Concept'
+    status: 'Concept',
   },
   {
     slug: 'research',
@@ -52,12 +52,12 @@ export const reModules: ReModule[] = [
       'Automatisierte Web‑ & Dokumentenrecherche',
       'Wiederkehrende Markt‑Updates',
       'Konkurrenzanalyse & Benchmark‑Reports',
-      'Zielgerichtete Optimierungsrecherche'
+      'Zielgerichtete Optimierungsrecherche',
     ],
     coreLayers: ['Ingestion', 'Retrieval', 'Observability'],
     integrations: ['Google Search API', 'Interne Wissensdatenbanken'],
     demoFlow: ['Anfrage', 'Quellen scannen', 'Analyse erstellen', 'Report speichern'],
-    status: 'Concept'
+    status: 'Concept',
   },
   {
     slug: 'report',
@@ -69,12 +69,12 @@ export const reModules: ReModule[] = [
       'Monats-/Quartals-/Ad‑hoc‑Reports',
       'Automatisierte Datenaggregation',
       'KPI‑Erklärungen & Visualisierungen',
-      'Export in PDF, Slides, Notion'
+      'Export in PDF, Slides, Notion',
     ],
     coreLayers: ['Orchestration', 'Observability'],
     integrations: ['BI‑Tools', 'ERP', 'CRM'],
     demoFlow: ['Daten abrufen', 'KPIs berechnen', 'Report generieren', 'Export senden'],
-    status: 'Concept'
+    status: 'Concept',
   },
   {
     slug: 'release',
@@ -86,12 +86,12 @@ export const reModules: ReModule[] = [
       'Newsletter‑Generierung mit KI',
       'Rückfragen automatisch beantworten',
       'Zielgruppen‑Segmentierung',
-      'Integration mit CRM und Support'
+      'Integration mit CRM und Support',
     ],
     coreLayers: ['Orchestration', 'Retrieval'],
     integrations: ['Mailchimp', 'HubSpot', 'Sendinblue'],
     demoFlow: ['Neues Update', 'Nachricht generieren', 'Versand', 'Antworten verarbeiten'],
-    status: 'Concept'
+    status: 'Concept',
   },
   {
     slug: 'recruit',
@@ -103,12 +103,12 @@ export const reModules: ReModule[] = [
       'Skill‑Extraction aus CV/Profilen',
       'Constraint‑Matching',
       'ATS/LinkedIn‑Anbindung',
-      'Vorlagen für Outreach'
+      'Vorlagen für Outreach',
     ],
     coreLayers: ['Orchestration'],
     integrations: ['Greenhouse', 'Lever', 'LinkedIn'],
     demoFlow: ['Profile importieren', 'Matchen', 'Vorschläge', 'Outreach'],
-    status: 'Concept'
+    status: 'Concept',
   },
   {
     slug: 'reboard',
@@ -120,34 +120,34 @@ export const reModules: ReModule[] = [
       'Q&A zu Firmen‑ & Tool‑Wissen',
       'Ansprechpartner‑Finder',
       'Guides & Schulungsressourcen',
-      'Feedback & Lücken‑Meldung'
+      'Feedback & Lücken‑Meldung',
     ],
     coreLayers: ['Retrieval', 'Orchestration', 'Observability'],
     integrations: ['Confluence', 'SharePoint', 'HRIS'],
     demoFlow: ['Frage', 'Interne Quelle', 'Antwort/Eskalation', 'Feedback'],
-    status: 'Concept'
-  }
+    status: 'Concept',
+  },
 ]
 
 export const rePackages: RePackage[] = [
   {
     name: 'VAE Assist Suite – Dialog & Qualität',
     contains: ['Re:spond', 'Re:view', 'Re:search'],
-    benefit: 'Auditierbarer Chat/Wissenshub, Qualität messbar, Zitation & Traceability'
+    benefit: 'Auditierbarer Chat/Wissenshub, Qualität messbar, Zitation & Traceability',
   },
   {
     name: 'VAE Ops Suite – Betrieb & Incident',
     contains: ['Re:solve', 'Re:mind', 'Re:port'],
-    benefit: 'Schnellere Incidents, Proaktive Warnungen, Automatisierte Reports'
+    benefit: 'Schnellere Incidents, Proaktive Warnungen, Automatisierte Reports',
   },
   {
     name: 'VAE Growth Suite – Kunden & Engagement',
     contains: ['Re:tain', 'Re:cruit'],
-    benefit: 'Höhere Bindung, Schnelleres Staffing'
+    benefit: 'Höhere Bindung, Schnelleres Staffing',
   },
   {
     name: 'VAE Dev Suite – Releases & Qualität',
     contains: ['Re:lease', 'Re:port', 'Re:view'],
-    benefit: 'Transparente Änderungen, Messbare Qualität, Wiederverwendbare Reports'
-  }
+    benefit: 'Transparente Änderungen, Messbare Qualität, Wiederverwendbare Reports',
+  },
 ]

@@ -15,7 +15,7 @@ const TestimonialsSection: React.FC = () => {
 
     const ctx = gsap.context(() => {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      
+
       if (reduced) {
         gsap.set([headerRef.current, statsRef.current, testimonialsRef.current, ctaRef.current], { opacity: 1, y: 0 })
         return
@@ -24,23 +24,24 @@ const TestimonialsSection: React.FC = () => {
       if (!sectionRef.current) return
 
       // Header Animation mit scrub
-      gsap.fromTo(headerRef.current, 
+      gsap.fromTo(
+        headerRef.current,
         {
           opacity: 0,
-          y: 80
+          y: 80,
         },
         {
           opacity: 1,
           y: 0,
-          ease: "none",
+          ease: 'none',
           scrollTrigger: {
             trigger: headerRef.current,
-            start: "top 90%",
-            end: "top 70%",
+            start: 'top 90%',
+            end: 'top 70%',
             scrub: 1,
-            toggleActions: "play none none reverse"
+            toggleActions: 'play none none reverse',
           },
-          force3D: true
+          force3D: true,
         }
       )
 
@@ -49,9 +50,18 @@ const TestimonialsSection: React.FC = () => {
         const statItems = statsRef.current.children
         gsap.set(statItems, { opacity: 0, y: 60, scale: 0.8 })
         ScrollTrigger.batch(statItems, {
-          start: "top 95%",
-          onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, scale: 1, ease: "power2.out", duration: 0.8, stagger: 0.1, force3D: true }),
-          once: true
+          start: 'top 95%',
+          onEnter: batch =>
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              ease: 'power2.out',
+              duration: 0.8,
+              stagger: 0.1,
+              force3D: true,
+            }),
+          once: true,
         })
       }
 
@@ -60,29 +70,39 @@ const TestimonialsSection: React.FC = () => {
         const testimonialCards = testimonialsRef.current.children
         gsap.set(testimonialCards, { opacity: 0, y: 80, scale: 0.9 })
         ScrollTrigger.batch(testimonialCards, {
-          start: "top 95%",
-          onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, scale: 1, ease: "power2.out", duration: 0.8, stagger: 0.1, force3D: true }),
-          once: true
+          start: 'top 95%',
+          onEnter: batch =>
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              ease: 'power2.out',
+              duration: 0.8,
+              stagger: 0.1,
+              force3D: true,
+            }),
+          once: true,
         })
       }
 
       // CTA Animation
       if (ctaRef.current) {
-        gsap.fromTo(ctaRef.current, 
+        gsap.fromTo(
+          ctaRef.current,
           {
             opacity: 0,
-            y: 60
+            y: 60,
           },
           {
             opacity: 1,
             y: 0,
-            ease: "power2.out",
+            ease: 'power2.out',
             duration: 0.8,
             scrollTrigger: {
               trigger: ctaRef.current,
-              start: "top 90%"
+              start: 'top 90%',
             },
-            force3D: true
+            force3D: true,
           }
         )
       }
@@ -96,23 +116,23 @@ const TestimonialsSection: React.FC = () => {
     {
       value: '340%',
       label: 'Durchschnittlicher ROI',
-      description: 'unserer KI-Implementierungen'
+      description: 'unserer KI-Implementierungen',
     },
     {
       value: '65%',
       label: 'Kostenreduktion',
-      description: 'durch Open Source Migration'
+      description: 'durch Open Source Migration',
     },
     {
       value: '99.9%',
       label: 'Uptime',
-      description: 'bei lokalen Hosting-Lösungen'
+      description: 'bei lokalen Hosting-Lösungen',
     },
     {
       value: '24h',
       label: 'Support Response',
-      description: 'Antwortzeit garantiert'
-    }
+      description: 'Antwortzeit garantiert',
+    },
   ]
 
   const renderStars = (rating: number) => {
@@ -122,7 +142,7 @@ const TestimonialsSection: React.FC = () => {
         width="16"
         height="16"
         viewBox="0 0 24 24"
-        fill={index < rating ? "currentColor" : "none"}
+        fill={index < rating ? 'currentColor' : 'none'}
         stroke="currentColor"
         strokeWidth="2"
         className="text-yellow-400"
@@ -133,80 +153,60 @@ const TestimonialsSection: React.FC = () => {
   }
 
   return (
-    <section 
-      id="testimonials" 
-      className="relative py-24 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary"
+    <section
+      id="testimonials"
+      className="relative bg-gradient-to-br from-bg-darker via-bg-dark to-bg-secondary py-24"
       ref={sectionRef}
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_25%_25%,hsla(var(--color-vae-turquoise),0.06),transparent_50%),radial-gradient(circle_at_75%_75%,hsla(var(--color-vae-turquoise),0.04),transparent_50%)]"
-        />
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-0 top-0 h-full w-full bg-[radial-gradient(circle_at_25%_25%,hsla(var(--color-vae-turquoise),0.06),transparent_50%),radial-gradient(circle_at_75%_75%,hsla(var(--color-vae-turquoise),0.04),transparent_50%)]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative mx-auto max-w-7xl px-6">
         {/* Section Header */}
-        <div className="text-center mb-16" ref={headerRef}>
+        <div className="mb-16 text-center" ref={headerRef}>
           <h2 className="h2 heading-gradient mb-4">Erfolgsgeschichten</h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            {testimonialsHero.subtitle}
-          </p>
+          <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-300">{testimonialsHero.subtitle}</p>
         </div>
 
         {/* Success Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20" ref={statsRef}>
+        <div className="mb-20 grid grid-cols-2 gap-8 lg:grid-cols-4" ref={statsRef}>
           {successMetrics.map((metric, index) => (
-            <div 
+            <div
               key={index}
-              className="text-center bg-gradient-to-br from-bg-primary/5 dark:from-white/5 to-bg-primary/2 dark:to-white/2 backdrop-blur-xl rounded-2xl p-6 border border-border-primary dark:border-white/10"
+              className="from-bg-primary/5 to-bg-primary/2 dark:to-white/2 border-border-primary rounded-2xl border bg-gradient-to-br p-6 text-center backdrop-blur-xl dark:border-white/10 dark:from-white/5"
             >
-              <div className="text-3xl md:text-4xl font-bold text-vae-turquoise mb-2">
-                {metric.value}
-              </div>
-              <div className="text-text-light dark:text-white font-semibold mb-1">
-                {metric.label}
-              </div>
-              <div className="text-gray-400 text-sm">
-                {metric.description}
-              </div>
+              <div className="mb-2 text-3xl font-bold text-vae-turquoise md:text-4xl">{metric.value}</div>
+              <div className="mb-1 font-semibold text-text-light dark:text-white">{metric.label}</div>
+              <div className="text-sm text-gray-400">{metric.description}</div>
             </div>
           ))}
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" ref={testimonialsRef}>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3" ref={testimonialsRef}>
           {testimonials.map((testimonial, index) => (
-            <div 
+            <div
               key={index}
-              className="bg-gradient-to-br from-bg-primary/8 dark:from-white/8 to-bg-primary/4 dark:to-white/4 backdrop-blur-xl rounded-2xl p-8 border border-border-primary dark:border-white/15 hover:border-vae-turquoise/30 transition-all duration-300"
+              className="from-bg-primary/8 dark:from-white/8 to-bg-primary/4 dark:to-white/4 border-border-primary rounded-2xl border bg-gradient-to-br p-8 backdrop-blur-xl transition-all duration-300 hover:border-vae-turquoise/30 dark:border-white/15"
             >
               {/* Rating */}
-              <div className="flex items-center gap-1 mb-4">
-                {renderStars(testimonial.rating)}
-              </div>
+              <div className="mb-4 flex items-center gap-1">{renderStars(testimonial.rating)}</div>
 
               {/* Content */}
-              <blockquote className="text-gray-300 leading-relaxed mb-6">
-                "{testimonial.content}"
-              </blockquote>
+              <blockquote className="mb-6 leading-relaxed text-gray-300">"{testimonial.content}"</blockquote>
 
               {/* Project Tag */}
-              <div className="inline-block bg-vae-turquoise/10 text-vae-turquoise px-3 py-1 rounded-full text-sm font-medium mb-4">
+              <div className="mb-4 inline-block rounded-full bg-vae-turquoise/10 px-3 py-1 text-sm font-medium text-vae-turquoise">
                 {testimonial.project}
               </div>
 
               {/* Author */}
-              <div className="border-t border-border-primary dark:border-white/10 pt-4">
-                <div className="font-semibold text-text-light dark:text-white">
-                  {testimonial.name}
-                </div>
-                <div className="text-sm text-gray-400">
-                  {testimonial.position}
-                </div>
-                <div className="text-sm text-vae-turquoise">
-                  {testimonial.company}
-                </div>
+              <div className="border-border-primary border-t pt-4 dark:border-white/10">
+                <div className="font-semibold text-text-light dark:text-white">{testimonial.name}</div>
+                <div className="text-sm text-gray-400">{testimonial.position}</div>
+                <div className="text-sm text-vae-turquoise">{testimonial.company}</div>
               </div>
             </div>
           ))}
@@ -214,18 +214,16 @@ const TestimonialsSection: React.FC = () => {
 
         {/* Call to Action */}
         <div className="mt-16 text-center" ref={ctaRef}>
-          <div className="bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 rounded-2xl p-8 border border-vae-turquoise/20">
-            <h3 className="text-2xl font-semibold text-text-light dark:text-white mb-4">
+          <div className="rounded-2xl border border-vae-turquoise/20 bg-gradient-to-r from-vae-turquoise/10 to-vae-turquoise/5 p-8">
+            <h3 className="mb-4 text-2xl font-semibold text-text-light dark:text-white">
               Werden Sie unser nächster Erfolg
             </h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              {testimonialsCTA.description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-vae-turquoise hover:bg-vae-turquoise-dark text-bg-darker dark:text-white px-8 py-3 rounded-lg font-semibold hover:-translate-y-1 transition-all duration-300 hover:shadow-lg hover:shadow-vae-turquoise/30">
+            <p className="mx-auto mb-6 max-w-2xl text-gray-300">{testimonialsCTA.description}</p>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <button className="rounded-lg bg-vae-turquoise px-8 py-3 font-semibold text-bg-darker transition-all duration-300 hover:-translate-y-1 hover:bg-vae-turquoise-dark hover:shadow-lg hover:shadow-vae-turquoise/30 dark:text-white">
                 Projekt besprechen
               </button>
-              <button className="border border-vae-turquoise text-vae-turquoise px-8 py-3 rounded-lg font-semibold hover:bg-vae-turquoise/10 transition-all duration-300">
+              <button className="rounded-lg border border-vae-turquoise px-8 py-3 font-semibold text-vae-turquoise transition-all duration-300 hover:bg-vae-turquoise/10">
                 Referenzen anfordern
               </button>
             </div>

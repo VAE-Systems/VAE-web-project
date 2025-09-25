@@ -16,7 +16,7 @@ export class FocusManager {
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
     document.addEventListener('mousedown', this.handleMouseDown.bind(this))
     document.addEventListener('touchstart', this.handleTouchStart.bind(this))
-    
+
     // Handle focus events
     document.addEventListener('focusin', this.handleFocusIn.bind(this))
     document.addEventListener('focusout', this.handleFocusOut.bind(this))

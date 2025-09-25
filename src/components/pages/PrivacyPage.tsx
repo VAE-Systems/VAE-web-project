@@ -17,19 +17,16 @@ const PrivacyPage: React.FC = () => {
         description="Datenschutzhinweise der VAE Systems UG (haftungsbeschränkt) – Informationen nach DSGVO zu Art, Umfang und Zweck der Verarbeitung personenbezogener Daten."
         canonicalPath="/privacy"
       />
-      <section className="pt-40 pb-24 container-vae max-w-4xl">
+      <section className="container-vae max-w-4xl pb-24 pt-40">
         <h1 className="h1 heading-gradient mb-10">Datenschutzerklärung</h1>
 
         {/* Privacy Settings Link */}
-        <div className="mb-8 p-6 bg-bg-secondary border border-border-primary rounded-lg">
-          <h2 className="text-lg font-semibold text-text-light mb-2">Ihre Datenschutz-Einstellungen</h2>
-          <p className="text-text-muted mb-4">
+        <div className="border-border-primary mb-8 rounded-lg border bg-bg-secondary p-6">
+          <h2 className="mb-2 text-lg font-semibold text-text-light">Ihre Datenschutz-Einstellungen</h2>
+          <p className="mb-4 text-text-muted">
             Verwalten Sie Ihre Cookie-Einstellungen und Datenschutz-Präferenzen individuell.
           </p>
-          <Link
-            to="/privacy/settings"
-            className="btn-primary inline-block"
-          >
+          <Link to="/privacy/settings" className="btn-primary inline-block">
             Datenschutz-Einstellungen öffnen
           </Link>
         </div>
@@ -37,7 +34,7 @@ const PrivacyPage: React.FC = () => {
         <div className="space-y-10 text-sm leading-relaxed text-text-secondary">
           {privacyContent.sections.map(section => (
             <section id={section.id} key={section.id}>
-              <h2 className="h3 text-text-light mb-2">{section.title}</h2>
+              <h2 className="h3 mb-2 text-text-light">{section.title}</h2>
               {typeof section.body === 'string' ? <p>{section.body}</p> : section.body}
             </section>
           ))}

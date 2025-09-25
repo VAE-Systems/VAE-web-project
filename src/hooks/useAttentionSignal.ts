@@ -1,6 +1,6 @@
 /**
  * useAttentionSignal
- * 
+ *
  * Adds a periodic, viewport-aware sheen signal to a CTA element.
  * Features:
  * - Triggers a 1.3s sheen only when element is visible (>= 50% in viewport)
@@ -89,7 +89,7 @@ export const useAttentionSignal = (
 
     // Viewport observer
     const io = new IntersectionObserver(
-      (entries) => {
+      entries => {
         const entry = entries[0]
         visibleRef.current = entry.isIntersecting && entry.intersectionRatio >= 0.5
       },
@@ -98,15 +98,23 @@ export const useAttentionSignal = (
     io.observe(el)
 
     // Pause on hover/focus
-    const onEnter = () => { pausedRef.current = true }
-    const onLeave = () => { pausedRef.current = false }
+    const onEnter = () => {
+      pausedRef.current = true
+    }
+    const onLeave = () => {
+      pausedRef.current = false
+    }
     el.addEventListener('mouseenter', onEnter)
     el.addEventListener('mouseleave', onLeave)
     el.addEventListener('focus', onEnter, true)
     el.addEventListener('blur', onLeave, true)
 
     // Stop after click
-    const onClick = () => { stoppedRef.current = true; clearTick(); el.removeAttribute('data-signal-state') }
+    const onClick = () => {
+      stoppedRef.current = true
+      clearTick()
+      el.removeAttribute('data-signal-state')
+    }
     el.addEventListener('click', onClick)
 
     // Kickoff (only if visible soon; otherwise first interval will catch it)
@@ -123,4 +131,3 @@ export const useAttentionSignal = (
     }
   }, [elRef, intervalMs, initialDelayMs, jitterMs, maxRuns, nudgeAfter])
 }
-

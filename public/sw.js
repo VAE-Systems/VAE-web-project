@@ -9,15 +9,10 @@ const STATIC_CACHE = 'vae-static-v1'
 const DYNAMIC_CACHE = 'vae-dynamic-v1'
 
 // Files to cache immediately
-const STATIC_FILES = [
-  '/',
-  '/manifest.json',
-  '/LOGO_01_white.svg',
-  '/App_Logo_light.svg'
-]
+const STATIC_FILES = ['/', '/manifest.json', '/LOGO_01_white.svg', '/App_Logo_light.svg']
 
 // Install event - cache static files
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   console.log('[SW] Install event')
   event.waitUntil(
     (async () => {
@@ -36,10 +31,18 @@ self.addEventListener('install', (event) => {
           '/fonts/inter/Inter-Regular.woff2',
           '/fonts/inter/Inter-SemiBold.woff2',
         ]
-        await Promise.all(fontUrls.map(async (url) => {
-          try { await fontCache.add(url) } catch { /* ignore missing fonts */ }
-        }))
-      } catch (e) { /* ignore */ }
+        await Promise.all(
+          fontUrls.map(async url => {
+            try {
+              await fontCache.add(url)
+            } catch {
+              /* ignore missing fonts */
+            }
+          })
+        )
+      } catch (e) {
+        /* ignore */
+      }
     })()
   )
   // Force activation
@@ -47,27 +50,30 @@ self.addEventListener('install', (event) => {
 })
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   console.log('[SW] Activate event')
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
-            console.log('[SW] Deleting old cache:', cacheName)
-            return caches.delete(cacheName)
-          }
-        })
-      )
-    }).then(() => {
-      // Take control of all clients
-      return self.clients.claim()
-    })
+    caches
+      .keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
+              console.log('[SW] Deleting old cache:', cacheName)
+              return caches.delete(cacheName)
+            }
+          })
+        )
+      })
+      .then(() => {
+        // Take control of all clients
+        return self.clients.claim()
+      })
   )
 })
 
 // Fetch event - serve from cache or network
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   const { request } = event
   const url = new URL(request.url)
 
@@ -101,38 +107,37 @@ self.addEventListener('fetch', (event) => {
 
   // Handle static assets
   event.respondWith(
-    caches.match(request)
-      .then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse
-        }
+    caches.match(request).then(cachedResponse => {
+      if (cachedResponse) {
+        return cachedResponse
+      }
 
-        return fetch(request)
-          .then(response => {
-            // Don't cache non-successful responses
-            if (!response.ok) return response
+      return fetch(request)
+        .then(response => {
+          // Don't cache non-successful responses
+          if (!response.ok) return response
 
-            const responseClone = response.clone()
+          const responseClone = response.clone()
 
-            // Cache the response
-            caches.open(DYNAMIC_CACHE).then(cache => {
-              cache.put(request, responseClone)
-            })
-
-            return response
+          // Cache the response
+          caches.open(DYNAMIC_CACHE).then(cache => {
+            cache.put(request, responseClone)
           })
-          .catch(() => {
-            // Return offline fallback for navigation requests
-            if (request.mode === 'navigate') {
-              return caches.match('/') || new Response('Offline', { status: 503 })
-            }
-          })
-      })
+
+          return response
+        })
+        .catch(() => {
+          // Return offline fallback for navigation requests
+          if (request.mode === 'navigate') {
+            return caches.match('/') || new Response('Offline', { status: 503 })
+          }
+        })
+    })
   )
 })
 
 // Background sync for offline actions
-self.addEventListener('sync', (event) => {
+self.addEventListener('sync', event => {
   console.log('[SW] Background sync:', event.tag)
 
   if (event.tag === 'background-sync') {
@@ -141,7 +146,7 @@ self.addEventListener('sync', (event) => {
 })
 
 // Push notifications
-self.addEventListener('push', (event) => {
+self.addEventListener('push', event => {
   console.log('[SW] Push received:', event)
 
   if (event.data) {
@@ -153,29 +158,25 @@ self.addEventListener('push', (event) => {
       badge: '/LOGO_01_white.svg',
       vibrate: [100, 50, 100],
       data: {
-        url: data.url || '/'
-      }
+        url: data.url || '/',
+      },
     }
 
-    event.waitUntil(
-      self.registration.showNotification(data.title, options)
-    )
+    event.waitUntil(self.registration.showNotification(data.title, options))
   }
 })
 
 // Handle notification clicks
-self.addEventListener('notificationclick', (event) => {
+self.addEventListener('notificationclick', event => {
   console.log('[SW] Notification click:', event)
 
   event.notification.close()
 
-  event.waitUntil(
-    self.clients.openWindow(event.notification.data?.url || '/')
-  )
+  event.waitUntil(self.clients.openWindow(event.notification.data?.url || '/'))
 })
 
 // Periodic background sync (if supported)
-self.addEventListener('periodicsync', (event) => {
+self.addEventListener('periodicsync', event => {
   console.log('[SW] Periodic sync:', event.tag)
 
   if (event.tag === 'content-sync') {
@@ -184,27 +185,30 @@ self.addEventListener('periodicsync', (event) => {
 })
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   console.log('[SW] Activate event')
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
-            console.log('[SW] Deleting old cache:', cacheName)
-            return caches.delete(cacheName)
-          }
-        })
-      )
-    }).then(() => {
-      // Take control of all clients
-      return self.clients.claim()
-    })
+    caches
+      .keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
+              console.log('[SW] Deleting old cache:', cacheName)
+              return caches.delete(cacheName)
+            }
+          })
+        )
+      })
+      .then(() => {
+        // Take control of all clients
+        return self.clients.claim()
+      })
   )
 })
 
 // Fetch event - serve from cache or network
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   const { request } = event
   const url = new URL(request.url)
 
@@ -238,38 +242,37 @@ self.addEventListener('fetch', (event) => {
 
   // Handle static assets
   event.respondWith(
-    caches.match(request)
-      .then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse
-        }
+    caches.match(request).then(cachedResponse => {
+      if (cachedResponse) {
+        return cachedResponse
+      }
 
-        return fetch(request)
-          .then(response => {
-            // Don't cache non-successful responses
-            if (!response.ok) return response
+      return fetch(request)
+        .then(response => {
+          // Don't cache non-successful responses
+          if (!response.ok) return response
 
-            const responseClone = response.clone()
+          const responseClone = response.clone()
 
-            // Cache the response
-            caches.open(DYNAMIC_CACHE).then(cache => {
-              cache.put(request, responseClone)
-            })
-
-            return response
+          // Cache the response
+          caches.open(DYNAMIC_CACHE).then(cache => {
+            cache.put(request, responseClone)
           })
-          .catch(() => {
-            // Return offline fallback for navigation requests
-            if (request.mode === 'navigate') {
-              return caches.match('/') || new Response('Offline', { status: 503 })
-            }
-          })
-      })
+
+          return response
+        })
+        .catch(() => {
+          // Return offline fallback for navigation requests
+          if (request.mode === 'navigate') {
+            return caches.match('/') || new Response('Offline', { status: 503 })
+          }
+        })
+    })
   )
 })
 
 // Background sync for offline actions
-self.addEventListener('sync', (event) => {
+self.addEventListener('sync', event => {
   console.log('[SW] Background sync:', event.tag)
 
   if (event.tag === 'background-sync') {
@@ -288,7 +291,7 @@ async function doBackgroundSync() {
 }
 
 // Push notifications
-self.addEventListener('push', (event) => {
+self.addEventListener('push', event => {
   console.log('[SW] Push received:', event)
 
   if (event.data) {
@@ -300,29 +303,25 @@ self.addEventListener('push', (event) => {
       badge: '/LOGO_01_white.svg',
       vibrate: [100, 50, 100],
       data: {
-        url: data.url || '/'
-      }
+        url: data.url || '/',
+      },
     }
 
-    event.waitUntil(
-      self.registration.showNotification(data.title, options)
-    )
+    event.waitUntil(self.registration.showNotification(data.title, options))
   }
 })
 
 // Handle notification clicks
-self.addEventListener('notificationclick', (event) => {
+self.addEventListener('notificationclick', event => {
   console.log('[SW] Notification click:', event)
 
   event.notification.close()
 
-  event.waitUntil(
-    self.clients.openWindow(event.notification.data?.url || '/')
-  )
+  event.waitUntil(self.clients.openWindow(event.notification.data?.url || '/'))
 })
 
 // Periodic background sync (if supported)
-self.addEventListener('periodicsync', (event) => {
+self.addEventListener('periodicsync', event => {
   console.log('[SW] Periodic sync:', event.tag)
 
   if (event.tag === 'content-sync') {

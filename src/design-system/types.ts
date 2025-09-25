@@ -89,4 +89,3 @@ export interface ThemeMetadata {
   label: string
   description: string
 }
-

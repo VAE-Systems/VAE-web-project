@@ -28,11 +28,7 @@ export const useSwipeGesture = (
   onSwipeDown?: () => void,
   config: SwipeConfig = {}
 ) => {
-  const {
-    threshold = 50,
-    restraint = 100,
-    allowedTime = 300
-  } = config
+  const { threshold = 50, restraint = 100, allowedTime = 300 } = config
 
   const [swipeState, setSwipeState] = useState<SwipeState | null>(null)
   const elementRef = useRef<HTMLElement>(null)
@@ -45,7 +41,7 @@ export const useSwipeGesture = (
       startTime: Date.now(),
       endX: 0,
       endY: 0,
-      endTime: 0
+      endTime: 0,
     })
   }
 
@@ -57,7 +53,7 @@ export const useSwipeGesture = (
       ...swipeState,
       endX: touch.clientX,
       endY: touch.clientY,
-      endTime: Date.now()
+      endTime: Date.now(),
     }
 
     const deltaX = endState.startX - endState.endX

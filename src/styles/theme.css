@@ -22,7 +22,7 @@
 }
 
 /* Dark theme overrides */
-[data-theme-mode="dark"] {
+[data-theme-mode='dark'] {
   --theme-background: #0a0a0a;
   --theme-surface: #1a1a1a;
   --theme-text: #f1f5f9;
@@ -32,13 +32,13 @@
 }
 
 /* High contrast theme */
-[data-color-scheme="high-contrast"] {
+[data-color-scheme='high-contrast'] {
   --theme-primary: #00ff88;
   --theme-secondary: #0088ff;
   --theme-accent: #aa00ff;
 }
 
-[data-theme-mode="dark"][data-color-scheme="high-contrast"] {
+[data-theme-mode='dark'][data-color-scheme='high-contrast'] {
   --theme-primary: #00ff88;
   --theme-secondary: #0088ff;
   --theme-accent: #aa00ff;
@@ -46,7 +46,7 @@
   --theme-muted: #cccccc;
 }
 
-[data-theme-mode="light"][data-color-scheme="high-contrast"] {
+[data-theme-mode='light'][data-color-scheme='high-contrast'] {
   --theme-primary: #008844;
   --theme-secondary: #004466;
   --theme-accent: #6600aa;
@@ -55,29 +55,57 @@
 }
 
 /* Colorblind friendly theme */
-[data-color-scheme="colorblind"] {
+[data-color-scheme='colorblind'] {
   --theme-primary: #ff6b35;
   --theme-secondary: #f7931e;
   --theme-accent: #0066cc;
 }
 
 /* Utility classes for theme usage */
-.theme-bg-primary { background-color: var(--theme-primary); }
-.theme-bg-secondary { background-color: var(--theme-secondary); }
-.theme-bg-accent { background-color: var(--theme-accent); }
-.theme-bg-background { background-color: var(--theme-background); }
-.theme-bg-surface { background-color: var(--theme-surface); }
+.theme-bg-primary {
+  background-color: var(--theme-primary);
+}
+.theme-bg-secondary {
+  background-color: var(--theme-secondary);
+}
+.theme-bg-accent {
+  background-color: var(--theme-accent);
+}
+.theme-bg-background {
+  background-color: var(--theme-background);
+}
+.theme-bg-surface {
+  background-color: var(--theme-surface);
+}
 
-.theme-text-primary { color: var(--theme-primary); }
-.theme-text-secondary { color: var(--theme-secondary); }
-.theme-text-accent { color: var(--theme-accent); }
-.theme-text-text { color: var(--theme-text); }
-.theme-text-muted { color: var(--theme-muted); }
+.theme-text-primary {
+  color: var(--theme-primary);
+}
+.theme-text-secondary {
+  color: var(--theme-secondary);
+}
+.theme-text-accent {
+  color: var(--theme-accent);
+}
+.theme-text-text {
+  color: var(--theme-text);
+}
+.theme-text-muted {
+  color: var(--theme-muted);
+}
 
-.theme-border-primary { border-color: var(--theme-primary); }
-.theme-border-secondary { border-color: var(--theme-secondary); }
-.theme-border-accent { border-color: var(--theme-accent); }
-.theme-border-muted { border-color: var(--theme-muted); }
+.theme-border-primary {
+  border-color: var(--theme-primary);
+}
+.theme-border-secondary {
+  border-color: var(--theme-secondary);
+}
+.theme-border-accent {
+  border-color: var(--theme-accent);
+}
+.theme-border-muted {
+  border-color: var(--theme-muted);
+}
 
 /* Component specific theme styles */
 .theme-button {

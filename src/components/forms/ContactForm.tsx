@@ -1,6 +1,6 @@
 /**
  * Contact Form Component
- * 
+ *
  * Modern, accessible contact form with validation and loading states
  */
 
@@ -30,23 +30,14 @@ const ContactForm: React.FC<ContactFormProps> = ({
   useMockApi = true, // Use mock API during development
   compact = false,
   disabled = false,
-  showLabels = true
+  showLabels = true,
 }) => {
-  
-  const {
-    formData,
-    formState,
-    loadingState,
-    updateField,
-    submitForm,
-    canSubmit,
-    hasErrors,
-    isSubmitting
-  } = useContactForm({
-    onSuccess,
-    onError,
-    useMockApi
-  })
+  const { formData, formState, loadingState, updateField, submitForm, canSubmit, hasErrors, isSubmitting } =
+    useContactForm({
+      onSuccess,
+      onError,
+      useMockApi,
+    })
 
   // ============================================================================
   // EVENT HANDLERS
@@ -59,11 +50,10 @@ const ContactForm: React.FC<ContactFormProps> = ({
     }
   }
 
-  const handleInputChange = (field: keyof typeof formData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    updateField(field, e.target.value)
-  }
+  const handleInputChange =
+    (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      updateField(field, e.target.value)
+    }
 
   // ============================================================================
   // STYLES
@@ -86,11 +76,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
   if (loadingState === 'success') {
     return (
       <div className={`${className}`}>
-        <div className="text-center p-8 bg-vae-turquoise/10 border border-vae-turquoise/30 rounded-lg">
-          <div className="text-vae-turquoise text-2xl mb-4">✓</div>
-          <h3 className="text-lg font-medium text-text-light mb-2">
-            Nachricht erfolgreich gesendet!
-          </h3>
+        <div className="rounded-lg border border-vae-turquoise/30 bg-vae-turquoise/10 p-8 text-center">
+          <div className="mb-4 text-2xl text-vae-turquoise">✓</div>
+          <h3 className="mb-2 text-lg font-medium text-text-light">Nachricht erfolgreich gesendet!</h3>
           <p className="text-text-muted">
             Vielen Dank für Ihre Anfrage. Wir melden uns innerhalb von 24-48 Stunden bei Ihnen.
           </p>
@@ -105,14 +93,12 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-6 ${className}`}>
-      
       {/* Name & Email Row */}
-      <div className={compact ? 'grid grid-cols-1 md:grid-cols-2 gap-4' : 'space-y-4'}>
-        
+      <div className={compact ? 'grid grid-cols-1 gap-4 md:grid-cols-2' : 'space-y-4'}>
         {/* Name Field */}
         <div>
           {showLabels && (
-            <label htmlFor="name" className="block text-sm font-medium text-text-light mb-2">
+            <label htmlFor="name" className="mb-2 block text-sm font-medium text-text-light">
               Name *
             </label>
           )}
@@ -131,7 +117,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         {/* Email Field */}
         <div>
           {showLabels && (
-            <label htmlFor="email" className="block text-sm font-medium text-text-light mb-2">
+            <label htmlFor="email" className="mb-2 block text-sm font-medium text-text-light">
               E-Mail *
             </label>
           )}
@@ -150,12 +136,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
       {/* Company & Phone Row (Optional) */}
       {!compact && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* Company Field */}
           <div>
             {showLabels && (
-              <label htmlFor="company" className="block text-sm font-medium text-text-light mb-2">
+              <label htmlFor="company" className="mb-2 block text-sm font-medium text-text-light">
                 Unternehmen
               </label>
             )}
@@ -173,7 +158,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           {/* Phone Field */}
           <div>
             {showLabels && (
-              <label htmlFor="phone" className="block text-sm font-medium text-text-light mb-2">
+              <label htmlFor="phone" className="mb-2 block text-sm font-medium text-text-light">
                 Telefon
               </label>
             )}
@@ -194,7 +179,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       {!compact && (
         <div>
           {showLabels && (
-            <label htmlFor="subject" className="block text-sm font-medium text-text-light mb-2">
+            <label htmlFor="subject" className="mb-2 block text-sm font-medium text-text-light">
               Betreff
             </label>
           )}
@@ -213,7 +198,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       {/* Message Field */}
       <div>
         {showLabels && (
-          <label htmlFor="message" className="block text-sm font-medium text-text-light mb-2">
+          <label htmlFor="message" className="mb-2 block text-sm font-medium text-text-light">
             Nachricht *
           </label>
         )}
@@ -231,8 +216,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
       {/* Error Display */}
       {hasErrors && (
-        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-          <div className="text-red-400 text-sm">
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4">
+          <div className="text-sm text-red-400">
             {formState.errors.map((error, index) => (
               <div key={index}>{error.message}</div>
             ))}
@@ -245,17 +230,18 @@ const ContactForm: React.FC<ContactFormProps> = ({
         type="submit"
         disabled={!canSubmit || disabled}
         className={`
-          w-full px-6 py-3 rounded-lg font-medium transition-all duration-200
-          ${canSubmit && !disabled
-            ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95'
-            : 'bg-bg-tertiary text-text-muted cursor-not-allowed'
+          w-full rounded-lg px-6 py-3 font-medium transition-all duration-200
+          ${
+            canSubmit && !disabled
+              ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95'
+              : 'bg-bg-tertiary cursor-not-allowed text-text-muted'
           }
           ${isSubmitting ? 'animate-pulse' : ''}
         `}
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center space-x-2">
-            <div className="w-4 h-4 border-2 border-bg-darker border-t-transparent rounded-full animate-spin"></div>
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-bg-darker border-t-transparent"></div>
             <span>Wird gesendet...</span>
           </span>
         ) : (
@@ -264,7 +250,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       </button>
 
       {/* Privacy Notice */}
-      <p className="text-xs text-text-muted text-center">
+      <p className="text-center text-xs text-text-muted">
         Durch das Absenden stimmen Sie unserer{' '}
         <a href="/privacy" className="text-vae-turquoise hover:underline">
           Datenschutzerklärung

@@ -45,10 +45,11 @@ export const COOKIE_CATEGORIES: CookieCategory[] = [
   {
     id: 'necessary',
     title: 'Notwendig',
-    description: 'Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden.',
+    description:
+      'Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden.',
     required: true,
     cookies: ['session', 'csrf', 'language'],
-    defaultEnabled: true
+    defaultEnabled: true,
   },
   {
     id: 'analytics',
@@ -56,7 +57,7 @@ export const COOKIE_CATEGORIES: CookieCategory[] = [
     description: 'Hilft uns zu verstehen, wie Besucher unsere Website nutzen, um die Erfahrung zu verbessern.',
     required: false,
     cookies: ['_ga', '_gid', '_gat', 'analytics_consent'],
-    defaultEnabled: false
+    defaultEnabled: false,
   },
   {
     id: 'marketing',
@@ -64,7 +65,7 @@ export const COOKIE_CATEGORIES: CookieCategory[] = [
     description: 'Wird für personalisierte Werbung und Newsletter verwendet.',
     required: false,
     cookies: ['newsletter_tracking', 'marketing_consent', 'campaign_tracking'],
-    defaultEnabled: false
+    defaultEnabled: false,
   },
   {
     id: 'preferences',
@@ -72,8 +73,8 @@ export const COOKIE_CATEGORIES: CookieCategory[] = [
     description: 'Speichert Ihre Einstellungen für eine bessere Benutzererfahrung.',
     required: false,
     cookies: ['theme', 'language_preference', 'user_settings'],
-    defaultEnabled: false
-  }
+    defaultEnabled: false,
+  },
 ]
 
 // Default consent state
@@ -83,7 +84,7 @@ export const DEFAULT_CONSENT: CookieConsent = {
   marketing: false,
   preferences: false,
   timestamp: '',
-  version: '1.0.0'
+  version: '1.0.0',
 }
 
 // GDPR Compliance Constants
@@ -91,5 +92,5 @@ export const GDPR_CONSTANTS = {
   CONSENT_VERSION: '1.0.0',
   CONSENT_EXPIRY_DAYS: 365,
   COOKIE_PREFIX: 'vae_consent_',
-  STORAGE_KEY: 'vae_privacy_consent'
+  STORAGE_KEY: 'vae_privacy_consent',
 } as const

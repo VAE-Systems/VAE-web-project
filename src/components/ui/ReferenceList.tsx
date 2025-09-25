@@ -22,7 +22,7 @@ const ReferenceList: React.FC<ReferenceListProps> = ({ items, className = '', de
   if (!items?.length) return null
   return (
     <div className={`mt-6 ${className}`}>
-      <ol className={`list-decimal ml-5 ${dense ? 'space-y-1' : 'space-y-2'} text-[11px] md:text-xs text-text-muted`}> 
+      <ol className={`ml-5 list-decimal ${dense ? 'space-y-1' : 'space-y-2'} text-[11px] text-text-muted md:text-xs`}>
         {items.map(ref => (
           <li key={ref.id} className="leading-relaxed">
             {ref.url ? (
@@ -30,14 +30,14 @@ const ReferenceList: React.FC<ReferenceListProps> = ({ items, className = '', de
                 href={ref.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-vae-turquoise transition-colors underline decoration-dotted underline-offset-2"
+                className="underline decoration-dotted underline-offset-2 transition-colors hover:text-vae-turquoise"
               >
                 {ref.label}
               </a>
             ) : (
               <span>{ref.label}</span>
             )}
-            {ref.note && <span className="text-text-muted/70 ml-1">— {ref.note}</span>}
+            {ref.note && <span className="ml-1 text-text-muted/70">— {ref.note}</span>}
           </li>
         ))}
       </ol>

@@ -28,7 +28,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
   small,
   children,
   iconSlot,
-  footerSlot
+  footerSlot,
 }) => {
   const { theme } = useTheme()
   const isLight = theme === 'light'
@@ -43,7 +43,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
     return () => media.removeEventListener('change', update)
   }, [])
 
-  const handleMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleMove: React.MouseEventHandler<HTMLDivElement> = e => {
     if (reducedMotion) return
     const rect = e.currentTarget.getBoundingClientRect()
     const x = ((e.clientX - rect.left) / rect.width) * 100
@@ -59,39 +59,29 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       id={slug}
       aria-labelledby={headingId}
       onMouseMove={reducedMotion ? undefined : handleMove}
-      className={`relative group rounded-2xl border border-border-primary dark:border-white/10 ${isLight ? 'bg-white/60' : 'bg-bg-primary/5 dark:bg-white/5'} backdrop-blur-md overflow-hidden transition-all duration-500 ${className} ${!reducedMotion ? (isLight ? 'hover:border-black/15 hover:shadow-[0_14px_46px_-14px_rgba(var(--color-black-rgb),0.32)]' : 'hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]') : ''}`.trim()}
+      className={`border-border-primary group relative rounded-2xl border dark:border-white/10 ${isLight ? 'bg-white/60' : 'bg-bg-primary/5 dark:bg-white/5'} overflow-hidden backdrop-blur-md transition-all duration-500 ${className} ${!reducedMotion ? (isLight ? 'hover:border-black/15 hover:shadow-[0_14px_46px_-14px_rgba(var(--color-black-rgb),0.32)]' : 'hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]') : ''}`.trim()}
       style={
-        reducedMotion
-          ? undefined
-          : ({ ['--sx' as any]: coords.x, ['--sy' as any]: coords.y } as React.CSSProperties)
+        reducedMotion ? undefined : ({ ['--sx' as any]: coords.x, ['--sy' as any]: coords.y } as React.CSSProperties)
       }
     >
       {!reducedMotion && !isLight && (
-        <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(600px_circle_at_var(--sx)_var(--sy),rgba(var(--vae-turquoise-rgb),0.18),transparent_70%)]" />
+        <div className="pointer-events-none absolute -inset-px bg-[radial-gradient(600px_circle_at_var(--sx)_var(--sy),rgba(var(--vae-turquoise-rgb),0.18),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       )}
-      <div className="relative z-10 p-6 flex flex-col h-full">
+      <div className="relative z-10 flex h-full flex-col p-6">
         {iconSlot && <div className="mb-4">{iconSlot}</div>}
-        <h3 id={headingId} className="text-sm font-semibold text-text-light dark:text-white mb-2 leading-snug">
+        <h3 id={headingId} className="mb-2 text-sm font-semibold leading-snug text-text-light dark:text-white">
           {title}
         </h3>
         <p
-          className={`text-xs text-text-secondary leading-relaxed mb-4 ${children ? '' : 'line-clamp-4'} flex-grow ${small ? 'mb-3' : ''}`}
+          className={`mb-4 text-xs leading-relaxed text-text-secondary ${children ? '' : 'line-clamp-4'} flex-grow ${small ? 'mb-3' : ''}`}
         >
           {description}
         </p>
-        {children && <div className="mb-5 text-[11px] text-text-muted space-y-1">{children}</div>}
-        {footerSlot && <div className="mt-auto mb-4 text-[10px] text-text-muted">{footerSlot}</div>}
-        <Link
-          to={to}
-          className="btn-convert text-[10px] gap-2 py-2 px-3 h-10 inline-flex items-center mt-auto"
-        >
+        {children && <div className="mb-5 space-y-1 text-[11px] text-text-muted">{children}</div>}
+        {footerSlot && <div className="mb-4 mt-auto text-[10px] text-text-muted">{footerSlot}</div>}
+        <Link to={to} className="btn-convert mt-auto inline-flex h-10 items-center gap-2 px-3 py-2 text-[10px]">
           {cta}
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
             <path d="M6 18 18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M9 6h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             <path d="M18 6v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />

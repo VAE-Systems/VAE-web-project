@@ -1,0 +1,4 @@
+{
+  "*.{js,jsx,ts,tsx,json,css}": ["prettier --write --config ./.prettierrc.json"],
+  "*.md": ["prettier --write --prose-wrap=preserve --config ./.prettierrc.json"]
+}

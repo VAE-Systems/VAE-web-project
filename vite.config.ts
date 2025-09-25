@@ -1,11 +1,21 @@
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
 import { fileURLToPath, URL } from 'node:url'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    // Bundle analyzer (only in build mode with ANALYZE=true)
+    process.env.ANALYZE === 'true' &&
+      visualizer({
+        filename: 'dist/bundle-report.html',
+        open: true,
+        gzipSize: true,
+        brotliSize: true,
+      }),
+  ].filter(Boolean),
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -13,6 +23,7 @@ export default defineConfig({
       '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
       '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
       '@types': fileURLToPath(new URL('./src/types', import.meta.url)),
+      '@design-system': fileURLToPath(new URL('./src/design-system', import.meta.url)),
     },
   },
   css: {
@@ -28,20 +39,46 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Nur in Dev
     cssCodeSplit: true,
     reportCompressedSize: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           animations: ['framer-motion', 'gsap'],
           routing: ['react-router-dom'],
+          // Separate heavy libraries
           three: ['three'],
           ogl: ['ogl'],
+          // UI components chunk
+          ui: ['lucide-react'],
+        },
+        // Better file naming for caching
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: ({ name }) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+            return 'assets/images/[name]-[hash][extname]'
+          }
+          if (/\.css$/.test(name ?? '')) {
+            return 'assets/css/[name]-[hash][extname]'
+          }
+          if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(name ?? '')) {
+            return 'assets/fonts/[name]-[hash][extname]'
+          }
+          return 'assets/[name]-[hash][extname]'
         },
       },
     },
-    chunkSizeWarningLimit: 700,
+    chunkSizeWarningLimit: 500, // Reduziert von 700
+    assetsInlineLimit: 4096, // Inline kleine Assets
   },
-})
+}))

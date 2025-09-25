@@ -82,6 +82,6 @@ export const usePWA = () => {
     canInstall,
     isInstalled,
     isInstallable,
-    install
+    install,
   }
 }

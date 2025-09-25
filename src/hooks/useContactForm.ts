@@ -1,6 +1,6 @@
 /**
  * Contact Form Hook
- * 
+ *
  * Custom React hook for managing contact form state, validation, and submission
  */
 
@@ -16,12 +16,12 @@ interface UseContactFormReturn {
   formData: ContactFormData
   formState: FormState<ContactFormData>
   loadingState: LoadingState
-  
+
   // Actions
   updateField: (field: keyof ContactFormData, value: string) => void
   resetForm: () => void
   submitForm: () => Promise<void>
-  
+
   // Computed values
   canSubmit: boolean
   hasErrors: boolean
@@ -39,7 +39,7 @@ const initialFormData: ContactFormData = {
   phone: '',
   message: '',
   subject: '',
-  source: 'website'
+  source: 'website',
 }
 
 const initialFormState: FormState<ContactFormData> = {
@@ -47,7 +47,7 @@ const initialFormState: FormState<ContactFormData> = {
   errors: [],
   isSubmitting: false,
   isValid: false,
-  isDirty: false
+  isDirty: false,
 }
 
 // ============================================================================
@@ -61,7 +61,6 @@ export const useContactForm = (
     useMockApi?: boolean
   } = {}
 ): UseContactFormReturn => {
-  
   const [formData, setFormData] = useState<ContactFormData>(initialFormData)
   const [formState, setFormState] = useState<FormState<ContactFormData>>(initialFormState)
   const [loadingState, setLoadingState] = useState<LoadingState>('idle')
@@ -75,14 +74,14 @@ export const useContactForm = (
     const errors = validationErrors.map(message => ({
       field: 'general', // We could make this more specific
       message,
-      code: 'VALIDATION_ERROR'
+      code: 'VALIDATION_ERROR',
     }))
 
     setFormState(prev => ({
       ...prev,
       errors,
       isValid: errors.length === 0,
-      isDirty: true
+      isDirty: true,
     }))
 
     return errors.length === 0
@@ -92,20 +91,23 @@ export const useContactForm = (
   // ACTIONS
   // ============================================================================
 
-  const updateField = useCallback((field: keyof ContactFormData, value: string) => {
-    const newFormData = { ...formData, [field]: value }
-    setFormData(newFormData)
-    
-    // Mark form as dirty when user types
-    if (!formState.isDirty) {
-      setFormState(prev => ({ ...prev, isDirty: true }))
-    }
-    
-    // Only validate if user has already tried to submit (better UX)
-    if (formState.isDirty && formState.errors.length > 0) {
-      validateForm(newFormData)
-    }
-  }, [formData, validateForm, formState.isDirty, formState.errors.length])
+  const updateField = useCallback(
+    (field: keyof ContactFormData, value: string) => {
+      const newFormData = { ...formData, [field]: value }
+      setFormData(newFormData)
+
+      // Mark form as dirty when user types
+      if (!formState.isDirty) {
+        setFormState(prev => ({ ...prev, isDirty: true }))
+      }
+
+      // Only validate if user has already tried to submit (better UX)
+      if (formState.isDirty && formState.errors.length > 0) {
+        validateForm(newFormData)
+      }
+    },
+    [formData, validateForm, formState.isDirty, formState.errors.length]
+  )
 
   const resetForm = useCallback(() => {
     setFormData(initialFormData)
@@ -132,39 +134,41 @@ export const useContactForm = (
       if (response.success && response.data) {
         setLoadingState('success')
         options.onSuccess?.(response.data.submissionId)
-        
+
         // Reset form on successful submission
         setTimeout(() => {
           resetForm()
         }, 2000)
-        
       } else {
         setLoadingState('error')
         const errorMessage = response.error?.message || 'Unbekannter Fehler'
         options.onError?.(errorMessage)
-        
+
         setFormState(prev => ({
           ...prev,
-          errors: [{
-            field: 'general',
-            message: errorMessage,
-            code: response.error?.code || 'UNKNOWN_ERROR'
-          }]
+          errors: [
+            {
+              field: 'general',
+              message: errorMessage,
+              code: response.error?.code || 'UNKNOWN_ERROR',
+            },
+          ],
         }))
       }
-
     } catch (error) {
       setLoadingState('error')
       const errorMessage = error instanceof Error ? error.message : 'Netzwerkfehler'
       options.onError?.(errorMessage)
-      
+
       setFormState(prev => ({
         ...prev,
-        errors: [{
-          field: 'general',
-          message: errorMessage,
-          code: 'NETWORK_ERROR'
-        }]
+        errors: [
+          {
+            field: 'general',
+            message: errorMessage,
+            code: 'NETWORK_ERROR',
+          },
+        ],
       }))
     } finally {
       setFormState(prev => ({ ...prev, isSubmitting: false }))
@@ -188,13 +192,13 @@ export const useContactForm = (
     formData,
     formState: { ...formState, data: formData },
     loadingState,
-    
+
     updateField,
     resetForm,
     submitForm,
-    
+
     canSubmit,
     hasErrors,
-    isSubmitting
+    isSubmitting,
   }
 }

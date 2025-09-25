@@ -26,13 +26,13 @@ class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-bg-darker text-text-light">
-          <div className="text-center p-8">
-            <h1 className="text-4xl font-bold text-red-400 mb-4">Oops! Etwas ist schiefgelaufen</h1>
-            <p className="text-lg mb-6">Entschuldigung, es gab einen Fehler. Bitte laden Sie die Seite neu.</p>
+        <div className="flex min-h-screen items-center justify-center bg-bg-darker text-text-light">
+          <div className="p-8 text-center">
+            <h1 className="mb-4 text-4xl font-bold text-red-400">Oops! Etwas ist schiefgelaufen</h1>
+            <p className="mb-6 text-lg">Entschuldigung, es gab einen Fehler. Bitte laden Sie die Seite neu.</p>
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-turquoise text-bg-darker rounded-lg hover:bg-turquoise-dark transition-colors"
+              className="bg-turquoise hover:bg-turquoise-dark rounded-lg px-6 py-3 text-bg-darker transition-colors"
             >
               Seite neu laden
             </button>

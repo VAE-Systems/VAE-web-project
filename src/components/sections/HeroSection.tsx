@@ -4,15 +4,11 @@ import CtaLink from '@/components/ui/CtaLink'
 import { motion } from 'framer-motion'
 import { CalendarClock, Grid3x3, Handshake, ShieldCheck, MapPin, Code as CodeIcon } from 'lucide-react'
 const NeuralNetworkBackground = React.lazy(() => import('./NeuralNetworkBackground'))
-import {
-  heroTitle,
-  heroTypewriterTexts,
-  heroDescription
-} from '../../content/home'
+import { heroTitle, heroTypewriterTexts, heroDescription } from '../../content/home'
 
 /**
  * Hero Section Component
- * 
+ *
  * Modern hero section with VAE Systems branding and key value propositions
  * Simplified version without Three.js for better performance and maintainability
  */
@@ -21,7 +17,10 @@ const HeroSection: React.FC = () => {
   // Defer heavy WebGL background for LCP and respect reduced motion
   const [enableBg, setEnableBg] = React.useState(false)
   const reducedMotion = React.useMemo(
-    () => (typeof window !== 'undefined' && window.matchMedia) ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false,
+    () =>
+      typeof window !== 'undefined' && window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        : false,
     []
   )
   React.useEffect(() => {
@@ -32,9 +31,9 @@ const HeroSection: React.FC = () => {
   }, [reducedMotion])
 
   return (
-    <section 
+    <section
       id="hero"
-      className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden hero-surface bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker overlay-diag overlay-grid"
+      className="hero-surface from-bg-primary to-bg-primary overlay-diag overlay-grid relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-gradient-to-br via-bg-secondary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker"
     >
       {/* Neural Network Background Animation (lazy + optional) */}
       {!reducedMotion && enableBg && (
@@ -42,32 +41,31 @@ const HeroSection: React.FC = () => {
           <NeuralNetworkBackground />
         </React.Suspense>
       )}
-      
+
       {/* Additional Background Layer for better text readability */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-bg-primary/85 via-bg-secondary/75 to-bg-primary/85 dark:from-bg-darker/80 dark:via-bg-dark/70 dark:to-bg-darker/80"></div>
+      <div className="from-bg-primary/85 to-bg-primary/85 absolute inset-0 z-0 bg-gradient-to-br via-bg-secondary/75 dark:from-bg-darker/80 dark:via-bg-dark/70 dark:to-bg-darker/80"></div>
 
       {/* Light mode: neutral floating dots (no green) */}
       <div aria-hidden className="light-only absolute inset-0 z-0">
-        <div className="floating-dot absolute top-[18%] left-[12%] w-2 h-2 rounded-full bg-black/10" />
-        <div className="floating-dot absolute top-[36%] left-[78%] w-3 h-3 rounded-md bg-black/8" />
-        <div className="floating-dot absolute top-[62%] left-[28%] w-2 h-2 rounded-full bg-black/10" />
-        <div className="floating-dot absolute top-[72%] left-[62%] w-2 h-2 rounded-full bg-black/10" />
-        <div className="floating-dot absolute top-[44%] left-[8%] w-1.5 h-1.5 rounded-full bg-black/10" />
-        <div className="floating-dot absolute top-[14%] left-[58%] w-2 h-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute left-[12%] top-[18%] h-2 w-2 rounded-full bg-black/10" />
+        <div className="floating-dot bg-black/8 absolute left-[78%] top-[36%] h-3 w-3 rounded-md" />
+        <div className="floating-dot absolute left-[28%] top-[62%] h-2 w-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute left-[62%] top-[72%] h-2 w-2 rounded-full bg-black/10" />
+        <div className="floating-dot absolute left-[8%] top-[44%] h-1.5 w-1.5 rounded-full bg-black/10" />
+        <div className="floating-dot absolute left-[58%] top-[14%] h-2 w-2 rounded-full bg-black/10" />
       </div>
 
       <div className="container-vae relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Content Section */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
             className="space-y-8"
           >
             <div className="space-y-6">
-              <motion.h1 
+              <motion.h1
                 className="h1"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -78,7 +76,7 @@ const HeroSection: React.FC = () => {
               </motion.h1>
 
               <motion.div
-                className="text-lg md:text-xl lg:text-2xl text-vae-turquoise font-medium min-h-[2rem]"
+                className="min-h-[2rem] text-lg font-medium text-vae-turquoise md:text-xl lg:text-2xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -87,83 +85,86 @@ const HeroSection: React.FC = () => {
               </motion.div>
 
               <motion.p
-                className="text-base sm:text-lg text-text-secondary max-w-xl leading-relaxed"
+                className="max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 {heroDescription.before}
-                <span className="text-vae-turquoise font-semibold">
-                  {heroDescription.highlight}
-                </span>
+                <span className="font-semibold text-vae-turquoise">{heroDescription.highlight}</span>
                 {heroDescription.after}
               </motion.p>
             </div>
 
-            <motion.div 
+            <motion.div
               className="space-y-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <CtaLink
                   ctaId="contact.schedule_call"
                   ctx={{ fromPage: 'home', intent: 'strategy-call' }}
                   variant="primary"
-                  className="text-center flex-1 flex items-center justify-center"
+                  className="flex flex-1 items-center justify-center text-center"
                   data-green-signal="true"
                 >
-                  <CalendarClock className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
+                  <CalendarClock className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
                   30‑Min Strategie‑Gespräch buchen
                 </CtaLink>
-                <Link 
-                  to="/products"
-                  className="btn-secondary flex-1 text-center flex items-center justify-center"
-                >
-                  <Grid3x3 className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
+                <Link to="/products" className="btn-secondary flex flex-1 items-center justify-center text-center">
+                  <Grid3x3 className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
                   Produkte & Plattform ansehen
                 </Link>
-                <Link
-                  to="/services"
-                  className="btn-outline flex-1 text-center flex items-center justify-center"
-                >
-                  <Handshake className="w-7 h-7 sm:w-8 sm:h-8 mr-3" />
+                <Link to="/services" className="btn-outline flex flex-1 items-center justify-center text-center">
+                  <Handshake className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
                   Services entdecken
                 </Link>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link to="/services/custom-solutions" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">Custom Solutions</Link>
-                <Link to="/products#core" className="px-4 py-2 rounded-full bg-vae-turquoise/10 hover:bg-vae-turquoise/20 text-xs font-medium text-text-secondary hover:text-vae-turquoise transition-colors">VAE CORE Architektur</Link>
+                <Link
+                  to="/services/custom-solutions"
+                  className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
+                >
+                  Custom Solutions
+                </Link>
+                <Link
+                  to="/products#core"
+                  className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
+                >
+                  VAE CORE Architektur
+                </Link>
                 <CtaLink
                   ctaId="contact.quick_email"
                   ctx={{ fromPage: 'home' }}
                   variant="ghost"
-                  className="px-4 py-2 rounded-full bg-bg-primary/5 hover:bg-bg-primary/10 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-medium text-text-secondary hover:text-text-light dark:hover:text-white transition-colors"
+                  className="bg-bg-primary/5 hover:bg-bg-primary/10 rounded-full px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:text-text-light dark:bg-white/5 dark:hover:bg-white/10 dark:hover:text-white"
                 />
               </div>
-              <p className="text-[11px] text-text-muted leading-relaxed max-w-md">
-                Unverbindlich & fokussiert: In <span className="text-text-secondary font-medium">15–30 Minuten</span> klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.
+              <p className="max-w-md text-[11px] leading-relaxed text-text-muted">
+                Unverbindlich & fokussiert: In <span className="font-medium text-text-secondary">15–30 Minuten</span>{' '}
+                klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.
               </p>
             </motion.div>
 
             {/* Trust Indicators */}
             <motion.div
-              className="flex flex-wrap items-center gap-6 pt-8 border-t border-border-primary dark:border-bg-secondary"
+              className="border-border-primary flex flex-wrap items-center gap-6 border-t pt-8 dark:border-bg-secondary"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
               <div className="flex items-center space-x-2">
-                <ShieldCheck className="w-6 h-6 text-vae-turquoise" />
+                <ShieldCheck className="h-6 w-6 text-vae-turquoise" />
                 <span className="text-sm text-text-secondary">DSGVO-konform</span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin className="w-6 h-6 text-vae-turquoise" />
+                <MapPin className="h-6 w-6 text-vae-turquoise" />
                 <span className="text-sm text-text-secondary">Made in Germany</span>
               </div>
               <div className="flex items-center space-x-2">
-                <CodeIcon className="w-6 h-6 text-vae-turquoise" />
+                <CodeIcon className="h-6 w-6 text-vae-turquoise" />
                 <span className="text-sm text-text-secondary">100% Open Source</span>
               </div>
             </motion.div>
@@ -175,9 +176,7 @@ const HeroSection: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-          >
-     
-          </motion.div>
+          ></motion.div>
         </div>
       </div>
     </section>
@@ -198,22 +197,25 @@ const TypewriterEffect: React.FC<{ texts: string[]; reducedMotion?: boolean }> =
       setCurrentText(texts[0] || '')
       return
     }
-    const timeout = setTimeout(() => {
-      const fullText = texts[currentIndex]
-      
-      if (!isDeleting) {
-        setCurrentText(fullText.substring(0, currentText.length + 1))
-        if (currentText === fullText) {
-          setTimeout(() => setIsDeleting(true), 2000)
+    const timeout = setTimeout(
+      () => {
+        const fullText = texts[currentIndex]
+
+        if (!isDeleting) {
+          setCurrentText(fullText.substring(0, currentText.length + 1))
+          if (currentText === fullText) {
+            setTimeout(() => setIsDeleting(true), 2000)
+          }
+        } else {
+          setCurrentText(fullText.substring(0, currentText.length - 1))
+          if (currentText === '') {
+            setIsDeleting(false)
+            setCurrentIndex(prev => (prev + 1) % texts.length)
+          }
         }
-      } else {
-        setCurrentText(fullText.substring(0, currentText.length - 1))
-        if (currentText === '') {
-          setIsDeleting(false)
-          setCurrentIndex((prev) => (prev + 1) % texts.length)
-        }
-      }
-    }, isDeleting ? 50 : 100)
+      },
+      isDeleting ? 50 : 100
+    )
 
     return () => clearTimeout(timeout)
   }, [currentText, currentIndex, isDeleting, texts, reducedMotion])
@@ -221,11 +223,11 @@ const TypewriterEffect: React.FC<{ texts: string[]; reducedMotion?: boolean }> =
   return (
     <span className="inline-block" aria-live="polite">
       {currentText}
-      <span className="animate-pulse" aria-hidden="true">|</span>
+      <span className="animate-pulse" aria-hidden="true">
+        |
+      </span>
     </span>
   )
 }
-
-
 
 export default HeroSection

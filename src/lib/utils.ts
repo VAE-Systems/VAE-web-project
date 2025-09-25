@@ -1,6 +1,6 @@
 /**
  * Utility Functions
- * 
+ *
  * Common helper functions used throughout the application
  */
 
@@ -79,7 +79,7 @@ export const getRelativeTime = (date: Date | string, locale = 'de-DE'): string =
   if (diffInSeconds < 3600) return `vor ${Math.floor(diffInSeconds / 60)} Minuten`
   if (diffInSeconds < 86400) return `vor ${Math.floor(diffInSeconds / 3600)} Stunden`
   if (diffInSeconds < 604800) return `vor ${Math.floor(diffInSeconds / 86400)} Tagen`
-  
+
   return formatDate(dateObj, locale)
 }
 
@@ -92,13 +92,16 @@ export const unique = <T>(array: T[]): T[] => {
 }
 
 export const groupBy = <T, K extends keyof T>(array: T[], key: K): Record<string, T[]> => {
-  return array.reduce((groups, item) => {
-    const group = String(item[key])
-    return {
-      ...groups,
-      [group]: [...(groups[group] || []), item]
-    }
-  }, {} as Record<string, T[]>)
+  return array.reduce(
+    (groups, item) => {
+      const group = String(item[key])
+      return {
+        ...groups,
+        [group]: [...(groups[group] || []), item],
+      }
+    },
+    {} as Record<string, T[]>
+  )
 }
 
 export const shuffle = <T>(array: T[]): T[] => {
@@ -217,7 +220,7 @@ export const storage = {
     } catch (error) {
       console.warn('Failed to clear localStorage:', error)
     }
-  }
+  },
 }
 
 // ============================================================================

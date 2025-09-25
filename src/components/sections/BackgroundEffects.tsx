@@ -13,9 +13,12 @@ export const ParallaxBackdrop: React.FC<{ strength?: number }> = ({ strength = 1
     if (reduced) return
 
     // Activate only when in viewport
-    const io = new IntersectionObserver((entries) => {
-      setActive(entries[0]?.isIntersecting ?? false)
-    }, { threshold: 0 })
+    const io = new IntersectionObserver(
+      entries => {
+        setActive(entries[0]?.isIntersecting ?? false)
+      },
+      { threshold: 0 }
+    )
     io.observe(el)
 
     const handler = (e: MouseEvent) => {
@@ -26,7 +29,10 @@ export const ParallaxBackdrop: React.FC<{ strength?: number }> = ({ strength = 1
       gsap.to(el, { x, y, duration: 1.2, ease: 'expo.out' })
     }
     window.addEventListener('mousemove', handler)
-    return () => { window.removeEventListener('mousemove', handler); io.disconnect() }
+    return () => {
+      window.removeEventListener('mousemove', handler)
+      io.disconnect()
+    }
   }, [strength, active])
   return (
     <div ref={containerRef} className="bg-layered-parallax">
@@ -44,10 +50,16 @@ export const ParticleField: React.FC<{ count?: number }> = ({ count = 25 }) => {
     const el = containerRef.current
     if (!el) return
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) { setPaused(true); return }
-    const io = new IntersectionObserver((entries) => {
-      setPaused(!(entries[0]?.isIntersecting ?? false))
-    }, { threshold: 0 })
+    if (reduced) {
+      setPaused(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      entries => {
+        setPaused(!(entries[0]?.isIntersecting ?? false))
+      },
+      { threshold: 0 }
+    )
     io.observe(el)
     return () => io.disconnect()
   }, [])
@@ -72,7 +84,7 @@ export const ParticleField: React.FC<{ count?: number }> = ({ count = 25 }) => {
               animationDelay: delay + 's',
               animationDuration: duration + 's',
               filter: `blur(${blur}px) brightness(1.1)`,
-              opacity
+              opacity,
             }}
           />
         )

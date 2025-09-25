@@ -36,14 +36,14 @@ const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySett
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
-  <div className="min-h-screen flex items-center justify-center bg-bg-darker">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-turquoise"></div>
+  <div className="flex min-h-screen items-center justify-center bg-bg-darker">
+    <div className="border-turquoise h-12 w-12 animate-spin rounded-full border-b-2"></div>
   </div>
 )
 
 /**
  * Main App Component
- * 
+ *
  * Provides routing structure and layout for VAE Systems website
  * Uses React Router for client-side navigation
  */
@@ -78,37 +78,37 @@ const App: React.FC = () => {
     <ErrorBoundary>
       <ThemeProvider>
         <Router>
-        <ScrollToTop />
-        <div className="min-h-[100dvh] bg-bg-darker text-text-light">
-          <Header />
-          <NavigationSwitcher />
-          <main className="pt-20">
-            <Suspense fallback={<LoadingSpinner />}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/services" element={<ServicesPage />} />
-                <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
-                <Route path="/services/consulting" element={<ServiceConsultingPage />} />
-                <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/products/solutions" element={<ProductSolutionsPage />} />
-                <Route path="/products/tools" element={<ProductToolsPage />} />
-                <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
-                <Route path="/products/showcases" element={<ProductShowcasesPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/impressum" element={<ImpressumPage />} />
-                <Route path="/privacy" element={<PrivacyPage />} />
-                <Route path="/privacy/settings" element={<PrivacySettings />} />
-              </Routes>
-            </Suspense>
-          </main>
-          <Footer />
-          <CookieBanner />
-        </div>
-      </Router>
-    </ThemeProvider>
-  </ErrorBoundary>
+          <ScrollToTop />
+          <div className="min-h-[100dvh] bg-bg-darker text-text-light">
+            <Header />
+            <NavigationSwitcher />
+            <main className="pt-20">
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
+                  <Route path="/services/consulting" element={<ServiceConsultingPage />} />
+                  <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
+                  <Route path="/products" element={<ProductsPage />} />
+                  <Route path="/products/solutions" element={<ProductSolutionsPage />} />
+                  <Route path="/products/tools" element={<ProductToolsPage />} />
+                  <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
+                  <Route path="/products/showcases" element={<ProductShowcasesPage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/impressum" element={<ImpressumPage />} />
+                  <Route path="/privacy" element={<PrivacyPage />} />
+                  <Route path="/privacy/settings" element={<PrivacySettings />} />
+                </Routes>
+              </Suspense>
+            </main>
+            <Footer />
+            <CookieBanner />
+          </div>
+        </Router>
+      </ThemeProvider>
+    </ErrorBoundary>
   )
 }
 

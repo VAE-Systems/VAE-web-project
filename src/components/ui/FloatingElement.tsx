@@ -17,7 +17,7 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
   className = '',
   intensity = 8,
   speed = 3,
-  delay = 0
+  delay = 0,
 }) => {
   const elementRef = useRef<HTMLDivElement>(null)
 
@@ -38,11 +38,13 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
     <div
       ref={elementRef}
       className={`inline-block ${className}`}
-      style={{
-        animation: `float ${speed}s ease-in-out infinite`,
-        animationDelay: `${delay}s`,
-        '--float-intensity': `${intensity}px`
-      } as React.CSSProperties}
+      style={
+        {
+          animation: `float ${speed}s ease-in-out infinite`,
+          animationDelay: `${delay}s`,
+          '--float-intensity': `${intensity}px`,
+        } as React.CSSProperties
+      }
     >
       {children}
     </div>

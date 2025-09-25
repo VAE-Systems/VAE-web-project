@@ -1,4 +1,29 @@
+# VAE Systems - Robots.txt
 User-agent: *
 Allow: /
 
-Sitemap: https://vae.systems/sitemap.xml
+# Block sensitive areas
+Disallow: /api/
+Disallow: /.well-known/
+Disallow: /admin/
+Disallow: /config/
+
+# Allow important resources for SEO
+Allow: /assets/
+Allow: /fonts/
+Allow: /*.css
+Allow: /*.js
+
+# Crawl delay for better server performance
+Crawl-delay: 1
+
+# Sitemap locations
+Sitemap: https://vae-systems.com/sitemap.xml
+Sitemap: https://vae-systems.com/sitemap-images.xml
+
+# Additional search engine directives
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

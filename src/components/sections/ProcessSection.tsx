@@ -8,8 +8,8 @@ import { TermHint } from '../ui/Glossary'
 // Wrap glossary term occurrences inside text with TermHint (underline hover) – only terms defined in each step glossary.
 function annotateWithHints(text: string, terms: string[]): (string | JSX.Element)[] {
   if (!terms.length) return [text]
-  const sorted = [...terms].sort((a,b) => b.length - a.length)
-  const pattern = new RegExp(`(${sorted.map(t => t.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')).join('|')})`, 'gi')
+  const sorted = [...terms].sort((a, b) => b.length - a.length)
+  const pattern = new RegExp(`(${sorted.map(t => t.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')).join('|')})`, 'gi')
   const parts: (string | JSX.Element)[] = []
   let last = 0
   let m: RegExpExecArray | null
@@ -23,7 +23,10 @@ function annotateWithHints(text: string, terms: string[]): (string | JSX.Element
   return parts
 }
 
-interface ProcessSectionProps { id?: string; className?: string }
+interface ProcessSectionProps {
+  id?: string
+  className?: string
+}
 
 const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', className = '' }) => {
   const ref = useRef<HTMLDivElement>(null)
@@ -40,48 +43,79 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
       ScrollTrigger.batch(cards, {
         start: 'top 85%',
         onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.08 }),
-        once: true
+        once: true,
       })
     }, ref)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section id={id} className={`relative py-32 about-section theme-c z-10 ${className}`} data-section ref={ref} aria-labelledby="process-heading">
+    <section
+      id={id}
+      className={`about-section theme-c relative z-10 py-32 ${className}`}
+      data-section
+      ref={ref}
+      aria-labelledby="process-heading"
+    >
       <div className="about-surface-bg" aria-hidden="true" />
-      <div className="container-vae relative max-w-6xl mx-auto">
-        <header className="max-w-3xl mb-14" data-heading-accent>
-          <h2 id="process-heading" className="text-4xl md:text-5xl font-bold text-white heading-fix mb-6">
+      <div className="container-vae relative mx-auto max-w-6xl">
+        <header className="mb-14 max-w-3xl" data-heading-accent>
+          <h2 id="process-heading" className="heading-fix mb-6 text-4xl font-bold text-white md:text-5xl">
             Wie wir starten & liefern
           </h2>
-          <div className="heading-accent-bar h-[3px] w-36 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed">Strukturierte Schritte – klare Artefakte – früh nutzbare Ergebnisse. Keine Blackbox, kein Hype-Spiel.</p>
+          <div className="heading-accent-bar mb-6 h-[3px] w-36 rounded-full bg-gradient-to-r from-vae-turquoise to-transparent" />
+          <p className="text-lg leading-relaxed text-text-secondary md:text-xl">
+            Strukturierte Schritte – klare Artefakte – früh nutzbare Ergebnisse. Keine Blackbox, kein Hype-Spiel.
+          </p>
         </header>
-        <ol className="grid md:grid-cols-2 gap-8 relative">
+        <ol className="relative grid gap-8 md:grid-cols-2">
           {processSteps.map((s, i) => (
-            <li key={s.key} data-step className="relative group">
-              <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-vae-turquoise/25 to-transparent opacity-0 group-hover:opacity-100 blur-md transition" aria-hidden="true" />
-              <div className="h-full flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 md:p-7">
-                <div className="flex items-start justify-between mb-4">
+            <li key={s.key} data-step className="group relative">
+              <div
+                className="absolute -inset-px rounded-2xl bg-gradient-to-br from-vae-turquoise/25 to-transparent opacity-0 blur-md transition group-hover:opacity-100"
+                aria-hidden="true"
+              />
+              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm md:p-7">
+                <div className="mb-4 flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-vae-turquoise/25 flex items-center justify-center text-vae-turquoise">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise">
                       <Icon name={s.icon} className="text-vae-turquoise" size={22} />
                     </div>
-                    <span className="text-xs uppercase tracking-wider text-vae-turquoise/70 font-medium">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise/70">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                   </div>
-                  {s.durationHint && <span className="text-[11px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-text-secondary dark:text-white/60">{s.durationHint}</span>}
+                  {s.durationHint && (
+                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-text-secondary dark:text-white/60">
+                      {s.durationHint}
+                    </span>
+                  )}
                 </div>
-                <h3 className="text-lg font-semibold text-text-light dark:text-white mb-3 leading-snug">{s.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-grow">
-                  {annotateWithHints(s.summary, (s.glossary || []).map(g => g.term))}
+                <h3 className="mb-3 text-lg font-semibold leading-snug text-text-light dark:text-white">{s.title}</h3>
+                <p className="mb-4 flex-grow text-sm leading-relaxed text-text-secondary">
+                  {annotateWithHints(
+                    s.summary,
+                    (s.glossary || []).map(g => g.term)
+                  )}
                 </p>
                 {s.deliverables.length > 0 && (
-                  <ul className="space-y-1.5 mb-4">
+                  <ul className="mb-4 space-y-1.5">
                     {s.deliverables.map(d => {
-                      const annotated = annotateWithHints(d, (s.glossary || []).map(g => g.term))
+                      const annotated = annotateWithHints(
+                        d,
+                        (s.glossary || []).map(g => g.term)
+                      )
                       return (
                         <li key={d} className="flex items-start gap-2 text-[12px] text-text-secondary">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-vae-turquoise flex-shrink-0 mt-[3px]"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2"/></svg>
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            className="mt-[3px] flex-shrink-0 text-vae-turquoise"
+                          >
+                            <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2" />
+                          </svg>
                           <span>{annotated}</span>
                         </li>
                       )
@@ -92,7 +126,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
             </li>
           ))}
         </ol>
-        <p className="text-[11px] text-text-secondary mt-8 tracking-wide">{processDisclaimer}</p>
+        <p className="mt-8 text-[11px] tracking-wide text-text-secondary">{processDisclaimer}</p>
       </div>
       <div className="section-divider-horizontal" aria-hidden="true" />
     </section>

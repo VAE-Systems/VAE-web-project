@@ -16,7 +16,7 @@ const Seo: React.FC<SeoProps> = ({
   description = 'Professionelle KI-Architektur für skalierbare Lösungen. Multi-Tenancy, Security & Provider-Agnostik.',
   image = '/App_Logo_light.svg',
   url,
-  type = 'website'
+  type = 'website',
 }) => {
   useEffect(() => {
     // Update document title
@@ -46,7 +46,6 @@ const Seo: React.FC<SeoProps> = ({
     updateMetaTag('og:image', image.startsWith('http') ? image : `https://vae-systems.com${image}`)
     updateMetaTag('og:url', url ? `https://vae-systems.com${url}` : 'https://vae-systems.com')
     updateMetaTag('og:type', type)
-
   }, [title, description, image, url, type])
 
   return null

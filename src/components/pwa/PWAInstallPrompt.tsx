@@ -28,7 +28,7 @@ const PWAInstallPrompt: React.FC = () => {
     serviceWorkerRegistered: false,
     serviceWorkerState: 'unknown',
     platform: 'unknown',
-    userAgent: 'unknown'
+    userAgent: 'unknown',
   })
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const PWAInstallPrompt: React.FC = () => {
       serviceWorkerRegistered: false, // Will be updated by service worker registration
       serviceWorkerState: 'unknown',
       platform: navigator.platform || 'unknown',
-      userAgent: navigator.userAgent
+      userAgent: navigator.userAgent,
     }
 
     // Check service worker status
@@ -56,7 +56,11 @@ const PWAInstallPrompt: React.FC = () => {
         if (registration) {
           newDebugInfo.serviceWorkerRegistered = true
           newDebugInfo.serviceWorkerState = registration.active?.state || 'unknown'
-          setDebugInfo(prev => ({ ...prev, serviceWorkerRegistered: true, serviceWorkerState: registration.active?.state || 'unknown' }))
+          setDebugInfo(prev => ({
+            ...prev,
+            serviceWorkerRegistered: true,
+            serviceWorkerState: registration.active?.state || 'unknown',
+          }))
         }
       })
     }
@@ -79,7 +83,9 @@ const PWAInstallPrompt: React.FC = () => {
     console.log('[PWA] Is installable:', isInstallable)
 
     if (!canInstall) {
-      alert(`PWA kann nicht installiert werden. Debug: HTTPS=${debugInfo.isHttps}, SW=${debugInfo.serviceWorkerSupported}, CanInstall=${debugInfo.canInstall}`)
+      alert(
+        `PWA kann nicht installiert werden. Debug: HTTPS=${debugInfo.isHttps}, SW=${debugInfo.serviceWorkerSupported}, CanInstall=${debugInfo.canInstall}`
+      )
       return
     }
 
@@ -109,26 +115,24 @@ const PWAInstallPrompt: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-40 bg-bg-darker border border-vae-turquoise/30 rounded-lg shadow-2xl p-4">
+    <div className="fixed bottom-4 left-4 right-4 z-40 rounded-lg border border-vae-turquoise/30 bg-bg-darker p-4 shadow-2xl md:left-auto md:right-4 md:w-96">
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0">
-          <div className="w-10 h-10 bg-vae-turquoise/20 rounded-lg flex items-center justify-center">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-vae-turquoise/20">
             <Icon name="download" className="text-vae-turquoise" size={20} />
           </div>
         </div>
 
-        <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-text-light mb-1">
-            App installieren
-          </h3>
-          <p className="text-sm text-text-muted mb-3">
+        <div className="min-w-0 flex-1">
+          <h3 className="mb-1 text-lg font-semibold text-text-light">App installieren</h3>
+          <p className="mb-3 text-sm text-text-muted">
             Installiere VAE Systems als App für besseren Zugriff und Offline-Nutzung.
           </p>
 
           {/* Debug Information - nur in Entwicklung */}
           {process.env.NODE_ENV === 'development' && (
-            <div className="mb-3 p-2 bg-bg-dark rounded text-xs text-text-muted border border-vae-turquoise/20">
-              <div className="font-semibold mb-1 text-vae-turquoise">Debug Info:</div>
+            <div className="mb-3 rounded border border-vae-turquoise/20 bg-bg-dark p-2 text-xs text-text-muted">
+              <div className="mb-1 font-semibold text-vae-turquoise">Debug Info:</div>
               <div>HTTPS: {debugInfo.isHttps ? '✅' : '❌'}</div>
               <div>SW Support: {debugInfo.serviceWorkerSupported ? '✅' : '❌'}</div>
               <div>Can Install: {debugInfo.canInstall ? '✅' : '❌'}</div>
@@ -142,7 +146,7 @@ const PWAInstallPrompt: React.FC = () => {
                   setIsDismissed(false)
                   window.location.reload()
                 }}
-                className="mt-2 px-2 py-1 bg-vae-turquoise/20 text-vae-turquoise rounded text-xs hover:bg-vae-turquoise/30"
+                className="mt-2 rounded bg-vae-turquoise/20 px-2 py-1 text-xs text-vae-turquoise hover:bg-vae-turquoise/30"
               >
                 Reset Dismissed
               </button>
@@ -150,18 +154,10 @@ const PWAInstallPrompt: React.FC = () => {
           )}
 
           <div className="flex gap-2">
-            <TouchButton
-              onClick={handleInstall}
-              size="sm"
-              className="flex-1"
-            >
+            <TouchButton onClick={handleInstall} size="sm" className="flex-1">
               Installieren
             </TouchButton>
-            <TouchButton
-              onClick={handleDismiss}
-              variant="ghost"
-              size="sm"
-            >
+            <TouchButton onClick={handleDismiss} variant="ghost" size="sm">
               Später
             </TouchButton>
           </div>
@@ -169,7 +165,7 @@ const PWAInstallPrompt: React.FC = () => {
 
         <button
           onClick={handleDismiss}
-          className="flex-shrink-0 text-text-muted hover:text-text-light p-1"
+          className="flex-shrink-0 p-1 text-text-muted hover:text-text-light"
           aria-label="Installationsaufforderung schließen"
         >
           <Icon name="close" />

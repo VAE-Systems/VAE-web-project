@@ -22,7 +22,7 @@ const variantClass: Record<Variant, string> = {
   primary: 'btn-primary',
   secondary: 'btn-secondary',
   convert: 'btn-convert',
-  ghost: 'btn-ghost'
+  ghost: 'btn-ghost',
 }
 
 const Button: React.FC<ButtonProps> = ({ to, href, variant = 'primary', children, className = '', ...rest }) => {

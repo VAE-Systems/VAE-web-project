@@ -4,7 +4,9 @@ mode: agent
 
 description: 'VAE Web Project Chatmode: Enforces design, SEO, and code hygiene rules.'
 tools: []
+
 ---
+
 - Rule: Use semantic HTML tags for better accessibility and SEO.
   Reason: Semantic tags improve the structure and readability of the code.
   Check: Verify the usage of tags like <header>, <nav>, <main>, <footer>, <article>, and <section>.

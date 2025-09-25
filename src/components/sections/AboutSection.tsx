@@ -13,9 +13,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
   const isLight = theme === 'light'
 
   return (
-    <section id="about" className={`relative py-24 md:py-32 overflow-hidden ${className}`}>      
+    <section id="about" className={`relative overflow-hidden py-24 md:py-32 ${className}`}>
       {/* Background accents */}
-      <div className="absolute inset-0 pointer-events-none -z-10">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         {isLight ? (
           <></>
         ) : (
@@ -26,25 +26,27 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
         )}
       </div>
       <div className="container-vae relative">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
+        <div className="mx-auto max-w-4xl space-y-6 text-center">
           <h2 className="h2 heading-gradient">Über uns</h2>
-          <p className="text-text-secondary leading-relaxed md:text-lg">
-            {miniTagline}
-          </p>
-          <p className="text-sm text-text-secondary leading-relaxed">
-            {miniSubline}
-          </p>
+          <p className="leading-relaxed text-text-secondary md:text-lg">{miniTagline}</p>
+          <p className="text-sm leading-relaxed text-text-secondary">{miniSubline}</p>
           <div className="flex flex-wrap justify-center gap-3 text-xs text-text-muted">
-            <span className="px-3 py-1 rounded-full bg-vae-turquoise/10 text-vae-turquoise/90 border border-vae-turquoise/25">Open Source First</span>
-            <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-text-secondary">On‑Prem Ready</span>
-            <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-text-secondary">Governance integriert</span>
+            <span className="rounded-full border border-vae-turquoise/25 bg-vae-turquoise/10 px-3 py-1 text-vae-turquoise/90">
+              Open Source First
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-text-secondary">
+              On‑Prem Ready
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-text-secondary">
+              Governance integriert
+            </span>
           </div>
-          
+
           {/* Mini Outcomes */}
-          <div className="grid md:grid-cols-2 gap-6 mt-8">
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
             {miniOutcomes.map(outcome => (
-              <div key={outcome.key} className="text-left p-4 rounded-lg bg-white/5 border border-white/10">
-                <div className="flex items-center gap-3 mb-2">
+              <div key={outcome.key} className="rounded-lg border border-white/10 bg-white/5 p-4 text-left">
+                <div className="mb-2 flex items-center gap-3">
                   <Icon name={outcome.icon} className="text-vae-turquoise" />
                   <h3 className="font-semibold text-white">{outcome.title}</h3>
                 </div>
@@ -55,11 +57,11 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
 
           {/* Mini Process */}
           <div className="mt-8">
-            <h3 className="text-lg font-semibold text-white mb-4">Unser Prozess</h3>
+            <h3 className="mb-4 text-lg font-semibold text-white">Unser Prozess</h3>
             <div className="flex flex-wrap justify-center gap-4">
               {miniProcess.map(step => (
                 <div key={step.key} className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-vae-turquoise/20 flex items-center justify-center mb-2 mx-auto">
+                  <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-vae-turquoise/20">
                     <Icon name={step.icon} className="text-vae-turquoise" size={18} />
                   </div>
                   <div className="text-sm font-medium text-white">{step.label}</div>
@@ -71,17 +73,20 @@ const AboutSection: React.FC<AboutSectionProps> = ({ className = '' }) => {
 
           {/* Mini Metrics */}
           <div className="mt-8">
-            <h3 className="text-lg font-semibold text-white mb-4">Typische Zeitrahmen</h3>
+            <h3 className="mb-4 text-lg font-semibold text-white">Typische Zeitrahmen</h3>
             <div className="flex flex-wrap justify-center gap-3">
               {miniMetrics.map(metric => (
-                <span key={metric} className="px-3 py-1 rounded-full bg-vae-turquoise/10 text-vae-turquoise/90 border border-vae-turquoise/25 text-sm">
+                <span
+                  key={metric}
+                  className="rounded-full border border-vae-turquoise/25 bg-vae-turquoise/10 px-3 py-1 text-sm text-vae-turquoise/90"
+                >
                   {metric}
                 </span>
               ))}
             </div>
           </div>
 
-          <a href="/about" className="inline-flex items-center gap-2 btn-outline mt-2">
+          <a href="/about" className="btn-outline mt-2 inline-flex items-center gap-2">
             Mehr erfahren
             <Icon name="arrow_outward" />
           </a>

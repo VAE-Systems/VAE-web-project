@@ -14,6 +14,7 @@
 ## ✨ Features
 
 ### 🎨 **Modern Design System**
+
 - **Design Tokens** – Farbschemata, Typografie & Spacing zentral in `src/design-system`
 - **VAE Corporate Identity** – Authentisches Türkis (`#00ffa5`) als Primary
 - **Glassmorphism Effects** – Moderne translucent UI Elemente
@@ -21,6 +22,7 @@
 - **Dual Theme** – Light & Dark Mode mit robustem Theme Manager
 
 ### 🏗️ **Technical Architecture**
+
 - **React 18** - Latest React with concurrent features
 - **TypeScript** - Strict type safety and better DX
 - **Vite** - Lightning-fast build tool and dev server
@@ -32,12 +34,14 @@
 ### 📱 **Components & Sections**
 
 #### 🎯 **Hero Section**
+
 - Typewriter effect with VAE branding
 - Network visualization with animated connections
 - Professional trust indicators
 - Direct contact integration
 
 #### 🛠️ **Services Portfolio**
+
 1. **Open Source Consulting** - Transparente Lösungen ohne Vendor-Lock-ins
 2. **Setup & Training** - Umfassende Implementierung und Schulungen
 3. **Startup Tech Stack** - Kosteneffiziente, skalierbare Infrastruktur
@@ -48,7 +52,8 @@
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -115,8 +120,7 @@ Alle Designparameter leben in `src/design-system`:
 ```tsx
 import { MagneticButton } from '@/components/ui'
 import { getTypographyStyle } from '@design-system/typography'
-
-<MagneticButton textStyle="headline" glowEffect>
+;<MagneticButton textStyle="headline" glowEffect>
   Jetzt starten
 </MagneticButton>
 
@@ -129,6 +133,7 @@ Bestehende Legacy-Variablen (`--theme-*`) bleiben für Abwärtskompatibilität e
 ## 📞 Contact
 
 **VAE Systems**
+
 - Email: info@vae.systems
 - Website: [vae.systems](https://vae.systems)
 

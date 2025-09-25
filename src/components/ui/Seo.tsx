@@ -34,7 +34,11 @@ const Seo: React.FC<SeoProps> = ({ title, description, canonicalPath, jsonLd, no
     const canonicalUrl = canonicalPath ? `${BASE_URL}${canonicalPath}` : undefined
     if (canonicalUrl) {
       let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-      if (!link) { link = document.createElement('link'); link.setAttribute('rel', 'canonical'); document.head.appendChild(link) }
+      if (!link) {
+        link = document.createElement('link')
+        link.setAttribute('rel', 'canonical')
+        document.head.appendChild(link)
+      }
       link.setAttribute('href', canonicalUrl)
     }
     const existing = document.head.querySelectorAll('script[data-seo-jsonld]')

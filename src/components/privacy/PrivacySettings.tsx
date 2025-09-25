@@ -17,25 +17,23 @@ const PrivacySettings: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="mx-auto max-w-4xl p-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-text-light mb-2">Datenschutz-Einstellungen</h1>
-        <p className="text-text-muted">
-          Verwalten Sie Ihre Cookie-Einstellungen und Datenschutz-Präferenzen.
-        </p>
+        <h1 className="mb-2 text-3xl font-bold text-text-light">Datenschutz-Einstellungen</h1>
+        <p className="text-text-muted">Verwalten Sie Ihre Cookie-Einstellungen und Datenschutz-Präferenzen.</p>
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex border-b border-border-primary mb-6">
+      <div className="border-border-primary mb-6 flex border-b">
         {[
           { id: 'overview', label: 'Übersicht' },
           { id: 'cookies', label: 'Cookies' },
-          { id: 'data', label: 'Ihre Daten' }
-        ].map((tab) => (
+          { id: 'data', label: 'Ihre Daten' },
+        ].map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as typeof activeTab)}
-            className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
+            className={`border-b-2 px-4 py-2 text-sm font-medium transition-colors ${
               activeTab === tab.id
                 ? 'border-vae-turquoise text-vae-turquoise'
                 : 'border-transparent text-text-muted hover:text-text-light'
@@ -51,20 +49,25 @@ const PrivacySettings: React.FC = () => {
         {activeTab === 'overview' && (
           <div className="space-y-6">
             <div className="card-vae">
-              <h2 className="text-xl font-semibold text-text-light mb-4">Ihre aktuellen Einstellungen</h2>
+              <h2 className="mb-4 text-xl font-semibold text-text-light">Ihre aktuellen Einstellungen</h2>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                {COOKIE_CATEGORIES.map((category) => (
-                  <div key={category.id} className="flex items-center justify-between p-4 border border-border-primary rounded-lg">
+              <div className="grid gap-4 md:grid-cols-2">
+                {COOKIE_CATEGORIES.map(category => (
+                  <div
+                    key={category.id}
+                    className="border-border-primary flex items-center justify-between rounded-lg border p-4"
+                  >
                     <div>
                       <h3 className="font-medium text-text-light">{category.title}</h3>
                       <p className="text-sm text-text-muted">{category.description}</p>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      consent[category.id as keyof typeof consent]
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'bg-red-500/20 text-red-400'
-                    }`}>
+                    <div
+                      className={`rounded-full px-3 py-1 text-sm font-medium ${
+                        consent[category.id as keyof typeof consent]
+                          ? 'bg-green-500/20 text-green-400'
+                          : 'bg-red-500/20 text-red-400'
+                      }`}
+                    >
                       {consent[category.id as keyof typeof consent] ? 'Aktiv' : 'Inaktiv'}
                     </div>
                   </div>
@@ -73,7 +76,7 @@ const PrivacySettings: React.FC = () => {
             </div>
 
             <div className="card-vae">
-              <h2 className="text-xl font-semibold text-text-light mb-4">Schnellaktionen</h2>
+              <h2 className="mb-4 text-xl font-semibold text-text-light">Schnellaktionen</h2>
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => {
@@ -103,7 +106,7 @@ const PrivacySettings: React.FC = () => {
 
                 <button
                   onClick={resetConsent}
-                  className="text-text-muted hover:text-red-400 transition-colors px-4 py-2 border border-border-primary rounded-lg"
+                  className="border-border-primary rounded-lg border px-4 py-2 text-text-muted transition-colors hover:text-red-400"
                 >
                   Zurücksetzen
                 </button>
@@ -115,30 +118,30 @@ const PrivacySettings: React.FC = () => {
         {activeTab === 'cookies' && (
           <div className="space-y-6">
             <div className="card-vae">
-              <h2 className="text-xl font-semibold text-text-light mb-4">Cookie-Kategorien</h2>
+              <h2 className="mb-4 text-xl font-semibold text-text-light">Cookie-Kategorien</h2>
 
               <div className="space-y-4">
-                {COOKIE_CATEGORIES.map((category) => (
-                  <div key={category.id} className="border border-border-primary rounded-lg p-6">
-                    <div className="flex items-start justify-between mb-4">
+                {COOKIE_CATEGORIES.map(category => (
+                  <div key={category.id} className="border-border-primary rounded-lg border p-6">
+                    <div className="mb-4 flex items-start justify-between">
                       <div className="flex-1">
-                        <h3 className="text-lg font-medium text-text-light mb-2">
+                        <h3 className="mb-2 text-lg font-medium text-text-light">
                           {category.title}
                           {category.required && (
-                            <span className="ml-2 text-sm bg-vae-turquoise/20 text-vae-turquoise px-2 py-0.5 rounded">
+                            <span className="ml-2 rounded bg-vae-turquoise/20 px-2 py-0.5 text-sm text-vae-turquoise">
                               Erforderlich
                             </span>
                           )}
                         </h3>
-                        <p className="text-text-muted mb-3">{category.description}</p>
+                        <p className="mb-3 text-text-muted">{category.description}</p>
 
                         <div className="mb-3">
-                          <h4 className="text-sm font-medium text-text-light mb-2">Verwendete Cookies:</h4>
+                          <h4 className="mb-2 text-sm font-medium text-text-light">Verwendete Cookies:</h4>
                           <div className="flex flex-wrap gap-2">
-                            {category.cookies.map((cookie) => (
+                            {category.cookies.map(cookie => (
                               <span
                                 key={cookie}
-                                className="px-2 py-1 bg-bg-secondary text-text-light text-xs rounded font-mono"
+                                className="rounded bg-bg-secondary px-2 py-1 font-mono text-xs text-text-light"
                               >
                                 {cookie}
                               </span>
@@ -148,14 +151,14 @@ const PrivacySettings: React.FC = () => {
                       </div>
 
                       {!category.required && (
-                        <label className="relative inline-flex items-center cursor-pointer">
+                        <label className="relative inline-flex cursor-pointer items-center">
                           <input
                             type="checkbox"
                             checked={Boolean(consent[category.id as keyof typeof consent])}
-                            onChange={(e) => handleCategoryToggle(category.id, e.target.checked)}
-                            className="sr-only peer"
+                            onChange={e => handleCategoryToggle(category.id, e.target.checked)}
+                            className="peer sr-only"
                           />
-                          <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-vae-turquoise/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-vae-turquoise"></div>
+                          <div className="peer h-6 w-11 rounded-full bg-gray-600 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-vae-turquoise peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-vae-turquoise/25"></div>
                         </label>
                       )}
                     </div>
@@ -169,46 +172,40 @@ const PrivacySettings: React.FC = () => {
         {activeTab === 'data' && (
           <div className="space-y-6">
             <div className="card-vae">
-              <h2 className="text-xl font-semibold text-text-light mb-4">Ihre gespeicherten Daten</h2>
+              <h2 className="mb-4 text-xl font-semibold text-text-light">Ihre gespeicherten Daten</h2>
 
               <div className="space-y-4">
-                <div className="p-4 border border-border-primary rounded-lg">
-                  <h3 className="font-medium text-text-light mb-2">Cookie-Einwilligung</h3>
-                  <p className="text-sm text-text-muted mb-2">
+                <div className="border-border-primary rounded-lg border p-4">
+                  <h3 className="mb-2 font-medium text-text-light">Cookie-Einwilligung</h3>
+                  <p className="mb-2 text-sm text-text-muted">
                     Ihre Cookie-Einstellungen vom {new Date(consent.timestamp).toLocaleDateString('de-DE')}
                   </p>
-                  <div className="text-xs text-text-secondary">
-                    Version: {consent.version}
-                  </div>
+                  <div className="text-xs text-text-secondary">Version: {consent.version}</div>
                 </div>
 
-                <div className="p-4 border border-border-primary rounded-lg">
-                  <h3 className="font-medium text-text-light mb-2">Newsletter-Daten</h3>
+                <div className="border-border-primary rounded-lg border p-4">
+                  <h3 className="mb-2 font-medium text-text-light">Newsletter-Daten</h3>
                   <p className="text-sm text-text-muted">
                     Ihre Newsletter-Einstellungen werden in unserem separaten Backend gespeichert.
                   </p>
                 </div>
 
-                <div className="p-4 border border-border-primary rounded-lg">
-                  <h3 className="font-medium text-text-light mb-2">Analytics-Daten</h3>
-                  <p className="text-sm text-text-muted">
-                    Falls aktiviert, werden anonyme Nutzungsdaten gesammelt.
-                  </p>
+                <div className="border-border-primary rounded-lg border p-4">
+                  <h3 className="mb-2 font-medium text-text-light">Analytics-Daten</h3>
+                  <p className="text-sm text-text-muted">Falls aktiviert, werden anonyme Nutzungsdaten gesammelt.</p>
                 </div>
               </div>
             </div>
 
             <div className="card-vae">
-              <h2 className="text-xl font-semibold text-text-light mb-4">Datenexport & Löschung</h2>
-              <p className="text-text-muted mb-4">
+              <h2 className="mb-4 text-xl font-semibold text-text-light">Datenexport & Löschung</h2>
+              <p className="mb-4 text-text-muted">
                 Sie haben das Recht, Ihre Daten einzusehen, zu exportieren oder löschen zu lassen.
               </p>
 
               <div className="flex flex-wrap gap-3">
-                <button className="btn-outline">
-                  Daten exportieren
-                </button>
-                <button className="text-text-muted hover:text-red-400 transition-colors px-4 py-2 border border-border-primary rounded-lg">
+                <button className="btn-outline">Daten exportieren</button>
+                <button className="border-border-primary rounded-lg border px-4 py-2 text-text-muted transition-colors hover:text-red-400">
                   Alle Daten löschen
                 </button>
               </div>

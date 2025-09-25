@@ -19,7 +19,7 @@ import Icon from '@/components/ui/Icon'
 
 /**
  * AboutPage Component
- * 
+ *
  * Dedicated page for About Us with related sections
  */
 const AboutPage: React.FC = () => {
@@ -43,8 +43,8 @@ const AboutPage: React.FC = () => {
           scrollTrigger: {
             trigger: el,
             start: 'top 75%',
-            once: true
-          }
+            once: true,
+          },
         })
         tl.to(targets, {
           opacity: 1,
@@ -52,7 +52,7 @@ const AboutPage: React.FC = () => {
           duration: 0.9,
           ease: 'power3.out',
           stagger: { each: 0.08, from: 'start' },
-          force3D: true
+          force3D: true,
         })
       }
 
@@ -66,8 +66,7 @@ const AboutPage: React.FC = () => {
       }
 
       // Sections flagged with data-section
-      gsap.utils.toArray<HTMLElement>('[data-section]')
-        .forEach(section => animateSection(section))
+      gsap.utils.toArray<HTMLElement>('[data-section]').forEach(section => animateSection(section))
 
       // Tag groups / chips subtle pop
       gsap.utils.toArray<HTMLElement>('[data-chip-group]').forEach(group => {
@@ -75,9 +74,10 @@ const AboutPage: React.FC = () => {
         gsap.set(chips, { opacity: 0, y: 14 })
         ScrollTrigger.create({
           trigger: group,
-            start: 'top 78%',
-            once: true,
-            onEnter: () => gsap.to(chips, { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'power2.out', force3D: true })
+          start: 'top 78%',
+          once: true,
+          onEnter: () =>
+            gsap.to(chips, { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'power2.out', force3D: true }),
         })
       })
 
@@ -90,7 +90,7 @@ const AboutPage: React.FC = () => {
           trigger: h,
           start: 'top 80%',
           once: true,
-          onEnter: () => gsap.to(bar, { scaleX: 1, duration: 0.65, ease: 'power3.out' })
+          onEnter: () => gsap.to(bar, { scaleX: 1, duration: 0.65, ease: 'power3.out' }),
         })
       })
 
@@ -98,7 +98,11 @@ const AboutPage: React.FC = () => {
       gsap.utils.toArray<HTMLElement>('[data-parallax-bg]').forEach(bg => {
         const parent = bg.parentElement
         if (!parent) return
-        gsap.to(bg, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: parent, start: 'top bottom', end: 'bottom top', scrub: 0.4 } })
+        gsap.to(bg, {
+          yPercent: 12,
+          ease: 'none',
+          scrollTrigger: { trigger: parent, start: 'top bottom', end: 'bottom top', scrub: 0.4 },
+        })
       })
     }, rootRef)
     return () => ctx.revert()
@@ -114,109 +118,168 @@ const AboutPage: React.FC = () => {
       prozess: '157 100% 48%',
       warum: '157 100% 48%',
       team: '157 100% 50%',
-      cta: '157 100% 60%'
+      cta: '157 100% 60%',
     }
-    const sections = Array.from(root.querySelectorAll<HTMLElement>('section[id]'))
-      .filter(s => accentMap[s.id])
+    const sections = Array.from(root.querySelectorAll<HTMLElement>('section[id]')).filter(s => accentMap[s.id])
     if (!sections.length) return
 
     // Fallback initial accent
     root.style.setProperty('--about-accent', accentMap[sections[0].id])
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = (entry.target as HTMLElement).id
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = (entry.target as HTMLElement).id
             if (accentMap[id]) {
-              gsap.to(root, { duration: 1.2, ease: 'power2.out', onUpdate: () => {}, onStart: () => {},
+              gsap.to(root, {
+                duration: 1.2,
+                ease: 'power2.out',
+                onUpdate: () => {},
+                onStart: () => {},
                 // Use gsap quickSetter alternative: just set property inside onComplete chain
               })
               root.style.setProperty('--about-accent', accentMap[id])
             }
-        }
-      })
-    }, { threshold: 0.5 })
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
 
     sections.forEach(sec => observer.observe(sec))
     return () => observer.disconnect()
   }, [])
 
   return (
-    <div ref={rootRef} className="min-h-[100dvh] relative" style={{ ['--about-accent' as any]:'157 100% 47%' }}>
+    <div ref={rootRef} className="relative min-h-[100dvh]" style={{ ['--about-accent' as any]: '157 100% 47%' }}>
       {/* Accent interpolation overlay */}
-      <div aria-hidden="true" className="about-accent-overlay fixed inset-0 z-0 pointer-events-none" />
+      <div aria-hidden="true" className="about-accent-overlay pointer-events-none fixed inset-0 z-0" />
       <Seo
         title="Über uns | VAE Systems"
         description="Gegründet 2025 in Heidelberg – interdisziplinäres KI & Automation Team. Open Source, Datenkontrolle, dokumentierte Systeme."
         canonicalPath="/about"
-        jsonLd={[{ '@context':'https://schema.org','@type':'Organization','name':'VAE Systems','foundingDate':'2025','address':{ '@type':'PostalAddress','addressLocality':'Heidelberg','addressCountry':'DE' }}]}
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'VAE Systems',
+            foundingDate: '2025',
+            address: { '@type': 'PostalAddress', addressLocality: 'Heidelberg', addressCountry: 'DE' },
+          },
+        ]}
       />
       <Breadcrumbs
         items={[
           { label: 'Home', path: '/' },
-          { label: 'About', path: '/about' }
+          { label: 'About', path: '/about' },
         ]}
       />
       {/* Page Hero (aligned style with ContactPage) */}
-  <section className={`about-hero pt-32 pb-16 relative overflow-hidden section-surface ${isLight ? 'bg-gradient-to-b from-white to-white/95' : 'bg-bg-darker'}`} data-section>
-        <div className="absolute inset-0 pointer-events-none">
+      <section
+        className={`about-hero section-surface relative overflow-hidden pb-16 pt-32 ${isLight ? 'bg-gradient-to-b from-white to-white/95' : 'bg-bg-darker'}`}
+        data-section
+      >
+        <div className="pointer-events-none absolute inset-0">
           {isLight ? (
             <>
               {/* Light mode: subtle white overlays + light grid */}
-              <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/12 to-white/10" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.05),transparent_60%)]" data-parallax-bg />
+              <div className="via-white/12 absolute inset-0 bg-gradient-to-b from-white/20 to-white/10" />
+              <div
+                className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.05),transparent_60%)]"
+                data-parallax-bg
+              />
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px] opacity-15" />
             </>
           ) : (
             <>
               {/* Dark mode: keep existing styling */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]" data-parallax-bg />
+              <div
+                className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]"
+                data-parallax-bg
+              />
               <div className="absolute inset-0 bg-[linear-gradient(rgba(var(--color-white-rgb),0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--color-white-rgb),0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-15" />
             </>
           )}
         </div>
         <div className="container-vae relative text-center">
-          <h1 className="h1 fluid-h1 text-vae-turquoise h-space-lg" data-fade>
+          <h1 className="h1 fluid-h1 h-space-lg text-vae-turquoise" data-fade>
             Über VAE Systems
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-white/90 max-w-4xl mx-auto leading-relaxed mb-6" data-fade>
+          <p
+            className="mx-auto mb-6 max-w-4xl text-xl leading-relaxed text-gray-600 dark:text-white/90 md:text-2xl"
+            data-fade
+          >
             Lokale & sichere KI-Infrastruktur und Automatisierung – modular, dokumentiert, erweiterbar.
           </p>
-          <p className="text-lg md:text-xl text-gray-500 dark:text-white/70 max-w-4xl mx-auto leading-relaxed" data-fade>
-            Fokus auf Ownership statt Abhängigkeit: transparente Architekturen, saubere Deployments (On‑Prem & souveräne Cloud) und klare Übergaben.
+          <p
+            className="mx-auto max-w-4xl text-lg leading-relaxed text-gray-500 dark:text-white/70 md:text-xl"
+            data-fade
+          >
+            Fokus auf Ownership statt Abhängigkeit: transparente Architekturen, saubere Deployments (On‑Prem & souveräne
+            Cloud) und klare Übergaben.
           </p>
         </div>
         <div className="mt-14 px-4">
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3"
             data-stagger-group
             id="founders"
             data-chip-group
           >
             {[
               {
-        name: 'Julian Darius Goertz-Dini', role: 'CEO & Gründer', focus: 'Unternehmensführung, Sales, strategische Vision', email: 'juliandini@vae-systems.com', linkedin: 'https://www.linkedin.com/in/julian-darius-goertz-dini-8a716a277'
+                name: 'Julian Darius Goertz-Dini',
+                role: 'CEO & Gründer',
+                focus: 'Unternehmensführung, Sales, strategische Vision',
+                email: 'juliandini@vae-systems.com',
+                linkedin: 'https://www.linkedin.com/in/julian-darius-goertz-dini-8a716a277',
               },
               {
-                name: 'Jakob Dünnebeil', role: 'CTO & Gründer', focus: 'Technische Leitung, Architektur, Systemdesign', email: 'jakobduennebeil@vae-systems.com', linkedin: 'https://www.linkedin.com/in/jakob-d%C3%BCnnebeil-54b25936b/'
+                name: 'Jakob Dünnebeil',
+                role: 'CTO & Gründer',
+                focus: 'Technische Leitung, Architektur, Systemdesign',
+                email: 'jakobduennebeil@vae-systems.com',
+                linkedin: 'https://www.linkedin.com/in/jakob-d%C3%BCnnebeil-54b25936b/',
               },
               {
-                name: 'Ninaad Anirrudah Deswandikar', role: 'CPO & Gründer', focus: 'Produktstrategie, UX, Feature-Entwicklung', email: 'ninaaddeswandikar@vae-systems.com', linkedin: 'https://www.linkedin.com/in/ninaad-aniruddha-deswandikar-a2248427a/'
-              }
-            ].map((f) => (
-              <div key={f.name} className="flex flex-col relative group rounded-2xl border border-border-primary dark:border-white/10 bg-bg-primary/5 dark:bg-white/[0.04] backdrop-blur-sm p-6" data-i>
-                <div className="absolute -top-5 -right-5 w-20 h-20 bg-vae-turquoise/25 blur-3xl rounded-full opacity-0 group-hover:opacity-70 transition-opacity" aria-hidden="true" />
+                name: 'Ninaad Anirrudah Deswandikar',
+                role: 'CPO & Gründer',
+                focus: 'Produktstrategie, UX, Feature-Entwicklung',
+                email: 'ninaaddeswandikar@vae-systems.com',
+                linkedin: 'https://www.linkedin.com/in/ninaad-aniruddha-deswandikar-a2248427a/',
+              },
+            ].map(f => (
+              <div
+                key={f.name}
+                className="border-border-primary bg-bg-primary/5 group relative flex flex-col rounded-2xl border p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04]"
+                data-i
+              >
+                <div
+                  className="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-vae-turquoise/25 opacity-0 blur-3xl transition-opacity group-hover:opacity-70"
+                  aria-hidden="true"
+                />
                 <div className="mb-3 text-left">
-                  <h3 className="text-text-light font-semibold text-lg leading-snug tracking-tight">{f.name}</h3>
-                  <p className="text-vae-turquoise text-xs font-medium uppercase tracking-wide mt-1">{f.role}</p>
+                  <h3 className="text-lg font-semibold leading-snug tracking-tight text-text-light">{f.name}</h3>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-vae-turquoise">{f.role}</p>
                 </div>
-                <p className="text-text-secondary text-sm leading-relaxed flex-grow mb-4 theme-light:text-text-light">{f.focus}</p>
-                <div className="mt-auto space-y-2 text-sm text-left">
-                  <a href={`mailto:${f.email}`} className="flex items-center text-vae-turquoise hover:text-text-light dark:hover:text-white transition-colors">
+                <p className="theme-light:text-text-light mb-4 flex-grow text-sm leading-relaxed text-text-secondary">
+                  {f.focus}
+                </p>
+                <div className="mt-auto space-y-2 text-left text-sm">
+                  <a
+                    href={`mailto:${f.email}`}
+                    className="flex items-center text-vae-turquoise transition-colors hover:text-text-light dark:hover:text-white"
+                  >
                     <Icon name="forward_to_inbox" className="mr-2" />
                     <span>{f.email}</span>
                   </a>
-                  <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center text-text-muted dark:text-white/60 hover:text-text-light dark:hover:text-white transition-colors">
+                  <a
+                    href={f.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-text-muted transition-colors hover:text-text-light dark:text-white/60 dark:hover:text-white"
+                  >
                     <Icon name="link" className="mr-2" />
                     <span>LinkedIn</span>
                   </a>
@@ -227,149 +290,177 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-  {/* Unified Services Summary */}
-  <section id="angebote" className="relative py-24 about-section theme-b z-10" data-section>
+      {/* Unified Services Summary */}
+      <section id="angebote" className="about-section theme-b relative z-10 py-24" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
-          <header className="max-w-4xl mb-14" data-heading-accent data-animate>
-            <h2 className="h2 text-gray-900 dark:text-white h-space">Was wir für Unternehmen bieten</h2>
-            <div className="heading-accent-bar h-[3px] w-28 bg-gradient-to-r from-vae-turquoise to-transparent rounded-full mb-6" />
-            <p className="text-lg md:text-xl text-gray-700 dark:text-white/80 leading-relaxed">Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche. <span className="text-gray-900 dark:text-white font-medium">Klarheit statt Angebots-Wildwuchs.</span></p>
+          <header className="mb-14 max-w-4xl" data-heading-accent data-animate>
+            <h2 className="h2 h-space text-gray-900 dark:text-white">Was wir für Unternehmen bieten</h2>
+            <div className="heading-accent-bar mb-6 h-[3px] w-28 rounded-full bg-gradient-to-r from-vae-turquoise to-transparent" />
+            <p className="text-lg leading-relaxed text-gray-700 dark:text-white/80 md:text-xl">
+              Drei komplementäre Service‑Säulen – identisch kommuniziert über Website, Angebote & Gespräche.{' '}
+              <span className="font-medium text-gray-900 dark:text-white">Klarheit statt Angebots-Wildwuchs.</span>
+            </p>
           </header>
-          <Reveal.Group stagger={0.08} className="grid md:grid-cols-3 gap-8 items-stretch">
-            {servicesCategories.map((s: { key: string; title: string; focus: string; examples: string[]; to: string }) => (
-              <Reveal key={s.key} preset="fadeUp">
-                <Card
-                  title={s.title}
-                  lead={s.focus}
-                  body={s.focus}
-                  bullets={s.examples}
-                  link={s.to}
-                  cta="Mehr dazu"
-                  badge="Service"
-                />
-              </Reveal>
-            ))}
+          <Reveal.Group stagger={0.08} className="grid items-stretch gap-8 md:grid-cols-3">
+            {servicesCategories.map(
+              (s: { key: string; title: string; focus: string; examples: string[]; to: string }) => (
+                <Reveal key={s.key} preset="fadeUp">
+                  <Card
+                    title={s.title}
+                    lead={s.focus}
+                    body={s.focus}
+                    bullets={s.examples}
+                    link={s.to}
+                    cta="Mehr dazu"
+                    badge="Service"
+                  />
+                </Reveal>
+              )
+            )}
           </Reveal.Group>
           <ProductsCardsGrid />
         </div>
       </section>
 
-  {/* Warum / Outcomes Section */}
-  <WhyOutcomesSection />
+      {/* Warum / Outcomes Section */}
+      <WhyOutcomesSection />
 
-    {/* Prozess vor Frühphase (konkret vor Kontext) */}
-    <ProcessSection />
+      {/* Prozess vor Frühphase (konkret vor Kontext) */}
+      <ProcessSection />
 
-    {/* Frühphase Kontext danach */}
-    <section id="fruehphase" className="relative py-32 about-section theme-a z-10" data-section>
+      {/* Frühphase Kontext danach */}
+      <section id="fruehphase" className="about-section theme-a relative z-10 py-32" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left: Text Content */}
-              <div className="lg:pr-8">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8 heading-fix" data-animate>
-                  Frühphase –<span className="text-vae-turquoise"> bewusst fokussiert</span>
-                </h2>
-                <p className="text-xl md:text-2xl text-gray-900 dark:text-white font-medium mb-6" data-animate>
-                  Präzise auf Wirkung ausgerichtet.
-                </p>
-                <div className="flex items-center space-x-4 text-lg text-gray-700 dark:text-white/80 mb-8" data-animate>
-                  <Icon name="location_on" className="text-vae-turquoise" />
-                  <span>KI, Automation und Infrastruktur aus Heidelberg</span>
-                </div>
-                <div className="flex flex-wrap gap-3 text-[13px] text-text-secondary dark:text-white/90" data-stagger-group data-chip-group>
-                  <span className="bg-bg-primary/10 dark:bg-white/10 px-3 py-1.5 rounded-full border border-border-primary dark:border-white/10" data-i>Pragmatisch</span>
-                  <span className="bg-bg-primary/10 dark:bg-white/10 px-3 py-1.5 rounded-full border border-border-primary dark:border-white/10" data-i>Offen</span>
-                  <span className="bg-bg-primary/10 dark:bg-white/10 px-3 py-1.5 rounded-full border border-border-primary dark:border-white/10" data-i>Partnerschaftlich</span>
-                </div>
+          <div className="grid items-center gap-16 lg:grid-cols-2">
+            {/* Left: Text Content */}
+            <div className="lg:pr-8">
+              <h2
+                className="heading-fix mb-8 text-5xl font-bold text-gray-900 dark:text-white md:text-6xl lg:text-7xl"
+                data-animate
+              >
+                Frühphase –<span className="text-vae-turquoise"> bewusst fokussiert</span>
+              </h2>
+              <p className="mb-6 text-xl font-medium text-gray-900 dark:text-white md:text-2xl" data-animate>
+                Präzise auf Wirkung ausgerichtet.
+              </p>
+              <div className="mb-8 flex items-center space-x-4 text-lg text-gray-700 dark:text-white/80" data-animate>
+                <Icon name="location_on" className="text-vae-turquoise" />
+                <span>KI, Automation und Infrastruktur aus Heidelberg</span>
               </div>
-              
-              {/* Right: Visual Element */}
-              <div className="relative">
-                <div className="card-vae">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <Icon name="psychology" className="text-vae-turquoise" size={22} />
-                      </div>
-                      <div className="text-2xl font-bold text-text-light dark:text-white">KI-Systeme</div>
-                      <div className="text-sm text-text-secondary">Intelligent</div>
+              <div
+                className="flex flex-wrap gap-3 text-[13px] text-text-secondary dark:text-white/90"
+                data-stagger-group
+                data-chip-group
+              >
+                <span
+                  className="bg-bg-primary/10 border-border-primary rounded-full border px-3 py-1.5 dark:border-white/10 dark:bg-white/10"
+                  data-i
+                >
+                  Pragmatisch
+                </span>
+                <span
+                  className="bg-bg-primary/10 border-border-primary rounded-full border px-3 py-1.5 dark:border-white/10 dark:bg-white/10"
+                  data-i
+                >
+                  Offen
+                </span>
+                <span
+                  className="bg-bg-primary/10 border-border-primary rounded-full border px-3 py-1.5 dark:border-white/10 dark:bg-white/10"
+                  data-i
+                >
+                  Partnerschaftlich
+                </span>
+              </div>
+            </div>
+
+            {/* Right: Visual Element */}
+            <div className="relative">
+              <div className="card-vae">
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/20">
+                      <Icon name="psychology" className="text-vae-turquoise" size={22} />
                     </div>
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <Icon name="precision_manufacturing" className="text-vae-turquoise" size={22} />
-                      </div>
-                      <div className="text-2xl font-bold text-text-light dark:text-white">Automation</div>
-                      <div className="text-sm text-text-secondary">Effizient</div>
+                    <div className="text-2xl font-bold text-text-light dark:text-white">KI-Systeme</div>
+                    <div className="text-sm text-text-secondary">Intelligent</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/20">
+                      <Icon name="precision_manufacturing" className="text-vae-turquoise" size={22} />
                     </div>
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <Icon name="cloud_sync" className="text-vae-turquoise" size={22} />
-                      </div>
-                      <div className="text-2xl font-bold text-text-light dark:text-white">Infrastruktur</div>
-                      <div className="text-sm text-text-secondary">Skalierbar</div>
+                    <div className="text-2xl font-bold text-text-light dark:text-white">Automation</div>
+                    <div className="text-sm text-text-secondary">Effizient</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/20">
+                      <Icon name="cloud_sync" className="text-vae-turquoise" size={22} />
                     </div>
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-vae-turquoise/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <Icon name="verified_user" className="text-vae-turquoise" size={22} />
-                      </div>
-                      <div className="text-2xl font-bold text-text-light dark:text-white">Open Source</div>
-                      <div className="text-sm text-text-secondary">Transparent</div>
+                    <div className="text-2xl font-bold text-text-light dark:text-white">Infrastruktur</div>
+                    <div className="text-sm text-text-secondary">Skalierbar</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/20">
+                      <Icon name="verified_user" className="text-vae-turquoise" size={22} />
                     </div>
+                    <div className="text-2xl font-bold text-text-light dark:text-white">Open Source</div>
+                    <div className="text-sm text-text-secondary">Transparent</div>
                   </div>
                 </div>
-                {/* Floating decoration */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-vae-turquoise/20 rounded-full blur-3xl animate-pulse"></div>
               </div>
+              {/* Floating decoration */}
+              <div className="absolute -right-4 -top-4 h-24 w-24 animate-pulse rounded-full bg-vae-turquoise/20 blur-3xl"></div>
+            </div>
           </div>
         </div>
         <div className="section-divider-horizontal" aria-hidden="true" />
       </section>
 
-  {/* Story / Mission / Werte vorerst entfernt für Reduktion & Repositioning */}
+      {/* Story / Mission / Werte vorerst entfernt für Reduktion & Repositioning */}
 
-  {/* Story & Team Block (compact) */}
-  <StoryTeamSection />
+      {/* Story & Team Block (compact) */}
+      <StoryTeamSection />
 
-  {/* Pilot Scenario entfernt (zu hypothetisch) */}
+      {/* Pilot Scenario entfernt (zu hypothetisch) */}
 
-  {/* CTA */}
-  <section className="relative py-32 about-section theme-b z-10" id="cta" data-section>
+      {/* CTA */}
+      <section className="about-section theme-b relative z-10 py-32" id="cta" data-section>
         <div className="about-surface-bg" aria-hidden="true" />
         <div className="container-vae relative">
           <div className="text-center">
             <div className="relative inline-block">
               {/* Background decoration */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-vae-turquoise/20 to-vae-turquoise/20 rounded-3xl blur-2xl opacity-75"></div>
-              
-              <div className="relative card-vae transform hover:scale-105 transition-all duration-500 hover:shadow-vae-turquoise/40">
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-vae-turquoise/20 to-vae-turquoise/20 opacity-75 blur-2xl"></div>
+
+              <div className="card-vae relative transform transition-all duration-500 hover:scale-105 hover:shadow-vae-turquoise/40">
                 {/* Floating elements */}
-                <div className="absolute top-4 right-4 w-4 h-4 bg-vae-turquoise/30 rounded-full animate-pulse"></div>
-                <div className="absolute bottom-4 left-4 w-3 h-3 bg-vae-turquoise/30 rounded-full animate-ping"></div>
-                
-                <div className="flex items-center justify-center mb-6">
-                  <div className="w-16 h-16 bg-vae-turquoise/30 rounded-2xl flex items-center justify-center">
-                    <Icon name="rocket_launch" className="text-vae-turquoise animate-pulse" size={22} />
+                <div className="absolute right-4 top-4 h-4 w-4 animate-pulse rounded-full bg-vae-turquoise/30"></div>
+                <div className="absolute bottom-4 left-4 h-3 w-3 animate-ping rounded-full bg-vae-turquoise/30"></div>
+
+                <div className="mb-6 flex items-center justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/30">
+                    <Icon name="rocket_launch" className="animate-pulse text-vae-turquoise" size={22} />
                   </div>
                 </div>
-                
-                <h3 className="text-3xl md:text-4xl font-bold text-text-light dark:text-white mb-4" data-animate>
+
+                <h3 className="mb-4 text-3xl font-bold text-text-light dark:text-white md:text-4xl" data-animate>
                   Erstes Gespräch – unverbindlich & konkret
                 </h3>
-                <p className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto" data-animate>
-                  Skizzieren Sie kurz Ziel, Systeme, Zeitfenster. Wir antworten innerhalb 24h mit Vorschlag für ein strukturiertes Erstgespräch.
+                <p className="mx-auto mb-8 max-w-2xl text-xl text-text-secondary" data-animate>
+                  Skizzieren Sie kurz Ziel, Systeme, Zeitfenster. Wir antworten innerhalb 24h mit Vorschlag für ein
+                  strukturiertes Erstgespräch.
                 </p>
-                
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                  <a 
-                    href="/contact"
-                    className="btn-primary hover-lift press-bounce"
-                  >
+
+                <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
+                  <a href="/contact" className="btn-primary hover-lift press-bounce">
                     Jetzt Kontakt aufnehmen
-                    <Icon name="arrow_forward" className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    <Icon
+                      name="arrow_forward"
+                      className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                    />
                   </a>
-                  
+
                   <div className="flex items-center text-text-secondary">
                     <Icon name="schedule" className="mr-2 text-vae-turquoise" />
                     <span className="text-sm">24h Antwortzeit garantiert</span>
@@ -381,10 +472,10 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-    {/* Tech Stack Section */}
-    <TechStackSection />
+      {/* Tech Stack Section */}
+      <TechStackSection />
 
-  <CaseStudiesSection />
+      <CaseStudiesSection />
     </div>
   )
 }

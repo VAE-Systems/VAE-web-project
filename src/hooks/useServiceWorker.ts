@@ -20,7 +20,7 @@ export const useServiceWorker = () => {
     isRegistered: false,
     isUpdating: false,
     updateAvailable: false,
-    registration: null
+    registration: null,
   })
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const useServiceWorker = () => {
     const registerServiceWorker = async () => {
       try {
         const registration = await navigator.serviceWorker.register('/sw.js', {
-          scope: '/'
+          scope: '/',
         })
 
         console.log('[SW] Registered:', registration)
@@ -40,7 +40,7 @@ export const useServiceWorker = () => {
         setState(prev => ({
           ...prev,
           isRegistered: true,
-          registration
+          registration,
         }))
 
         // Handle updates
@@ -54,7 +54,7 @@ export const useServiceWorker = () => {
                 setState(prev => ({
                   ...prev,
                   isUpdating: false,
-                  updateAvailable: true
+                  updateAvailable: true,
                 }))
               }
             })
@@ -66,7 +66,6 @@ export const useServiceWorker = () => {
           console.log('[SW] New service worker activated')
           window.location.reload()
         })
-
       } catch (error) {
         console.error('[SW] Registration failed:', error)
       }
@@ -87,7 +86,7 @@ export const useServiceWorker = () => {
       setState(prev => ({
         ...prev,
         isRegistered: false,
-        registration: null
+        registration: null,
       }))
     }
   }
@@ -95,6 +94,6 @@ export const useServiceWorker = () => {
   return {
     ...state,
     updateServiceWorker,
-    unregisterServiceWorker
+    unregisterServiceWorker,
   }
 }

@@ -1,6 +1,6 @@
 /**
  * Global Type Definitions for VAE Systems Website
- * 
+ *
  * Central location for all TypeScript interfaces and types
  */
 
@@ -28,7 +28,6 @@ export interface NewsletterSubscription {
   }
   source?: string
 }
-
 
 // ============================================================================
 // API RESPONSE TYPES

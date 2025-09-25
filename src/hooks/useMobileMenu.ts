@@ -13,11 +13,7 @@ interface MobileMenuConfig {
 }
 
 export const useMobileMenu = (config: MobileMenuConfig = {}) => {
-  const {
-    enableSwipeGestures = true,
-    closeOnRouteChange = true,
-    preventBodyScroll = true
-  } = config
+  const { enableSwipeGestures = true, closeOnRouteChange = true, preventBodyScroll = true } = config
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -72,6 +68,6 @@ export const useMobileMenu = (config: MobileMenuConfig = {}) => {
     toggle,
     handleSwipeLeft,
     handleSwipeRight,
-    handleRouteChange
+    handleRouteChange,
   }
 }

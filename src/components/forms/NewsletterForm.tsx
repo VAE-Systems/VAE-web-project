@@ -1,6 +1,6 @@
 /**
  * Newsletter Form Component
- * 
+ *
  * Compact newsletter subscription form with preferences
  */
 
@@ -33,25 +33,17 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
   disabled = false,
   inline = false,
   showPreferences = false,
-  showLabels = true
+  showLabels = true,
 }) => {
   // Centered success overlay visibility
   const [showOverlay, setShowOverlay] = useState(false)
 
-  const {
-    formData,
-    formState,
-    loadingState,
-    updateField,
-    subscribe,
-    canSubmit,
-    hasErrors,
-    isSubmitting
-  } = useNewsletter({
-    onSuccess,
-    onError,
-    useMockApi
-  }) as any // Type assertion to handle the updatePreference issue
+  const { formData, formState, loadingState, updateField, subscribe, canSubmit, hasErrors, isSubmitting } =
+    useNewsletter({
+      onSuccess,
+      onError,
+      useMockApi,
+    }) as any // Type assertion to handle the updatePreference issue
 
   // Show centered success overlay when subscription succeeded
   useEffect(() => {
@@ -75,28 +67,30 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
   // Portal root memo
   const portalRoot = useMemo(() => (typeof document !== 'undefined' ? document.body : null), [])
 
-  const SuccessOverlay = (
+  const SuccessOverlay =
     showOverlay && portalRoot
       ? createPortal(
           <div aria-live="polite" aria-atomic="true">
-            <div className="fixed inset-0 z-[100] pointer-events-none flex items-center justify-center">
+            <div className="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center">
               {/* No blocking backdrop, just subtle vignette */}
               <div className="pointer-events-none absolute inset-0 bg-black/20 md:bg-black/10" />
               <div
                 role="status"
-                className="pointer-events-auto relative mx-4 w-full max-w-md rounded-2xl border border-white/10 bg-bg-secondary/80 backdrop-blur-xl shadow-2xl p-5 md:p-6 text-center"
+                className="pointer-events-auto relative mx-4 w-full max-w-md rounded-2xl border border-white/10 bg-bg-secondary/80 p-5 text-center shadow-2xl backdrop-blur-xl md:p-6"
               >
                 <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/20 text-vae-turquoise">
                   ✓
                 </div>
-                <h3 className="text-base md:text-lg font-semibold text-text-light mb-1">Newsletter-Anmeldung erfolgreich</h3>
-                <p className="text-xs md:text-sm text-text-muted mb-4">
+                <h3 className="mb-1 text-base font-semibold text-text-light md:text-lg">
+                  Newsletter-Anmeldung erfolgreich
+                </h3>
+                <p className="mb-4 text-xs text-text-muted md:text-sm">
                   Bitte bestätige die Anmeldung über den Link in deiner E‑Mail.
                 </p>
                 <button
                   type="button"
                   onClick={() => setShowOverlay(false)}
-                  className="px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95"
+                  className="rounded-lg bg-vae-turquoise px-4 py-2 font-medium text-bg-darker transition-all duration-200 hover:bg-vae-turquoise-dark active:scale-95"
                 >
                   Schließen
                 </button>
@@ -106,7 +100,6 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
           portalRoot
         )
       : null
-  )
 
   // ============================================================================
   // EVENT HANDLERS
@@ -119,9 +112,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
     }
   }
 
-  const handleInputChange = (field: keyof typeof formData) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleInputChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
     updateField(field, e.target.value)
   }
 
@@ -156,9 +147,9 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
     return (
       <div className={`${className}`}>
         {SuccessOverlay}
-        <div className="text-center p-6 bg-vae-turquoise/10 border border-vae-turquoise/30 rounded-lg">
-          <div className="text-vae-turquoise text-xl mb-3">✓</div>
-          <h3 className="font-medium text-text-light mb-2">Newsletter-Anmeldung erfolgreich!</h3>
+        <div className="rounded-lg border border-vae-turquoise/30 bg-vae-turquoise/10 p-6 text-center">
+          <div className="mb-3 text-xl text-vae-turquoise">✓</div>
+          <h3 className="mb-2 font-medium text-text-light">Newsletter-Anmeldung erfolgreich!</h3>
           <p className="text-sm text-text-muted">Bitte prüfen Sie Ihr E-Mail-Postfach für die Bestätigungsmail.</p>
         </div>
       </div>
@@ -179,8 +170,8 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
           - Allow wrapping on very small widths; stack vertically on mobile, row on >= sm.
           - Keep the button from shrinking and let it be full width when stacked.
         */}
-        <div className="flex flex-col gap-2 items-stretch">
-          <div className="flex-1 min-w-0">
+        <div className="flex flex-col items-stretch gap-2">
+          <div className="min-w-0 flex-1">
             <input
               type="email"
               value={formData.email}
@@ -195,25 +186,26 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
             type="submit"
             disabled={!canSubmit || disabled}
             className={`
-              px-4 py-2 rounded-lg font-medium transition-all duration-200 flex-none w-full
-              ${canSubmit && !disabled
-                ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95'
-                : 'bg-bg-tertiary text-text-muted cursor-not-allowed'
+              w-full flex-none rounded-lg px-4 py-2 font-medium transition-all duration-200
+              ${
+                canSubmit && !disabled
+                  ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95'
+                  : 'bg-bg-tertiary cursor-not-allowed text-text-muted'
               }
               ${isSubmitting ? 'animate-pulse' : ''}
             `}
           >
             {isSubmitting ? (
-              <div className="w-4 h-4 border-2 border-bg-darker border-t-transparent rounded-full animate-spin"></div>
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-bg-darker border-t-transparent"></div>
             ) : (
               'Anmelden'
             )}
           </button>
         </div>
-        
+
         {/* Error Display for Inline */}
         {hasErrors && (
-          <div className="mt-2 text-red-400 text-sm">
+          <div className="mt-2 text-sm text-red-400">
             {formState.errors.map((error: any, index: number) => (
               <div key={index}>{error.message}</div>
             ))}
@@ -229,14 +221,12 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-6 ${className}`}>
-      
       {/* Email & Name Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* Email Field */}
         <div>
           {showLabels && (
-            <label htmlFor="newsletter-email" className="block text-sm font-medium text-text-light mb-2">
+            <label htmlFor="newsletter-email" className="mb-2 block text-sm font-medium text-text-light">
               E-Mail-Adresse *
             </label>
           )}
@@ -255,7 +245,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
         {/* Name Field */}
         <div>
           {showLabels && (
-            <label htmlFor="newsletter-name" className="block text-sm font-medium text-text-light mb-2">
+            <label htmlFor="newsletter-name" className="mb-2 block text-sm font-medium text-text-light">
               Name (optional)
             </label>
           )}
@@ -274,30 +264,28 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
       {/* Preferences */}
       {showPreferences && (
         <div>
-          <p className="text-sm font-medium text-text-light mb-3">
-            Newsletter-Themen (optional):
-          </p>
+          <p className="mb-3 text-sm font-medium text-text-light">Newsletter-Themen (optional):</p>
           <div className="space-y-2">
             {[
               { key: 'tech', label: 'Technische Updates & Tutorials' },
               { key: 'business', label: 'Business Insights & Case Studies' },
-              { key: 'updates', label: 'Produkt-Updates & News' }
+              { key: 'updates', label: 'Produkt-Updates & News' },
             ].map(({ key, label }) => (
-              <label key={key} className="flex items-center space-x-3 cursor-pointer">
+              <label key={key} className="flex cursor-pointer items-center space-x-3">
                 <input
                   type="checkbox"
                   checked={formData.preferences?.[key as keyof typeof formData.preferences] || false}
-                  onChange={(e) => {
+                  onChange={e => {
                     // Handle preferences update properly
                     const updatedPreferences = {
                       ...formData.preferences,
-                      [key]: e.target.checked
+                      [key]: e.target.checked,
                     }
                     // We'll fix this properly by using a dedicated function
                     console.log('Preference updated:', key, e.target.checked, updatedPreferences)
                   }}
                   disabled={disabled || isSubmitting}
-                  className="w-4 h-4 text-vae-turquoise bg-bg-secondary border border-bg-tertiary rounded focus:ring-vae-turquoise/50"
+                  className="border-bg-tertiary h-4 w-4 rounded border bg-bg-secondary text-vae-turquoise focus:ring-vae-turquoise/50"
                 />
                 <span className="text-sm text-text-muted">{label}</span>
               </label>
@@ -308,8 +296,8 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
 
       {/* Error Display */}
       {hasErrors && (
-        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-          <div className="text-red-400 text-sm">
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4">
+          <div className="text-sm text-red-400">
             {formState.errors.map((error: any, index: number) => (
               <div key={index}>{error.message}</div>
             ))}
@@ -322,17 +310,18 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
         type="submit"
         disabled={!canSubmit || disabled}
         className={`
-          w-full px-6 py-3 rounded-lg font-medium transition-all duration-200
-          ${canSubmit && !disabled
-            ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95'
-            : 'bg-bg-tertiary text-text-muted cursor-not-allowed'
+          w-full rounded-lg px-6 py-3 font-medium transition-all duration-200
+          ${
+            canSubmit && !disabled
+              ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark active:scale-95'
+              : 'bg-bg-tertiary cursor-not-allowed text-text-muted'
           }
           ${isSubmitting ? 'animate-pulse' : ''}
         `}
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center space-x-2">
-            <div className="w-4 h-4 border-2 border-bg-darker border-t-transparent rounded-full animate-spin"></div>
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-bg-darker border-t-transparent"></div>
             <span>Wird angemeldet...</span>
           </span>
         ) : (
@@ -341,11 +330,12 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
       </button>
 
       {/* Privacy Notice */}
-      <p className="text-xs text-text-muted text-center">
+      <p className="text-center text-xs text-text-muted">
         Sie können sich jederzeit wieder abmelden. Weitere Informationen in unserer{' '}
         <a href="/privacy" className="text-vae-turquoise hover:underline">
           Datenschutzerklärung
-        </a>.
+        </a>
+        .
       </p>
     </form>
   )

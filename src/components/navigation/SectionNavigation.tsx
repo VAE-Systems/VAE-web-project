@@ -23,13 +23,13 @@ const sections: SectionData[] = [
   { id: 'tech-stack', iconName: 'code', label: 'Tech' },
   { id: 'about', iconName: 'people', label: 'Über Uns' },
   { id: 'faq', iconName: 'help_outline', label: 'FAQ' },
-  { id: 'contact', iconName: 'email', label: 'Kontakt' }
+  { id: 'contact', iconName: 'email', label: 'Kontakt' },
 ]
 
 /**
  * Section Navigation - Einfaches, klares Konzept:
  * - Scroll-Position bestimmt welcher Button aktiv ist
- * - Klick scrollt zur Sektion 
+ * - Klick scrollt zur Sektion
  * - Hover zeigt grüne Umrandung
  * - Kein "Hängen" nach Klicks, keine Ziel-Markierungen
  */
@@ -41,17 +41,17 @@ const SectionNavigation: React.FC = () => {
     const updateActiveSection = () => {
       const scrollY = window.scrollY
       const headerOffset = 100
-      
+
       let currentSection = sections[0].id
-      
+
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i]
         const element = document.getElementById(section.id)
-        
+
         if (element) {
           const rect = element.getBoundingClientRect()
           const elementTop = scrollY + rect.top
-          
+
           if (scrollY + headerOffset >= elementTop - 50) {
             currentSection = section.id
             break
@@ -89,62 +89,60 @@ const SectionNavigation: React.FC = () => {
     gsap.to(window, {
       scrollTo: { y: element.offsetTop - 80 },
       duration: 0.6,
-      ease: "power2.out"
+      ease: 'power2.out',
     })
   }, [])
 
   return (
-    <nav 
-      className="fixed top-1/2 right-6 -translate-y-1/2 z-50"
-      aria-label="Section Navigation"
-    >
+    <nav className="fixed right-6 top-1/2 z-50 -translate-y-1/2" aria-label="Section Navigation">
       <div className="flex flex-col gap-3">
-        {sections.map((section) => {
+        {sections.map(section => {
           const isActive = activeSection === section.id
-          
+
           return (
-            <div key={section.id} className="relative group">
+            <div key={section.id} className="group relative">
               {/* Navigation Button */}
               <button
                 onClick={() => scrollToSection(section.id)}
-                onMouseDown={(e) => e.preventDefault()} // Verhindert focus ring
+                onMouseDown={e => e.preventDefault()} // Verhindert focus ring
                 className={`
-                  relative w-12 h-12 rounded-full 
-                  backdrop-blur-xl border transition-all duration-150
-                  flex items-center justify-center
-                  hover:scale-105 hover:-translate-x-1 hover-lift press-bounce
-                  hover:border-vae-turquoise hover:bg-white/15
-                  outline-none
-                  ${isActive
-                    ? 'bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark text-bg-darker dark:text-white shadow-lg shadow-vae-turquoise/30 scale-105 border-vae-turquoise'
-                    : 'bg-bg-primary/8 dark:bg-white/8 border-border-primary dark:border-white/15 text-text-light dark:text-white'
+                  hover-lift press-bounce relative flex 
+                  h-12 w-12 items-center justify-center
+                  rounded-full border outline-none
+                  backdrop-blur-xl transition-all duration-150 hover:-translate-x-1
+                  hover:scale-105 hover:border-vae-turquoise
+                  hover:bg-white/15
+                  ${
+                    isActive
+                      ? 'scale-105 border-vae-turquoise bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark text-bg-darker shadow-lg shadow-vae-turquoise/30 dark:text-white'
+                      : 'bg-bg-primary/8 dark:bg-white/8 border-border-primary text-text-light dark:border-white/15 dark:text-white'
                   }
                 `}
                 aria-label={`Zu ${section.label} scrollen`}
               >
                 <Icon name={section.iconName} size={18} />
-                
+
                 {/* Active indicator */}
                 {isActive && (
-                  <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-6 bg-vae-turquoise rounded-full" />
+                  <div className="absolute -left-2 top-1/2 h-6 w-1 -translate-y-1/2 rounded-full bg-vae-turquoise" />
                 )}
               </button>
 
               {/* Tooltip */}
-              <div 
+              <div
                 className="
-                  absolute right-full mr-3 top-1/2 -translate-y-1/2
-                  px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap
-                  bg-bg-primary/95 dark:bg-bg-darker/95 backdrop-blur-xl border border-border-primary dark:border-white/10 text-text-light dark:text-white
-                  opacity-0 pointer-events-none transition-all duration-150
-                  group-hover:opacity-100 group-hover:-translate-x-1
-                  shadow-lg z-10
+                  bg-bg-primary/95 border-border-primary pointer-events-none absolute right-full
+                  top-1/2 z-10 mr-3 -translate-y-1/2 whitespace-nowrap rounded-lg
+                  border px-3 py-2 text-sm font-medium text-text-light opacity-0 shadow-lg
+                  backdrop-blur-xl transition-all duration-150 group-hover:-translate-x-1
+                  group-hover:opacity-100 dark:border-white/10
+                  dark:bg-bg-darker/95 dark:text-white
                 "
               >
                 {section.label}
-                
+
                 {/* Tooltip arrow */}
-                <div className="absolute left-full top-1/2 -translate-y-1/2 w-0 h-0 border-l-4 border-l-bg-darker/95 border-y-4 border-y-transparent" />
+                <div className="absolute left-full top-1/2 h-0 w-0 -translate-y-1/2 border-y-4 border-l-4 border-y-transparent border-l-bg-darker/95" />
               </div>
             </div>
           )
@@ -152,11 +150,11 @@ const SectionNavigation: React.FC = () => {
       </div>
 
       {/* Progress indicator - reagiert sofort */}
-      <div className="absolute -right-1 top-0 bottom-0 w-0.5 bg-border-primary/10 dark:bg-white/10 rounded-full overflow-hidden">
-        <div 
+      <div className="bg-border-primary/10 absolute -right-1 bottom-0 top-0 w-0.5 overflow-hidden rounded-full dark:bg-white/10">
+        <div
           className="w-full bg-gradient-to-b from-vae-turquoise to-vae-turquoise-dark transition-all duration-200 ease-out"
           style={{
-            height: `${(sections.findIndex(s => s.id === activeSection) + 1) / sections.length * 100}%`
+            height: `${((sections.findIndex(s => s.id === activeSection) + 1) / sections.length) * 100}%`,
           }}
         />
       </div>

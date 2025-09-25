@@ -1,6 +1,6 @@
 /**
  * Contact Service
- * 
+ *
  * Handles all contact form submissions, validations, and API calls
  */
 
@@ -62,9 +62,9 @@ export const submitContactForm = async (data: ContactFormData): Promise<ContactS
         error: {
           code: 'VALIDATION_ERROR',
           message: 'Validierungsfehler',
-          details: validationErrors
+          details: validationErrors,
         },
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       }
     }
 
@@ -78,8 +78,8 @@ export const submitContactForm = async (data: ContactFormData): Promise<ContactS
       body: JSON.stringify({
         ...data,
         timestamp: new Date().toISOString(),
-        source: data.source || 'website'
-      })
+        source: data.source || 'website',
+      }),
     })
 
     if (!response.ok) {
@@ -87,28 +87,27 @@ export const submitContactForm = async (data: ContactFormData): Promise<ContactS
     }
 
     const result = await response.json()
-    
+
     return {
       success: true,
       data: {
         submissionId: result.id || generateSubmissionId(),
         confirmationSent: true,
-        estimatedResponse: '24-48 Stunden'
+        estimatedResponse: '24-48 Stunden',
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
-
   } catch (error) {
     console.error('Contact form submission error:', error)
-    
+
     return {
       success: false,
       error: {
         code: 'SUBMISSION_ERROR',
         message: 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut.',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: error instanceof Error ? error.message : 'Unknown error',
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
   }
 }
@@ -128,16 +127,16 @@ const generateSubmissionId = (): string => {
 export const mockContactSubmission = async (): Promise<ContactSubmissionResponse> => {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000))
-  
+
   // Simulate occasional errors for testing
   if (Math.random() < 0.1) {
     return {
       success: false,
       error: {
         code: 'MOCK_ERROR',
-        message: 'Simulierter Serverfehler für Testing'
+        message: 'Simulierter Serverfehler für Testing',
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
   }
 
@@ -146,8 +145,8 @@ export const mockContactSubmission = async (): Promise<ContactSubmissionResponse
     data: {
       submissionId: generateSubmissionId(),
       confirmationSent: true,
-      estimatedResponse: '24-48 Stunden'
+      estimatedResponse: '24-48 Stunden',
     },
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   }
 }

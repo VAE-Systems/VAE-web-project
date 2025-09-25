@@ -36,14 +36,14 @@ const TouchCard: React.FC<TouchCardProps> = ({
   interactive = false,
   disabled = false,
   longPressDelay,
-  touchThreshold
+  touchThreshold,
 }) => {
   const baseClasses = 'bg-bg-secondary border border-border-primary rounded-lg transition-all duration-200'
 
   const paddingClasses = {
     sm: 'p-3',
     md: 'p-4',
-    lg: 'p-6'
+    lg: 'p-6',
   }
 
   const interactiveClasses = interactive
@@ -69,7 +69,7 @@ const TouchCard: React.FC<TouchCardProps> = ({
       className={`${baseClasses} ${paddingClasses[padding]} ${interactiveClasses} ${disabledClass} ${minHeightClass} touch-manipulation ${className}`}
       onClick={interactive ? handleClick : undefined}
       style={{
-        WebkitTapHighlightColor: 'transparent'
+        WebkitTapHighlightColor: 'transparent',
       }}
       role={interactive ? 'button' : undefined}
       tabIndex={interactive ? 0 : undefined}

@@ -1,7 +1,7 @@
 {
-  "name": "VAE Systems - Innovative KI-Lösungen",
+  "name": "VAE Systems - DSGVO-konforme KI-Automatisierung",
   "short_name": "VAE Systems",
-  "description": "VAE Systems UG (haftungsbeschränkt) - Innovative KI-Lösungen und Automatisierung für Unternehmen",
+  "description": "DSGVO-konforme KI-Automatisierung und Workflow-Engines für deutsche Unternehmen. Open Source, lokal gehostet, ohne Vendor Lock-in.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
@@ -9,7 +9,61 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "de",
-  "categories": ["business", "productivity", "utilities"],
+  "categories": ["business", "productivity", "utilities", "developer"],
+  "shortcuts": [
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "description": "KI-Services & Consulting entdecken",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/LOGO_01_white.svg",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "VAE CORE",
+      "short_name": "VAE CORE",
+      "description": "Enterprise KI-Plattform",
+      "url": "/products/vae-core",
+      "icons": [
+        {
+          "src": "/LOGO_01_white.svg",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Re: Suite",
+      "short_name": "Re: Suite",
+      "description": "Modulare KI-Bausteine (Re:spond, Re:search, Re:port)",
+      "url": "/products/solutions",
+      "icons": [
+        {
+          "src": "/LOGO_01_white.svg",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Strategie-Call",
+      "short_name": "Kontakt",
+      "description": "30-Min Strategie-Gespräch buchen",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/LOGO_01_white.svg",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
   "icons": [
     {
       "src": "/LOGO_01_white.svg",
@@ -30,42 +84,27 @@
       "purpose": "any maskable"
     }
   ],
-  "shortcuts": [
+  "screenshots": [
     {
-      "name": "Services",
-      "short_name": "Services",
-      "description": "Unsere Dienstleistungen entdecken",
-      "url": "/services",
-      "icons": [
-        {
-          "src": "/LOGO_01_white.svg",
-          "sizes": "96x96"
-        }
-      ]
+      "src": "/screenshots/desktop-hero.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "VAE Systems - KI-Automatisierung für deutsche Unternehmen"
     },
     {
-      "name": "Produkte",
-      "short_name": "Produkte",
-      "description": "Unsere Produkte ansehen",
-      "url": "/products",
-      "icons": [
-        {
-          "src": "/LOGO_01_white.svg",
-          "sizes": "96x96"
-        }
-      ]
+      "src": "/screenshots/mobile-services.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Services: Consulting, Training, Custom Solutions"
     },
     {
-      "name": "Kontakt",
-      "short_name": "Kontakt",
-      "description": "Kontakt aufnehmen",
-      "url": "/contact",
-      "icons": [
-        {
-          "src": "/LOGO_01_white.svg",
-          "sizes": "96x96"
-        }
-      ]
+      "src": "/screenshots/vae-core-dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "VAE CORE Enterprise KI-Plattform Dashboard"
     }
   ]
 }

@@ -75,7 +75,10 @@ const normalizeEmailBody = (body: string): string => {
   // Collapse mixed newlines to \n first
   const unified = body.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
   // Remove trailing spaces on each line
-  const cleaned = unified.split('\n').map(l => l.replace(/\s+$/,'')).join('\n')
+  const cleaned = unified
+    .split('\n')
+    .map(l => l.replace(/\s+$/, ''))
+    .join('\n')
   // Ensure single blank lines (no triples)
   const compact = cleaned.replace(/\n{3,}/g, '\n\n')
   // Convert to CRLF
@@ -111,7 +114,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     id: 'contact.general',
     type: 'route',
     path: '/contact',
-    label: 'Kontakt'
+    label: 'Kontakt',
   },
   'contact.demo': {
     id: 'contact.demo',
@@ -119,8 +122,8 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     path: '/contact',
     label: 'Demo anfragen',
     query: {
-      intent: (ctx) => ctx.intent ? String(ctx.intent) : 'demo',
-      product: (ctx) => (ctx.product ? String(ctx.product) : undefined),
+      intent: ctx => (ctx.intent ? String(ctx.intent) : 'demo'),
+      product: ctx => (ctx.product ? String(ctx.product) : undefined),
     },
   },
   // Direct scheduling (Notion booking link)
@@ -129,7 +132,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     type: 'external',
     url: 'https://calendar.notion.so/meet/juliandarius/vae-systems',
     label: 'Kostenloses Erstgespräch',
-    newTab: true
+    newTab: true,
   },
   // Quick email CTA
   'contact.quick_email': {
@@ -137,8 +140,9 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     type: 'mailto',
     email: BUSINESS_EMAIL,
     label: 'Direkte Frage per Mail',
-    subject: (ctx) => `Kurzfrage zu KI Projekt${ctx.product ? ` – ${ctx.product}` : ''}`,
-    body: (ctx) => `Hallo VAE Systems,\n\nich habe eine kurze Frage zu${ctx.product ? ` ${ctx.product}` : ' Ihrem Angebot'}.\n\nFRAGE / THEMA:\n[Bitte kurz schildern]\n\nKONTEXT (1–2 Sätze):\n[Projekt / Situation]\n\nMEINE KONTAKTDATEN:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit (Zeiten): [ ]\n\nOPTIONAL – WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: ${ctx.fromPage || 'unknown'} | intent: ${ctx.intent || 'quick-question'} | product: ${ctx.product || 'general'}`
+    subject: ctx => `Kurzfrage zu KI Projekt${ctx.product ? ` – ${ctx.product}` : ''}`,
+    body: ctx =>
+      `Hallo VAE Systems,\n\nich habe eine kurze Frage zu${ctx.product ? ` ${ctx.product}` : ' Ihrem Angebot'}.\n\nFRAGE / THEMA:\n[Bitte kurz schildern]\n\nKONTEXT (1–2 Sätze):\n[Projekt / Situation]\n\nMEINE KONTAKTDATEN:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit (Zeiten): [ ]\n\nOPTIONAL – WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: ${ctx.fromPage || 'unknown'} | intent: ${ctx.intent || 'quick-question'} | product: ${ctx.product || 'general'}`,
   },
   // Product-specific: VAE CORE contact via email
   'product.vae-core.contact_email': {
@@ -147,7 +151,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     email: BUSINESS_EMAIL,
     label: 'VAE CORE – Kontakt',
     subject: 'Anfrage: VAE CORE – Interesse/Demo',
-    body: `Hallo VAE Systems,\n\nich interessiere mich für VAE CORE und hätte gern ein kurzes Erstgespräch.\n\nKURZER BEDARF / ZIEL:\n[ ]\n\nTECHNISCHE / ORGANISATORISCHE ANFORDERUNGEN:\n• Sicherheit / Compliance: [ ]\n• Betriebsmodell / Hosting: [ ]\n\nTEAM & UMGEBUNG:\n• Teamgröße / Nutzer: [ ]\n• Rollen / Stakeholder: [ ]\n\nWUNSCHTERMIN(E) FÜR 15–20 MIN ERSTGESPRÄCH:\n[Bitte 2–3 Zeitfenster anbieten]\n\nOPTIONALE ZUSÄTZLICHE HINWEISE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: vae-core-page | intent: contact | product: VAE CORE`
+    body: `Hallo VAE Systems,\n\nich interessiere mich für VAE CORE und hätte gern ein kurzes Erstgespräch.\n\nKURZER BEDARF / ZIEL:\n[ ]\n\nTECHNISCHE / ORGANISATORISCHE ANFORDERUNGEN:\n• Sicherheit / Compliance: [ ]\n• Betriebsmodell / Hosting: [ ]\n\nTEAM & UMGEBUNG:\n• Teamgröße / Nutzer: [ ]\n• Rollen / Stakeholder: [ ]\n\nWUNSCHTERMIN(E) FÜR 15–20 MIN ERSTGESPRÄCH:\n[Bitte 2–3 Zeitfenster anbieten]\n\nOPTIONALE ZUSÄTZLICHE HINWEISE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: vae-core-page | intent: contact | product: VAE CORE`,
   },
   // Product-specific: VAE CORE demo route (keeps contact form flow)
   'product.vae-core.demo': {
@@ -157,8 +161,8 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     label: 'Kostenlose Demo buchen',
     query: {
       intent: () => 'demo',
-      product: () => 'vae-core'
-    }
+      product: () => 'vae-core',
+    },
   },
   // External reference kept for completeness
   'product.vae-core.github': {
@@ -166,7 +170,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     type: 'external',
     url: 'https://github.com/vae-systems/vae-core',
     label: 'GitHub Repository',
-    newTab: true
+    newTab: true,
   },
   // Product grid: generic product contact via email
   'products.contact_email': {
@@ -174,8 +178,9 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     type: 'mailto',
     email: BUSINESS_EMAIL,
     label: 'Kontakt',
-    subject: (ctx) => `Anfrage: ${ctx.product ? String(ctx.product) : 'Produkt'} – Info/Demo`,
-    body: (ctx) => `Hallo VAE Systems,\n\nich interessiere mich für ${ctx.product || 'ein Produkt'} und bitte um weitere Informationen.\n\nKURZER BEDARF / USE CASE:\n[ ]\n\nZEITRAHMEN / PRIORITÄT:\n[ ]\n\nTEAM & NUTZER:\n• Teamgröße: [ ]\n• Hauptnutzer / Rollen: [ ]\n\nANFORDERUNGEN / RANDBEDINGUNGEN:\n• Sicherheit / Compliance: [ ]\n• Integration / Schnittstellen: [ ]\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: ${ctx.fromPage || 'products-grid'} | intent: ${ctx.intent || 'contact'} | product: ${ctx.product || 'general'}`
+    subject: ctx => `Anfrage: ${ctx.product ? String(ctx.product) : 'Produkt'} – Info/Demo`,
+    body: ctx =>
+      `Hallo VAE Systems,\n\nich interessiere mich für ${ctx.product || 'ein Produkt'} und bitte um weitere Informationen.\n\nKURZER BEDARF / USE CASE:\n[ ]\n\nZEITRAHMEN / PRIORITÄT:\n[ ]\n\nTEAM & NUTZER:\n• Teamgröße: [ ]\n• Hauptnutzer / Rollen: [ ]\n\nANFORDERUNGEN / RANDBEDINGUNGEN:\n• Sicherheit / Compliance: [ ]\n• Integration / Schnittstellen: [ ]\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: ${ctx.fromPage || 'products-grid'} | intent: ${ctx.intent || 'contact'} | product: ${ctx.product || 'general'}`,
   },
   // Tools page: Early Interest (opens mail client with template)
   'products.tools.early_interest_email': {
@@ -183,8 +188,9 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     type: 'mailto',
     email: BUSINESS_EMAIL,
     label: 'Early Interest anmelden',
-    subject: (ctx) => `Ich interessiere mich für Early Access zu ${ctx.product || 'Applikationen & Modulen'}`,
-    body: (ctx) => `Hallo VAE Systems,\n\nich möchte Early Access anmelden für ${ctx.product || 'Applikationen & Module'}.\n\nKURZBESCHREIBUNG / BEDARF:\n[ ]\n\nGEPLANTER EINSATZZEITRAUM:\n[ ]\n\nTEAM / NUTZER:\n• Teamgröße: [ ]\n• Nutzergruppen / Rollen: [ ]\n\nSECURITY / COMPLIANCE ANFORDERUNGEN:\n[ ]\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nDanke & viele Grüße\n[Ihr Name]\n\n— meta: from: ${ctx.fromPage || 'unknown'} | intent: ${ctx.intent || 'early-access'} | product: ${ctx.product || 'Applikationen & Module'}`
+    subject: ctx => `Ich interessiere mich für Early Access zu ${ctx.product || 'Applikationen & Modulen'}`,
+    body: ctx =>
+      `Hallo VAE Systems,\n\nich möchte Early Access anmelden für ${ctx.product || 'Applikationen & Module'}.\n\nKURZBESCHREIBUNG / BEDARF:\n[ ]\n\nGEPLANTER EINSATZZEITRAUM:\n[ ]\n\nTEAM / NUTZER:\n• Teamgröße: [ ]\n• Nutzergruppen / Rollen: [ ]\n\nSECURITY / COMPLIANCE ANFORDERUNGEN:\n[ ]\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nDanke & viele Grüße\n[Ihr Name]\n\n— meta: from: ${ctx.fromPage || 'unknown'} | intent: ${ctx.intent || 'early-access'} | product: ${ctx.product || 'Applikationen & Module'}`,
   },
   // Consulting: 2 Days On-Site Workshop
   'consulting.two_days_workshop': {
@@ -193,7 +199,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     email: BUSINESS_EMAIL,
     label: 'Beratung anfragen',
     subject: 'Anfrage: 2 Tage Vor Ort Intensiv-Workshop',
-    body: `Hallo VAE Systems,\n\nich interessiere mich für Ihren 2 TAGE VOR ORT INTENSIV-WORKSHOP.\n\nAKTUELLER BEDARF / AUSGANGSLAGE:\n[ ]\n\nHERAUSFORDERUNGEN / SCHMERZPUNKTE:\n[ ]\n\nERWARTETE ERGEBNISSE / ZIELE NACH DEN 2 TAGEN:\n[ ]\n\nVERFÜGBARE TERMINE (2–3 Optionen):\n[ ]\n\nKONTAKT & ORGANISATION:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Standort (Vor-Ort): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nBUDGETRAHMEN BESTÄTIGUNG: 3.800 € (Standard)\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: workshop-booking | service: 2-days-workshop | price: 3800`
+    body: `Hallo VAE Systems,\n\nich interessiere mich für Ihren 2 TAGE VOR ORT INTENSIV-WORKSHOP.\n\nAKTUELLER BEDARF / AUSGANGSLAGE:\n[ ]\n\nHERAUSFORDERUNGEN / SCHMERZPUNKTE:\n[ ]\n\nERWARTETE ERGEBNISSE / ZIELE NACH DEN 2 TAGEN:\n[ ]\n\nVERFÜGBARE TERMINE (2–3 Optionen):\n[ ]\n\nKONTAKT & ORGANISATION:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Standort (Vor-Ort): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nBUDGETRAHMEN BESTÄTIGUNG: 3.800 € (Standard)\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: workshop-booking | service: 2-days-workshop | price: 3800`,
   },
   // Consulting: 2 Days On-Site Workshop (Form Route)
   'consulting.two_days_workshop.route': {
@@ -203,8 +209,8 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     label: 'Workshop Formular',
     query: {
       intent: () => 'workshop',
-      service: () => '2-days-workshop'
-    }
+      service: () => '2-days-workshop',
+    },
   },
   // Consulting: Deep-Dive Architecture & Governance
   'consulting.deep_dive_architecture': {
@@ -213,7 +219,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     email: BUSINESS_EMAIL,
     label: 'Beratung anfragen',
     subject: 'Anfrage: Deep-Dive Architektur & Governance',
-    body: `Hallo VAE Systems,\n\nich interessiere mich für Ihren DEEP-DIVE: ARCHITEKTUR & GOVERNANCE (Entscheidungsvorlage).\n\nAKTUELLER BEDARF / FRAGESTELLUNG:\n[ ]\n\nTECHNISCHE / ORGANISATORISCHE HERAUSFORDERUNGEN:\n[ ]\n\nZIEL / ERWARTETE ENTSCHEIDUNG / OUTCOME:\n[ ]\n\nZEITRAHMEN FÜR ENTSCHEIDUNGSVORLAGE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nBUDGETRAHMEN: Auf Anfrage (bitte Optionen senden)\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: deep-dive-booking | service: architecture-governance | price: on-request`
+    body: `Hallo VAE Systems,\n\nich interessiere mich für Ihren DEEP-DIVE: ARCHITEKTUR & GOVERNANCE (Entscheidungsvorlage).\n\nAKTUELLER BEDARF / FRAGESTELLUNG:\n[ ]\n\nTECHNISCHE / ORGANISATORISCHE HERAUSFORDERUNGEN:\n[ ]\n\nZIEL / ERWARTETE ENTSCHEIDUNG / OUTCOME:\n[ ]\n\nZEITRAHMEN FÜR ENTSCHEIDUNGSVORLAGE:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nBUDGETRAHMEN: Auf Anfrage (bitte Optionen senden)\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: deep-dive-booking | service: architecture-governance | price: on-request`,
   },
   // Consulting: Deep-Dive Architecture & Governance (Form Route)
   'consulting.deep_dive_architecture.route': {
@@ -223,8 +229,8 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     label: 'Deep-Dive Formular',
     query: {
       intent: () => 'deep-dive',
-      service: () => 'architecture-governance'
-    }
+      service: () => 'architecture-governance',
+    },
   },
   // Consulting: Monthly Support
   'consulting.monthly_support': {
@@ -233,7 +239,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     email: BUSINESS_EMAIL,
     label: 'Beratung anfragen',
     subject: 'Anfrage: Monatliche Begleitung & Support',
-    body: `Hallo VAE Systems,\n\nich interessiere mich für Ihre MONATLICHE BEGLEITUNG (Reviews, Vendor-Auswahl, Architektur & KPI Monitoring).\n\nAKTUELLER BEDARF / FOKUS:\n[ ]\n\nHERAUSFORDERUNGEN / RISIKEN:\n[ ]\n\nERWARTETE ZIELE / KPIs:\n[ ]\n\nGEWÜNSCHTE LAUFZEIT / START:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nBUDGETRAHMEN: ab 5.000 € monatlich (bitte Staffelung senden)\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: monthly-support-booking | service: monthly-support | price: 5000+`
+    body: `Hallo VAE Systems,\n\nich interessiere mich für Ihre MONATLICHE BEGLEITUNG (Reviews, Vendor-Auswahl, Architektur & KPI Monitoring).\n\nAKTUELLER BEDARF / FOKUS:\n[ ]\n\nHERAUSFORDERUNGEN / RISIKEN:\n[ ]\n\nERWARTETE ZIELE / KPIs:\n[ ]\n\nGEWÜNSCHTE LAUFZEIT / START:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma: [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nBUDGETRAHMEN: ab 5.000 € monatlich (bitte Staffelung senden)\n\nOPTIONALE WEITERE HINWEISE:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: monthly-support-booking | service: monthly-support | price: 5000+`,
   },
   // Consulting: Monthly Support (Form Route)
   'consulting.monthly_support.route': {
@@ -243,8 +249,8 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     label: 'Begleitung Formular',
     query: {
       intent: () => 'monthly-support',
-      service: () => 'monthly-support'
-    }
+      service: () => 'monthly-support',
+    },
   },
 
   // Generic initial consultation (Erstgespräch) mailto
@@ -254,7 +260,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     email: BUSINESS_EMAIL,
     label: 'Erstgespräch buchen',
     subject: 'Anfrage: Erstgespräch (15–20 Min)',
-    body: `Hallo VAE Systems,\n\nich würde gern ein unverbindliches ERSTGESPRÄCH (15–20 Min) vereinbaren.\n\nKURZER KONTEXT / THEMENSTELLUNG:\n[ ]\n\nZIELE DES GESPRÄCHS:\n[ ]\n\nAKTUELLE PHASE / STATUS IM PROJEKT:\n[ ]\n\nWUNSCHTERMIN(E) – BITTE 2–3 OPTIONEN:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nOPTIONALE HINWEISE / LINKS:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: initial-call | service: initial-call`
+    body: `Hallo VAE Systems,\n\nich würde gern ein unverbindliches ERSTGESPRÄCH (15–20 Min) vereinbaren.\n\nKURZER KONTEXT / THEMENSTELLUNG:\n[ ]\n\nZIELE DES GESPRÄCHS:\n[ ]\n\nAKTUELLE PHASE / STATUS IM PROJEKT:\n[ ]\n\nWUNSCHTERMIN(E) – BITTE 2–3 OPTIONEN:\n[ ]\n\nKONTAKT:\n• Name / Rolle: [ ]\n• Firma (optional): [ ]\n• Telefon / Erreichbarkeit: [ ]\n\nOPTIONALE HINWEISE / LINKS:\n[ ]\n\nVielen Dank & beste Grüße\n[Ihr Name]\n\n— meta: from: consulting-page | intent: initial-call | service: initial-call`,
   },
   // Consulting: Initial Call (Form Route)
   'consulting.initial_call.route': {
@@ -264,8 +270,8 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
     label: 'Erstgespräch Formular',
     query: {
       intent: () => 'initial-call',
-      service: () => 'initial-call'
-    }
+      service: () => 'initial-call',
+    },
   },
 }
 
@@ -282,7 +288,7 @@ export const buildCta = (id: string, ctx: CtaContext = {}): BuiltCta => {
       id: 'contact.general',
       type: 'route',
       href: '/contact',
-      label: 'Kontakt'
+      label: 'Kontakt',
     }
   }
 

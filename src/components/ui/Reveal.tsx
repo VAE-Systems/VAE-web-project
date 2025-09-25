@@ -26,9 +26,10 @@ export const Reveal: React.FC<RevealProps> & { Group: React.FC<RevealGroupProps>
   className,
   ...rest
 }) => {
-  const variants = typeof customVariants === 'function'
-    ? (customVariants(delay) as any)
-    : (customVariants ?? (PresetVariants[preset] as any))
+  const variants =
+    typeof customVariants === 'function'
+      ? (customVariants(delay) as any)
+      : (customVariants ?? (PresetVariants[preset] as any))
 
   const MotionComponent = useMemo(() => motion(Tag as any), [Tag]) as unknown as React.ComponentType<any>
 

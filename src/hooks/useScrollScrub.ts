@@ -10,7 +10,7 @@ type OffsetInput = string | number | [string | number, string | number]
 
 export function useScrollScrub({ target, offset }: ScrollScrubOptions) {
   const resolvedOffset: [OffsetInput, OffsetInput] = Array.isArray(offset)
-    ? offset as [OffsetInput, OffsetInput]
+    ? (offset as [OffsetInput, OffsetInput])
     : [offset ?? 'start end', 'center center']
 
   const { scrollYProgress } = useScroll({ target, offset: resolvedOffset as any })

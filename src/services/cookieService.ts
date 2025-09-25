@@ -61,7 +61,7 @@ export class CookieService {
       consent,
       showBanner: false,
       showPreferences: false,
-      lastUpdated: new Date().toISOString()
+      lastUpdated: new Date().toISOString(),
     }
 
     try {

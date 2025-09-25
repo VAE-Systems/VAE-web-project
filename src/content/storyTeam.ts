@@ -15,14 +15,14 @@ export const storyIntro = {
   body: [
     'Wir kommen aus Mathematik, Informatik, Volkswirtschaft & Produktdesign – verbunden durch frühe, intensive Arbeit mit LLMs, Self‑Hosting und Automatisierungs-Stacks.',
     'Unsere Haltung: Architektur, Dokumentation & Ownership sind der Unterschied zwischen flüchtigem Experiment und tragfähiger Wertschöpfungsschicht.',
-    'Europäische Datenhoheit & offene Systeme sind für uns kein Marketing, sondern Design-Kriterium.'
+    'Europäische Datenhoheit & offene Systeme sind für uns kein Marketing, sondern Design-Kriterium.',
   ],
   microFacts: [
     { label: 'Gründung', value: '2025' },
     { label: 'Herkunft', value: 'Heidelberg' },
     { label: 'Lock‑In Haltung', value: '0%' },
-    { label: 'LLM Praxis', value: 'seit 2022' }
-  ]
+    { label: 'LLM Praxis', value: 'seit 2022' },
+  ],
 }
 
 export const founders: FounderBio[] = [
@@ -34,9 +34,9 @@ export const founders: FounderBio[] = [
     points: [
       'Geprägt von skulpturaler Langfrist-Perspektive (Enkel des Bildhauers Jürgen Goertz)',
       'Vorstand Aktiv Kollektiv Heidelberg – Aufbau effizienter Arbeits- & Informationsstrukturen',
-      'Treibende Kraft für dokumentierte Übergabefähigkeit & klare Betriebsmodelle'
+      'Treibende Kraft für dokumentierte Übergabefähigkeit & klare Betriebsmodelle',
     ],
-    icon: 'engineering'
+    icon: 'engineering',
   },
   {
     key: 'jakob',
@@ -46,9 +46,9 @@ export const founders: FounderBio[] = [
     points: [
       'Frühe eigene Software- & Hosting-Projekte (Langjährige Praxis statt kurzfristiger Trend)',
       'Modularisierung & Adapter-Layer für wartbare Erweiterbarkeit',
-      'Self-Hosting, Observability & Testbarkeit als Default'
+      'Self-Hosting, Observability & Testbarkeit als Default',
     ],
-    icon: 'terminal'
+    icon: 'terminal',
   },
   {
     key: 'ninaad',
@@ -58,8 +58,8 @@ export const founders: FounderBio[] = [
     points: [
       'Aufgewachsen im Umfeld globaler Tech-Einflüsse (Vater 19 Jahre bei Microsoft)',
       'Übersetzt komplexe Architekturentscheidungen in klare Produktinkremente',
-      'Brücke zwischen Nutzer-Feedback, Priorisierung & Engineering'
+      'Brücke zwischen Nutzer-Feedback, Priorisierung & Engineering',
     ],
-    icon: 'lightbulb'
-  }
+    icon: 'lightbulb',
+  },
 ]

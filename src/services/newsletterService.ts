@@ -1,6 +1,6 @@
 /**
  * Newsletter Service
- * 
+ *
  * Handles newsletter subscriptions, validations, and email management
  */
 
@@ -46,9 +46,9 @@ export const subscribeToNewsletter = async (data: NewsletterSubscription): Promi
         error: {
           code: 'VALIDATION_ERROR',
           message: 'Validierungsfehler',
-          details: validationErrors
+          details: validationErrors,
         },
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       }
     }
 
@@ -62,8 +62,8 @@ export const subscribeToNewsletter = async (data: NewsletterSubscription): Promi
       body: JSON.stringify({
         ...data,
         timestamp: new Date().toISOString(),
-        source: data.source || 'website'
-      })
+        source: data.source || 'website',
+      }),
     })
 
     if (!response.ok) {
@@ -71,27 +71,26 @@ export const subscribeToNewsletter = async (data: NewsletterSubscription): Promi
     }
 
     const result = await response.json()
-    
+
     return {
       success: true,
       data: {
         subscriptionId: result.id || generateSubscriptionId(),
-        confirmationRequired: true
+        confirmationRequired: true,
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
-
   } catch (error) {
     console.error('Newsletter subscription error:', error)
-    
+
     return {
       success: false,
       error: {
         code: 'SUBSCRIPTION_ERROR',
         message: 'Fehler bei der Newsletter-Anmeldung. Bitte versuchen Sie es später erneut.',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: error instanceof Error ? error.message : 'Unknown error',
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
   }
 }
@@ -111,16 +110,16 @@ const generateSubscriptionId = (): string => {
 export const mockNewsletterSubscription = async (): Promise<NewsletterResponse> => {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 500))
-  
+
   // Simulate occasional errors for testing
   if (Math.random() < 0.05) {
     return {
       success: false,
       error: {
         code: 'MOCK_ERROR',
-        message: 'Simulierter Serverfehler für Testing'
+        message: 'Simulierter Serverfehler für Testing',
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
   }
 
@@ -128,8 +127,8 @@ export const mockNewsletterSubscription = async (): Promise<NewsletterResponse> 
     success: true,
     data: {
       subscriptionId: generateSubscriptionId(),
-      confirmationRequired: true
+      confirmationRequired: true,
     },
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   }
 }

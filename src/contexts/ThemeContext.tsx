@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type ReactNode
+  type ReactNode,
 } from 'react'
 
 import {
@@ -19,7 +19,7 @@ import {
   persistTheme,
   resolveTheme,
   type ThemeDefinition,
-  type ThemeMode
+  type ThemeMode,
 } from '@design-system/index'
 
 interface ThemeContextValue {
@@ -104,20 +104,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setTheme(next)
   }, [])
 
-  const value = useMemo<ThemeContextValue>(() => ({
-    theme,
-    definition,
-    availableThemes,
-    toggleTheme,
-    setTheme: setThemeSafe,
-    isReady
-  }), [theme, definition, availableThemes, toggleTheme, setThemeSafe, isReady])
-
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+  const value = useMemo<ThemeContextValue>(
+    () => ({
+      theme,
+      definition,
+      availableThemes,
+      toggleTheme,
+      setTheme: setThemeSafe,
+      isReady,
+    }),
+    [theme, definition, availableThemes, toggleTheme, setThemeSafe, isReady]
   )
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
 export const useTheme = (): ThemeContextValue => {

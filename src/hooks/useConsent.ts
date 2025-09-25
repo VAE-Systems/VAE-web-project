@@ -22,18 +22,21 @@ export const useConsent = (): ConsentManager => {
   // CONSENT ACTIONS
   // ============================================================================
 
-  const updateConsent = useCallback((category: keyof CookieConsent, enabled: boolean) => {
-    const newConsent: CookieConsent = {
-      ...consent,
-      [category]: enabled,
-      timestamp: new Date().toISOString(),
-      version: GDPR_CONSTANTS.CONSENT_VERSION
-    }
+  const updateConsent = useCallback(
+    (category: keyof CookieConsent, enabled: boolean) => {
+      const newConsent: CookieConsent = {
+        ...consent,
+        [category]: enabled,
+        timestamp: new Date().toISOString(),
+        version: GDPR_CONSTANTS.CONSENT_VERSION,
+      }
 
-    setConsent(newConsent)
-    cookieService.saveConsent(newConsent)
-    setIsConsentGiven(true)
-  }, [consent])
+      setConsent(newConsent)
+      cookieService.saveConsent(newConsent)
+      setIsConsentGiven(true)
+    },
+    [consent]
+  )
 
   const acceptAll = useCallback(() => {
     const newConsent: CookieConsent = {
@@ -42,7 +45,7 @@ export const useConsent = (): ConsentManager => {
       marketing: true,
       preferences: true,
       timestamp: new Date().toISOString(),
-      version: GDPR_CONSTANTS.CONSENT_VERSION
+      version: GDPR_CONSTANTS.CONSENT_VERSION,
     }
 
     setConsent(newConsent)
@@ -57,7 +60,7 @@ export const useConsent = (): ConsentManager => {
       marketing: false,
       preferences: false,
       timestamp: new Date().toISOString(),
-      version: GDPR_CONSTANTS.CONSENT_VERSION
+      version: GDPR_CONSTANTS.CONSENT_VERSION,
     }
 
     setConsent(newConsent)
@@ -69,7 +72,7 @@ export const useConsent = (): ConsentManager => {
     const newConsent: CookieConsent = {
       ...DEFAULT_CONSENT,
       timestamp: new Date().toISOString(),
-      version: GDPR_CONSTANTS.CONSENT_VERSION
+      version: GDPR_CONSTANTS.CONSENT_VERSION,
     }
 
     setConsent(newConsent)
@@ -130,6 +133,6 @@ export const useConsent = (): ConsentManager => {
     acceptNecessary,
     resetConsent,
     hasConsent,
-    isConsentGiven
+    isConsentGiven,
   }
 }

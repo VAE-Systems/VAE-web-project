@@ -54,9 +54,7 @@ export const prefersReducedMotion = () =>
     : false
 
 // Helper to build a staggered parent container
-export function staggerContainer(
-  opts: { stagger?: number; delayChildren?: number } = {}
-) {
+export function staggerContainer(opts: { stagger?: number; delayChildren?: number } = {}) {
   const { stagger = 0.06, delayChildren = 0 } = opts
   return {
     hidden: {},

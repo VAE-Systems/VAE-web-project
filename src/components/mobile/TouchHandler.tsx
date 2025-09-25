@@ -32,7 +32,7 @@ const TouchHandler: React.FC<TouchHandlerProps> = ({
   className = '',
   disabled = false,
   longPressDelay = 500,
-  touchThreshold = 50
+  touchThreshold = 50,
 }) => {
   const elementRef = useRef<HTMLDivElement>(null)
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
@@ -71,10 +71,7 @@ const TouchHandler: React.FC<TouchHandlerProps> = ({
 
     // Cancel long press if moved too much
     if (longPressTimerRef.current) {
-      const distance = Math.sqrt(
-        Math.pow(touch.clientX - touchStart.x, 2) +
-        Math.pow(touch.clientY - touchStart.y, 2)
-      )
+      const distance = Math.sqrt(Math.pow(touch.clientX - touchStart.x, 2) + Math.pow(touch.clientY - touchStart.y, 2))
 
       if (distance > 10) {
         clearTimeout(longPressTimerRef.current)
@@ -159,7 +156,7 @@ const TouchHandler: React.FC<TouchHandlerProps> = ({
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchCancel}
       style={{
-        WebkitTapHighlightColor: 'transparent'
+        WebkitTapHighlightColor: 'transparent',
       }}
       aria-disabled={disabled}
     >

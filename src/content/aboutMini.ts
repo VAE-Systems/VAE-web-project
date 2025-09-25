@@ -23,27 +23,27 @@ export const miniOutcomes: MiniOutcome[] = [
     key: 'early-impact',
     title: 'Frühe interne Nutzung',
     body: 'Akzeptanzkriterien + produktionsnaher Pilot in Wochen statt Quartalen.',
-    icon: 'rocket_launch'
+    icon: 'rocket_launch',
   },
   {
     key: 'extensible-foundation',
     title: 'Erweiterbares Fundament',
     body: 'Modularer Stack + Runbooks sichern Ownership & spätere Ausbaustufen.',
-    icon: 'architecture'
-  }
+    icon: 'architecture',
+  },
 ]
 
 export const miniProcess: MiniProcessStep[] = [
   { key: 'focus', label: 'Fokus', hint: 'Ziel & Use‑Case Schärfung', icon: 'target' },
   { key: 'arch', label: 'Architektur', hint: 'Stack & Feasibility', icon: 'hub' },
   { key: 'pilot', label: 'Pilot', hint: 'Produktionsnahes Inkrement', icon: 'rocket' },
-  { key: 'handover', label: 'Übergabe', hint: 'Runbooks & Ownership', icon: 'assignment_turned_in' }
+  { key: 'handover', label: 'Übergabe', hint: 'Runbooks & Ownership', icon: 'assignment_turned_in' },
 ]
 
 export const miniMetrics: string[] = [
   '< 5 Tage Fokus / Schärfung',
   '1–2 Wochen Architektur Sprint',
-  '2–4 Wochen produktionsnaher Pilot'
+  '2–4 Wochen produktionsnaher Pilot',
 ]
 
 export { badges } // re-export for convenience

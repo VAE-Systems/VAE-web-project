@@ -39,26 +39,26 @@ const ScrollProgress: React.FC = () => {
   const pct = Math.round(progress * 100)
 
   return (
-    <div className="fixed top-1/2 right-4 -translate-y-1/2 z-40 select-none" aria-label={`Scroll Fortschritt ${pct}%`}>
-      <div className="relative h-[340px] w-2 rounded-full bg-bg-primary/8 dark:bg-white/8 overflow-hidden border border-border-primary/15 dark:border-white/15 backdrop-blur-sm">
+    <div className="fixed right-4 top-1/2 z-40 -translate-y-1/2 select-none" aria-label={`Scroll Fortschritt ${pct}%`}>
+      <div className="bg-bg-primary/8 dark:bg-white/8 border-border-primary/15 relative h-[340px] w-2 overflow-hidden rounded-full border backdrop-blur-sm dark:border-white/15">
         {/* Track subtle glow */}
-        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)] pointer-events-none" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)] opacity-40" />
         {/* Fill (top -> down) */}
         <div
-          className="absolute top-0 left-0 w-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise/80 to-vae-turquoise-dark transition-[height] duration-150 ease-out shadow-[0_0_8px_-2px_rgba(var(--vae-turquoise-rgb),0.6)] [height:var(--progress)]"
-          style={{ '--progress': `${pct}%` } as React.CSSProperties }
+          className="absolute left-0 top-0 w-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise/80 to-vae-turquoise-dark shadow-[0_0_8px_-2px_rgba(var(--vae-turquoise-rgb),0.6)] transition-[height] duration-150 ease-out [height:var(--progress)]"
+          style={{ '--progress': `${pct}%` } as React.CSSProperties}
         />
         {/* Circular badge (static) */}
-        <div className="absolute -left-20 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3">
+        <div className="absolute -left-20 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3">
           <div
-            className="relative w-16 h-16 rounded-full p-[3px] bg-[conic-gradient(rgba(var(--vae-turquoise-rgb),0.85)_var(--pct),rgba(255,255,255,0.07)_var(--pct)_100%),radial-gradient(circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.4),rgba(var(--vae-turquoise-rgb),0.05))] backdrop-blur-md border border-vae-turquoise/40 shadow-[0_0_18px_-4px_rgba(var(--vae-turquoise-rgb),0.6)]"
-            style={{ '--pct': `${pct}%` } as React.CSSProperties }
+            className="relative h-16 w-16 rounded-full border border-vae-turquoise/40 bg-[conic-gradient(rgba(var(--vae-turquoise-rgb),0.85)_var(--pct),rgba(255,255,255,0.07)_var(--pct)_100%),radial-gradient(circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.4),rgba(var(--vae-turquoise-rgb),0.05))] p-[3px] shadow-[0_0_18px_-4px_rgba(var(--vae-turquoise-rgb),0.6)] backdrop-blur-md"
+            style={{ '--pct': `${pct}%` } as React.CSSProperties}
           >
-            <div className="absolute inset-[4px] rounded-full bg-[linear-gradient(145deg,rgba(8,24,22,0.9),rgba(6,18,16,0.65))] flex items-center justify-center text-vae-turquoise font-semibold text-sm tracking-wide">
+            <div className="absolute inset-[4px] flex items-center justify-center rounded-full bg-[linear-gradient(145deg,rgba(8,24,22,0.9),rgba(6,18,16,0.65))] text-sm font-semibold tracking-wide text-vae-turquoise">
               {pct}%
             </div>
           </div>
-          <span className="text-[10px] uppercase tracking-wider text-text-muted font-medium select-none">Progress</span>
+          <span className="select-none text-[10px] font-medium uppercase tracking-wider text-text-muted">Progress</span>
         </div>
       </div>
     </div>

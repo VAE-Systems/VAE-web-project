@@ -6,7 +6,7 @@ const spacing: ThemeDefinition['spacing'] = {
   md: '0.75rem',
   lg: '1rem',
   xl: '1.5rem',
-  '2xl': '2rem'
+  '2xl': '2rem',
 }
 
 const radius: ThemeDefinition['radius'] = {
@@ -15,7 +15,7 @@ const radius: ThemeDefinition['radius'] = {
   md: '10px',
   lg: '14px',
   xl: '18px',
-  full: '999px'
+  full: '999px',
 }
 
 const shadow: ThemeDefinition['shadow'] = {
@@ -24,13 +24,13 @@ const shadow: ThemeDefinition['shadow'] = {
   md: '0 8px 24px rgba(15, 23, 42, 0.16)',
   lg: '0 20px 40px rgba(15, 23, 42, 0.18)',
   inner: 'inset 0 1px 0 rgba(255, 255, 255, 0.08)',
-  glow: '0 0 24px rgba(0, 255, 165, 0.35)'
+  glow: '0 0 24px rgba(0, 255, 165, 0.35)',
 }
 
 const transition: ThemeDefinition['transition'] = {
   default: 'all 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
   fast: 'all 0.18s cubic-bezier(0.4, 0, 0.2, 1)',
-  slow: 'all 0.45s cubic-bezier(0.33, 1, 0.68, 1)'
+  slow: 'all 0.45s cubic-bezier(0.33, 1, 0.68, 1)',
 }
 
 const typography: ThemeDefinition['typography'] = {
@@ -39,35 +39,35 @@ const typography: ThemeDefinition['typography'] = {
     fontSize: 'clamp(2.75rem, 2.2vw + 1.5rem, 3.5rem)',
     lineHeight: 1.1,
     fontWeight: 600,
-    letterSpacing: '-0.02em'
+    letterSpacing: '-0.02em',
   },
   headline: {
     fontFamily: 'var(--font-display, "Space Grotesk", system-ui)',
     fontSize: 'clamp(2rem, 1.5vw + 1rem, 2.75rem)',
     lineHeight: 1.15,
     fontWeight: 600,
-    letterSpacing: '-0.015em'
+    letterSpacing: '-0.015em',
   },
   subheadline: {
     fontFamily: 'var(--font-display, "Space Grotesk", system-ui)',
     fontSize: 'clamp(1.375rem, 1vw + 1rem, 1.75rem)',
     lineHeight: 1.2,
     fontWeight: 500,
-    letterSpacing: '-0.01em'
+    letterSpacing: '-0.01em',
   },
   body: {
     fontFamily: 'var(--font-base, "Inter", system-ui)',
     fontSize: '1rem',
     lineHeight: 1.6,
     fontWeight: 400,
-    letterSpacing: '-0.005em'
+    letterSpacing: '-0.005em',
   },
   bodySmall: {
     fontFamily: 'var(--font-base, "Inter", system-ui)',
     fontSize: '0.9375rem',
     lineHeight: 1.55,
     fontWeight: 400,
-    letterSpacing: '-0.003em'
+    letterSpacing: '-0.003em',
   },
   label: {
     fontFamily: 'var(--font-base, "Inter", system-ui)',
@@ -75,15 +75,15 @@ const typography: ThemeDefinition['typography'] = {
     lineHeight: 1.4,
     fontWeight: 600,
     letterSpacing: '0.08em',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
   },
   mono: {
     fontFamily: 'var(--font-mono, "JetBrains Mono", monospace)',
     fontSize: '0.875rem',
     lineHeight: 1.5,
     fontWeight: 500,
-    letterSpacing: '0.01em'
-  }
+    letterSpacing: '0.01em',
+  },
 }
 
 const lightPalette: ThemeDefinition['palette'] = {
@@ -103,7 +103,7 @@ const lightPalette: ThemeDefinition['palette'] = {
   warning: 'hsl(40 100% 45%)',
   danger: 'hsl(358 85% 55%)',
   info: 'hsl(210 80% 50%)',
-  focus: 'hsla(157, 95%, 45%, 0.35)'
+  focus: 'hsla(157, 95%, 45%, 0.35)',
 }
 
 const darkPalette: ThemeDefinition['palette'] = {
@@ -123,7 +123,7 @@ const darkPalette: ThemeDefinition['palette'] = {
   warning: 'hsl(40 100% 52%)',
   danger: 'hsl(356 95% 60%)',
   info: 'hsl(210 100% 64%)',
-  focus: 'hsla(157, 100%, 47%, 0.45)'
+  focus: 'hsla(157, 100%, 47%, 0.45)',
 }
 
 export const themeRegistry: ThemeRegistry = {
@@ -134,7 +134,7 @@ export const themeRegistry: ThemeRegistry = {
     radius,
     spacing,
     shadow,
-    transition
+    transition,
   },
   dark: {
     mode: 'dark',
@@ -143,8 +143,8 @@ export const themeRegistry: ThemeRegistry = {
     radius,
     spacing,
     shadow,
-    transition
-  }
+    transition,
+  },
 }
 
 export const defaultTheme: ThemeMode = 'dark'
@@ -153,12 +153,11 @@ export const themeMetadata: ThemeMetadata[] = [
   {
     name: 'light',
     label: 'Light Mode',
-    description: 'Hohe Lesbarkeit, neutrale Flächen, moderne Akzente.'
+    description: 'Hohe Lesbarkeit, neutrale Flächen, moderne Akzente.',
   },
   {
     name: 'dark',
     label: 'Dark Mode',
-    description: 'Kontrastierte Flächen, Fokus auf Inhalte und Tiefe.'
-  }
+    description: 'Kontrastierte Flächen, Fokus auf Inhalte und Tiefe.',
+  },
 ]
-

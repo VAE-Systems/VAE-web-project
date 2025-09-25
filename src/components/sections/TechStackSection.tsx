@@ -4,37 +4,112 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Motion } from '@/utils/motion'
 
-
 const techStack = [
-  { name: 'TensorFlow', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', website: 'https://tensorflow.org' },
-  { name: 'PyTorch', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', website: 'https://pytorch.org' },
-  { name: 'OpenAI', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg', website: 'https://openai.com' },
+  {
+    name: 'TensorFlow',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
+    website: 'https://tensorflow.org',
+  },
+  {
+    name: 'PyTorch',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg',
+    website: 'https://pytorch.org',
+  },
+  {
+    name: 'OpenAI',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
+    website: 'https://openai.com',
+  },
   { name: 'LangChain', logo: 'https://python.langchain.com/img/brand/wordmark.png', website: 'https://langchain.com' },
-  { name: 'Claude Sonnet', logo: 'https://avatars.githubusercontent.com/u/121681234?s=200&v=4', website: 'https://anthropic.com' },
-  { name: 'ChatGPT', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg', website: 'https://chat.openai.com' },
-  { name: 'Python', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', website: 'https://python.org' },
-  { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', website: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
-  { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', website: 'https://nodejs.org' },
-  { name: 'FastAPI', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg', website: 'https://fastapi.tiangolo.com' },
-  { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', website: 'https://react.dev' },
-  { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', website: 'https://typescriptlang.org' },
-  { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', website: 'https://postgresql.org' },
-  { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', website: 'https://mongodb.com' },
-  { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', website: 'https://docker.com' },
-  { name: 'Kubernetes', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg', website: 'https://kubernetes.io' },
-  { name: 'AWS', logo: 'https://e7.pngegg.com/pngimages/628/589/png-clipart-amazon-web-services-amazon-com-logo-plataform-computer-network-text.png', website: 'https://aws.amazon.com' },
-  { name: 'Temporal', logo: 'https://images.ctfassets.net/0uuz8ydxyd9p/2W8B7bcLSPX9YaSwkfrhmv/eade3fc61520b8cee84cf8605dce3056/Temporal_Symbol_dark_1_2x.png', website: 'https://temporal.io' },
+  {
+    name: 'Claude Sonnet',
+    logo: 'https://avatars.githubusercontent.com/u/121681234?s=200&v=4',
+    website: 'https://anthropic.com',
+  },
+  {
+    name: 'ChatGPT',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+    website: 'https://chat.openai.com',
+  },
+  {
+    name: 'Python',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    website: 'https://python.org',
+  },
+  {
+    name: 'JavaScript',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    website: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+  },
+  {
+    name: 'Node.js',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    website: 'https://nodejs.org',
+  },
+  {
+    name: 'FastAPI',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
+    website: 'https://fastapi.tiangolo.com',
+  },
+  {
+    name: 'React',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    website: 'https://react.dev',
+  },
+  {
+    name: 'TypeScript',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    website: 'https://typescriptlang.org',
+  },
+  {
+    name: 'PostgreSQL',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    website: 'https://postgresql.org',
+  },
+  {
+    name: 'MongoDB',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    website: 'https://mongodb.com',
+  },
+  {
+    name: 'Docker',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    website: 'https://docker.com',
+  },
+  {
+    name: 'Kubernetes',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
+    website: 'https://kubernetes.io',
+  },
+  {
+    name: 'AWS',
+    logo: 'https://e7.pngegg.com/pngimages/628/589/png-clipart-amazon-web-services-amazon-com-logo-plataform-computer-network-text.png',
+    website: 'https://aws.amazon.com',
+  },
+  {
+    name: 'Temporal',
+    logo: 'https://images.ctfassets.net/0uuz8ydxyd9p/2W8B7bcLSPX9YaSwkfrhmv/eade3fc61520b8cee84cf8605dce3056/Temporal_Symbol_dark_1_2x.png',
+    website: 'https://temporal.io',
+  },
   { name: 'Pinecone', logo: 'https://www.pinecone.io/images/pinecone-logo.svg', website: 'https://pinecone.io' },
-  { name: 'Supabase', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg', website: 'https://supabase.com' },
-  { name: 'Corteza', logo: 'https://cortezaproject.org/wp-content/uploads/2024/10/Corteza-logo-340-300x138.png', website: 'https://cortezaproject.org' }
+  {
+    name: 'Supabase',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg',
+    website: 'https://supabase.com',
+  },
+  {
+    name: 'Corteza',
+    logo: 'https://cortezaproject.org/wp-content/uploads/2024/10/Corteza-logo-340-300x138.png',
+    website: 'https://cortezaproject.org',
+  },
 ] as const
 
 /**
  * TechStackSection Component
- * 
+ *
  * Features:
  * - GSAP animations with ScrollTrigger
- * - Animated cables/connections  
+ * - Animated cables/connections
  * - Radial background effect
  * - Interactive hover animations
  * - VAE design system integration
@@ -81,7 +156,7 @@ const TechStackSection: React.FC = () => {
           duration: 3,
           ease: Motion.ease,
           delay: i * 0.05,
-          scrollTrigger: trig
+          scrollTrigger: trig,
         })
         gsap.to(path, {
           opacity: 0.6,
@@ -90,50 +165,52 @@ const TechStackSection: React.FC = () => {
           duration: 2.5,
           ease: 'sine.inOut',
           delay: 3 + i * 0.05,
-          scrollTrigger: trig
+          scrollTrigger: trig,
         })
       })
 
       // Text animations mit scrub
-      gsap.fromTo(headingRef.current, 
+      gsap.fromTo(
+        headingRef.current,
         {
           opacity: 0,
           y: 60,
-          filter: 'blur(20px)'
+          filter: 'blur(20px)',
         },
         {
           opacity: 1,
           y: 0,
           filter: 'blur(0px)',
-          ease: "none",
+          ease: 'none',
           scrollTrigger: {
             trigger: headingRef.current,
-            start: "top 90%",
-            end: "top 70%",
+            start: 'top 90%',
+            end: 'top 70%',
             scrub: 1,
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: 'play none none reverse',
+          },
         }
       )
 
-      gsap.fromTo(subRef.current, 
+      gsap.fromTo(
+        subRef.current,
         {
           opacity: 0,
           y: 40,
-          filter: 'blur(15px)'
+          filter: 'blur(15px)',
         },
         {
           opacity: 1,
           y: 0,
           filter: 'blur(0px)',
-          ease: "none",
+          ease: 'none',
           scrollTrigger: {
             trigger: subRef.current,
-            start: "top 90%",
-            end: "top 75%",
+            start: 'top 90%',
+            end: 'top 75%',
             scrub: 1.2,
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: 'play none none reverse',
+          },
         }
       )
 
@@ -144,9 +221,19 @@ const TechStackSection: React.FC = () => {
         const radius = 200 + (i % 5) * 40
         const x = radius * Math.cos(angle)
         const y = radius * Math.sin(angle)
-        gsap.fromTo(el,
+        gsap.fromTo(
+          el,
           { x, y, opacity: 0, scale: 0.85 },
-          { x: 0, y: 0, opacity: 1, scale: 1, duration: Motion.enter, ease: Motion.ease, delay: i * Motion.stagger, scrollTrigger: trig }
+          {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: Motion.enter,
+            ease: Motion.ease,
+            delay: i * Motion.stagger,
+            scrollTrigger: trig,
+          }
         )
         const imgEl = el.querySelector('img')
         if (imgEl) {
@@ -164,7 +251,12 @@ const TechStackSection: React.FC = () => {
           if (img) {
             // Laufender Spin nur während Hover
             ;(img as any)._spinTween?.kill?.()
-            ;(img as any)._spinTween = gsap.to(img, { rotationY: '+=360', duration: 1.4, ease: 'power1.inOut', repeat: -1 })
+            ;(img as any)._spinTween = gsap.to(img, {
+              rotationY: '+=360',
+              duration: 1.4,
+              ease: 'power1.inOut',
+              repeat: -1,
+            })
           }
         }
         const handleLeave = () => {
@@ -181,8 +273,8 @@ const TechStackSection: React.FC = () => {
           const fade = gsap.to(el, { '--glow-alpha': 0, scale: 1, duration: 3.2, ease: 'power2.out' })
           ;(el as any)._fadeOutTween = fade
         }
-  el.addEventListener('pointerenter', handleEnter)
-  el.addEventListener('pointerleave', handleLeave)
+        el.addEventListener('pointerenter', handleEnter)
+        el.addEventListener('pointerleave', handleLeave)
 
         // 3D tilt effect (only update CSS variables to avoid clobbering GSAP / hover transforms)
         // Leichtes Throttling (rAF) für effizienteren Tilt
@@ -225,11 +317,14 @@ const TechStackSection: React.FC = () => {
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        setActive(entry.isIntersecting)
-      })
-    }, { threshold: 0.25 })
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          setActive(entry.isIntersecting)
+        })
+      },
+      { threshold: 0.25 }
+    )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
@@ -244,10 +339,10 @@ const TechStackSection: React.FC = () => {
   }
 
   return (
-    <section 
+    <section
       id="tech-stack"
       className={
-        "relative py-24 md:py-32 surface-alt overflow-hidden border-t border-vae-turquoise/10 overlay-grid overlay-diag edge-glow-top tech-stack-interactive " +
+        'surface-alt overlay-grid overlay-diag edge-glow-top tech-stack-interactive relative overflow-hidden border-t border-vae-turquoise/10 py-24 md:py-32 ' +
         (active ? 'tech-stack-active' : '')
       }
       ref={sectionRef}
@@ -257,16 +352,10 @@ const TechStackSection: React.FC = () => {
       <ParallaxBackdrop strength={8} />
       <ParticleField count={22} />
       {/* Radial Background */}
-      <div 
-        className="radial-bg absolute inset-0 opacity-0 scale-0 -z-20 bg-[radial-gradient(circle_at_center,hsla(var(--color-vae-turquoise),0.2),transparent_70%)]"
-      />
+      <div className="radial-bg absolute inset-0 -z-20 scale-0 bg-[radial-gradient(circle_at_center,hsla(var(--color-vae-turquoise),0.2),transparent_70%)] opacity-0" />
 
       {/* Animated Cables */}
-      <svg 
-        className="absolute inset-0 -z-10"
-        viewBox="0 0 100 100" 
-        preserveAspectRatio="none"
-      >
+      <svg className="absolute inset-0 -z-10" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path
           ref={el => {
             if (el) cableRefs.current.push(el)
@@ -276,7 +365,7 @@ const TechStackSection: React.FC = () => {
             stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
-            opacity: 0
+            opacity: 0,
           }}
         />
         <path
@@ -288,7 +377,7 @@ const TechStackSection: React.FC = () => {
             stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
-            opacity: 0
+            opacity: 0,
           }}
         />
         <path
@@ -300,7 +389,7 @@ const TechStackSection: React.FC = () => {
             stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
-            opacity: 0
+            opacity: 0,
           }}
         />
         <path
@@ -312,7 +401,7 @@ const TechStackSection: React.FC = () => {
             stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
-            opacity: 0
+            opacity: 0,
           }}
         />
         <path
@@ -324,7 +413,7 @@ const TechStackSection: React.FC = () => {
             stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
-            opacity: 0
+            opacity: 0,
           }}
         />
         <path
@@ -336,34 +425,28 @@ const TechStackSection: React.FC = () => {
             stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
             strokeWidth: '1.5',
             fill: 'none',
-            opacity: 0
+            opacity: 0,
           }}
         />
       </svg>
 
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-14">
-          <h2
-            ref={headingRef}
-            className="h2 heading-gradient h-space mb-3"
-          >
+        <div className="mb-14 text-center">
+          <h2 ref={headingRef} className="h2 heading-gradient h-space mb-3">
             Unser Technologie-Fundament
           </h2>
-          <p 
-            ref={subRef}
-            className="text-xl text-text-secondary max-w-2xl mx-auto"
-          >
+          <p ref={subRef} className="mx-auto max-w-2xl text-xl text-text-secondary">
             Open Source, bewährte Frameworks und deutsche Ingenieurskunst.
           </p>
         </div>
 
         {/* Tech Grid */}
         <div ref={spotlightRef} className="tech-spotlight">
-          <div 
-            className="tech-stack-grid grid gap-8 max-w-5xl mx-auto"
-            style={{ 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))'
+          <div
+            className="tech-stack-grid mx-auto grid max-w-5xl gap-8"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
             }}
           >
             {techStack.map((tech, i) => (
@@ -373,12 +456,14 @@ const TechStackSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="tech-tile flex flex-col items-center justify-center gap-3 p-4 text-center will-change-transform"
-                ref={el => { logoRefs.current[i] = el }}
+                ref={el => {
+                  logoRefs.current[i] = el
+                }}
               >
-                <img 
-                  src={tech.logo} 
+                <img
+                  src={tech.logo}
                   alt={tech.name}
-                  className="w-12 h-12 object-contain will-change-transform"
+                  className="h-12 w-12 object-contain will-change-transform"
                   loading="lazy"
                   decoding="async"
                 />

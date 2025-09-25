@@ -92,7 +92,7 @@ export const getStoredTheme = (): ThemeMode | null => {
   if (!isBrowser()) return null
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY)
-    return (stored === 'light' || stored === 'dark') ? stored : null
+    return stored === 'light' || stored === 'dark' ? stored : null
   } catch {
     return null
   }

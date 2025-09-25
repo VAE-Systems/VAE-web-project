@@ -13,7 +13,7 @@ import Seo from '../ui/Seo'
 
 /**
  * HomePage Component
- * 
+ *
  * Main landing page with all sections
  */
 const HomePage: React.FC = () => {
@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
       <HeroSection />
 
       {/* 2. Outcomes / Warum (frühe Nutzen-Verankerung) */}
-  <HomeOutcomesSection className="pt-24 pb-24" />
+      <HomeOutcomesSection className="pb-24 pt-24" />
 
       {/* 3. Case Studies (Social Proof früh) */}
       <CaseStudiesSection />
@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
       <ServicesSection />
 
       {/* 5. Prozess (Sicherheit & Transparenz des Vorgehens) */}
-  <HomeProcessTeaserSection className="pt-24" />
+      <HomeProcessTeaserSection className="pt-24" />
 
       {/* 6. Products & Plattform (Skalierungsebene) */}
       <ProductsSection />
@@ -45,11 +45,11 @@ const HomePage: React.FC = () => {
       {/* 7. Tech Stack (technische Tiefe nach Kontext) */}
       <TechStackSection />
 
-  {/* 8. About (Mini Enhanced) */}
-  <AboutMiniSection />
+      {/* 8. About (Mini Enhanced) */}
+      <AboutMiniSection />
 
       {/* 9. FAQ (Einwandbehandlung) */}
-      <React.Suspense fallback={<div className="py-24 text-center text-text-muted text-sm">Lade FAQ…</div>}>
+      <React.Suspense fallback={<div className="py-24 text-center text-sm text-text-muted">Lade FAQ…</div>}>
         <FAQSection />
       </React.Suspense>
 

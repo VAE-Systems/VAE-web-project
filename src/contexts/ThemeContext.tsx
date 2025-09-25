@@ -20,7 +20,7 @@ import {
   resolveTheme,
   type ThemeDefinition,
   type ThemeMode,
-} from '@design-system/index'
+} from '../design-system'
 
 interface ThemeContextValue {
   theme: ThemeMode

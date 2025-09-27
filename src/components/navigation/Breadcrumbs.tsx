@@ -46,16 +46,19 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, currentStep
           </div>
         </div>
       )}
-      <ol className="flex flex-wrap items-center text-xs text-text-muted">
+      <ol className="flex flex-wrap items-center text-xs">
         {items.map((item, idx) => (
           <li key={item.path} className="flex items-center">
-            {idx > 0 && <span className="mx-2 text-text-muted/60">/</span>}
+            {idx > 0 && <span className="mx-2 text-text-muted/50">/</span>}
             {idx === items.length - 1 ? (
-              <span className="font-medium text-text-secondary" aria-current="page">
+              <span className="font-medium text-text-light" aria-current="page">
                 {item.label}
               </span>
             ) : (
-              <Link to={item.path} className="text-vae-turquoise hover:underline">
+              <Link
+                to={item.path}
+                className="text-vae-turquoise transition-all duration-200 hover:text-vae-turquoise/80 hover:underline"
+              >
                 {item.label}
               </Link>
             )}

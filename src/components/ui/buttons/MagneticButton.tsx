@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo
 
 import { prefersReducedMotion } from '@/utils/motion'
 import { cn } from '@/lib/classNames'
-import { getTypographyStyle, type TypographyPreset } from '@design-system/typography'
+import { type TypographyPreset } from '@design-system/typography'
 
 interface Ripple {
   id: number
@@ -10,7 +10,7 @@ interface Ripple {
   y: number
 }
 
-export interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MagneticButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Strength of the magnetic offset; values between 0.02 and 0.12 work best */
   intensity?: number
   /** Enables a subtle glow on hover */
@@ -23,6 +23,8 @@ export interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButt
   textStyle?: TypographyPreset
   /** Enable hardware acceleration by hinting `will-change` */
   enableHardwareAcceleration?: boolean
+  /** Disabled state for the wrapped component */
+  disabled?: boolean
 }
 
 const MIN_INTENSITY = 0
@@ -31,7 +33,7 @@ const DEFAULT_INTENSITY = 0.075
 
 const clampIntensity = (value: number) => Math.min(Math.max(value, MIN_INTENSITY), MAX_INTENSITY)
 
-export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>(
+export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
   (
     {
       className,
@@ -49,8 +51,8 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
     },
     ref
   ) => {
-    const buttonRef = useRef<HTMLButtonElement>(null)
-    useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement, [])
+    const buttonRef = useRef<HTMLDivElement>(null)
+    useImperativeHandle(ref, () => buttonRef.current as HTMLDivElement, [])
 
     const [position, setPosition] = useState({ x: 0, y: 0 })
     const [isHovered, setIsHovered] = useState(false)
@@ -62,7 +64,7 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
     const resolvedIntensity = reduceMotion.current ? 0 : clampIntensity(intensity)
 
     const handlePointerMove = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
+      (event: React.MouseEvent<HTMLDivElement>) => {
         if (disabled || !buttonRef.current || resolvedIntensity === 0) return
 
         const computePosition = () => {
@@ -100,7 +102,7 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
     }, [disabled])
 
     const handleClickInternal = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
+      (event: React.MouseEvent<HTMLDivElement>) => {
         if (disabled) return
 
         if (rippleEffect && buttonRef.current) {
@@ -157,43 +159,38 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
       return `${translate}${scale}`
     }, [isHovered, position.x, position.y, resolvedIntensity, scaleEffect])
 
-    const typographyStyle = useMemo(() => getTypographyStyle(textStyle), [textStyle])
-
     return (
-      <button
-        ref={buttonRef}
-        type="button"
+      <div
+        ref={buttonRef as React.RefObject<HTMLDivElement>}
         className={cn(
-          'relative inline-flex select-none items-center justify-center gap-2 overflow-hidden rounded-full border border-transparent bg-slate-900/80 px-4 py-2 text-slate-100 transition-transform duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 dark:bg-slate-800/80',
-          glowEffect && 'shadow-[0_0_24px_rgba(0,255,165,0.35)] hover:shadow-[0_0_32px_rgba(0,255,165,0.45)]',
-          disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer hover:border-emerald-400/60',
+          'relative inline-block transition-transform duration-300 ease-out',
+          glowEffect && 'hover:drop-shadow-[0_0_16px_rgba(52,211,153,0.4)]',
+          disabled && 'pointer-events-none opacity-60',
           className
         )}
         style={{
           transform,
-          ...typographyStyle,
           ...style,
         }}
         onMouseMove={handlePointerMove}
         onMouseLeave={handlePointerLeave}
         onMouseEnter={handlePointerEnter}
         onClick={handleClickInternal}
-        disabled={disabled}
         {...rest}
       >
-        <span className="relative z-10 flex items-center gap-2">{children}</span>
+        <div className="relative z-10">{children}</div>
         {rippleEffect && (
           <span className="pointer-events-none absolute inset-0">
             {ripples.map(ripple => (
               <span
                 key={ripple.id}
-                className="absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 animate-[ripple_0.6s_ease-out_forwards] rounded-full bg-white/30 opacity-80"
+                className="absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 animate-[ripple_0.6s_ease-out_forwards] rounded-full bg-emerald-400/30 opacity-80"
                 style={{ left: ripple.x, top: ripple.y }}
               />
             ))}
           </span>
         )}
-      </button>
+      </div>
     )
   }
 )

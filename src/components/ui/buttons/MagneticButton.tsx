@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 
-import { prefersReducedMotion } from '@/utils/motion'
 import { cn } from '@/lib/classNames'
+import { prefersReducedMotion } from '@/utils/motion'
 import { type TypographyPreset } from '@design-system/typography'
 
 interface Ripple {

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, Heading1, Heading2, Body, ButtonText } from './Text'
 import MagneticButton from './MagneticButton'
+import { Body, ButtonText, Heading1, Heading2, Text } from './Text'
 
 /**
  * Typography Showcase Component

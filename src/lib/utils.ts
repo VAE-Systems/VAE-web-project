@@ -5,6 +5,7 @@
  */
 
 import type { LoadingState } from '../types'
+import { ANIMATION } from '../config'
 
 // ============================================================================
 // VALIDATION UTILITIES
@@ -48,6 +49,25 @@ export const truncate = (text: string, maxLength: number, suffix = '...'): strin
 
 export const capitalize = (text: string): string => {
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+}
+
+export const formatNumber = (num: number, locale: string = 'de-DE'): string => {
+  return new Intl.NumberFormat(locale).format(num)
+}
+
+export const formatCurrency = (amount: number, currency: string = 'EUR', locale: string = 'de-DE'): string => {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(amount)
+}
+
+export const formatPercentage = (value: number, decimals: number = 1, locale: string = 'de-DE'): string => {
+  return new Intl.NumberFormat(locale, {
+    style: 'percent',
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(value / 100)
 }
 
 export const formatName = (firstName: string, lastName?: string): string => {
@@ -229,7 +249,7 @@ export const storage = {
 
 export const debounce = <T extends (...args: any[]) => void>(
   func: T,
-  delay: number
+  delay: number = ANIMATION.DELAY.FORM_SUBMIT
 ): ((...args: Parameters<T>) => void) => {
   let timeoutId: NodeJS.Timeout
   return (...args: Parameters<T>) => {
@@ -240,7 +260,7 @@ export const debounce = <T extends (...args: any[]) => void>(
 
 export const throttle = <T extends (...args: any[]) => void>(
   func: T,
-  delay: number
+  delay: number = ANIMATION.DURATION.BASE
 ): ((...args: Parameters<T>) => void) => {
   let lastCall = 0
   return (...args: Parameters<T>) => {

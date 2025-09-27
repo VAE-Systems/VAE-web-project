@@ -1,3 +1,13 @@
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(var(--float-intensity, -8px));
+  }
+}
+
 /* Motion tokens and micro-interactions */
 
 @keyframes sheen-sweep {

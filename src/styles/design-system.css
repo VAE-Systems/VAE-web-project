@@ -1,0 +1,115 @@
+/**
+ * Design System CSS-Variablen
+ * Diese werden automatisch vom JavaScript aktualisiert
+ */
+
+@layer base {
+  :root {
+    /* === DESIGN SYSTEM - Dynamische Variablen === */
+    /* Responsive Typografie-Skala mit clamp() */
+    --ds-font-size-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+    --ds-font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+    --ds-font-size-base: clamp(1rem, 0.9rem + 0.3vw, 1.125rem);
+    --ds-font-size-lg: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+    --ds-font-size-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+    --ds-font-size-2xl: clamp(1.5rem, 1.3rem + 0.7vw, 2rem);
+    --ds-font-size-3xl: clamp(2rem, 1.7rem + 1vw, 2.5rem);
+    --ds-font-size-4xl: clamp(2.5rem, 2rem + 1.3vw, 3rem);
+    --ds-font-size-5xl: clamp(3rem, 2.5rem + 1.8vw, 4rem);
+    --ds-font-size-6xl: clamp(4rem, 3rem + 2.5vw, 5rem);
+
+    /* Proportionale Spacing-Skala */
+    --ds-spacing-xs: 0.25rem;
+    --ds-spacing-sm: 0.5rem;
+    --ds-spacing-base: 1rem;
+    --ds-spacing-lg: 1.5rem;
+    --ds-spacing-xl: 2rem;
+    --ds-spacing-2xl: 3rem;
+    --ds-spacing-3xl: 4rem;
+    --ds-spacing-4xl: 6rem;
+    --ds-spacing-5xl: 8rem;
+
+    /* Design System Scale Factor */
+    --ds-scale-factor: 1;
+  }
+}
+
+/* Utility-Klassen für das Design-System */
+@layer utilities {
+  /* Typografie Utilities */
+  .ds-text-xs {
+    font-size: var(--ds-font-size-xs);
+  }
+  .ds-text-sm {
+    font-size: var(--ds-font-size-sm);
+  }
+  .ds-text-base {
+    font-size: var(--ds-font-size-base);
+  }
+  .ds-text-lg {
+    font-size: var(--ds-font-size-lg);
+  }
+  .ds-text-xl {
+    font-size: var(--ds-font-size-xl);
+  }
+  .ds-text-2xl {
+    font-size: var(--ds-font-size-2xl);
+  }
+  .ds-text-3xl {
+    font-size: var(--ds-font-size-3xl);
+  }
+  .ds-text-4xl {
+    font-size: var(--ds-font-size-4xl);
+  }
+  .ds-text-5xl {
+    font-size: var(--ds-font-size-5xl);
+  }
+  .ds-text-6xl {
+    font-size: var(--ds-font-size-6xl);
+  }
+
+  /* Spacing Utilities */
+  .ds-p-xs {
+    padding: var(--ds-spacing-xs);
+  }
+  .ds-p-sm {
+    padding: var(--ds-spacing-sm);
+  }
+  .ds-p-base {
+    padding: var(--ds-spacing-base);
+  }
+  .ds-p-lg {
+    padding: var(--ds-spacing-lg);
+  }
+  .ds-p-xl {
+    padding: var(--ds-spacing-xl);
+  }
+  .ds-p-2xl {
+    padding: var(--ds-spacing-2xl);
+  }
+  .ds-p-3xl {
+    padding: var(--ds-spacing-3xl);
+  }
+
+  .ds-m-xs {
+    margin: var(--ds-spacing-xs);
+  }
+  .ds-m-sm {
+    margin: var(--ds-spacing-sm);
+  }
+  .ds-m-base {
+    margin: var(--ds-spacing-base);
+  }
+  .ds-m-lg {
+    margin: var(--ds-spacing-lg);
+  }
+  .ds-m-xl {
+    margin: var(--ds-spacing-xl);
+  }
+  .ds-m-2xl {
+    margin: var(--ds-spacing-2xl);
+  }
+  .ds-m-3xl {
+    margin: var(--ds-spacing-3xl);
+  }
+}

@@ -4,7 +4,7 @@
  * Manages mobile menu state with swipe gesture support
  */
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 interface MobileMenuConfig {
   enableSwipeGestures?: boolean
@@ -17,15 +17,24 @@ export const useMobileMenu = (config: MobileMenuConfig = {}) => {
 
   const [isOpen, setIsOpen] = useState(false)
 
+  // Debug logging
+  useEffect(() => {
+    console.log('Mobile menu state changed to:', isOpen)
+  }, [isOpen])
+
   const open = useCallback(() => {
+    console.log('open() called')
     setIsOpen(true)
     if (preventBodyScroll) {
+      // Prevent scrolling on body but preserve scrollbar width
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
       document.body.style.overflow = 'hidden'
-      document.body.style.paddingRight = '0px' // Prevent layout shift
+      document.body.style.paddingRight = `${scrollBarWidth}px`
     }
   }, [preventBodyScroll])
 
   const close = useCallback(() => {
+    console.log('close() called')
     setIsOpen(false)
     if (preventBodyScroll) {
       document.body.style.overflow = ''
@@ -34,9 +43,12 @@ export const useMobileMenu = (config: MobileMenuConfig = {}) => {
   }, [preventBodyScroll])
 
   const toggle = useCallback(() => {
+    console.log('Toggle called, current isOpen:', isOpen)
     if (isOpen) {
+      console.log('Closing menu')
       close()
     } else {
+      console.log('Opening menu')
       open()
     }
   }, [isOpen, open, close])

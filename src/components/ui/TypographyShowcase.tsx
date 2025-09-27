@@ -97,14 +97,7 @@ export const TypographyShowcase: React.FC = () => {
         <Body>Die neuen Typografie-Komponenten lassen sich nahtlos in bestehende Komponenten integrieren:</Body>
 
         <div className="space-y-4">
-          <MagneticButton
-            textSize="sm"
-            textWeight="semibold"
-            glowEffect
-            rippleEffect
-            scaleEffect
-            ariaLabel="Demo Button mit Typografie"
-          >
+          <MagneticButton className="btn-primary">
             <ButtonText>Enhanced Magnetic Button</ButtonText>
           </MagneticButton>
 

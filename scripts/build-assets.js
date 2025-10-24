@@ -58,7 +58,7 @@ const manifestConfig = {
 
   icons: [
     {
-      src: '/LOGO_01_white.svg',
+      src: '/App_Logo_light.svg',
       sizes: 'any',
       type: 'image/svg+xml',
       purpose: 'any maskable',
@@ -122,7 +122,7 @@ function generateManifest() {
       url: shortcut.url,
       icons: [
         {
-          src: '/LOGO_01_white.svg',
+          src: '/App_Logo_light.svg',
           sizes: '96x96',
           type: 'image/svg+xml',
         },

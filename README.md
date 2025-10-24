@@ -1,7 +1,7 @@
 # 🚀 VAE Systems Website - Modern Rebuild
 
 <div align="center">
-  <img src="public/LOGO_01_white.svg" alt="VAE Systems Logo" width="200"/>
+  <img src="public/App_Logo_light.svg" alt="VAE Systems Logo" width="200"/>
   
   **Enterprise-grade KI-Lösungen für maximale Effizienz und Datensouveränität**
   
@@ -84,9 +84,9 @@ npm run lint         # Run ESLint
 ```
 vae-web-project/
 ├── 📁 public/                  # Static assets
-│   ├── LOGO_01_white.svg      # VAE logo variants
-│   ├── LOGO_02.svg
-│   └── logo.svg
+│   ├── App_Logo_light.svg      # Primary VAE logo (light on dark backgrounds)
+│   ├── art-affair-logo.svg     # Partner/initiative logo asset
+│   └── Re_Section.png          # Marketing illustration used on landing page
 ├── 📁 src/
 │   ├── 📄 App.tsx               # Haupt-App inkl. Routing & ThemeProvider
 │   ├── 📄 main.tsx              # Entry-Point (ReactDOM.createRoot)

@@ -57,9 +57,9 @@ const Footer: React.FC = () => {
           {/* Brand Section */}
           <Reveal preset="fadeUp" className="md:col-span-3 lg:col-span-2 xl:col-span-2">
             <div className="mb-6 flex items-center space-x-4">
-              <div className="h-12">
+              <div className="h-14 md:h-16">
                 <img
-                  src={'/LOGO_01_white.svg'}
+                  src={'/App_Logo_light.svg'}
                   alt="VAE Systems Logo"
                   className="light-invert h-full w-auto"
                   loading="lazy"

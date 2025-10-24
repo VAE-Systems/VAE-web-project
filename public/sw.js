@@ -9,7 +9,7 @@ const STATIC_CACHE = 'vae-static-v1'
 const DYNAMIC_CACHE = 'vae-dynamic-v1'
 
 // Files to cache immediately
-const STATIC_FILES = ['/', '/manifest.json', '/LOGO_01_white.svg', '/App_Logo_light.svg']
+const STATIC_FILES = ['/', '/manifest.json', '/App_Logo_light.svg']
 
 // Install event - cache static files
 self.addEventListener('install', event => {
@@ -154,8 +154,8 @@ self.addEventListener('push', event => {
 
     const options = {
       body: data.body,
-      icon: '/LOGO_01_white.svg',
-      badge: '/LOGO_01_white.svg',
+      icon: '/App_Logo_light.svg',
+      badge: '/App_Logo_light.svg',
       vibrate: [100, 50, 100],
       data: {
         url: data.url || '/',
@@ -299,8 +299,8 @@ self.addEventListener('push', event => {
 
     const options = {
       body: data.body,
-      icon: '/LOGO_01_white.svg',
-      badge: '/LOGO_01_white.svg',
+      icon: '/App_Logo_light.svg',
+      badge: '/App_Logo_light.svg',
       vibrate: [100, 50, 100],
       data: {
         url: data.url || '/',

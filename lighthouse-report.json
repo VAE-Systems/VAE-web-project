@@ -2405,7 +2405,7 @@
             "entity": "localhost"
           },
           {
-            "url": "http://localhost:3000/LOGO_01_white.svg",
+            "url": "http://localhost:3000/App_Logo_light.svg",
             "sessionTargetType": "page",
             "protocol": "http/1.1",
             "rendererStartTime": 134.2960000000894,
@@ -3306,7 +3306,7 @@
             "entity": "localhost"
           },
           {
-            "url": "http://localhost:3000/LOGO_01_white.svg",
+            "url": "http://localhost:3000/App_Logo_light.svg",
             "sessionTargetType": "page",
             "protocol": "http/1.1",
             "rendererStartTime": 815.1510000042617,
@@ -3323,7 +3323,7 @@
             "entity": "localhost"
           },
           {
-            "url": "http://localhost:3000/LOGO_01_white.svg",
+            "url": "http://localhost:3000/App_Logo_light.svg",
             "sessionTargetType": "page",
             "protocol": "http/1.1",
             "rendererStartTime": 817.8540000021458,
@@ -6841,7 +6841,7 @@
         ],
         "items": [
           {
-            "url": "http://localhost:3000/LOGO_01_white.svg",
+            "url": "http://localhost:3000/App_Logo_light.svg",
             "node": {
               "type": "node",
               "lhId": "1-136-IMG",
@@ -6855,12 +6855,12 @@
                 "width": 61,
                 "height": 38
               },
-              "snippet": "<img src=\"/LOGO_01_white.svg\" alt=\"VAE Systems Logo\" class=\"h-full w-auto light-invert\">",
+              "snippet": "<img src=\"/App_Logo_light.svg\" alt=\"VAE Systems Logo\" class=\"h-full w-auto light-invert\">",
               "nodeLabel": "VAE Systems Logo"
             }
           },
           {
-            "url": "http://localhost:3000/LOGO_01_white.svg",
+            "url": "http://localhost:3000/App_Logo_light.svg",
             "node": {
               "type": "node",
               "lhId": "1-137-IMG",
@@ -6874,7 +6874,7 @@
                 "width": 73,
                 "height": 45
               },
-              "snippet": "<img src=\"/LOGO_01_white.svg\" alt=\"VAE Systems Logo\" class=\"h-full w-auto light-invert\">",
+              "snippet": "<img src=\"/App_Logo_light.svg\" alt=\"VAE Systems Logo\" class=\"h-full w-auto light-invert\">",
               "nodeLabel": "VAE Systems Logo"
             }
           }

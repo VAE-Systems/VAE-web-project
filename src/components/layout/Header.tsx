@@ -237,9 +237,9 @@ const Header: React.FC = () => {
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo/Brand */}
           <Link to="/" className="group flex items-center space-x-4" onClick={() => closeMobileMenu()}>
-            <div className="group-hover:glow-turquoise h-10 transition-all duration-300">
+            <div className="group-hover:glow-turquoise h-12 transition-all duration-300 sm:h-14">
               <img
-                src={'/LOGO_01_white.svg'}
+                src={'/App_Logo_light.svg'}
                 alt="VAE Systems Logo"
                 className="light-invert h-full w-auto"
                 loading="eager"

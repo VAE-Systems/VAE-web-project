@@ -23,36 +23,37 @@ export interface TestimonialSnippet {
   company?: string
 }
 
-export const tagline = 'Substanz statt KI‑Hype: belastbare, dokumentierte KI‑ & Automations‑Architektur ohne Lock‑In.'
+export const tagline =
+  'Arbeitsinfrastruktur, KI-Optimierung und Betreuung aus einer Hand – dokumentiert, messbar und ohne Vendor-Lock-in.'
 
 export const outcomes: Outcome[] = [
   {
-    key: 'early-utility',
-    headline: 'Schnell zum ersten echten Nutzen',
-    body: 'Meilenstein-basiert mit klaren Akzeptanzkriterien: frühe interne Nutzung statt monatelanger Stealth-Entwicklung.',
-    evidence: ['Sprints', 'Akzeptanzkriterien', 'Produktionsnah'],
-    icon: 'rocket_launch',
+    key: 'experience',
+    headline: 'Erprobte Open-Source Erfahrung',
+    body: 'Unsere eigene Infrastruktur läuft seit über zwei Jahren vollständig auf Nextcloud, Odoo & Co. – wir wissen aus erster Hand, was im Alltag funktioniert.',
+    evidence: ['Eigenbetrieb seit 2023', 'Dokumentierte Playbooks', 'Produktiver Einsatz'],
+    icon: 'verified',
   },
   {
-    key: 'foundation',
-    headline: 'Ein Fundament, das mitwächst',
-    body: 'Systeme mit Fokus auf zukünftige Ausbaubarkeit: modular, dokumentiert und so gebaut, dass neue Technologien andocken – langfristige Startinvestition statt Wegwerf-Projekt.',
-    evidence: ['Modular', 'Dokumentiert', 'Erweiterbar'],
-    icon: 'architecture',
+    key: 'partnership',
+    headline: 'Komplettbetreuung statt Einmalprojekt',
+    body: 'Wir planen, setzen um und betreuen dauerhaft – inklusive Feature-Releases, Security-Checks und Support. Ihre Systeme wachsen mit Ihren Anforderungen.',
+    evidence: ['Monatliche Roadmaps', 'SLA & Support', 'Langfristige Sparrings'],
+    icon: 'handshake',
   },
   {
-    key: 'sovereignty',
-    headline: 'Kein versteckter Lock‑In',
-    body: 'Wir setzen auf Qualität & interne Dokumentation – Architektur & Runbooks sind so gestaltet, dass Systeme unabhängig von uns bestehen und wachsen können.',
-    evidence: ['Runbooks', 'Open Patterns', 'Ownership'],
-    icon: 'lock_open',
+    key: 'costs',
+    headline: 'Messbare Kosteneinsparung',
+    body: 'Statt mehrere SaaS-Abos zu bezahlen, hosten Sie Ihre Infrastruktur selbst: €89/Monat in der Testphase, €289/Monat im Vollbetrieb.',
+    evidence: ['SaaS vs. Self-Host Vergleich', 'Transparente Kalkulation', 'Keine versteckten Gebühren'],
+    icon: 'savings',
   },
   {
-    key: 'modular-curated',
-    headline: 'Architekturen, die Optionen offen halten',
-    body: 'Gezielte Komponenten statt unübersichtlicher Tool-Ketten: Baukasten-Logik nutzt Ökosystem-Vorteile – ohne künstliche Einschränkungen.',
-    evidence: ['Kuratierter Stack', 'Adapter-Layer', 'Vendor-frei'],
-    icon: 'hub',
+    key: 'ai-first',
+    headline: 'AI-Ready von Anfang an',
+    body: 'Ihre Infrastruktur wird so aufgesetzt, dass AI-Workflows sofort andocken: Dokumentenverarbeitung, Automationen und Reporting sind vorbereitet.',
+    evidence: ['Workflows & Automation', 'KPI-Dashboards', 'Iterative Optimierung'],
+    icon: 'auto_awesome',
   },
 ]
 

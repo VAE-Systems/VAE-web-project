@@ -136,76 +136,61 @@ const Footer: React.FC = () => {
               <h4 className="mb-4 text-lg font-semibold text-text-light">Services</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link
-                    to="/services/consulting"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    Beratung
+                  <Link to="/infrastruktur" className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                    Arbeitsinfrastruktur Setup
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/services/trainings"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    Schulungen & Workshops
+                  <Link to="/ki-optimierung" className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                    AI-Workflow Optimierung
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/services/custom-solutions"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    Custom Solutions
+                  <Link to="/betreuung" className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                    Langfristige Betreuung
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/services#comparison"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    Vergleich & Reifegrad
+                  <Link to="/testphase" className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                    3-Monate Testphase
                   </Link>
                 </li>
               </ul>
             </div>
           </Reveal>
 
-          {/* Produkte */}
-          <Reveal preset="fadeUp" as="nav" aria-label="Produkte" className="space-y-6">
+          {/* Solutions */}
+          <Reveal preset="fadeUp" as="nav" aria-label="Lösungen" className="space-y-6">
             <div>
-              <h4 className="mb-4 text-lg font-semibold text-text-light">Produkte</h4>
+              <h4 className="mb-4 text-lg font-semibold text-text-light">Lösungen</h4>
               <ul className="space-y-2 text-sm">
-                <li className="flex items-center space-x-2">
-                  <Link
-                    to="/products/vae-core"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    VAE Core Plattform
-                  </Link>
-                  <span className="rounded-full bg-vae-turquoise/20 px-2 py-0.5 text-[10px] tracking-wide text-vae-turquoise">
-                    Q2/2026
-                  </span>
-                </li>
                 <li>
                   <Link
-                    to="/products/solutions"
+                    to="/solutions#infrastructure"
                     className="text-text-secondary transition-colors hover:text-vae-turquoise"
                   >
-                    Solutions
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/products/tools" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    Tools & Komponenten
+                    Infrastruktur-Pakete
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/products/showcases"
+                    to="/solutions#automation"
                     className="text-text-secondary transition-colors hover:text-vae-turquoise"
                   >
-                    Showcases
+                    Automations-Bausteine
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/solutions#cases"
+                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
+                  >
+                    Case Studies
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/vae-core" className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                    VAE CORE Plattform
                   </Link>
                 </li>
               </ul>

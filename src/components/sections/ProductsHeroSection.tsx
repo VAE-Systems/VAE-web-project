@@ -100,14 +100,14 @@ const ProductsHeroSection: React.FC = () => {
                     30‑Min Strategie‑Gespräch buchen
                   </CtaLink>
                   <Link
-                    to="/services"
+                    to="/infrastruktur"
                     className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
                   >
                     <Icon name="handshake" className="mr-2" />
                     Services & Expertise
                   </Link>
                   <a
-                    href="#products"
+                    href="#solutions"
                     className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
                   >
                     <Icon name="category" className="mr-2" />
@@ -116,13 +116,13 @@ const ProductsHeroSection: React.FC = () => {
                 </div>
                 <div className="flex flex-wrap justify-center gap-2">
                   <Link
-                    to="/services/custom-solutions"
+                    to="/ki-optimierung"
                     className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
                   >
                     Custom Solutions
                   </Link>
                   <Link
-                    to="/products/vae-core"
+                    to="/vae-core"
                     className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
                   >
                     VAE CORE Architektur

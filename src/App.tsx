@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
 // Layout Components
 import Header from '@components/layout/Header'
@@ -20,14 +20,12 @@ import { initializeFocusManager } from '@/utils/focusManagement'
 // Lazy-loaded Pages
 const HomePage = React.lazy(() => import('@components/pages/HomePage'))
 const ServicesPage = React.lazy(() => import('@components/pages/ServicesPage'))
-const ServiceTrainingsPage = React.lazy(() => import('@components/pages/ServiceTrainingsPage'))
-const ServiceConsultingPage = React.lazy(() => import('@components/pages/ServiceConsultingPage'))
-const ServiceCustomSolutionsPage = React.lazy(() => import('@components/pages/ServiceCustomSolutionsPage'))
 const ProductsPage = React.lazy(() => import('@components/pages/ProductsPage'))
-const ProductSolutionsPage = React.lazy(() => import('@components/pages/ProductSolutionsPage'))
-const ProductToolsPage = React.lazy(() => import('@components/pages/ProductToolsPage'))
+const TestphasePage = React.lazy(() => import('@components/pages/TestphasePage'))
+const InfrastrukturPage = React.lazy(() => import('@components/pages/InfrastrukturPage'))
+const KiOptimierungPage = React.lazy(() => import('@components/pages/KiOptimierungPage'))
+const BetreuungPage = React.lazy(() => import('@components/pages/BetreuungPage'))
 const ProductVaeCorePage = React.lazy(() => import('@components/pages/ProductVaeCorePage'))
-const ProductShowcasesPage = React.lazy(() => import('@components/pages/ProductShowcasesPage'))
 const AboutPage = React.lazy(() => import('@components/pages/AboutPage'))
 const ContactPage = React.lazy(() => import('@components/pages/ContactPage'))
 const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage'))
@@ -87,16 +85,16 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/services" element={<ServicesPage />} />
-                  <Route path="/services/trainings" element={<ServiceTrainingsPage />} />
-                  <Route path="/services/consulting" element={<ServiceConsultingPage />} />
-                  <Route path="/services/custom-solutions" element={<ServiceCustomSolutionsPage />} />
+                  <Route path="/infrastruktur" element={<InfrastrukturPage />} />
+                  <Route path="/ki-optimierung" element={<KiOptimierungPage />} />
+                  <Route path="/betreuung" element={<BetreuungPage />} />
+                  <Route path="/testphase" element={<TestphasePage />} />
+                  <Route path="/solutions" element={<ProductsPage />} />
                   <Route path="/products" element={<ProductsPage />} />
-                  <Route path="/products/solutions" element={<ProductSolutionsPage />} />
-                  <Route path="/products/tools" element={<ProductToolsPage />} />
-                  <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
-                  <Route path="/products/showcases" element={<ProductShowcasesPage />} />
+                  <Route path="/vae-core" element={<ProductVaeCorePage />} />
                   <Route path="/about" element={<AboutPage />} />
-                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/kontakt" element={<ContactPage />} />
+                  <Route path="/contact" element={<Navigate to="/kontakt" replace />} />
                   <Route path="/impressum" element={<ImpressumPage />} />
                   <Route path="/privacy" element={<PrivacyPage />} />
                   <Route path="/privacy/settings" element={<PrivacySettings />} />

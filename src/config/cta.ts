@@ -130,7 +130,7 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
   'contact.schedule_call': {
     id: 'contact.schedule_call',
     type: 'external',
-    url: 'https://calendar.notion.so/meet/juliandarius/vae-systems',
+    url: 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz',
     label: 'Kostenloses Erstgespräch',
     newTab: true,
   },

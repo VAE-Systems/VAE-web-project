@@ -10,40 +10,49 @@ export interface ServiceCategory {
 
 export const serviceCategories: ServiceCategory[] = [
   {
-    key: 'trainings',
-    title: 'Schulungen & Workshops',
-    tagline: 'Enablement',
-    description:
-      'Fokussierte Schulungen & Workshops für schnellere interne Umsetzungskompetenz ohne dauerhafte externe Abhängigkeit.',
-    points: [
-      'VAE CORE Administration',
-      'Prompt- & Retrieval-Strategien',
-      'Architektur / Datenmodell Basics',
-      'Hands-on Deployment Sessions',
-    ],
-    cta: 'Schulungen ansehen',
-  },
-  {
     key: 'consulting',
-    title: 'Beratung',
-    tagline: 'Strategie & Governance',
+    title: 'Strategische Beratung',
+    tagline: 'Roadmaps & Governance',
     description:
-      'Architektur, Roadmaps, Compliance & Security – faktenbasiert statt Hype. Entscheidungsgrundlagen klar dokumentiert.',
-    points: ['Architektur & Roadmap', 'EU AI Act Orientierung', 'Security & Operations', 'Kosten / TCO Bewertung'],
-    cta: 'Beratung ansehen',
+      'Wir analysieren Prozesse, definieren Zielbilder und entwickeln klare Roadmaps für Open-Source-Infrastruktur und AI-Automatisierung.',
+    points: [
+      'Business- & IT-Assessment',
+      'Kosten- & Effizienzanalysen',
+      'Compliance & AI-Governance',
+      'Umsetzungs-Roadmaps',
+    ],
+    cta: 'Services ansehen',
   },
   {
-    key: 'custom',
-    title: 'Custom Solutions',
-    tagline: 'Individuelle Umsetzung',
+    key: 'infrastructure',
+    title: 'Open Source Infrastruktur',
+    tagline: 'Nextcloud & Odoo',
     description:
-      'Spezifische Integrationen, Automationspfade & Retrieval-Layer – modulare Bausteine statt generischer SaaS-Katalog.',
+      'Planung, Implementierung und Betrieb kompletter Open-Source-Stacks für Kollaboration, CRM und Geschäftsprozesse.',
+    points: ['Nextcloud Kollaboration', 'Odoo ERP/CRM', 'Security & Backups', 'DSGVO-konforme Hosting-Modelle'],
+    cta: 'Infrastruktur planen',
+  },
+  {
+    key: 'automation',
+    title: 'AI Workflow Automation',
+    tagline: 'Intelligente Prozesse',
+    description:
+      'Wir automatisieren Dokumenten- und Serviceprozesse mit AI, integrieren bestehende Tools und schaffen messbare KPIs.',
+    points: ['Dokumentenautomatisierung', 'Kundenservice-Workflows', 'Analytics & Reporting', 'Tool-Integrationen'],
+    cta: 'Automationspotenzial prüfen',
+  },
+  {
+    key: 'coordination',
+    title: 'Projektkoordination',
+    tagline: 'Entwicklernetzwerk',
+    description:
+      'Koordination erfahrener Entwickler:innen, Qualitätssicherung und transparente Projektsteuerung mit klarer Verantwortung.',
     points: [
-      'API / System-Integrationen',
-      'Workflow Automatisierung',
-      'Retrieval & Index Layer',
-      'Observability / Betrieb',
+      'Projektmanagement & PMO',
+      'Entwicklernetzwerk Zugriff',
+      'Code Reviews & QA',
+      'Transparente Kostenstruktur',
     ],
-    cta: 'Solution Details',
+    cta: 'Projekt besprechen',
   },
 ]

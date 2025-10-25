@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import Icon from '@/components/ui/Icon'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useEffect, useRef } from 'react'
+import { homeProcessDescription, homeProcessHeading, homeProcessNote } from '../../content/home'
 import { processSteps } from '../../content/process'
-import { homeProcessHeading, homeProcessDescription, homeProcessNote } from '../../content/home'
 import Card from '../ui/Card'
-import Icon from '@/components/ui/Icon'
+import MagneticButton from '../ui/buttons/MagneticButton'
 
 /**
  * HomeProcessTeaserSection
@@ -52,13 +53,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
           <h2 id="process-home-heading" className="h2 heading-gradient h-space mb-4">
             {homeProcessHeading}
           </h2>
-          <p className="text-lg leading-relaxed text-text-secondary md:text-xl">
-            {homeProcessDescription}
-            <a href="/about#prozess" className="text-vae-turquoise hover:underline">
-              Über Uns
-            </a>
-            .
-          </p>
+          <p className="text-lg leading-relaxed text-text-secondary md:text-xl">{homeProcessDescription}</p>
         </header>
         <ol className="mb-12 grid items-stretch gap-8 md:grid-cols-3">
           {steps.map((s, i) => (
@@ -103,17 +98,20 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
                   ))}
                 </ul>
               )}
-              <div className="mt-auto pt-2">
-                <a
-                  href="/about#prozess"
-                  className="inline-flex items-center gap-1 text-[11px] font-medium text-vae-turquoise hover:underline"
-                >
-                  Kompletter Ablauf <Icon name="arrow_forward" size={14} />
-                </a>
+              <div className="mt-auto pt-2 text-[11px] font-medium uppercase tracking-wide text-vae-turquoise/70">
+                Phase {String(i + 1).padStart(2, '0')}
               </div>
             </Card>
           ))}
         </ol>
+        <div className="flex justify-center">
+          <MagneticButton>
+            <a href="/about#prozess" className="btn-outline inline-flex items-center gap-2 text-sm">
+              Kompletter Ablauf ansehen
+              <Icon name="arrow_forward" size={16} />
+            </a>
+          </MagneticButton>
+        </div>
         <div className="max-w-3xl text-[12px] text-text-muted">{homeProcessNote}</div>
       </div>
     </section>

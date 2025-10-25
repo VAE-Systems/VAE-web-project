@@ -1,10 +1,12 @@
+import CtaLink from '@/components/ui/CtaLink'
+import Icon from '@/components/ui/Icon'
+import { motion } from 'framer-motion'
+import { CalendarClock, Code as CodeIcon, MapPin, ShieldCheck, Sparkle } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import CtaLink from '@/components/ui/CtaLink'
-import { motion } from 'framer-motion'
-import { CalendarClock, Grid3x3, Handshake, ShieldCheck, MapPin, Code as CodeIcon } from 'lucide-react'
+import { heroBenefits, heroDescription, heroTitle, heroTypewriterTexts } from '../../content/home'
+import MagneticButton from '../ui/buttons/MagneticButton'
 const NeuralNetworkBackground = React.lazy(() => import('./NeuralNetworkBackground'))
-import { heroTitle, heroTypewriterTexts, heroDescription } from '../../content/home'
 
 /**
  * Hero Section Component
@@ -91,9 +93,30 @@ const HeroSection: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 {heroDescription.before}
-                <span className="font-semibold text-vae-turquoise">{heroDescription.highlight}</span>
+                {heroDescription.highlight ? (
+                  <span className="font-semibold text-vae-turquoise">{heroDescription.highlight}</span>
+                ) : null}
                 {heroDescription.after}
               </motion.p>
+
+              <motion.ul
+                className="grid max-w-xl gap-4 text-sm text-text-secondary sm:text-base"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+              >
+                {heroBenefits.map(benefit => (
+                  <li key={benefit.title} className="flex items-start gap-3">
+                    <div className="mt-[2px] flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-vae-turquoise/20 text-vae-turquoise">
+                      <Icon name={benefit.icon} size={18} />
+                    </div>
+                    <div>
+                      <span className="block font-semibold text-text-light">{benefit.title}</span>
+                      <span className="block text-sm text-text-secondary">{benefit.description}</span>
+                    </div>
+                  </li>
+                ))}
+              </motion.ul>
             </div>
 
             <motion.div
@@ -103,48 +126,31 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <div className="flex flex-col gap-4 sm:flex-row">
-                <CtaLink
-                  ctaId="contact.schedule_call"
-                  ctx={{ fromPage: 'home', intent: 'strategy-call' }}
-                  variant="primary"
-                  className="flex flex-1 items-center justify-center text-center"
-                  data-green-signal="true"
-                >
-                  <CalendarClock className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
-                  30‑Min Strategie‑Gespräch buchen
-                </CtaLink>
-                <Link to="/products" className="btn-secondary flex flex-1 items-center justify-center text-center">
-                  <Grid3x3 className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
-                  Produkte & Plattform ansehen
-                </Link>
-                <Link to="/services" className="btn-outline flex flex-1 items-center justify-center text-center">
-                  <Handshake className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
-                  Services entdecken
-                </Link>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  to="/services/custom-solutions"
-                  className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
-                >
-                  Custom Solutions
-                </Link>
-                <Link
-                  to="/products#core"
-                  className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
-                >
-                  VAE CORE Architektur
-                </Link>
-                <CtaLink
-                  ctaId="contact.quick_email"
-                  ctx={{ fromPage: 'home' }}
-                  variant="ghost"
-                  className="bg-bg-primary/5 hover:bg-bg-primary/10 rounded-full px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:text-text-light dark:bg-white/5 dark:hover:bg-white/10 dark:hover:text-white"
-                />
+                <MagneticButton className="flex-1">
+                  <Link
+                    to="/testphase"
+                    className="btn-primary flex w-full items-center justify-center gap-3 text-center"
+                    data-green-signal="true"
+                  >
+                    <Sparkle className="h-6 w-6" />
+                    3-Monate Testphase starten
+                  </Link>
+                </MagneticButton>
+                <MagneticButton className="flex-1">
+                  <CtaLink
+                    ctaId="contact.schedule_call"
+                    ctx={{ fromPage: 'home', intent: 'strategy-call' }}
+                    className="btn-outline flex w-full items-center justify-center gap-3 text-center"
+                  >
+                    <CalendarClock className="h-6 w-6" />
+                    Strategiegespräch buchen
+                  </CtaLink>
+                </MagneticButton>
               </div>
               <p className="max-w-md text-[11px] leading-relaxed text-text-muted">
-                Unverbindlich & fokussiert: In <span className="font-medium text-text-secondary">15–30 Minuten</span>{' '}
-                klären wir Zielbild, Reifegrad & nächste sinnvolle Schritte. Kein Pitch – klare Einordnung.
+                Testphase: <span className="font-medium text-text-secondary">€189/Monat</span> für Server & Betrieb.
+                Danach weiter mit Vollservice für €489/Monat oder Infrastruktur only für €149/Monat – jederzeit mit
+                sauberem Handover beendbar.
               </p>
             </motion.div>
 

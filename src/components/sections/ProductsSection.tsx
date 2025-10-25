@@ -7,7 +7,7 @@ import Icon from '@/components/ui/Icon'
 const ProductsSection: React.FC = () => {
   return (
     <section
-      id="products"
+      id="solutions"
       className="surface-alt relative overflow-hidden border-t border-vae-turquoise/10 py-24 md:py-32"
     >
       <ParallaxBackdrop strength={10} />
@@ -19,30 +19,20 @@ const ProductsSection: React.FC = () => {
 
       <div className="container-vae relative">
         <div className="mx-auto mb-16 max-w-3xl text-center">
-          <h2 className="h2 fluid-h2 heading-gradient mb-5">Produkte & Plattform</h2>
+          <h2 className="h2 fluid-h2 heading-gradient mb-5">Consulting Solutions</h2>
           <p className="mb-4 text-lg leading-relaxed text-text-secondary md:text-xl">
-            Vier Erlebniswelten – Lösungen, Applikationen, Plattform & Ökosystem. Alles folgt einem Prinzip:
-            pragmatischer Nutzen ohne versteckte Abhängigkeiten.
+            Unsere Lösungs-Pakete verbinden Beratung, Implementierung und Betrieb. Ziel: Effizienz, Datenhoheit und
+            schnelle Umsetzung ohne Vendor-Lock-in.
           </p>
           <p className="text-sm leading-relaxed text-text-muted">
-            Studien & Branchenreports zeigen wiederholt: Fragmentierte Tool‑Landschaften, fehlende Betriebs- &
-            Integrationskompetenzen sowie mangelnde Observability bremsen Skalierung. Unsere Suite adressiert genau
-            diese Lücken schrittweise.
+            Wir kombinieren bewährte Open-Source-Bausteine mit AI Automationen und koordinieren erfahrene Teams. So
+            entstehen skalierbare Lösungen mit klaren Ergebnissen.
           </p>
         </div>
 
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           {productCategories.map(cat => {
-            const link =
-              cat.key === 'solutions'
-                ? '/products/solutions'
-                : cat.key === 'tools'
-                  ? '/products/tools'
-                  : cat.key === 'core'
-                    ? '/products/vae-core'
-                    : cat.key === 'built'
-                      ? '/products/showcases'
-                      : '/products'
+            const link = `/solutions#${cat.key}`
             return (
               <div
                 key={cat.key}

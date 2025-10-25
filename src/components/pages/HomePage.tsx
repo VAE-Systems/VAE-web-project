@@ -1,14 +1,10 @@
 import React from 'react'
+import FinalCtaSection from '../sections/FinalCtaSection'
 import HeroSection from '../sections/HeroSection'
-import CaseStudiesSection from '../sections/CaseStudiesSection'
-import ServicesSection from '../sections/ServicesSection'
 import HomeOutcomesSection from '../sections/HomeOutcomesSection'
 import HomeProcessTeaserSection from '../sections/HomeProcessTeaserSection'
-import ProductsSection from '../sections/ProductsSection'
-import TechStackSection from '../sections/TechStackSection'
-import AboutMiniSection from '../sections/AboutMiniSection'
-const FAQSection = React.lazy(() => import('../sections/FAQSection'))
-import ContactSection from '../sections/ContactSection'
+import ServicesSection from '../sections/ServicesSection'
+import TestphaseBanner from '../sections/TestphaseBanner'
 import Seo from '../ui/Seo'
 
 /**
@@ -20,41 +16,27 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
       <Seo
-        title="VAE Systems – Produktionsnahe K I & Automation"
-        description="Produktionsnahe KI & Automation – modular, dokumentiert, ohne Lock‑In."
+        title="VAE Systems – Arbeitsinfrastruktur einrichten, AI-optimieren, betreuen"
+        description="Wir bauen Ihre Open-Source-Arbeitsinfrastruktur auf, optimieren sie mit KI-Workflows und betreuen sie langfristig – inklusive 3-monatiger Testphase."
         canonicalPath="/"
       />
       {/* 1. Hero */}
       <HeroSection />
 
-      {/* 2. Outcomes / Warum (frühe Nutzen-Verankerung) */}
+      {/* 1b. Testphase Offer */}
+      <TestphaseBanner />
+
+      {/* 2. Warum & Resultate */}
       <HomeOutcomesSection className="pb-24 pt-24" />
 
-      {/* 3. Case Studies (Social Proof früh) */}
-      <CaseStudiesSection />
-
-      {/* 4. Services (Einordnung nach Problem & Proof) */}
+      {/* 3. Services (Einordnung nach Problem & Proof) */}
       <ServicesSection />
 
-      {/* 5. Prozess (Sicherheit & Transparenz des Vorgehens) */}
+      {/* 4. Prozess (Sicherheit & Transparenz des Vorgehens) */}
       <HomeProcessTeaserSection className="pt-24" />
 
-      {/* 6. Products & Plattform (Skalierungsebene) */}
-      <ProductsSection />
-
-      {/* 7. Tech Stack (technische Tiefe nach Kontext) */}
-      <TechStackSection />
-
-      {/* 8. About (Mini Enhanced) */}
-      <AboutMiniSection />
-
-      {/* 9. FAQ (Einwandbehandlung) */}
-      <React.Suspense fallback={<div className="py-24 text-center text-sm text-text-muted">Lade FAQ…</div>}>
-        <FAQSection />
-      </React.Suspense>
-
-      {/* 10. Kontakt (Conversion) */}
-      <ContactSection />
+      {/* 5. Abschluss */}
+      <FinalCtaSection />
     </div>
   )
 }

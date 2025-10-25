@@ -1,10 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import Icon from '@/components/ui/Icon'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { outcomes, badges } from '../../content/aboutWhy'
-import { homeOutcomesHeading, homeOutcomesDescription } from '../../content/home'
-import Card from '../ui/Card'
-import Icon from '@/components/ui/Icon'
+import React, { useEffect, useRef } from 'react'
+import { homeOutcomesDescription, homeOutcomesHeading, outcomeMetrics, whyVaeHighlights } from '../../content/home'
 
 /**
  * HomeOutcomesSection
@@ -33,9 +31,6 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
     return () => ctx.revert()
   }, [])
 
-  // Nur die ersten 3 Outcomes auf Home (kompakt)
-  const primary = outcomes.slice(0, 3)
-
   return (
     <section
       id={id}
@@ -53,57 +48,55 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
           </h2>
           <p className="text-lg leading-relaxed text-text-secondary md:text-xl">
             {homeOutcomesDescription.before}
-            <a href="/about#warum" className="text-vae-turquoise hover:underline">
-              Über Uns
-            </a>
             {homeOutcomesDescription.after}
           </p>
         </header>
-        <div className="mb-14 grid items-stretch gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {primary.map((o, i) => (
-            <Card as="div" key={o.key} data-outcome-card className="p-6">
-              <div className="mb-4 flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise">
-                    <Icon name={o.icon || 'hub'} className="text-vae-turquoise" size={22} />
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.9fr)]">
+          <div className="grid gap-6" data-why-list>
+            {whyVaeHighlights.map((item, index) => (
+              <article
+                key={item.title}
+                data-outcome-card
+                className="border-border-primary bg-bg-primary/[0.04] relative overflow-hidden rounded-2xl border p-6 backdrop-blur-sm transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.2),0_16px_52px_-20px_rgba(var(--vae-turquoise-rgb),0.4)] dark:border-white/10 dark:bg-white/[0.03]"
+              >
+                <div
+                  className="absolute -top-10 right-4 h-24 w-24 rounded-full bg-vae-turquoise/10 blur-3xl"
+                  aria-hidden="true"
+                />
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise">
+                    <Icon name={item.icon} className="text-vae-turquoise" size={22} />
                   </div>
                   <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise/70">
-                    {String(i + 1).padStart(2, '0')}
+                    {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
-              </div>
-              <h3 className="mb-3 text-lg font-semibold leading-snug text-text-light">{o.headline}</h3>
-              <p className="flex-grow text-sm leading-relaxed text-text-secondary">{o.body}</p>
-              {o.evidence && (
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {o.evidence.slice(0, 3).map(tag => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-vae-turquoise/20 bg-vae-turquoise/10 px-2.5 py-1 text-[11px] tracking-wide text-vae-turquoise transition-colors group-hover:border-vae-turquoise/40 group-hover:bg-vae-turquoise/20"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </Card>
-          ))}
-        </div>
-        <div className="mb-10 flex flex-wrap gap-3">
-          {badges.slice(0, 3).map(b => (
-            <div
-              key={b.key}
-              className="flex items-center gap-2 rounded-full border border-vae-turquoise/20 bg-vae-turquoise/10 px-3 py-1.5 text-[12px] text-vae-turquoise"
-            >
-              <Icon name={b.icon} className="text-vae-turquoise" size={16} />
-              <span>{b.label}</span>
+                <h3 className="mb-3 text-lg font-semibold leading-snug text-text-light">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-text-secondary">{item.description}</p>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-vae-turquoise/80">
+                  {item.proof}
+                </p>
+              </article>
+            ))}
+          </div>
+          <aside
+            className="border-border-primary bg-bg-primary/[0.05] sticky top-28 rounded-2xl border p-6 backdrop-blur-md dark:border-white/10 dark:bg-white/[0.04] lg:p-8"
+            data-outcome-card
+            aria-label="Kennzahlen"
+          >
+            <div className="mb-6">
+              <span className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise/70">KPIs</span>
+              <h3 className="mt-2 text-xl font-semibold text-text-light">Was Pilotkund:innen erreichen</h3>
             </div>
-          ))}
-        </div>
-        <div className="text-sm text-text-muted">
-          <a href="/about#warum" className="inline-flex items-center gap-1 text-vae-turquoise hover:underline">
-            Mehr Outcomes & Prinzipien ansehen <Icon name="arrow_forward" size={16} />
-          </a>
+            <ul className="space-y-6">
+              {outcomeMetrics.map(metric => (
+                <li key={metric.label} className="flex items-start gap-4">
+                  <span className="text-4xl font-bold leading-none text-vae-turquoise sm:text-5xl">{metric.value}</span>
+                  <p className="text-sm leading-relaxed text-text-secondary sm:text-base">{metric.label}</p>
+                </li>
+              ))}
+            </ul>
+          </aside>
         </div>
       </div>
     </section>

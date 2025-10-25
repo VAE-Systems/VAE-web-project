@@ -1,8 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { storyIntro, founders } from '../../content/storyTeam'
+import { storyIntro } from '../../content/storyTeam'
+import { teamMembers } from '@/content/team'
 import Icon from '@/components/ui/Icon'
+
+const FALLBACK_AVATAR =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320"><rect width="320" height="320" fill="%23121a1a"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" fill="%2300d488" font-family="Arial, sans-serif" font-size="32">VAE</text></svg>'
 
 interface StoryTeamSectionProps {
   id?: string
@@ -11,6 +15,9 @@ interface StoryTeamSectionProps {
 
 const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', className = '' }) => {
   const ref = useRef<HTMLDivElement>(null)
+  const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.src = FALLBACK_AVATAR
+  }, [])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -68,40 +75,85 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
         </header>
 
         {/* Founders */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3" data-block>
-          {founders.map(f => (
-            <div
-              key={f.key}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2" data-block>
+          {teamMembers.map(member => (
+            <article
+              key={member.id}
               className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.035] p-6 backdrop-blur-sm"
             >
-              <div className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <div className="relative z-10 mb-4">
-                <h3 className="flex items-center gap-2 text-lg font-semibold leading-snug tracking-tight text-text-light dark:text-white">
-                  <Icon name={f.icon} className="text-vae-turquoise" size={16} />
-                  {f.name}
-                </h3>
-                <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-vae-turquoise">{f.role}</p>
+              <div className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="relative z-10 mb-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-inner shadow-black/10 sm:h-28 sm:w-28">
+                  <img
+                    src={member.image}
+                    alt={`${member.name} – ${member.role}`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    onError={handleImageError}
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold leading-tight text-text-light dark:text-white">{member.name}</h3>
+                  <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-vae-turquoise">
+                    {member.role}
+                  </p>
+                </div>
               </div>
-              <p className="relative z-10 mb-4 text-sm leading-relaxed text-text-secondary dark:text-white/80">
-                {f.highlight}
+
+              <p className="relative z-10 mb-5 text-[0.95rem] leading-relaxed text-text-secondary dark:text-white/80">
+                {member.bio}
               </p>
-              <ul className="relative z-10 mb-4 space-y-2 text-[12px] text-text-secondary">
-                {f.points.map(p => (
-                  <li key={p} className="flex items-start gap-2">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="mt-[3px] flex-shrink-0 text-vae-turquoise"
-                    >
-                      <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2" />
-                    </svg>
-                    {p}
-                  </li>
+
+              <div className="relative z-10 mb-5 flex flex-wrap gap-2">
+                {member.expertise.map(area => (
+                  <span
+                    key={area}
+                    className="bg-vae-turquoise/12 rounded-full border border-vae-turquoise/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-vae-turquoise/90"
+                  >
+                    {area}
+                  </span>
                 ))}
-              </ul>
-            </div>
+              </div>
+
+              <dl className="relative z-10 mb-6 grid gap-3 text-sm text-text-secondary dark:text-white/70 sm:grid-cols-2">
+                <div>
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-vae-turquoise/70">
+                    Erfahrung
+                  </dt>
+                  <dd className="mt-1 text-text-light dark:text-white">{member.experience}</dd>
+                </div>
+                <div>
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-vae-turquoise/70">
+                    Ausbildung
+                  </dt>
+                  <dd className="mt-1 text-text-light dark:text-white">{member.education}</dd>
+                </div>
+              </dl>
+
+              <div className="relative z-10 mt-auto flex flex-col gap-2 text-sm">
+                {member.email && (
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="flex items-center gap-2 text-vae-turquoise transition-colors hover:text-text-light dark:hover:text-white"
+                  >
+                    <Icon name="forward_to_inbox" size={18} />
+                    <span>{member.email}</span>
+                  </a>
+                )}
+                {member.linkedin && (
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-text-muted transition-colors hover:text-text-light dark:text-white/60 dark:hover:text-white"
+                  >
+                    <Icon name="link" size={16} />
+                    <span>LinkedIn Profil</span>
+                  </a>
+                )}
+              </div>
+            </article>
           ))}
         </div>
       </div>

@@ -17,81 +17,69 @@
   <!-- Main Service Pages -->
   <url>
     <loc>https://vae-systems.com/services</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://vae-systems.com/services/trainings</loc>
-    <lastmod>2025-09-25</lastmod>
+    <loc>https://vae-systems.com/infrastruktur</loc>
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://vae-systems.com/ki-optimierung</loc>
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://vae-systems.com/betreuung</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vae-systems.com/services/consulting</loc>
-    <lastmod>2025-09-25</lastmod>
+    <loc>https://vae-systems.com/testphase</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/services/custom-solutions</loc>
-    <lastmod>2025-09-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Product Pages -->
+  <!-- Solutions & Plattform -->
   <url>
-    <loc>https://vae-systems.com/products</loc>
-    <lastmod>2025-09-25</lastmod>
+    <loc>https://vae-systems.com/solutions</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vae-systems.com/products/solutions</loc>
-    <lastmod>2025-09-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/products/tools</loc>
-    <lastmod>2025-09-25</lastmod>
+    <loc>https://vae-systems.com/vae-core</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vae.systems/products/vae-core</loc>
-    <lastmod>2025-08-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vae.systems/products/showcases</loc>
-    <lastmod>2025-08-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vae.systems/about</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://vae-systems.com/about</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://vae.systems/contact</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://vae-systems.com/contact</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vae.systems/impressum</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://vae-systems.com/impressum</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://vae.systems/privacy</loc>
-    <lastmod>2025-08-29</lastmod>
+    <loc>https://vae-systems.com/privacy</loc>
+    <lastmod>2025-10-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

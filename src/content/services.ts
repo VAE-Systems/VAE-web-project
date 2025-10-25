@@ -1,192 +1,253 @@
 // Services Content - Zentralisiert lange Texte aus ServicesPage.tsx
 export const servicesHero = {
   title: 'Services',
-  subtitle: 'Schulungen & Workshops, strategische Beratung & individuelle KI-/Automationslösungen.',
-  description: 'Von Analyse bis Umsetzung – souverän & nachvollziehbar.',
+  subtitle: 'Arbeitsinfrastruktur einrichten, mit KI optimieren und langfristig betreuen.',
+  description:
+    'Wir kombinieren Open-Source-Business-Tools, intelligente Workflows und kontinuierliche Weiterentwicklung – so entsteht eine digitale Arbeitsumgebung, die mit Ihrem Unternehmen wächst.',
 }
 
 export const servicesLifecycle = {
-  title: 'Lifecycle statt Einzelleistung.',
+  title: 'Von Setup bis dauerhafte Weiterentwicklung.',
   description1:
-    "Wir entwickeln nicht nur Software – wir begleiten den gesamten Lebenszyklus: Analyse, Architektur, Implementierung, Enablement, Betrieb & Übergabe. So entstehen keine 'Abwurfprojekte', sondern betreibbare Lösungen.",
+    'Wir starten mit einem vollständigen Infrastruktur-Setup, bauen anschließend KI-gestützte Workflows aus und begleiten den Betrieb langfristig – alles in klaren, nachvollziehbaren Etappen.',
   description2:
-    'Schulungen & Workshops bauen interne Kompetenz auf, Beratung schafft Klarheit & Richtung, Custom Solutions liefern präzise Bausteine oder vollständige Automationspfade – kombinierbar nach Reifegrad.',
-  platformLink: 'Plattform‑ & Lizenzangebote unter /products. Services adressieren Ihren spezifischen Kontext.',
+    'Das Ergebnis: eine selbstgehostete Business-Suite mit kontinuierlichen Verbesserungszyklen, transparenter Kostenstruktur und dokumentiertem Wissenstransfer zu Ihrem Team.',
+  platformLink: 'Produktseite für VAE CORE bleibt unter /vae-core abrufbar.',
 }
 
 export const lifecycleBenefits = [
   {
-    title: 'Enablement',
-    benefits: ['Team handlungsfähig', 'Reduktion externer Abhängigkeit', 'Dokumentierte Artefakte'],
+    title: 'Schneller Start',
+    benefits: ['Produktive Systeme binnen 2–4 Wochen', 'Saubere Übergabe & Runbooks', 'Team-Onboarding inklusive'],
   },
   {
-    title: 'Governance & Compliance',
-    benefits: ['Frühe AI Act Orientierung', 'Sicherheitsmodell klar', 'Transparente Audits'],
+    title: 'Messbare Effizienz',
+    benefits: ['AI-gestützte Workflows', 'Regelmäßige Reviews', 'Transparente KPI-Reports'],
   },
   {
-    title: 'Umsetzung',
-    benefits: ['Fokus reale Engpässe', 'Messbare Qualitätskriterien', 'Souveräner Betrieb'],
+    title: 'Langfristige Sicherheit',
+    benefits: ['Kontinuierliche Updates', 'Security- & Backup-Checks', 'Support & Betreuung'],
   },
 ]
 
 export const servicesCategories = [
   {
-    key: 'trainings',
-    title: 'Schulungen & Workshops',
-    icon: 'school',
-    focus: 'Enablement & Wissenstransfer – Teams schneller produktiv.',
-    examples: ['VAE CORE Admin', 'Prompt Patterns Lab', 'Architektur Grundlagen'],
-    to: '/services/trainings',
+    key: 'infrastructure',
+    title: 'Arbeitsinfrastruktur Setup',
+    icon: 'dns',
+    focus: 'Nextcloud, CRM, Kommunikation & Wissen – produktionsbereit eingerichtet.',
+    examples: ['System-Setup', 'Benutzer & Rechte', 'Security & Backups'],
+    to: '/infrastruktur',
   },
   {
-    key: 'consulting',
-    title: 'Beratung',
-    icon: 'handshake',
-    focus: 'Strategische Architektur-, Prozess- & Compliance-Begleitung.',
-    examples: ['KI-Integrations-Roadmap', 'Security & Governance Audit', 'Regulatorische Analyse'],
-    to: '/services/consulting',
+    key: 'automation',
+    title: 'AI-Workflow Optimierung',
+    icon: 'auto_awesome',
+    focus: 'Automationen & AI-Use-Cases für Ihre Prozesse.',
+    examples: ['Dokumenten-Pipelines', 'Service-Workflows', 'KPI-Dashboards'],
+    to: '/ki-optimierung',
   },
   {
-    key: 'custom',
-    title: 'Custom Solutions',
-    icon: 'extension',
-    focus: 'Individuelle Software & Integrationen – gezielte Umsetzung statt Produktkatalog.',
-    examples: ['API-Connector', 'Workflow Automatisierung', 'Retrieval Layer'],
-    to: '/services/custom-solutions',
+    key: 'support',
+    title: 'Langfristige Betreuung',
+    icon: 'support_agent',
+    focus: 'Updates, Security, Features & Support im laufenden Betrieb.',
+    examples: ['Release-Planung', 'Security Checks', 'Support & Enablement'],
+    to: '/betreuung',
   },
 ]
 
 export const comparisonMatrix = {
-  title: 'Wann welches Format?',
+  title: 'Welche Leistung deckt welchen Bedarf?',
   subtitle:
-    'Schnell erkennbare Zuordnung: Wissen aufbauen, Richtung festlegen oder spezifisch umsetzen. Überlappungen bewusst minimal.',
+    'Drei aufeinander aufbauende Servicebereiche greifen ineinander: Infrastruktur aufsetzen, Prozesse mit KI optimieren und Systeme langfristig betreuen.',
+  columns: [
+    { key: 'infrastructure', label: 'Infrastruktur-Setup' },
+    { key: 'automation', label: 'AI-Optimierung' },
+    { key: 'support', label: 'Langzeit-Betreuung' },
+  ],
   criteria: [
     {
       key: 'ziel',
       label: 'Primäres Ziel',
-      trainings: 'Kompetenz & Routinen',
-      consulting: 'Richtung & Governance',
-      custom: 'Produktiver Baustein',
+      infrastructure: 'Produktive Open-Source-Stacks',
+      automation: 'Prozessautomatisierung & KPIs',
+      support: 'Stabiler Betrieb & kontinuierlicher Ausbau',
     },
     {
       key: 'output',
       label: 'Output',
-      trainings: 'Unterlagen, Übungen, Cheatsheets',
-      consulting: 'Roadmap, Architektur, KPI/Risiko',
-      custom: 'Software, Runbooks, Dashboards',
-    },
-    {
-      key: 'tiefe',
-      label: 'Technische Tiefe',
-      trainings: 'Fundament & Patterns',
-      consulting: 'Architektur & Optionen',
-      custom: 'Implementierung & Integrationen',
+      infrastructure: 'Implementiertes System + Runbook',
+      automation: 'Automations-Workflows & Dashboards',
+      support: 'Roadmap, Release-Plan & Support-Report',
     },
     {
       key: 'dauer',
       label: 'Typische Dauer',
-      trainings: '1 Tag / Modul',
-      consulting: 'Tage – wenige Wochen',
-      custom: 'Wochen – Inkremente',
+      infrastructure: '2–4 Wochen Rollout',
+      automation: '3–6 Wochen Inkremente',
+      support: 'Monatliche Zyklen / laufend',
     },
     {
       key: 'team',
       label: 'Interne Beteiligung',
-      trainings: 'Aktives Lernen',
-      consulting: 'Workshops & Entscheidungen',
-      custom: 'Review + Co-Development',
+      infrastructure: 'IT & Key User Enablement',
+      automation: 'Prozessowner & Fachbereiche',
+      support: 'Stakeholder & Supportkontakt',
     },
     {
       key: 'metriken',
       label: 'Messpunkte',
-      trainings: 'Lernziele / Erfolg',
-      consulting: 'Reifegrad, Risiko, TCO',
-      custom: 'Qualität, Latenz, Kosten',
+      infrastructure: 'Nutzerakzeptanz, Betriebs-SLAs',
+      automation: 'Durchlaufzeit, Fehlerquote, KPIs',
+      support: 'Verfügbarkeit, Tickets, Roadmap-Status',
     },
     {
       key: 'lockin',
-      label: 'Lock‑in Risiko',
-      trainings: 'Keins',
-      consulting: 'Sehr gering',
-      custom: 'Niedrig (Open-first)',
+      label: 'Lock-in Risiko',
+      infrastructure: 'Gering (Open Source + Dokumentation)',
+      automation: 'Gering (modulare Workflows)',
+      support: 'Keine Zusatzbindung',
     },
   ],
   footnote:
-    'Bereiche können separat gebucht oder in direktem Kontakt sinnvoll kombiniert werden – abhängig von Reifegrad & Zielbild.',
-  sequenceNote:
-    'Typische Sequenz: Klarheit (Beratung) → Enablement (Schulungen & Workshops) → Umsetzung spezifischer Bausteine (Custom Solutions).',
+    'Leistungen lassen sich einzeln oder als Gesamtpaket buchen – gemeinsam priorisieren wir nach Impact und Reifegrad.',
+  sequenceNote: 'Empfohlene Reihenfolge: Infrastruktur-Setup → AI-Optimierung → Langfristige Betreuung.',
 }
 
 export const finalCta = {
-  title: 'Nächster Schritt?',
+  title: 'Bereit für Ihre Testphase?',
   subtitle:
-    'Senden Sie uns Kernziel, Zeithorizont & vorhandene Systeme – wir melden uns innerhalb von 24h mit einem Vorschlag für das Erstgespräch.',
+    'Starten Sie mit einer vollständig eingerichteten Infrastruktur, testen Sie drei Monate lang für nur die Serverkosten und entscheiden Sie danach in Ruhe.',
   buttons: [
-    { to: '/contact', text: 'Kontakt aufnehmen', primary: true },
-    { href: '/service-katalog.pdf', text: 'Service-Katalog (PDF, 1.2 MB)', secondary: true },
+    { to: '/testphase', text: '3-Monate Testphase starten', primary: true },
+    { to: '/contact', text: 'Strategiegespräch vereinbaren', secondary: true },
   ],
-  disclaimer: 'PDF ist Vorab-Version – Inhalte können sich ändern.',
+  disclaimer:
+    'Testphase: €189/Monat (Server & Betrieb). Danach: €489/Monat Vollservice oder €149/Monat Infrastruktur only.',
 }
 
 export const servicesData = [
   {
-    key: 'trainings',
-    badge: 'Core Säule',
-    title: 'Schulungen & Workshops – Enablement & Rollenkompetenz',
+    key: 'infrastructure',
+    badge: 'Setup',
+    title: 'Arbeitsinfrastruktur einrichten',
     description:
-      'Hands-on Formate für Dev, Ops & Knowledge Steward. Schnelle interne Souveränität statt dauerhafte externe Abhängigkeit.',
+      'Nextcloud, CRM, Kommunikationstools und Wissensspeicher – alles selbstgehostet, DSGVO-konform und für Ihr Team vorbereitet.',
     stats: [
-      { value: '2–4', desc: 'Wochen initiales Setup', note: '3' },
-      { value: '100%', desc: 'Enablement Fokus' },
+      { value: '2–4', desc: 'Wochen bis Go-Live', note: '3' },
+      { value: '80%', desc: 'SaaS-Kostenersparnis' },
     ],
-    features: ['Workshops & Labs', 'Artefakte / Playbooks', 'Mentoring & Shadowing'],
-    cta: 'Schulungen ansehen',
-    iconName: 'school',
+    features: ['Nextcloud Business Suite', 'CRM- & Automationsmodule', 'Backup & Security Framework'],
+    cta: 'Setup besprechen',
+    iconName: 'dns',
   },
   {
-    key: 'consulting',
-    badge: 'Core Säule',
-    title: 'Beratung – Architektur & Governance',
+    key: 'automation',
+    badge: 'AI',
+    title: 'Mit KI kontinuierlich verbessern',
     description:
-      'Architektur, Governance, Compliance & Roadmaps für souveräne KI- & Automationslandschaften. Fokus: Transparenz, Austauschbarkeit, Betrieb statt POC-Silos.',
+      'Wir entwickeln AI-gestützte Workflows, automatisieren wiederkehrende Aufgaben und liefern Dashboards für sichtbare Ergebnisse.',
     stats: [
-      { value: '65%', desc: 'ø Lizenz-/Vendor Kosten Reduktion', note: '1' },
-      { value: '4–6x', desc: 'Schnellere Entscheidungszyklen', note: '2' },
+      { value: '3–6', desc: 'Wochen je Iteration', note: '4' },
+      { value: '2-3h', desc: 'Zeitgewinn pro Mitarbeiter/Woche' },
     ],
-    features: ['Architektur-Assessment', 'Roadmap & Reifegradmodell', 'Governance / AI Act Vororientierung'],
-    cta: 'Beratung ansehen',
-    iconName: 'handshake',
+    features: ['Dokumenten- & Service-Automation', 'Datenanalyse & Reporting', 'Iterative Optimierung'],
+    cta: 'AI-Potenzial analysieren',
+    iconName: 'auto_awesome',
   },
   {
-    key: 'solutions',
-    badge: 'Core Säule',
-    title: 'Custom Solutions – Integration & Automation',
+    key: 'support',
+    badge: 'Care',
+    title: 'Langfristige Betreuung & Ausbau',
     description:
-      'Gezielte Automations- & Retrieval-Bausteine. Von Connectoren über Evaluierung bis Observability – modular kombinierbar.',
+      'Regelmäßige Updates, Security-Checks, neue Features und Support – wir entwickeln Ihre Infrastruktur dauerhaft weiter.',
     stats: [
-      { value: '3–8', desc: 'Wochen MVP Umsetzung', note: '4' },
-      { value: '60%', desc: 'Avg. Effizienzgewinn', note: '5' },
+      { value: '24/7', desc: 'Monitoring optional' },
+      { value: '€489', desc: 'Monatliche Vollbetreuung' },
     ],
-    features: ['Workflow Orchestrierung', 'Retrieval / Index Layer', 'Evaluierung & Monitoring'],
-    cta: 'Use Cases',
-    iconName: 'extension',
+    features: ['Feature-Roadmap & Rollout', 'Security & Compliance Checks', 'Support & Enablement'],
+    cta: 'Betreuung anfragen',
+    iconName: 'support_agent',
+  },
+]
+
+export interface ConsultingService {
+  id: string
+  title: string
+  description: string
+  type: 'consulting' | 'coordination'
+  features: string[]
+  timeline: string
+  investment: string
+  cta: string
+}
+
+export const consultingServices: ConsultingService[] = [
+  {
+    id: 'infrastructure-setup',
+    title: 'Arbeitsinfrastruktur einrichten',
+    description:
+      'Kompletter Aufbau Ihrer digitalen Arbeitsumgebung mit Nextcloud, CRM, Kommunikationstools und Kollaborations-Workflows – fertig dokumentiert und für Ihr Team einsatzbereit.',
+    type: 'consulting',
+    features: [
+      'System- & Benutzerkonfiguration',
+      'Security, Backup & Monitoring',
+      'Team-Onboarding & Dokumentation',
+      'Integration bestehender Datenquellen',
+    ],
+    timeline: 'Phase 1 · 2–4 Wochen',
+    investment: 'Testphase: €189/Monat (Server & Betrieb) · Danach: ab €149/Monat',
+    cta: 'Setup besprechen',
+  },
+  {
+    id: 'ai-optimization',
+    title: 'AI-Workflow Optimierung',
+    description:
+      'Wir automatisieren wiederkehrende Aufgaben, verbinden Systeme und liefern kontinuierlich neue AI-gestützte Effizienzhebel sowie nachvollziehbare KPIs.',
+    type: 'consulting',
+    features: [
+      'Dokumenten- & Anfrageautomatisierung',
+      'Workflow-Design & Iteration',
+      'KPI-Dashboards & Reporting',
+      'Regelmäßige Optimierungssprints',
+    ],
+    timeline: 'Phase 2 · fortlaufende Sprints (3–6 Wochen)',
+    investment: 'Inklusive in der monatlichen Betreuung',
+    cta: 'AI-Potenzial analysieren',
+  },
+  {
+    id: 'longterm-support',
+    title: 'Langfristige Betreuung',
+    description:
+      'Updates, Security-Patches, neue Features und Support – wir entwickeln die Infrastruktur im laufenden Betrieb weiter und bleiben technischer Ansprechpartner.',
+    type: 'coordination',
+    features: [
+      'Feature-Roadmap & Release-Management',
+      'Security & Compliance Checks',
+      'Support & Incident Handling',
+      'Wissenstransfer & Enablement',
+    ],
+    timeline: 'Phase 3 · monatliche Weiterentwicklung',
+    investment: 'Vollservice: €489/Monat · Infrastruktur only: €149/Monat',
+    cta: 'Betreuung anfragen',
   },
 ]
 
 export const lifecycleBlocks = [
   {
-    title: 'Lifecycle Ansatz',
+    title: 'Aufsetzen',
     description:
-      'Analyse → Architektur → Umsetzung → Enablement → Betrieb. Keine „Throwaway" POCs – inkrementell produktionsfähig.',
+      'Komplette Infrastruktur in wenigen Wochen produktiv: Systeme, Benutzer, Sicherheit und Dokumentation stehen vom ersten Tag an.',
   },
   {
-    title: 'Messbarkeit',
+    title: 'Optimieren',
     description:
-      'Evaluationssets, Quality Gates & Betriebsmesswerte eingebaut statt nachgelagert. Entscheidungen werden datenbasiert.',
+      'AI-gestützte Workflows und Automationen ergänzen das Fundament. Wir messen Wirkung, justieren Prozesse und liefern Insights.',
   },
   {
-    title: 'Souveränität',
+    title: 'Betreuen',
     description:
-      'Open Source & lokale Ausführbarkeit verhindern unerwünschten Lock‑in. Austauschbare Index & Modell Layer.',
+      'Kontinuierliche Weiterentwicklung mit Feature-Releases, Security-Checks und Support – für eine Infrastruktur, die mit Ihnen skaliert.',
   },
 ]

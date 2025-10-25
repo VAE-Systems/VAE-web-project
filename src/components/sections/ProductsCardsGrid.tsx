@@ -5,7 +5,7 @@ import { productCategories } from '../navigation/productCategories'
 import Icon from '@/components/ui/Icon'
 
 const ProductsCardsGrid: React.FC = () => {
-  const visibleKeys = ['solutions', 'tools', 'core'] // Reihenfolge wie gewünscht
+  const visibleKeys = ['infrastruktur', 'automation', 'packages'] // Reihenfolge wie gewünscht
   const items = productCategories.filter(p => visibleKeys.includes(p.key))
 
   return (
@@ -22,6 +22,7 @@ const ProductsCardsGrid: React.FC = () => {
           {items.map(cat => (
             <article
               key={cat.key}
+              id={cat.key}
               className="border-border-primary bg-bg-primary/5 group relative flex h-full flex-col overflow-hidden rounded-2xl border p-5 backdrop-blur-md transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.12),0_10px_40px_-10px_rgba(var(--vae-turquoise-rgb),0.28)] dark:border-white/10 dark:bg-white/5 sm:p-6"
             >
               <div className="relative z-10 mb-3 flex items-start justify-between">
@@ -64,7 +65,7 @@ const ProductsCardsGrid: React.FC = () => {
               </ul>
 
               <div className="mt-auto flex items-center gap-3">
-                <Link to={`/products/${cat.key}`} className="btn-primary btn-compact whitespace-nowrap">
+                <Link to={`/solutions#${cat.key}`} className="btn-primary btn-compact whitespace-nowrap">
                   Ansehen
                 </Link>
                 <CtaLink

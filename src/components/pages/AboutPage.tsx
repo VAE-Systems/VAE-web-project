@@ -16,6 +16,7 @@ import Card from '../ui/Card'
 import { servicesCategories } from '../../content/services'
 import Breadcrumbs from '../navigation/Breadcrumbs'
 import Icon from '@/components/ui/Icon'
+import { teamMembers } from '@/content/team'
 
 /**
  * AboutPage Component
@@ -222,36 +223,14 @@ const AboutPage: React.FC = () => {
         </div>
         <div className="mt-14 px-4">
           <div
-            className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3"
+            className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2"
             data-stagger-group
             id="founders"
             data-chip-group
           >
-            {[
-              {
-                name: 'Julian Darius Goertz-Dini',
-                role: 'CEO & Gründer',
-                focus: 'Unternehmensführung, Sales, strategische Vision',
-                email: 'juliandini@vae-systems.com',
-                linkedin: 'https://www.linkedin.com/in/julian-darius-goertz-dini-8a716a277',
-              },
-              {
-                name: 'Jakob Dünnebeil',
-                role: 'CTO & Gründer',
-                focus: 'Technische Leitung, Architektur, Systemdesign',
-                email: 'jakobduennebeil@vae-systems.com',
-                linkedin: 'https://www.linkedin.com/in/jakob-d%C3%BCnnebeil-54b25936b/',
-              },
-              {
-                name: 'Ninaad Anirrudah Deswandikar',
-                role: 'CPO & Gründer',
-                focus: 'Produktstrategie, UX, Feature-Entwicklung',
-                email: 'ninaaddeswandikar@vae-systems.com',
-                linkedin: 'https://www.linkedin.com/in/ninaad-aniruddha-deswandikar-a2248427a/',
-              },
-            ].map(f => (
+            {teamMembers.map(member => (
               <div
-                key={f.name}
+                key={member.id}
                 className="border-border-primary bg-bg-primary/5 group relative flex flex-col rounded-2xl border p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04]"
                 data-i
               >
@@ -260,29 +239,53 @@ const AboutPage: React.FC = () => {
                   aria-hidden="true"
                 />
                 <div className="mb-3 text-left">
-                  <h3 className="text-lg font-semibold leading-snug tracking-tight text-text-light">{f.name}</h3>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-vae-turquoise">{f.role}</p>
+                  <h3 className="text-lg font-semibold leading-snug tracking-tight text-text-light">{member.name}</h3>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-vae-turquoise">{member.role}</p>
                 </div>
-                <p className="theme-light:text-text-light mb-4 flex-grow text-sm leading-relaxed text-text-secondary">
-                  {f.focus}
+                <p className="theme-light:text-text-light mb-4 text-sm leading-relaxed text-text-secondary">
+                  {member.bio}
                 </p>
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {member.expertise.map(area => (
+                    <span
+                      key={area}
+                      className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-vae-turquoise/90"
+                    >
+                      {area}
+                    </span>
+                  ))}
+                </div>
+                <div className="mb-4 grid grid-cols-1 gap-3 text-xs text-text-muted sm:grid-cols-2">
+                  <div>
+                    <p className="font-semibold uppercase tracking-[0.18em] text-vae-turquoise/80">Erfahrung</p>
+                    <p className="mt-1 text-text-light dark:text-white">{member.experience}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold uppercase tracking-[0.18em] text-vae-turquoise/80">Ausbildung</p>
+                    <p className="mt-1 text-text-light dark:text-white">{member.education}</p>
+                  </div>
+                </div>
                 <div className="mt-auto space-y-2 text-left text-sm">
-                  <a
-                    href={`mailto:${f.email}`}
-                    className="flex items-center text-vae-turquoise transition-colors hover:text-text-light dark:hover:text-white"
-                  >
-                    <Icon name="forward_to_inbox" className="mr-2" />
-                    <span>{f.email}</span>
-                  </a>
-                  <a
-                    href={f.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-text-muted transition-colors hover:text-text-light dark:text-white/60 dark:hover:text-white"
-                  >
-                    <Icon name="link" className="mr-2" />
-                    <span>LinkedIn</span>
-                  </a>
+                  {member.email && (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="flex items-center text-vae-turquoise transition-colors hover:text-text-light dark:hover:text-white"
+                    >
+                      <Icon name="forward_to_inbox" className="mr-2" />
+                      <span>{member.email}</span>
+                    </a>
+                  )}
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-text-muted transition-colors hover:text-text-light dark:text-white/60 dark:hover:text-white"
+                    >
+                      <Icon name="link" className="mr-2" />
+                      <span>LinkedIn</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

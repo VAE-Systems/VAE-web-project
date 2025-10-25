@@ -62,12 +62,12 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
             className={`inline-block rounded-[2rem] px-8 py-6 backdrop-blur-md ${isLight ? 'border border-black/10 bg-white/85 shadow-[0_8px_40px_-18px_rgba(0,0,0,0.25)] ring-1 ring-black/10' : 'border border-vae-turquoise/30 bg-[linear-gradient(160deg,rgba(0,15,12,0.92),rgba(0,32,26,0.78))] shadow-[0_0_60px_-18px_rgba(var(--vae-turquoise-rgb),0.5)] ring-1 ring-vae-turquoise/25'}`}
           >
             <h1 className="h1 fluid-h1 mb-4">
-              <span className="block text-text-light">Services & Expertise</span>
-              <span className="block text-vae-turquoise">für nachhaltige KI-Infrastruktur.</span>
+              <span className="block text-text-light">Services & Betreuung</span>
+              <span className="block text-vae-turquoise">für Ihre digitale Arbeitsumgebung.</span>
             </h1>
             <p className="mx-auto max-w-3xl text-lg leading-relaxed text-text-secondary/90 md:text-xl">
-              Von Analyse über Implementierung bis Lifecycle-Optimierung – modulare Service-Pakete für souveräne, lokale
-              und skalierbare Automatisierung.
+              Wir richten Ihre Open-Source-Infrastruktur ein, erweitern sie mit AI-Workflows und betreuen alle Systeme
+              langfristig. Transparent, dokumentiert und immer mit Fokus auf messbaren Geschäftsnutzen.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-6 text-vae-turquoise sm:gap-8">
@@ -87,22 +87,25 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
           {/* CTA Block (aligned with main landing hero style) */}
           <div className="space-y-5">
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <Link
+                to="/testphase"
+                className="btn-primary flex flex-1 items-center justify-center text-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
+              >
+                <Icon name="auto_awesome" className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
+                3-Monate Testphase starten
+              </Link>
               <CtaLink
                 ctaId="contact.schedule_call"
                 ctx={{ fromPage: 'services', intent: 'strategy-call' }}
-                className="btn-primary flex flex-1 items-center justify-center text-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
-                data-green-signal="true"
+                className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${
+                  isLight
+                    ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80'
+                    : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'
+                }`}
               >
                 <Icon name="schedule" className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
-                30‑Min Strategie‑Gespräch buchen
+                Strategiegespräch vereinbaren
               </CtaLink>
-              <Link
-                to="/products"
-                className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
-              >
-                <Icon name="apps" className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
-                Produkte & Plattform
-              </Link>
               <a
                 href="#categories"
                 className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
@@ -113,21 +116,27 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
             </div>
             <div className="flex flex-wrap justify-center gap-2">
               <Link
-                to="/services/custom-solutions"
+                to="/infrastruktur"
                 className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
               >
-                Custom Solutions
+                Infrastruktur Setup
               </Link>
               <Link
-                to="/products/vae-core"
+                to="/ki-optimierung"
                 className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
               >
-                VAE CORE Architektur
+                AI-Workflows
+              </Link>
+              <Link
+                to="/betreuung"
+                className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
+              >
+                Betreuung & Ausbau
               </Link>
             </div>
             <p className="mx-auto max-w-md text-[11px] leading-relaxed text-text-muted/80">
-              In <span className="font-medium text-text-secondary">15–30 Minuten</span> klären wir Zielbild, Reifegrad &
-              nächste sinnvolle Schritte – kein Pitch, klare Einordnung.
+              Testphase: <span className="font-medium text-text-secondary">€89/Monat</span> für die reinen Serverkosten.
+              Danach frei wählbar: Vollservice für €289/Monat oder kostenfrei beenden.
             </p>
           </div>
         </div>

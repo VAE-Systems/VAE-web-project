@@ -29,25 +29,25 @@ export const manifestConfig = {
     {
       name: 'Services',
       shortName: 'Services',
-      description: 'KI-Services & Consulting entdecken',
+      description: 'Consulting-Portfolio entdecken',
       url: '/services',
     },
     {
-      name: 'VAE CORE',
-      shortName: 'VAE CORE',
-      description: 'Enterprise KI-Plattform',
-      url: '/products/vae-core',
+      name: 'Lösungen',
+      shortName: 'Lösungen',
+      description: 'Open Source Infrastruktur & AI Automation',
+      url: '/solutions',
     },
     {
-      name: 'Re: Suite',
-      shortName: 'Re: Suite',
-      description: 'Modulare KI-Bausteine',
-      url: '/products/solutions', // Based on reSuite.ts content
+      name: 'Über uns',
+      shortName: 'Über uns',
+      description: 'Team & Arbeitsweise kennenlernen',
+      url: '/about',
     },
     {
       name: 'Kontakt',
       shortName: 'Kontakt',
-      description: '30-Min Strategie-Gespräch',
+      description: '30-Min Strategie-Gespräch vereinbaren',
       url: '/contact',
     },
   ],
@@ -88,14 +88,14 @@ export const manifestConfig = {
       sizes: '390x844', // iPhone 12/13/14 dimensions
       type: 'image/png',
       platform: 'narrow',
-      label: 'Services-Übersicht: Consulting, Training, Custom Solutions',
+      label: 'Services-Übersicht: Beratung, Infrastruktur, Automation',
     },
     {
       src: '/screenshots/vae-core-overview.png',
       sizes: '1280x720',
       type: 'image/png',
       platform: 'wide',
-      label: 'VAE CORE - Enterprise KI-Plattform Dashboard',
+      label: 'Open Source Infrastruktur & AI Automation Cockpit',
     },
   ],
 }

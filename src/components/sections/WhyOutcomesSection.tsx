@@ -68,11 +68,13 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
         <div className="mx-auto max-w-6xl">
           <header className="mb-14 max-w-3xl" data-heading-accent>
             <h2 id="why-heading" className="fluid-h2 heading-fix mb-6 font-bold text-text-light dark:text-white">
-              {tagline}
+              Warum Unternehmen sich für VAE entscheiden
             </h2>
             <div className="heading-accent-bar mb-6 h-[3px] w-40 rounded-full bg-gradient-to-r from-vae-turquoise to-transparent" />
+            <p className="text-lg leading-relaxed text-text-secondary md:text-xl">{tagline}</p>
             <p className="text-lg leading-relaxed text-text-secondary md:text-xl">
-              Was Kunden konkret gewinnen – und die Prinzipien, die das ermöglichen.
+              Die Ergebnisse stammen aus unserem eigenen Betrieb und Kundenprojekten: Open-Source-Infrastruktur,
+              Automatisierung und Betreuung greifen ineinander.
             </p>
           </header>
           <div className="grid items-start gap-12 lg:grid-cols-3">

@@ -1,12 +1,12 @@
 export const productsHeroContent = {
   title: {
-    main: 'Modulare KI-Produkte',
-    sub: 'vom Kernel bis zur Plattform.',
+    main: 'Consulting Solutions',
+    sub: 'für Ihre Open-Source Arbeitsumgebung.',
   },
   description:
-    'Bausteine, Integrationslayer und vollständige Workflows: Stellen Sie sich Ihre lokale, souveräne KI-Infrastruktur zusammen – exakt so weit automatisiert wie Ihr aktueller Reifegrad es zulässt.',
+    'Pakete für Infrastruktur-Setup, AI-Optimierung und Betreuung: wählen Sie den Einstiegspunkt, der zu Ihrem Reifegrad passt – ohne Lock-in und mit klaren Ergebnissen.',
   buttons: {
-    discover: 'Produkte entdecken',
-    consult: 'Beratung starten',
+    discover: 'Lösungen ansehen',
+    consult: 'Testphase sichern',
   },
 }

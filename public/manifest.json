@@ -14,7 +14,7 @@
     {
       "name": "Services",
       "short_name": "Services",
-      "description": "KI-Services & Consulting entdecken",
+      "description": "Consulting-Portfolio entdecken",
       "url": "/services",
       "icons": [
         {
@@ -25,10 +25,10 @@
       ]
     },
     {
-      "name": "VAE CORE",
-      "short_name": "VAE CORE",
-      "description": "Enterprise KI-Plattform",
-      "url": "/products/vae-core",
+      "name": "Lösungen",
+      "short_name": "Lösungen",
+      "description": "Open Source Infrastruktur & AI Automation",
+      "url": "/solutions",
       "icons": [
         {
           "src": "/App_Logo_light.svg",
@@ -38,10 +38,10 @@
       ]
     },
     {
-      "name": "Re: Suite",
-      "short_name": "Re: Suite",
-      "description": "Modulare KI-Bausteine (Re:spond, Re:search, Re:port)",
-      "url": "/products/solutions",
+      "name": "Über uns",
+      "short_name": "Über uns",
+      "description": "Team & Arbeitsweise kennenlernen",
+      "url": "/about",
       "icons": [
         {
           "src": "/App_Logo_light.svg",
@@ -51,9 +51,9 @@
       ]
     },
     {
-      "name": "Strategie-Call",
+      "name": "Kontakt",
       "short_name": "Kontakt",
-      "description": "30-Min Strategie-Gespräch buchen",
+      "description": "30-Min Strategie-Gespräch vereinbaren",
       "url": "/contact",
       "icons": [
         {
@@ -97,14 +97,14 @@
       "sizes": "390x844",
       "type": "image/png",
       "platform": "narrow",
-      "label": "Services: Consulting, Training, Custom Solutions"
+      "label": "Services: Beratung, Infrastruktur, Automation"
     },
     {
       "src": "/screenshots/vae-core-dashboard.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide",
-      "label": "VAE CORE Enterprise KI-Plattform Dashboard"
+      "label": "Open Source Infrastruktur & AI Automation Cockpit"
     }
   ]
 }

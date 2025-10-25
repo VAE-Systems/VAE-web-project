@@ -9,8 +9,8 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Produkte & Plattform – VAE Systems',
-    about: 'Komplettlösungen, Applikationen, Plattform (VAE CORE) und Showcases',
+    name: 'Consulting Solutions – VAE Systems',
+    about: 'Infrastruktur-Setup, AI-Optimierung, Betreuung und VAE CORE',
     isPartOf: { '@type': 'WebSite', name: 'VAE Systems', url: 'https://www.vae-systems.com' },
   },
   {
@@ -18,7 +18,7 @@ const jsonLd = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.vae-systems.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Produkte & Plattform', item: 'https://www.vae-systems.com/products' },
+      { '@type': 'ListItem', position: 2, name: 'Consulting Solutions', item: 'https://www.vae-systems.com/solutions' },
     ],
   },
 ]
@@ -27,15 +27,15 @@ const ProductsPage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
       <Seo
-        title="Produkte & Plattform | VAE Systems – Lösungen, Module, Plattform"
-        description="VAE Systems Produkt-Suite: Komplettlösungen, Applikationen, VAE Core Plattform und reale Showcases. Modular, nachvollziehbar, souverän betreibbar."
-        canonicalPath="/products"
+        title="Consulting Solutions | VAE Systems"
+        description="Lösungen und Pakete für Infrastruktur-Setup, AI-Optimierung und Betreuung – kombiniert mit VAE CORE für maximale Souveränität."
+        canonicalPath="/solutions"
         jsonLd={jsonLd}
       />
       <Breadcrumbs
         items={[
           { label: 'Home', path: '/' },
-          { label: 'Produkte & Plattform', path: '/products' },
+          { label: 'Consulting Solutions', path: '/solutions' },
         ]}
       />
       <ProductsHeroSection />

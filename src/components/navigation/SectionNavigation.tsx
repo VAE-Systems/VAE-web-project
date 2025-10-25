@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react'
 import Icon from '@/components/ui/Icon'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import React, { useCallback, useEffect, useState } from 'react'
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollToPlugin)
@@ -15,15 +15,11 @@ interface SectionData {
 // Reihenfolge an neue Homepage-Story angepasst
 const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
-  { id: 'outcomes', iconName: 'insights', label: 'Outcomes' },
-  { id: 'case-studies', iconName: 'work', label: 'Cases' },
+  { id: 'testphase', iconName: 'workspace_premium', label: 'Testphase' },
+  { id: 'outcomes', iconName: 'insights', label: 'Ergebnisse' },
   { id: 'services', iconName: 'settings', label: 'Services' },
   { id: 'process', iconName: 'timeline', label: 'Prozess' },
-  { id: 'products', iconName: 'inventory_2', label: 'Produkte' },
-  { id: 'tech-stack', iconName: 'code', label: 'Tech' },
-  { id: 'about', iconName: 'people', label: 'Über Uns' },
-  { id: 'faq', iconName: 'help_outline', label: 'FAQ' },
-  { id: 'contact', iconName: 'email', label: 'Kontakt' },
+  { id: 'abschluss', iconName: 'check_circle', label: 'Nächste Schritte' },
 ]
 
 /**
@@ -106,7 +102,7 @@ const SectionNavigation: React.FC = () => {
                 onClick={() => scrollToSection(section.id)}
                 onMouseDown={e => e.preventDefault()} // Verhindert focus ring
                 className={`
-                  hover-lift press-bounce relative flex 
+                  hover-lift press-bounce relative flex
                   h-12 w-12 items-center justify-center
                   rounded-full border outline-none
                   backdrop-blur-xl transition-all duration-150 hover:-translate-x-1

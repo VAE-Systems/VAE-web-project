@@ -798,29 +798,73 @@ body.using-keyboard *:focus {
 
   /* VAE Navigation Components */
   .nav-link {
-    @apply font-medium text-text-secondary transition-colors duration-300;
+    @apply relative inline-flex items-center gap-1 border-b-2 border-transparent px-0 py-2 font-semibold text-text-secondary transition-colors duration-300;
   }
-  .nav-link.active {
+  .nav-link-text {
+    line-height: 1;
+  }
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    @apply text-text-light;
+  }
+  .nav-link--active {
+    color: hsl(var(--color-vae-turquoise));
+    border-color: hsl(var(--color-vae-turquoise));
+  }
+  .nav-link--active .nav-link-text {
+    color: inherit;
+  }
+  .nav-testphase {
+    @apply inline-flex items-center gap-2 rounded-xl font-semibold text-white;
+    background: linear-gradient(135deg, hsl(var(--color-vae-turquoise)), #00d488);
+    padding: 0.55rem 1.4rem;
+    letter-spacing: 0.01em;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      filter 0.25s ease;
+  }
+  .nav-testphase:hover,
+  .nav-testphase:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 32px -12px hsla(var(--color-vae-turquoise), 0.45);
+  }
+  .nav-testphase--active {
+    box-shadow: 0 16px 36px -12px hsla(var(--color-vae-turquoise), 0.55);
+  }
+  .dropdown-menu {
+    min-width: 220px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+  .dropdown-link {
+    @apply flex items-center justify-between rounded-lg px-3 py-2 font-medium text-text-secondary transition-all duration-300;
+    font-size: 0.95rem;
+  }
+  .dropdown-link:hover,
+  .dropdown-link:focus-visible {
+    @apply text-text-light;
+    background-color: hsla(var(--color-vae-turquoise), 0.1);
+  }
+  .dropdown-link--active {
+    background: linear-gradient(135deg, hsl(var(--color-vae-turquoise) / 0.92), hsl(var(--color-vae-turquoise) / 0.82));
+    color: white;
+    box-shadow: 0 14px 28px -14px hsla(var(--color-vae-turquoise), 0.55);
+  }
+  .dropdown-link--secondary {
+    @apply font-semibold uppercase text-text-muted;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    padding-top: 0.75rem;
+  }
+  .dropdown-link--secondary:hover,
+  .dropdown-link--secondary:focus-visible {
     @apply text-vae-turquoise;
   }
-  /* Light mode: underline only the textual part of nav links (icons remain untouched) */
-  .theme-light .nav-link:hover {
-    color: hsl(var(--color-text-secondary));
-  }
-  .theme-light .nav-link:hover .nav-link-text {
-    text-decoration-line: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 6px;
-    text-decoration-color: hsl(var(--color-vae-turquoise));
-  }
-  .theme-light .nav-link.active {
-    color: hsl(var(--color-text-light));
-  }
-  .theme-light .nav-link.active .nav-link-text {
-    text-decoration-line: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 6px;
-    text-decoration-color: hsl(var(--color-vae-turquoise));
+  .nav-link:focus-visible,
+  .nav-testphase:focus-visible,
+  .dropdown-link:focus-visible {
+    outline: 2px solid hsla(var(--color-vae-turquoise), 0.6);
+    outline-offset: 3px;
   }
 
   /* Focus Ring Helper */

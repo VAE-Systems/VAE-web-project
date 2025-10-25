@@ -1,23 +1,24 @@
-import React, { useEffect, useRef } from 'react'
 import CtaLink from '@/components/ui/CtaLink'
+import Icon from '@/components/ui/Icon'
+import Reveal from '@/components/ui/Reveal'
+import { useScrollScrub } from '@/hooks/useScrollScrub'
+import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import SpotlightCard from '../ui/SpotlightCard'
-import Icon from '@/components/ui/Icon'
-import ServicesHeroSection from '../sections/ServicesHeroSection'
-import Seo from '../ui/Seo'
-import Breadcrumbs from '../navigation/Breadcrumbs'
-import Reveal from '@/components/ui/Reveal'
-import { motion } from 'framer-motion'
-import { useScrollScrub } from '@/hooks/useScrollScrub'
 import {
-  servicesLifecycle,
-  lifecycleBenefits,
-  servicesCategories,
   comparisonMatrix,
   finalCta,
+  lifecycleBenefits,
+  servicesCategories,
+  servicesLifecycle,
 } from '../../content/services'
+import Breadcrumbs from '../navigation/Breadcrumbs'
+import ServicesHeroSection from '../sections/ServicesHeroSection'
+import MagneticButton from '../ui/buttons/MagneticButton'
+import Seo from '../ui/Seo'
+import SpotlightCard from '../ui/SpotlightCard'
 const FAQSection = React.lazy(() => import('../sections/FAQSection'))
 /**
  * ServicesPage Component
@@ -52,8 +53,8 @@ const ServicesPage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
       <Seo
-        title="Services | VAE Systems – Schulungen, Beratung, Individuelle Lösungen"
-        description="Schulungen & Workshops, strategische Beratung & individuelle KI-/Automationslösungen. Von Analyse bis Umsetzung – souverän & nachvollziehbar."
+        title="Services | Arbeitsinfrastruktur, AI-Optimierung & Betreuung"
+        description="Wir richten Ihre Open-Source-Arbeitsinfrastruktur ein, optimieren Prozesse mit KI und betreuen Systeme langfristig. Transparente Kosten, dokumentierte Ergebnisse."
         canonicalPath="/services"
         jsonLd={[{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'VAE Services' }]}
       />
@@ -72,9 +73,9 @@ const ServicesPage: React.FC = () => {
             <p className="mb-5 text-lg leading-relaxed text-text-secondary">{servicesLifecycle.description1}</p>
             <p className="mb-5 text-sm leading-relaxed text-text-secondary">{servicesLifecycle.description2}</p>
             <p className="text-sm leading-relaxed text-text-secondary">
-              {servicesLifecycle.platformLink}{' '}
-              <Link to="/products" className="text-vae-turquoise hover:underline">
-                Products
+              Weitere Details zur Plattform finden Sie auf der{' '}
+              <Link to="/vae-core" className="text-vae-turquoise hover:underline">
+                VAE CORE Seite
               </Link>
               .
             </p>
@@ -141,17 +142,17 @@ const ServicesPage: React.FC = () => {
             <p className="text-lg leading-relaxed text-text-secondary">{comparisonMatrix.subtitle}</p>
           </header>
           <div className="-mx-2 overflow-x-auto px-2">
-            <div className="border-border-primary bg-bg-primary/3 relative grid min-w-[860px] grid-cols-[160px_repeat(3,1fr)] rounded-2xl border dark:border-white/10 dark:bg-white/[0.03]">
+            <div className="border-border-primary bg-bg-primary/3 relative grid min-w-[960px] grid-cols-[180px_repeat(4,1fr)] rounded-2xl border dark:border-white/10 dark:bg-white/[0.03]">
               {/* Column Headers */}
               <div className="border-border-primary border-b p-3 text-[11px] uppercase tracking-wide text-text-muted/70 dark:border-white/10">
                 Kriterium
               </div>
-              {['Schulungen & Workshops', 'Beratung', 'Custom Solutions'].map(h => (
+              {comparisonMatrix.columns.map(col => (
                 <div
-                  key={h}
+                  key={col.key}
                   className="border-border-primary from-bg-primary/10 border-b bg-gradient-to-b to-transparent p-3 text-[11px] font-semibold uppercase tracking-wide text-text-light backdrop-blur-sm dark:border-white/10 dark:from-white/10 dark:text-white"
                 >
-                  {h}
+                  {col.label}
                 </div>
               ))}
               {comparisonMatrix.criteria.map((r, i, arr) => (
@@ -161,21 +162,27 @@ const ServicesPage: React.FC = () => {
                   >
                     {r.label}
                   </div>
-                  {[r.trainings, r.consulting, r.custom].map((val, ci) => (
-                    <div
-                      className={`border-border-primary group relative border-t p-4 text-xs leading-relaxed text-text-secondary dark:border-white/5 ${i === arr.length - 1 && ci === 2 ? 'rounded-br-2xl' : ''}`}
-                      aria-label={`${r.label} für ${['Schulungen & Workshops', 'Beratung', 'Custom Solutions'][ci]}: ${val}`}
-                    >
-                      <div className="duration-400 pointer-events-none absolute inset-0 bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)] opacity-0 transition-opacity group-hover:opacity-100" />
-                      <span className="relative z-10">{val}</span>
-                    </div>
-                  ))}
+                  {comparisonMatrix.columns.map((col, ci) => {
+                    const val = (r as Record<string, string>)[col.key] ?? '—'
+                    const isLastCell = i === arr.length - 1 && ci === comparisonMatrix.columns.length - 1
+                    return (
+                      <div
+                        key={col.key}
+                        className={`border-border-primary group relative border-t p-4 text-xs leading-relaxed text-text-secondary dark:border-white/5 ${isLastCell ? 'rounded-br-2xl' : ''}`}
+                        aria-label={`${r.label} für ${col.label}: ${val}`}
+                      >
+                        <div className="duration-400 pointer-events-none absolute inset-0 bg-[radial-gradient(380px_circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_70%)] opacity-0 transition-opacity group-hover:opacity-100" />
+                        <span className="relative z-10">{val}</span>
+                      </div>
+                    )
+                  })}
                 </React.Fragment>
               ))}
               {/* Vertical Separators: exakt an den Grid-Spalten */}
-              <div className="bg-border-primary/20 pointer-events-none absolute bottom-0 left-[160px] top-[40px] w-px dark:bg-white/5" />
-              <div className="bg-border-primary/20 pointer-events-none absolute bottom-0 left-[calc(160px+((100%-160px)/3))] top-[40px] w-px dark:bg-white/5" />
-              <div className="bg-border-primary/20 pointer-events-none absolute bottom-0 left-[calc(160px+2*((100%-160px)/3))] top-[40px] w-px dark:bg-white/5" />
+              <div className="bg-border-primary/20 pointer-events-none absolute bottom-0 left-[180px] top-[40px] w-px dark:bg-white/5" />
+              <div className="bg-border-primary/20 pointer-events-none absolute bottom-0 left-[calc(180px+((100%-180px)/4))] top-[40px] w-px dark:bg-white/5" />
+              <div className="bg-border-primary/20 pointer-events-none absolute bottom-0 left-[calc(180px+2*((100%-180px)/4))] top-[40px] w-px dark:bg-white/5" />
+              <div className="bg-border-primary/20 pointer-events-none absolute bottom-0 left-[calc(180px+3*((100%-180px)/4))] top-[40px] w-px dark:bg-white/5" />
             </div>
           </div>
           <div className="mt-8 max-w-4xl space-y-2 text-[11px] text-text-muted">
@@ -191,24 +198,36 @@ const ServicesPage: React.FC = () => {
           <h2 className="h2 h-space text-text-light">{finalCta.title}</h2>
           <p className="mb-10 text-lg text-text-secondary">{finalCta.subtitle}</p>
           <div className="mb-10 flex flex-col justify-center gap-4 sm:flex-row">
-            {finalCta.buttons.map(btn =>
-              btn.primary ? (
-                <Link key={btn.text} to={btn.to || '/contact'} className={`btn-primary px-8 py-4`}>
-                  {btn.text}
-                </Link>
-              ) : (
-                <a
-                  key={btn.text}
-                  href={btn.href || '#'}
-                  className="btn-secondary px-8 py-4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${btn.text}`}
-                >
-                  {btn.text}
-                </a>
+            {finalCta.buttons.map(btn => {
+              const destination = btn.to ?? '#'
+              const isExternal = /^https?:\/\//.test(destination) || destination.startsWith('mailto:')
+
+              const buttonClass = btn.primary ? 'btn-primary px-8 py-4' : 'btn-secondary px-8 py-4'
+
+              return (
+                <MagneticButton key={btn.text} className="w-full sm:w-auto">
+                  {isExternal ? (
+                    <a
+                      href={destination}
+                      className={`${buttonClass} inline-flex w-full items-center justify-center text-center`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={btn.text}
+                    >
+                      {btn.text}
+                    </a>
+                  ) : (
+                    <Link
+                      to={destination}
+                      className={`${buttonClass} inline-flex w-full items-center justify-center text-center`}
+                      aria-label={btn.text}
+                    >
+                      {btn.text}
+                    </Link>
+                  )}
+                </MagneticButton>
               )
-            )}
+            })}
           </div>
           {/* Added consulting direct mail CTAs */}
           <div className="mb-8 grid gap-4 text-left md:grid-cols-2" aria-label="Direkte Beratungs-Anfragen">

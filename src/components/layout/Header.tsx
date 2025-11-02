@@ -9,7 +9,7 @@ import {
   Sun,
   X,
 } from 'lucide-react'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import CtaLink from '@/components/ui/CtaLink'
@@ -27,10 +27,18 @@ interface NavigationDropdownItem {
   meta?: string
 }
 
+interface NavigationDropdownIntro {
+  eyebrow?: string
+  badgeLabel?: string
+  badgeVariant?: 'accent' | 'neutral' | 'soft'
+}
+
 interface NavigationItem {
   label: string
   path?: string
   dropdown?: NavigationDropdownItem[]
+  dropdownIntro?: NavigationDropdownIntro
+  dropdownFooter?: { label: string; path: string }
   highlight?: boolean
 }
 
@@ -38,34 +46,54 @@ const navigation: NavigationItem[] = [
   { label: 'Home', path: '/' },
   {
     label: 'Services',
+    dropdownIntro: { eyebrow: 'Service-Suite', badgeLabel: 'Delivery orchestriert', badgeVariant: 'accent' },
+    dropdownFooter: { label: 'Alle Services', path: '/services' },
     dropdown: [
       {
         label: 'Infrastruktur Setup',
         path: '/infrastruktur',
-        description: 'Produktionsreife Nextcloud-Suite, Governance & Security Framework – fertig dokumentiert.',
+        description: 'Produktionsreife Nextcloud-Suite mit Governance, Compliance-Layer und Dokumentation.',
         icon: 'architecture',
-        meta: 'Setup · 2–4 Wochen',
+        meta: 'Foundation · 2–4 Wochen',
       },
       {
         label: 'AI-Workflow Optimierung',
         path: '/ki-optimierung',
-        description: 'Automatisierte Prozesse, Retrieval-Pipelines und KPI-Dashboards für messbare Effekte.',
+        description: 'Retrieval-Augmented Prozesse, orchestrierte Agenten und KPI-Telemetrie in Echtzeit.',
         icon: 'auto_awesome',
-        meta: 'AI · 3–6 Wochen',
+        meta: 'Automation · 3–6 Wochen',
       },
       {
         label: 'Langzeit-Betreuung',
         path: '/betreuung',
-        description: 'Release-Planung, Security-Checks und technischer Support im laufenden Betrieb.',
+        description: 'Lifecycle-Steuerung, Security-Screenings und technischer Support im laufenden Betrieb.',
         icon: 'support_agent',
         meta: 'Care · Laufend',
       },
     ],
   },
   { label: 'VAE CORE', path: '/vae-core' },
+  {
+    label: 'Ressourcen',
+    dropdownIntro: { eyebrow: 'Guided Experience', badgeLabel: 'Direkter Draht', badgeVariant: 'soft' },
+    dropdown: [
+      {
+        label: 'Über uns',
+        path: '/about',
+        description: 'Team, Prinzipien und Architektur-Standards des VAE-Kollektivs.',
+        icon: 'insights',
+        meta: 'Inside VAE',
+      },
+      {
+        label: 'Kontakt',
+        path: '/kontakt',
+        description: 'Schneller Zugang zu unserem Core-Team für Beratung & Workshops.',
+        icon: 'forward_to_inbox',
+        meta: 'Kontakt',
+      },
+    ],
+  },
   { label: '3-Monate Testphase', path: '/testphase', highlight: true },
-  { label: 'Über uns', path: '/about' },
-  { label: 'Kontakt', path: '/kontakt' },
 ]
 
 const Header: React.FC = () => {
@@ -73,11 +101,13 @@ const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme()
 
   const [isScrolled, setIsScrolled] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState<string | null>(null)
 
-  const servicesTriggerRef = useRef<HTMLButtonElement>(null)
-  const servicesDropdownRef = useRef<HTMLDivElement>(null)
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({})
+  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({})
+  const focusTrapRef = useRef<HTMLDivElement | null>(null)
+  const activeDropdownRef = useRef<string | null>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
 
   const {
@@ -96,38 +126,68 @@ const Header: React.FC = () => {
 
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const openServicesMenu = useCallback(() => {
+  const clearHoverTimer = useCallback(() => {
     if (hoverTimer.current) {
       clearTimeout(hoverTimer.current)
       hoverTimer.current = null
     }
-    setServicesOpen(true)
   }, [])
 
-  const closeServicesMenu = useCallback(() => {
-    if (hoverTimer.current) {
-      clearTimeout(hoverTimer.current)
-      hoverTimer.current = null
-    }
-    setServicesOpen(false)
-  }, [])
+  const handleOpenDropdown = useCallback(
+    (label: string) => {
+      clearHoverTimer()
+      setOpenDropdown(label)
+    },
+    [clearHoverTimer]
+  )
 
-  const scheduleServicesClose = useCallback((delay = 160) => {
-    if (hoverTimer.current) {
-      clearTimeout(hoverTimer.current)
-    }
-    hoverTimer.current = setTimeout(() => {
-      setServicesOpen(false)
-      hoverTimer.current = null
-    }, delay)
-  }, [])
+  const closeDropdown = useCallback(() => {
+    clearHoverTimer()
+    setOpenDropdown(null)
+  }, [clearHoverTimer])
+
+  const scheduleDropdownClose = useCallback(
+    (delay = 160) => {
+      clearHoverTimer()
+      hoverTimer.current = setTimeout(() => {
+        setOpenDropdown(null)
+        hoverTimer.current = null
+      }, delay)
+    },
+    [clearHoverTimer]
+  )
+
+  const registerTriggerRef = useCallback(
+    (label: string) => (node: HTMLButtonElement | null) => {
+      triggerRefs.current[label] = node
+    },
+    []
+  )
+
+  const registerDropdownRef = useCallback(
+    (label: string) => (node: HTMLDivElement | null) => {
+      dropdownRefs.current[label] = node
+      if (openDropdown === label) {
+        focusTrapRef.current = node
+      }
+    },
+    [openDropdown]
+  )
+
+  useEffect(() => {
+    activeDropdownRef.current = openDropdown
+    focusTrapRef.current = openDropdown ? (dropdownRefs.current[openDropdown] ?? null) : null
+  }, [openDropdown])
 
   useFocusTrap(
-    servicesOpen,
-    servicesDropdownRef,
+    Boolean(openDropdown),
+    focusTrapRef,
     () => {
-      closeServicesMenu()
-      servicesTriggerRef.current?.focus()
+      const label = activeDropdownRef.current
+      closeDropdown()
+      if (label && triggerRefs.current[label]) {
+        triggerRefs.current[label]?.focus()
+      }
     },
     { initialFocus: 'first' }
   )
@@ -141,40 +201,45 @@ const Header: React.FC = () => {
   })
 
   useEffect(() => {
-    if (!servicesOpen) return
+    if (!openDropdown) return
 
     const handleClick = (event: MouseEvent) => {
       const target = event.target as Node
-      if (
-        servicesDropdownRef.current &&
-        !servicesDropdownRef.current.contains(target) &&
-        !servicesTriggerRef.current?.contains(target)
-      ) {
-        closeServicesMenu()
+      const dropdownEl = dropdownRefs.current[openDropdown]
+      const triggerEl = triggerRefs.current[openDropdown]
+
+      if (dropdownEl && dropdownEl.contains(target)) {
+        return
       }
+
+      if (triggerEl && triggerEl.contains(target)) {
+        return
+      }
+
+      closeDropdown()
     }
 
     document.addEventListener('mousedown', handleClick)
     return () => document.removeEventListener('mousedown', handleClick)
-  }, [servicesOpen, closeServicesMenu])
+  }, [openDropdown, closeDropdown])
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 48)
       if (window.scrollY > 48) {
-        closeServicesMenu()
+        closeDropdown()
       }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [closeServicesMenu])
+  }, [closeDropdown])
 
   useEffect(() => {
     closeMobileMenu()
-    closeServicesMenu()
+    closeDropdown()
     setMobileDropdownOpen(null)
-  }, [location.pathname, location.hash, closeMobileMenu, closeServicesMenu])
+  }, [location.pathname, location.hash, closeMobileMenu, closeDropdown])
 
   const isPathActive = useCallback(
     (path: string) => {
@@ -200,33 +265,45 @@ const Header: React.FC = () => {
 
   const mobileMenuVisible = isMobileMenuOpen
 
+  const primaryDesktopItems = useMemo(() => navigation.filter(item => !item.highlight), [])
+  const highlightDesktopItems = useMemo(() => navigation.filter(item => item.highlight), [])
+
+  const isDarkMode = theme === 'dark'
+  const baseHeaderSurface = isDarkMode
+    ? isScrolled
+      ? 'border-white/12 bg-bg-darker/85 shadow-[0_26px_58px_-30px_rgba(8,12,24,0.85)]'
+      : 'border-white/10 bg-bg-darker/60 shadow-[0_32px_64px_-36px_rgba(8,12,24,0.7)]'
+    : isScrolled
+      ? 'border-white/70 bg-white/90 shadow-[0_30px_70px_-28px_rgba(15,23,42,0.35)]'
+      : 'border-white/50 bg-white/60 shadow-[0_34px_72px_-36px_rgba(15,23,42,0.3)]'
+  const headerClassName = `fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-2xl backdrop-saturate-150 transition-[background-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${baseHeaderSurface}`
+
+  const navPillSurface = isDarkMode
+    ? 'bg-white/[0.04] border-white/[0.1] backdrop-blur-xl shadow-[0_26px_58px_-32px_rgba(8,12,24,0.85)]'
+    : 'bg-white/80 border-white/70 backdrop-blur-lg shadow-[0_28px_60px_-32px_rgba(15,23,42,0.35)]'
+
   const handleMobileNavClick = useCallback(() => {
     closeMobileMenu()
+    closeDropdown()
     setMobileDropdownOpen(null)
-  }, [closeMobileMenu])
+  }, [closeMobileMenu, closeDropdown])
 
   return (
-    <header
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? `${theme === 'light' ? 'bg-white/85' : 'bg-bg-darker/85'} backdrop-glass border-b ${theme === 'light' ? 'border-black/10' : 'border-vae-turquoise/30'} shadow-[0_22px_48px_-36px_rgba(15,23,42,0.65)]`
-          : `border-b bg-transparent ${theme === 'light' ? 'border-black/10' : 'border-vae-turquoise/10'} shadow-[0_18px_42px_-36px_rgba(15,23,42,0.45)]`
-      }`}
-    >
+    <header className={headerClassName}>
       <div className="container-vae relative">
-        <div className="flex h-16 items-center justify-between md:h-20">
-          <Link to="/" className="group flex items-center gap-4 pr-2" onClick={handleMobileNavClick}>
-            <div className="group-hover:glow-turquoise relative h-14 transition-all duration-300 sm:h-16">
+        <div className="flex h-[68px] items-center justify-between gap-3 md:h-[86px]">
+          <Link to="/" className="group flex items-center gap-5 pr-2" onClick={handleMobileNavClick}>
+            <div className="group-hover:glow-turquoise relative h-16 transition-all duration-300 sm:h-[70px] md:h-20">
               <img
                 src="/App_Logo_light.svg"
                 alt="VAE Systems Logo"
-                className="light-invert h-full w-auto drop-shadow-[0_10px_28px_rgba(45,212,191,0.22)]"
+                className="light-invert h-full w-auto drop-shadow-[0_18px_44px_rgba(45,212,191,0.24)]"
                 loading="eager"
                 decoding="async"
               />
             </div>
-            <div className="hidden border-l border-vae-turquoise/25 pl-4 md:block">
-              <div className="space-y-1 text-[10px] uppercase tracking-[0.35em] text-vae-turquoise/70">
+            <div className="hidden border-l border-vae-turquoise/30 pl-5 md:block">
+              <div className="space-y-1 text-[10px] uppercase tracking-[0.35em] text-vae-turquoise/80">
                 <div className="text-[11px] font-semibold tracking-[0.28em] text-vae-turquoise">Versatile AI</div>
                 <div className="text-[11px] font-semibold tracking-[0.28em] text-vae-turquoise">Enhanced</div>
                 <div className="text-[11px] font-semibold tracking-[0.28em] text-vae-turquoise">Systems</div>
@@ -234,168 +311,172 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          <nav className="relative hidden items-center space-x-6 md:flex xl:space-x-10">
-            {navigation.map(item => {
-              const isActive = isNavItemActive(item)
+          <div className="hidden flex-1 items-center justify-center md:flex">
+            <div className="flex items-center gap-3 xl:gap-4">
+              <nav className="relative">
+                <div
+                  className={`inline-flex items-center gap-1 rounded-full border px-2 py-1 transition-all duration-500 ${navPillSurface}`}
+                >
+                  {primaryDesktopItems.map(item => {
+                    const isActive = isNavItemActive(item)
 
-              if (item.dropdown?.length) {
-                return (
-                  <div
-                    key={item.label}
-                    className="relative"
-                    onMouseEnter={openServicesMenu}
-                    onMouseLeave={() => scheduleServicesClose()}
-                  >
-                    <button
-                      type="button"
-                      ref={servicesTriggerRef}
-                      className={`nav-link flex items-center gap-1 ${isActive ? 'nav-link--active' : ''}`}
-                      aria-haspopup="menu"
-                      aria-expanded={servicesOpen}
-                      aria-controls="services-menu"
-                      onFocus={openServicesMenu}
-                      onBlur={() => scheduleServicesClose()}
-                      onClick={() => (servicesOpen ? closeServicesMenu() : openServicesMenu())}
-                    >
-                      <span className="nav-link-text">{item.label}</span>
-                      <ChevronDown
-                        className={`text-base transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`}
-                        aria-hidden="true"
-                        size={18}
-                      />
-                    </button>
-
-                    {servicesOpen && (
-                      <div
-                        ref={servicesDropdownRef}
-                        id="services-menu"
-                        role="menu"
-                        aria-label="Services Navigation"
-                        className="dropdown-menu absolute left-1/2 top-full z-[60] mt-5 min-w-[360px] -translate-x-1/2 rounded-2xl border border-white/10 bg-white/95 px-6 py-5 shadow-[0_26px_60px_-35px_rgba(15,23,42,0.45)] backdrop-blur-2xl dark:border-white/15 dark:bg-bg-darker/95"
-                        onMouseEnter={openServicesMenu}
-                        onMouseLeave={() => scheduleServicesClose()}
-                      >
-                        <div className="mb-4 flex items-center justify-between">
-                          <span className="text-[11px] uppercase tracking-[0.35em] text-text-muted">Service-Suite</span>
-                          <span className="rounded-full bg-vae-turquoise/15 px-3 py-1 text-[11px] font-semibold tracking-wide text-vae-turquoise">
-                            End-to-End Betreuung
-                          </span>
-                        </div>
-                        <ul className="grid gap-3" role="none">
-                          {item.dropdown.map(subItem => {
-                            const active = isPathActive(subItem.path)
-                            return (
-                              <li key={subItem.path} role="none">
-                                <Link
-                                  to={subItem.path}
-                                  className={`group flex items-start gap-4 rounded-2xl border border-transparent px-4 py-4 transition-all duration-300 ${
-                                    active
-                                      ? 'border-vae-turquoise/50 bg-vae-turquoise/10 shadow-[0_10px_30px_-15px_rgba(var(--vae-turquoise-rgb),0.55)]'
-                                      : 'hover:border-vae-turquoise/35 hover:bg-vae-turquoise/5 dark:hover:bg-white/5'
-                                  }`}
-                                  role="menuitem"
-                                  onClick={() => {
-                                    closeServicesMenu()
-                                    handleMobileNavClick()
-                                  }}
-                                >
-                                  <span
-                                    className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-                                      active ? 'bg-vae-turquoise text-white' : 'bg-vae-turquoise/10 text-vae-turquoise'
-                                    }`}
-                                  >
-                                    <Icon name={subItem.icon ?? 'auto_awesome'} size={18} />
-                                  </span>
-                                  <span className="flex-1">
-                                    <span className="flex items-center gap-2 text-sm font-semibold text-text-light">
-                                      {subItem.label}
-                                      {subItem.meta && (
-                                        <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-vae-turquoise/80">
-                                          {subItem.meta}
-                                        </span>
-                                      )}
-                                    </span>
-                                    {subItem.description && (
-                                      <span className="mt-1 block text-xs leading-snug text-text-secondary">
-                                        {subItem.description}
-                                      </span>
-                                    )}
-                                  </span>
-                                  <span
-                                    className={`flex h-7 w-7 items-center justify-center rounded-full border border-transparent transition-all ${
-                                      active
-                                        ? 'border-vae-turquoise/60 bg-vae-turquoise/15 text-vae-turquoise'
-                                        : 'text-text-secondary group-hover:text-vae-turquoise'
-                                    }`}
-                                  >
-                                    {active ? (
-                                      <CheckIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                                    ) : (
-                                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                                    )}
-                                  </span>
-                                </Link>
-                              </li>
-                            )
-                          })}
-                        </ul>
-                        <div className="mt-5 flex items-center justify-between gap-4 rounded-xl border border-vae-turquoise/15 bg-vae-turquoise/5 px-4 py-3">
-                          <div>
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-vae-turquoise/80">
-                              Übersicht
-                            </p>
-                            <p className="text-xs text-text-secondary">Vergleichen Sie alle Module & Abhängigkeiten.</p>
-                          </div>
-                          <Link
-                            to="/services"
-                            className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-vae-turquoise/40 px-4 py-2 text-sm font-semibold text-vae-turquoise transition-colors hover:border-vae-turquoise hover:text-vae-turquoise/80"
-                            role="menuitem"
-                            onClick={() => {
-                              closeServicesMenu()
-                              handleMobileNavClick()
-                            }}
+                    if (item.dropdown?.length) {
+                      const isDropdownOpen = openDropdown === item.label
+                      const dropdownId = `${item.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-menu`
+                      return (
+                        <div
+                          key={item.label}
+                          className="relative"
+                          onMouseEnter={() => handleOpenDropdown(item.label)}
+                          onMouseLeave={() => scheduleDropdownClose()}
+                        >
+                          <button
+                            type="button"
+                            ref={registerTriggerRef(item.label)}
+                            className={`nav-link flex items-center gap-1 ${isActive ? 'nav-link--active' : ''} ${isDropdownOpen ? 'nav-link--expanded' : ''}`}
+                            aria-haspopup="menu"
+                            aria-expanded={isDropdownOpen}
+                            aria-controls={dropdownId}
+                            onFocus={() => handleOpenDropdown(item.label)}
+                            onBlur={() => scheduleDropdownClose()}
+                            onClick={() => (isDropdownOpen ? closeDropdown() : handleOpenDropdown(item.label))}
                           >
-                            Alle Services
-                          </Link>
+                            <span className="nav-link-text">{item.label}</span>
+                            <ChevronDown
+                              className={`ml-1 h-4 w-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-vae-turquoise' : ''}`}
+                              aria-hidden="true"
+                            />
+                          </button>
+
+                          {isDropdownOpen && (
+                            <div
+                              ref={registerDropdownRef(item.label)}
+                              id={dropdownId}
+                              role="menu"
+                              aria-label={`${item.label} Navigation`}
+                              className="dropdown-menu absolute left-1/2 top-full z-[60] mt-5 min-w-[360px] -translate-x-1/2 rounded-3xl border px-6 py-6 backdrop-blur-2xl"
+                              onMouseEnter={() => handleOpenDropdown(item.label)}
+                              onMouseLeave={() => scheduleDropdownClose()}
+                              onFocusCapture={clearHoverTimer}
+                              onBlurCapture={() => scheduleDropdownClose()}
+                            >
+                              {(item.dropdownIntro?.eyebrow || item.dropdownIntro?.badgeLabel) && (
+                                <div className="mb-5 flex items-center justify-between gap-4">
+                                  {item.dropdownIntro?.eyebrow && (
+                                    <span className="text-[11px] uppercase tracking-[0.35em] text-text-muted">
+                                      {item.dropdownIntro.eyebrow}
+                                    </span>
+                                  )}
+                                  {item.dropdownIntro?.badgeLabel && (
+                                    <span
+                                      className={`dropdown-badge dropdown-badge--${item.dropdownIntro.badgeVariant ?? 'neutral'}`}
+                                    >
+                                      {item.dropdownIntro.badgeLabel}
+                                    </span>
+                                  )}
+                                </div>
+                              )}
+                              <ul className="grid gap-3" role="none">
+                                {item.dropdown.map(subItem => {
+                                  const active = isPathActive(subItem.path)
+                                  return (
+                                    <li key={subItem.path} role="none">
+                                      <Link
+                                        to={subItem.path}
+                                        className={`dropdown-card group ${active ? 'dropdown-card--active' : ''}`}
+                                        role="menuitem"
+                                        onClick={() => {
+                                          closeDropdown()
+                                          handleMobileNavClick()
+                                        }}
+                                      >
+                                        <span className="dropdown-card__icon">
+                                          <Icon name={subItem.icon ?? 'auto_awesome'} size={18} />
+                                        </span>
+                                        <span className="dropdown-card__body">
+                                          <span className="dropdown-card__title-row">
+                                            <span className="dropdown-card__title">{subItem.label}</span>
+                                            {subItem.meta && (
+                                              <span className="dropdown-card__meta-chip">{subItem.meta}</span>
+                                            )}
+                                          </span>
+                                          {subItem.description && (
+                                            <p className="dropdown-card__description">{subItem.description}</p>
+                                          )}
+                                        </span>
+                                        <span className="dropdown-card__trailing">
+                                          {active ? (
+                                            <CheckIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                                          ) : (
+                                            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                                          )}
+                                        </span>
+                                      </Link>
+                                    </li>
+                                  )
+                                })}
+                              </ul>
+                              {item.dropdownFooter && (
+                                <div className="border-white/12 mt-5 flex items-center justify-between gap-4 rounded-2xl border bg-white/10 px-4 py-3 text-sm text-text-secondary transition-all duration-300 dark:border-white/10 dark:bg-white/[0.04] dark:text-text-secondary">
+                                  <div>
+                                    <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-vae-turquoise/80">
+                                      Übersicht
+                                    </p>
+                                    <p className="text-xs text-text-muted">
+                                      Vergleichen Sie Module, Laufzeiten und Integrationen.
+                                    </p>
+                                  </div>
+                                  <Link
+                                    to={item.dropdownFooter.path}
+                                    className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-vae-turquoise/40 px-4 py-2 text-sm font-semibold text-vae-turquoise transition-colors hover:border-vae-turquoise hover:text-vae-turquoise/80"
+                                    role="menuitem"
+                                    onClick={() => {
+                                      closeDropdown()
+                                      handleMobileNavClick()
+                                    }}
+                                  >
+                                    {item.dropdownFooter.label}
+                                  </Link>
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
-                      </div>
-                    )}
-                  </div>
-                )
-              }
+                      )
+                    }
 
-              if (!item.path) {
-                return null
-              }
+                    if (!item.path) {
+                      return null
+                    }
 
-              if (item.highlight) {
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`nav-testphase ${isActive ? 'nav-testphase--active' : ''}`}
-                    onClick={handleMobileNavClick}
-                  >
-                    <span className="flex items-center gap-2">
-                      <Sparkle className="h-4 w-4" aria-hidden="true" />
-                      {item.label}
-                    </span>
-                  </Link>
-                )
-              }
-
-              return (
+                    return (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`nav-link ${isActive ? 'nav-link--active' : ''}`}
+                        onClick={handleMobileNavClick}
+                      >
+                        <span className="nav-link-text">{item.label}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </nav>
+              {highlightDesktopItems.map(item => (
                 <Link
                   key={item.path}
-                  to={item.path}
-                  className={`nav-link ${isActive ? 'nav-link--active' : ''}`}
+                  to={item.path!}
+                  className={`nav-testphase ${isNavItemActive(item) ? 'nav-testphase--active' : ''}`}
                   onClick={handleMobileNavClick}
                 >
-                  <span className="nav-link-text">{item.label}</span>
+                  <span className="flex items-center gap-2">
+                    <Sparkle className="h-4 w-4" aria-hidden="true" />
+                    {item.label}
+                  </span>
                 </Link>
-              )
-            })}
-          </nav>
+              ))}
+            </div>
+          </div>
 
           <div className="hidden items-center space-x-4 md:flex">
             <CtaLink

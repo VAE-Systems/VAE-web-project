@@ -1,12 +1,16 @@
-import React, { useEffect, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import React, { Suspense, useEffect } from 'react'
+import { Navigate, Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom'
 
 // Layout Components
-import Header from '@components/layout/Header'
-import Footer from '@components/layout/Footer'
-import SectionNavigation from '@components/navigation/SectionNavigation'
-import ScrollProgress from '@components/navigation/ScrollProgress'
 import ErrorBoundary from '@components/ErrorBoundary'
+import Footer from '@components/layout/Footer'
+import Header from '@components/layout/Header'
+import ScrollProgress from '@components/navigation/ScrollProgress'
+import SectionNavigation from '@components/navigation/SectionNavigation'
+
+// UI Components
+import ScrollProgressBar from '@components/ui/ScrollProgressBar'
+import SkipToContent from '@components/ui/SkipToContent'
 
 // Privacy Components
 import CookieBanner from '@components/privacy/CookieBanner'
@@ -78,9 +82,11 @@ const App: React.FC = () => {
         <Router>
           <ScrollToTop />
           <div className="min-h-[100dvh] bg-bg-darker text-text-light">
+            <SkipToContent />
+            <ScrollProgressBar />
             <Header />
             <NavigationSwitcher />
-            <main className="pt-20">
+            <main id="main-content" className="pt-20">
               <Suspense fallback={<LoadingSpinner />}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />

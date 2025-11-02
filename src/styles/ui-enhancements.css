@@ -1,0 +1,436 @@
+/**
+ * UI Enhancements - Gimmicks & Micro-Interactions
+ *
+ * Dieses Stylesheet enthält moderne UI-Verbesserungen:
+ * - Skip-to-Content Link (Accessibility)
+ * - Enhanced Navigation Mega-Menu
+ * - Smooth Scroll Behavior
+ * - Improved Hover States
+ */
+
+/* ================================
+   SKIP TO CONTENT (Accessibility)
+   ================================ */
+
+.skip-to-content {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 70;
+  padding: 0.75rem 1.5rem;
+  background: hsl(var(--color-vae-turquoise));
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 24px rgba(0, 255, 165, 0.4);
+  transform: translateY(-5rem);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skip-to-content:focus {
+  transform: translateY(0);
+  outline: 2px solid hsl(var(--color-vae-turquoise));
+  outline-offset: 4px;
+}
+
+/* ================================
+   SMOOTH SCROLL BEHAVIOR
+   ================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ================================
+   ENHANCED NAVIGATION DROPDOWNS
+   ================================ */
+
+/* Mega-Menu Styling */
+.dropdown-menu {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px) saturate(150%);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1),
+    0 0 40px rgba(0, 255, 165, 0.08);
+  animation: dropdownFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Dropdown Cards - Enhanced Hover States */
+.dropdown-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.dropdown-card:hover {
+  border-color: rgba(0, 255, 165, 0.3);
+  background: rgba(0, 255, 165, 0.05);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 165, 0.2),
+    0 8px 16px -4px rgba(0, 255, 165, 0.15);
+  transform: translateY(-2px);
+}
+
+.dropdown-card--active {
+  border-color: rgba(0, 255, 165, 0.5);
+  background: rgba(0, 255, 165, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 165, 0.3),
+    0 8px 24px -4px rgba(0, 255, 165, 0.25);
+}
+
+/* Dropdown Card Icon Container */
+.dropdown-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: rgba(0, 255, 165, 0.1);
+  color: hsl(var(--color-vae-turquoise));
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-card:hover .dropdown-card__icon {
+  background: rgba(0, 255, 165, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 0 16px rgba(0, 255, 165, 0.3);
+}
+
+.dropdown-card--active .dropdown-card__icon {
+  background: hsl(var(--color-vae-turquoise));
+  color: white;
+}
+
+/* Dropdown Card Body */
+.dropdown-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.dropdown-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.dropdown-card__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: hsl(var(--color-text-light));
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-card:hover .dropdown-card__title {
+  color: hsl(var(--color-vae-turquoise));
+}
+
+.dropdown-card__meta-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: hsl(var(--color-vae-turquoise) / 0.7);
+  background: rgba(0, 255, 165, 0.1);
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-card:hover .dropdown-card__meta-chip {
+  background: rgba(0, 255, 165, 0.15);
+  color: hsl(var(--color-vae-turquoise));
+}
+
+.dropdown-card__description {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: hsl(var(--color-text-secondary));
+  margin: 0;
+}
+
+.dropdown-card__trailing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  color: hsl(var(--color-text-muted));
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-card:hover .dropdown-card__trailing {
+  color: hsl(var(--color-vae-turquoise));
+  transform: translateX(2px);
+}
+
+/* Dropdown Badges */
+.dropdown-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-badge--accent {
+  background: rgba(0, 255, 165, 0.15);
+  color: hsl(var(--color-vae-turquoise));
+  border: 1px solid rgba(0, 255, 165, 0.3);
+}
+
+.dropdown-badge--neutral {
+  background: rgba(255, 255, 255, 0.05);
+  color: hsl(var(--color-text-secondary));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-badge--soft {
+  background: rgba(0, 255, 165, 0.08);
+  color: hsl(var(--color-vae-turquoise) / 0.8);
+  border: 1px solid rgba(0, 255, 165, 0.2);
+}
+
+/* ================================
+   NAVIGATION LINKS - Enhanced States
+   ================================ */
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: hsl(var(--color-text-light));
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: hsl(var(--color-vae-turquoise));
+  background: rgba(0, 255, 165, 0.08);
+  border-color: rgba(0, 255, 165, 0.2);
+}
+
+.nav-link--active {
+  color: hsl(var(--color-vae-turquoise));
+  background: rgba(0, 255, 165, 0.12);
+  border-color: rgba(0, 255, 165, 0.3);
+  font-weight: 600;
+}
+
+.nav-link--expanded {
+  color: hsl(var(--color-vae-turquoise));
+  background: rgba(0, 255, 165, 0.1);
+  border-color: rgba(0, 255, 165, 0.25);
+}
+
+.nav-link-text {
+  position: relative;
+}
+
+/* Testphase CTA - Enhanced */
+.nav-testphase {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: white;
+  background: hsl(var(--color-vae-turquoise));
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.nav-testphase::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-testphase:hover {
+  background: hsl(var(--color-vae-turquoise-dark));
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 165, 0.5),
+    0 8px 24px -4px rgba(0, 255, 165, 0.4),
+    0 0 32px rgba(0, 255, 165, 0.3);
+  transform: translateY(-2px);
+}
+
+.nav-testphase:hover::before {
+  opacity: 1;
+}
+
+.nav-testphase--active {
+  box-shadow:
+    0 0 0 2px rgba(0, 255, 165, 0.6),
+    0 8px 24px -4px rgba(0, 255, 165, 0.5),
+    0 0 40px rgba(0, 255, 165, 0.4);
+}
+
+/* ================================
+   BUTTON ENHANCEMENTS
+   ================================ */
+
+/* Ripple Effect on Click (Optional Enhancement) */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-ripple:active::after {
+  animation: ripple 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ================================
+   LOADING STATES
+   ================================ */
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 16px rgba(0, 255, 165, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(0, 255, 165, 0.6);
+  }
+}
+
+.loading-pulse {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ================================
+   REDUCED MOTION
+   ================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown-menu {
+    animation: none;
+  }
+
+  .dropdown-card:hover {
+    transform: none;
+  }
+
+  .nav-testphase:hover {
+    transform: none;
+  }
+
+  .btn-ripple::after {
+    animation: none;
+  }
+
+  .loading-pulse {
+    animation: none;
+  }
+}
+
+/* ================================
+   DARK MODE ADJUSTMENTS
+   ================================ */
+
+.dark .dropdown-menu {
+  background: rgba(8, 12, 24, 0.85);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark .dropdown-card:hover {
+  background: rgba(0, 255, 165, 0.06);
+}
+
+.dark .dropdown-card--active {
+  background: rgba(0, 255, 165, 0.12);
+}
+
+/* ================================
+   MOBILE OPTIMIZATIONS
+   ================================ */
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    min-width: calc(100vw - 2rem);
+    left: 1rem;
+    right: 1rem;
+    transform: translateX(0);
+  }
+
+  .nav-link {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .nav-testphase {
+    width: 100%;
+    justify-content: center;
+  }
+}

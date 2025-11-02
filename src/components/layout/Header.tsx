@@ -1,13 +1,40 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * VAE SYSTEMS - HEADER COMPONENT
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * Hauptnavigation mit:
+ * - Logo & Brand-Text (VERSATILE AI | ENHANCED | SYSTEMS als Blöcke)
+ * - Desktop Navigation Pills mit Dropdown-Menüs
+ * - Mobile-Menü mit Swipe-Gesten
+ * - Theme-Toggle (Light/Dark Mode)
+ * - CTA-Button ("30-Min Strategie-Gespräch")
+ *
+ * STYLING-KLASSEN:
+ * - .nav-link: Normale Navigation-Links (Home, VAE CORE, etc.)
+ * - .nav-link--active: Aktiver Link-State
+ * - .nav-link--expanded: Wenn Dropdown geöffnet ist
+ * - .nav-testphase: Hervorgehobener CTA-Link (3-Monate Testphase)
+ * - .dropdown-menu: Dropdown-Container (Glassmorphism-Effekt)
+ * - .dropdown-card: Einzelne Dropdown-Items
+ *
+ * Diese Klassen sind in /src/styles/ui-enhancements.css definiert und können
+ * dort angepasst werden, um das Design zu ändern (Farben, Shadows, etc.)
+ */
+
+// ══════════════════════════════════════════════════════════════════════════
+// IMPORTS - Icons und Komponenten
+// ══════════════════════════════════════════════════════════════════════════
 import {
-  ArrowUpRight,
-  CalendarClock,
-  Check as CheckIcon,
-  ChevronDown,
-  Menu as MenuIcon,
-  Moon,
-  Sparkle,
-  Sun,
-  X,
+  ArrowUpRight, // Icon: Pfeil nach oben-rechts (für Dropdown-Items)
+  CalendarClock, // Icon: Kalender mit Uhr (für CTA-Button)
+  Check as CheckIcon, // Icon: Häkchen (für aktive Items)
+  ChevronDown, // Icon: Pfeil nach unten (für Dropdown-Trigger)
+  Menu as MenuIcon, // Icon: Hamburger-Menü (Mobile)
+  Moon, // Icon: Mond (Dark Mode)
+  Sparkle, // Icon: Funkeln (für Testphase-Button)
+  Sun, // Icon: Sonne (Light Mode)
+  X, // Icon: X zum Schließen (Mobile)
 } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -19,42 +46,88 @@ import { useAttentionSignal, useFocusTrap } from '@/hooks'
 import { useMobileMenu } from '@/hooks/useMobileMenu'
 import { useSwipeGesture } from '@/hooks/useSwipeGesture'
 
+// ══════════════════════════════════════════════════════════════════════════
+// TYPESCRIPT INTERFACES - Definieren die Struktur der Navigation
+// ══════════════════════════════════════════════════════════════════════════
+
+/**
+ * NavigationDropdownItem
+ * Einzelnes Item in einem Dropdown-Menü (z.B. "Infrastruktur Setup")
+ */
 interface NavigationDropdownItem {
-  label: string
-  path: string
-  description?: string
-  icon?: string
-  meta?: string
+  label: string // Name des Items (z.B. "Infrastruktur Setup")
+  path: string // Link-Ziel (z.B. "/infrastruktur")
+  description?: string // Beschreibungstext unter dem Label
+  icon?: string // Material Icon Name (z.B. "architecture")
+  meta?: string // Zusatzinfo (z.B. "Foundation · 2–4 Wochen")
 }
 
+/**
+ * NavigationDropdownIntro
+ * Header-Bereich eines Dropdown-Menüs (optional)
+ */
 interface NavigationDropdownIntro {
-  eyebrow?: string
-  badgeLabel?: string
-  badgeVariant?: 'accent' | 'neutral' | 'soft'
+  eyebrow?: string // Kleiner Text oben (z.B. "Service-Suite")
+  badgeLabel?: string // Badge-Text (z.B. "Delivery orchestriert")
+  badgeVariant?: 'accent' | 'neutral' | 'soft' // Badge-Stil (Farbe)
 }
 
+/**
+ * NavigationItem
+ * Haupt-Navigationseintrag (z.B. "Services", "Home", etc.)
+ */
 interface NavigationItem {
-  label: string
-  path?: string
-  dropdown?: NavigationDropdownItem[]
-  dropdownIntro?: NavigationDropdownIntro
-  dropdownFooter?: { label: string; path: string }
-  highlight?: boolean
+  label: string // Angezeigter Text (z.B. "Services")
+  path?: string // Direkter Link (wenn kein Dropdown)
+  dropdown?: NavigationDropdownItem[] // Array von Dropdown-Items
+  dropdownIntro?: NavigationDropdownIntro // Header des Dropdowns
+  dropdownFooter?: { label: string; path: string } // Footer-Link im Dropdown
+  highlight?: boolean // Ob als CTA-Button dargestellt (z.B. Testphase)
 }
 
+// ══════════════════════════════════════════════════════════════════════════
+// NAVIGATION KONFIGURATION
+// ══════════════════════════════════════════════════════════════════════════
+/**
+ * Hier wird die komplette Navigation definiert.
+ *
+ * STRUKTUR:
+ * - Einfacher Link: { label: 'Home', path: '/' }
+ * - Dropdown-Menü: { label: 'Services', dropdown: [...], dropdownIntro: {...} }
+ * - Highlight-CTA: { label: '3-Monate Testphase', path: '/testphase', highlight: true }
+ *
+ * Um die Navigation zu ändern:
+ * 1. Neue Items hinzufügen/entfernen in diesem Array
+ * 2. Für Dropdowns: dropdown-Array mit Items füllen
+ * 3. Icons aus Material Symbols (https://fonts.google.com/icons)
+ */
 const navigation: NavigationItem[] = [
+  // ────────────────────────────────────────────────────────────────────────
+  // HOME - Einfacher Link zur Startseite
+  // ────────────────────────────────────────────────────────────────────────
   { label: 'Home', path: '/' },
+
+  // ────────────────────────────────────────────────────────────────────────
+  // SERVICES - Dropdown-Menü mit 3 Service-Kategorien
+  // ────────────────────────────────────────────────────────────────────────
   {
     label: 'Services',
-    dropdownIntro: { eyebrow: 'Service-Suite', badgeLabel: 'Delivery orchestriert', badgeVariant: 'accent' },
-    dropdownFooter: { label: 'Alle Services', path: '/services' },
+    dropdownIntro: {
+      eyebrow: 'Service-Suite', // Kleiner Text oben
+      badgeLabel: 'Delivery orchestriert', // Badge rechts oben
+      badgeVariant: 'accent', // Badge-Farbe (accent = türkis)
+    },
+    dropdownFooter: {
+      label: 'Alle Services', // Link-Text im Footer
+      path: '/services', // Footer-Link-Ziel
+    },
     dropdown: [
       {
         label: 'Infrastruktur Setup',
         path: '/infrastruktur',
         description: 'Produktionsreife Nextcloud-Suite mit Governance, Compliance-Layer und Dokumentation.',
-        icon: 'architecture',
-        meta: 'Foundation · 2–4 Wochen',
+        icon: 'architecture', // Material Symbol Icon
+        meta: 'Foundation · 2–4 Wochen', // Zusatzinfo unten
       },
       {
         label: 'AI-Workflow Optimierung',
@@ -72,10 +145,22 @@ const navigation: NavigationItem[] = [
       },
     ],
   },
+
+  // ────────────────────────────────────────────────────────────────────────
+  // VAE CORE - Einfacher Link
+  // ────────────────────────────────────────────────────────────────────────
   { label: 'VAE CORE', path: '/vae-core' },
+
+  // ────────────────────────────────────────────────────────────────────────
+  // RESSOURCEN - Dropdown-Menü mit 2 Items
+  // ────────────────────────────────────────────────────────────────────────
   {
     label: 'Ressourcen',
-    dropdownIntro: { eyebrow: 'Guided Experience', badgeLabel: 'Direkter Draht', badgeVariant: 'soft' },
+    dropdownIntro: {
+      eyebrow: 'Guided Experience',
+      badgeLabel: 'Direkter Draht',
+      badgeVariant: 'soft', // Badge-Farbe (soft = gedämpft)
+    },
     dropdown: [
       {
         label: 'Über uns',
@@ -93,39 +178,63 @@ const navigation: NavigationItem[] = [
       },
     ],
   },
+
+  // ────────────────────────────────────────────────────────────────────────
+  // TESTPHASE - Hervorgehobener CTA-Button (highlight: true)
+  // ────────────────────────────────────────────────────────────────────────
+  // Wird als türkiser Button mit Sparkle-Icon dargestellt
+  // CSS-Klasse: .nav-testphase (siehe ui-enhancements.css)
   { label: '3-Monate Testphase', path: '/testphase', highlight: true },
 ]
 
+// ══════════════════════════════════════════════════════════════════════════
+// HEADER COMPONENT - Hauptfunktion
+// ══════════════════════════════════════════════════════════════════════════
 const Header: React.FC = () => {
-  const location = useLocation()
-  const { theme, toggleTheme } = useTheme()
+  // ──────────────────────────────────────────────────────────────────────
+  // HOOKS & STATES
+  // ──────────────────────────────────────────────────────────────────────
+  const location = useLocation() // Aktuelle Route (von React Router)
+  const { theme, toggleTheme } = useTheme() // Theme Context (light/dark)
 
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState<string | null>(null)
+  // State für visuelle Zustände
+  const [isScrolled, setIsScrolled] = useState(false) // Ob Seite gescrollt ist
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null) // Welches Desktop-Dropdown offen ist
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState<string | null>(null) // Welches Mobile-Dropdown offen ist
 
-  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({})
-  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({})
-  const focusTrapRef = useRef<HTMLDivElement | null>(null)
-  const activeDropdownRef = useRef<string | null>(null)
-  const ctaRef = useRef<HTMLAnchorElement>(null)
+  // Refs für Dropdown-Management (DOM-Referenzen)
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({}) // Dropdown-Trigger-Buttons
+  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({}) // Dropdown-Container
+  const focusTrapRef = useRef<HTMLDivElement | null>(null) // Für Keyboard-Navigation
+  const activeDropdownRef = useRef<string | null>(null) // Aktuell offenes Dropdown
+  const ctaRef = useRef<HTMLAnchorElement>(null) // CTA-Button Ref
 
+  // Mobile Menu Hook (öffnen/schließen/toggle)
   const {
     isOpen: isMobileMenuOpen,
     close: closeMobileMenu,
     toggle: toggleMobileMenu,
-    handleSwipeLeft,
+    handleSwipeLeft, // Swipe-Gesten für Mobile
     handleSwipeRight,
   } = useMobileMenu()
 
+  // Swipe-Gesten für Mobile Menu
   const mobileMenuRef = useSwipeGesture(handleSwipeLeft, handleSwipeRight, undefined, undefined, {
-    threshold: 50,
-    restraint: 100,
-    allowedTime: 300,
+    threshold: 50, // Mindest-Swipe-Distanz in Pixeln
+    restraint: 100, // Maximale Abweichung von der Swipe-Richtung
+    allowedTime: 300, // Maximale Zeit für Swipe-Geste
   }) as React.RefObject<HTMLDivElement>
 
+  // Timer für verzögertes Schließen von Dropdowns (Hover-Effekt)
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  // ──────────────────────────────────────────────────────────────────────
+  // DROPDOWN MANAGEMENT - Funktionen zum Öffnen/Schließen von Dropdowns
+  // ──────────────────────────────────────────────────────────────────────
+
+  /**
+   * Löscht den Hover-Timer (verhindert verzögertes Schließen)
+   */
   const clearHoverTimer = useCallback(() => {
     if (hoverTimer.current) {
       clearTimeout(hoverTimer.current)
@@ -133,6 +242,10 @@ const Header: React.FC = () => {
     }
   }, [])
 
+  /**
+   * Öffnet ein Dropdown sofort
+   * @param label - Name des Dropdown-Items (z.B. "Services")
+   */
   const handleOpenDropdown = useCallback(
     (label: string) => {
       clearHoverTimer()
@@ -141,11 +254,18 @@ const Header: React.FC = () => {
     [clearHoverTimer]
   )
 
+  /**
+   * Schließt das aktive Dropdown sofort
+   */
   const closeDropdown = useCallback(() => {
     clearHoverTimer()
     setOpenDropdown(null)
   }, [clearHoverTimer])
 
+  /**
+   * Schließt Dropdown mit Verzögerung (für smooth Hover-Effekt)
+   * @param delay - Verzögerung in Millisekunden (Standard: 160ms)
+   */
   const scheduleDropdownClose = useCallback(
     (delay = 160) => {
       clearHoverTimer()
@@ -157,6 +277,10 @@ const Header: React.FC = () => {
     [clearHoverTimer]
   )
 
+  /**
+   * Registriert einen Trigger-Button (für Focus-Management)
+   * @param label - Name des Dropdown-Items
+   */
   const registerTriggerRef = useCallback(
     (label: string) => (node: HTMLButtonElement | null) => {
       triggerRefs.current[label] = node
@@ -164,6 +288,10 @@ const Header: React.FC = () => {
     []
   )
 
+  /**
+   * Registriert einen Dropdown-Container (für Focus-Management)
+   * @param label - Name des Dropdown-Items
+   */
   const registerDropdownRef = useCallback(
     (label: string) => (node: HTMLDivElement | null) => {
       dropdownRefs.current[label] = node

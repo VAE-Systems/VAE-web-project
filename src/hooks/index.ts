@@ -4,10 +4,11 @@
  * Central export point for all custom React hooks
  */
 
-export { useContactForm } from './useContactForm'
-export { useNewsletter } from './useNewsletter'
-export { useFocusTrap } from './useFocusTrap'
 export { useAttentionSignal } from './useAttentionSignal'
+export { useContactForm } from './useContactForm'
+export { useFocusTrap } from './useFocusTrap'
+export { useNewsletter } from './useNewsletter'
+export { useParallax, useScrollReveal, useScrollRevealBatch } from './useScrollReveal'
 
 // Future hooks can be added here:
 // export { useAuth } from './useAuth'

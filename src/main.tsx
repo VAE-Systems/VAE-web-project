@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './styles/globals.css'
 import { useServiceWorker } from './hooks/useServiceWorker'
+import './styles/globals.css'
+import './styles/ui-enhancements.css'
 
 // Service Worker Registration Component
 const ServiceWorkerManager: React.FC = () => {

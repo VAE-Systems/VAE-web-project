@@ -53,6 +53,8 @@ export default {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-out',
         glow: 'glow 2s ease-in-out infinite alternate',
+        wiggle: 'wiggle 0.5s ease-in-out 3s infinite',
+        'wiggle-once': 'wiggle 0.5s ease-in-out',
       },
 
       keyframes: {
@@ -67,6 +69,12 @@ export default {
         glow: {
           '0%': { boxShadow: '0 0 5px hsl(157, 100%, 47%)' },
           '100%': { boxShadow: '0 0 20px hsl(157, 100%, 47%), 0 0 30px hsl(157, 100%, 47%)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+          '75%': { transform: 'rotate(-3deg)' },
         },
       },
 

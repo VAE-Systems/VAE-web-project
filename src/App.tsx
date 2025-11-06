@@ -4,7 +4,8 @@ import { Navigate, Route, BrowserRouter as Router, Routes, useLocation } from 'r
 // Layout Components
 import ErrorBoundary from '@components/ErrorBoundary'
 import Footer from '@components/layout/Footer'
-import Header from '@components/layout/Header'
+// import Header from '@components/layout/Header' // Old Header
+import HeaderModern from '@components/layout/HeaderModern' // New Modern Header
 import ScrollProgress from '@components/navigation/ScrollProgress'
 import SectionNavigation from '@components/navigation/SectionNavigation'
 
@@ -84,7 +85,7 @@ const App: React.FC = () => {
           <div className="min-h-[100dvh] bg-bg-darker text-text-light">
             <SkipToContent />
             <ScrollProgressBar />
-            <Header />
+            <HeaderModern />
             <NavigationSwitcher />
             <main id="main-content" className="pt-20">
               <Suspense fallback={<LoadingSpinner />}>

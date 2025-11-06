@@ -112,10 +112,11 @@ const NAVIGATION: NavItem[] = [
       ],
     },
   },
-  {
-    label: 'VAE CORE',
-    path: '/vae-core',
-  },
+  // VAE CORE vorübergehend deaktiviert
+  // {
+  //   label: 'VAE CORE',
+  //   path: '/vae-core',
+  // },
 ]
 
 /**
@@ -128,25 +129,65 @@ interface MagneticButtonProps {
   href?: string
   onClick?: () => void
   className?: string
+  forwardRef?: React.RefObject<HTMLAnchorElement | HTMLButtonElement>
 }
 
-const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick, className = '' }) => {
-  const buttonRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
+const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick, className = '', forwardRef }) => {
+  const internalRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
+  const buttonRef = forwardRef || internalRef
   const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [isHovered, setIsHovered] = useState(false)
+  const [shouldWiggle, setShouldWiggle] = useState(false)
+  const wiggleTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!buttonRef.current) return
-    const rect = buttonRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left - rect.width / 2
-    const y = e.clientY - rect.top - rect.height / 2
-    setPosition({ x: x * 0.3, y: y * 0.3 })
+  // Wiggle Logic: Nur wenn NICHT gehovert, nach 20s
+  useEffect(() => {
+    const startWiggleTimer = () => {
+      if (wiggleTimerRef.current) {
+        clearTimeout(wiggleTimerRef.current)
+      }
+
+      wiggleTimerRef.current = setTimeout(() => {
+        if (!isHovered) {
+          setShouldWiggle(true)
+          setTimeout(() => setShouldWiggle(false), 500) // Animation dauert 0.5s
+        }
+        startWiggleTimer() // Restart timer
+      }, 20000) // 20 Sekunden
+    }
+
+    startWiggleTimer()
+
+    return () => {
+      if (wiggleTimerRef.current) {
+        clearTimeout(wiggleTimerRef.current)
+      }
+    }
+  }, [isHovered])
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!buttonRef.current) return
+      const rect = buttonRef.current.getBoundingClientRect()
+      const x = e.clientX - rect.left - rect.width / 2
+      const y = e.clientY - rect.top - rect.height / 2
+      setPosition({ x: x * 0.3, y: y * 0.3 })
+    },
+    [buttonRef]
+  )
+
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true)
+    setShouldWiggle(false) // Stop wiggle sofort beim Hover
   }, [])
 
   const handleMouseLeave = useCallback(() => {
     setPosition({ x: 0, y: 0 })
+    setIsHovered(false)
   }, [])
 
   const baseClasses = `
+    cta-sheen
     relative inline-flex items-center gap-2 px-6 py-3 rounded-xl
     bg-gradient-to-r from-vae-turquoise to-emerald-400
     text-gray-900 font-bold text-sm
@@ -156,6 +197,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
     active:scale-95
     overflow-hidden
     group
+    ${shouldWiggle && !isHovered ? 'animate-wiggle-attention' : ''}
     ${className}
   `
 
@@ -174,6 +216,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
         href={href}
         className={baseClasses}
         onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
           transform: `translate(${position.x}px, ${position.y}px)`,
@@ -190,6 +233,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
       onClick={onClick}
       className={baseClasses}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
         transform: `translate(${position.x}px, ${position.y}px)`,
@@ -304,11 +348,7 @@ const HeaderModern: React.FC = () => {
                 <img
                   src="/App_Logo_light.svg"
                   alt="VAE Systems"
-                  className={`h-full w-auto transition-all duration-300 ${
-                    isDark
-                      ? 'brightness-0 drop-shadow-[0_0_20px_rgba(0,255,165,0.25)] invert'
-                      : 'drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)]'
-                  }`}
+                  className="light-invert h-full w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)] transition-all duration-300 dark:drop-shadow-[0_0_20px_rgba(0,255,165,0.25)]"
                 />
               </div>
 
@@ -323,6 +363,9 @@ const HeaderModern: React.FC = () => {
             </Link>
 
             {/* ═══════════════════════════════════════════════════════════
+                DESKTOP NAVIGATION
+
+        {/* ═══════════════════════════════════════════════════════════
                 DESKTOP NAVIGATION
                 ═══════════════════════════════════════════════════════ */}
             <nav className="hidden items-center gap-1 lg:flex">
@@ -486,7 +529,10 @@ const HeaderModern: React.FC = () => {
             <div className="flex items-center gap-3">
               {/* CTA Button - Desktop */}
               <div className="hidden lg:block">
-                <MagneticButton href="https://cal.com/vae-systems/strategie" className="animate-wiggle">
+                <MagneticButton
+                  href="https://cal.com/vae-systems/strategie"
+                  forwardRef={ctaRef as React.RefObject<HTMLAnchorElement>}
+                >
                   <Calendar className="h-4 w-4" />
                   <span>Strategie-Gespräch</span>
                 </MagneticButton>

@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
         >
           {/* Brand Section */}
           <Reveal preset="fadeUp" className="md:col-span-3 lg:col-span-2 xl:col-span-2">
-            <div className="mb-6 flex items-center space-x-4">
+            <div className="mb-6 flex items-center gap-4">
               <div className="h-14 md:h-16">
                 <img
                   src={'/App_Logo_light.svg'}
@@ -67,10 +67,12 @@ const Footer: React.FC = () => {
                 />
               </div>
               <div className="border-l border-vae-turquoise/30 pl-4">
-                <div className="text-xs leading-tight tracking-wider">
-                  <div className="font-medium text-vae-turquoise">VERSATILE AI</div>
-                  <div className="font-medium text-vae-turquoise">ENHANCED</div>
-                  <div className="font-medium text-vae-turquoise">SYSTEMS_</div>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-vae-turquoise">
+                    Versatile AI
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-vae-turquoise">Enhanced</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-vae-turquoise">Systems</span>
                 </div>
               </div>
             </div>

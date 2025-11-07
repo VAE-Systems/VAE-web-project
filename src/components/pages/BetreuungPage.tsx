@@ -8,10 +8,10 @@ import {
   Building2,
   Check,
   CheckCircle2,
+  ChevronDown,
   Layers,
   Lightbulb,
   Minus,
-  Plus,
   RefreshCcw,
   Server,
   ShieldCheck,
@@ -81,9 +81,9 @@ const serviceLevels: ServiceLevel[] = [
     id: 'infrastructure',
     icon: Server,
     title: 'Infrastruktur-Managed',
-    subtitle: 'Technik läuft, ihr seid unabhängig',
+    subtitle: 'Technik läuft, Sie sind unabhängig',
     description:
-      'Ideal für Teams mit IT-Know-how. Wir übernehmen Betrieb, Security, Monitoring und Optimierung – ihr behaltet volle Kontrolle und Technical Ownership.',
+      'Ideal für Teams mit IT-Know-how. Wir übernehmen Betrieb, Security, Monitoring und Optimierung – Sie behalten volle Kontrolle und Technical Ownership.',
     included: [
       'Monatliche System-Updates & Patches',
       '24/7-Monitoring, Uptime & Alerting',
@@ -104,9 +104,9 @@ const serviceLevels: ServiceLevel[] = [
     id: 'full',
     icon: Users,
     title: 'Full-Partnership',
-    subtitle: 'Wir sind euer IT-Team',
+    subtitle: 'Wir sind Ihr IT-Team',
     description:
-      'Ihr wollt euch voll auf das Business konzentrieren? Wir übernehmen Infrastruktur, Support, KI-Optimierung und Innovation – wie ein internes IT-Team, nur fokussierter.',
+      'Sie wollen sich voll auf das Business konzentrieren? Wir übernehmen Infrastruktur, Support, KI-Optimierung und Innovation – wie ein internes IT-Team, nur fokussierter.',
     included: [
       'Alles aus Infrastruktur-Managed',
       'Direkter User-Support (< 6h Reaktionszeit)',
@@ -166,7 +166,7 @@ const detailedServices: Array<{ icon: LucideIcon; title: string; description: st
     icon: Users,
     title: 'Support & Beratung',
     description:
-      'Euer Team bekommt Antworten, Sparring und Priorisierung. Infrastruktur-Managed: < 24h, Full-Partnership: < 6h.',
+      'Ihr Team erhält Antworten, Sparring und Priorisierung. Infrastruktur-Managed: < 24h, Full-Partnership: < 6h.',
   },
   {
     icon: Target,
@@ -199,7 +199,7 @@ const reasonCards: Array<{ icon: LucideIcon; title: string; description: string 
     icon: Lightbulb,
     title: 'Trends & Innovation im Blick',
     description:
-      'Wir beobachten Open Source, KI und Automatisierung täglich. Ihr bekommt proaktive Roadmaps statt reaktiver Tickets.',
+      'Wir beobachten Open Source, KI und Automatisierung täglich. Sie erhalten proaktive Roadmaps statt reaktiver Tickets.',
   },
 ]
 
@@ -207,17 +207,17 @@ const faqItems = [
   {
     question: 'Wie funktioniert die monatliche Kündigung?',
     answer:
-      'Ihr gebt uns Bescheid, im Folgemonat läuft der Vertrag aus. Ihr erhaltet vollständige Dokumentation, Daten-Export in Standardformaten und auf Wunsch einen 2h-Handover-Call. Infrastruktur und Daten bleiben bei euch.',
+      'Sie geben uns Bescheid, im Folgemonat läuft der Vertrag aus. Sie erhalten vollständige Dokumentation, Daten-Export in Standardformaten und auf Wunsch einen 2h-Handover-Call. Infrastruktur und Daten bleiben bei Ihnen.',
   },
   {
     question: 'Warum kostet monatlich kündbar mehr?',
     answer:
-      'Flexibilität hat einen Preis. Der Aufschlag kompensiert unser Risiko, damit ihr jederzeit aussteigen könnt – ohne Kleingedrucktes und ohne Abhängigkeiten.',
+      'Flexibilität hat einen Preis. Der Aufschlag kompensiert unser Risiko, damit Sie jederzeit aussteigen können – ohne Kleingedrucktes und ohne Abhängigkeiten.',
   },
   {
     question: 'Können wir zwischen den Service-Leveln wechseln?',
     answer:
-      'Ja, jederzeit. Startet mit Infrastruktur-Managed und wechselt bei Bedarf auf Full-Partnership oder zurück. Wir passen SLAs und Umfang dynamisch an.',
+      'Ja, jederzeit. Starten Sie mit Infrastruktur-Managed und wechseln Sie bei Bedarf auf Full-Partnership oder zurück. Wir passen SLAs und Umfang dynamisch an.',
   },
   {
     question: 'Was kostet langfristige Betreuung?',
@@ -225,17 +225,17 @@ const faqItems = [
       'Es hängt von Teamgröße, Infrastruktur-Landschaft, gewünschter KI-Automation und Reaktionszeit ab. Im kostenlosen Beratungsgespräch kalkulieren wir transparent: individuelles Angebot statt Pauschalpreis.',
   },
   {
-    question: 'Wie schnell reagiert ihr bei Problemen?',
+    question: 'Wie schnell reagieren Sie bei Problemen?',
     answer:
       'Infrastruktur-Managed: < 24h. Full-Partnership: < 6h. Kritische Incidents werden sofort priorisiert – auch nachts oder am Wochenende.',
   },
   {
     question: 'Können wir auch einzelne Leistungen buchen?',
     answer:
-      'Ja, auf Stundenbasis (ab 65 €/h) für Ad-hoc-Support, Consulting oder Mini-Projekte. Ideal, wenn ihr ohne monatliche Bindung testen wollt.',
+      'Ja, auf Stundenbasis (ab 65 €/h) für Ad-hoc-Support, Consulting oder Mini-Projekte. Ideal, wenn Sie ohne monatliche Bindung testen möchten.',
   },
   {
-    question: 'Wie oft informiert ihr über Trends & Potenziale?',
+    question: 'Wie oft informieren Sie über Trends & Potenziale?',
     answer:
       'Full-Partnership: monatliche Strategy-Reviews mit konkreten Empfehlungen zu KI, Open Source und Automatisierung. Infrastruktur-Managed: monatliche Trend-Updates als Teil der Reviews.',
   },
@@ -255,7 +255,11 @@ const BetreuungPage: React.FC = () => {
     }
   }, [])
 
-  const scrollToServiceLevels = useCallback(() => {
+  const scrollToServiceLevels = useCallback((e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     const target = document.getElementById('service-levels')
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -320,7 +324,10 @@ const BetreuungPage: React.FC = () => {
             </MagneticButton>
             <MagneticButton intensity={0.05} className="w-full sm:w-auto">
               <button
-                onClick={scrollToServiceLevels}
+                onClick={e => {
+                  e.preventDefault()
+                  scrollToServiceLevels(e)
+                }}
                 className="btn-ghost flex w-full items-center justify-center border border-gray-300 px-8 py-4 text-base text-gray-900 transition hover:border-vae-turquoise hover:text-vae-turquoise dark:border-white/20 dark:text-white"
               >
                 Service-Optionen ansehen ↓
@@ -370,34 +377,44 @@ const BetreuungPage: React.FC = () => {
               Business Growth – wir halten das IT-Rückgrat stabil.
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-3xl border border-vae-turquoise/30 bg-gradient-to-br from-gray-100 to-white p-8 dark:from-bg-dark dark:to-bg-darker">
-            <div className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">
-              Ressourcen-Fokus
-            </div>
-            <p className="text-lg text-gray-700 dark:text-text-secondary">
-              Infrastruktur-Aufgaben wirken klein, summieren sich aber zu verlorenen Monaten. Unsere Visualisierung
-              zeigt typischen Ressourcenverbrauch in Tech-Teams.
-            </p>
-            <div className="mt-8 space-y-5">
-              {resourceSplit.map(item => (
-                <div key={item.label}>
-                  <div className="mb-2 flex items-center justify-between text-sm text-gray-700 dark:text-text-secondary">
-                    <span>{item.label}</span>
-                    <span className="font-semibold text-gray-900 dark:text-text-light">{item.value}%</span>
+          <div className="relative overflow-hidden rounded-3xl border border-vae-turquoise/30 bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8 shadow-lg dark:from-bg-dark dark:via-[#0e1117] dark:to-bg-darker">
+            {/* Subtle glow effect at top */}
+            <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_top,rgba(52,211,153,0.12),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(52,211,153,0.08),transparent_60%)]" />
+
+            <div className="relative z-10">
+              <div className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">
+                Ressourcen-Fokus
+              </div>
+              <p className="text-lg text-gray-700 dark:text-text-secondary">
+                Infrastruktur-Aufgaben wirken klein, summieren sich aber zu verlorenen Monaten. Unsere Visualisierung
+                zeigt typischen Ressourcenverbrauch in Tech-Teams.
+              </p>
+              <div className="mt-8 space-y-6">
+                {resourceSplit.map(item => (
+                  <div key={item.label}>
+                    <div className="mb-3 flex items-baseline justify-between gap-4">
+                      <span className="flex-1 text-sm font-medium text-gray-700 dark:text-text-secondary">
+                        {item.label}
+                      </span>
+                      <span className="w-14 text-right text-2xl font-bold tabular-nums text-gray-900 dark:text-text-light">
+                        {item.value}%
+                      </span>
+                    </div>
+                    <div className="h-3 rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm transition-all duration-700 ease-out"
+                        style={{ width: `${item.value}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-2 rounded-full bg-gray-200 dark:bg-white/10">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff]"
-                      style={{ width: `${item.value}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <p className="mt-8 text-sm text-gray-700 dark:text-text-secondary">
+                Unser Ziel: Wartung auf{' '}
+                <span className="font-semibold text-gray-900 dark:text-text-light">unter 20%</span> drücken und
+                Innovation verdoppeln – mit klarem Fokus auf Wertschöpfung statt Firefighting.
+              </p>
             </div>
-            <p className="mt-8 text-sm text-gray-700 dark:text-text-secondary">
-              Unser Ziel: Wartung auf <span className="text-gray-900 dark:text-text-light">unter 20%</span> drücken und
-              Innovation verdoppeln – mit klarem Fokus auf Wertschöpfung statt Firefighting.
-            </p>
           </div>
         </div>
       </section>
@@ -592,11 +609,11 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 7: FAQ */}
-      <section className="border-b border-white/5 py-20">
+      <section className="border-b border-gray-200 py-20 dark:border-white/5">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">FAQ</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">Häufige Fragen</h2>
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
           </div>
           <div className="mt-12 space-y-4">
             {faqItems.map((item, index) => {
@@ -604,20 +621,29 @@ const BetreuungPage: React.FC = () => {
               const panelId = `faq-panel-${index}`
               const buttonId = `faq-button-${index}`
               return (
-                <div key={item.question} className="rounded-2xl border border-white/10 bg-white/5">
+                <div
+                  key={item.question}
+                  className={`group overflow-hidden rounded-2xl border transition-all duration-300 ${
+                    isOpen
+                      ? 'border-vae-turquoise/50 bg-vae-turquoise/5 shadow-lg shadow-vae-turquoise/10'
+                      : 'border-gray-200 bg-white hover:border-vae-turquoise/35 dark:border-white/10 dark:bg-white/5'
+                  }`}
+                >
                   <button
                     id={buttonId}
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => toggleFaq(index)}
-                    className="flex w-full items-center justify-between px-6 py-5 text-left"
+                    className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left text-lg font-medium text-gray-900 dark:text-white"
                   >
-                    <span className="text-lg font-semibold text-white">{item.question}</span>
-                    {isOpen ? (
-                      <Minus className="h-5 w-5 text-vae-turquoise" aria-hidden="true" />
-                    ) : (
-                      <Plus className="h-5 w-5 text-text-secondary" aria-hidden="true" />
-                    )}
+                    <span className="flex-1">{item.question}</span>
+                    <span
+                      className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-vae-turquoise/10 text-vae-turquoise transition-all duration-300 ${
+                        isOpen ? 'rotate-180 bg-vae-turquoise/20' : 'group-hover:bg-vae-turquoise/15'
+                      }`}
+                    >
+                      <ChevronDown className="h-5 w-5" aria-hidden="true" />
+                    </span>
                   </button>
                   <div
                     id={panelId}
@@ -629,7 +655,9 @@ const BetreuungPage: React.FC = () => {
                     style={{ maxHeight: isOpen ? `${answerRefs.current[index]?.scrollHeight ?? 0}px` : 0 }}
                     className="overflow-hidden px-6 transition-[max-height] duration-500 ease-in-out"
                   >
-                    <p className="pb-6 text-base leading-relaxed text-text-secondary">{item.answer}</p>
+                    <div className="border-t border-gray-200 pb-5 pt-4 text-base leading-relaxed text-gray-700 dark:border-white/10 dark:text-text-secondary">
+                      {item.answer}
+                    </div>
                   </div>
                 </div>
               )
@@ -639,13 +667,15 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 8: CTA */}
-      <section className="py-20">
+      <section className="bg-gray-50 py-20 dark:bg-transparent">
         <div className="container-vae">
           <div className="rounded-3xl border border-vae-turquoise/40 bg-gradient-to-br from-vae-turquoise/15 to-transparent p-10 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">Finale Einladung</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">Bereit, Ressourcen freizulegen?</h2>
-            <p className="mt-4 text-lg text-text-secondary">
-              Kostenloses Beratungsgespräch – unverbindlich, monatlich kündbar. Wir zeigen, wie Outsourcing euer
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Bereit, Ressourcen freizulegen?
+            </h2>
+            <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
+              Kostenloses Beratungsgespräch – unverbindlich, monatlich kündbar. Wir zeigen, wie Outsourcing Ihr
               IT-Rückgrat stärkt und Ressourcen aufs Kernbusiness lenkt.
             </p>
             <MagneticButton intensity={0.1} scaleEffect glowEffect className="mx-auto mt-8 inline-flex">
@@ -656,7 +686,7 @@ const BetreuungPage: React.FC = () => {
                 Beratung buchen
               </button>
             </MagneticButton>
-            <p className="mt-4 text-sm text-text-secondary">
+            <p className="mt-4 text-sm text-gray-600 dark:text-text-secondary">
               45 Minuten. Klarheit zu Aufwand, Team-Setup und KI-Potenzialen.
             </p>
           </div>

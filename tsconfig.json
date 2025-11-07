@@ -5,7 +5,6 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -13,14 +12,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
-
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
     /* Path mapping */
     "baseUrl": ".",
     "paths": {
@@ -31,11 +27,14 @@
       "@types/*": ["./src/types/*"],
       "@design-system/*": ["./src/design-system/*"]
     },
-
     /* Vite environment types */
     "types": ["vite/client", "node"]
   },
-  "include": ["src"],
+  "include": ["src", "archive/Header.tsx", "archive/pages/ProductsPage.tsx", "archive/pages/ServicesPage.tsx"],
   "exclude": ["node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

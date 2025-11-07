@@ -7,19 +7,19 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import Breadcrumbs from '../../src/components/navigation/Breadcrumbs'
+import ServicesHeroSection from '../../src/components/sections/ServicesHeroSection'
+import MagneticButton from '../../src/components/ui/buttons/MagneticButton'
+import Seo from '../../src/components/ui/Seo'
+import SpotlightCard from '../../src/components/ui/SpotlightCard'
 import {
   comparisonMatrix,
   finalCta,
   lifecycleBenefits,
   servicesCategories,
   servicesLifecycle,
-} from '../../content/services'
-import Breadcrumbs from '../navigation/Breadcrumbs'
-import ServicesHeroSection from '../sections/ServicesHeroSection'
-import MagneticButton from '../ui/buttons/MagneticButton'
-import Seo from '../ui/Seo'
-import SpotlightCard from '../ui/SpotlightCard'
-const FAQSection = React.lazy(() => import('../sections/FAQSection'))
+} from '../../src/content/services'
+const FAQSection = React.lazy(() => import('../../src/components/sections/FAQSection'))
 /**
  * ServicesPage Component
  *

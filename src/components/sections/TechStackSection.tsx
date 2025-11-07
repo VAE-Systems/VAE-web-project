@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
+import { Motion } from '@/utils/motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Motion } from '@/utils/motion'
+import React, { useEffect, useRef, useState } from 'react'
+import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 
 const techStack = [
   {
@@ -434,10 +434,11 @@ const TechStackSection: React.FC = () => {
         {/* Section Header */}
         <div className="mb-14 text-center">
           <h2 ref={headingRef} className="h2 heading-gradient h-space mb-3">
-            Unser Technologie-Fundament
+            Open Source Systeme & KI-Modelle
           </h2>
           <p ref={subRef} className="mx-auto max-w-2xl text-xl text-text-secondary">
-            Open Source, bewährte Frameworks und deutsche Ingenieurskunst.
+            Arbeitssysteme (Nextcloud, Temporal, Docker) + KI-Frameworks (LangChain, Open-Source-LLMs) – unsere
+            Doppel-Kompetenz.
           </p>
         </div>
 

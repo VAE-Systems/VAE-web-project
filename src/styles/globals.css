@@ -246,6 +246,18 @@
     height: auto;
     display: block;
   }
+
+  /* Smooth theme transitions */
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition:
+      background-color 300ms ease-in-out,
+      border-color 300ms ease-in-out,
+      color 300ms ease-in-out,
+      box-shadow 300ms ease-in-out !important;
+  }
 }
 
 /* Utility: pause particle animations when out of view */
@@ -1691,11 +1703,19 @@ body.using-keyboard *:focus {
       0 0 calc(50px * var(--glow-alpha)) rgba(var(--vae-turquoise-rgb), calc(0.65 * var(--glow-alpha))),
       0 0 0 1px rgba(var(--vae-turquoise-rgb), calc(0.55 * var(--glow-alpha)));
   }
-  /* Light-mode tuning for tech tiles: darker subtle surfaces and borders */
+  /* Light-mode tuning for tech tiles: saubere Kontraste, kein Blau */
   .theme-light .tech-tile {
-    background: linear-gradient(165deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.02));
-    border-color: rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.9));
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(0, 0, 0, 0.02);
+  }
+  .theme-light .tech-tile:hover {
+    border-color: rgba(var(--vae-turquoise-rgb), 0.4);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(var(--vae-turquoise-rgb), 0.3);
   }
   .tech-tile::after {
     content: '';

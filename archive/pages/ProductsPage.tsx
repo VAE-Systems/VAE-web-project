@@ -1,9 +1,9 @@
 import React from 'react'
-import ProductsSection from '../sections/ProductsSection'
-import ProductsHeroSection from '../sections/ProductsHeroSection'
-import Seo from '../ui/Seo'
-import Breadcrumbs from '../navigation/Breadcrumbs'
-const FAQSection = React.lazy(() => import('../sections/FAQSection'))
+import Breadcrumbs from '../../src/components/navigation/Breadcrumbs'
+import ProductsHeroSection from '../../src/components/sections/ProductsHeroSection'
+import ProductsSection from '../../src/components/sections/ProductsSection'
+import Seo from '../../src/components/ui/Seo'
+const FAQSection = React.lazy(() => import('../../src/components/sections/FAQSection'))
 
 const jsonLd = [
   {

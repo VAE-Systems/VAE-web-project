@@ -1,8 +1,34 @@
-import React from 'react'
-import { Mail } from 'lucide-react'
-import { NewsletterForm } from '../forms'
-import { Link } from 'react-router-dom'
 import Reveal from '@/components/ui/Reveal'
+import { Mail } from 'lucide-react'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { NewsletterForm } from '../forms'
+
+interface FooterLink {
+  label: string
+  to: string
+}
+
+const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[]> = {
+  services: [
+    { label: 'Strategische Beratung', to: '/services/beratung' },
+    { label: 'Infrastructure Setup', to: '/services/setup' },
+    { label: 'Langfristige Betreuung', to: '/services/betreuung' },
+    { label: '3-Monate Testphase', to: '/#testphase' },
+  ],
+  resources: [
+    { label: 'Consulting Solutions', to: '/#solutions' },
+    { label: 'Case Studies', to: '/about/referenzen' },
+    { label: 'Warum VAE', to: '/#warum' },
+    { label: 'Tech Stack', to: '/#tech-stack' },
+  ],
+  company: [
+    { label: 'Über uns', to: '/about' },
+    { label: 'Kontakt', to: '/contact' },
+    { label: 'Impressum', to: '/impressum' },
+    { label: 'Datenschutz', to: '/privacy' },
+  ],
+}
 
 /**
  * Footer Component
@@ -56,8 +82,8 @@ const Footer: React.FC = () => {
         >
           {/* Brand Section */}
           <Reveal preset="fadeUp" className="md:col-span-3 lg:col-span-2 xl:col-span-2">
-            <div className="mb-6 flex items-center gap-4">
-              <div className="h-14 md:h-16">
+            <div className="mb-6 flex items-center gap-1">
+              <div className="h-[4.6rem] md:h-[5.2rem]">
                 <img
                   src={'/App_Logo_light.svg'}
                   alt="VAE Systems Logo"
@@ -66,7 +92,7 @@ const Footer: React.FC = () => {
                   decoding="async"
                 />
               </div>
-              <div className="border-l border-vae-turquoise/30 pl-4">
+              <div className="border-l border-vae-turquoise/30 pl-3">
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-vae-turquoise">
                     Versatile AI
@@ -137,64 +163,29 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="mb-4 text-lg font-semibold text-text-light">Services</h4>
               <ul className="space-y-2 text-sm">
-                <li>
-                  <Link to="/infrastruktur" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    Arbeitsinfrastruktur Setup
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/ki-optimierung" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    AI-Workflow Optimierung
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/betreuung" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    Langfristige Betreuung
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/testphase" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    3-Monate Testphase
-                  </Link>
-                </li>
+                {footerNavigation.services.map(link => (
+                  <li key={link.to}>
+                    <Link to={link.to} className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </Reveal>
 
-          {/* Solutions */}
-          <Reveal preset="fadeUp" as="nav" aria-label="Lösungen" className="space-y-6">
+          {/* Resources */}
+          <Reveal preset="fadeUp" as="nav" aria-label="Ressourcen" className="space-y-6">
             <div>
-              <h4 className="mb-4 text-lg font-semibold text-text-light">Lösungen</h4>
+              <h4 className="mb-4 text-lg font-semibold text-text-light">Ressourcen</h4>
               <ul className="space-y-2 text-sm">
-                <li>
-                  <Link
-                    to="/solutions#infrastructure"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    Infrastruktur-Pakete
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/solutions#automation"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    Automations-Bausteine
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/solutions#cases"
-                    className="text-text-secondary transition-colors hover:text-vae-turquoise"
-                  >
-                    Case Studies
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/vae-core" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    VAE CORE Plattform
-                  </Link>
-                </li>
+                {footerNavigation.resources.map(link => (
+                  <li key={link.to}>
+                    <Link to={link.to} className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </Reveal>
@@ -220,26 +211,13 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="mb-4 text-lg font-semibold text-text-light">Unternehmen</h4>
               <ul className="space-y-2 text-sm">
-                <li>
-                  <Link to="/about" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    Über uns
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contact" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    Kontakt
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/impressum" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    Impressum
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/privacy" className="text-text-secondary transition-colors hover:text-vae-turquoise">
-                    Datenschutz
-                  </Link>
-                </li>
+                {footerNavigation.company.map(link => (
+                  <li key={link.to}>
+                    <Link to={link.to} className="text-text-secondary transition-colors hover:text-vae-turquoise">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>

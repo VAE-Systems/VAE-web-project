@@ -1,7 +1,7 @@
-import Icon from '@/components/ui/Icon'
-import { finalCtaHome } from '@/content/home'
+import { CalendarClock } from 'lucide-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import CtaLink from '@/components/ui/CtaLink'
+import { finalCtaHome } from '@/content/home'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
 interface FinalCtaSectionProps {
@@ -10,7 +10,7 @@ interface FinalCtaSectionProps {
 }
 
 const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 'abschluss' }) => {
-  const { eyebrow, title, description, primary, secondary } = finalCtaHome
+  const { eyebrow, title, description, primary, note } = finalCtaHome
 
   return (
     <section
@@ -35,24 +35,18 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
             {title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-text-secondary sm:text-lg">{description}</p>
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <MagneticButton className="w-full sm:w-auto">
-              <Link to={primary.to} className="btn-primary flex min-w-[240px] items-center justify-center gap-3">
-                <Icon name="calendar_month" size={18} className="text-bg-primary" />
-                {primary.label}
-              </Link>
-            </MagneticButton>
-            <MagneticButton className="w-full sm:w-auto">
-              <a
-                href={secondary.to}
-                className="btn-outline flex min-w-[240px] items-center justify-center gap-3"
-                rel="noopener noreferrer"
-              >
-                <Icon name="mail" size={18} />
-                {secondary.label}
-              </a>
-            </MagneticButton>
-          </div>
+          <MagneticButton className="mt-10 inline-flex w-full sm:w-auto">
+            <CtaLink
+              ctaId={primary.ctaId}
+              ctx={{ fromPage: 'home', intent: 'final-cta' }}
+              variant="custom"
+              className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+            >
+              <CalendarClock className="h-5 w-5" />
+              {primary.label}
+            </CtaLink>
+          </MagneticButton>
+          {note && <p className="mt-4 text-xs text-text-muted">{note}</p>}
         </div>
       </div>
     </section>

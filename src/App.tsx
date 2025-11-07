@@ -24,14 +24,11 @@ import { initializeFocusManager } from '@/utils/focusManagement'
 
 // Lazy-loaded Pages
 const HomePage = React.lazy(() => import('@components/pages/HomePage'))
-const ServicesPage = React.lazy(() => import('@components/pages/ServicesPage'))
-const ProductsPage = React.lazy(() => import('@components/pages/ProductsPage'))
-const TestphasePage = React.lazy(() => import('@components/pages/TestphasePage'))
-const InfrastrukturPage = React.lazy(() => import('@components/pages/InfrastrukturPage'))
-const KiOptimierungPage = React.lazy(() => import('@components/pages/KiOptimierungPage'))
+const SetupPage = React.lazy(() => import('@components/pages/SetupPage'))
 const BetreuungPage = React.lazy(() => import('@components/pages/BetreuungPage'))
-const ProductVaeCorePage = React.lazy(() => import('@components/pages/ProductVaeCorePage'))
+const BeratungPage = React.lazy(() => import('@components/pages/BeratungPage'))
 const AboutPage = React.lazy(() => import('@components/pages/AboutPage'))
+const ReferenzenPage = React.lazy(() => import('@components/pages/ReferenzenPage'))
 const ContactPage = React.lazy(() => import('@components/pages/ContactPage'))
 const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage'))
 const PrivacyPage = React.lazy(() => import('@components/pages/PrivacyPage'))
@@ -90,20 +87,32 @@ const App: React.FC = () => {
             <main id="main-content" className="pt-20">
               <Suspense fallback={<LoadingSpinner />}>
                 <Routes>
+                  {/* Homepage */}
                   <Route path="/" element={<HomePage />} />
-                  <Route path="/services" element={<ServicesPage />} />
-                  <Route path="/infrastruktur" element={<InfrastrukturPage />} />
-                  <Route path="/ki-optimierung" element={<KiOptimierungPage />} />
-                  <Route path="/betreuung" element={<BetreuungPage />} />
-                  <Route path="/testphase" element={<TestphasePage />} />
-                  <Route path="/solutions" element={<ProductsPage />} />
-                  <Route path="/products" element={<ProductsPage />} />
-                  <Route path="/vae-core" element={<ProductVaeCorePage />} />
+
+                  {/* Services */}
+                  <Route path="/services/setup" element={<SetupPage />} />
+                  <Route path="/services/betreuung" element={<BetreuungPage />} />
+                  <Route path="/services/beratung" element={<BeratungPage />} />
+
+                  {/* Redirects from old URLs */}
+                  <Route path="/infrastruktur" element={<Navigate to="/services/setup" replace />} />
+                  <Route path="/betreuung" element={<Navigate to="/services/betreuung" replace />} />
+
+                  {/* Main Pages */}
                   <Route path="/about" element={<AboutPage />} />
-                  <Route path="/kontakt" element={<ContactPage />} />
-                  <Route path="/contact" element={<Navigate to="/kontakt" replace />} />
+                  <Route path="/about/referenzen" element={<ReferenzenPage />} />
+                  <Route path="/case-studies" element={<ReferenzenPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+
+                  {/* Redirects */}
+                  <Route path="/kontakt" element={<Navigate to="/contact" replace />} />
+                  <Route path="/resources/referenzen" element={<Navigate to="/about/referenzen" replace />} />
+
+                  {/* Legal */}
                   <Route path="/impressum" element={<ImpressumPage />} />
                   <Route path="/privacy" element={<PrivacyPage />} />
+                  <Route path="/datenschutz" element={<Navigate to="/privacy" replace />} />
                   <Route path="/privacy/settings" element={<PrivacySettings />} />
                 </Routes>
               </Suspense>

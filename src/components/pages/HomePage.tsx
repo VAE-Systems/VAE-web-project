@@ -1,10 +1,11 @@
 import React from 'react'
 import FinalCtaSection from '../sections/FinalCtaSection'
 import HeroSection from '../sections/HeroSection'
-import HomeOutcomesSection from '../sections/HomeOutcomesSection'
 import HomeProcessTeaserSection from '../sections/HomeProcessTeaserSection'
-import ServicesSection from '../sections/ServicesSection'
-import TestphaseBanner from '../sections/TestphaseBanner'
+import ServicesOverviewSection from '../sections/ServicesOverviewSection'
+import SocialProofSection from '../sections/SocialProofSection'
+import TechShowcaseSection from '../sections/TechShowcaseSection'
+import WhyOpenSourceSection from '../sections/WhyOpenSourceSection'
 import Seo from '../ui/Seo'
 
 /**
@@ -23,19 +24,22 @@ const HomePage: React.FC = () => {
       {/* 1. Hero */}
       <HeroSection />
 
-      {/* 1b. Testphase Offer */}
-      <TestphaseBanner />
+      {/* 2. Warum Open Source */}
+      <WhyOpenSourceSection />
 
-      {/* 2. Warum & Resultate */}
-      <HomeOutcomesSection className="pb-24 pt-24" />
+      {/* 3. Services Überblick */}
+      <ServicesOverviewSection />
 
-      {/* 3. Services (Einordnung nach Problem & Proof) */}
-      <ServicesSection />
+      {/* 4. Tech Showcase */}
+      <TechShowcaseSection />
 
-      {/* 4. Prozess (Sicherheit & Transparenz des Vorgehens) */}
-      <HomeProcessTeaserSection className="pt-24" />
+      {/* 5. Social Proof */}
+      <SocialProofSection />
 
-      {/* 5. Abschluss */}
+      {/* 6. Prozess */}
+      <HomeProcessTeaserSection className="pt-0" />
+
+      {/* 7. Abschluss */}
       <FinalCtaSection />
     </div>
   )

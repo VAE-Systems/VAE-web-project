@@ -1,5 +1,5 @@
-import type { ThemeDefinition, ThemeMode } from './types'
 import { defaultTheme, themeRegistry } from './tokens'
+import type { ThemeDefinition, ThemeMode } from './types'
 
 const STORAGE_KEY = 'vae-theme'
 
@@ -111,8 +111,17 @@ export const applyTheme = (mode: ThemeMode) => {
   if (!isBrowser()) return
   const theme = resolveTheme(mode)
   const root = document.documentElement
+
+  // Add transition class for smooth theme switching
+  root.classList.add('theme-transitioning')
+
   setDataAttributes(root, theme)
   setCssVariables(root, theme)
+
+  // Remove transition class after transition completes
+  setTimeout(() => {
+    root.classList.remove('theme-transitioning')
+  }, 300)
 }
 
 export const initialiseTheme = (): ThemeMode => {

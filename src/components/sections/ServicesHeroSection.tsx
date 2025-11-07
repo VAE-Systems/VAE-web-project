@@ -97,6 +97,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
               <CtaLink
                 ctaId="contact.schedule_call"
                 ctx={{ fromPage: 'services', intent: 'strategy-call' }}
+                variant="custom"
                 className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${
                   isLight
                     ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80'

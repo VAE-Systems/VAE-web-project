@@ -144,7 +144,7 @@ const SectionNavigation: React.FC = () => {
                   hover-lift press-bounce relative flex
                   h-9 w-9 items-center justify-center rounded-full border
                   outline-none backdrop-blur-xl transition-all
-                  duration-150 hover:scale-105 hover:border-vae-turquoise 
+                  duration-150 hover:scale-105 hover:border-vae-turquoise
                   hover:bg-white/15 md:h-12
                   md:w-12
                   md:hover:-translate-x-1

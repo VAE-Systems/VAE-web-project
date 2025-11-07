@@ -18,14 +18,14 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'art-affair-qr-signage',
     title: 'ART AFFAIR – QR Code Newsletter Automation @ art KARLSRUHE 2025',
-    type: 'Pilot Automation',
+    type: 'Pilot-Projekt',
     status: 'Live Pilot',
     year: '2025',
-    tags: ['Event-Tech', 'Newsletter Funnel', 'On-Site Automation'],
+    tags: ['Event-Tech', 'Newsletter Funnel', 'On-Site Automation', 'ActivePieces'],
     challenge:
-      'Vor Ort qualifizierte Kontakte erfassen ohne Personal-Overhead & sofortigen digitalen Mehrwert liefern.',
+      'Qualifizierte Kontakte am Messestand erfassen ohne Personal-Overhead & sofortigen digitalen Mehrwert liefern.',
     solution:
-      'Dynamische QR-Codes an jedem Kunstwerk, Scan führt zu Micro-Flow: DSGVO-konforme Opt-in Oberfläche → Sofort E-Mail mit Stand-Infos & PDF → Segmentierung für Follow-up.',
+      'Dynamische QR-Codes an jedem Kunstwerk, Scan führt zu Micro-Flow: DSGVO-konforme Opt-in Oberfläche → Sofort E-Mail mit Stand-Infos & PDF → Segmentierung für Follow-up. Entwickelt mit ActivePieces und eigenen Code-Automationen, nahtlos in die bestehende Infrastruktur integriert.',
     outcome:
       'Hohe Conversion bei minimalem Setup-Aufwand; Grundlage für wiederverwendbaren Event-Automations-Blueprint.',
     metrics: [
@@ -34,7 +34,7 @@ export const caseStudies: CaseStudy[] = [
       { label: 'Manual Aufwand', value: '-70%', hint: 'vs. manuelle Erfassung' },
     ],
     narrative:
-      'Schneller, skalierbarer Messe-Funnel: Besucher scannen, erhalten kontextuelle Inhalte und sind sofort im Segment. Kein Vendor-Lock-in, vollständig adaptierbar für kommende Ausstellungen. Grundlage für spätere Integration mit VAE CORE Embedding-Katalogen.',
+      'Pilot-Projekt für art KARLSRUHE Stand: Besucher scannen QR-Codes, erhalten kontextuelle Inhalte und sind sofort im Newsletter-Segment. Entwickelt mit ActivePieces und Custom-Code-Automationen, vollständig in die bestehende Infrastruktur integriert. Kein Vendor-Lock-in, vollständig adaptierbar für kommende Ausstellungen.',
   },
 ]
 

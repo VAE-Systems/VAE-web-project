@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { buildCta, type CtaContext } from '@/config/cta'
 
-type Variant = 'primary' | 'secondary' | 'convert' | 'ghost'
+type Variant = 'primary' | 'secondary' | 'convert' | 'ghost' | 'custom'
 
 interface CtaLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   ctaId: string
@@ -13,7 +13,7 @@ interface CtaLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   'aria-label'?: string
 }
 
-const variantClass: Record<Variant, string> = {
+const variantClass: Record<Exclude<Variant, 'custom'>, string> = {
   primary: 'btn-primary',
   secondary: 'btn-secondary',
   convert: 'btn-convert',
@@ -29,7 +29,8 @@ const variantClass: Record<Variant, string> = {
 const CtaLink = React.forwardRef<HTMLAnchorElement, CtaLinkProps>(
   ({ ctaId, ctx, variant = 'primary', children, className = '', ...rest }, ref) => {
     const built = React.useMemo(() => buildCta(ctaId, ctx), [ctaId, ctx])
-    const classes = `${variantClass[variant]} ${className}`.trim()
+    const variantClasses = variant === 'custom' ? '' : variantClass[variant]
+    const classes = [variantClasses, className].filter(Boolean).join(' ').trim()
     const label = typeof children !== 'undefined' ? children : built.label
 
     if (built.type === 'route') {

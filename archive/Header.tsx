@@ -469,14 +469,14 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between gap-3 py-3 md:grid md:h-[96px] md:grid-cols-[auto,1fr,auto] md:items-center md:gap-6 md:py-0">
           <Link
             to="/"
-            className="dark:border-white/12 group flex items-center gap-1 rounded-2xl border border-black/15 bg-white/80 px-3 py-2 transition-all duration-300 hover:border-vae-turquoise/40 hover:bg-white/90 dark:bg-white/[0.06] md:px-4"
+            className="dark:border-white/12 group flex items-center gap-4 rounded-2xl border border-black/15 bg-white/80 px-3 py-2 transition-all duration-300 hover:border-vae-turquoise/40 hover:bg-white/90 dark:bg-white/[0.06] md:px-4"
             onClick={handleMobileNavClick}
           >
-            <span className="relative flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-xl bg-white shadow-[0_26px_60px_-36px_rgba(15,23,42,0.35)] transition-transform duration-300 group-hover:scale-[1.03] group-hover:shadow-[0_32px_70px_-36px_rgba(0,255,165,0.35)] dark:bg-gradient-to-br dark:from-white/[0.08] dark:to-white/[0.02] md:h-[5.2rem] md:w-[5.2rem]">
+            <span className="relative flex h-14 w-14 items-center justify-center rounded-xl bg-white shadow-[0_26px_60px_-36px_rgba(15,23,42,0.35)] transition-transform duration-300 group-hover:scale-[1.03] group-hover:shadow-[0_32px_70px_-36px_rgba(0,255,165,0.35)] dark:bg-gradient-to-br dark:from-white/[0.08] dark:to-white/[0.02] md:h-16 md:w-16">
               <img
                 src="/App_Logo_light.svg"
                 alt="VAE Systems Logo"
-                className="light-invert h-[3.0rem] w-auto md:h-[3.9rem]"
+                className="light-invert h-9 w-auto md:h-12"
                 loading="eager"
                 decoding="async"
               />
@@ -485,7 +485,7 @@ const Header: React.FC = () => {
               <span className="text-text-primary text-sm font-semibold dark:text-white">VAE Systems</span>
               <span className="text-xs font-medium text-text-muted dark:text-white/60">AI & Automation Fabric</span>
             </span>
-            <span className="hidden flex-col border-l border-white/60 pl-3 leading-relaxed md:flex">
+            <span className="hidden flex-col border-l border-white/60 pl-4 leading-relaxed md:flex">
               <span className="text-[10px] font-semibold uppercase tracking-[0.32em] text-vae-turquoise">
                 Versatile AI
               </span>
@@ -672,7 +672,6 @@ const Header: React.FC = () => {
               <CtaLink
                 ctaId="contact.schedule_call"
                 ref={ctaRef as unknown as React.Ref<HTMLAnchorElement>}
-                variant="custom"
                 className="text-text-primary dark:border-white/12 inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/80 px-5 py-2 text-sm font-semibold shadow-[0_18px_44px_-28px_rgba(15,23,42,0.35)] transition-all duration-300 hover:border-vae-turquoise hover:text-vae-turquoise dark:bg-white/[0.08] dark:text-white"
                 data-green-signal="true"
                 aria-label="Direkt Termin buchen (extern)"
@@ -838,7 +837,6 @@ const Header: React.FC = () => {
                 <div className="mt-auto space-y-4">
                   <CtaLink
                     ctaId="contact.schedule_call"
-                    variant="custom"
                     className="flex min-h-[52px] w-full items-center justify-center rounded-xl bg-vae-turquoise px-6 py-4 text-base font-semibold text-white shadow-lg shadow-vae-turquoise/30 transition-all duration-300 hover:bg-vae-turquoise-dark hover:shadow-vae-turquoise/40"
                     onClick={handleMobileNavClick}
                     aria-label="Direkt Termin buchen (extern)"

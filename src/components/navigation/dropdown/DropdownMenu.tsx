@@ -1,0 +1,330 @@
+import { ChevronDown, Menu, X } from 'lucide-react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { DropdownContent } from './DropdownContent'
+import { DropdownMenuItem } from './DropdownMenuItem'
+import { DropdownMenu as DropdownMenuType, MENU_DATA } from './menuData'
+import { useMediaQuery } from './useMediaQuery'
+
+const HOVER_DEBOUNCE_MS = 80
+const CLOSE_DELAY_MS = 120
+
+interface DropdownMenuProps {
+  menus?: DropdownMenuType[]
+  className?: string
+  initialOpenMenuId?: string | null
+  initialActiveItems?: Partial<Record<string, string>>
+}
+
+const buildInitialActiveState = (menuList: DropdownMenuType[]) =>
+  menuList.reduce<Record<string, string>>((acc, menu) => {
+    acc[menu.id] = menu.menuItems[0]?.id ?? ''
+    return acc
+  }, {})
+
+const mergeInitialActiveState = (menuList: DropdownMenuType[], overrides?: Partial<Record<string, string>>) => {
+  const base = buildInitialActiveState(menuList)
+  if (!overrides) return base
+  return Object.entries(overrides).reduce<Record<string, string>>((acc, [key, value]) => {
+    if (value) {
+      acc[key] = value
+    }
+    return acc
+  }, base)
+}
+
+export const DropdownMenu: React.FC<DropdownMenuProps> = ({
+  menus = MENU_DATA,
+  className,
+  initialOpenMenuId = null,
+  initialActiveItems,
+}) => {
+  const isDesktop = useMediaQuery('(min-width: 768px)')
+  const [openMenuId, setOpenMenuId] = useState<string | null>(initialOpenMenuId)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [expandedMobileMenus, setExpandedMobileMenus] = useState<Record<string, boolean>>({})
+  const [activeContentByMenu, setActiveContentByMenu] = useState<Record<string, string>>(() =>
+    mergeInitialActiveState(menus, initialActiveItems)
+  )
+
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({})
+  const itemRefs = useRef<Record<string, (HTMLAnchorElement | null)[]>>({})
+
+  const activeContentCache = useMemo(() => activeContentByMenu, [activeContentByMenu])
+
+  useEffect(() => {
+    setActiveContentByMenu(mergeInitialActiveState(menus, initialActiveItems))
+  }, [menus, initialActiveItems])
+
+  useEffect(() => {
+    setOpenMenuId(initialOpenMenuId ?? null)
+  }, [initialOpenMenuId])
+
+  useEffect(() => {
+    if (!openMenuId) return undefined
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (!containerRef.current?.contains(event.target as Node)) {
+        setOpenMenuId(null)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [openMenuId])
+
+  useEffect(() => {
+    if (!isDesktop) {
+      setOpenMenuId(null)
+    }
+  }, [isDesktop])
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current)
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+    }
+  }, [])
+
+  const setMenuActiveItem = useCallback((menuId: string, itemId: string) => {
+    setActiveContentByMenu(prev => {
+      if (prev[menuId] === itemId) return prev
+      return { ...prev, [menuId]: itemId }
+    })
+  }, [])
+
+  const handleMenuItemHover = (menuId: string, itemId: string) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current)
+    hoverTimeoutRef.current = setTimeout(() => setMenuActiveItem(menuId, itemId), HOVER_DEBOUNCE_MS)
+  }
+
+  const openMenu = (menuId: string) => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+    setOpenMenuId(menuId)
+  }
+
+  const closeMenu = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+    closeTimeoutRef.current = setTimeout(() => setOpenMenuId(null), CLOSE_DELAY_MS)
+  }
+
+  const handleTriggerKeyDown =
+    (menuId: string, hasItems: boolean) => (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (!hasItems) return
+
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        if (openMenuId === menuId) {
+          setOpenMenuId(null)
+        } else {
+          openMenu(menuId)
+          itemRefs.current[menuId]?.[0]?.focus()
+        }
+      }
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault()
+        openMenu(menuId)
+        itemRefs.current[menuId]?.[0]?.focus()
+      }
+
+      if (event.key === 'Escape') {
+        setOpenMenuId(null)
+        triggerRefs.current[menuId]?.blur()
+      }
+    }
+
+  const handleMenuItemKeyDown =
+    (menuId: string, itemIndex: number, totalItems: number) => (event: React.KeyboardEvent<HTMLAnchorElement>) => {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault()
+        const nextIndex = (itemIndex + 1) % totalItems
+        itemRefs.current[menuId]?.[nextIndex]?.focus()
+      }
+
+      if (event.key === 'ArrowUp') {
+        event.preventDefault()
+        const prevIndex = (itemIndex - 1 + totalItems) % totalItems
+        itemRefs.current[menuId]?.[prevIndex]?.focus()
+      }
+
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        setOpenMenuId(null)
+        triggerRefs.current[menuId]?.focus()
+      }
+    }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prev => !prev)
+  }
+
+  const toggleMobileSection = (menuId: string) => {
+    setExpandedMobileMenus(prev => ({ ...prev, [menuId]: !prev[menuId] }))
+  }
+
+  const renderDesktopMenu = () => (
+    <div className="hidden w-full items-center justify-end gap-6 lg:flex" role="menubar" aria-label="Hauptnavigation">
+      {menus.map(menu => {
+        const activeContentId = activeContentCache[menu.id] || menu.menuItems[0]?.id
+        const panelVisible = openMenuId === menu.id
+
+        return (
+          <div
+            key={menu.id}
+            className="relative"
+            onMouseEnter={() => openMenu(menu.id)}
+            onMouseLeave={closeMenu}
+            onFocusCapture={() => openMenu(menu.id)}
+          >
+            <button
+              ref={node => {
+                triggerRefs.current[menu.id] = node
+              }}
+              className={`group inline-flex items-center gap-2 px-1 py-2 text-xs font-semibold uppercase tracking-[0.28em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/50 ${
+                panelVisible
+                  ? 'text-vae-turquoise'
+                  : 'text-gray-700 hover:text-gray-900 dark:text-white/80 dark:hover:text-white'
+              }`}
+              aria-haspopup="true"
+              aria-expanded={panelVisible}
+              aria-controls={`${menu.id}-panel`}
+              onKeyDown={handleTriggerKeyDown(menu.id, menu.menuItems.length > 0)}
+            >
+              {menu.label}
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  panelVisible
+                    ? 'rotate-180 text-vae-turquoise'
+                    : 'text-gray-500 group-hover:text-gray-700 dark:text-white/50 dark:group-hover:text-white/80'
+                }`}
+              />
+            </button>
+
+            <div
+              id={`${menu.id}-panel`}
+              role="menu"
+              aria-hidden={!panelVisible}
+              className={`absolute left-1/2 top-full z-40 mt-3 w-[min(90vw,56rem)] -translate-x-1/2 rounded-2xl border shadow-lg backdrop-blur-xl transition-all duration-200 ease-out ${
+                panelVisible
+                  ? 'pointer-events-auto translate-y-0 opacity-100'
+                  : 'pointer-events-none -translate-y-2 opacity-0'
+              } ${'dark:bg-[hsl(0,0%,6%)]/98 border-gray-200/60 bg-white/95 shadow-gray-900/5 dark:border-white/10 dark:shadow-black/40'}`}
+            >
+              {/* Subtitle Header - elegant am Anfang des Dropdowns */}
+              {menu.subtitle && (
+                <div className="border-b border-gray-200/50 px-6 py-3 dark:border-white/10">
+                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-gray-500/80 dark:text-white/50">
+                    {menu.subtitle}
+                  </p>
+                </div>
+              )}
+
+              <div className="flex flex-col gap-4 p-4 lg:flex-row">
+                <div className="lg:w-[40%]">
+                  <ul className="space-y-2" role="menu" aria-label={`${menu.label} Navigation`}>
+                    {menu.menuItems.map((item, index) => (
+                      <DropdownMenuItem
+                        key={item.id}
+                        item={item}
+                        isActive={activeContentId === item.id}
+                        onHover={itemId => handleMenuItemHover(menu.id, itemId)}
+                        onKeyDown={handleMenuItemKeyDown(menu.id, index, menu.menuItems.length)}
+                        itemRef={node => {
+                          if (!itemRefs.current[menu.id]) itemRefs.current[menu.id] = []
+                          itemRefs.current[menu.id][index] = node
+                        }}
+                      />
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="lg:w-[60%]">
+                  <DropdownContent content={menu.content[activeContentId || '']} />
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+
+  const renderMobileMenu = () => (
+    <div className="w-full lg:hidden" aria-label="Mobile Navigation">
+      <button
+        type="button"
+        onClick={toggleMobileMenu}
+        aria-expanded={isMobileMenuOpen}
+        className="flex w-full items-center justify-between rounded-full border border-white/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white"
+      >
+        <span>Menü</span>
+        {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </button>
+
+      {isMobileMenuOpen && (
+        <div className="mt-4 space-y-3 rounded-3xl border border-white/10 bg-bg-darker/90 p-4 shadow-2xl shadow-black/40">
+          {menus.map(menu => {
+            const isExpanded = expandedMobileMenus[menu.id]
+            const activeContentId = activeContentCache[menu.id] || menu.menuItems[0]?.id
+
+            return (
+              <div key={menu.id} className="overflow-hidden rounded-2xl border border-white/10">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.2em] text-white"
+                  aria-expanded={isExpanded}
+                  aria-controls={`${menu.id}-mobile-panel`}
+                  onClick={() => toggleMobileSection(menu.id)}
+                >
+                  {menu.label}
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-vae-turquoise' : 'text-white/70'}`}
+                  />
+                </button>
+
+                <div
+                  id={`${menu.id}-mobile-panel`}
+                  className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                >
+                  <div className="min-h-0 space-y-4 px-4 pb-4 text-white/80">
+                    <ul className="space-y-2">
+                      {menu.menuItems.map(item => (
+                        <li key={item.id}>
+                          <a
+                            href={item.href}
+                            onFocus={() => setMenuActiveItem(menu.id, item.id)}
+                            onMouseEnter={() => setMenuActiveItem(menu.id, item.id)}
+                            className="block rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-white/90"
+                          >
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <DropdownContent content={menu.content[activeContentId || '']} />
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+
+  return (
+    <div ref={containerRef} className={`w-full ${className ?? ''}`}>
+      {renderDesktopMenu()}
+      {renderMobileMenu()}
+    </div>
+  )
+}

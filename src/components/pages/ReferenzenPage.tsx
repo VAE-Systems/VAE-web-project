@@ -26,7 +26,7 @@ import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
-const calendlyUrl = 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz'
+const bookingRoute = '/termin-buchen'
 
 interface Metric {
   label: string
@@ -627,39 +627,11 @@ const TechBadgeModal: React.FC<TechBadgeModalProps> = ({ badge, onClose }) => {
 const ReferenzenPage: React.FC = () => {
   const [expandedCase, setExpandedCase] = useState<string | null>(caseStudies[0].id)
   const [selectedBadge, setSelectedBadge] = useState<TechBadge | null>(null)
-  const [calendlyReady, setCalendlyReady] = useState(false)
   const motionDisabled = useRef(prefersReducedMotion())
 
   const openCalendly = useCallback(() => {
     if (typeof window === 'undefined') return
-    const calendly = (window as any).Calendly
-    if (calendly?.initPopupWidget) {
-      calendly.initPopupWidget({ url: calendlyUrl })
-      setCalendlyReady(true)
-    } else {
-      window.open(calendlyUrl, '_blank', 'noopener,noreferrer')
-    }
-  }, [])
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') return
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      'script[src="https://assets.calendly.com/assets/external/widget.js"]'
-    )
-    if (existingScript) {
-      setCalendlyReady(true)
-      return
-    }
-    const script = document.createElement('script')
-    script.src = 'https://assets.calendly.com/assets/external/widget.js'
-    script.async = true
-    script.onload = () => setCalendlyReady(true)
-    document.head.appendChild(script)
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script)
-      }
-    }
+    window.open(bookingRoute, '_self')
   }, [])
 
   const seoJsonLd = useMemo(() => {
@@ -850,11 +822,6 @@ const ReferenzenPage: React.FC = () => {
               </Link>
             </MagneticButton>
           </div>
-          {!calendlyReady && (
-            <p className="text-xs text-text-muted">
-              Calendly lädt … falls nichts passiert, öffnen wir den Terminplaner in einem neuen Tab.
-            </p>
-          )}
         </div>
       </section>
 

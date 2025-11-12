@@ -1,5 +1,3 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import Seo from '../ui/Seo'
 import {
   type LucideIcon,
   Activity,
@@ -20,9 +18,11 @@ import {
   Users,
   Zap,
 } from 'lucide-react'
+import React, { useCallback, useRef, useState } from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
+import Seo from '../ui/Seo'
 
-const calendlyUrl = 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz'
+const calendlyUrl = '/termin-buchen'
 
 const trustBadges = ['Monatlich kündbar', 'Flexible Bindung', '< 6h Reaktionszeit']
 
@@ -247,12 +247,7 @@ const BetreuungPage: React.FC = () => {
 
   const openCalendly = useCallback(() => {
     if (typeof window === 'undefined') return
-    const calendly = (window as any).Calendly
-    if (calendly?.initPopupWidget) {
-      calendly.initPopupWidget({ url: calendlyUrl })
-    } else {
-      window.open(calendlyUrl, '_blank', 'noopener,noreferrer')
-    }
+    window.open(calendlyUrl, '_self')
   }, [])
 
   const scrollToServiceLevels = useCallback((e?: React.MouseEvent) => {
@@ -268,25 +263,6 @@ const BetreuungPage: React.FC = () => {
 
   const toggleFaq = useCallback((index: number) => {
     setOpenFaqIndex(prev => (prev === index ? null : index))
-  }, [])
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') return
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      'script[src="https://assets.calendly.com/assets/external/widget.js"]'
-    )
-    if (existingScript) return
-
-    const script = document.createElement('script')
-    script.src = 'https://assets.calendly.com/assets/external/widget.js'
-    script.async = true
-    document.head.appendChild(script)
-
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script)
-      }
-    }
   }, [])
 
   return (
@@ -443,6 +419,104 @@ const BetreuungPage: React.FC = () => {
                 <p className="mt-3 text-sm text-gray-700 dark:text-text-secondary">{pillar.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Visual Section: Team in Action */}
+      <section className="border-b border-gray-200 py-20 dark:border-white/5">
+        <div className="container-vae">
+          <header className="mx-auto mb-14 max-w-3xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Unser Ansatz</p>
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Direkte Kommunikation, klare Prozesse
+            </h2>
+            <p className="mt-4 text-base text-gray-700 dark:text-text-secondary md:text-lg">
+              Transparenz und enge Zusammenarbeit sind der Kern unserer Betreuung
+            </p>
+          </header>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {/* Jakob erklärt an Leinwand */}
+            <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-vae-turquoise/60 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+              <div className="mb-3 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                  <Users className="h-5 w-5 text-vae-turquoise" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Persönliche Beratung</h3>
+                  <p className="text-xs text-gray-600 dark:text-text-secondary">Review & Strategie</p>
+                </div>
+              </div>
+              <picture>
+                <source
+                  srcSet="/images/optimized/Jakob-steht-vor-Leinwand-erklärt-und-zeigt-auf-Texte.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="/images/optimized/Jakob-steht-vor-Leinwand-erklärt-und-zeigt-auf-Texte.jpg"
+                  alt="VAE Team erklärt Infrastruktur-Strategie"
+                  loading="lazy"
+                  className="h-auto w-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </picture>
+            </div>
+
+            {/* Hand zeigt Details */}
+            <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-vae-turquoise/60 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+              <div className="mb-3 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                  <Target className="h-5 w-5 text-vae-turquoise" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Detailgenau & strukturiert</h3>
+                  <p className="text-xs text-gray-600 dark:text-text-secondary">Keine Black Box</p>
+                </div>
+              </div>
+              <picture>
+                <source
+                  srcSet="/images/optimized/Hand-mit-Brille-zeigt-auf-Text-an-Leinwand-2-beste-version.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="/images/optimized/Hand-mit-Brille-zeigt-auf-Text-an-Leinwand-2-beste-version.jpg"
+                  alt="Detaillierte technische Dokumentation"
+                  loading="lazy"
+                  className="h-auto w-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </picture>
+            </div>
+          </div>
+
+          {/* Benefits unter den Bildern */}
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <Activity className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Proaktives Monitoring</h4>
+              <p className="text-sm text-gray-700 dark:text-text-secondary">
+                Wir erkennen Probleme, bevor sie auftreten
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <Lightbulb className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Strategische Optimierung</h4>
+              <p className="text-sm text-gray-700 dark:text-text-secondary">
+                Monatliche Reviews mit Verbesserungsvorschlägen
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <RefreshCcw className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Kontinuierliche Updates</h4>
+              <p className="text-sm text-gray-700 dark:text-text-secondary">
+                Immer auf dem neuesten Stand, ohne Ausfälle
+              </p>
+            </div>
           </div>
         </div>
       </section>

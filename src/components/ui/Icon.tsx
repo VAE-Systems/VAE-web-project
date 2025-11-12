@@ -2,6 +2,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  Award,
   Bot,
   Boxes,
   Brain,
@@ -10,6 +11,7 @@ import {
   CalendarCheck,
   CalendarClock,
   Check,
+  CheckCircle,
   ChevronDown,
   ChevronUp,
   Cloud,
@@ -117,6 +119,8 @@ export type IconName =
   | 'design_services'
   | 'widgets'
   | 'deployed_code'
+  | 'workspace_premium'
+  | 'check_circle'
   | string
 
 const MAP: Record<string, React.ComponentType<any>> = {
@@ -134,6 +138,7 @@ const MAP: Record<string, React.ComponentType<any>> = {
   upload: Upload,
   close: X,
   check: Check,
+  check_circle: CheckCircle,
   menu: Menu,
 
   // Communication Icons
@@ -200,6 +205,7 @@ const MAP: Record<string, React.ComponentType<any>> = {
   auto_awesome: Sparkles,
   tune: SlidersHorizontal,
   design_services: Pencil,
+  workspace_premium: Award,
 
   // Fallback for energy/power icons
   bolt: Zap,

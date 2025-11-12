@@ -15,7 +15,7 @@ import {
   UploadCloud,
   Users,
 } from 'lucide-react'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
@@ -236,7 +236,7 @@ const toolOptions: ToolOption[] = [
   { id: 'slack', label: 'Slack (€7/User/Monat)', price: 7 },
 ]
 
-const calendlyUrl = 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz'
+const calendlyUrl = '/termin-buchen'
 
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)
@@ -292,11 +292,7 @@ const SetupPage: React.FC = () => {
   const maxComparisonValue = Math.max(yearlySaaSCost, estimatedSetupCost + openSourceAnnual, openSourceAnnual)
 
   const openCalendly = useCallback(() => {
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      ;(window as any).Calendly.initPopupWidget({ url: calendlyUrl })
-    } else {
-      window.open(calendlyUrl, '_blank', 'noopener,noreferrer')
-    }
+    window.open(calendlyUrl, '_self')
   }, [])
 
   const scrollToROI = useCallback(() => {
@@ -308,19 +304,6 @@ const SetupPage: React.FC = () => {
 
   const toggleFaq = useCallback((index: number) => {
     setOpenFaqIndex(prev => (prev === index ? null : index))
-  }, [])
-
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://assets.calendly.com/assets/external/widget.js'
-    script.async = true
-    document.head.appendChild(script)
-
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script)
-      }
-    }
   }, [])
 
   return (
@@ -416,37 +399,75 @@ const SetupPage: React.FC = () => {
               Erstgespräch erhalten Sie eine präzise Schätzung.
             </p>
           </div>
-          <div className="relative min-h-[320px] rounded-3xl border border-gray-200 bg-white p-8 shadow-md dark:border-white/10 dark:bg-white/5">
+          <div className="relative min-h-[320px] rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 via-white/5 to-transparent p-8 shadow-lg backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/5">
             <div className="relative flex h-full flex-col justify-between gap-8">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
+              <div className="rounded-2xl border border-red-500/30 bg-red-500/5 p-5 backdrop-blur-sm">
+                <p className="mb-1 text-sm font-semibold uppercase tracking-[0.3em] text-red-400/80 dark:text-red-300/70">
                   Vorher
                 </p>
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Fragmentierte SaaS-Landschaft</h3>
-                <p className="mt-2 text-gray-700 dark:text-text-secondary">
+                <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                   Viele Tools, hohe Kosten, Daten verstreut, Abhängigkeit von Anbietern.
                 </p>
               </div>
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Nachher</p>
+              <div className="rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/10 p-5 backdrop-blur-sm">
+                <p className="mb-1 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/90">Nachher</p>
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   Einheitliche Open-Source-Plattform
                 </h3>
-                <p className="mt-2 text-gray-700 dark:text-text-secondary">
+                <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                   Alle Prozesse auf Ihrer Infrastruktur, vollständig in Ihrer Kontrolle.
                 </p>
               </div>
               <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-text-secondary">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:from-white/0 dark:via-white/50 dark:to-white/0" />
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
                 End-to-end orchestriert von VAE
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:from-white/0 dark:via-white/50 dark:to-white/0" />
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 3 */}
+      {/* Section 3 - Produktionsreife Systeme */}
+      <section className="relative overflow-hidden py-20">
+        <div className="container-vae relative">
+          <header className="mx-auto mb-14 max-w-3xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">Ihre Infrastruktur</p>
+            <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">Produktionsreife Systeme</h2>
+            <p className="mt-4 text-base text-text-secondary md:text-lg">
+              Vollständig konfiguriert, dokumentiert und unter Ihrer Kontrolle
+            </p>
+          </header>
+
+          {/* Feature Highlights */}
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <Server className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h4 className="mb-2 text-base font-semibold text-white">Auf Ihren Servern</h4>
+              <p className="text-sm text-text-secondary">Volle Datenkontrolle, keine Cloud-Abhängigkeit</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <Users className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h4 className="mb-2 text-base font-semibold text-white">Intuitiv bedienbar</h4>
+              <p className="text-sm text-text-secondary">Moderne UI/UX, schnelle Einarbeitung</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <ShieldCheck className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h4 className="mb-2 text-base font-semibold text-white">Enterprise-Ready</h4>
+              <p className="text-sm text-text-secondary">Security, Backups, Monitoring inklusive</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4 - Original Content */}
       <section className="py-20">
         <div className="container-vae">
           <div className="mx-auto max-w-2xl text-center">

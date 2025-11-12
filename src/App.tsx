@@ -4,8 +4,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes, useLocation } from 'r
 // Layout Components
 import ErrorBoundary from '@components/ErrorBoundary'
 import Footer from '@components/layout/Footer'
-// import Header from '@components/layout/Header' // Old Header
-import HeaderModern from '@components/layout/HeaderModern' // New Modern Header
+import Header from '@components/layout/Header'
 import ScrollProgress from '@components/navigation/ScrollProgress'
 import SectionNavigation from '@components/navigation/SectionNavigation'
 
@@ -33,6 +32,13 @@ const ContactPage = React.lazy(() => import('@components/pages/ContactPage'))
 const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage'))
 const PrivacyPage = React.lazy(() => import('@components/pages/PrivacyPage'))
 const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySettings'))
+const BookingLandingPage = React.lazy(() => import('@components/pages/BookingLandingPage'))
+const TechStackResourcePage = React.lazy(() => import('@components/pages/TechStackResourcePage'))
+const ResourcesBlogPage = React.lazy(() => import('@components/pages/ResourcesBlogPage'))
+const ResourcesFaqPage = React.lazy(() => import('@components/pages/ResourcesFaqPage'))
+const ValuesPage = React.lazy(() => import('@components/pages/ValuesPage'))
+const LeadershipPage = React.lazy(() => import('@components/pages/LeadershipPage'))
+const CareerPage = React.lazy(() => import('@components/pages/CareerPage'))
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
@@ -82,7 +88,7 @@ const App: React.FC = () => {
           <div className="min-h-[100dvh] bg-bg-darker text-text-light">
             <SkipToContent />
             <ScrollProgressBar />
-            <HeaderModern />
+            <Header />
             <NavigationSwitcher />
             <main id="main-content" className="pt-20">
               <Suspense fallback={<LoadingSpinner />}>
@@ -94,6 +100,9 @@ const App: React.FC = () => {
                   <Route path="/services/setup" element={<SetupPage />} />
                   <Route path="/services/betreuung" element={<BetreuungPage />} />
                   <Route path="/services/beratung" element={<BeratungPage />} />
+                  <Route path="/leistungen/strategie" element={<BeratungPage />} />
+                  <Route path="/leistungen/infrastruktur" element={<SetupPage />} />
+                  <Route path="/leistungen/betreuung" element={<BetreuungPage />} />
 
                   {/* Redirects from old URLs */}
                   <Route path="/infrastruktur" element={<Navigate to="/services/setup" replace />} />
@@ -103,7 +112,15 @@ const App: React.FC = () => {
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/about/referenzen" element={<ReferenzenPage />} />
                   <Route path="/case-studies" element={<ReferenzenPage />} />
+                  <Route path="/ressourcen/case-studies" element={<ReferenzenPage />} />
+                  <Route path="/ressourcen/tech-stack" element={<TechStackResourcePage />} />
+                  <Route path="/ressourcen/blog" element={<ResourcesBlogPage />} />
+                  <Route path="/ressourcen/faq" element={<ResourcesFaqPage />} />
+                  <Route path="/ueber-uns/werte" element={<ValuesPage />} />
+                  <Route path="/ueber-uns/leitung" element={<LeadershipPage />} />
+                  <Route path="/ueber-uns/karriere" element={<CareerPage />} />
                   <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/termin-buchen" element={<BookingLandingPage />} />
 
                   {/* Redirects */}
                   <Route path="/kontakt" element={<Navigate to="/contact" replace />} />

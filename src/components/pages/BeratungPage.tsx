@@ -7,12 +7,12 @@ import {
   Calendar,
   CheckCircle2,
   ChevronDown,
-  Minus,
-  Plus,
   FileText,
   GitBranch,
   Heart,
   Map,
+  Minus,
+  Plus,
   Rocket,
   Search,
   Target,
@@ -264,17 +264,9 @@ const BeratungPage: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null)
   const answerRefs = useRef<Record<number, HTMLDivElement | null>>({})
 
-  // Calendly Integration
+  // Booking CTA now routes über Landing-Page
   const openCalendly = useCallback(() => {
-    // Check if Calendly is loaded
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      ;(window as any).Calendly.initPopupWidget({
-        url: 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz',
-      })
-    } else {
-      // Fallback: Open in new tab
-      window.open('https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz', '_blank')
-    }
+    window.open('/termin-buchen', '_self')
   }, [])
 
   // Smooth scroll to section
@@ -288,20 +280,6 @@ const BeratungPage: React.FC = () => {
   // FAQ Toggle
   const toggleFAQ = useCallback((index: number) => {
     setOpenFAQ(prev => (prev === index ? null : index))
-  }, [])
-
-  // Load Calendly Script
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://assets.calendly.com/assets/external/widget.js'
-    script.async = true
-    document.head.appendChild(script)
-
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script)
-      }
-    }
   }, [])
 
   // GSAP Animations
@@ -554,38 +532,54 @@ const BeratungPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Right Column - Image Placeholder */}
-            <div className="relative overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/10 to-transparent">
-              <div className="from-bg-primary/5 to-bg-primary/10 aspect-[4/3] bg-gradient-to-br">
-                {/* Placeholder for image - abstract illustration */}
-                <div className="flex h-full items-center justify-center p-12">
-                  <div className="relative">
-                    <div className="absolute inset-0 animate-pulse rounded-full bg-vae-turquoise/20 blur-3xl" />
-                    <div className="relative space-y-4">
-                      <div className="flex items-center gap-4">
-                        <div className="h-16 w-16 rounded-lg bg-vae-turquoise/30" />
-                        <div className="space-y-2">
-                          <div className="h-4 w-32 rounded bg-vae-turquoise/20" />
-                          <div className="h-3 w-24 rounded bg-vae-turquoise/10" />
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="h-16 w-16 rounded-lg bg-vae-turquoise/25" />
-                        <div className="space-y-2">
-                          <div className="h-4 w-28 rounded bg-vae-turquoise/15" />
-                          <div className="h-3 w-20 rounded bg-vae-turquoise/10" />
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="h-16 w-16 rounded-lg bg-vae-turquoise/20" />
-                        <div className="space-y-2">
-                          <div className="h-4 w-36 rounded bg-vae-turquoise/15" />
-                          <div className="h-3 w-28 rounded bg-vae-turquoise/10" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            {/* Right Column - Julian Hand + Jakob Tafel mit Hover-Animation */}
+            <div className="grid gap-6">
+              {/* Julian Hand mit Smartwatch */}
+              <div className="group relative overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 to-transparent shadow-lg transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-xl hover:shadow-vae-turquoise/20">
+                <picture>
+                  <source
+                    srcSet="/images/optimized/Julian-Hand-Mit-Smartwatch-zeigt-auf-texte-und-so.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/images/optimized/Julian-Hand-Mit-Smartwatch-zeigt-auf-texte-und-so.jpg"
+                    alt="Präzise Analyse und strategische Planung"
+                    loading="lazy"
+                    className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </picture>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-darker/20 to-transparent transition-opacity duration-500 group-hover:opacity-70" />
+                {/* Türkiser Glanz-Effekt beim Hover */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-vae-turquoise/0 via-vae-turquoise/0 to-vae-turquoise/0 opacity-0 transition-all duration-500 group-hover:from-vae-turquoise/10 group-hover:via-vae-turquoise/5 group-hover:to-transparent group-hover:opacity-100" />
+              </div>
+
+              {/* Jakob vor Tafel - mit Hover-Übergang zwischen Bild 1 und 2 */}
+              <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 to-transparent shadow-lg transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-xl hover:shadow-vae-turquoise/20">
+                {/* Bild 1 - Standard */}
+                <picture className="absolute inset-0 transition-opacity duration-700 ease-in-out group-hover:opacity-0">
+                  <source srcSet="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp" type="image/webp" />
+                  <img
+                    src="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.jpg"
+                    alt="Strategieentwicklung an der Tafel"
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </picture>
+
+                {/* Bild 2 - Bei Hover */}
+                <picture className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100">
+                  <source srcSet="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie-2.webp" type="image/webp" />
+                  <img
+                    src="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie-2.jpg"
+                    alt="Strategieentwicklung an der Tafel - Details"
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </picture>
+
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-darker/20 to-transparent transition-opacity duration-500 group-hover:opacity-70" />
+                {/* Türkiser Glanz-Effekt beim Hover */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-vae-turquoise/0 via-vae-turquoise/0 to-vae-turquoise/0 opacity-0 transition-all duration-500 group-hover:from-vae-turquoise/10 group-hover:via-vae-turquoise/5 group-hover:to-transparent group-hover:opacity-100" />
               </div>
             </div>
           </div>

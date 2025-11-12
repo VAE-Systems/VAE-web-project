@@ -15,11 +15,12 @@ interface SectionData {
 // Reihenfolge an neue Homepage-Story angepasst
 const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
-  { id: 'testphase', iconName: 'workspace_premium', label: 'Testphase' },
-  { id: 'outcomes', iconName: 'insights', label: 'Ergebnisse' },
+  { id: 'why-open-source', iconName: 'lightbulb', label: 'Warum Open Source?' },
   { id: 'services', iconName: 'settings', label: 'Services' },
+  { id: 'tech-showcase', iconName: 'code', label: 'Technologien' },
+  { id: 'social-proof', iconName: 'work', label: 'Projekte' },
   { id: 'process', iconName: 'timeline', label: 'Prozess' },
-  { id: 'abschluss', iconName: 'check_circle', label: 'Nächste Schritte' },
+  { id: 'abschluss', iconName: 'check_circle', label: 'Kontakt' },
 ]
 
 /**

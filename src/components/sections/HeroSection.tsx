@@ -42,10 +42,13 @@ const HeroSection: React.FC = () => {
           <NeuralNetworkBackground />
         </React.Suspense>
       )}
-      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-70 mix-blend-screen dark:opacity-50">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(var(--vae-turquoise-rgb),0.05),transparent_55%)]" />
+      {/* Reduzierter Kontrast mit sanfteren Gradienten */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-50 mix-blend-screen dark:opacity-30">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.10),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(var(--vae-turquoise-rgb),0.03),transparent_60%)]" />
       </div>
+      {/* Soft Overlay für noch sanfteren Kontrast */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-bg-darker/10 dark:bg-bg-darker/20" />
       <div className="container-vae relative z-10 py-20 sm:py-28 lg:py-32">
         <div className="mx-auto flex min-h-[70vh] max-w-5xl flex-col items-center justify-center gap-10 text-center">
           <div className="space-y-6">

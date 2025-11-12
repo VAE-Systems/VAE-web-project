@@ -30,7 +30,13 @@
     /* Vite environment types */
     "types": ["vite/client", "node"]
   },
-  "include": ["src", "archive/Header.tsx", "archive/pages/ProductsPage.tsx", "archive/pages/ServicesPage.tsx"],
+  "include": [
+    "src",
+    "archive/Header_old.tsx",
+    "archive/HeaderModern.tsx",
+    "archive/pages/ProductsPage.tsx",
+    "archive/pages/ServicesPage.tsx"
+  ],
   "exclude": ["node_modules"],
   "references": [
     {

@@ -1,22 +1,22 @@
-import React, { useEffect, useRef } from 'react'
+import { useTheme } from '@/contexts/ThemeContext'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useTheme } from '@/contexts/ThemeContext'
+import React, { useEffect, useRef } from 'react'
 import CaseStudiesSection from '../sections/CaseStudiesSection'
 import TechStackSection from '../sections/TechStackSection'
 // ProviderComparison vorerst entfernt bis Redesign
 // import ProviderComparisonSection from '../sections/ProviderComparison'
-import ProcessSection from '../sections/ProcessSection'
-import StoryTeamSection from '../sections/StoryTeamSection'
-import WhyOutcomesSection from '../sections/WhyOutcomesSection'
-import Seo from '../ui/Seo'
-import ProductsCardsGrid from '../sections/ProductsCardsGrid'
+import Icon from '@/components/ui/Icon'
 import Reveal from '@/components/ui/Reveal'
-import Card from '../ui/Card'
+import { teamMembers } from '@/content/team'
 import { servicesCategories } from '../../content/services'
 import Breadcrumbs from '../navigation/Breadcrumbs'
-import Icon from '@/components/ui/Icon'
-import { teamMembers } from '@/content/team'
+import ProcessSection from '../sections/ProcessSection'
+import ProductsCardsGrid from '../sections/ProductsCardsGrid'
+import StoryTeamSection from '../sections/StoryTeamSection'
+import WhyOutcomesSection from '../sections/WhyOutcomesSection'
+import Card from '../ui/Card'
+import Seo from '../ui/Seo'
 
 /**
  * AboutPage Component
@@ -238,6 +238,34 @@ const AboutPage: React.FC = () => {
                   className="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-vae-turquoise/25 opacity-0 blur-3xl transition-opacity group-hover:opacity-70"
                   aria-hidden="true"
                 />
+
+                {/* Portrait Bild mit Gradient Overlay - kleinere Darstellung */}
+                <div
+                  className={`relative mx-auto mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-vae-turquoise/5 to-vae-turquoise/10 ${member.id === 'jakob' ? 'max-w-[352px]' : 'max-w-xs'}`}
+                >
+                  <picture>
+                    <source
+                      srcSet={`/images/optimized/${member.id === 'julian' ? 'Julian-Portrait-Leitung-mit-Schatten' : 'Jakob-Portrait-Leitung-mit-Schatten'}.webp`}
+                      type="image/webp"
+                    />
+                    <img
+                      src={`/images/optimized/${member.id === 'julian' ? 'Julian-Portrait-Leitung-mit-Schatten' : 'Jakob-Portrait-Leitung-mit-Schatten'}.png`}
+                      alt={`${member.name} Portrait`}
+                      loading="lazy"
+                      className="h-auto w-full object-cover object-center transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
+                      style={{
+                        mixBlendMode: 'multiply',
+                        aspectRatio: '3/4',
+                        objectPosition: member.id === 'julian' ? 'center top' : 'center 20%',
+                        maxHeight: '300px',
+                        transform: member.id === 'jakob' ? 'scale(1.15)' : 'scale(1)',
+                      }}
+                    />
+                  </picture>
+                  {/* Subtle Border Glow */}
+                  <div className="pointer-events-none absolute inset-0 rounded-xl border border-vae-turquoise/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+
                 <div className="mb-3 text-left">
                   <h3 className="text-lg font-semibold leading-snug tracking-tight text-text-light">{member.name}</h3>
                   <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-vae-turquoise">{member.role}</p>

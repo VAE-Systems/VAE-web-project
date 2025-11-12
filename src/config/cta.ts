@@ -129,10 +129,9 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
   // Direct scheduling (Notion booking link)
   'contact.schedule_call': {
     id: 'contact.schedule_call',
-    type: 'external',
-    url: 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz',
+    type: 'route',
+    path: '/termin-buchen',
     label: 'Kostenloses Erstgespräch',
-    newTab: true,
   },
   // Quick email CTA
   'contact.quick_email': {

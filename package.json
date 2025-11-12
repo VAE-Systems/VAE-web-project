@@ -15,7 +15,10 @@
     "type-check": "tsc --noEmit",
     "prepare": "husky",
     "analyze": "ANALYZE=true npm run build",
-    "build-manifest": "node scripts/build-assets.js"
+    "build-manifest": "node scripts/build-assets.js",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@types/gsap": "^1.20.2",
@@ -49,11 +52,20 @@
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "rollup-plugin-visualizer": "^5.14.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.4",
     "terser": "^5.44.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vite-bundle-analyzer": "^0.7.0"
+    "vite-bundle-analyzer": "^0.7.0",
+    "@playwright/test": "^1.48.2",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/addon-interactions": "^8.2.9",
+    "@storybook/addon-viewport": "^8.2.9",
+    "@storybook/react": "^8.2.9",
+    "@storybook/react-vite": "^8.2.9",
+    "@storybook/test": "^8.2.9",
+    "storybook": "^8.2.9"
   },
   "keywords": [
     "vae-systems",

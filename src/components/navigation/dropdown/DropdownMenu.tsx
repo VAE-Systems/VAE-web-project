@@ -13,6 +13,7 @@ interface DropdownMenuProps {
   className?: string
   initialOpenMenuId?: string | null
   initialActiveItems?: Partial<Record<string, string>>
+  isHeaderScrolled?: boolean
 }
 
 const buildInitialActiveState = (menuList: DropdownMenuType[]) =>
@@ -188,7 +189,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               ref={node => {
                 triggerRefs.current[menu.id] = node
               }}
-              className={`group inline-flex items-center gap-2 px-1 py-2 text-xs font-semibold uppercase tracking-[0.28em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/50 ${
+              className={`group inline-flex items-center gap-2 px-1 py-2 text-xs font-semibold uppercase tracking-[0.28em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-darker ${
                 panelVisible
                   ? 'text-vae-turquoise'
                   : 'text-gray-700 hover:text-gray-900 dark:text-white/80 dark:hover:text-white'
@@ -216,12 +217,12 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'
-              } ${'dark:bg-[hsl(0,0%,6%)]/98 border-gray-200/60 bg-white/95 shadow-gray-900/5 dark:border-white/10 dark:shadow-black/40'}`}
+              } border-gray-200/60 bg-white/95 shadow-gray-900/5 dark:border-white/10 dark:bg-[hsla(0,0%,6%,0.98)] dark:shadow-black/40`}
             >
               {/* Subtitle Header - elegant am Anfang des Dropdowns */}
               {menu.subtitle && (
-                <div className="border-b border-gray-200/50 px-6 py-3 dark:border-white/10">
-                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-gray-500/80 dark:text-white/50">
+                <div className="border-b border-gray-200/50 bg-white/60 px-6 py-3 dark:border-white/10 dark:bg-white/0">
+                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-gray-500/80 dark:text-white/65">
                     {menu.subtitle}
                   </p>
                 </div>
@@ -263,30 +264,35 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         type="button"
         onClick={toggleMobileMenu}
         aria-expanded={isMobileMenuOpen}
-        className="flex w-full items-center justify-between rounded-full border border-white/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white"
+        className="flex w-full items-center justify-between rounded-full border border-gray-200/80 bg-white/95 px-4 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-gray-900 shadow-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:shadow-black/20 dark:focus-visible:ring-offset-bg-darker"
       >
         <span>Menü</span>
         {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
 
       {isMobileMenuOpen && (
-        <div className="mt-4 space-y-3 rounded-3xl border border-white/10 bg-bg-darker/90 p-4 shadow-2xl shadow-black/40">
+        <div className="mt-4 space-y-3 rounded-3xl border border-gray-200/80 bg-white/95 p-4 text-gray-900 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-bg-darker/90 dark:text-white dark:shadow-black/40">
           {menus.map(menu => {
             const isExpanded = expandedMobileMenus[menu.id]
             const activeContentId = activeContentCache[menu.id] || menu.menuItems[0]?.id
 
             return (
-              <div key={menu.id} className="overflow-hidden rounded-2xl border border-white/10">
+              <div
+                key={menu.id}
+                className="overflow-hidden rounded-2xl border border-gray-200/80 bg-white/90 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-black/20"
+              >
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.2em] text-white"
+                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.2em] text-gray-900 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-white dark:focus-visible:ring-offset-bg-darker"
                   aria-expanded={isExpanded}
                   aria-controls={`${menu.id}-mobile-panel`}
                   onClick={() => toggleMobileSection(menu.id)}
                 >
                   {menu.label}
                   <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-vae-turquoise' : 'text-white/70'}`}
+                    className={`h-4 w-4 transition-transform duration-200 ${
+                      isExpanded ? 'rotate-180 text-vae-turquoise' : 'text-gray-500 dark:text-white/60'
+                    }`}
                   />
                 </button>
 
@@ -294,7 +300,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   id={`${menu.id}-mobile-panel`}
                   className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                 >
-                  <div className="min-h-0 space-y-4 px-4 pb-4 text-white/80">
+                  <div className="min-h-0 space-y-4 px-4 pb-4 text-gray-700 dark:text-white/80">
                     <ul className="space-y-2">
                       {menu.menuItems.map(item => (
                         <li key={item.id}>
@@ -302,7 +308,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                             href={item.href}
                             onFocus={() => setMenuActiveItem(menu.id, item.id)}
                             onMouseEnter={() => setMenuActiveItem(menu.id, item.id)}
-                            className="block rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-white/90"
+                            className="block rounded-xl border border-gray-200/80 bg-white/95 px-4 py-3 text-sm font-medium text-gray-800 transition-all duration-200 hover:border-vae-turquoise/50 hover:text-vae-turquoise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white/80 dark:hover:border-white/40 dark:hover:text-white dark:focus-visible:ring-offset-bg-darker"
                           >
                             {item.label}
                           </a>

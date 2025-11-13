@@ -149,10 +149,10 @@ const HeaderModern: React.FC = () => {
         ${
           isScrolled
             ? isDark
-              ? 'bg-[hsl(0,0%,6%)]/98 border-b border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)] backdrop-blur-md'
+              ? 'border-b border-white/10 bg-[hsla(0,0%,6%,0.98)] shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)] backdrop-blur-md'
               : 'bg-white/98 border-b border-gray-200/80 shadow-[0_8px_32px_-8px_rgba(15,23,42,0.12)] backdrop-blur-md'
             : isDark
-              ? 'border-white/8 border-b bg-[hsl(0,0%,6%)]/95 backdrop-blur-md'
+              ? 'border-white/8 border-b bg-[hsla(0,0%,6%,0.95)] backdrop-blur-md'
               : 'bg-white/96 border-b border-gray-200/60 backdrop-blur-md'
         }
       `}

@@ -33,12 +33,9 @@ const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage')
 const PrivacyPage = React.lazy(() => import('@components/pages/PrivacyPage'))
 const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySettings'))
 const BookingLandingPage = React.lazy(() => import('@components/pages/BookingLandingPage'))
-const TechStackResourcePage = React.lazy(() => import('@components/pages/TechStackResourcePage'))
-const ResourcesBlogPage = React.lazy(() => import('@components/pages/ResourcesBlogPage'))
 const ResourcesFaqPage = React.lazy(() => import('@components/pages/ResourcesFaqPage'))
-const ValuesPage = React.lazy(() => import('@components/pages/ValuesPage'))
-const LeadershipPage = React.lazy(() => import('@components/pages/LeadershipPage'))
-const CareerPage = React.lazy(() => import('@components/pages/CareerPage'))
+const ValuesPage = React.lazy(() => import('@/components/pages/values/ValuesPage'))
+const LeadershipPage = React.lazy(() => import('@components/pages/leadership/LeadershipPage'))
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
@@ -113,12 +110,11 @@ const App: React.FC = () => {
                   <Route path="/about/referenzen" element={<ReferenzenPage />} />
                   <Route path="/case-studies" element={<ReferenzenPage />} />
                   <Route path="/ressourcen/case-studies" element={<ReferenzenPage />} />
-                  <Route path="/ressourcen/tech-stack" element={<TechStackResourcePage />} />
-                  <Route path="/ressourcen/blog" element={<ResourcesBlogPage />} />
+                  <Route path="/ressourcen/tech-stack" element={<Navigate to="/ressourcen/faq" replace />} />
+                  <Route path="/ressourcen/blog" element={<Navigate to="/ressourcen/faq" replace />} />
                   <Route path="/ressourcen/faq" element={<ResourcesFaqPage />} />
                   <Route path="/ueber-uns/werte" element={<ValuesPage />} />
                   <Route path="/ueber-uns/leitung" element={<LeadershipPage />} />
-                  <Route path="/ueber-uns/karriere" element={<CareerPage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/termin-buchen" element={<BookingLandingPage />} />
 

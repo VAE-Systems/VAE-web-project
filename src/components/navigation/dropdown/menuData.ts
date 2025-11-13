@@ -25,7 +25,7 @@ export interface DropdownMenu {
 export const MENU_DATA: DropdownMenu[] = [
   {
     id: 'leistungen',
-    label: 'UNSERE LEISTUNGEN',
+    label: 'Unsere Leistungen',
     subtitle: 'Professional Services',
     menuItems: [
       { id: 'strategy', label: 'Strategieberatung', href: '/leistungen/strategie' },
@@ -68,7 +68,7 @@ export const MENU_DATA: DropdownMenu[] = [
   },
   {
     id: 'ressourcen',
-    label: 'RESSOURCEN',
+    label: 'Ressourcen',
     subtitle: 'Wissenswertes & Insights',
     menuItems: [
       { id: 'cases', label: 'Case Studies', href: '/ressourcen/case-studies' },
@@ -133,12 +133,11 @@ export const MENU_DATA: DropdownMenu[] = [
   },
   {
     id: 'ueber-uns',
-    label: 'ÜBER UNS',
+    label: 'Über uns',
     subtitle: 'Team & Philosophie',
     menuItems: [
       { id: 'werte', label: 'Werte', href: '/ueber-uns/werte' },
       { id: 'leitung', label: 'Leitung', href: '/ueber-uns/leitung' },
-      { id: 'karriere', label: 'Karriere', href: '/ueber-uns/karriere' },
       { id: 'kontakt', label: 'Kontakt', href: '/contact' },
     ],
     content: {
@@ -161,14 +160,6 @@ export const MENU_DATA: DropdownMenu[] = [
         description: 'Julian Goertz Dini (CEO) & Jakob Dünnebeil (CTO)',
         ctaText: 'Empfehlungen ansehen →',
         ctaHref: '/ueber-uns/leitung',
-      },
-      karriere: {
-        id: 'karriere',
-        title: 'Karriere',
-        description:
-          'Wir suchen flexible Experten für unser Netzwerk. Hohe Ansprüche an Softwarekenntnisse und Eigenverantwortung. Bewirb dich, wenn du Teil unseres Teams werden möchtest.',
-        ctaText: 'Jetzt bewerben →',
-        ctaHref: '/ueber-uns/karriere',
       },
       kontakt: {
         id: 'kontakt',

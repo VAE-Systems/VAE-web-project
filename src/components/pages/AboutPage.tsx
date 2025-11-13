@@ -1,4 +1,3 @@
-import { useTheme } from '@/contexts/ThemeContext'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef } from 'react'
@@ -25,8 +24,6 @@ import Seo from '../ui/Seo'
  */
 const AboutPage: React.FC = () => {
   const rootRef = useRef<HTMLDivElement>(null)
-  const { theme } = useTheme()
-  const isLight = theme === 'light'
 
   // Base animation & lazy registration
   useEffect(() => {
@@ -176,58 +173,39 @@ const AboutPage: React.FC = () => {
           { label: 'About', path: '/about' },
         ]}
       />
-      {/* Page Hero (aligned style with ContactPage) */}
-      <section
-        className={`about-hero section-surface relative overflow-hidden pb-16 pt-32 ${isLight ? 'bg-gradient-to-b from-white to-white/95' : 'bg-bg-darker'}`}
-        data-section
-      >
-        <div className="pointer-events-none absolute inset-0">
-          {isLight ? (
-            <>
-              {/* Light mode: subtle white overlays + light grid */}
-              <div className="via-white/12 absolute inset-0 bg-gradient-to-b from-white/20 to-white/10" />
-              <div
-                className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.05),transparent_60%)]"
-                data-parallax-bg
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px] opacity-15" />
-            </>
-          ) : (
-            <>
-              {/* Dark mode: keep existing styling */}
-              <div
-                className="absolute inset-0 bg-[radial-gradient(circle_at_28%_30%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%),radial-gradient(circle_at_75%_65%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]"
-                data-parallax-bg
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(var(--color-white-rgb),0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--color-white-rgb),0.05)_1px,transparent_1px)] bg-[size:70px_70px] opacity-15" />
-            </>
-          )}
-        </div>
-        <div className="container-vae relative text-center">
-          <h1 className="h1 fluid-h1 h-space-lg text-vae-turquoise" data-fade>
-            Über VAE Systems
+
+      {/* Hero - Konsistentes Design wie Referenzen-Seite */}
+      <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker to-bg-dark dark:border-white/5">
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.18),transparent_55%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_55%)]"
+          aria-hidden="true"
+        />
+        <div className="container-vae relative flex min-h-[40vh] flex-col items-center justify-center gap-6 py-24 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise">
+            Über uns
+          </span>
+          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-text-light md:text-5xl">
+            Lokale & sichere KI-Infrastruktur und Automatisierung
           </h1>
-          <p
-            className="mx-auto mb-6 max-w-4xl text-xl leading-relaxed text-gray-600 dark:text-white/90 md:text-2xl"
-            data-fade
-          >
-            Lokale & sichere KI-Infrastruktur und Automatisierung – modular, dokumentiert, erweiterbar.
+          <p className="max-w-3xl text-lg leading-relaxed text-text-secondary">
+            Modular, dokumentiert, erweiterbar – mit Fokus auf Ownership statt Abhängigkeit. Transparente Architekturen,
+            saubere Deployments (On‑Prem & souveräne Cloud) und klare Übergaben.
           </p>
-          <p
-            className="mx-auto max-w-4xl text-lg leading-relaxed text-gray-500 dark:text-white/70 md:text-xl"
-            data-fade
-          >
-            Fokus auf Ownership statt Abhängigkeit: transparente Architekturen, saubere Deployments (On‑Prem & souveräne
-            Cloud) und klare Übergaben.
+          <p className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/70 px-4 py-2 text-sm text-text-secondary dark:border-white/10 dark:bg-white/5">
+            <Icon name="verified_user" className="h-4 w-4 text-vae-turquoise" /> 100% Open Source, DSGVO-konform, Made
+            in Germany
           </p>
         </div>
-        <div className="mt-14 px-4">
-          <div
-            className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2"
-            data-stagger-group
-            id="founders"
-            data-chip-group
-          >
+      </section>
+
+      {/* Founders Section */}
+      <section className="border-t border-black/5 bg-bg-dark py-20 transition-colors dark:border-white/5 dark:bg-bg-dark">
+        <div className="container-vae">
+          <div className="mb-10 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Das Team</p>
+            <h2 className="mt-3 text-3xl font-semibold text-text-light md:text-4xl">Wer wir sind</h2>
+          </div>
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2" data-chip-group>
             {teamMembers.map(member => (
               <div
                 key={member.id}

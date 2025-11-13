@@ -5,7 +5,8 @@ import { Calendar, Moon, Sun } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const CTA_URL = '/termin-buchen'
+const CTA_URL = 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz'
+const LOGIN_URL = 'https://nc.intern.vae.systems/login?clear=1'
 
 interface MagneticButtonProps {
   children: React.ReactNode
@@ -149,10 +150,10 @@ const HeaderModern: React.FC = () => {
         ${
           isScrolled
             ? isDark
-              ? 'bg-[hsl(0,0%,6%)]/98 border-b border-white/10 shadow-sm backdrop-blur-xl'
+              ? 'border-b border-white/10 bg-[hsla(0,0%,6%,0.98)] shadow-sm backdrop-blur-xl'
               : 'border-b border-gray-200/70 bg-white shadow-sm backdrop-blur-sm'
             : isDark
-              ? 'border-white/8 bg-[hsl(0,0%,6%)]/96 border-b backdrop-blur-lg'
+              ? 'border-white/8 border-b bg-[hsla(0,0%,6%,0.96)] backdrop-blur-lg'
               : 'bg-white/98 border-b border-gray-100/80 backdrop-blur-sm'
         }
       `}
@@ -169,11 +170,15 @@ const HeaderModern: React.FC = () => {
                 />
               </div>
               <div className="hidden flex-col border-l border-vae-turquoise/30 pl-3 md:flex">
-                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-vae-turquoise">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/85">
                   Versatile AI
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-vae-turquoise">Enhanced</span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-vae-turquoise">Systems</span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
+                  Enhanced
+                </span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
+                  Systems
+                </span>
               </div>
             </Link>
 
@@ -194,6 +199,8 @@ const HeaderModern: React.FC = () => {
             <div className="flex items-center gap-3 lg:hidden">
               <a
                 href={CTA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
                   isDark
                     ? 'text-vae-turquoise hover:text-vae-turquoise/80'
@@ -203,10 +210,35 @@ const HeaderModern: React.FC = () => {
                 <Calendar className="h-4 w-4" />
                 Beratung buchen
               </a>
+              <a
+                href={LOGIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`rounded-md px-3 py-2 text-xs font-medium transition-all duration-200 ${
+                  isDark
+                    ? 'text-gray-400 hover:bg-white/5 hover:text-vae-turquoise'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-vae-turquoise'
+                }`}
+              >
+                Kundenlogin
+              </a>
             </div>
           </div>
 
-          <div className="hidden items-center gap-8 lg:flex">
+          <div className="hidden items-center gap-6 lg:flex">
+            <a
+              href={LOGIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+                isDark
+                  ? 'text-gray-400 hover:bg-white/5 hover:text-vae-turquoise'
+                  : 'text-gray-600 hover:bg-gray-100 hover:text-vae-turquoise'
+              }`}
+            >
+              Kundenlogin
+            </a>
+
             <MagneticButton href={CTA_URL} forwardRef={ctaRef as React.RefObject<HTMLAnchorElement>}>
               <Calendar className="h-4 w-4" />
               <span>Beratung buchen</span>

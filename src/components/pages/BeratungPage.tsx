@@ -767,7 +767,7 @@ const BeratungPage: React.FC = () => {
 
                 {phase.timeline && <p className="mb-3 text-sm font-medium text-vae-turquoise/80">{phase.timeline}</p>}
 
-                <div className="rounded-lg bg-gray-100 px-4 py-3 dark:bg-[hsl(0,0%,6%)]">
+                <div className="rounded-lg bg-gray-100 px-4 py-3 dark:bg-[hsla(0,0%,6%,1)]">
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">{phase.pricing}</p>
                 </div>
 

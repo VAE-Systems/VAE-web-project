@@ -22,11 +22,19 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({ item, isActi
         onTouchStart={handleHover}
         onKeyDown={onKeyDown}
         aria-current={isActive ? 'true' : undefined}
-        className={`group flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold tracking-tight transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-bg-darker ${isActive ? 'border-vae-turquoise/80 bg-white/5 text-white shadow-lg shadow-vae-turquoise/20' : 'border-white/5 text-text-light hover:border-white/20 hover:bg-white/5 hover:text-white'} `}
+        className={`group flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold tracking-tight transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-darker ${
+          isActive
+            ? 'border-vae-turquoise/80 bg-white text-gray-900 shadow-lg shadow-vae-turquoise/15 dark:border-vae-turquoise/70 dark:bg-white/10 dark:text-white'
+            : 'border-gray-200/80 bg-white/90 text-gray-700 hover:border-gray-300 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:border-white/20 dark:hover:bg-white/10 dark:hover:text-white'
+        }`}
       >
         <span className="flex items-center gap-2">{item.label}</span>
         <span
-          className={`text-xs uppercase tracking-[0.2em] transition-opacity duration-200 ${isActive ? 'text-vae-turquoise opacity-100' : 'opacity-0 group-hover:opacity-60'}`}
+          className={`text-xs uppercase tracking-[0.2em] transition-opacity duration-200 ${
+            isActive
+              ? 'text-vae-turquoise opacity-100'
+              : 'text-gray-400 opacity-0 group-hover:opacity-60 dark:text-white/50 dark:group-hover:text-white/80'
+          }`}
         >
           →
         </span>

@@ -189,7 +189,7 @@ const HeaderModern: React.FC = () => {
           </div>
 
           <div className="flex w-full flex-col gap-4 lg:flex-1 lg:flex-row lg:items-center lg:gap-6">
-            <DropdownMenu className="w-full" />
+            <DropdownMenu className="w-full" isHeaderScrolled={isScrolled} />
 
             <div className="flex items-center gap-3 lg:hidden">
               <a

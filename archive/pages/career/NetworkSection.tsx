@@ -1,5 +1,5 @@
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { NETWORK_CTA } from '@/data/careerData'
+import { NETWORK_CTA } from '../../data/careerData'
 import { ArrowUpRight, Star } from 'lucide-react'
 import React from 'react'
 

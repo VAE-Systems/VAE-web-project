@@ -26,7 +26,7 @@ import { Link } from 'react-router-dom'
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
-const bookingRoute = '/termin-buchen'
+const bookingRoute = '/contact#booking'
 
 interface Metric {
   label: string
@@ -313,37 +313,37 @@ const expertiseAreas: ExpertiseArea[] = [
     id: 'collaboration',
     icon: Cloud,
     title: 'Collaboration & File Management',
-    tools: ['Nextcloud', 'OnlyOffice', 'Collabora'],
+    tools: ['Digitale Workspaces', 'Co-Authoring & Freigaben'],
   },
   {
     id: 'crm',
     icon: Briefcase,
     title: 'CRM & Business Management',
-    tools: ['Odoo ERP', 'SuiteCRM', 'Twenty CRM'],
+    tools: ['CRM/ERP-Blueprints', 'Operative Workflows'],
   },
   {
     id: 'automation',
     icon: Zap,
     title: 'Workflow-Automation',
-    tools: ['n8n', 'Node-RED', 'Custom Workflows'],
+    tools: ['Event-Driven Automationen', 'Data Sync & Orchestration'],
   },
   {
     id: 'ai',
     icon: Brain,
     title: 'AI & Machine Learning',
-    tools: ['LangChain', 'Ollama', 'Qdrant', 'OpenAI API'],
+    tools: ['LLM-Integrationen', 'Vector-Search & Retrieval'],
   },
   {
     id: 'infrastructure',
     icon: Server,
     title: 'Infrastructure & Hosting',
-    tools: ['Docker', 'Traefik', 'PostgreSQL', 'Redis', 'Hetzner'],
+    tools: ['Container & Netzwerke', 'Data Layer & Storage'],
   },
   {
     id: 'security',
     icon: Shield,
     title: 'Monitoring & Security',
-    tools: ['Uptime Kuma', 'Restic', 'Firewall', 'SSL/TLS'],
+    tools: ['Observability & Incident Response', 'Backup & Compliance'],
   },
 ]
 
@@ -797,6 +797,9 @@ const ReferenzenPage: React.FC = () => {
               )
             })}
           </div>
+          <p className="text-center text-sm text-text-secondary">
+            Konkrete Software- und Vendor-Listen teilen wir nach Erstgespräch – vollständige Toolkataloge auf Anfrage.
+          </p>
         </div>
       </section>
 
@@ -804,9 +807,9 @@ const ReferenzenPage: React.FC = () => {
       <section className="border-t border-black/5 bg-bg-darker py-20 transition-colors dark:border-white/5">
         <div className="container-vae flex flex-col items-center gap-6 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Nächster Schritt</p>
-          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Euer Projekt könnte hier stehen</h2>
+          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Ihr Projekt könnte hier stehen</h2>
           <p className="max-w-2xl text-base text-text-secondary">
-            Egal ob NGO, Mittelstand oder Startup – wir bauen die Open-Source-Infrastruktur, die zu euren Prozessen
+            Egal ob NGO, Mittelstand oder Startup – wir bauen die Open-Source-Infrastruktur, die zu Ihren Prozessen
             passt. Von Beratung bis Langzeit-Betreuung.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">

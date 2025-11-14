@@ -62,7 +62,7 @@ const CONTACT_CTA: FaqCta = {
 
 const BOOKING_CTA: FaqCta = {
   label: 'Gespräch buchen',
-  href: '/termin-buchen',
+  href: '/contact#booking',
 }
 
 const APPLY_CTA: FaqCta = {

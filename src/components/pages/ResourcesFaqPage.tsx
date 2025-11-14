@@ -110,7 +110,7 @@ const ResourcesFaqPage: React.FC = () => {
               </Link>
             </MagneticButton>
             <MagneticButton>
-              <Link to="/termin-buchen" className="btn-ghost inline-flex items-center gap-2 text-base">
+              <Link to="/contact#booking" className="btn-ghost inline-flex items-center gap-2 text-base">
                 Gespräch buchen
                 <ChevronDown className="h-4 w-4 rotate-180 text-vae-turquoise" />
               </Link>

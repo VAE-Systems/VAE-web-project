@@ -236,7 +236,7 @@ const toolOptions: ToolOption[] = [
   { id: 'slack', label: 'Slack (€7/User/Monat)', price: 7 },
 ]
 
-const calendlyUrl = '/termin-buchen'
+const calendlyUrl = '/contact#booking'
 
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)

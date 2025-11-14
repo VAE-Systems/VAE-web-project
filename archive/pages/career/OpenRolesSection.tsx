@@ -1,5 +1,5 @@
 import { useFadeIn } from '@/components/pages/values/useFadeIn'
-import { OPEN_ROLES } from '@/data/careerData'
+import { OPEN_ROLES } from '../../data/careerData'
 import { Mail } from 'lucide-react'
 import React from 'react'
 

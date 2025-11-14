@@ -1,5 +1,5 @@
 import { useFadeIn } from '@/components/pages/values/useFadeIn'
-import { PRINCIPLES } from '@/data/careerData'
+import { PRINCIPLES } from '../../data/careerData'
 import React from 'react'
 
 export const PrinciplesSection: React.FC = () => {

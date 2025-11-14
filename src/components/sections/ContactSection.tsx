@@ -1,7 +1,53 @@
-import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowUpRight, BookOpen, CalendarDays, Compass, HelpCircle } from 'lucide-react'
+import React, { useEffect, useRef } from 'react'
 import { useContactForm } from '../../hooks/useContactForm'
+
+const bookingOptions = [
+  {
+    id: 'strategy',
+    label: 'Strategie-Call · 30 Min',
+    description: 'Erstgespräch zu KI-Roadmap, Organisations-Setup & Priorisierung.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz',
+  },
+  {
+    id: 'infrastructure',
+    label: 'Infrastruktur-Setup · 45 Min',
+    description: 'Technischer Deep-Dive zu Self-Hosting, Migration & Security.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/Infra45VAE',
+  },
+  {
+    id: 'partnership',
+    label: 'Partnernetzwerk & Freelancer · 30 Min',
+    description: 'Austausch für Kooperationen, Netzwerk & Co-Delivery.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/PartnerCallVAE',
+  },
+]
+
+const bookingResources = [
+  {
+    id: 'agenda',
+    label: 'Ablauf & Agenda',
+    description: 'Was passiert im Call, welche Ergebnisse liefern wir?',
+    href: 'https://docs.vae.systems/s/erstberatung-ablauf',
+    icon: Compass,
+  },
+  {
+    id: 'prep',
+    label: 'Vorbereitung',
+    description: 'Optionales Material, damit wir gleich tief einsteigen.',
+    href: 'https://docs.vae.systems/s/vorbereitung-erstberatung',
+    icon: BookOpen,
+  },
+  {
+    id: 'faq',
+    label: 'FAQ',
+    description: 'Budget, Security, Timeline – die häufigsten Fragen.',
+    href: 'https://docs.vae.systems/s/erstberatung-faq',
+    icon: HelpCircle,
+  },
+]
 
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -293,6 +339,66 @@ const ContactSection: React.FC = () => {
 
           {/* Contact Information */}
           <div className="space-y-8" ref={contactInfoRef}>
+            <div id="booking" className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Termin</p>
+                  <h3 className="text-2xl font-semibold text-text-light">Direkt Termin buchen</h3>
+                </div>
+                <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Kostenlos</span>
+              </div>
+              <p className="mt-3 text-sm text-text-secondary">
+                Wählen Sie den Termin-Typ, der zu Ihrer Anfrage passt. Wir nutzen die Infos, um den Call optimal
+                vorzubereiten.
+              </p>
+              <div className="mt-5 space-y-3">
+                {bookingOptions.map(option => (
+                  <a
+                    key={option.id}
+                    href={option.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="group flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left transition-colors hover:border-vae-turquoise/40"
+                  >
+                    <div>
+                      <p className="text-base font-semibold text-text-light">{option.label}</p>
+                      <p className="text-sm text-text-secondary">{option.description}</p>
+                    </div>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-vae-turquoise">
+                      <CalendarDays className="h-5 w-5" />
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <h4 className="mb-4 text-lg font-semibold text-text-light">Call-Vorbereitung & Ressourcen</h4>
+              <div className="space-y-3">
+                {bookingResources.map(resource => {
+                  const Icon = resource.icon
+                  return (
+                    <a
+                      key={resource.id}
+                      href={resource.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition-colors hover:border-vae-turquoise/40"
+                    >
+                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/15 bg-white/5 text-vae-turquoise">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div className="flex-1">
+                        <p className="font-semibold text-text-light">{resource.label}</p>
+                        <p className="text-sm text-text-secondary">{resource.description}</p>
+                      </div>
+                      <ArrowUpRight className="h-5 w-5 text-white/60 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                    </a>
+                  )
+                })}
+              </div>
+            </div>
+
             <div>
               <h3 className="mb-6 text-2xl font-semibold text-text-light">Kontaktinformationen</h3>
               <div className="space-y-6">

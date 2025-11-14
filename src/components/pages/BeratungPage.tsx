@@ -266,7 +266,7 @@ const BeratungPage: React.FC = () => {
 
   // Booking CTA now routes über Landing-Page
   const openCalendly = useCallback(() => {
-    window.open('/termin-buchen', '_self')
+    window.open('/contact#booking', '_self')
   }, [])
 
   // Smooth scroll to section

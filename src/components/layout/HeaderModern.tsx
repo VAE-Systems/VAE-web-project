@@ -5,7 +5,7 @@ import { Calendar, Moon, Sun } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const CTA_URL = '/termin-buchen'
+const CTA_URL = '/contact#booking'
 
 interface MagneticButtonProps {
   children: React.ReactNode

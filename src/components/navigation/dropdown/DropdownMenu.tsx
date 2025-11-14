@@ -52,6 +52,10 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({})
   const itemRefs = useRef<Record<string, (HTMLAnchorElement | null)[]>>({})
+  const panelContentRefs = useRef<Record<string, HTMLDivElement | null>>({})
+  const panelRefCallbacks = useRef<Record<string, (node: HTMLDivElement | null) => void>>({})
+  const [panelHeights, setPanelHeights] = useState<Record<string, number>>({})
+  const [panelRefVersion, setPanelRefVersion] = useState(0)
 
   const activeContentCache = useMemo(() => activeContentByMenu, [activeContentByMenu])
 
@@ -86,6 +90,36 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
       setOpenMenuId(null)
     }
   }, [isDesktop])
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof ResizeObserver === 'undefined') {
+      return undefined
+    }
+
+    const observers = Object.entries(panelContentRefs.current).map(([menuId, node]) => {
+      if (!node) return null
+
+      const observer = new ResizeObserver(entries => {
+        const entry = entries[0]
+        if (!entry) return
+        const nextHeight = entry.contentRect.height
+
+        setPanelHeights(prev => {
+          if (Math.abs((prev[menuId] ?? 0) - nextHeight) < 0.5) {
+            return prev
+          }
+          return { ...prev, [menuId]: nextHeight }
+        })
+      })
+
+      observer.observe(node)
+      return observer
+    })
+
+    return () => {
+      observers.forEach(observer => observer?.disconnect())
+    }
+  }, [menus, panelRefVersion])
 
   useEffect(() => {
     return () => {
@@ -171,11 +205,24 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     setExpandedMobileMenus(prev => ({ ...prev, [menuId]: !prev[menuId] }))
   }
 
+  const getPanelRefHandler = useCallback((menuId: string) => {
+    if (!panelRefCallbacks.current[menuId]) {
+      panelRefCallbacks.current[menuId] = (node: HTMLDivElement | null) => {
+        if (panelContentRefs.current[menuId] === node) return
+        panelContentRefs.current[menuId] = node
+        setPanelRefVersion(prev => prev + 1)
+      }
+    }
+
+    return panelRefCallbacks.current[menuId]
+  }, [])
+
   const renderDesktopMenu = () => (
     <div className="hidden w-full items-center justify-end gap-6 lg:flex" role="menubar" aria-label="Hauptnavigation">
       {menus.map(menu => {
         const activeContentId = activeContentCache[menu.id] || menu.menuItems[0]?.id
         const panelVisible = openMenuId === menu.id
+        const panelHeight = panelHeights[menu.id]
 
         return (
           <div
@@ -213,42 +260,45 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               id={`${menu.id}-panel`}
               role="menu"
               aria-hidden={!panelVisible}
-              className={`absolute left-1/2 top-full z-40 mt-3 w-[min(90vw,56rem)] -translate-x-1/2 rounded-2xl border shadow-lg backdrop-blur-xl transition-all duration-200 ease-out ${
+              className={`absolute left-1/2 top-full z-40 mt-3 w-[min(90vw,56rem)] -translate-x-1/2 overflow-hidden rounded-2xl border shadow-lg backdrop-blur-xl transition-[height,opacity,transform] duration-300 ease-out ${
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'
               } border-gray-200/60 bg-white/95 shadow-gray-900/5 dark:border-white/10 dark:bg-[hsla(0,0%,6%,0.98)] dark:shadow-black/40`}
+              style={{ height: panelHeight ? `${panelHeight}px` : undefined }}
             >
-              {/* Subtitle Header - elegant am Anfang des Dropdowns */}
-              {menu.subtitle && (
-                <div className="border-b border-gray-200/50 bg-white/60 px-6 py-3 dark:border-white/10 dark:bg-white/0">
-                  <p className="text-xs font-medium uppercase tracking-[0.25em] text-gray-500/80 dark:text-white/65">
-                    {menu.subtitle}
-                  </p>
-                </div>
-              )}
+              <div ref={getPanelRefHandler(menu.id)}>
+                {/* Subtitle Header - elegant am Anfang des Dropdowns */}
+                {menu.subtitle && (
+                  <div className="border-b border-gray-200/50 bg-white/60 px-6 py-3 dark:border-white/10 dark:bg-white/0">
+                    <p className="text-xs font-medium uppercase tracking-[0.25em] text-gray-500/80 dark:text-white/65">
+                      {menu.subtitle}
+                    </p>
+                  </div>
+                )}
 
-              <div className="flex flex-col gap-4 p-4 lg:flex-row">
-                <div className="lg:w-[40%]">
-                  <ul className="space-y-2" role="menu" aria-label={`${menu.label} Navigation`}>
-                    {menu.menuItems.map((item, index) => (
-                      <DropdownMenuItem
-                        key={item.id}
-                        item={item}
-                        isActive={activeContentId === item.id}
-                        onHover={itemId => handleMenuItemHover(menu.id, itemId)}
-                        onKeyDown={handleMenuItemKeyDown(menu.id, index, menu.menuItems.length)}
-                        itemRef={node => {
-                          if (!itemRefs.current[menu.id]) itemRefs.current[menu.id] = []
-                          itemRefs.current[menu.id][index] = node
-                        }}
-                      />
-                    ))}
-                  </ul>
-                </div>
+                <div className="flex flex-col gap-4 p-4 lg:flex-row">
+                  <div className="lg:w-[40%]">
+                    <ul className="space-y-2" role="menu" aria-label={`${menu.label} Navigation`}>
+                      {menu.menuItems.map((item, index) => (
+                        <DropdownMenuItem
+                          key={item.id}
+                          item={item}
+                          isActive={activeContentId === item.id}
+                          onHover={itemId => handleMenuItemHover(menu.id, itemId)}
+                          onKeyDown={handleMenuItemKeyDown(menu.id, index, menu.menuItems.length)}
+                          itemRef={node => {
+                            if (!itemRefs.current[menu.id]) itemRefs.current[menu.id] = []
+                            itemRefs.current[menu.id][index] = node
+                          }}
+                        />
+                      ))}
+                    </ul>
+                  </div>
 
-                <div className="lg:w-[60%]">
-                  <DropdownContent content={menu.content[activeContentId || '']} />
+                  <div className="lg:w-[60%]">
+                    <DropdownContent content={menu.content[activeContentId || '']} />
+                  </div>
                 </div>
               </div>
             </div>

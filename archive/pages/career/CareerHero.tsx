@@ -1,9 +1,9 @@
-import { CAREER_HERO } from '@/data/careerData'
+import { CAREER_HERO } from '../../data/careerData'
 import { Mail, Sparkles, UsersRound } from 'lucide-react'
 import React, { useMemo } from 'react'
 
 export const CareerHero: React.FC = () => {
-  const bodyParagraphs = useMemo(() => CAREER_HERO.body.split(' — ').map(chunk => chunk.trim()), [])
+  const bodyParagraphs = useMemo<string[]>(() => CAREER_HERO.body.split(' — ').map((chunk: string) => chunk.trim()), [])
   const focusBadges = ['Freelance Engineering', 'DevOps', 'UX Research', 'Open Source', 'Remote EU']
   const statusHighlights = [
     { label: 'Status', value: 'Keine aktiven Stellenausschreibungen' },
@@ -27,7 +27,7 @@ export const CareerHero: React.FC = () => {
           <h1 className="text-balance text-4xl font-semibold leading-tight md:text-5xl">{CAREER_HERO.title}</h1>
           <p className="text-lg font-medium text-white/85 md:text-xl">{CAREER_HERO.subheading}</p>
           <div className="space-y-4 text-base leading-relaxed text-white/80 md:text-lg">
-            {bodyParagraphs.map(paragraph => (
+            {bodyParagraphs.map((paragraph: string) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>

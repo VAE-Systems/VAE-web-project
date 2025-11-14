@@ -129,8 +129,8 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
   // Direct scheduling (Notion booking link)
   'contact.schedule_call': {
     id: 'contact.schedule_call',
-    type: 'route',
-    path: '/termin-buchen',
+    type: 'external',
+    url: '/contact#booking',
     label: 'Kostenloses Erstgespräch',
   },
   // Quick email CTA

@@ -22,7 +22,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import Seo from '../ui/Seo'
 
-const calendlyUrl = '/termin-buchen'
+const calendlyUrl = '/contact#booking'
 
 const trustBadges = ['Monatlich kündbar', 'Flexible Bindung', '< 6h Reaktionszeit']
 

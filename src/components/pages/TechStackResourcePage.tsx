@@ -1,53 +1,228 @@
-import React, { useMemo, useState } from 'react'
-import { ChevronDown, Filter, Layers, Search, Sparkles } from 'lucide-react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { Filter, Layers, Search, Sparkles } from 'lucide-react'
+import { gsap } from 'gsap'
 
 import Seo from '@/components/ui/Seo'
 import { TECH_FILTERS, TECH_SECTIONS, TECH_TILES, TechTile, TechCategoryId } from '@/data/techStackData'
 
 type FilterId = 'all' | TechCategoryId
 
-const TechStackTile: React.FC<{ tile: TechTile }> = ({ tile }) => {
+interface GroupWithTiles {
+  id: string
+  title?: string
+  description?: string
+  items: TechTile[]
+}
+
+const InteractiveTechGrid: React.FC<{ tiles: TechTile[] }> = ({ tiles }) => {
+  const tileRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
+  const containerRef = useRef<HTMLDivElement>(null)
+  const spotlightRef = useRef<HTMLDivElement>(null)
+  const [pointerCoarse, setPointerCoarse] = useState(true)
+  const hasAnimatedRef = useRef(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    setPointerCoarse(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const elements = tiles.map(tile => tileRefs.current[tile.id]).filter((el): el is HTMLAnchorElement => Boolean(el))
+
+    const animateTiles = () => {
+      if (hasAnimatedRef.current) return
+      hasAnimatedRef.current = true
+      gsap.context(() => {
+        elements.forEach((el, index) => {
+          const angle = ((index * 30) % 360) * (Math.PI / 180)
+          const radius = 180 + ((index % 4) + 1) * 35
+          const x = radius * Math.cos(angle)
+          const y = radius * Math.sin(angle)
+          gsap.fromTo(
+            el,
+            { x, y, opacity: 0, scale: 0.8, filter: 'blur(18px)' },
+            {
+              x: 0,
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              filter: 'blur(0px)',
+              duration: 0.85,
+              ease: 'power3.out',
+              delay: index * 0.025,
+            }
+          )
+        })
+      }, containerRef)
+    }
+
+    let observer: IntersectionObserver | undefined
+    if (typeof IntersectionObserver !== 'undefined' && containerRef.current && !prefersReducedMotion) {
+      observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animateTiles()
+              observer?.disconnect()
+            }
+          })
+        },
+        { threshold: 0.25 }
+      )
+      observer.observe(containerRef.current)
+    } else {
+      animateTiles()
+    }
+
+    const cleanups: Array<() => void> = []
+
+    elements.forEach(el => {
+      const img = el.querySelector('img') as HTMLElement | null
+
+      const handleEnter = () => {
+        ;(el as any)._fadeOutTween?.kill?.()
+        gsap.to(el, { '--glow-alpha': 0.78, scale: 1.085, duration: 0.25, ease: 'power2.out' })
+        if (!prefersReducedMotion && img) {
+          ;(img as any)._spinTween?.kill?.()
+          ;(img as any)._spinTween = gsap.to(img, {
+            rotationY: '+=360',
+            duration: 1.4,
+            ease: 'power1.inOut',
+            repeat: -1,
+          })
+        }
+      }
+
+      const handleLeave = () => {
+        if (img) {
+          const currentRot = (gsap.getProperty(img, 'rotationY') as number) || 0
+          ;(img as any)._spinTween?.kill?.()
+          const target = Math.ceil(currentRot / 360) * 360
+          gsap.to(img, { rotationY: target, duration: 0.8, ease: 'power2.out' })
+        }
+        const fade = gsap.to(el, { '--glow-alpha': 0, scale: 1, duration: 3.2, ease: 'power2.out' })
+        ;(el as any)._fadeOutTween = fade
+      }
+
+      let ticking = false
+      const handleMove = (event: MouseEvent) => {
+        if (pointerCoarse) return
+        if (ticking) return
+        ticking = true
+        requestAnimationFrame(() => {
+          const rect = el.getBoundingClientRect()
+          const xRel = (event.clientX - rect.left) / rect.width
+          const yRel = (event.clientY - rect.top) / rect.height
+          const rotX = (0.5 - yRel) * 14
+          const rotY = (xRel - 0.5) * 14
+          el.style.setProperty('--rx', `${rotX}deg`)
+          el.style.setProperty('--ry', `${rotY}deg`)
+          ticking = false
+        })
+      }
+
+      const resetTilt = () => {
+        el.style.setProperty('--rx', '0deg')
+        el.style.setProperty('--ry', '0deg')
+      }
+
+      el.addEventListener('pointerenter', handleEnter)
+      el.addEventListener('pointerleave', handleLeave)
+      el.addEventListener('mousemove', handleMove)
+      el.addEventListener('mouseleave', resetTilt)
+
+      cleanups.push(() => {
+        el.removeEventListener('pointerenter', handleEnter)
+        el.removeEventListener('pointerleave', handleLeave)
+        el.removeEventListener('mousemove', handleMove)
+        el.removeEventListener('mouseleave', resetTilt)
+      })
+    })
+
+    return () => {
+      observer?.disconnect()
+      cleanups.forEach(clean => clean())
+    }
+  }, [tiles, pointerCoarse])
+
+  const handlePointer = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (pointerCoarse) return
+    if (!spotlightRef.current) return
+    const rect = spotlightRef.current.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    const y = ((event.clientY - rect.top) / rect.height) * 100
+    spotlightRef.current.style.setProperty('--spot-x', `${x}%`)
+    spotlightRef.current.style.setProperty('--spot-y', `${y}%`)
+  }
+
+  const resetSpotlight = () => {
+    if (!spotlightRef.current) return
+    spotlightRef.current.style.setProperty('--spot-x', '50%')
+    spotlightRef.current.style.setProperty('--spot-y', '50%')
+  }
+
+  const desktopColumns = 6
+  const remainder = tiles.length % desktopColumns
+  const placeholderCount = remainder === 0 ? 0 : desktopColumns - remainder
+
   return (
-    <a
-      href={tile.link}
-      target="_blank"
-      rel="noreferrer noopener"
-      className="border-white/8 group relative flex h-full flex-col items-center justify-center gap-3 rounded-3xl border bg-white/[0.03] p-4 text-center text-white transition duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:bg-white/10"
+    <div
+      className="tech-spotlight"
+      ref={spotlightRef}
+      onPointerMove={handlePointer}
+      onPointerLeave={resetSpotlight}
+      data-pointer={pointerCoarse ? 'coarse' : 'fine'}
+      aria-hidden={tiles.length === 0}
     >
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-        {tile.logo ? (
-          <img
-            src={tile.logo}
-            alt={tile.name}
-            loading="lazy"
-            className="h-10 w-10 object-contain"
-            onError={event => {
-              event.currentTarget.style.display = 'none'
+      <div
+        ref={containerRef}
+        className="tech-stack-grid mx-auto grid max-w-6xl gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+      >
+        {tiles.map(tile => (
+          <a
+            key={tile.id}
+            href={tile.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="tech-tile flex aspect-square flex-col items-center justify-center gap-3 p-4 text-center will-change-transform"
+            ref={el => {
+              if (el) {
+                tileRefs.current[tile.id] = el
+              } else {
+                delete tileRefs.current[tile.id]
+              }
             }}
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+              {tile.logo ? (
+                <img src={tile.logo} alt={tile.name} className="h-10 w-10 object-contain will-change-transform" />
+              ) : (
+                <span className="text-lg font-semibold text-white/80">{tile.name[0]}</span>
+              )}
+            </div>
+            <span className="text-sm font-medium text-text-light">{tile.name}</span>
+            {tile.description && <span className="text-xs text-white/70">{tile.description}</span>}
+          </a>
+        ))}
+        {Array.from({ length: placeholderCount }).map((_, index) => (
+          <div
+            key={`placeholder-${index}`}
+            className="tech-tile hidden aspect-square flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/[0.03] opacity-0 xl:flex"
+            aria-hidden="true"
           />
-        ) : (
-          <span className="text-xl font-semibold text-white/80">{tile.name[0]}</span>
-        )}
+        ))}
       </div>
-      <div className="space-y-1">
-        <p className="text-sm font-semibold text-white">{tile.name}</p>
-        {tile.description && <p className="text-xs text-white/70">{tile.description}</p>}
-        {tile.organization && (
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white/40">{tile.organization}</p>
-        )}
-      </div>
-      <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80 opacity-0 transition group-hover:opacity-100">
-        Öffnen →
-      </span>
-      <div className="pointer-events-none absolute inset-0 rounded-3xl border border-white/5 opacity-0 transition group-hover:opacity-60" />
-    </a>
+    </div>
   )
 }
+
+type SectionWithTiles = (typeof TECH_SECTIONS)[number] & { groups: GroupWithTiles[] }
 
 const TechStackResourcePage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterId>('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [spotlight, setSpotlight] = useState({ x: '50%', y: '50%' })
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
 
@@ -61,41 +236,37 @@ const TechStackResourcePage: React.FC = () => {
     })
   }, [activeFilter, normalizedQuery])
 
-  const sectionsWithContent = useMemo(() => {
+  const sectionsWithContent: SectionWithTiles[] = useMemo(() => {
     return TECH_SECTIONS.map(section => {
       const tiles = filteredTiles.filter(tile => tile.category === section.id)
       if (!tiles.length) return null
 
-      const grouped =
+      const baseGroups: GroupWithTiles[] =
         section.groups?.map(group => ({
           ...group,
           items: tiles.filter(tile => tile.group === group.id),
         })) ?? []
 
-      const usedGroupIds = new Set(grouped.flatMap(group => (group.items.length ? [group.id] : [])))
+      const groupsWithItems = baseGroups.filter(group => group.items.length > 0)
+      const usedGroupIds = new Set(groupsWithItems.map(group => group.id))
       const remainder = tiles.filter(tile => (tile.group ? !usedGroupIds.has(tile.group) : true))
 
-      const groupsWithItems = grouped.filter(group => group.items.length > 0)
       if (remainder.length) {
-        groupsWithItems.push({ id: 'others', title: 'Weitere Tools', items: remainder })
+        groupsWithItems.push({
+          id: 'others',
+          title: groupsWithItems.length ? 'Weitere Tools' : undefined,
+          items: remainder,
+        })
       }
-
       if (!groupsWithItems.length) {
         groupsWithItems.push({ id: 'default', title: undefined, items: tiles })
       }
 
       return { ...section, groups: groupsWithItems }
-    }).filter((section): section is NonNullable<typeof section> => Boolean(section))
+    }).filter((section): section is SectionWithTiles => Boolean(section))
   }, [filteredTiles])
 
   const totalVisibleTiles = filteredTiles.length
-
-  const handleSpotlightMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect()
-    const x = ((event.clientX - rect.left) / rect.width) * 100
-    const y = ((event.clientY - rect.top) / rect.height) * 100
-    setSpotlight({ x: `${x}%`, y: `${y}%` })
-  }
 
   return (
     <div className="bg-bg-darker text-text-light">
@@ -105,10 +276,11 @@ const TechStackResourcePage: React.FC = () => {
         canonicalPath="/ressourcen/tech-stack"
       />
 
-      <section className="relative overflow-hidden border-b border-white/5 bg-gradient-to-b from-bg-darker to-[#050505] py-24">
-        <div className="absolute inset-0 opacity-70" aria-hidden="true">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(13,148,136,0.2),transparent_55%),radial-gradient(circle_at_75%_25%,rgba(99,102,241,0.18),transparent_60%)]" />
-        </div>
+      <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker to-bg-dark dark:border-white/5">
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.18),transparent_55%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_55%)]"
+          aria-hidden="true"
+        />
         <div className="container-vae relative space-y-8 text-center">
           <div className="inline-flex items-center justify-center gap-2 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-6 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/90">
             Open Source Systeme & KI-Modelle
@@ -206,23 +378,10 @@ const TechStackResourcePage: React.FC = () => {
                       <p className="text-sm font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
                         {group.title}
                       </p>
-                      <span className="text-xs text-white/50">{group.items?.length ?? 0} Tools</span>
+                      <span className="text-xs text-white/50">{(group as any).items?.length ?? 0} Tools</span>
                     </div>
                   )}
-                  <div
-                    className="rounded-[40px] border border-white/5 bg-gradient-to-b from-white/5 to-transparent p-6"
-                    onMouseMove={handleSpotlightMove}
-                    onMouseLeave={() => setSpotlight({ x: '50%', y: '50%' })}
-                    style={{
-                      backgroundImage: `radial-gradient(circle at ${spotlight.x} ${spotlight.y}, rgba(13,148,136,0.15), transparent 55%)`,
-                    }}
-                  >
-                    <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                      {group.items?.map(tile => (
-                        <TechStackTile key={tile.id} tile={tile} />
-                      ))}
-                    </div>
-                  </div>
+                  <InteractiveTechGrid tiles={(group as any).items ?? []} />
                 </div>
               ))}
             </div>

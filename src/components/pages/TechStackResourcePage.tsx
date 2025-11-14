@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Filter, Layers, Search, Sparkles } from 'lucide-react'
 import { gsap } from 'gsap'
+import { Filter, Layers, Search, Sparkles } from 'lucide-react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import Seo from '@/components/ui/Seo'
-import { TECH_FILTERS, TECH_SECTIONS, TECH_TILES, TechTile, TechCategoryId } from '@/data/techStackData'
+import { TECH_FILTERS, TECH_SECTIONS, TECH_TILES, TechCategoryId, TechTile } from '@/data/techStackData'
 
 type FilterId = 'all' | TechCategoryId
 

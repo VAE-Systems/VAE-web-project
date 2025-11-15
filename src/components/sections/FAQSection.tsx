@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import AccordionItem from '@/components/ui/AccordionItem'
 import { defaultFAQCategories } from '@/content/faqData'
 
 // Types
@@ -35,14 +36,12 @@ const FAQSection: React.FC<FAQSectionProps> = ({
   const headerRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
-  const answerRefs = useRef<Record<number, HTMLDivElement | null>>({})
-  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({})
 
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({})
 
-  const toggleFAQ = useCallback((index: number) => {
-    setOpenFAQ(prev => (prev === index ? null : index))
-  }, [])
+  const toggle = (id: string) => {
+    setOpenItems(prev => ({ ...prev, [id]: !prev[id] }))
+  }
 
   // Animations (effizienter: wenige ScrollTrigger statt viele)
   useEffect(() => {
@@ -85,65 +84,6 @@ const FAQSection: React.FC<FAQSectionProps> = ({
     return () => ctx.revert()
   }, [cta])
 
-  // Open / close height animation w/ GSAP for smoother auto height
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) return
-    Object.entries(answerRefs.current).forEach(([key, el]) => {
-      if (!el) return
-      const idx = Number(key)
-      const isOpen = idx === openFAQ
-      gsap.killTweensOf(el)
-      if (isOpen) {
-        gsap.fromTo(
-          el,
-          { height: 0, opacity: 0 },
-          {
-            height: el.scrollHeight,
-            opacity: 1,
-            duration: 0.4,
-            ease: 'power2.out',
-            onComplete: () => {
-              el.style.height = 'auto'
-            },
-            force3D: true,
-          }
-        )
-        cardRefs.current[idx]?.classList.add('ringed')
-      } else {
-        if (el.style.height === 'auto') el.style.height = `${el.scrollHeight}px`
-        gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: 'power1.out', force3D: true })
-        cardRefs.current[idx]?.classList.remove('ringed')
-      }
-    })
-  }, [openFAQ])
-
-  // Keyboard accessibility
-  const onKey = (e: React.KeyboardEvent, idx: number) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      toggleFAQ(idx)
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      const next = document.querySelector<HTMLElement>(`[data-faq-button='${idx + 1}']`)
-      next?.focus()
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      const prev = document.querySelector<HTMLElement>(`[data-faq-button='${idx - 1}']`)
-      prev?.focus()
-    }
-  }
-
-  // Flatten index mapping
-  const totalList: { cat: string; item: FAQItem; globalIndex: number }[] = []
-  categories.forEach((cat: FAQCategory, ci: number) =>
-    cat.questions.forEach((q: FAQItem, qi: number) =>
-      totalList.push({ cat: cat.category, item: q, globalIndex: ci * 100 + qi })
-    )
-  )
-
   return (
     <section id={id} ref={sectionRef} className={`relative py-24 ${className}`.trim()} aria-labelledby={`${id}-title`}>
       <div className="pointer-events-none absolute inset-0">
@@ -169,65 +109,18 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                 </div>
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
               </div>
-              <ul className={`space-y-3 ${dense ? 'md:space-y-2' : ''}`}>
-                {category.questions.map((faq: FAQItem, questionIndex: number) => {
-                  const faqIndex = categoryIndex * 100 + questionIndex
-                  const isOpen = openFAQ === faqIndex
-                  return (
-                    <li key={faq.question} className="list-none">
-                      <div
-                        ref={el => (cardRefs.current[faqIndex] = el)}
-                        className={`border-border-primary bg-bg-primary/5 supports-[backdrop-filter]:bg-bg-primary/5 group relative rounded-xl border backdrop-blur transition-colors duration-300 focus-within:border-vae-turquoise/40 hover:border-vae-turquoise/35 dark:border-white/10 dark:bg-white/5 dark:supports-[backdrop-filter]:bg-white/5 ${isOpen ? 'border-vae-turquoise/50' : ''}`}
-                      >
-                        <button
-                          data-faq-button={faqIndex}
-                          aria-expanded={isOpen}
-                          aria-controls={`faq-answer-${faqIndex}`}
-                          id={`faq-button-${faqIndex}`}
-                          onClick={() => toggleFAQ(faqIndex)}
-                          onKeyDown={e => onKey(e, faqIndex)}
-                          className="flex w-full items-center justify-between gap-6 rounded-xl px-6 py-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60"
-                        >
-                          <span className="flex-1 pr-2 text-base font-medium leading-relaxed text-text-light dark:text-white">
-                            {faq.question}
-                          </span>
-                          <span
-                            className={`relative flex h-9 w-9 items-center justify-center rounded-full bg-vae-turquoise/10 text-vae-turquoise transition-all duration-300 ${isOpen ? 'rotate-180 bg-vae-turquoise/20' : 'group-hover:bg-vae-turquoise/15'}`}
-                          >
-                            <svg
-                              width="18"
-                              height="18"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              className="transition-transform duration-300"
-                            >
-                              <path
-                                d="M6 9l6 6 6-6"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </span>
-                        </button>
-                        <div
-                          id={`faq-answer-${faqIndex}`}
-                          role="region"
-                          aria-labelledby={`faq-button-${faqIndex}`}
-                          ref={el => (answerRefs.current[faqIndex] = el)}
-                          className="h-0 overflow-hidden px-6 opacity-0 will-change-[height,opacity]"
-                        >
-                          <div className="border-t border-vae-turquoise/20 pb-6 pt-0">
-                            <p className="text-sm leading-relaxed text-text-secondary">{faq.answer}</p>
-                          </div>
-                        </div>
-                        <div className="[ &.ringed]:ring-2 [ &.ringed]:ring-vae-turquoise/40 pointer-events-none absolute inset-0 rounded-xl ring-0 ring-vae-turquoise/0 transition-all duration-500" />
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
+              <div className={`space-y-3 ${dense ? 'md:space-y-2' : ''}`}>
+                {category.questions.map((faq: FAQItem, questionIndex: number) => (
+                  <AccordionItem
+                    key={faq.question}
+                    question={faq.question}
+                    answer={faq.answer}
+                    id={`${categoryIndex}-${questionIndex}`}
+                    isOpen={!!openItems[`${categoryIndex}-${questionIndex}`]}
+                    onToggle={() => toggle(`${categoryIndex}-${questionIndex}`)}
+                  />
+                ))}
+              </div>
             </div>
           ))}
         </div>

@@ -18,6 +18,9 @@ import CookieBanner from '@components/privacy/CookieBanner'
 // Theme Context
 import { ThemeProvider } from '@/contexts/ThemeContext'
 
+// Help System
+import { HelpModeProvider } from '@/components/ui/help'
+
 // Focus Management
 import { initializeFocusManager } from '@/utils/focusManagement'
 
@@ -34,8 +37,14 @@ const PrivacyPage = React.lazy(() => import('@components/pages/PrivacyPage'))
 const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySettings'))
 const ResourcesFaqPage = React.lazy(() => import('@components/pages/ResourcesFaqPage'))
 const ValuesPage = React.lazy(() => import('@/components/pages/values/ValuesPage'))
+const DesignHeritagePage = React.lazy(() => import('@/components/pages/values/DesignHeritagePage'))
+const TransparenzPage = React.lazy(() => import('@/components/pages/values/TransparenzPage'))
+const KommunikationPage = React.lazy(() => import('@/components/pages/values/KommunikationPage'))
+const UnabhaengigkeitPage = React.lazy(() => import('@/components/pages/values/UnabhaengigkeitPage'))
+const QualitaetPage = React.lazy(() => import('@/components/pages/values/QualitaetPage'))
+const SkalierbarkeitPage = React.lazy(() => import('@/components/pages/values/SkalierbarkeitPage'))
 const LeadershipPage = React.lazy(() => import('@components/pages/leadership/LeadershipPage'))
-const TechStackResourcePage = React.lazy(() => import('@components/pages/TechStackResourcePage'))
+const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
@@ -80,60 +89,68 @@ const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <Router>
-          <ScrollToTop />
-          <div className="min-h-[100dvh] bg-bg-darker text-text-light">
-            <SkipToContent />
-            <ScrollProgressBar />
-            <Header />
-            <NavigationSwitcher />
-            <main id="main-content" className="pt-20">
-              <Suspense fallback={<LoadingSpinner />}>
-                <Routes>
-                  {/* Homepage */}
-                  <Route path="/" element={<HomePage />} />
+        <HelpModeProvider>
+          <Router>
+            <ScrollToTop />
+            <div className="min-h-[100dvh] bg-bg-darker text-text-light">
+              <SkipToContent />
+              <ScrollProgressBar />
+              <Header />
+              <NavigationSwitcher />
+              <main id="main-content" className="pt-20">
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    {/* Homepage */}
+                    <Route path="/" element={<HomePage />} />
 
-                  {/* Services */}
-                  <Route path="/services/setup" element={<SetupPage />} />
-                  <Route path="/services/betreuung" element={<BetreuungPage />} />
-                  <Route path="/services/beratung" element={<BeratungPage />} />
-                  <Route path="/leistungen/strategie" element={<BeratungPage />} />
-                  <Route path="/leistungen/infrastruktur" element={<SetupPage />} />
-                  <Route path="/leistungen/betreuung" element={<BetreuungPage />} />
+                    {/* Services */}
+                    <Route path="/services/setup" element={<SetupPage />} />
+                    <Route path="/services/betreuung" element={<BetreuungPage />} />
+                    <Route path="/services/beratung" element={<BeratungPage />} />
+                    <Route path="/leistungen/strategie" element={<BeratungPage />} />
+                    <Route path="/leistungen/infrastruktur" element={<SetupPage />} />
+                    <Route path="/leistungen/betreuung" element={<BetreuungPage />} />
 
-                  {/* Redirects from old URLs */}
-                  <Route path="/infrastruktur" element={<Navigate to="/services/setup" replace />} />
-                  <Route path="/betreuung" element={<Navigate to="/services/betreuung" replace />} />
+                    {/* Redirects from old URLs */}
+                    <Route path="/infrastruktur" element={<Navigate to="/services/setup" replace />} />
+                    <Route path="/betreuung" element={<Navigate to="/services/betreuung" replace />} />
 
-                  {/* Main Pages */}
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="/about/referenzen" element={<ReferenzenPage />} />
-                  <Route path="/case-studies" element={<ReferenzenPage />} />
-                  <Route path="/ressourcen/case-studies" element={<ReferenzenPage />} />
-                  <Route path="/ressourcen/tech-stack" element={<TechStackResourcePage />} />
-                  <Route path="/ressourcen/blog" element={<Navigate to="/ressourcen/faq" replace />} />
-                  <Route path="/ressourcen/faq" element={<ResourcesFaqPage />} />
-                  <Route path="/ueber-uns/werte" element={<ValuesPage />} />
-                  <Route path="/ueber-uns/leitung" element={<LeadershipPage />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                  <Route path="/termin-buchen" element={<Navigate to="/contact#booking" replace />} />
+                    {/* Main Pages */}
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/about/referenzen" element={<ReferenzenPage />} />
+                    <Route path="/case-studies" element={<ReferenzenPage />} />
+                    <Route path="/ressourcen/case-studies" element={<ReferenzenPage />} />
 
-                  {/* Redirects */}
-                  <Route path="/kontakt" element={<Navigate to="/contact" replace />} />
-                  <Route path="/resources/referenzen" element={<Navigate to="/about/referenzen" replace />} />
+                    <Route path="/ressourcen/blog" element={<BlogPage />} />
+                    <Route path="/ressourcen/faq" element={<ResourcesFaqPage />} />
+                    <Route path="/ueber-uns/werte" element={<ValuesPage />} />
+                    <Route path="/ueber-uns/design-handwerk" element={<DesignHeritagePage />} />
+                    <Route path="/wissen/transparenz-open-source" element={<TransparenzPage />} />
+                    <Route path="/wissen/klare-projektkommunikation" element={<KommunikationPage />} />
+                    <Route path="/wissen/vendor-lock-in-vermeiden" element={<UnabhaengigkeitPage />} />
+                    <Route path="/wissen/handwerkskunst-statt-schnellschuss" element={<QualitaetPage />} />
+                    <Route path="/wissen/skalierbare-architektur" element={<SkalierbarkeitPage />} />
+                    <Route path="/ueber-uns/leitung" element={<LeadershipPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/termin-buchen" element={<Navigate to="/contact#booking" replace />} />
 
-                  {/* Legal */}
-                  <Route path="/impressum" element={<ImpressumPage />} />
-                  <Route path="/privacy" element={<PrivacyPage />} />
-                  <Route path="/datenschutz" element={<Navigate to="/privacy" replace />} />
-                  <Route path="/privacy/settings" element={<PrivacySettings />} />
-                </Routes>
-              </Suspense>
-            </main>
-            <Footer />
-            <CookieBanner />
-          </div>
-        </Router>
+                    {/* Redirects */}
+                    <Route path="/kontakt" element={<Navigate to="/contact" replace />} />
+                    <Route path="/resources/referenzen" element={<Navigate to="/about/referenzen" replace />} />
+
+                    {/* Legal */}
+                    <Route path="/impressum" element={<ImpressumPage />} />
+                    <Route path="/privacy" element={<PrivacyPage />} />
+                    <Route path="/datenschutz" element={<Navigate to="/privacy" replace />} />
+                    <Route path="/privacy/settings" element={<PrivacySettings />} />
+                  </Routes>
+                </Suspense>
+              </main>
+              <Footer />
+              <CookieBanner />
+            </div>
+          </Router>
+        </HelpModeProvider>
       </ThemeProvider>
     </ErrorBoundary>
   )

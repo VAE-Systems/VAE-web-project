@@ -123,7 +123,9 @@ export type IconName =
   | 'check_circle'
   | string
 
-const MAP: Record<string, React.ComponentType<any>> = {
+type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>
+
+const MAP: Record<string, IconComponent> = {
   // Arrow & Navigation Icons
   arrow_forward: ArrowRight,
   arrow_outward: ArrowUpRight,
@@ -139,6 +141,7 @@ const MAP: Record<string, React.ComponentType<any>> = {
   close: X,
   check: Check,
   check_circle: CheckCircle,
+  task_alt: CheckCircle,
   menu: Menu,
 
   // Communication Icons
@@ -185,6 +188,7 @@ const MAP: Record<string, React.ComponentType<any>> = {
   code: Code,
   info: Info,
   travel_explore: Globe,
+  dns: Globe,
   link: LinkIcon,
 
   // Theme Icons
@@ -213,6 +217,8 @@ const MAP: Record<string, React.ComponentType<any>> = {
   electric_bolt: Zap,
 }
 
+const missingIconWarnings = new Set<string>()
+
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name?: IconName | string
   className?: string
@@ -220,29 +226,30 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 }
 
 const Icon: React.FC<IconProps> = ({ name, className, size = 20, ...rest }) => {
-  const key = (name as string) || ''
+  const fallbackClasses = [className, process.env.NODE_ENV === 'development' ? 'opacity-50' : null]
+    .filter(Boolean)
+    .join(' ')
 
-  // Versuche verschiedene Varianten des Icon-Namens
+  const renderFallback = () => (
+    <Shapes className={fallbackClasses} width={size} height={size} aria-hidden="true" {...rest} />
+  )
+
+  const key = typeof name === 'string' ? name.trim() : ''
+
+  if (!key) {
+    return renderFallback()
+  }
+
   const normalizedKey = key.toLowerCase()
   const IconComponent = MAP[key] || MAP[normalizedKey] || null
 
-  // Debug-Logging nur im Development-Modus
-  if (!IconComponent && process.env.NODE_ENV === 'development') {
-    console.warn(`Icon '${name}' not found in Icon map. Available icons:`, Object.keys(MAP))
-  }
-
-  // Fallback mit unterschiedlichen Strategien für Dev vs Prod
   if (!IconComponent) {
-    // Verwende Shapes als Fallback-Icon
-    return (
-      <Shapes
-        className={`${className} ${process.env.NODE_ENV === 'development' ? 'opacity-50' : ''}`}
-        width={size}
-        height={size}
-        aria-hidden="true"
-        {...rest}
-      />
-    )
+    if (process.env.NODE_ENV === 'development' && !missingIconWarnings.has(normalizedKey)) {
+      missingIconWarnings.add(normalizedKey)
+      console.warn(`Icon '${key}' not found in Icon map. Add a mapping in src/components/ui/Icon.tsx.`)
+    }
+
+    return renderFallback()
   }
 
   return <IconComponent className={className} width={size} height={size} aria-hidden="true" {...rest} />

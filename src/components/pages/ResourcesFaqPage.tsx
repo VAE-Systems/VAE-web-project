@@ -1,22 +1,25 @@
 import { CalendarDays, ChevronDown, Search as SearchIcon, ShieldCheck } from 'lucide-react'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import FAQSection, { FAQCategory } from '@/components/sections/FAQSection'
 import Seo from '@/components/ui/Seo'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { faqCategories, FaqCategoryId, faqEntries, FaqEntry } from '@/data/faqData'
+import { faqCategories, FaqCategoryId, faqEntries } from '@/data/faqData'
 
 type CategoryFilter = 'all' | FaqCategoryId
 
 const FILTERS: Array<{ id: CategoryFilter; label: string }> = [
   { id: 'all', label: 'Alle' },
-  ...faqCategories.map(category => ({ id: category.id, label: category.label })),
+  { id: 'tech' as const, label: 'Technologie' },
+  { id: 'business' as const, label: 'Business' },
+  { id: 'career' as const, label: 'Karriere' },
 ]
 
 const ResourcesFaqPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [openItems, setOpenItems] = useState<string[]>([])
+  const contentRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
 
@@ -32,25 +35,27 @@ const ResourcesFaqPage: React.FC = () => {
     })
   }, [activeCategory, normalizedQuery])
 
-  useEffect(() => {
-    setOpenItems(prev => {
-      const next = prev.filter(id => filteredFaqs.some(entry => entry.id === id))
-      return next.length === prev.length ? prev : next
-    })
-  }, [filteredFaqs])
-
   const groupedFaqs = useMemo(() => {
-    if (!filteredFaqs.length) return []
     if (activeCategory !== 'all') {
       const category = faqCategories.find(cat => cat.id === activeCategory)
-      return category ? [{ category, entries: filteredFaqs }] : []
+      return category
+        ? [
+            {
+              category,
+              questions: filteredFaqs.map(entry => ({ question: entry.question, answer: entry.answer })),
+            },
+          ]
+        : []
     }
+
     return faqCategories
       .map(category => ({
         category,
-        entries: filteredFaqs.filter(entry => entry.categoryId === category.id),
+        questions: filteredFaqs
+          .filter(entry => entry.categoryId === category.id)
+          .map(entry => ({ question: entry.question, answer: entry.answer })),
       }))
-      .filter(group => group.entries.length > 0)
+      .filter(group => group.questions.length > 0)
   }, [activeCategory, filteredFaqs])
 
   const totalFaqs = filteredFaqs.length
@@ -59,19 +64,31 @@ const ResourcesFaqPage: React.FC = () => {
     setOpenItems(prev => (prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]))
   }
 
-  const renderAnswer = (entry: FaqEntry) => (
-    <>
-      <p className="text-sm leading-relaxed text-text-secondary">{entry.answer}</p>
-      {entry.cta && (
-        <div className="mt-4">
-          <Link to={entry.cta.href} className="btn-ghost inline-flex items-center gap-2 text-sm">
-            {entry.cta.label}
-            <ChevronDown className="h-4 w-4 rotate-180 text-vae-turquoise" />
-          </Link>
-        </div>
-      )}
-    </>
-  )
+  const measureHeights = useCallback(() => {
+    const nextHeights: Record<string, number> = {}
+    Object.entries(contentRefs.current).forEach(([id, element]) => {
+      if (element) {
+        nextHeights[id] = element.scrollHeight
+      }
+    })
+
+    setContentHeights(prev => {
+      const prevKeys = Object.keys(prev)
+      const nextKeys = Object.keys(nextHeights)
+      const changed = prevKeys.length !== nextKeys.length || nextKeys.some(key => prev[key] !== nextHeights[key])
+      return changed ? nextHeights : prev
+    })
+  }, [])
+
+  useEffect(() => {
+    measureHeights()
+  }, [filteredFaqs, measureHeights])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    window.addEventListener('resize', measureHeights)
+    return () => window.removeEventListener('resize', measureHeights)
+  }, [measureHeights])
 
   return (
     <div className="bg-bg-darker text-text-light">
@@ -95,8 +112,8 @@ const ResourcesFaqPage: React.FC = () => {
             Antworten ohne Fluff – direkt aus Projekten
           </h1>
           <p className="max-w-3xl text-base text-text-secondary">
-            Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. 64 Fragen, sortiert wie eine echte
-            Knowledge Base. Preise? Die besprechen wir im Gespräch – weil jedes Projekt anders gebaut wird.
+            Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. {faqEntries.length} Fragen, sortiert wie
+            eine echte Knowledge Base. Preise? Die besprechen wir im Gespräch – weil jedes Projekt anders gebaut wird.
           </p>
           <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
             <ShieldCheck className="h-4 w-4 text-vae-turquoise" />
@@ -203,56 +220,24 @@ const ResourcesFaqPage: React.FC = () => {
             </div>
           )}
 
-          {groupedFaqs.map(group => (
-            <div key={group.category.id} className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/5 pb-2">
-                <div>
-                  <p className="text-sm font-semibold text-white">{group.category.label}</p>
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/50">Knowledge Base</p>
-                </div>
-                <p className="text-xs text-white/60">{group.entries.length} Antworten</p>
-              </div>
-              <div className="space-y-3">
-                {group.entries.map(entry => {
-                  const isOpen = openItems.includes(entry.id)
-                  return (
-                    <article
-                      key={entry.id}
-                      className="rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark via-bg-dark/80 to-black/40 p-5 transition hover:border-vae-turquoise/40"
-                    >
-                      <button
-                        type="button"
-                        onClick={() => toggleItem(entry.id)}
-                        aria-expanded={isOpen}
-                        aria-controls={`${entry.id}-content`}
-                        className="flex w-full items-center justify-between gap-6 text-left"
-                      >
-                        <div>
-                          <p className="text-lg font-medium text-white">{entry.question}</p>
-                          <p className="text-xs uppercase tracking-[0.2em] text-vae-turquoise/70">
-                            {group.category.label}
-                          </p>
-                        </div>
-                        <span
-                          className={`rounded-full border border-white/10 p-2 transition ${
-                            isOpen ? 'rotate-180 border-vae-turquoise text-vae-turquoise' : 'text-white/70'
-                          }`}
-                        >
-                          <ChevronDown className="h-4 w-4" />
-                        </span>
-                      </button>
-                      <div
-                        id={`${entry.id}-content`}
-                        className={`grid overflow-hidden transition-all ${isOpen ? 'mt-4 grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
-                      >
-                        <div className="overflow-hidden border-t border-white/5 pt-4">{renderAnswer(entry)}</div>
-                      </div>
-                    </article>
-                  )
-                })}
-              </div>
-            </div>
-          ))}
+          {groupedFaqs.map(group => {
+            const faqCategory: FAQCategory = {
+              category: group.category.label,
+              questions: group.questions,
+            }
+
+            return (
+              <FAQSection
+                key={group.category.id}
+                title=""
+                subtitle=""
+                categories={[faqCategory]}
+                cta={false}
+                className="py-0"
+                dense={true}
+              />
+            )
+          })}
         </div>
       </section>
     </div>

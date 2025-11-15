@@ -4,8 +4,6 @@ import {
   Building2,
   Check,
   Headphones,
-  Minus,
-  Plus,
   Repeat,
   Rocket,
   Server,
@@ -15,8 +13,9 @@ import {
   UploadCloud,
   Users,
 } from 'lucide-react'
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
+import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
@@ -241,8 +240,6 @@ const calendlyUrl = '/contact#booking'
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)
   const [customToolCost, setCustomToolCost] = useState(0)
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
-  const answerRefs = useRef<Record<number, HTMLDivElement | null>>({})
 
   const [toolSelection, setToolSelection] = useState<Record<string, boolean>>(() => {
     return toolOptions.reduce<Record<string, boolean>>((acc, option) => {
@@ -250,6 +247,17 @@ const SetupPage: React.FC = () => {
       return acc
     }, {})
   })
+
+  const faqAccordionItems = useMemo(
+    () =>
+      faqItems.map((item, index) => ({
+        id: `setup-faq-${index}`,
+        question: item.question,
+        defaultOpen: index === 0,
+        answer: <p className="text-base leading-relaxed text-text-secondary">{item.answer}</p>,
+      })),
+    []
+  )
 
   const formatCurrency = useCallback((value: number) => {
     if (Number.isNaN(value)) return '€0'
@@ -300,10 +308,6 @@ const SetupPage: React.FC = () => {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-  }, [])
-
-  const toggleFaq = useCallback((index: number) => {
-    setOpenFaqIndex(prev => (prev === index ? null : index))
   }, [])
 
   return (
@@ -752,42 +756,16 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 7 FAQ */}
-      <section className="py-20">
+      <section className="bg-gradient-to-b from-bg-darker via-[#050505] to-bg-darker py-20">
         <div className="container-vae">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">FAQ</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Häufige Fragen</h2>
+          <div className="mx-auto max-w-2xl text-center text-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">FAQ</p>
+            <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-text-secondary">
+              Alles rund um Infrastruktur-Setups – von Migration bis Kosten-Transparenz.
+            </p>
           </div>
-          <div className="mt-12 space-y-4">
-            {faqItems.map((item, index) => {
-              const isOpen = openFaqIndex === index
-              return (
-                <div key={item.question} className="rounded-2xl border border-white/10 bg-white/5">
-                  <button
-                    className="flex w-full items-center justify-between px-6 py-5 text-left"
-                    onClick={() => toggleFaq(index)}
-                    aria-expanded={isOpen}
-                  >
-                    <span className="text-lg font-semibold text-white">{item.question}</span>
-                    {isOpen ? (
-                      <Minus className="h-5 w-5 text-vae-turquoise" />
-                    ) : (
-                      <Plus className="h-5 w-5 text-text-secondary" />
-                    )}
-                  </button>
-                  <div
-                    ref={el => {
-                      answerRefs.current[index] = el
-                    }}
-                    style={{ maxHeight: isOpen ? `${answerRefs.current[index]?.scrollHeight ?? 0}px` : 0 }}
-                    className="overflow-hidden px-6 transition-[max-height] duration-500 ease-in-out"
-                  >
-                    <p className="pb-6 text-base text-text-secondary">{item.answer}</p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <FaqAccordion items={faqAccordionItems} className="mt-12 space-y-4" />
         </div>
       </section>
 

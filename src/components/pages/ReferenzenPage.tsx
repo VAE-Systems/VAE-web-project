@@ -59,6 +59,7 @@ interface CaseStudy {
   techStack: TechBadge[]
   role: string
   cta?: { label: string; href: string }
+  externalLinks?: { label: string; href: string }[]
   icon: React.ElementType
 }
 
@@ -94,36 +95,28 @@ const caseStudies: CaseStudy[] = [
     implementation: [
       {
         title: 'Nextcloud Hub',
-        items: [
-          'Dateispeicherung & Sharing als Google-Drive-Ersatz',
-          'Team-Kalender & Kontakte',
-          'Nextcloud Talk für interne Kommunikation',
-          'OnlyOffice für kollaborative Dokumente',
-        ],
+        items: ['Dateispeicherung & Sharing als Google-Drive-Ersatz', 'Team-Kalender & Kontakte'],
       },
       {
         title: 'Twenty CRM',
-        items: [
-          'Mitgliederverwaltung & Kontakt-Datenbank',
-          'Event-Tracking und Follow-ups',
-          'Custom Fields für NGO-spezifische Daten',
-        ],
+        items: ['Mitgliederverwaltung & Kontakt-Datenbank', 'Mitglieder-Account-Management'],
       },
       {
-        title: 'n8n Automation',
-        items: [
-          'Lead- und Mitglieder-Onboarding automatisiert',
-          'E-Mail-Benachrichtigungen und Reminder',
-          'Daten-Synchronisation zwischen Nextcloud & CRM',
-        ],
-      },
-      {
-        title: 'Infrastructure',
+        title: 'Infrastructure & Operations',
         items: [
           'Self-hosted Hetzner-Stack',
-          'Docker-basiertes Deployment',
+          'Docker-basiertes Deployment & Server Management',
           'Tägliche Backups',
-          'Traefik + Let’s Encrypt',
+          'Arbeitsstruktur für Teams & Projekte',
+          'Anhaltende Weiterentwicklung & Skalierung',
+        ],
+      },
+      {
+        title: 'Langfristige Wirkung',
+        items: [
+          'Blueprint für entstehende Gruppen',
+          'Grundlage für operative Fähigkeit neuer Initiativen',
+          'Dokumentenmanagement & Wissenstransfer',
         ],
       },
     ],
@@ -138,15 +131,10 @@ const caseStudies: CaseStudy[] = [
     techStack: [
       {
         name: 'Nextcloud',
-        description: 'Self-hosted Collaboration Suite für Files, Kalender und Talk.',
+        description: 'Self-hosted Collaboration Suite für Files und Kalender.',
         docsUrl: 'https://nextcloud.com/',
       },
-      { name: 'Twenty CRM', description: 'CRM mit Custom Fields für NGOs & Vereine.', docsUrl: 'https://twenty.com/' },
-      {
-        name: 'n8n',
-        description: 'Workflow-Automatisierung mit mehr als 400 Integrationen.',
-        docsUrl: 'https://n8n.io/',
-      },
+      { name: 'Twenty CRM', description: 'CRM für Mitgliederverwaltung.', docsUrl: 'https://twenty.com/' },
       {
         name: 'Docker',
         description: 'Container-Orchestrierung für reproduzierbare Deployments.',
@@ -157,10 +145,12 @@ const caseStudies: CaseStudy[] = [
         description: 'Relationale Datenbank für CRM & Automationen.',
         docsUrl: 'https://www.postgresql.org/',
       },
-      { name: 'Traefik', description: 'Reverse Proxy inklusive automatischem SSL.', docsUrl: 'https://traefik.io/' },
     ],
     role: 'Julian Goertz ist Vorstand bei Aktiv Kollektiv e.V. und hat die Infrastruktur intern konzipiert und umgesetzt.',
     cta: { label: 'Ähnliches Projekt starten', href: '/services/setup' },
+    externalLinks: [
+      { label: 'Aktiv Kollektiv auf LinkedIn', href: 'https://www.linkedin.com/company/aktiv-kollektiv/' },
+    ],
   },
   {
     id: 'art-affair-qr',
@@ -172,29 +162,30 @@ const caseStudies: CaseStudy[] = [
     status: 'Produktiv im Einsatz',
     statusVariant: 'live',
     challenge:
-      'Für Event-Leads benötigte Art Affair ein System, das QR-Codes generiert, Leads speichert und automatisch personalisierte Follow-up-E-Mails versendet – proprietäre Tools waren zu teuer und unflexibel, KI-Integration nicht möglich.',
+      'Für Event-Leads benötigte Art Affair ein System, das QR-Codes generiert, Leads speichert und automatisch personalisierte Follow-up-E-Mails versendet – proprietäre Tools waren zu teuer und unflexibel.',
     solutionIntro:
-      'Wir haben ein maßgeschneidertes System mit Open-Source-Komponenten gebaut, das Leads erfasst, KI-basiert kommuniziert und ohne Vendor-Lock-in betrieben wird.',
+      'Wir haben ein maßgeschneidertes System gebaut, das Leads erfasst, KI-basiert kommuniziert und durch Automation in bestehende Systeme integriert wurde. Daten werden sicher in Containern gespeichert.',
     implementation: [
       {
-        title: 'n8n Workflow-Engine',
+        title: 'API-basierte Automation',
         items: [
-          'QR-Code-Generierung und Verwaltung',
+          'Custom API-Programmierung für QR-Code-Generierung',
           'Webhook-basierte Lead-Erfassung',
-          'Automatisierte E-Mail-Ausspielung',
+          'Automatisierte E-Mail-Ausspielung via API',
+          'Integration in bestehende Event-Infrastruktur',
         ],
       },
       {
-        title: 'LangChain + OpenAI / Ollama',
+        title: 'KI-Integration via OpenAI API',
         items: [
           'LLM-gestützte E-Mail-Generierung',
           'Personalisierter Content auf Basis Event-Kontext',
-          'Einfache Anpassung auf weitere Sprachen',
+          'Direkte OpenAI API-Integration',
         ],
       },
       {
-        title: 'PostgreSQL Data Layer',
-        items: ['Persistente Lead-Speicherung', 'Event-Tracking & Analytics', 'Grundlage für zukünftige Dashboards'],
+        title: 'Container-basierte Datenspeicherung',
+        items: ['Persistente Lead-Speicherung in Containern', 'Event-Tracking & Analytics', 'Sichere Datenhaltung'],
       },
       {
         title: 'Lightweight Frontend',
@@ -210,26 +201,25 @@ const caseStudies: CaseStudy[] = [
       },
     ],
     techStack: [
-      { name: 'n8n', description: 'Automatisierungs-Engine für sämtliche Workflows.', docsUrl: 'https://n8n.io/' },
       {
-        name: 'LangChain',
-        description: 'Orchestrierung von LLM-Ketten zur E-Mail-Generierung.',
-        docsUrl: 'https://www.langchain.com/',
+        name: 'OpenAI API',
+        description: 'KI-gestützte E-Mail-Generierung via direkter API-Integration.',
+        docsUrl: 'https://platform.openai.com/',
+      },
+      {
+        name: 'Docker',
+        description: 'Container-basierte Datenspeicherung und Service-Deployment.',
+        docsUrl: 'https://www.docker.com/',
       },
       { name: 'PostgreSQL', description: 'Lead-Datenbank mit Event-Tracking.', docsUrl: 'https://www.postgresql.org/' },
       {
-        name: 'Docker',
-        description: 'Deployment aller Services inklusive Scheduler.',
-        docsUrl: 'https://www.docker.com/',
-      },
-      {
-        name: 'OpenAI API',
-        description: 'LLM-Backend – optional durch Ollama ersetzbar.',
-        docsUrl: 'https://platform.openai.com/',
+        name: 'Custom API',
+        description: 'Maßgeschneiderte API-Programmierung für Workflow-Automation.',
       },
     ],
     role: 'VAE Systems verantwortete Konzept, Entwicklung, Infrastructure-as-Code und Deployment.',
     cta: { label: 'KI-Workflow-Automation anfragen', href: '/services/beratung' },
+    externalLinks: [{ label: 'Art Affair Website', href: 'https://art-affair.net/' }],
   },
   {
     id: 'vae-internal',
@@ -248,11 +238,14 @@ const caseStudies: CaseStudy[] = [
         title: 'Stack im Einsatz',
         items: [
           'Nextcloud Hub für Files, Kalender, Kontakte, Talk',
-          'n8n für Workflow-Automation, Client-Onboarding, Reporting',
-          'Perplexity & Open-Source-LLMs für Research',
+          'Outline für Team-Dokumentation & Wissensdatenbank',
+          'OpenProject für Projektmanagement & Roadmaps',
+          'Twenty CRM für Kontakt- & Opportunity-Management',
+          'Super Productivity für Time Tracking & Task Management',
+          'n8n für internes Automations-Testing (produktive Automationen werden stabil programmiert)',
+          'Self-hosted Website auf eigenem Stack',
           'GitHub für Versionskontrolle',
-          'Docker & Traefik für sämtliche Services',
-          'Uptime Kuma und Restic für Monitoring & Backups',
+          'Docker für sämtliche Services',
         ],
       },
     ],
@@ -270,12 +263,33 @@ const caseStudies: CaseStudy[] = [
         description: 'Zentrale Collaboration für Files und Kommunikation.',
         docsUrl: 'https://nextcloud.com/',
       },
-      { name: 'n8n', description: 'Automatisierung für Onboarding & Ops.', docsUrl: 'https://n8n.io/' },
+      {
+        name: 'Outline',
+        description: 'Wissensdatenbank & Team-Dokumentation.',
+        docsUrl: 'https://www.getoutline.com/',
+      },
+      {
+        name: 'OpenProject',
+        description: 'Projektmanagement & Agile Workflows.',
+        docsUrl: 'https://www.openproject.org/',
+      },
+      {
+        name: 'Twenty CRM',
+        description: 'Open-Source CRM für moderne Sales Workflows.',
+        docsUrl: 'https://twenty.com/',
+      },
+      {
+        name: 'Super Productivity',
+        description: 'Time Tracking & Task Management.',
+        docsUrl: 'https://super-productivity.com/',
+      },
+      {
+        name: 'n8n',
+        description: 'Internes Automations-Testing (Produktion: Stabil programmiert).',
+        docsUrl: 'https://n8n.io/',
+      },
       { name: 'Docker', description: 'Containerisierung sämtlicher Services.', docsUrl: 'https://www.docker.com/' },
       { name: 'PostgreSQL', description: 'Persistente Datenhaltung.', docsUrl: 'https://www.postgresql.org/' },
-      { name: 'Traefik', description: 'Routing, SSL, Zero-Downtime-Deployments.', docsUrl: 'https://traefik.io/' },
-      { name: 'Uptime Kuma', description: 'Self-hosted Monitoring & Alerts.', docsUrl: 'https://uptimekuma.com/' },
-      { name: 'Restic', description: 'Verschlüsselte Backups, versioniert.', docsUrl: 'https://restic.net/' },
     ],
     role: 'Unsere interne Infrastruktur beweist: Open Source ist produktionsreif und skalierbar.',
   },
@@ -371,144 +385,162 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
   animationsEnabled,
 }) => {
   const Icon = study.icon
+  const [showLogoModal, setShowLogoModal] = useState(false)
   return (
-    <article
-      className="group relative overflow-hidden rounded-3xl border border-black/5 bg-white/90 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.2)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.25)]"
-      aria-expanded={isExpanded}
-    >
-      <div className="flex flex-col gap-6 lg:flex-row">
-        <div className="flex w-full flex-col gap-4 lg:max-w-xs">
-          <div className="flex items-center gap-3 text-sm text-text-muted">
-            <span className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:border-white/10 dark:bg-white/10">
-              <Icon className="h-4 w-4" /> Case Study
-            </span>
-            <span
-              className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusStyles[study.statusVariant]}`}
-            >
-              <BadgeCheck className="h-3.5 w-3.5" /> {study.status}
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            {study.logo ? (
-              <div
-                className={`flex items-center justify-center rounded-xl border border-black/5 bg-white/50 p-4 dark:border-white/10 dark:bg-white/5 ${
-                  study.logo.wide ? 'h-20 w-40' : 'h-28 w-28'
-                }`}
+    <>
+      <article
+        className="group relative rounded-3xl border border-black/5 bg-white/90 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.2)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.25)]"
+        aria-expanded={isExpanded}
+      >
+        <div className="flex flex-col gap-6 lg:flex-row">
+          <div className="flex w-full flex-col gap-4 lg:max-w-xs">
+            <div className="flex items-center gap-3 text-sm text-text-muted">
+              <span className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:border-white/10 dark:bg-white/10">
+                <Icon className="h-4 w-4" /> Case Study
+              </span>
+              <span
+                className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium ${statusStyles[study.statusVariant]}`}
               >
-                <img
-                  src={study.logo.src}
-                  alt={study.logo.alt}
-                  className={[
-                    'h-full w-full object-contain transition-transform duration-300',
-                    (study.logo.invertOnDark || study.logo.invertOnLight) && 'filter',
-                    study.logo.invertOnDark && 'dark:invert',
-                    study.logo.invertOnLight && 'invert',
-                    study.logo.invertOnLight && 'dark:invert-0',
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                  loading="lazy"
-                />
+                <BadgeCheck className="h-3.5 w-3.5" /> {study.status}
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              {study.logo ? (
+                <button
+                  type="button"
+                  onClick={() => setShowLogoModal(true)}
+                  className={`group/logo flex cursor-pointer items-center justify-center rounded-xl border border-black/5 bg-white/50 p-4 transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5 ${
+                    study.logo.wide ? 'h-20 w-40' : 'h-28 w-28'
+                  }`}
+                  aria-label={`${study.logo.alt} vergrößern`}
+                >
+                  <img
+                    src={study.logo.src}
+                    alt={study.logo.alt}
+                    className={[
+                      'h-full w-full object-contain transition-all duration-300 group-hover/logo:scale-110',
+                      (study.logo.invertOnDark || study.logo.invertOnLight) && 'filter',
+                      study.logo.invertOnDark && 'dark:invert',
+                      study.logo.invertOnLight && 'invert',
+                      study.logo.invertOnLight && 'dark:invert-0',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    loading="lazy"
+                  />
+                </button>
+              ) : (
+                <div className="flex h-28 w-28 items-center justify-center rounded-xl border border-black/5 bg-white/50 text-vae-turquoise dark:border-white/10 dark:bg-white/5">
+                  <Icon className="h-14 w-14" />
+                </div>
+              )}
+              <div>
+                <p className="text-sm font-semibold text-vae-turquoise">{study.organization}</p>
+                <p className="text-sm text-text-muted">{study.industry}</p>
               </div>
-            ) : (
-              <div className="flex h-28 w-28 items-center justify-center rounded-xl border border-black/5 bg-white/50 text-vae-turquoise dark:border-white/10 dark:bg-white/5">
-                <Icon className="h-14 w-14" />
-              </div>
-            )}
+            </div>
             <div>
-              <p className="text-sm font-semibold text-vae-turquoise">{study.organization}</p>
-              <p className="text-sm text-text-muted">{study.industry}</p>
+              <h3 className="text-2xl font-semibold text-text-light">{study.title}</h3>
+              <p className="mt-3 text-base text-text-secondary">{study.challenge}</p>
+            </div>
+            <div className="rounded-2xl border border-black/5 bg-white/80 p-4 text-sm text-text-secondary dark:border-white/5 dark:bg-white/5">
+              <p className="font-semibold text-text-light">Unsere Antwort</p>
+              <p className="mt-2 leading-relaxed">{study.solutionIntro}</p>
             </div>
           </div>
-          <div>
-            <h3 className="text-2xl font-semibold text-text-light">{study.title}</h3>
-            <p className="mt-3 text-base text-text-secondary">{study.challenge}</p>
-          </div>
-          <div className="rounded-2xl border border-black/5 bg-white/80 p-4 text-sm text-text-secondary dark:border-white/5 dark:bg-white/5">
-            <p className="font-semibold text-text-light">Unsere Antwort</p>
-            <p className="mt-2 leading-relaxed">{study.solutionIntro}</p>
+
+          <div className="flex-1 space-y-6">
+            {study.implementation.map(block => (
+              <div
+                key={block.title}
+                className="rounded-2xl border border-black/5 bg-white/80 p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]"
+              >
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-vae-turquoise">{block.title}</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-text-secondary">
+                  {block.items.map(item => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="flex-1 space-y-6">
-          {study.implementation.map(block => (
-            <div
-              key={block.title}
-              className="rounded-2xl border border-black/5 bg-white/80 p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]"
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <button
+            type="button"
+            onClick={onToggle}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60"
+          >
+            {isExpanded ? 'Details ausblenden' : 'Details ansehen'}
+            <ChevronDown
+              className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
+              aria-hidden="true"
+            />
+          </button>
+          {study.cta && (
+            <Link
+              to={study.cta.href}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary underline-offset-4 transition-colors hover:text-vae-turquoise hover:underline"
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-vae-turquoise">{block.title}</p>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-text-secondary">
-                {block.items.map(item => (
-                  <li key={item}>{item}</li>
+              {study.cta.label} <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
+          {study.externalLinks?.map(link => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary underline-offset-4 transition-colors hover:text-vae-turquoise hover:underline"
+            >
+              {link.label} <ArrowUpRight className="h-4 w-4" />
+            </a>
+          ))}
+        </div>
+
+        <ExpandableContent isOpen={isExpanded} animationsEnabled={animationsEnabled}>
+          <div className="mt-8 grid gap-6 pb-2 lg:grid-cols-3">
+            <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Messbare Ergebnisse</p>
+              <ul className="mt-4 space-y-4 text-sm text-text-secondary">
+                {study.results.map(metric => (
+                  <li key={metric.label}>
+                    <p className="font-semibold text-text-light">{metric.label}</p>
+                    <p className="mt-1 leading-relaxed">{metric.description}</p>
+                  </li>
                 ))}
               </ul>
             </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-6 flex flex-wrap items-center gap-4">
-        <button
-          type="button"
-          onClick={onToggle}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60"
-        >
-          {isExpanded ? 'Details ausblenden' : 'Details ansehen'}
-          <ChevronDown
-            className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
-            aria-hidden="true"
-          />
-        </button>
-        {study.cta && (
-          <Link
-            to={study.cta.href}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary underline-offset-4 transition-colors hover:text-vae-turquoise hover:underline"
-          >
-            {study.cta.label} <ArrowRight className="h-4 w-4" />
-          </Link>
-        )}
-      </div>
-
-      <ExpandableContent isOpen={isExpanded} animationsEnabled={animationsEnabled}>
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Messbare Ergebnisse</p>
-            <ul className="mt-4 space-y-4 text-sm text-text-secondary">
-              {study.results.map(metric => (
-                <li key={metric.label}>
-                  <p className="font-semibold text-text-light">{metric.label}</p>
-                  <p className="mt-1 leading-relaxed">{metric.description}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Tech Stack</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {study.techStack.map(badge => (
-                <button
-                  key={badge.name}
-                  type="button"
-                  onClick={() => onBadgeClick(badge)}
-                  title={badge.description}
-                  className="rounded-full border border-black/10 bg-white/80 px-4 py-1.5 text-sm text-text-light transition-all duration-200 hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:text-vae-turquoise dark:border-white/10 dark:bg-white/10 dark:text-white"
-                >
-                  {badge.name}
-                </button>
-              ))}
+            <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Tech Stack</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {study.techStack.map(badge => (
+                  <button
+                    key={badge.name}
+                    type="button"
+                    onClick={() => onBadgeClick(badge)}
+                    title={badge.description}
+                    className="rounded-full border border-black/10 bg-white/80 px-4 py-1.5 text-sm text-text-light transition-all duration-200 hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:text-vae-turquoise dark:border-white/10 dark:bg-white/10 dark:text-white"
+                  >
+                    {badge.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Rolle & Ownership</p>
+              <p className="mt-3 text-sm leading-relaxed text-text-secondary">{study.role}</p>
+              <div className="mt-6 flex items-center gap-3 text-xs text-text-muted">
+                <Sparkles className="h-4 w-4 text-vae-turquoise" />
+                Open Source · DSGVO-konform · Transparent dokumentiert
+              </div>
             </div>
           </div>
-          <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Rolle & Ownership</p>
-            <p className="mt-3 text-sm leading-relaxed text-text-secondary">{study.role}</p>
-            <div className="mt-6 flex items-center gap-3 text-xs text-text-muted">
-              <Sparkles className="h-4 w-4 text-vae-turquoise" />
-              Open Source · DSGVO-konform · Transparent dokumentiert
-            </div>
-          </div>
-        </div>
-      </ExpandableContent>
-    </article>
+        </ExpandableContent>
+      </article>
+      {showLogoModal && study.logo && <LogoModal logo={study.logo} onClose={() => setShowLogoModal(false)} />}
+    </>
   )
 }
 
@@ -564,6 +596,57 @@ const ExpandableContent: React.FC<ExpandableContentProps> = ({ isOpen, children,
       style={{ maxHeight: isOpen ? `${height}px` : '0px', opacity: isOpen ? 1 : 0 }}
     >
       <div ref={innerRef}>{children}</div>
+    </div>
+  )
+}
+
+interface LogoModalProps {
+  logo: { src: string; alt: string; invertOnDark?: boolean; invertOnLight?: boolean; wide?: boolean }
+  onClose: () => void
+}
+
+const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-10 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${logo.alt} - Vergrößert`}
+      onClick={onClose}
+    >
+      <div className="relative max-h-[90vh] max-w-4xl" onClick={e => e.stopPropagation()}>
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute -right-4 -top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-text-light shadow-lg transition-all hover:scale-110 hover:bg-white dark:bg-bg-darker/90 dark:text-white dark:hover:bg-bg-darker"
+          aria-label="Schließen"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        <div className="rounded-2xl border border-white/20 bg-white/95 p-8 shadow-2xl dark:bg-bg-dark/95">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            className={[
+              'max-h-[75vh] w-full object-contain',
+              (logo.invertOnDark || logo.invertOnLight) && 'filter',
+              logo.invertOnDark && 'dark:invert',
+              logo.invertOnLight && 'invert',
+              logo.invertOnLight && 'dark:invert-0',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          />
+        </div>
+      </div>
     </div>
   )
 }

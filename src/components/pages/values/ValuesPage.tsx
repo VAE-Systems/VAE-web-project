@@ -57,8 +57,8 @@ const ValuesPage: React.FC = () => {
         <ValueSection key={value.id} value={value} index={index} />
       ))}
 
-      <VisionSection />
       <CTASection />
+      <VisionSection />
     </div>
   )
 }

@@ -1,8 +1,7 @@
 import Reveal from '@/components/ui/Reveal'
 import { Mail } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NewsletterForm } from '../forms'
 
 interface FooterLink {
   label: string
@@ -14,7 +13,7 @@ const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[
     { label: 'Strategische Beratung', to: '/services/beratung' },
     { label: 'Infrastructure Setup', to: '/services/setup' },
     { label: 'Langfristige Betreuung', to: '/services/betreuung' },
-    { label: '3-Monate Testphase', to: '/#testphase' },
+    { label: '3-Monate Testphase', to: '/testphase' },
   ],
   resources: [
     { label: 'Consulting Solutions', to: '/#solutions' },
@@ -30,6 +29,29 @@ const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[
   ],
 }
 
+const contactEmail = 'info@vae.systems'
+
+const knowledgeResources = [
+  {
+    title: 'Automation Playbooks',
+    description: 'Architektur-Notizen & Erfahrungsberichte für KI-Automatisierung.',
+    to: '/ressourcen/blog',
+    isExternal: false,
+  },
+  {
+    title: 'FAQ & Troubleshooting',
+    description: 'Antworten auf Integrations- & Betriebsfragen rund um VAE Systeme.',
+    to: '/ressourcen/faq',
+    isExternal: false,
+  },
+  {
+    title: 'LinkedIn Updates',
+    description: 'Produkt-Roadmap, Events und Einblicke direkt vom VAE Team.',
+    to: 'https://www.linkedin.com/company/vae-systems',
+    isExternal: true,
+  },
+] as const
+
 /**
  * Footer Component
  *
@@ -37,41 +59,25 @@ const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[
  * newsletter signup, and company information
  */
 const Footer: React.FC = () => {
-  const techStack = [
-    'Python',
-    'FastAPI',
-    'Temporal',
-    'Docker',
-    'Kubernetes',
-    'PostgreSQL',
-    'Open Source AI',
-    'VAE Core',
-  ]
+  const [isNewsletterNoticeOpen, setIsNewsletterNoticeOpen] = useState(false)
 
-  // Newsletter success/error handlers
-  const handleNewsletterSuccess = (subscriptionId: string) => {
-    console.log('Newsletter subscription successful:', subscriptionId)
-    // Analytics tracking
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', 'newsletter_signup', {
-        event_category: 'engagement',
-        event_label: 'footer_newsletter',
-      })
-    }
-    // TODO: Add toast notification system
-  }
+  const openNewsletterNotice = () => setIsNewsletterNoticeOpen(true)
+  const closeNewsletterNotice = () => setIsNewsletterNoticeOpen(false)
 
-  const handleNewsletterError = (error: string) => {
-    console.error('Newsletter subscription error:', error)
-    // Analytics tracking for errors
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', 'newsletter_error', {
-        event_category: 'engagement',
-        event_label: error,
-      })
+  useEffect(() => {
+    if (!isNewsletterNoticeOpen || typeof window === 'undefined') {
+      return
     }
-    // TODO: Add error notification system
-  }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeNewsletterNotice()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isNewsletterNoticeOpen])
 
   return (
     <footer className="border-t border-bg-secondary bg-bg-darker" role="contentinfo">
@@ -110,12 +116,13 @@ const Footer: React.FC = () => {
 
             <div className="mb-6">
               <a
-                href="mailto:juliandini@vae-systems.com"
+                href={`mailto:${contactEmail}`}
                 className="hover-lift press-bounce inline-flex items-center gap-2 text-vae-turquoise transition-colors duration-200 hover:text-vae-turquoise-300"
                 data-analytics="contact-email"
+                aria-label="Kontakt per E-Mail"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
-                <span>juliandini@vae-systems.com</span>
+                <span>{contactEmail}</span>
               </a>
             </div>
 
@@ -190,19 +197,46 @@ const Footer: React.FC = () => {
             </div>
           </Reveal>
 
-          {/* Tech Stack (Badges) */}
-          <Reveal preset="fadeUp" aria-label="Technologien">
-            <h4 className="mb-4 text-lg font-semibold text-text-light">Tech Stack</h4>
-            <ul className="flex flex-wrap gap-2 text-sm">
-              {techStack.map(tech => (
-                <li
-                  key={tech}
-                  className="rounded-lg border border-bg-secondary bg-bg-secondary px-3 py-1 text-text-light transition-colors hover:border-vae-turquoise/30"
-                  title={tech}
-                >
-                  {tech}
-                </li>
-              ))}
+          {/* Knowledge Resources */}
+          <Reveal preset="fadeUp" aria-label="Knowledge Resources">
+            <h4 className="mb-4 text-lg font-semibold text-text-light">Knowledge Hub</h4>
+            <ul className="space-y-3 text-sm">
+              {knowledgeResources.map(resource => {
+                const content = (
+                  <>
+                    <span className="font-medium text-text-light">{resource.title}</span>
+                    <span className="block text-xs text-text-muted">{resource.description}</span>
+                  </>
+                )
+
+                return (
+                  <li key={resource.title}>
+                    {resource.isExternal ? (
+                      <a
+                        href={resource.to}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group block rounded-xl border border-bg-secondary bg-bg-secondary/40 px-4 py-3 transition-colors hover:border-vae-turquoise/40 hover:bg-bg-secondary/70"
+                      >
+                        {content}
+                        <span className="mt-1 inline-flex items-center text-[10px] uppercase tracking-[0.25em] text-vae-turquoise">
+                          Folgen
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={resource.to}
+                        className="group block rounded-xl border border-bg-secondary bg-bg-secondary/40 px-4 py-3 transition-colors hover:border-vae-turquoise/40 hover:bg-bg-secondary/70"
+                      >
+                        {content}
+                        <span className="mt-1 inline-flex items-center text-[10px] uppercase tracking-[0.25em] text-vae-turquoise">
+                          Mehr lesen
+                        </span>
+                      </Link>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
           </Reveal>
 
@@ -225,19 +259,15 @@ const Footer: React.FC = () => {
               <p className="mb-4 text-xs leading-relaxed text-text-muted">
                 Releases, Architektur-Notizen & Events (ca. 1× Monat). Abmeldung jederzeit.
               </p>
-              <NewsletterForm
-                inline={true}
-                onSuccess={handleNewsletterSuccess}
-                onError={handleNewsletterError}
-                useMockApi={true}
-                className="mb-3"
-              />
+              <button
+                type="button"
+                onClick={openNewsletterNotice}
+                className="w-full rounded-xl border border-vae-turquoise/30 bg-transparent px-4 py-2 text-sm font-semibold text-vae-turquoise transition-all hover:border-vae-turquoise hover:bg-vae-turquoise/10"
+              >
+                Newsletter-Benachrichtigung
+              </button>
               <p className="text-[10px] text-text-muted">
-                Mit Absenden bestätigst du unsere{' '}
-                <a href="/privacy#newsletter" className="text-vae-turquoise hover:underline">
-                  Datenschutzhinweise
-                </a>
-                .
+                Aktuell geschlossene Beta. Wir informieren dich, sobald neue Plätze frei werden.
               </p>
             </div>
           </Reveal>
@@ -266,6 +296,57 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {isNewsletterNoticeOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="newsletter-locked-title"
+          aria-describedby="newsletter-locked-description"
+          onClick={closeNewsletterNotice}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl border border-bg-secondary bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
+            onClick={event => event.stopPropagation()}
+          >
+            <div className="mb-3 flex items-center justify-between gap-4">
+              <h3 id="newsletter-locked-title" className="text-lg font-semibold text-text-light">
+                Newsletter aktuell gesperrt
+              </h3>
+              <button
+                type="button"
+                onClick={closeNewsletterNotice}
+                className="text-sm font-semibold uppercase tracking-[0.2em] text-text-muted transition-colors hover:text-text-light"
+                aria-label="Hinweis schließen"
+              >
+                &times;
+              </button>
+            </div>
+            <p id="newsletter-locked-description" className="mb-6 text-sm leading-relaxed text-text-muted">
+              Unser Newsletter befindet sich gerade in einer geschlossenen Beta. Folge uns gerne auf LinkedIn für
+              Updates oder stöbere im Blog, um aktuelle Architektur- und Automatisierungsbeiträge zu entdecken.
+            </p>
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://www.linkedin.com/company/vae-systems"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl border border-vae-turquoise/40 px-4 py-2 text-sm font-semibold text-vae-turquoise transition-colors hover:border-vae-turquoise hover:bg-vae-turquoise/10"
+              >
+                Auf LinkedIn folgen
+              </a>
+              <Link
+                to="/ressourcen/blog"
+                className="inline-flex items-center justify-center rounded-xl border border-bg-secondary px-4 py-2 text-sm font-semibold text-text-light transition-colors hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                onClick={closeNewsletterNotice}
+              >
+                Blog besuchen
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   )
 }

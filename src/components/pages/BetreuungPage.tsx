@@ -6,7 +6,6 @@ import {
   Building2,
   Check,
   CheckCircle2,
-  ChevronDown,
   Layers,
   Lightbulb,
   Minus,
@@ -18,8 +17,9 @@ import {
   Users,
   Zap,
 } from 'lucide-react'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
+import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 
 const calendlyUrl = '/contact#booking'
@@ -242,8 +242,16 @@ const faqItems = [
 ]
 
 const BetreuungPage: React.FC = () => {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0)
-  const answerRefs = useRef<Array<HTMLDivElement | null>>([])
+  const faqAccordionItems = useMemo(
+    () =>
+      faqItems.map((item, index) => ({
+        id: `betreuung-faq-${index}`,
+        question: item.question,
+        defaultOpen: index === 0,
+        answer: <p className="text-base leading-relaxed text-text-secondary">{item.answer}</p>,
+      })),
+    []
+  )
 
   const openCalendly = useCallback(() => {
     if (typeof window === 'undefined') return
@@ -259,10 +267,6 @@ const BetreuungPage: React.FC = () => {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-  }, [])
-
-  const toggleFaq = useCallback((index: number) => {
-    setOpenFaqIndex(prev => (prev === index ? null : index))
   }, [])
 
   return (
@@ -683,60 +687,16 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 7: FAQ */}
-      <section className="border-b border-gray-200 py-20 dark:border-white/5">
+      <section className="bg-gradient-to-b from-bg-darker via-[#050505] to-bg-darker py-20">
         <div className="container-vae">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">FAQ</p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
+          <div className="mx-auto max-w-3xl text-center text-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">FAQ</p>
+            <h2 className="mt-3 text-3xl font-semibold md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-text-secondary">
+              Antworten zur monatlich kündbaren Betreuung – transparent, ohne Buzzword-Schleier.
+            </p>
           </div>
-          <div className="mt-12 space-y-4">
-            {faqItems.map((item, index) => {
-              const isOpen = openFaqIndex === index
-              const panelId = `faq-panel-${index}`
-              const buttonId = `faq-button-${index}`
-              return (
-                <div
-                  key={item.question}
-                  className={`group overflow-hidden rounded-2xl border transition-all duration-300 ${
-                    isOpen
-                      ? 'border-vae-turquoise/50 bg-vae-turquoise/5 shadow-lg shadow-vae-turquoise/10'
-                      : 'border-gray-200 bg-white hover:border-vae-turquoise/35 dark:border-white/10 dark:bg-white/5'
-                  }`}
-                >
-                  <button
-                    id={buttonId}
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    onClick={() => toggleFaq(index)}
-                    className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left text-lg font-medium text-gray-900 dark:text-white"
-                  >
-                    <span className="flex-1">{item.question}</span>
-                    <span
-                      className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-vae-turquoise/10 text-vae-turquoise transition-all duration-300 ${
-                        isOpen ? 'rotate-180 bg-vae-turquoise/20' : 'group-hover:bg-vae-turquoise/15'
-                      }`}
-                    >
-                      <ChevronDown className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                  </button>
-                  <div
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={buttonId}
-                    ref={el => {
-                      answerRefs.current[index] = el
-                    }}
-                    style={{ maxHeight: isOpen ? `${answerRefs.current[index]?.scrollHeight ?? 0}px` : 0 }}
-                    className="overflow-hidden px-6 transition-[max-height] duration-500 ease-in-out"
-                  >
-                    <div className="border-t border-gray-200 pb-5 pt-4 text-base leading-relaxed text-gray-700 dark:border-white/10 dark:text-text-secondary">
-                      {item.answer}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <FaqAccordion items={faqAccordionItems} className="mt-12 space-y-4" />
         </div>
       </section>
 

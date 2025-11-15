@@ -1,5 +1,5 @@
 import { gsap } from 'gsap'
-import { Filter, Layers, Search, Sparkles } from 'lucide-react'
+import { CheckCircle2, Filter, Layers, Search, Sparkles } from 'lucide-react'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import Seo from '@/components/ui/Seo'
@@ -223,6 +223,29 @@ type SectionWithTiles = (typeof TECH_SECTIONS)[number] & { groups: GroupWithTile
 const TechStackResourcePage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterId>('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const totalCategories = TECH_SECTIONS.length
+  const heroHighlights = [
+    {
+      icon: Sparkles,
+      title: 'Open Source first',
+      description: 'Frameworks, Modelle und Ops-Tools, die wir täglich produktiv betreiben.',
+    },
+    {
+      icon: Layers,
+      title: `${totalCategories} Kategorien`,
+      description: `${TECH_TILES.length}+ Tools, Modelle und Infrastructure-Bausteine`,
+    },
+    {
+      icon: Filter,
+      title: 'Suche & Filter',
+      description: 'Tag-basiert, priorisierbar, exportierbar für Ihr Architektur-Board.',
+    },
+  ]
+  const heroBullets = [
+    'Operations: Nextcloud, Temporal, n8n, Kubernetes',
+    'KI & Modelle: LangChain, vLLM, Mistral, Llama 3',
+    'Infrastruktur: Hetzner, AWS & komplette On-Prem-Stacks',
+  ]
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
 
@@ -276,34 +299,63 @@ const TechStackResourcePage: React.FC = () => {
         canonicalPath="/ressourcen/tech-stack"
       />
 
-      <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker to-bg-dark dark:border-white/5">
-        <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.18),transparent_55%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_55%)]"
-          aria-hidden="true"
-        />
-        <div className="container-vae relative space-y-8 text-center">
-          <div className="inline-flex items-center justify-center gap-2 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-6 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/90">
-            Open Source Systeme & KI-Modelle
-          </div>
-          <div className="space-y-4">
-            <h1 className="text-4xl font-semibold text-white md:text-5xl">VAE Tech Stack · Komplettübersicht</h1>
-            <p className="mx-auto max-w-3xl text-lg text-white/80">
+      <section className="relative overflow-hidden border-b border-white/5 bg-gradient-to-b from-bg-darker via-[#050505] to-bg-dark py-24">
+        <div className="pointer-events-none absolute inset-0 opacity-80" aria-hidden="true">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.25),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_70%)]" />
+        </div>
+        <div className="container-vae relative grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/80">Tech Stack</p>
+            <h1 className="mt-5 text-4xl font-semibold text-white md:text-5xl">VAE Tech Stack · Komplettübersicht</h1>
+            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-text-secondary">
               Arbeitssysteme (Nextcloud, Temporal, Docker) + KI-Frameworks (LangChain, Open-Source-LLMs) – unsere
-              Doppel-Kompetenz. Filterbar, suchbar, sofort einsatzbereit.
+              Doppel-Kompetenz. Alles kuratiert, dokumentiert und in Kundenprojekten geprüft.
             </p>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {heroHighlights.map(highlight => {
+                const Icon = highlight.icon
+                return (
+                  <div
+                    key={highlight.title}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-5 text-left shadow-[0_12px_35px_rgba(0,0,0,0.45)]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-white/70">
+                          {highlight.title}
+                        </p>
+                        <p className="mt-1 text-sm text-text-secondary">{highlight.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/70">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2">
-              <Sparkles className="h-4 w-4 text-vae-turquoise" />
-              Open Source first
-            </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2">
-              <Layers className="h-4 w-4 text-vae-turquoise" />
-              10 Kategorien · {TECH_TILES.length} Tools
-            </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2">
-              <Filter className="h-4 w-4 text-vae-turquoise" />
-              Suche + Filter inklusive
+
+          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-white shadow-[0_25px_80px_rgba(0,0,0,0.55)] backdrop-blur">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">
+              Was Sie hier finden
+            </p>
+            <h3 className="mt-4 text-2xl font-semibold">Kuratiert, dokumentiert, sofort nutzbar</h3>
+            <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+              Tech-Roadmap für souveräne Organisationen: Tool-Auswahl, KI-Modelle, Deployment-Patterns, inkl. Empfehlung
+              für Cloud, On-Prem oder Hybrid.
+            </p>
+            <ul className="mt-6 space-y-4 text-sm text-text-secondary">
+              {heroBullets.map(bullet => (
+                <li key={bullet} className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-white/80">{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-3 text-sm text-white/80">
+              Live gepflegt · {TECH_TILES.length}+ geprüfte Tools & Modelle · Stand: {new Date().getFullYear()}
             </div>
           </div>
         </div>

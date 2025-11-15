@@ -11,13 +11,12 @@ import {
   GitBranch,
   Heart,
   Map,
-  Minus,
-  Plus,
   Rocket,
   Search,
   Target,
 } from 'lucide-react'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
@@ -260,9 +259,17 @@ const faqData: FAQItem[] = [
 // =========================================
 
 const BeratungPage: React.FC = () => {
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
   const heroRef = useRef<HTMLDivElement>(null)
-  const answerRefs = useRef<Record<number, HTMLDivElement | null>>({})
+  const faqAccordionItems = useMemo(
+    () =>
+      faqData.map((faq, idx) => ({
+        id: `beratung-faq-${idx}`,
+        question: faq.question,
+        defaultOpen: idx === 0,
+        answer: <p className="text-base leading-relaxed text-text-secondary">{faq.answer}</p>,
+      })),
+    []
+  )
 
   // Booking CTA now routes über Landing-Page
   const openCalendly = useCallback(() => {
@@ -275,11 +282,6 @@ const BeratungPage: React.FC = () => {
     if (processSection) {
       processSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-  }, [])
-
-  // FAQ Toggle
-  const toggleFAQ = useCallback((index: number) => {
-    setOpenFAQ(prev => (prev === index ? null : index))
   }, [])
 
   // GSAP Animations
@@ -352,39 +354,6 @@ const BeratungPage: React.FC = () => {
 
     return () => ctx.revert()
   }, [])
-
-  // FAQ Accordion Animation
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) return
-
-    Object.entries(answerRefs.current).forEach(([key, el]) => {
-      if (!el) return
-      const idx = Number(key)
-      const isOpen = idx === openFAQ
-
-      gsap.killTweensOf(el)
-      if (isOpen) {
-        gsap.fromTo(
-          el,
-          { height: 0, opacity: 0 },
-          {
-            height: el.scrollHeight,
-            opacity: 1,
-            duration: 0.3,
-            ease: 'power2.out',
-            onComplete: () => {
-              el.style.height = 'auto'
-            },
-            force3D: true,
-          }
-        )
-      } else {
-        if (el.style.height === 'auto') el.style.height = `${el.scrollHeight}px`
-        gsap.to(el, { height: 0, opacity: 0, duration: 0.25, ease: 'power1.out', force3D: true })
-      }
-    })
-  }, [openFAQ])
 
   return (
     <div className="min-h-screen bg-white text-gray-900 dark:bg-[hsl(0,0%,4%)] dark:text-[hsl(0,0%,95%)]">
@@ -799,65 +768,59 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== FAQ + FINAL CTA ==================== */}
-      <section className="animate-section bg-gray-50 py-24 dark:bg-transparent">
-        <div className="container-vae">
-          {/* FAQ */}
-          <div className="mx-auto mb-20 max-w-3xl">
-            <h2 className="h2 heading-gradient mb-12 text-center">Häufige Fragen</h2>
+      <section className="animate-section bg-gradient-to-b from-bg-darker via-[#050505] to-bg-darker py-24 text-white">
+        <div className="container-vae grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">FAQ</p>
+            <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-text-secondary">
+              Strategische Klarheit vor jedem Projekt: Antworten auf die wichtigsten Fragen rund um Umfang, Dauer und
+              ROI unserer Beratung.
+            </p>
 
-            <div className="space-y-4">
-              {faqData.map((faq, idx) => {
-                const isOpen = openFAQ === idx
-                return (
-                  <div
-                    key={idx}
-                    className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/5"
-                  >
-                    <button
-                      onClick={() => toggleFAQ(idx)}
-                      className="flex w-full items-center justify-between px-6 py-5 text-left"
-                      aria-expanded={isOpen}
-                    >
-                      <span className="text-lg font-semibold leading-relaxed text-gray-900 dark:text-white">
-                        {faq.question}
-                      </span>
-                      {isOpen ? (
-                        <Minus className="h-5 w-5 text-vae-turquoise" />
-                      ) : (
-                        <Plus className="h-5 w-5 text-gray-500 dark:text-[hsl(0,0%,70%)]" />
-                      )}
-                    </button>
-
-                    <div ref={el => (answerRefs.current[idx] = el)} className="h-0 overflow-hidden px-6">
-                      <p className="pb-6 text-base leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
+            <FaqAccordion items={faqAccordionItems} className="mt-12 space-y-4" />
           </div>
 
-          {/* Final CTA */}
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="rounded-2xl border border-vae-turquoise/30 bg-gradient-to-br from-vae-turquoise/10 to-transparent p-10 shadow-lg">
-              <h3 className="mb-4 text-3xl font-semibold text-gray-900 dark:text-white">
-                Bereit für den ersten Schritt?
-              </h3>
-              <p className="mb-8 text-lg text-gray-600 dark:text-[hsl(0,0%,75%)]">
-                Buchen Sie jetzt Ihr kostenloses Strategiegespräch.
+          <div className="relative">
+            <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-10 text-center shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise">
+                Schritt 1
+              </div>
+              <h3 className="text-3xl font-semibold text-white">Bereit für den ersten Schritt?</h3>
+              <p className="mt-4 text-base text-text-secondary">
+                Buchen Sie Ihr kostenloses Strategiegespräch. Wir analysieren Ihre Situation, priorisieren Ziele und
+                zeigen konkrete Optionen – ohne Sales-Pitch.
               </p>
+
+              <ul className="mt-8 space-y-3 text-sm text-text-secondary">
+                <li className="flex items-center justify-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-vae-turquoise" /> 45 Minuten, kostenlos & unverbindlich
+                </li>
+                <li className="flex items-center justify-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-vae-turquoise" /> Termin innerhalb von 48 Stunden
+                </li>
+                <li className="flex items-center justify-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-vae-turquoise" /> Executive Summary inklusive
+                </li>
+              </ul>
 
               <MagneticButton intensity={0.1} scaleEffect glowEffect>
                 <button
                   onClick={openCalendly}
-                  className="btn-primary flex items-center justify-center gap-2 px-10 py-5 text-lg font-semibold"
+                  className="btn-primary mt-10 inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
-                  <Calendar className="h-6 w-6" />
-                  Termin buchen (45 Min, kostenlos)
+                  <Calendar className="h-5 w-5" />
+                  Termin buchen
                 </button>
               </MagneticButton>
+
+              <p className="mt-4 text-xs text-text-secondary">
+                Bereit, aber noch unsicher? Wir klären jede Frage live.
+              </p>
+
+              <div className="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center opacity-60">
+                <div className="h-32 w-32 rounded-full bg-vae-turquoise/30 blur-[80px]" />
+              </div>
             </div>
           </div>
         </div>

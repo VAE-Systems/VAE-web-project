@@ -1,5 +1,5 @@
 import { CalendarDays, ChevronDown, Search as SearchIcon, ShieldCheck } from 'lucide-react'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import FAQSection, { FAQCategory } from '@/components/sections/FAQSection'
@@ -11,15 +11,16 @@ type CategoryFilter = 'all' | FaqCategoryId
 
 const FILTERS: Array<{ id: CategoryFilter; label: string }> = [
   { id: 'all', label: 'Alle' },
-  { id: 'tech' as const, label: 'Technologie' },
-  { id: 'business' as const, label: 'Business' },
-  { id: 'career' as const, label: 'Karriere' },
+  { id: 'technology', label: 'Technologie' },
+  { id: 'business', label: 'Business' },
+  { id: 'career', label: 'Karriere' },
+  { id: 'projects', label: 'Projekte' },
+  { id: 'general', label: 'Allgemein' },
 ]
 
 const ResourcesFaqPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const contentRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
 
@@ -59,36 +60,6 @@ const ResourcesFaqPage: React.FC = () => {
   }, [activeCategory, filteredFaqs])
 
   const totalFaqs = filteredFaqs.length
-
-  const toggleItem = (id: string) => {
-    setOpenItems(prev => (prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]))
-  }
-
-  const measureHeights = useCallback(() => {
-    const nextHeights: Record<string, number> = {}
-    Object.entries(contentRefs.current).forEach(([id, element]) => {
-      if (element) {
-        nextHeights[id] = element.scrollHeight
-      }
-    })
-
-    setContentHeights(prev => {
-      const prevKeys = Object.keys(prev)
-      const nextKeys = Object.keys(nextHeights)
-      const changed = prevKeys.length !== nextKeys.length || nextKeys.some(key => prev[key] !== nextHeights[key])
-      return changed ? nextHeights : prev
-    })
-  }, [])
-
-  useEffect(() => {
-    measureHeights()
-  }, [filteredFaqs, measureHeights])
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    window.addEventListener('resize', measureHeights)
-    return () => window.removeEventListener('resize', measureHeights)
-  }, [measureHeights])
 
   return (
     <div className="bg-bg-darker text-text-light">

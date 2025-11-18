@@ -1,3 +1,4 @@
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { HelpCircle, X } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { useHelpModeContext } from './HelpModeContext'
@@ -38,7 +39,7 @@ export const HelpIntroPopup: React.FC = () => {
       aria-labelledby="help-intro-title"
     >
       <div
-        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-3xl border border-vae-turquoise/40 bg-white p-8 shadow-2xl duration-300 dark:bg-bg-darker"
+        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl duration-300 dark:border-white/10 dark:bg-bg-darker"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -86,24 +87,24 @@ export const HelpIntroPopup: React.FC = () => {
         </div>
 
         <div className="mt-6 flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={closeIntroPopup}
-            className="w-full rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/10 px-6 py-3 text-sm font-semibold text-gray-900 transition hover:bg-vae-turquoise/20 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50 dark:text-white"
-          >
-            Verstanden, los geht's!
-          </button>
+          <MagneticButton intensity={0.075}>
+            <button type="button" onClick={closeIntroPopup} className="btn-primary w-full">
+              Verstanden, los geht's!
+            </button>
+          </MagneticButton>
 
-          <button
-            type="button"
-            onClick={() => {
-              setSkipHelpForSession(true)
-              closeIntroPopup()
-            }}
-            className="w-full rounded-2xl border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 transition hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-500 dark:hover:bg-gray-700"
-          >
-            Nicht mehr anzeigen bis zum nächsten Besuch
-          </button>
+          <MagneticButton intensity={0.075}>
+            <button
+              type="button"
+              onClick={() => {
+                setSkipHelpForSession(true)
+                closeIntroPopup()
+              }}
+              className="btn-ghost w-full"
+            >
+              Nicht mehr anzeigen bis zum nächsten Besuch
+            </button>
+          </MagneticButton>
         </div>
       </div>
     </div>

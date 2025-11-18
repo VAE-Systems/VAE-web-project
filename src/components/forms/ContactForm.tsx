@@ -4,6 +4,7 @@
  * Modern, accessible contact form with validation and loading states
  */
 
+import { cn } from '@/lib/classNames'
 import React from 'react'
 import { useContactForm } from '../../hooks/useContactForm'
 import type { FormComponentProps } from '../../types'
@@ -75,7 +76,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   if (loadingState === 'success') {
     return (
-      <div className={`${className}`}>
+      <div className={cn(className)}>
+        <p className="mb-4 text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
         <div className="rounded-lg border border-vae-turquoise/30 bg-vae-turquoise/10 p-8 text-center">
           <div className="mb-4 text-2xl text-vae-turquoise">✓</div>
           <h3 className="mb-2 text-lg font-medium text-text-light">Nachricht erfolgreich gesendet!</h3>
@@ -92,7 +94,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   // ============================================================================
 
   return (
-    <form onSubmit={handleSubmit} className={`space-y-6 ${className}`}>
+    <form onSubmit={handleSubmit} className={cn('space-y-6', className)}>
       {/* Name & Email Row */}
       <div className={compact ? 'grid grid-cols-1 gap-4 md:grid-cols-2' : 'space-y-4'}>
         {/* Name Field */}
@@ -109,7 +111,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleInputChange('name')}
             placeholder="Ihr vollständiger Name"
             disabled={disabled || isSubmitting}
-            className={`${baseInputClasses} ${errorInputClasses}`}
+            className={cn(baseInputClasses, formState.errors.name && errorInputClasses)}
             required
           />
         </div>
@@ -128,7 +130,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleInputChange('email')}
             placeholder="ihre.email@beispiel.de"
             disabled={disabled || isSubmitting}
-            className={`${baseInputClasses} ${errorInputClasses}`}
+            className={cn(baseInputClasses, formState.errors.email && errorInputClasses)}
             required
           />
         </div>

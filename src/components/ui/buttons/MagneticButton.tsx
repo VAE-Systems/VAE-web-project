@@ -54,7 +54,7 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     const buttonRef = useRef<HTMLDivElement>(null)
     useImperativeHandle(ref, () => buttonRef.current as HTMLDivElement, [])
 
-    const [position, setPosition] = useState({ x: 0, y: 0 })
+    const positionRef = useRef({ x: 0, y: 0 })
     const [isHovered, setIsHovered] = useState(false)
     const [ripples, setRipples] = useState<Ripple[]>([])
     const animationFrame = useRef<number>()
@@ -72,10 +72,16 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
           const rect = buttonRef.current.getBoundingClientRect()
           const offsetX = event.clientX - rect.left - rect.width / 2
           const offsetY = event.clientY - rect.top - rect.height / 2
-          setPosition({
+
+          positionRef.current = {
             x: offsetX * resolvedIntensity,
             y: offsetY * resolvedIntensity,
-          })
+          }
+
+          // Direkte DOM-Manipulation - kein Re-Render
+          const translate = `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0)`
+          const scale = scaleEffect && isHovered ? ' scale(1.04)' : ''
+          buttonRef.current.style.transform = `${translate}${scale}`
         }
 
         if (animationFrame.current) {
@@ -84,7 +90,7 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
 
         animationFrame.current = window.requestAnimationFrame(computePosition)
       },
-      [disabled, resolvedIntensity]
+      [disabled, resolvedIntensity, scaleEffect, isHovered]
     )
 
     const handlePointerLeave = useCallback(() => {
@@ -92,7 +98,10 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
       if (animationFrame.current) {
         cancelAnimationFrame(animationFrame.current)
       }
-      setPosition({ x: 0, y: 0 })
+      positionRef.current = { x: 0, y: 0 }
+      if (buttonRef.current) {
+        buttonRef.current.style.transform = 'translate3d(0, 0, 0)'
+      }
     }, [])
 
     const handlePointerEnter = useCallback(() => {
@@ -152,12 +161,12 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
       []
     )
 
-    const transform = useMemo(() => {
-      if (resolvedIntensity === 0) return undefined
-      const translate = `translate3d(${position.x}px, ${position.y}px, 0)`
-      const scale = scaleEffect && isHovered ? ' scale(1.04)' : ''
-      return `${translate}${scale}`
-    }, [isHovered, position.x, position.y, resolvedIntensity, scaleEffect])
+    const containerStyle = useMemo(
+      () => ({
+        ...style,
+      }),
+      [style]
+    )
 
     return (
       <div
@@ -168,10 +177,7 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
           disabled && 'pointer-events-none opacity-60',
           className
         )}
-        style={{
-          transform,
-          ...style,
-        }}
+        style={containerStyle}
         onMouseMove={handlePointerMove}
         onMouseLeave={handlePointerLeave}
         onMouseEnter={handlePointerEnter}
@@ -181,13 +187,16 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
         <div className="relative z-10">{children}</div>
         {rippleEffect && (
           <span className="pointer-events-none absolute inset-0">
-            {ripples.map(ripple => (
-              <span
-                key={ripple.id}
-                className="absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 animate-[ripple_0.6s_ease-out_forwards] rounded-full bg-emerald-400/30 opacity-80"
-                style={{ left: ripple.x, top: ripple.y }}
-              />
-            ))}
+            {ripples.map(ripple => {
+              const rippleStyle = { left: ripple.x, top: ripple.y }
+              return (
+                <span
+                  key={ripple.id}
+                  className="absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 animate-[ripple_0.6s_ease-out_forwards] rounded-full bg-emerald-400/30 opacity-80"
+                  style={rippleStyle}
+                />
+              )
+            })}
           </span>
         )}
       </div>

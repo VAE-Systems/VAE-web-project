@@ -69,7 +69,7 @@ export const ValidationPopup: React.FC<ValidationPopupProps> = ({
       aria-describedby="validation-popup-description"
     >
       <div
-        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-md rounded-3xl border border-red-400/40 bg-white p-6 shadow-2xl duration-300 dark:border-red-500/40 dark:bg-bg-darker"
+        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-md rounded-3xl border border-red-300 bg-white p-6 shadow-2xl duration-300 dark:border-red-500/30 dark:bg-bg-darker"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-start gap-4">

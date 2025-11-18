@@ -41,10 +41,7 @@ export const HeritageSection: React.FC = () => {
             Handwerk an – nachvollziehbar, langlebig und charaktervoll.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a
-              href="/ueber-uns/design-handwerk"
-              className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/40 px-5 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise transition hover:border-vae-turquoise hover:bg-vae-turquoise/10"
-            >
+            <a href="/ueber-uns/design-handwerk" className="btn-outline inline-flex items-center gap-2">
               Mehr über das Designhandwerk
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M7 17L17 7" />

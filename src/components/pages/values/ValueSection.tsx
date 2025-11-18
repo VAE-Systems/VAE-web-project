@@ -35,7 +35,7 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
     }
 
     const isExternalLink = value.link.external ?? /^https?:/i.test(value.link.href)
-    const className = `inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary/80 transition duration-300 hover:border-vae-turquoise/70 hover:text-text-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-vae-turquoise/60 motion-reduce:transition-none dark:border-white/15 ${linkAlignment}`
+    const className = `btn-ghost inline-flex items-center gap-2 ${linkAlignment}`
     const content = (
       <>
         {value.link.text}

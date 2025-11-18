@@ -1,3 +1,4 @@
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { Settings, X } from 'lucide-react'
 import React from 'react'
 import { useHelpModeContext } from './HelpModeContext'
@@ -37,7 +38,7 @@ export const HelpSettingsModal: React.FC<HelpSettingsModalProps> = ({ isOpen, on
       aria-labelledby="help-settings-title"
     >
       <div
-        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-sm rounded-2xl border border-vae-turquoise/40 bg-white p-6 shadow-xl duration-300 dark:bg-bg-darker"
+        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-sm rounded-2xl border border-gray-200 bg-white p-6 shadow-xl duration-300 dark:border-white/10 dark:bg-bg-darker"
         onClick={e => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
@@ -76,13 +77,13 @@ export const HelpSettingsModal: React.FC<HelpSettingsModalProps> = ({ isOpen, on
           </label>
         </div>
 
-        <button
-          type="button"
-          onClick={handleSave}
-          className="mt-4 w-full rounded-xl border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:bg-vae-turquoise/20 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50 dark:text-white"
-        >
-          Speichern & Schließen
-        </button>
+        <div className="mt-4">
+          <MagneticButton intensity={0.075}>
+            <button type="button" onClick={handleSave} className="btn-primary w-full">
+              Speichern & Schließen
+            </button>
+          </MagneticButton>
+        </div>
       </div>
     </div>
   )

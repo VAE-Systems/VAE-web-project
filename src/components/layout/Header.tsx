@@ -19,7 +19,7 @@ interface MagneticButtonProps {
 const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick, className = '', forwardRef }) => {
   const internalRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
   const buttonRef = forwardRef || internalRef
-  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const positionRef = useRef({ x: 0, y: 0 })
   const [isHovered, setIsHovered] = useState(false)
   const [shouldWiggle, setShouldWiggle] = useState(false)
   const wiggleTimerRef = useRef<NodeJS.Timeout | null>(null)
@@ -54,7 +54,8 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
       const rect = buttonRef.current.getBoundingClientRect()
       const x = event.clientX - rect.left - rect.width / 2
       const y = event.clientY - rect.top - rect.height / 2
-      setPosition({ x: x * 0.3, y: y * 0.3 })
+      positionRef.current = { x: x * 0.3, y: y * 0.3 }
+      buttonRef.current.style.transform = `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`
     },
     [buttonRef]
   )
@@ -65,9 +66,12 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
   }, [])
 
   const handleMouseLeave = useCallback(() => {
-    setPosition({ x: 0, y: 0 })
+    positionRef.current = { x: 0, y: 0 }
+    if (buttonRef.current) {
+      buttonRef.current.style.transform = 'translate(0, 0)'
+    }
     setIsHovered(false)
-  }, [])
+  }, [buttonRef])
 
   const baseClasses = `
     cta-sheen
@@ -100,7 +104,6 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
       >
         {content}
       </a>
@@ -115,7 +118,6 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
     >
       {content}
     </button>

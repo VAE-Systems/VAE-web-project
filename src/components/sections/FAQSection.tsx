@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import AccordionItem from '@/components/ui/AccordionItem'
 import { defaultFAQCategories } from '@/content/faqData'
+import { cn } from '@/lib/classNames'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useEffect, useRef, useState } from 'react'
 
 // Types
 export interface FAQItem {
@@ -85,7 +86,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
   }, [cta])
 
   return (
-    <section id={id} ref={sectionRef} className={`relative py-24 ${className}`.trim()} aria-labelledby={`${id}-title`}>
+    <section id={id} ref={sectionRef} className={cn('relative py-24', className)} aria-labelledby={`${id}-title`}>
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,hsla(var(--color-vae-turquoise),0.07),transparent_60%),radial-gradient(circle_at_80%_70%,hsla(var(--color-vae-turquoise),0.05),transparent_55%)]" />
       </div>
@@ -109,7 +110,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                 </div>
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
               </div>
-              <div className={`space-y-3 ${dense ? 'md:space-y-2' : ''}`}>
+              <div className={cn('space-y-3', dense && 'md:space-y-2')}>
                 {category.questions.map((faq: FAQItem, questionIndex: number) => (
                   <AccordionItem
                     key={faq.question}

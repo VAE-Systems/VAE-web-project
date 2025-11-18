@@ -1,4 +1,5 @@
-import React from 'react'
+import { cn } from '@/lib/classNames'
+import React, { useMemo } from 'react'
 import { TypographyProps, getTypographyClasses } from '../../types/typography'
 
 /**
@@ -50,18 +51,16 @@ export const Text: React.FC<TextProps> = ({
   style,
   ...props
 }) => {
-  // Generate typography classes dynamically
-  const typographyClasses = getTypographyClasses({
-    size,
-    weight,
-    lineHeight,
-    letterSpacing,
-  })
-
-  // Combine classes efficiently
-  const combinedClassName = [typographyClasses, responsive ? 'responsive-text' : '', className]
-    .filter(Boolean)
-    .join(' ')
+  // Generate typography classes dynamically with memoization
+  const combinedClassName = useMemo(() => {
+    const typographyClasses = getTypographyClasses({
+      size,
+      weight,
+      lineHeight,
+      letterSpacing,
+    })
+    return cn(typographyClasses, responsive && 'responsive-text', className)
+  }, [size, weight, lineHeight, letterSpacing, responsive, className])
 
   return React.createElement(
     Component,

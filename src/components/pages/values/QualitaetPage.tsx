@@ -91,10 +91,7 @@ const QualitaetPage: React.FC = () => {
                   <ArrowRight className="h-4 w-4" /> Projekt besprechen
                 </Link>
               </MagneticButton>
-              <Link
-                to="/ueber-uns/werte"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-text-secondary transition hover:border-vae-turquoise/50 hover:text-text-light"
-              >
+              <Link to="/ueber-uns/werte" className="btn-ghost inline-flex items-center gap-2">
                 Zurück zu den Werten
               </Link>
             </div>

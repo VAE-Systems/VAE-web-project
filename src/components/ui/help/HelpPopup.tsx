@@ -1,3 +1,4 @@
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { HelpCircle, X } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { useHelpModeContext } from './HelpModeContext'
@@ -50,7 +51,7 @@ export const HelpPopup: React.FC<HelpPopupProps> = ({ className = '', showConfir
       aria-describedby="help-popup-description"
     >
       <div
-        className={`animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-3xl border border-vae-turquoise/40 bg-white p-8 shadow-2xl duration-300 dark:bg-bg-darker ${className}`}
+        className={`animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl duration-300 dark:border-white/10 dark:bg-bg-darker ${className}`}
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -77,13 +78,13 @@ export const HelpPopup: React.FC<HelpPopupProps> = ({ className = '', showConfir
           </button>
         </div>
         {showConfirmButton && (
-          <button
-            type="button"
-            onClick={closeHelp}
-            className="mt-6 w-full rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/10 px-6 py-3 text-sm font-semibold text-gray-900 transition hover:bg-vae-turquoise/20 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50 dark:text-white"
-          >
-            Verstanden
-          </button>
+          <div className="mt-6">
+            <MagneticButton intensity={0.075}>
+              <button type="button" onClick={closeHelp} className="btn-primary w-full">
+                Verstanden
+              </button>
+            </MagneticButton>
+          </div>
         )}
       </div>
     </div>

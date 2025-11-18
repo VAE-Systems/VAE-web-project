@@ -1,4 +1,5 @@
 import Reveal from '@/components/ui/Reveal'
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { Mail } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -259,16 +260,21 @@ const Footer: React.FC = () => {
               <p className="mb-4 text-xs leading-relaxed text-text-muted">
                 Releases, Architektur-Notizen & Events (ca. 1× Monat). Abmeldung jederzeit.
               </p>
-              <button
-                type="button"
-                onClick={openNewsletterNotice}
-                className="w-full rounded-xl border border-vae-turquoise/30 bg-transparent px-4 py-2 text-sm font-semibold text-vae-turquoise transition-all hover:border-vae-turquoise hover:bg-vae-turquoise/10"
-              >
-                Newsletter-Benachrichtigung
-              </button>
-              <p className="text-[10px] text-text-muted">
-                Aktuell geschlossene Beta. Wir informieren dich, sobald neue Plätze frei werden.
-              </p>
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={openNewsletterNotice}
+                  className="flex w-full items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-left transition-all hover:border-white/20 hover:bg-white/[0.04]"
+                >
+                  <span className="flex-1 text-sm text-text-muted/70">Ihre E-Mail</span>
+                  <span className="rounded-lg bg-white/[0.08] px-3 py-1.5 text-xs font-medium text-text-light/90 transition-colors group-hover:bg-white/[0.12] group-hover:text-white">
+                    →
+                  </span>
+                </button>
+                <p className="text-[10px] text-text-muted">
+                  Aktuell geschlossene Beta. Wir informieren dich, sobald neue Plätze frei werden.
+                </p>
+              </div>
             </div>
           </Reveal>
         </Reveal.Group>
@@ -299,7 +305,7 @@ const Footer: React.FC = () => {
 
       {isNewsletterNoticeOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-labelledby="newsletter-locked-title"
@@ -307,7 +313,7 @@ const Footer: React.FC = () => {
           onClick={closeNewsletterNotice}
         >
           <div
-            className="w-full max-w-md rounded-2xl border border-bg-secondary bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
+            className="w-full max-w-md rounded-2xl border border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
             onClick={event => event.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-4">
@@ -328,21 +334,25 @@ const Footer: React.FC = () => {
               Updates oder stöbere im Blog, um aktuelle Architektur- und Automatisierungsbeiträge zu entdecken.
             </p>
             <div className="flex flex-col gap-3">
-              <a
-                href="https://www.linkedin.com/company/vae-systems"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-vae-turquoise/40 px-4 py-2 text-sm font-semibold text-vae-turquoise transition-colors hover:border-vae-turquoise hover:bg-vae-turquoise/10"
-              >
-                Auf LinkedIn folgen
-              </a>
-              <Link
-                to="/ressourcen/blog"
-                className="inline-flex items-center justify-center rounded-xl border border-bg-secondary px-4 py-2 text-sm font-semibold text-text-light transition-colors hover:border-vae-turquoise/40 hover:text-vae-turquoise"
-                onClick={closeNewsletterNotice}
-              >
-                Blog besuchen
-              </Link>
+              <MagneticButton intensity={0.075}>
+                <a
+                  href="https://www.linkedin.com/company/vae-systems"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary inline-flex w-full items-center justify-center"
+                >
+                  Auf LinkedIn folgen
+                </a>
+              </MagneticButton>
+              <MagneticButton intensity={0.075}>
+                <Link
+                  to="/ressourcen/blog"
+                  onClick={closeNewsletterNotice}
+                  className="btn-ghost inline-flex w-full items-center justify-center"
+                >
+                  Blog besuchen
+                </Link>
+              </MagneticButton>
             </div>
           </div>
         </div>

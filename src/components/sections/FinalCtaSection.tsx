@@ -1,7 +1,7 @@
-import { CalendarClock } from 'lucide-react'
-import React from 'react'
 import CtaLink from '@/components/ui/CtaLink'
 import { finalCtaHome } from '@/content/home'
+import { CalendarClock } from 'lucide-react'
+import React from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
 interface FinalCtaSectionProps {

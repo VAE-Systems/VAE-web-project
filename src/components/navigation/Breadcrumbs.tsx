@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 /**
@@ -30,6 +30,10 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, currentStep
   if (!items.length) return null
 
   const showProgress = currentStep !== undefined && totalSteps !== undefined && totalSteps > 1
+  const progressStyle = useMemo(
+    () => (showProgress ? { width: `${(currentStep / totalSteps) * 100}%` } : {}),
+    [showProgress, currentStep, totalSteps]
+  )
 
   return (
     <nav aria-label="Breadcrumb" className={['container-vae py-4', className].filter(Boolean).join(' ')}>
@@ -40,8 +44,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, currentStep
           </span>
           <div className="bg-bg-primary/20 h-1 flex-1 overflow-hidden rounded-full">
             <div
-              className="h-full bg-vae-turquoise transition-all duration-300 ease-out"
-              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+              className="h-full rounded-full bg-vae-turquoise transition-all duration-500 ease-out"
+              style={progressStyle}
             />
           </div>
         </div>

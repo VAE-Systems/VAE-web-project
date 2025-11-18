@@ -4,6 +4,7 @@
  * Compact newsletter subscription form with preferences
  */
 
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import React, { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useNewsletter } from '../../hooks/useNewsletter'
@@ -87,13 +88,11 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
                 <p className="mb-4 text-xs text-text-muted md:text-sm">
                   Bitte bestätige die Anmeldung über den Link in deiner E‑Mail.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setShowOverlay(false)}
-                  className="rounded-lg bg-vae-turquoise px-4 py-2 font-medium text-bg-darker transition-all duration-200 hover:bg-vae-turquoise-dark active:scale-95"
-                >
-                  Schließen
-                </button>
+                <MagneticButton intensity={0.075}>
+                  <button type="button" onClick={() => setShowOverlay(false)} className="btn-primary">
+                    Schließen
+                  </button>
+                </MagneticButton>
               </div>
             </div>
           </div>,

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const PRINCIPLES = [
   {
     title: 'Kapazitäts-Planung',
-    body: 'Wir planen Systeme nach deinen Drei- bis Fünf-Jahres-Zielen. So wächst Infrastruktur mit, ohne Re-Writes oder Notfall-Migrationen.',
+    body: 'Wir planen Systeme nach Ihren Drei- bis Fünf-Jahres-Zielen. So wächst Infrastruktur mit, ohne Re-Writes oder Notfall-Migrationen.',
   },
   {
     title: 'Cloud-native wo sinnvoll',
@@ -15,7 +15,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Observability ab Tag 1',
-    body: 'Monitoring, Alerting und Lasttests starten mit dem ersten Deploy. So siehst du Engpässe, bevor sie zum Problem werden.',
+    body: 'Monitoring, Alerting und Lasttests starten mit dem ersten Deploy. So sehen Sie Engpässe, bevor sie zum Problem werden.',
   },
 ]
 
@@ -44,7 +44,7 @@ const EXAMPLES = [
   {
     title: 'Horizontale Skalierung',
     description:
-      'Statt größere Server kaufen wir mehr kleine. So kannst du Kapazität linear hochfahren – ohne Downtime oder teure Refactorings.',
+      'Statt größere Server kaufen wir mehr kleine. So können Sie Kapazität linear hochfahren – ohne Downtime oder teure Refactorings.',
   },
   {
     title: 'Caching-Strategien',
@@ -82,7 +82,7 @@ const SkalierbarkeitPage: React.FC = () => {
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
               Wir planen Plattformen so, dass sie heute effizient laufen und morgen zehnmal so viele Nutzer:innen
-              tragen. Kapazitäten, Datenflüsse und Betriebsprozesse werden von Anfang an gemessen. So wächst dein System
+              tragen. Kapazitäten, Datenflüsse und Betriebsprozesse werden von Anfang an gemessen. So wächst Ihr System
               ohne Re-Write und ohne Überraschungskosten.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -199,8 +199,8 @@ const SkalierbarkeitPage: React.FC = () => {
         <div className="container-vae text-center">
           <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Wachstum ohne Überraschungen</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-secondary">
-            Lass uns prüfen, wie wir deine Systeme auf Wachstum vorbereiten – durch Kapazitäts-Planung, Lasttests und
-            klare Skalierungs-Strategien.
+            Lassen Sie uns prüfen, wie wir Ihre Systeme auf Wachstum vorbereiten – durch Kapazitäts-Planung, Lasttests
+            und klare Skalierungs-Strategien.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
             <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">

@@ -72,7 +72,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
     showOverlay && portalRoot
       ? createPortal(
           <div aria-live="polite" aria-atomic="true">
-            <div className="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center">
+            <div className="pointer-events-none fixed inset-0 z-[1050] flex items-center justify-center">
               {/* No blocking backdrop, just subtle vignette */}
               <div className="pointer-events-none absolute inset-0 bg-black/20 md:bg-black/10" />
               <div
@@ -234,7 +234,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
             type="email"
             value={formData.email}
             onChange={handleInputChange('email')}
-            placeholder="ihre.email@beispiel.de"
+            placeholder="Ihre.Email@beispiel.de"
             disabled={disabled || isSubmitting}
             className={`w-full ${baseInputClasses} ${errorInputClasses}`}
             required

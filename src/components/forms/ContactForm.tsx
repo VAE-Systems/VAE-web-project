@@ -128,7 +128,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             type="email"
             value={formData.email}
             onChange={handleInputChange('email')}
-            placeholder="ihre.email@beispiel.de"
+            placeholder="Ihre.Email@beispiel.de"
             disabled={disabled || isSubmitting}
             className={cn(baseInputClasses, formState.errors.email && errorInputClasses)}
             required

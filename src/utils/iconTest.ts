@@ -39,7 +39,7 @@ export function testIconAvailability(iconNames: string[]): IconTestResult[] {
 
       // Prüfe ob Icon verfügbar ist (würde normalerweise gegen MAP prüfen)
       result.found = variations.some(_variation => {
-        // Hier würdest du gegen das tatsächliche MAP-Object prüfen
+        // Hier würde man gegen das tatsächliche MAP-Object prüfen
         return false // Placeholder
       })
 

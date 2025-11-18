@@ -15,7 +15,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Offen legen, wie es entsteht',
-    body: 'Werkstatt statt Blackbox: Du siehst Prozesse, Werkzeuge und Zwischenschritte. Nur so kann Vertrauen wachsen.',
+    body: 'Werkstatt statt Blackbox: Sie sehen Prozesse, Werkzeuge und Zwischenschritte. Nur so kann Vertrauen wachsen.',
   },
 ]
 

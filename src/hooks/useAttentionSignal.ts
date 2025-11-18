@@ -63,7 +63,9 @@ export const useAttentionSignal = (
           return
         }
         // Fire sheen
-        el.setAttribute('data-signal-state', 'on')
+        if (el.getAttribute('data-signal-state') !== 'on') {
+          el.setAttribute('data-signal-state', 'on')
+        }
         runsRef.current += 1
         setTimeout(() => el.removeAttribute('data-signal-state'), 1350)
 
@@ -118,6 +120,11 @@ export const useAttentionSignal = (
     }
     el.addEventListener('click', onClick)
 
+    const handleVisibility = () => {
+      pausedRef.current = document.hidden
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+
     // Kickoff (only if visible soon; otherwise first interval will catch it)
     schedule(initialDelayMs)
 
@@ -129,6 +136,7 @@ export const useAttentionSignal = (
       el.removeEventListener('focus', onEnter, true)
       el.removeEventListener('blur', onLeave, true)
       el.removeEventListener('click', onClick)
+      document.removeEventListener('visibilitychange', handleVisibility)
     }
   }, [elRef, intervalMs, initialDelayMs, jitterMs, maxRuns, nudgeAfter])
 }

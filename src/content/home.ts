@@ -7,7 +7,7 @@ export const heroTypewriterTexts = [
 ] as const
 
 export const heroDescription =
-  'Wir ersetzen teure SaaS-Tools durch Open-Source-Alternativen, optimieren eure Workflows mit KI und betreuen euch langfristig. Für mittelständische Teams, die Effizienz steigern und Kosten senken wollen — ohne Abhängigkeit von Microsoft, Google oder Salesforce.'
+  'Wir ersetzen teure SaaS-Tools durch Open-Source-Alternativen, optimieren Ihre Workflows mit KI und begleiten Sie langfristig. Für mittelständische Teams, die Effizienz steigern und Kosten senken wollen — ohne Abhängigkeit von Microsoft, Google oder Salesforce.'
 
 export interface HeroBenefit {
   title: string
@@ -28,7 +28,7 @@ export const heroBenefits: HeroBenefit[] = [
   },
   {
     title: 'Langzeit-Partnerschaft',
-    description: 'Updates, Security, neue Features – wir bleiben an eurer Seite.',
+    description: 'Updates, Security, neue Features – wir bleiben an Ihrer Seite.',
     icon: 'support_agent',
   },
 ]
@@ -111,7 +111,7 @@ export const finalCtaHome = {
   eyebrow: 'Finaler Schritt',
   title: 'Bereit für Business Efficiency?',
   description:
-    'Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren eure Situation und zeigen, wie Open Source und KI euer Business effizienter machen.',
+    'Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen, wie Open Source und KI Ihr Business effizienter machen.',
   primary: {
     label: 'Kostenlose Beratung buchen (45 Min)',
     ctaId: 'contact.schedule_call',
@@ -138,19 +138,19 @@ export const homeProcessTeaserSteps: HomeProcessTeaserStep[] = [
     number: '01',
     title: 'Analyse & Strategie',
     duration: '1–2 Wochen',
-    description: 'Wir verstehen eure Situation, analysieren Systeme und entwickeln 3 realistische Optionen.',
+    description: 'Wir verstehen Ihre Situation, analysieren Systeme und entwickeln drei realistische Optionen.',
   },
   {
     number: '02',
     title: 'Setup & Migration',
     duration: '3–5 Wochen',
-    description: 'Wir bauen eure Infrastruktur auf, migrieren Daten und schulen euer Team.',
+    description: 'Wir bauen Ihre Infrastruktur auf, migrieren Daten und schulen Ihr Team.',
   },
   {
     number: '03',
     title: 'Betreuung & Optimierung',
     duration: 'laufend',
-    description: 'Optional betreuen wir eure Systeme langfristig und optimieren kontinuierlich.',
+    description: 'Optional betreuen wir Ihre Systeme langfristig und optimieren kontinuierlich.',
   },
 ] as const
 
@@ -163,12 +163,12 @@ export const openSourcePainPoints: OpenSourcePoint[] = [
   {
     title: 'Kosten wachsen unkontrolliert',
     description:
-      'Microsoft 365, Salesforce, OpenAI API, Anthropic — monatliche Gebühren pro Mitarbeiter:in oder API-Call. Je größer euer Team und je mehr KI-Einsatz, desto teurer wird es. Keine Kontrolle über Preissteigerungen.',
+      'Microsoft 365, Salesforce, OpenAI API, Anthropic — monatliche Gebühren pro Mitarbeiter:in oder API-Call. Je größer Ihr Team und je mehr KI-Einsatz, desto teurer wird es. Keine Kontrolle über Preissteigerungen.',
   },
   {
     title: 'Vendor-Lock-in',
     description:
-      'Eure Daten und KI-Workflows liegen bei US-Konzernen. Features verschwinden? Akzeptieren. API-Preise steigen? Zahlen. Modelle wechseln? Neuintegration. Kein Mitspracherecht.',
+      'Ihre Daten und KI-Workflows liegen bei US-Konzernen. Features verschwinden? Akzeptieren. API-Preise steigen? Zahlen. Modelle wechseln? Neuintegration. Kein Mitspracherecht.',
   },
   {
     title: 'DSGVO-Risiken',
@@ -186,7 +186,7 @@ export const openSourceAdvantages: OpenSourcePoint[] = [
   {
     title: 'Volle Kontrolle',
     description:
-      'Eure Daten, eure KI-Modelle, euer Server, eure Regeln. Keine versteckten Preiserhöhungen, keine Feature-Entfernungen. Digitale Souveränität bei Systemen UND KI.',
+      'Ihre Daten, Ihre KI-Modelle, Ihr Server, Ihre Regeln. Keine versteckten Preiserhöhungen, keine Feature-Entfernungen. Digitale Souveränität bei Systemen UND KI.',
   },
   {
     title: 'DSGVO-konform by Design',
@@ -213,7 +213,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     title: 'Strategische Beratung',
     badge: 'Startpunkt',
     description:
-      'Ihr wisst noch nicht genau, was ihr braucht? Wir analysieren eure Situation, zeigen Optionen und entwickeln einen realistischen Fahrplan.',
+      'Sie wissen noch nicht genau, was Sie brauchen? Wir analysieren Ihre Situation, zeigen Optionen und entwickeln einen realistischen Fahrplan.',
     inclusions: [
       'Kostenlose Erstberatung (45 Min)',
       'System-Analyse & Kosten-Nutzen-Rechnung',
@@ -229,7 +229,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     title: 'Infrastructure-Setup',
     badge: '3–6 Wochen',
     description:
-      'Von SaaS zu Open Source in 3–6 Wochen. Wir bauen eure komplette Infrastruktur auf — produktionsbereit, migriert, geschult.',
+      'Von SaaS zu Open Source in 3–6 Wochen. Wir bauen Ihre komplette Infrastruktur auf — produktionsbereit, migriert, geschult.',
     inclusions: [
       'Kompletter Server-Aufbau',
       'Tool-Installation & Konfiguration',
@@ -245,7 +245,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     title: 'Langfristige Betreuung',
     badge: 'Kontinuierlich',
     description:
-      'Eure Infrastruktur läuft. Wir sorgen dafür, dass sie es bleibt. Updates, Security, KI-Optimierung — wir sind euer IT-Rückgrat.',
+      'Ihre Infrastruktur läuft. Wir sorgen dafür, dass sie es bleibt. Updates, Security, KI-Optimierung — wir sind Ihr IT-Rückgrat.',
     inclusions: [
       'Monatliche Updates & Security-Patches',
       '24/7-Monitoring & Backups',

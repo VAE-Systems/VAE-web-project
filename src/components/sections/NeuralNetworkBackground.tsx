@@ -1,6 +1,6 @@
+import { useTheme } from '@/contexts/ThemeContext'
 import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import { useTheme } from '@/contexts/ThemeContext'
 
 interface NeuralNetworkBackgroundProps {
   className?: string
@@ -249,7 +249,7 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
     // Recreate on theme changes to update colors
   }, [theme])
 
-  return <div ref={mountRef} className={`pointer-events-none absolute inset-0 z-0 ${className}`} style={{}} />
+  return <div ref={mountRef} className={`pointer-events-none absolute inset-0 z-0 ${className}`} />
 }
 
 export default NeuralNetworkBackground

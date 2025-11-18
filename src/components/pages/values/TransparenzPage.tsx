@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom'
 const PRINCIPLES = [
   {
     title: 'Open Source First',
-    body: 'Proprietäre Tools binden dich langfristig. Open Source gibt dir Kontrolle, Anpassbarkeit und die Freiheit, jederzeit den Partner zu wechseln.',
+    body: 'Proprietäre Tools binden Sie langfristig. Open Source gibt Ihnen Kontrolle, Anpassbarkeit und die Freiheit, jederzeit den Partner zu wechseln.',
   },
   {
     title: 'Dokumentation als Standard',
-    body: 'Jede Entscheidung wird in Git, Notion oder Tickets festgehalten. So kannst du jederzeit nachvollziehen, warum etwas so gebaut wurde.',
+    body: 'Jede Entscheidung wird in Git, Notion oder Tickets festgehalten. So können Sie jederzeit nachvollziehen, warum etwas so gebaut wurde.',
   },
   {
     title: 'Live-Transparenz',
-    body: 'Statusupdates landen direkt in deinen Tools – nicht erst im Monatsreport. Du siehst Fortschritt und Probleme in Echtzeit.',
+    body: 'Statusupdates landen direkt in Ihren Tools – nicht erst im Monatsreport. Sie sehen Fortschritt und Probleme in Echtzeit.',
   },
 ]
 
@@ -24,7 +24,7 @@ const PROCESS_STEPS = [
     label: '01',
     title: 'Zugänge & Ownership',
     detail:
-      'Du erhältst Admin-Rechte auf allen Repositories, Cloud-Accounts und Deployment-Pipelines. Keine Black Boxes, keine Abhängigkeiten.',
+      'Sie erhalten Admin-Rechte auf allen Repositories, Cloud-Accounts und Deployment-Pipelines. Keine Black Boxes, keine Abhängigkeiten.',
   },
   {
     label: '02',
@@ -44,7 +44,7 @@ const EXAMPLES = [
   {
     title: 'Git als Single Source of Truth',
     description:
-      'Infrastruktur-Code, Deployment-Skripte und Dokumentation liegen in deinen Repos. Kein Vendor-Lock-in, keine versteckten Konfigurationen.',
+      'Infrastruktur-Code, Deployment-Skripte und Dokumentation liegen in Ihren Repos. Kein Vendor-Lock-in, keine versteckten Konfigurationen.',
   },
   {
     title: 'Pull Requests mit Kontext',
@@ -63,7 +63,7 @@ const TransparenzPage: React.FC = () => {
     <div className="bg-bg-darker text-text-light">
       <Seo
         title="Transparenz & Open Source | VAE Systems"
-        description="Wie VAE Systems Transparenz lebt: Open Source First, Live-Dokumentation und vollständige Ownership für deine Organisation."
+        description="Wie VAE Systems Transparenz lebt: Open Source First, Live-Dokumentation und vollständige Ownership für Ihre Organisation."
         canonicalPath="/wissen/transparenz-open-source"
       />
 
@@ -81,9 +81,9 @@ const TransparenzPage: React.FC = () => {
               Transparenz & Ehrlichkeit — Der Anfang von Vertrauen
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
-              Du siehst jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in deinen Tools dokumentiert
-              wird. Wir kommentieren Pull Requests so, dass du sie auch als Nicht-Entwicklerin nachvollziehst. Open
-              Source als Prinzip bedeutet, dass du Code, Infrastruktur und Daten behältst.
+              Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert
+              wird. Wir kommentieren Pull Requests so, dass Sie sie auch als Nicht-Entwicklerin nachvollziehen können.
+              Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten.
             </p>
             <div className="flex flex-wrap gap-4">
               <MagneticButton className="inline-flex">
@@ -122,7 +122,7 @@ const TransparenzPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Open-Source-Stacks geben dir die volle Kontrolle über Code und Infrastruktur</span>
+                <span>Open-Source-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur</span>
               </li>
               <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
@@ -158,8 +158,8 @@ const TransparenzPage: React.FC = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Ablauf</p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Transparenz von Tag 1 an</h2>
             <p className="text-base leading-relaxed text-text-secondary">
-              Wir starten jedes Projekt mit einem Onboarding in deine Tools: Git, Notion, Jira, Slack. Du bekommst
-              Admin-Rechte und siehst jeden Commit, jedes Ticket, jede Entscheidung – live und ungefiltert.
+              Wir starten jedes Projekt mit einem Onboarding in Ihre Tools: Git, Notion, Jira, Slack. Sie erhalten
+              Admin-Rechte und sehen jeden Commit, jedes Ticket, jede Entscheidung – live und ungefiltert.
             </p>
           </div>
           <div className="space-y-6">
@@ -201,8 +201,8 @@ const TransparenzPage: React.FC = () => {
             Transparenz als Wettbewerbsvorteil nutzen
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-secondary">
-            Lass uns prüfen, wie wir deine Prozesse, Entscheidungen und Systeme nachvollziehbarer machen – für dein
-            Team, deine Stakeholder und externe Audits.
+            Lassen Sie uns prüfen, wie wir Ihre Prozesse, Entscheidungen und Systeme nachvollziehbarer machen – für Ihr
+            Team, Ihre Stakeholder und externe Audits.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
             <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">

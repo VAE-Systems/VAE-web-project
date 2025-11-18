@@ -25,15 +25,15 @@ export const VALUES_DATA: Value[] = [
     id: 'transparenz',
     title: 'Transparenz & Ehrlichkeit — Der Anfang von Vertrauen',
     intro:
-      'Du siehst jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in deinen Tools dokumentiert wird. Wir kommentieren Pull Requests so, dass du sie auch als Nicht-Entwicklerin nachvollziehst. Open Source als Prinzip bedeutet, dass du Code, Infrastruktur und Daten behältst. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
+      'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir kommentieren Pull Requests so, dass Sie sie auch als Nicht-Entwicklerin nachvollziehen können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
     benefits: [
       'Live-Dokumentation in Git, Notion und Tickets statt Präsentationen im Nachgang',
       'Risiken und Annahmen werden sofort gekennzeichnet – kein Schönreden',
-      'Open-Source-Stacks geben dir die volle Kontrolle über Code und Infrastruktur',
+      'Open-Source-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur',
       'Audits bleiben möglich, weil jedes Artefakt versioniert ist',
     ],
     deepDive:
-      'Digitale Partnerschaften scheitern selten an Technik, sondern am Misstrauen. Sobald Informationen gefiltert werden, verlieren Entscheider:innen die Kontrolle. Deshalb legen wir Architektur-Entscheidungen, Budgetstände und Risiken sofort offen – sogar wenn das unbequem ist.\n\nJedes Artefakt landet in deinen Repositories: Meeting-Notizen, Architektur-Entwürfe, Migrationspläne. Wir kommentieren Tickets so, dass du Entscheidungen nachvollziehen kannst, auch wenn du nicht täglich commitest. So kannst du prüfen, statt blind zu vertrauen.\n\nTransparenz schützt auch uns. Wenn Erwartungen schriftlich festgehalten sind, merken alle früh, wenn etwas kippt. Das beschleunigt Eskalationen, erhöht Verlässlichkeit und macht Zusammenarbeit messbar.',
+      'Digitale Partnerschaften scheitern selten an Technik, sondern am Misstrauen. Sobald Informationen gefiltert werden, verlieren Entscheider:innen die Kontrolle. Deshalb legen wir Architektur-Entscheidungen, Budgetstände und Risiken sofort offen – sogar wenn das unbequem ist.\n\nJedes Artefakt landet in Ihren Repositories: Meeting-Notizen, Architektur-Entwürfe, Migrationspläne. Wir kommentieren Tickets so, dass Sie Entscheidungen nachvollziehen können, auch wenn Sie nicht täglich committen. So können Sie prüfen, statt blind zu vertrauen.\n\nTransparenz schützt auch uns. Wenn Erwartungen schriftlich festgehalten sind, merken alle früh, wenn etwas kippt. Das beschleunigt Eskalationen, erhöht Verlässlichkeit und macht Zusammenarbeit messbar.',
     seoKeywords: [
       'Transparenz in Technologieprojekten',
       'Open Source als Prinzip',
@@ -49,7 +49,7 @@ export const VALUES_DATA: Value[] = [
     id: 'kommunikation',
     title: 'Klare Kommunikation — Die Grundlage für Erfolg',
     intro:
-      'Du bekommst Klartext statt Buzzword-Salven. Wir melden Abweichungen unmittelbar – nicht erst im Monatsreport. Jede Zielgruppe erhält das Format, das sie braucht, damit dein Projekt steuerbar bleibt. So weißt du jederzeit, was als Nächstes passiert.',
+      'Sie erhalten Klartext statt Buzzword-Salven. Wir melden Abweichungen unmittelbar – nicht erst im Monatsreport. Jede Zielgruppe erhält das Format, das sie braucht, damit Ihr Projekt steuerbar bleibt. So wissen Sie jederzeit, was als Nächstes passiert.',
     benefits: [
       'Workshops übersetzen komplexe Technik in Entscheidungen für Business-Teams',
       'Status-Reports zeigen Abweichungen früh statt im Nachgang',
@@ -57,7 +57,7 @@ export const VALUES_DATA: Value[] = [
       'Entscheidungen werden schriftlich bestätigt, damit niemand überrascht wird',
     ],
     deepDive:
-      'Komplexe Projekte scheitern, wenn Beteiligte nicht das gleiche Bild teilen. Deshalb starten wir jedes Mandat mit einer Kommunikationsarchitektur: Wer braucht welche Information, in welchem Takt und in welcher Tiefe?\n\nWorkshops für Fachbereiche, Executive-Summaries für Entscheider:innen und asynchrone Loom-Updates sorgen dafür, dass alle den gleichen Wissensstand haben. So verschwinden Missverständnisse, bevor sie teuer werden.\n\nKlartext heißt auch: Wir sprechen unangenehme Dinge an. Verzögerungen, Budgetverschiebungen oder Fehlentscheidungen landen sofort bei dir – inklusive Handlungsempfehlung. So planst du aktiv statt zu reagieren.',
+      'Komplexe Projekte scheitern, wenn Beteiligte nicht das gleiche Bild teilen. Deshalb starten wir jedes Mandat mit einer Kommunikationsarchitektur: Wer braucht welche Information, in welchem Takt und in welcher Tiefe?\n\nWorkshops für Fachbereiche, Executive-Summaries für Entscheider:innen und asynchrone Loom-Updates sorgen dafür, dass alle den gleichen Wissensstand haben. So verschwinden Missverständnisse, bevor sie teuer werden.\n\nKlartext heißt auch: Wir sprechen unangenehme Dinge an. Verzögerungen, Budgetverschiebungen oder Fehlentscheidungen landen sofort bei Ihnen – inklusive Handlungsempfehlung. So planen Sie aktiv statt zu reagieren.',
     seoKeywords: [
       'klare Projektkommunikation',
       'Stakeholder-Updates',
@@ -73,15 +73,15 @@ export const VALUES_DATA: Value[] = [
     id: 'unabhaengigkeit',
     title: 'Unabhängigkeit & Freiheit — Das Recht zu wählen',
     intro:
-      'Du kannst morgen den Partner wechseln, ohne dein System zu verlieren. Wir planen offene Schnittstellen, dokumentieren Schlüsselentscheidungen und vermeiden proprietäre Lizenzfallen. So bleibt deine Organisation souverän – unabhängig davon, wer liefert. Unabhängigkeit ist kein Risiko, sondern ein Wettbewerbsvorteil.',
+      'Sie können morgen den Partner wechseln, ohne Ihr System zu verlieren. Wir planen offene Schnittstellen, dokumentieren Schlüsselentscheidungen und vermeiden proprietäre Lizenzfallen. So bleibt Ihre Organisation souverän – unabhängig davon, wer liefert. Unabhängigkeit ist kein Risiko, sondern ein Wettbewerbsvorteil.',
     benefits: [
       'Vendor-Lock-ins werden identifiziert und durch offene Alternativen ersetzt',
       'Schlüsselprozesse sind dokumentiert, damit kein Einzelner kritisch ist',
       'Architekturentscheidungen priorisieren austauschbare Komponenten',
-      'Du besitzt Deployment-Pipelines und Zugänge selbst',
+      'Sie besitzen Deployment-Pipelines und Zugänge selbst',
     ],
     deepDive:
-      'Echte Partnerschaft entsteht, wenn beide Seiten freiwillig bleiben. Deshalb analysieren wir zuerst, an wen oder was du gebunden bist: proprietäre Tools, einzelne Personen, überalterte Hosting-Verträge.\n\nWir ersetzen kritische Komponenten, wo sinnvoll, durch offene Standards oder orchestrieren Übergangsmodelle. Wichtig ist, dass du Infrastruktur, Code und Zugangsdaten selbst kontrollierst – nicht wir, nicht ein Hyperscaler.\n\nParadoxerweise stärkt Unabhängigkeit die Zusammenarbeit. Wenn du frei bist zu gehen, entscheiden wir uns bewusst jeden Tag füreinander – und genau das hebt die Qualität.',
+      'Echte Partnerschaft entsteht, wenn beide Seiten freiwillig bleiben. Deshalb analysieren wir zuerst, an wen oder was Sie gebunden sind: proprietäre Tools, einzelne Personen, überalterte Hosting-Verträge.\n\nWir ersetzen kritische Komponenten, wo sinnvoll, durch offene Standards oder orchestrieren Übergangsmodelle. Wichtig ist, dass Sie Infrastruktur, Code und Zugangsdaten selbst kontrollieren – nicht wir, nicht ein Hyperscaler.\n\nParadoxerweise stärkt Unabhängigkeit die Zusammenarbeit. Wenn Sie frei sind zu gehen, entscheiden wir uns bewusst jeden Tag füreinander – und genau das hebt die Qualität.',
     seoKeywords: [
       'Vendor-Lock-in vermeiden',
       'technologische Souveränität',
@@ -97,7 +97,7 @@ export const VALUES_DATA: Value[] = [
     id: 'qualitaet',
     title: 'Exzellenz als Standard — Handwerkskunst statt Schnellschuss',
     intro:
-      'Schnelle Hacks kosten langfristig mehr als sauber geplante Systeme. Wir liefern Architektur, die wächst, Code, der lesbar bleibt, und Tests, die Änderungen absichern. Qualität ist kein Luxus, sondern die günstigste Art, komplexe Plattformen zu betreiben. Du investierst einmal und erhältst Stabilität für Jahre.',
+      'Schnelle Hacks kosten langfristig mehr als sauber geplante Systeme. Wir liefern Architektur, die wächst, Code, der lesbar bleibt, und Tests, die Änderungen absichern. Qualität ist kein Luxus, sondern die günstigste Art, komplexe Plattformen zu betreiben. Sie investieren einmal und erhalten Stabilität für Jahre.',
     benefits: [
       'Lesbarer Code und Architecture Decision Records beschleunigen Onboarding',
       'Automatisierte Tests und Observability reduzieren Ausfälle',
@@ -116,7 +116,7 @@ export const VALUES_DATA: Value[] = [
     id: 'design',
     title: 'Liebe fürs Detail & Design — Exzellenz spüren',
     intro:
-      'Technologie wirkt nur, wenn sie sich richtig anfühlt. Wir verbinden Performance, Accessibility und visuelle Präzision, damit Nutzer:innen intuitiv ins Ziel kommen. Details wie Motion, Microcopy und Error-States sind geplant, nicht zufällig. Design ist keine Dekoration, sondern der sichtbare Teil deiner Produktstrategie.',
+      'Technologie wirkt nur, wenn sie sich richtig anfühlt. Wir verbinden Performance, Accessibility und visuelle Präzision, damit Nutzer:innen intuitiv ins Ziel kommen. Details wie Motion, Microcopy und Error-States sind geplant, nicht zufällig. Design ist keine Dekoration, sondern der sichtbare Teil Ihrer Produktstrategie.',
     benefits: [
       'UX-Flows werden getestet, bevor sie live gehen',
       'Motion und Microcopy unterstützen Orientierung und Markenwirkung',
@@ -136,15 +136,15 @@ export const VALUES_DATA: Value[] = [
     id: 'skalierbarkeit',
     title: 'Skalierbarkeit als Fundament — Ideen brauchen Raum',
     intro:
-      'Wir planen Plattformen so, dass sie heute effizient laufen und morgen zehnmal so viele Nutzer:innen tragen. Kapazitäten, Datenflüsse und Betriebsprozesse werden von Anfang an gemessen. So wächst dein System ohne Re-Write und ohne Überraschungskosten. Skalierbarkeit ist das Fundament, nicht die Kür.',
+      'Wir planen Plattformen so, dass sie heute effizient laufen und morgen zehnmal so viele Nutzer:innen tragen. Kapazitäten, Datenflüsse und Betriebsprozesse werden von Anfang an gemessen. So wächst Ihr System ohne Re-Write und ohne Überraschungskosten. Skalierbarkeit ist das Fundament, nicht die Kür.',
     benefits: [
-      'Kapazitätsplanung orientiert sich an deinen Drei- bis Fünf-Jahres-Zielen',
+      'Kapazitätsplanung orientiert sich an Ihren Drei- bis Fünf-Jahres-Zielen',
       'Cloud-native Patterns kommen nur zum Einsatz, wenn sie echten Nutzen bringen',
       'Observability und Alerting starten mit dem ersten Deploy',
       'Runbooks und Handover sichern den Betrieb im eigenen Team',
     ],
     deepDive:
-      'Viele Plattformen sind nach dem ersten Wachstumsschub am Limit. Jede neue Kund:in macht das System instabil und das Team reagiert nur noch auf Feuer. Das ist vermeidbar, wenn Skalierungsziele von Anfang an Teil des Scope sind.\n\nWir definieren daher Szenarien: doppelter Traffic, neue Märkte, regulatorische Anforderungen. Für jedes Szenario planen wir Architektur, Kosten und Betrieb durch – inklusive Lasttests und Observability-KPIs.\n\nSkalierbarkeit bedeutet nicht überall Microservices, sondern bewusste Entscheidungen. Manchmal reicht ein modulärer Monolith, manchmal braucht es Event-Streaming. Wichtig ist, dass du jederzeit weißt, wie du wachsen kannst.',
+      'Viele Plattformen sind nach dem ersten Wachstumsschub am Limit. Jede neue Kund:in macht das System instabil und das Team reagiert nur noch auf Feuer. Das ist vermeidbar, wenn Skalierungsziele von Anfang an Teil des Scope sind.\n\nWir definieren daher Szenarien: doppelter Traffic, neue Märkte, regulatorische Anforderungen. Für jedes Szenario planen wir Architektur, Kosten und Betrieb durch – inklusive Lasttests und Observability-KPIs.\n\nSkalierbarkeit bedeutet nicht überall Microservices, sondern bewusste Entscheidungen. Manchmal reicht ein modulärer Monolith, manchmal braucht es Event-Streaming. Wichtig ist, dass Sie jederzeit wissen, wie Sie wachsen können.',
     seoKeywords: [
       'skalierbare Cloud-Architektur',
       'Kapazitätsplanung IT',
@@ -174,7 +174,7 @@ export const TESTIMONIAL = {
 
 export const CTA = {
   heading: 'Lassen Sie uns zusammenarbeiten',
-  copy: 'Diese Werte sind keine Floskeln – sie sind unser Arbeitsalltag. Wenn das zu deiner Vorstellung von Technologiepartnerschaft passt, sprechen wir darüber.',
+  copy: 'Diese Werte sind keine Floskeln – sie sind unser Arbeitsalltag. Wenn das zu Ihrer Vorstellung von Technologiepartnerschaft passt, sprechen wir darüber.',
   text: 'Kostenloses Erstgespräch vereinbaren',
   href: '/kontakt',
 }

@@ -1,13 +1,24 @@
-import { ArrowUpRight, Mail, MessageSquare } from 'lucide-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import {
+  ArrowUpRight,
+  BookOpen,
+  CalendarDays,
+  Compass,
+  GraduationCap,
+  HelpCircle,
+  Mail,
+  MessageSquare,
+} from 'lucide-react'
+import React, { useEffect, useRef } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { getHelpModeClasses, HelpButton, HelpIntroPopup, HelpPopup, useHelpMode } from '@/components/ui/help'
 import Icon from '@/components/ui/Icon'
 import Seo from '@/components/ui/Seo'
+import { MailBuilderTutorialOverlay } from '@/components/ui/tutorial/MailBuilderTutorialOverlay'
 import { ValidationPopup } from '@/components/ui/validation'
 import { contactHero, contactIntro, contactUsps } from '@/content/contact'
+import { useMailBuilderTutorial } from '@/hooks/useMailBuilderTutorial'
 
 const MAIL_TO = 'info@vae.systems'
 
@@ -92,19 +103,64 @@ const helpTexts = {
 }
 
 const ContactPage: React.FC = () => {
+  const [searchParams] = useSearchParams()
+  const mailBuilderRef = useRef<HTMLDivElement>(null)
+  const hasAutoStarted = useRef(false)
+
   const [selectedIntents, setSelectedIntents] = React.useState<string[]>([])
-  const [timeline, setTimeline] = React.useState(timelineOptions[1].id)
-  const [companyStage, setCompanyStage] = React.useState(companyStages[0].id)
-  const [collabMode, setCollabMode] = React.useState(collaborationModes[0].id)
+  const [timeline, setTimeline] = React.useState<string>('')
+  const [companyStage, setCompanyStage] = React.useState<string>('')
+  const [collabMode, setCollabMode] = React.useState<string>('')
   const [contactName, setContactName] = React.useState('')
-  const [position, setPosition] = React.useState('')
   const [companyName, setCompanyName] = React.useState('')
+  const [position, setPosition] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [notes, setNotes] = React.useState('')
   const [validationError, setValidationError] = React.useState('')
 
-  // Use help mode with auto-registered help texts
   const { helpMode, showHelp } = useHelpMode(helpTexts)
+  const tutorial = useMailBuilderTutorial()
+
+  // Pre-Selection from URL parameters (e.g., from booking page)
+  useEffect(() => {
+    const intentParam = searchParams.get('intent')
+    const sourceParam = searchParams.get('source')
+
+    if (intentParam && projectIntents.find(i => i.id === intentParam)) {
+      setSelectedIntents([intentParam])
+    }
+
+    // Optional: Log source for analytics
+    if (sourceParam) {
+      console.log('User came from:', sourceParam)
+    }
+  }, [searchParams])
+
+  // Auto-start tutorial on first visit to mail-builder section
+  useEffect(() => {
+    if (tutorial.hasCompleted || tutorial.hasSkipped || hasAutoStarted.current) return
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !hasAutoStarted.current) {
+            hasAutoStarted.current = true
+            // Delay tutorial start slightly for smooth UX
+            setTimeout(() => {
+              tutorial.startTutorial()
+            }, 500)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    if (mailBuilderRef.current) {
+      observer.observe(mailBuilderRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [tutorial])
 
   const toggleIntent = (id: string) => {
     setSelectedIntents(prev => (prev.includes(id) ? prev.filter(intent => intent !== id) : [...prev, id]))
@@ -201,7 +257,7 @@ const ContactPage: React.FC = () => {
     const intentLine =
       intentLabels.length > 0
         ? `Wir interessieren uns für ${intentLabels.join(', ')}.`
-        : 'Wir möchten gemeinsam ausloten, wie wir mit euch arbeiten können.'
+        : 'Wir möchten gemeinsam ausloten, wie wir mit Ihnen arbeiten können.'
 
     const emailLines = [
       'Hallo Julian und Jakob,',
@@ -218,7 +274,7 @@ const ContactPage: React.FC = () => {
       emailLines.push(` Telefon: ${phone}`)
     }
 
-    emailLines.push('', 'Lasst uns gern sprechen.', '', 'Beste Grüße', contactName || '[Ihr Name]')
+    emailLines.push('', 'Lassen Sie uns gern sprechen.', '', 'Beste Grüße', contactName || '[Ihr Name]')
 
     // Boss-Style signature: Position, Company on separate line
     if (position && companyName) {
@@ -286,11 +342,24 @@ const ContactPage: React.FC = () => {
               {contactHero.subtitle}
             </h1>
             <p className="text-lg leading-relaxed text-gray-600 dark:text-white/70">{contactIntro.body}</p>
-            <div className="flex flex-col items-center gap-4 pt-2 sm:flex-row sm:justify-center lg:justify-start">
-              <MagneticButton className="flex-1">
+            <div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:justify-center lg:justify-start">
+              <MagneticButton className="w-full sm:w-auto">
                 <button
                   type="button"
-                  className="btn-primary flex w-full items-center justify-center gap-3 text-base"
+                  className="btn-primary flex w-full items-center justify-center gap-3 px-8 py-3.5 text-base"
+                  onClick={() => {
+                    const booking = document.getElementById('booking')
+                    booking?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }}
+                >
+                  Termin anfragen
+                  <ArrowUpRight className="h-5 w-5" />
+                </button>
+              </MagneticButton>
+              <MagneticButton className="w-full sm:w-auto">
+                <button
+                  type="button"
+                  className="btn-secondary flex w-full items-center justify-center gap-3 px-8 py-3.5 text-base"
                   onClick={() => {
                     const mailBuilder = document.getElementById('mail-builder')
                     mailBuilder?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -302,7 +371,7 @@ const ContactPage: React.FC = () => {
               </MagneticButton>
               <Link
                 to="/referenzen"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:border-vae-turquoise/60 hover:text-vae-turquoise dark:border-white/15 dark:text-white/70 dark:hover:text-white"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:border-vae-turquoise/60 hover:text-vae-turquoise dark:border-white/15 dark:text-white/70 dark:hover:text-white sm:w-auto"
               >
                 Referenzen ansehen
                 <ArrowUpRight className="h-4 w-4" />
@@ -355,8 +424,213 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Booking Section */}
+      <section id="booking" className="border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="container-vae">
+          <div className="mx-auto max-w-4xl space-y-8">
+            <div className="text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+                Direkt Termin buchen
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+                Wählen Sie den passenden Termin-Typ
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-gray-600 dark:text-white/70">
+                Wir nutzen die Infos, um den Call optimal vorzubereiten und Ihnen direkt den richtigen Ansprechpartner
+                zuzuordnen.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <a
+                href="https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      Erstberatung KI-Automatisierung · 30 Min
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
+                      Für Scale-ups & Mittelstand: KI-Roadmap, Quick Wins & Priorisierung.
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://nc.intern.vae.systems/apps/calendar/appointment/Infra45VAE"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      Infrastruktur-Audit · 45 Min
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
+                      Self-Hosting, Cloud-Migration, Security & Compliance-Check.
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_ADVISORY"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Strategic Advisory · 45 Min</h3>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
+                      Für CTOs & Führungskräfte: Langfristige Architektur & Team-Setup.
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://nc.intern.vae.systems/apps/calendar/appointment/PartnerCallVAE"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      Partnership & Netzwerk · 30 Min
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
+                      Für Freelancer, Agenturen & Partner: Co-Delivery & Kooperationen.
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_RETAINER"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Retainer-Planung · 30 Min</h3>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
+                      Kontinuierliche Begleitung: Sparring, Support & operative Projekte.
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_WORKSHOP"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Workshop-Anfrage · 20 Min</h3>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
+                      Team-Workshops, Trainings & Knowledge-Transfer zu KI & Infrastruktur.
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                    <CalendarDays className="h-5 w-5" />
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            {/* Call-Vorbereitung Resources */}
+            <div className="rounded-[28px] border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/[0.02]">
+              <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+                Call-Vorbereitung & Ressourcen
+              </h3>
+              <div className="grid gap-4 md:grid-cols-3">
+                <a
+                  href="https://docs.vae.systems/s/erstberatung-ablauf"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/10 text-vae-turquoise">
+                    <Compass className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-900 dark:text-white">Ablauf & Agenda</p>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-white/70">
+                      Was passiert im Call, welche Ergebnisse liefern wir?
+                    </p>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-gray-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-vae-turquoise dark:text-white/40" />
+                </a>
+
+                <a
+                  href="https://docs.vae.systems/s/vorbereitung-erstberatung"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/10 text-vae-turquoise">
+                    <BookOpen className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-900 dark:text-white">Vorbereitung</p>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-white/70">
+                      Optionales Material, damit wir gleich tief einsteigen.
+                    </p>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-gray-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-vae-turquoise dark:text-white/40" />
+                </a>
+
+                <a
+                  href="https://docs.vae.systems/s/erstberatung-faq"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/10 text-vae-turquoise">
+                    <HelpCircle className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-900 dark:text-white">FAQ</p>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-white/70">
+                      Budget, Security, Timeline – die häufigsten Fragen.
+                    </p>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-gray-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-vae-turquoise dark:text-white/40" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         id="mail-builder"
+        ref={mailBuilderRef}
         className="bg-gradient-to-b from-gray-100 via-white to-gray-50 py-24 dark:bg-gradient-to-b dark:from-bg-dark dark:via-[#081014] dark:to-bg-darker"
       >
         <div className="container-vae grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -374,11 +648,21 @@ const ContactPage: React.FC = () => {
                   die in Ihrem Mailclient geöffnet wird.
                 </p>
               </div>
-              <HelpButton />
+              <div className="flex gap-2" data-tutorial="buttons">
+                <button
+                  onClick={tutorial.startTutorial}
+                  className="rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-3 text-vae-turquoise transition-all hover:bg-vae-turquoise/20 hover:shadow-lg hover:shadow-vae-turquoise/20"
+                  aria-label="Tutorial starten"
+                  title="Tutorial starten"
+                >
+                  <GraduationCap className="h-5 w-5" />
+                </button>
+                <HelpButton />
+              </div>
             </div>
 
             <div className="space-y-6">
-              <div>
+              <div data-tutorial="intents">
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
                   1. Themen
                 </p>
@@ -414,7 +698,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               <div className="grid gap-6 md:grid-cols-2">
-                <div>
+                <div data-tutorial="timeline">
                   <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
                     2. Zeitpunkt
                   </p>
@@ -444,7 +728,7 @@ const ContactPage: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                <div>
+                <div data-tutorial="setup">
                   <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
                     3. Setup
                   </p>
@@ -476,7 +760,7 @@ const ContactPage: React.FC = () => {
                 </div>
               </div>
 
-              <div>
+              <div data-tutorial="collaboration">
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
                   Zusammenarbeitsmodell
                 </p>
@@ -576,7 +860,10 @@ const ContactPage: React.FC = () => {
               </button>
             </MagneticButton>
           </div>
-          <div className="space-y-6 rounded-[32px] border border-gray-200 bg-white p-8 shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_90px_rgba(0,0,0,0.55)]">
+          <div
+            data-tutorial="preview"
+            className="space-y-6 rounded-[32px] border border-gray-200 bg-white p-8 shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_90px_rgba(0,0,0,0.55)]"
+          >
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
               Vorschau (wird in Ihrem Mailprogramm geöffnet)
             </p>
@@ -637,6 +924,9 @@ const ContactPage: React.FC = () => {
       {/* Help Popups (managed by help system) */}
       <HelpIntroPopup />
       <HelpPopup />
+
+      {/* Tutorial Overlay */}
+      <MailBuilderTutorialOverlay tutorial={tutorial} />
 
       {/* Validation Popup */}
       <ValidationPopup message={validationError} isOpen={!!validationError} onClose={() => setValidationError('')} />

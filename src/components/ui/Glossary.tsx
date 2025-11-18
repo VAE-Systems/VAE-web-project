@@ -157,7 +157,7 @@ export const TermHint: React.FC<TermHintProps> = ({ term, className, variant = '
         pos &&
         typeof document !== 'undefined' &&
         createPortal(
-          <div style={{ top: pos.top, left: pos.left }} className="pointer-events-none absolute z-[200] w-[280px]">
+          <div style={{ top: pos.top, left: pos.left }} className="pointer-events-none absolute z-[1070] w-[280px]">
             <div className="border-border-primary bg-bg-primary/95 relative animate-fade-in rounded-lg border p-3 text-[11px] leading-relaxed text-text-secondary shadow-xl backdrop-blur-md dark:border-white/10 dark:bg-bg-darker/95">
               <span className="mb-1 block text-[10px] uppercase tracking-wide text-vae-turquoise">Begriff</span>
               <span className="mb-1 block text-xs font-medium text-text-light dark:text-white">

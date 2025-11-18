@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom'
 const PRINCIPLES = [
   {
     title: 'Open Standards First',
-    body: 'Wir setzen auf offene Standards (REST, GraphQL, PostgreSQL, Kubernetes), damit du jederzeit Komponenten austauschen kannst.',
+    body: 'Wir setzen auf offene Standards (REST, GraphQL, PostgreSQL, Kubernetes), damit Sie jederzeit Komponenten austauschen können.',
   },
   {
     title: 'Dokumentierte Schlüsselentscheidungen',
-    body: 'Architecture Decision Records (ADRs) erklären, warum wir bestimmte Tools gewählt haben – und wie du sie ersetzen kannst.',
+    body: 'Architecture Decision Records (ADRs) erklären, warum wir bestimmte Tools gewählt haben – und wie Sie sie ersetzen können.',
   },
   {
-    title: 'Ownership bei dir',
-    body: 'Du besitzt Deployment-Pipelines, Cloud-Accounts und Zugangsdaten. Kein Vendor-Lock-in, keine versteckten Abhängigkeiten.',
+    title: 'Ownership bei Ihnen',
+    body: 'Sie besitzen Deployment-Pipelines, Cloud-Accounts und Zugangsdaten. Kein Vendor-Lock-in, keine versteckten Abhängigkeiten.',
   },
 ]
 
@@ -24,19 +24,19 @@ const PROCESS_STEPS = [
     label: '01',
     title: 'Abhängigkeits-Audit',
     detail:
-      'Wir analysieren, an wen oder was du gebunden bist: proprietäre Tools, einzelne Personen, überalterte Hosting-Verträge. Dann priorisieren wir die größten Risiken.',
+      'Wir analysieren, an wen oder was Sie gebunden sind: proprietäre Tools, einzelne Personen, überalterte Hosting-Verträge. Dann priorisieren wir die größten Risiken.',
   },
   {
     label: '02',
     title: 'Migrations-Roadmap',
     detail:
-      'Wir ersetzen kritische Komponenten durch offene Alternativen oder orchestrieren Übergangsmodelle. Wichtig ist, dass du Infrastruktur, Code und Zugangsdaten selbst kontrollierst.',
+      'Wir ersetzen kritische Komponenten durch offene Alternativen oder orchestrieren Übergangsmodelle. Wichtig ist, dass Sie Infrastruktur, Code und Zugangsdaten selbst kontrollieren.',
   },
   {
     label: '03',
     title: 'Handover & Training',
     detail:
-      'Nach der Migration trainieren wir dein Team, damit es Systeme eigenständig betreiben kann. Runbooks, Monitoring und Notfallpläne sind Teil des Deliverys.',
+      'Nach der Migration trainieren wir Ihr Team, damit es Systeme eigenständig betreiben kann. Runbooks, Monitoring und Notfallpläne sind Teil des Deliverys.',
   },
 ]
 
@@ -44,12 +44,12 @@ const EXAMPLES = [
   {
     title: 'Offene APIs statt Vendor-Plattformen',
     description:
-      'Wir bauen API-First-Systeme, die mit jedem Frontend, Backend oder Integrations-Tool funktionieren. So bleibst du flexibel, wenn sich deine Anforderungen ändern.',
+      'Wir bauen API-First-Systeme, die mit jedem Frontend, Backend oder Integrations-Tool funktionieren. So bleiben Sie flexibel, wenn sich Ihre Anforderungen ändern.',
   },
   {
     title: 'Cloud-Agnostisch',
     description:
-      'Infrastruktur-Code (Terraform, Pulumi) funktioniert auf AWS, Azure und GCP. Du kannst Provider wechseln, ohne von vorn zu beginnen.',
+      'Infrastruktur-Code (Terraform, Pulumi) funktioniert auf AWS, Azure und GCP. Sie können Provider wechseln, ohne von vorn zu beginnen.',
   },
   {
     title: 'Key-Person-Risk minimieren',
@@ -81,8 +81,8 @@ const UnabhaengigkeitPage: React.FC = () => {
               Unabhängigkeit & Freiheit — Das Recht zu wählen
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
-              Du kannst morgen den Partner wechseln, ohne dein System zu verlieren. Wir planen offene Schnittstellen,
-              dokumentieren Schlüsselentscheidungen und vermeiden proprietäre Lizenzfallen. So bleibt deine Organisation
+              Sie können morgen den Partner wechseln, ohne Ihr System zu verlieren. Wir planen offene Schnittstellen,
+              dokumentieren Schlüsselentscheidungen und vermeiden proprietäre Lizenzfallen. So bleibt Ihre Organisation
               souverän – unabhängig davon, wer liefert.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -130,7 +130,7 @@ const UnabhaengigkeitPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Du besitzt Deployment-Pipelines und Zugänge selbst</span>
+                <span>Sie besitzen Deployment-Pipelines und Zugänge selbst</span>
               </li>
             </ul>
           </div>
@@ -159,7 +159,7 @@ const UnabhaengigkeitPage: React.FC = () => {
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Von Abhängigkeit zu Souveränität</h2>
             <p className="text-base leading-relaxed text-text-secondary">
               Echte Partnerschaft entsteht, wenn beide Seiten freiwillig bleiben. Deshalb analysieren wir zuerst, an wen
-              oder was du gebunden bist – und bauen dann einen Plan, um diese Abhängigkeiten zu reduzieren.
+              oder was Sie gebunden sind – und bauen dann einen Plan, um diese Abhängigkeiten zu reduzieren.
             </p>
           </div>
           <div className="space-y-6">
@@ -199,7 +199,7 @@ const UnabhaengigkeitPage: React.FC = () => {
         <div className="container-vae text-center">
           <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Technologische Souveränität aufbauen</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-secondary">
-            Lass uns prüfen, wie wir deine Abhängigkeiten reduzieren, kritische Systeme dokumentieren und dein Team
+            Lassen Sie uns prüfen, wie wir Ihre Abhängigkeiten reduzieren, kritische Systeme dokumentieren und Ihr Team
             befähigen können, Infrastruktur eigenständig zu betreiben.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">

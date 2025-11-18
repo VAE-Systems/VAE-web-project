@@ -11,7 +11,7 @@ const DESIGN_PRINCIPLES = [
   },
   {
     title: 'Werkstatt statt Blackbox',
-    body: 'Prototypen, Figma-Dateien und Token-Systeme liegen in deinen Repos. Du kannst nachvollziehen, warum eine Entscheidung gefallen ist und welche Variante verworfen wurde.',
+    body: 'Prototypen, Figma-Dateien und Token-Systeme liegen in Ihren Repos. Sie können nachvollziehen, warum eine Entscheidung gefallen ist und welche Variante verworfen wurde.',
   },
   {
     title: 'Künstlerische DNA',
@@ -24,7 +24,7 @@ const PROCESS_STEPS = [
     label: '01',
     title: 'Research & Kontext',
     detail:
-      'Stakeholder-Interviews, Daten aus Support-Logs und Beobachtungen aus laufenden Plattformen. Wir verstehen, welche Jobs-to-be-done dein Interface wirklich lösen muss.',
+      'Stakeholder-Interviews, Daten aus Support-Logs und Beobachtungen aus laufenden Plattformen. Wir verstehen, welche Jobs-to-be-done Ihr Interface wirklich lösen muss.',
   },
   {
     label: '02',
@@ -56,7 +56,7 @@ const GALLERY = [
     id: 'apps',
     title: 'Finger zeigt auf VAE Apps',
     description:
-      'Workshop-Folie mit App-Landschaft. Wir liefern dir die optimierte 1920px-Version plus Zugriff auf die Originaldatei für Print.',
+      'Workshop-Folie mit App-Landschaft. Wir liefern Ihnen die optimierte 1920px-Version plus Zugriff auf die Originaldatei für Print.',
     sources: {
       webp: '/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.webp',
       jpg: '/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.jpg',
@@ -90,7 +90,7 @@ const DesignHeritagePage: React.FC = () => {
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
               Wir verbinden künstlerische Herkunft mit belastbarer Produktentwicklung. Jede Visualisierung – vom
-              Werteplakat bis zur App-Landkarte – wird in hoher Auflösung produziert, versioniert und in deine Systeme
+              Werteplakat bis zur App-Landkarte – wird in hoher Auflösung produziert, versioniert und in Ihre Systeme
               eingebunden.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -150,8 +150,8 @@ const DesignHeritagePage: React.FC = () => {
               Vom ersten Scribble bis zum Release begleitet
             </h2>
             <p className="text-base leading-relaxed text-text-secondary">
-              Wir dokumentieren jeden Schritt in denselben Tools, die dein Team ohnehin nutzt. Dadurch bleiben
-              Wissensübergaben nachvollziehbar – egal ob du das Design intern weiterführen oder mit uns ausbauen
+              Wir dokumentieren jeden Schritt in denselben Tools, die Ihr Team ohnehin nutzt. Dadurch bleiben
+              Wissensübergaben nachvollziehbar – egal ob Sie das Design intern weiterführen oder mit uns ausbauen
               möchtest.
             </p>
           </div>
@@ -176,7 +176,7 @@ const DesignHeritagePage: React.FC = () => {
             </h2>
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-text-secondary">
               Jede Aufnahme liegt als performante WebP-Version und als hochauflösender Export vor. Für Druck oder
-              Keynotes kannst du die Vollversion (bis zu 4000px Breite) jederzeit aus unserem Asset-Ordner abrufen.
+              Keynotes können Sie die Vollversion (bis zu 4000px Breite) jederzeit aus unserem Asset-Ordner abrufen.
             </p>
           </div>
 
@@ -219,9 +219,9 @@ const DesignHeritagePage: React.FC = () => {
 
       <section className="border-t border-vae-turquoise/10 bg-gradient-to-br from-bg-dark via-bg-darker to-bg-dark py-24">
         <div className="container-vae text-center">
-          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Next Step: Dein Designsystem aufwerten</h2>
+          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Next Step: Ihr Designsystem aufwerten</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-secondary">
-            Lass uns prüfen, wie wir deine Marke, deine Produkte oder dein internes Tooling sichtbarer, schneller und
+            Lassen Sie uns prüfen, wie wir Ihre Marke, Ihre Produkte oder Ihr internes Tooling sichtbarer, schneller und
             verständlicher machen können – inklusive dokumentierter Assets und klarer Handovers.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">

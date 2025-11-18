@@ -9,7 +9,9 @@ const NeuralNetworkBackground = React.lazy(() => import('./NeuralNetworkBackgrou
 const trustBadges = ['100% Open Source', 'DSGVO-konform', 'Made in Germany']
 
 const HeroSection: React.FC = () => {
+  const sectionRef = React.useRef<HTMLElement | null>(null)
   const [enableBg, setEnableBg] = React.useState(false)
+  const [heroVisible, setHeroVisible] = React.useState(true)
   const reducedMotion = React.useMemo(
     () =>
       typeof window !== 'undefined' && window.matchMedia
@@ -19,11 +21,51 @@ const HeroSection: React.FC = () => {
   )
 
   React.useEffect(() => {
-    if (!reducedMotion) {
-      const timeout = window.setTimeout(() => setEnableBg(true), 50)
+    if (reducedMotion) return
+    if (typeof window === 'undefined') return
+
+    const node = sectionRef.current
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      const timeout = window.setTimeout(() => setEnableBg(true), 120)
       return () => window.clearTimeout(timeout)
     }
+
+    let timeout: number | null = null
+    const observer = new IntersectionObserver(
+      entries => {
+        const entry = entries[0]
+        if (entry?.isIntersecting) {
+          observer.disconnect()
+          timeout = window.setTimeout(() => setEnableBg(true), 150)
+        }
+      },
+      { threshold: 0.35 }
+    )
+
+    observer.observe(node)
+
+    return () => {
+      observer.disconnect()
+      if (timeout) window.clearTimeout(timeout)
+    }
   }, [reducedMotion])
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return
+    const node = sectionRef.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const entry = entries[0]
+        setHeroVisible(entry?.isIntersecting ?? false)
+      },
+      { threshold: [0.1, 0.5] }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
 
   const scrollToServices = React.useCallback(() => {
     const target = document.getElementById('services')
@@ -35,6 +77,7 @@ const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="from-bg-primary via-bg-primary/90 relative isolate overflow-hidden bg-gradient-to-b to-bg-secondary dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker"
     >
       {!reducedMotion && enableBg && (
@@ -58,7 +101,7 @@ const HeroSection: React.FC = () => {
               <span className="block text-vae-turquoise">{heroTitle[1]}</span>
             </h1>
             <div className="min-h-[2.2rem] text-lg font-medium text-vae-turquoise md:text-xl lg:text-2xl">
-              <TypewriterEffect texts={heroTypewriterTexts} reducedMotion={reducedMotion} />
+              <TypewriterEffect texts={heroTypewriterTexts} reducedMotion={reducedMotion} paused={!heroVisible} />
             </div>
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
               {heroDescription}
@@ -118,41 +161,61 @@ const HeroSection: React.FC = () => {
   )
 }
 
-const TypewriterEffect: React.FC<{ texts: readonly string[]; reducedMotion?: boolean }> = ({
+const TypewriterEffect: React.FC<{ texts: readonly string[]; reducedMotion?: boolean; paused?: boolean }> = ({
   texts,
   reducedMotion,
+  paused,
 }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [currentText, setCurrentText] = React.useState('')
   const [isDeleting, setIsDeleting] = React.useState(false)
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const clearTimer = React.useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+  }, [])
+
   React.useEffect(() => {
     if (reducedMotion) {
-      // Render static headline without animation
       setCurrentText(texts[0] || '')
+      clearTimer()
       return
     }
-    const timeout = setTimeout(
+
+    if (paused) {
+      clearTimer()
+      return
+    }
+
+    timeoutRef.current = window.setTimeout(
       () => {
         const fullText = texts[currentIndex]
 
         if (!isDeleting) {
-          setCurrentText(fullText.substring(0, currentText.length + 1))
-          if (currentText === fullText) {
-            setTimeout(() => setIsDeleting(true), 2000)
+          const next = fullText.substring(0, currentText.length + 1)
+          setCurrentText(next)
+          if (next === fullText) {
+            timeoutRef.current = window.setTimeout(() => setIsDeleting(true), 1800)
           }
         } else {
-          setCurrentText(fullText.substring(0, currentText.length - 1))
-          if (currentText === '') {
+          const next = fullText.substring(0, currentText.length - 1)
+          setCurrentText(next)
+          if (next === '') {
             setIsDeleting(false)
             setCurrentIndex(prev => (prev + 1) % texts.length)
           }
         }
       },
-      isDeleting ? 50 : 100
+      isDeleting ? 60 : 110
     )
 
-    return () => clearTimeout(timeout)
-  }, [currentText, currentIndex, isDeleting, texts, reducedMotion])
+    return () => clearTimer()
+  }, [currentText, currentIndex, isDeleting, texts, reducedMotion, paused, clearTimer])
+
+  React.useEffect(() => () => clearTimer(), [clearTimer])
 
   return (
     <span className="inline-block" aria-live="polite">

@@ -108,6 +108,29 @@ vae-web-project/
 - `/src/styles/ui-enhancements.css` - Komplett überarbeitet
 - `/src/components/layout/Header.tsx` - Navigation-Container entfernt
 
+### Header/Hero Performance-Stabilisierung
+
+**Datum:** 18. November 2025
+
+#### Änderungen:
+
+1. **Scroll-Handling mit Hysterese**
+   - `HeaderModern` reagiert nur noch auf echte Scroll-Transitions (rAF-gebündelt, 2‑Schwellen-System) → kein flackerndes Glas mehr.
+2. **Dropdown-Leistung**
+   - `DropdownMenu` beobachtet nur das aktive Panel und drosselt `ResizeObserver`-Updates → weniger Layout-Thrash beim Hover.
+3. **CTA-Signale & Magnetic Buttons**
+   - Aufmerksamkeitssignal respektiert Tab-Visibility & vermeidet doppelte DOM-Writes.
+   - Magneteffekt nutzt rAF-Throttling und deaktiviert sich bei `prefers-reduced-motion` oder Pointer „coarse“.
+4. **Hero Lazy Loading**
+   - NeuralNetworkBackground lädt erst, wenn der Hero sichtbar ist; Typewriter pausiert automatisch off-screen.
+
+#### Betroffene Dateien:
+
+- `/src/components/layout/Header.tsx`
+- `/src/components/navigation/dropdown/DropdownMenu.tsx`
+- `/src/hooks/useAttentionSignal.ts`
+- `/src/components/sections/HeroSection.tsx`
+
 ---
 
 ## 📝 Wichtige Dokumente

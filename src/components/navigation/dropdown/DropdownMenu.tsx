@@ -96,30 +96,45 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
       return undefined
     }
 
-    const observers = Object.entries(panelContentRefs.current).map(([menuId, node]) => {
-      if (!node) return null
+    if (!openMenuId) {
+      return undefined
+    }
 
-      const observer = new ResizeObserver(entries => {
-        const entry = entries[0]
-        if (!entry) return
-        const nextHeight = entry.contentRect.height
+    const node = panelContentRefs.current[openMenuId]
+    if (!node) {
+      return undefined
+    }
 
+    let frameId: number | null = null
+
+    const observer = new ResizeObserver(entries => {
+      const entry = entries[0]
+      if (!entry) return
+      const nextHeight = entry.contentRect.height
+
+      if (frameId != null) {
+        cancelAnimationFrame(frameId)
+      }
+
+      frameId = requestAnimationFrame(() => {
         setPanelHeights(prev => {
-          if (Math.abs((prev[menuId] ?? 0) - nextHeight) < 0.5) {
+          if (Math.abs((prev[openMenuId] ?? 0) - nextHeight) < 0.5) {
             return prev
           }
-          return { ...prev, [menuId]: nextHeight }
+          return { ...prev, [openMenuId]: nextHeight }
         })
       })
-
-      observer.observe(node)
-      return observer
     })
 
+    observer.observe(node)
+
     return () => {
-      observers.forEach(observer => observer?.disconnect())
+      if (frameId != null) {
+        cancelAnimationFrame(frameId)
+      }
+      observer.disconnect()
     }
-  }, [menus, panelRefVersion])
+  }, [openMenuId, panelRefVersion])
 
   useEffect(() => {
     return () => {

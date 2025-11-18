@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
             </div>
 
             <p className="mb-6 leading-relaxed text-text-muted">
-              Individuelle KI-Automatisierungssysteme für Unternehmen, die ihre digitale Infrastruktur selbst besitzen
+              Individuelle KI-Automatisierungssysteme für Unternehmen, die Ihre digitale Infrastruktur selbst besitzen
               wollen. Lokales Hosting, Open-Source-KI und semantische Arbeitsräume mit VAE Core.
             </p>
 
@@ -272,7 +272,7 @@ const Footer: React.FC = () => {
                   </span>
                 </button>
                 <p className="text-[10px] text-text-muted">
-                  Aktuell geschlossene Beta. Wir informieren dich, sobald neue Plätze frei werden.
+                  Aktuell geschlossene Beta. Wir informieren Sie, sobald neue Plätze frei werden.
                 </p>
               </div>
             </div>

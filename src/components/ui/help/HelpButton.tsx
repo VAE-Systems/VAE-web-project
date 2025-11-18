@@ -73,7 +73,7 @@ export const HelpModeIndicator: React.FC<{ className?: string }> = ({ className 
       className={`animate-in fade-in slide-in-from-top-2 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 px-5 py-3 duration-300 ${className}`}
     >
       <p className="text-sm text-vae-turquoise">
-        💡 <strong>Hilfe-Modus aktiv:</strong> Klicken Sie auf ein Feld, um eine Erklärung zu erhalten.
+        <strong>Hilfe-Modus aktiv:</strong> Klicken Sie auf ein Feld, um eine Erklärung zu erhalten.
       </p>
     </div>
   )

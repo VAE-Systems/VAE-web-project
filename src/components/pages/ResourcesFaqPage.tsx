@@ -83,8 +83,8 @@ const ResourcesFaqPage: React.FC = () => {
             Antworten ohne Fluff – direkt aus Projekten
           </h1>
           <p className="max-w-3xl text-base text-text-secondary">
-            Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. {faqEntries.length} Fragen, sortiert wie
-            eine echte Knowledge Base. Preise? Die besprechen wir im Gespräch – weil jedes Projekt anders gebaut wird.
+            Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. {faqEntries.length} Fragen, strukturiert
+            wie eine echte Knowledge Base. Preise klären wir im Gespräch, weil jedes Projekt anders gebaut wird.
           </p>
           <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
             <ShieldCheck className="h-4 w-4 text-vae-turquoise" />
@@ -113,12 +113,14 @@ const ResourcesFaqPage: React.FC = () => {
             <div className="rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
               <p className="text-xs uppercase tracking-[0.3em] text-white/60">Einträge</p>
               <p className="mt-2 text-2xl font-semibold text-white">{faqEntries.length} Fragen</p>
-              <p className="text-sm text-text-secondary">Kuratiert. Keine generischen SEO-Antworten.</p>
+              <p className="text-sm text-text-secondary">Kuratiert, keine generischen SEO-Antworten.</p>
             </div>
             <div className="rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
               <p className="text-xs uppercase tracking-[0.3em] text-white/60">Philosophie</p>
               <p className="mt-2 text-2xl font-semibold text-white">Lösungsorientiert</p>
-              <p className="text-sm text-text-secondary">Preisfragen triggern direkte CTA statt Ratespiel.</p>
+              <p className="text-sm text-text-secondary">
+                Preisfragen führen direkt zu einem CTA statt zu Ratespielen.
+              </p>
             </div>
           </div>
         </div>
@@ -187,7 +189,7 @@ const ResourcesFaqPage: React.FC = () => {
 
           {!totalFaqs && (
             <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-8 text-center text-sm text-white/80">
-              <p>Keine Treffer. Passe Filter oder Suchbegriff an.</p>
+              <p>Keine Treffer. Bitte passen Sie Filter oder Suchbegriff an.</p>
             </div>
           )}
 

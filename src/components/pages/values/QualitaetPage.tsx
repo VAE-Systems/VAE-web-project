@@ -200,8 +200,8 @@ const QualitaetPage: React.FC = () => {
         <div className="container-vae text-center">
           <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Qualität zahlt sich langfristig aus</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-secondary">
-            Lass uns prüfen, wie wir deine Systeme wartbarer, schneller und robuster machen – durch saubere Architektur,
-            automatisierte Tests und klare Prozesse.
+            Lassen Sie uns prüfen, wie wir Ihre Systeme wartbarer, schneller und robuster machen – durch saubere
+            Architektur, automatisierte Tests und klare Prozesse.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
             <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">

@@ -39,7 +39,7 @@ export const HelpIntroPopup: React.FC = () => {
       aria-labelledby="help-intro-title"
     >
       <div
-        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl duration-300 dark:border-white/10 dark:bg-bg-darker"
+        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-[32px] border border-white/20 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker p-8 shadow-[0_30px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl duration-300"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -48,15 +48,13 @@ export const HelpIntroPopup: React.FC = () => {
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-vae-turquoise/20">
                 <HelpCircle className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 id="help-intro-title" className="text-2xl font-semibold text-gray-900 dark:text-white">
+              <h3 id="help-intro-title" className="text-2xl font-semibold text-white">
                 Hilfe-Modus aktiviert
               </h3>
             </div>
             <div className="mt-6 space-y-3">
-              <p className="text-base leading-relaxed text-gray-700 dark:text-white/80">
-                💡 <strong>So funktioniert's:</strong>
-              </p>
-              <ul className="ml-6 space-y-2 text-sm leading-relaxed text-gray-600 dark:text-white/70">
+              <p className="text-lg font-semibold leading-relaxed text-white">So funktioniert's:</p>
+              <ul className="ml-6 space-y-2 text-base leading-relaxed text-white/80">
                 <li className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise" />
                   <span>Klicken Sie auf ein beliebiges Feld oder Element</span>
@@ -69,7 +67,7 @@ export const HelpIntroPopup: React.FC = () => {
                   <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise" />
                   <span>
                     Drücken Sie{' '}
-                    <kbd className="rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold dark:bg-gray-700">ESC</kbd>{' '}
+                    <kbd className="rounded bg-white/10 px-1.5 py-0.5 text-xs font-semibold text-white/90">ESC</kbd>{' '}
                     oder klicken Sie auf das Fragezeichen-Icon, um den Modus zu beenden
                   </span>
                 </li>
@@ -79,7 +77,7 @@ export const HelpIntroPopup: React.FC = () => {
           <button
             type="button"
             onClick={closeIntroPopup}
-            className="flex-shrink-0 text-gray-400 transition hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50 dark:text-white/60 dark:hover:text-white"
+            className="flex-shrink-0 text-white/60 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50"
             aria-label="Schließen"
           >
             <X className="h-5 w-5" />

@@ -102,8 +102,8 @@ export const MENU_DATA: DropdownMenu[] = [
         items: [
           'Was kostet eine Beratung?',
           'Wie lange dauert ein Projekt?',
-          'Arbeitet ihr remote?',
-          'Welche Branchen bedient ihr?',
+          'Arbeiten Sie remote?',
+          'Welche Branchen bedienen Sie?',
           'Was bedeutet "Open Source First"?',
         ],
         ctaText: 'Alle FAQs ansehen →',

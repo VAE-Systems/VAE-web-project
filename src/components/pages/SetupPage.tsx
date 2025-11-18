@@ -3,7 +3,10 @@ import {
   Briefcase,
   Building2,
   Check,
+  GraduationCap,
   Headphones,
+  Lock,
+  LockOpen,
   Repeat,
   Rocket,
   Server,
@@ -13,11 +16,13 @@ import {
   UploadCloud,
   Users,
 } from 'lucide-react'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
+import { SpotlightTutorialOverlay } from '../ui/tutorial/MailBuilderTutorialOverlay'
+import { useSetupCalculatorTutorial } from '@/hooks/useSetupCalculatorTutorial'
 
 interface ServiceCard {
   icon: React.ElementType
@@ -240,6 +245,14 @@ const calendlyUrl = '/contact#booking'
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)
   const [customToolCost, setCustomToolCost] = useState(0)
+  const [vatRate, setVatRate] = useState(19)
+  const [showGrossTotals, setShowGrossTotals] = useState(true)
+  const [ctaHovered, setCtaHovered] = useState(false)
+
+  const calculatorSectionRef = useRef<HTMLElement | null>(null)
+  const hasAutoStartedCalculatorTutorial = useRef(false)
+  const tutorial = useSetupCalculatorTutorial()
+  const { hasCompleted: tutorialCompleted, hasSkipped: tutorialSkipped, startTutorial } = tutorial
 
   const [toolSelection, setToolSelection] = useState<Record<string, boolean>>(() => {
     return toolOptions.reduce<Record<string, boolean>>((acc, option) => {
@@ -247,6 +260,39 @@ const SetupPage: React.FC = () => {
       return acc
     }, {})
   })
+
+  // Auto-start the calculator tutorial when the ROI section becomes visible.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (tutorialCompleted || tutorialSkipped || hasAutoStartedCalculatorTutorial.current) return
+    if (!('IntersectionObserver' in window)) return
+    const target = calculatorSectionRef.current
+    if (!target) return
+
+    let timer: number | null = null
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting || hasAutoStartedCalculatorTutorial.current) return
+          hasAutoStartedCalculatorTutorial.current = true
+          timer = window.setTimeout(() => {
+            startTutorial()
+          }, 400)
+          observer.disconnect()
+        })
+      },
+      { threshold: 0.45 }
+    )
+
+    observer.observe(target)
+
+    return () => {
+      observer.disconnect()
+      if (timer) {
+        window.clearTimeout(timer)
+      }
+    }
+  }, [startTutorial, tutorialCompleted, tutorialSkipped])
 
   const faqAccordionItems = useMemo(
     () =>
@@ -278,26 +324,25 @@ const SetupPage: React.FC = () => {
 
   const yearlySaaSCost = useMemo(() => monthlySaaSCost * 12, [monthlySaaSCost])
 
-  const openSourceMonthly = 50
+  const openSourceMonthly = 50 // konservativer Hosting-Ansatz als Basisbetrag
   const openSourceAnnual = openSourceMonthly * 12
 
-  const estimatedSetupCost = useMemo(() => {
-    const activeTools = Object.values(toolSelection).filter(Boolean).length
-    const base = 1500
-    const perUser = Math.max(teamSize - 5, 0) * 40
-    const perTool = activeTools * 300
-    const raw = base + perUser + perTool
-    const clamped = Math.min(5000, Math.max(1500, raw))
-    return Math.round(clamped / 100) * 100
-  }, [toolSelection, teamSize])
+  // Calculator: centralize VAT handling so UI + logic stay in sync.
+  const sanitizedVatRate = useMemo(() => {
+    if (Number.isNaN(vatRate)) return 0
+    return Math.min(40, Math.max(0, vatRate))
+  }, [vatRate])
 
-  const yearOneSavings = useMemo(
-    () => yearlySaaSCost - (estimatedSetupCost + openSourceAnnual),
-    [yearlySaaSCost, estimatedSetupCost, openSourceAnnual]
-  )
+  const vatMultiplier = showGrossTotals ? sanitizedVatRate / 100 : 0
+  const saasVatYearly = yearlySaaSCost * vatMultiplier
+  const saasGrossYearly = yearlySaaSCost + saasVatYearly
+
+  const openSourceVatYearly = openSourceAnnual * vatMultiplier
+  const openSourceGrossYearly = openSourceAnnual + openSourceVatYearly
+
   const yearTwoSavings = useMemo(() => yearlySaaSCost - openSourceAnnual, [yearlySaaSCost, openSourceAnnual])
 
-  const maxComparisonValue = Math.max(yearlySaaSCost, estimatedSetupCost + openSourceAnnual, openSourceAnnual)
+  const maxComparisonValue = Math.max(yearlySaaSCost, openSourceAnnual)
 
   const openCalendly = useCallback(() => {
     window.open(calendlyUrl, '_self')
@@ -499,18 +544,30 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 4 ROI */}
-      <section id="roi-calculator" className="border-y border-white/5 bg-bg-dark py-20">
+      <section id="roi-calculator" ref={calculatorSectionRef} className="border-y border-white/5 bg-bg-dark py-20">
         <div className="container-vae">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">ROI-Kalkulator</p>
             <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Was sparen Sie mit Open Source?</h2>
-            <p className="mt-3 text-lg text-text-secondary">Berechnen Sie Ihre jährliche Einsparung in Echtzeit.</p>
+            <p className="mt-3 text-lg text-text-secondary">
+              Ihre aktuellen Lizenzen vs. Hosting-Kosten – transparent, monatlich und jährlich, optional inklusive USt.
+            </p>
+            <div className="mt-6 flex items-center justify-center gap-3">
+              <button
+                onClick={startTutorial}
+                className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-white transition hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:bg-white/10"
+              >
+                <GraduationCap className="h-4 w-4 text-vae-turquoise transition group-hover:text-vae-turquoise/80" />
+                Tutorial starten
+              </button>
+              <span className="text-xs font-medium text-text-secondary">Geführte Tour durch den Kostenrechner</span>
+            </div>
           </div>
           <div className="mt-12 grid gap-8 rounded-3xl border border-white/10 bg-white/5 p-8 lg:grid-cols-[0.45fr_0.55fr]">
             <div className="space-y-8">
-              <div>
+              <div data-calculator-tutorial="team-size">
                 <label className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                  Anzahl Mitarbeiter
+                  Anzahl Mitarbeitende
                 </label>
                 <div className="mt-4 flex flex-col gap-4">
                   <input
@@ -535,148 +592,249 @@ const SetupPage: React.FC = () => {
                 </div>
               </div>
 
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">Aktuelle Tools</p>
-                <div className="mt-4 space-y-3">
-                  {toolOptions.map(option => (
-                    <label
-                      key={option.id}
-                      className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-sm leading-relaxed text-text-secondary transition hover:border-vae-turquoise/50"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={toolSelection[option.id]}
-                        onChange={() =>
-                          setToolSelection(prev => ({
-                            ...prev,
-                            [option.id]: !prev[option.id],
-                          }))
-                        }
-                        className="h-4 w-4 accent-vae-turquoise"
-                      />
-                      <span>{option.label}</span>
-                    </label>
-                  ))}
+              <div className="space-y-5" data-calculator-tutorial="tools">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
+                    Ihre aktuellen SaaS-Tools
+                  </p>
+                  <div className="mt-4 space-y-3">
+                    {toolOptions.map(option => (
+                      <label
+                        key={option.id}
+                        className={`flex items-center justify-between rounded-2xl border px-4 py-3 text-sm transition ${
+                          toolSelection[option.id]
+                            ? 'border-vae-turquoise/60 bg-vae-turquoise/10 text-white'
+                            : 'border-white/10 bg-bg-darker text-text-secondary hover:border-white/30'
+                        }`}
+                      >
+                        <div>
+                          <p className="font-semibold">{option.label}</p>
+                          <p className="text-xs text-text-secondary/80">pro Nutzer:in & Monat</p>
+                        </div>
+                        <input
+                          type="checkbox"
+                          checked={toolSelection[option.id]}
+                          onChange={event =>
+                            setToolSelection(prev => ({
+                              ...prev,
+                              [option.id]: event.target.checked,
+                            }))
+                          }
+                          className="h-5 w-5 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-vae-turquoise/60"
+                        />
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-bg-darker/60 p-5">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
+                    Weitere Lizenzkosten (monatlich)
+                  </p>
+                  <p className="mt-2 text-xs text-text-secondary">
+                    Addieren Sie Spezial-Tools oder Agenturleistungen, die noch nicht in der Liste enthalten sind.
+                  </p>
+                  <input
+                    type="number"
+                    min={0}
+                    step={50}
+                    value={customToolCost}
+                    onChange={event => setCustomToolCost(Math.max(0, Number(event.target.value) || 0))}
+                    className="mt-3 w-full rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-lg text-white"
+                    placeholder="0"
+                  />
                 </div>
               </div>
 
-              <div>
-                <label className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                  Weitere SaaS-Tools (€ / Monat)
-                </label>
-                <input
-                  type="number"
-                  min={0}
-                  step={50}
-                  value={customToolCost}
-                  onChange={event => setCustomToolCost(Math.max(0, Number(event.target.value) || 0))}
-                  className="mt-3 w-full rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-lg text-white"
-                  placeholder="0"
-                />
+              <div className="rounded-2xl border border-white/10 bg-bg-darker/60 p-5">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">USt.-Satz</p>
+                    <p className="text-xs text-text-secondary">Konfigurierbar, Standard in Deutschland: 19%</p>
+                  </div>
+                  <label className="flex items-center gap-2 text-xs font-semibold text-text-secondary">
+                    <input
+                      type="checkbox"
+                      checked={showGrossTotals}
+                      onChange={event => setShowGrossTotals(event.target.checked)}
+                      className="h-4 w-4 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-vae-turquoise/60"
+                    />
+                    Bruttowerte anzeigen
+                  </label>
+                </div>
+                <div className="mt-4 flex items-center gap-3">
+                  <input
+                    type="number"
+                    min={0}
+                    max={40}
+                    value={vatRate}
+                    onChange={event => {
+                      const value = Number(event.target.value)
+                      if (Number.isNaN(value)) {
+                        setVatRate(0)
+                        return
+                      }
+                      setVatRate(Math.max(0, Math.min(40, value)))
+                    }}
+                    className="w-28 rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-lg text-white"
+                  />
+                  <span className="text-sm text-text-secondary">%</span>
+                </div>
               </div>
             </div>
 
             <div className="space-y-6 rounded-3xl border border-white/10 bg-bg-darker/60 p-6">
-              <div className="rounded-2xl border border-red-500/40 bg-red-500/10 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-300">Aktueller Status</p>
-                <div className="mt-3 grid gap-3 text-lg">
-                  <div className="flex items-center justify-between text-text-secondary">
-                    <span>Monatliche Kosten</span>
-                    <span className="font-semibold text-white">{formatCurrency(monthlySaaSCost)}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-text-secondary">
-                    <span>Jährliche Kosten</span>
-                    <span className="font-semibold text-white">{formatCurrency(yearlySaaSCost)}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-vae-green/40 bg-vae-green/10 rounded-2xl border p-5">
-                <p className="text-vae-green text-xs font-semibold uppercase tracking-[0.3em]">Mit Open Source</p>
-                <div className="mt-3 space-y-3 text-lg">
-                  <div className="flex items-center justify-between text-text-secondary">
-                    <span>Einmalige Setup-Kosten</span>
-                    <span className="font-semibold text-white">{formatCurrency(estimatedSetupCost)}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-text-secondary">
-                    <span>Jährliche Kosten (Hosting ca. {formatCurrency(openSourceMonthly)}/Monat)</span>
-                    <span className="font-semibold text-white">{formatCurrency(openSourceAnnual)}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-text-secondary">
-                    <span>Einsparung Jahr 1</span>
-                    <span className="font-semibold text-white">{formatCurrency(yearOneSavings)}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-text-secondary">
-                    <span>Einsparung ab Jahr 2</span>
-                    <span className="font-semibold text-white">{formatCurrency(yearTwoSavings)}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">Kostenvergleich</p>
-                <div className="mt-4 space-y-3 text-sm">
-                  <div>
+              <div className="space-y-6" data-calculator-tutorial="results">
+                <div className="rounded-2xl border border-red-500/40 bg-red-500/10 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-300">
+                    Ihre aktuellen SaaS-Kosten
+                  </p>
+                  <div className="mt-4 space-y-3 text-sm md:text-base">
                     <div className="flex items-center justify-between text-text-secondary">
-                      <span>SaaS pro Jahr</span>
+                      <span>Monatliche Kosten (netto)</span>
+                      <span className="font-semibold text-white">{formatCurrency(monthlySaaSCost)}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-text-secondary">
+                      <span>Jährliche Kosten (netto)</span>
                       <span className="font-semibold text-white">{formatCurrency(yearlySaaSCost)}</span>
                     </div>
-                    <div className="mt-2 h-2 rounded-full bg-white/10">
-                      <div
-                        className="h-2 rounded-full bg-red-400"
-                        style={{
-                          width: `${maxComparisonValue ? Math.max((yearlySaaSCost / maxComparisonValue) * 100, 5) : 0}%`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div>
                     <div className="flex items-center justify-between text-text-secondary">
-                      <span>Setup + Jahr 1</span>
+                      <span>{`davon USt (${sanitizedVatRate}% p.a.)`}</span>
                       <span className="font-semibold text-white">
-                        {formatCurrency(estimatedSetupCost + openSourceAnnual)}
+                        {showGrossTotals ? formatCurrency(saasVatYearly) : '—'}
                       </span>
                     </div>
-                    <div className="mt-2 h-2 rounded-full bg-white/10">
-                      <div
-                        className="h-2 rounded-full bg-vae-turquoise"
-                        style={{
-                          width: `${maxComparisonValue ? Math.max(((estimatedSetupCost + openSourceAnnual) / maxComparisonValue) * 100, 5) : 0}%`,
-                        }}
-                      />
+                    <div className="flex items-center justify-between text-text-secondary">
+                      <span>Bruttokosten p.a.</span>
+                      <span className="font-semibold text-white">
+                        {showGrossTotals ? formatCurrency(saasGrossYearly) : '—'}
+                      </span>
                     </div>
                   </div>
-                  <div>
+                </div>
+
+                <div className="border-vae-green/40 bg-vae-green/10 rounded-2xl border p-5">
+                  <div className="flex items-center justify-between">
+                    <p className="text-vae-green text-xs font-semibold uppercase tracking-[0.3em]">Mit Open Source</p>
+                    <Lock className="text-vae-green h-4 w-4" />
+                  </div>
+                  <div className="mt-4 space-y-3 text-sm md:text-base">
                     <div className="flex items-center justify-between text-text-secondary">
-                      <span>Nur Hosting ab Jahr 2</span>
+                      <span>Monatliche Hosting-Kosten (netto)</span>
+                      <span className="font-semibold text-white">{formatCurrency(openSourceMonthly)}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-text-secondary">
+                      <span>Jährliche Hosting-Kosten (netto)</span>
                       <span className="font-semibold text-white">{formatCurrency(openSourceAnnual)}</span>
                     </div>
-                    <div className="mt-2 h-2 rounded-full bg-white/10">
-                      <div
-                        className="bg-vae-green h-2 rounded-full"
-                        style={{
-                          width: `${maxComparisonValue ? Math.max((openSourceAnnual / maxComparisonValue) * 100, 5) : 0}%`,
-                        }}
-                      />
+                    <div className="flex items-center justify-between text-text-secondary">
+                      <span>{`davon USt (${sanitizedVatRate}% p.a.)`}</span>
+                      <span className="font-semibold text-white">
+                        {showGrossTotals ? formatCurrency(openSourceVatYearly) : '—'}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-text-secondary">
+                      <span>Bruttokosten p.a.</span>
+                      <span className="font-semibold text-white">
+                        {showGrossTotals ? formatCurrency(openSourceGrossYearly) : '—'}
+                      </span>
+                    </div>
+                  </div>
+                  {/* Locked Setup placeholder – reveals CTA without exposing pricing */}
+                  <div className="mt-5 rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-text-secondary">
+                    <div className="flex items-center justify-between text-white">
+                      <span className="flex items-center gap-2 text-sm font-semibold">
+                        <Lock className="text-vae-green h-4 w-4" />
+                        Einmalige Setup-Kosten (individuell) 🔒
+                      </span>
+                      <span className="text-sm font-semibold">auf Anfrage</span>
+                    </div>
+                    <p className="mt-2 text-xs text-text-secondary">
+                      Diese Zeile ist bewusst gesperrt. Wir kalkulieren Setup & Implementierung individuell.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">Einsparungen</p>
+                  <div className="mt-4 space-y-4 text-sm md:text-base">
+                    <div>
+                      <div className="flex items-center justify-between text-text-secondary">
+                        <span>Einsparung Jahr 1 (Setup individuell 🔒)</span>
+                        <span className="font-semibold text-white">–</span>
+                      </div>
+                      <p className="mt-1 text-xs text-text-secondary">
+                        Formel: SaaS pro Jahr – (Hosting + individuelles Setup 🔒). Wir rechnen dies nach dem Scoping.
+                      </p>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between text-text-secondary">
+                        <span>Einsparung ab Jahr 2 (nur Hosting)</span>
+                        <span className="font-semibold text-white">{formatCurrency(yearTwoSavings)}</span>
+                      </div>
+                      <p className="mt-1 text-xs text-text-secondary">
+                        Ab Jahr 2 fällt nur noch Hosting an – keine Lizenzen, keine Vendor-Lock-ins.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
+                    Kostenvergleich
+                  </p>
+                  <div className="mt-4 space-y-3 text-sm">
+                    <div>
+                      <div className="flex items-center justify-between text-text-secondary">
+                        <span>Ihre SaaS-Kosten pro Jahr</span>
+                        <span className="font-semibold text-white">{formatCurrency(yearlySaaSCost)}</span>
+                      </div>
+                      <div className="mt-2 h-2 rounded-full bg-white/10">
+                        <div
+                          className="h-2 rounded-full bg-red-400"
+                          style={{
+                            width: `${maxComparisonValue ? Math.max((yearlySaaSCost / maxComparisonValue) * 100, 5) : 0}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between text-text-secondary">
+                        <span>Open Source ab Jahr 2 (Hosting)</span>
+                        <span className="font-semibold text-white">{formatCurrency(openSourceAnnual)}</span>
+                      </div>
+                      <div className="mt-2 h-2 rounded-full bg-white/10">
+                        <div
+                          className="bg-vae-green h-2 rounded-full"
+                          style={{
+                            width: `${maxComparisonValue ? Math.max((openSourceAnnual / maxComparisonValue) * 100, 5) : 0}%`,
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <MagneticButton intensity={0.06} scaleEffect>
-                <button onClick={openCalendly} className="btn-primary mt-2 w-full justify-center">
+              <MagneticButton intensity={0.06} scaleEffect data-calculator-tutorial="cta">
+                <button
+                  onClick={openCalendly}
+                  onMouseEnter={() => setCtaHovered(true)}
+                  onMouseLeave={() => setCtaHovered(false)}
+                  className="btn-primary mt-2 w-full justify-center gap-2"
+                >
+                  {ctaHovered ? <LockOpen className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
                   Individuelle Berechnung anfragen
                 </button>
               </MagneticButton>
               <p className="text-sm text-text-secondary">
                 Hinweis: Dies ist eine vereinfachte Schätzung. Im kostenlosen Beratungsgespräch erhalten Sie eine exakte
-                Berechnung für Ihre Situation.
+                Berechnung, inklusive Ihrer individuellen Setup-Kosten.
               </p>
             </div>
           </div>
         </div>
       </section>
-
       {/* Section 5 Process */}
       <section className="py-20">
         <div className="container-vae">
@@ -790,6 +948,7 @@ const SetupPage: React.FC = () => {
           </p>
         </div>
       </section>
+      <SpotlightTutorialOverlay tutorial={tutorial} />
     </div>
   )
 }

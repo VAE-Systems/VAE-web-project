@@ -20,9 +20,48 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
   const internalRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
   const buttonRef = forwardRef || internalRef
   const positionRef = useRef({ x: 0, y: 0 })
+  const frameRef = useRef<number | null>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [shouldWiggle, setShouldWiggle] = useState(false)
   const wiggleTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const [canUseMagnet, setCanUseMagnet] = useState(true)
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const pointerQuery = window.matchMedia('(pointer: fine)')
+
+    const updateCapability = () => {
+      setCanUseMagnet(!motionQuery.matches && pointerQuery.matches)
+    }
+
+    updateCapability()
+
+    const addListener = (media: MediaQueryList, handler: () => void) => {
+      if (media.addEventListener) {
+        media.addEventListener('change', handler)
+      } else if (media.addListener) {
+        media.addListener(handler)
+      }
+    }
+
+    const removeListener = (media: MediaQueryList, handler: () => void) => {
+      if (media.removeEventListener) {
+        media.removeEventListener('change', handler)
+      } else if (media.removeListener) {
+        media.removeListener(handler)
+      }
+    }
+
+    addListener(motionQuery, updateCapability)
+    addListener(pointerQuery, updateCapability)
+
+    return () => {
+      removeListener(motionQuery, updateCapability)
+      removeListener(pointerQuery, updateCapability)
+    }
+  }, [])
 
   useEffect(() => {
     const startWiggleTimer = () => {
@@ -48,16 +87,26 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
     }
   }, [isHovered])
 
+  const scheduleTransform = useCallback(() => {
+    if (frameRef.current != null) return
+    frameRef.current = window.requestAnimationFrame(() => {
+      frameRef.current = null
+      if (!buttonRef.current || !canUseMagnet) return
+      const { x, y } = positionRef.current
+      buttonRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`
+    })
+  }, [buttonRef, canUseMagnet])
+
   const handleMouseMove = useCallback(
     (event: React.MouseEvent) => {
-      if (!buttonRef.current) return
+      if (!buttonRef.current || !canUseMagnet) return
       const rect = buttonRef.current.getBoundingClientRect()
       const x = event.clientX - rect.left - rect.width / 2
       const y = event.clientY - rect.top - rect.height / 2
-      positionRef.current = { x: x * 0.3, y: y * 0.3 }
-      buttonRef.current.style.transform = `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`
+      positionRef.current = { x: x * 0.25, y: y * 0.25 }
+      scheduleTransform()
     },
-    [buttonRef]
+    [buttonRef, canUseMagnet, scheduleTransform]
   )
 
   const handleMouseEnter = useCallback(() => {
@@ -67,11 +116,29 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
 
   const handleMouseLeave = useCallback(() => {
     positionRef.current = { x: 0, y: 0 }
+    if (frameRef.current != null) {
+      window.cancelAnimationFrame(frameRef.current)
+      frameRef.current = null
+    }
     if (buttonRef.current) {
-      buttonRef.current.style.transform = 'translate(0, 0)'
+      buttonRef.current.style.transform = 'translate3d(0, 0, 0)'
     }
     setIsHovered(false)
   }, [buttonRef])
+
+  useEffect(() => {
+    return () => {
+      if (frameRef.current != null) {
+        window.cancelAnimationFrame(frameRef.current)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!canUseMagnet && buttonRef.current) {
+      buttonRef.current.style.transform = 'translate3d(0, 0, 0)'
+    }
+  }, [canUseMagnet, buttonRef])
 
   const baseClasses = `
     cta-sheen
@@ -127,6 +194,8 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
 const HeaderModern: React.FC = () => {
   const { theme, toggleTheme } = useTheme()
   const [isScrolled, setIsScrolled] = useState(false)
+  const lastScrollState = useRef(false)
+  const scrollRafRef = useRef<number | null>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
 
   useAttentionSignal(ctaRef, {
@@ -136,11 +205,36 @@ const HeaderModern: React.FC = () => {
   })
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+    if (typeof window === 'undefined') return undefined
+
+    const ENTER_THRESHOLD = 28
+    const EXIT_THRESHOLD = 10
+
+    const evaluateScrollState = () => {
+      scrollRafRef.current = null
+      const currentScroll = window.scrollY || 0
+      const nextState = lastScrollState.current ? currentScroll > EXIT_THRESHOLD : currentScroll > ENTER_THRESHOLD
+
+      if (nextState !== lastScrollState.current) {
+        lastScrollState.current = nextState
+        setIsScrolled(nextState)
+      }
     }
+
+    const handleScroll = () => {
+      if (scrollRafRef.current != null) return
+      scrollRafRef.current = window.requestAnimationFrame(evaluateScrollState)
+    }
+
+    evaluateScrollState()
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    return () => {
+      if (scrollRafRef.current != null) {
+        window.cancelAnimationFrame(scrollRafRef.current)
+      }
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   const isDark = theme === 'dark'

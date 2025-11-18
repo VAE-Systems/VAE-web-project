@@ -81,9 +81,9 @@ const KommunikationPage: React.FC = () => {
               Klare Kommunikation — Die Grundlage für Erfolg
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
-              Du bekommst Klartext statt Buzzword-Salven. Wir melden Abweichungen unmittelbar – nicht erst im
-              Monatsreport. Jede Zielgruppe erhält das Format, das sie braucht, damit dein Projekt steuerbar bleibt. So
-              weißt du jederzeit, was als Nächstes passiert.
+              Sie erhalten Klartext statt Buzzword-Salven. Wir melden Abweichungen unmittelbar – nicht erst im
+              Monatsreport. Jede Zielgruppe erhält das Format, das sie braucht, damit Ihr Projekt steuerbar bleibt. So
+              wissen Sie jederzeit, was als Nächstes passiert.
             </p>
             <div className="flex flex-wrap gap-4">
               <MagneticButton className="inline-flex">
@@ -201,8 +201,8 @@ const KommunikationPage: React.FC = () => {
         <div className="container-vae text-center">
           <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Kommunikation als Erfolgsfaktor</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-secondary">
-            Lass uns prüfen, wie wir deine Stakeholder-Kommunikation strukturieren, Eskalationsprozesse definieren und
-            Missverständnisse vermeiden können.
+            Lassen Sie uns prüfen, wie wir Ihre Stakeholder-Kommunikation strukturieren, Eskalationsprozesse definieren
+            und Missverständnisse vermeiden können.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
             <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">

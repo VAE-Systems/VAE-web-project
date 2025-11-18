@@ -156,8 +156,8 @@ const BlogPage: React.FC = () => {
             Zurück zur Website oder direkt Kontakt aufnehmen
           </h3>
           <p className="max-w-3xl text-base leading-relaxed text-gray-700 dark:text-white/70">
-            Du kannst jederzeit zurück auf die Startseite oder direkt mit uns sprechen. Wir schicken dir gerne relevante
-            Artikel oder beantworten Detailfragen aus dem Blog.
+            Sie können jederzeit zurück auf die Startseite oder direkt mit uns sprechen. Wir schicken Ihnen gerne
+            relevante Artikel oder beantworten Detailfragen aus dem Blog.
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <MagneticButton>

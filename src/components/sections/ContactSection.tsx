@@ -7,21 +7,45 @@ import { useContactForm } from '../../hooks/useContactForm'
 const bookingOptions = [
   {
     id: 'strategy',
-    label: 'Strategie-Call · 30 Min',
-    description: 'Erstgespräch zu KI-Roadmap, Organisations-Setup & Priorisierung.',
-    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz',
+    label: 'Erstberatung KI-Automatisierung · 30 Min',
+    description: 'Für Scale-ups & Mittelstand: KI-Roadmap, Quick Wins & Priorisierung.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz', // TODO: Neuer Link
+    category: 'beratung',
   },
   {
     id: 'infrastructure',
-    label: 'Infrastruktur-Setup · 45 Min',
-    description: 'Technischer Deep-Dive zu Self-Hosting, Migration & Security.',
-    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/Infra45VAE',
+    label: 'Infrastruktur-Audit · 45 Min',
+    description: 'Self-Hosting, Cloud-Migration, Security & Compliance-Check.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/Infra45VAE', // TODO: Neuer Link
+    category: 'technik',
+  },
+  {
+    id: 'advisory',
+    label: 'Strategic Advisory · 45 Min',
+    description: 'Für CTOs & Führungskräfte: Langfristige Architektur & Team-Setup.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_ADVISORY', // TODO: Neuer Link
+    category: 'advisory',
   },
   {
     id: 'partnership',
-    label: 'Partnernetzwerk & Freelancer · 30 Min',
-    description: 'Austausch für Kooperationen, Netzwerk & Co-Delivery.',
+    label: 'Partnership & Netzwerk · 30 Min',
+    description: 'Für Freelancer, Agenturen & Partner: Co-Delivery & Kooperationen.',
     href: 'https://nc.intern.vae.systems/apps/calendar/appointment/PartnerCallVAE',
+    category: 'partner',
+  },
+  {
+    id: 'retainer',
+    label: 'Retainer-Planung · 30 Min',
+    description: 'Kontinuierliche Begleitung: Sparring, Support & operative Projekte.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_RETAINER', // TODO: Neuer Link
+    category: 'retainer',
+  },
+  {
+    id: 'workshop',
+    label: 'Workshop-Anfrage · 20 Min',
+    description: 'Team-Workshops, Trainings & Knowledge-Transfer zu KI & Infrastruktur.',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_WORKSHOP', // TODO: Neuer Link
+    category: 'workshop',
   },
 ]
 
@@ -258,7 +282,7 @@ const ContactSection: React.FC = () => {
                     onChange={e => updateField('email', e.target.value)}
                     required
                     className="w-full rounded-lg border border-vae-turquoise/20 bg-vae-turquoise/5 px-4 py-3 text-text-light placeholder-text-muted transition-colors focus:border-vae-turquoise focus:outline-none focus:ring-1 focus:ring-vae-turquoise"
-                    placeholder="ihre.email@unternehmen.de"
+                    placeholder="Ihre.Email@unternehmen.de"
                   />
                 </div>
               </div>

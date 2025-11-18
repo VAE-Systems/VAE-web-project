@@ -57,13 +57,20 @@ export const DESIGN_TOKENS = {
 
   // Z-index scale
   Z_INDEX: {
+    BACKGROUND: 0,
+    CONTENT: 10,
+    STICKY_NAV: 45,
+    NAVIGATION: 50,
+    SCROLL_PROGRESS: 60,
     DROPDOWN: 1000,
     STICKY: 1020,
     FIXED: 1030,
     MODAL_BACKDROP: 1040,
     MODAL: 1050,
+    MODAL_OVERLAY: 1050,
     POPOVER: 1060,
     TOOLTIP: 1070,
+    GLOSSARY: 1070,
   } as const,
 
   // Box shadows

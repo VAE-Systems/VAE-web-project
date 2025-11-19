@@ -34,19 +34,19 @@ const SETUP_CALCULATOR_TUTORIAL_STEPS: SetupCalculatorTutorialStepConfig[] = [
   },
   {
     step: 3,
-    title: 'Netto, Brutto & Vergleich',
-    actionHint: 'Passen Sie den USt.-Satz an oder blenden Sie Bruttowerte aus.',
+    title: 'Netto- und Bruttovergleich',
+    actionHint: 'Lesen Sie Monats- und Jahreswerte – brutto basiert auf 19% gesetzlicher USt.',
     description:
-      'Sie sehen sofort den Jahresvergleich zwischen bestehenden SaaS-Lizenzkosten und unserem Open-Source-Hosting – inklusive optionalem USt.-Anteil.',
+      'Wir zeigen Netto- und Bruttowerte nebeneinander, damit Sie sofort erkennen, wie stark die USt. Ihre SaaS-Gesamtkosten beeinflusst.',
     highlightTarget: '[data-calculator-tutorial="results"]',
     position: 'right',
   },
   {
     step: 4,
-    title: 'Individuelle Berechnung öffnen',
-    actionHint: 'Klicken Sie auf den CTA, um eine gesperrte Setup-Berechnung anzufordern.',
+    title: 'Sparpotenzial anfordern',
+    actionHint: 'Hover zeigt Ihnen die Vorschau, ein Klick auf „Sparpotenzial ermitteln“ öffnet die Kontaktseite.',
     description:
-      'Die Setup-Kosten bleiben bewusst verborgen (🔒). Mit einem Klick kontaktieren Sie uns und erhalten eine individuelle Kalkulation inklusive konkreter Einsparung Jahr 1.',
+      'Die detaillierte Berechnung bleibt gesperrt. Mit dem CTA nehmen Sie Kontakt auf und erhalten Ihre individuelle Kalkulation inklusive Einsparung im ersten Jahr.',
     highlightTarget: '[data-calculator-tutorial="cta"]',
     position: 'right',
   },

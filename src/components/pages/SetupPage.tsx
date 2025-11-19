@@ -5,8 +5,6 @@ import {
   Check,
   GraduationCap,
   Headphones,
-  Lock,
-  LockOpen,
   Repeat,
   Rocket,
   Server,
@@ -18,11 +16,14 @@ import {
 } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import FaqAccordion from '../ui/FaqAccordion'
-import Seo from '../ui/Seo'
-import MagneticButton from '../ui/buttons/MagneticButton'
-import { SpotlightTutorialOverlay } from '../ui/tutorial/MailBuilderTutorialOverlay'
+import { flattenedSaasTools, saasToolCategories } from '@/data/saasTools'
 import { useSetupCalculatorTutorial } from '@/hooks/useSetupCalculatorTutorial'
+import { cn } from '@/lib/classNames'
+import MagneticButton from '../ui/buttons/MagneticButton'
+import FaqAccordion from '../ui/FaqAccordion'
+import LockedSection from '../ui/LockedSection'
+import Seo from '../ui/Seo'
+import { SpotlightTutorialOverlay } from '../ui/tutorial/MailBuilderTutorialOverlay'
 
 interface ServiceCard {
   icon: React.ElementType
@@ -52,10 +53,17 @@ interface FAQItem {
   answer: string
 }
 
-interface ToolOption {
+interface CustomLicense {
   id: string
-  label: string
-  price: number
+  name: string
+  unitPrice: number
+  quantity: number
+}
+
+interface CustomLicenseFormState {
+  name: string
+  unitPrice: string
+  quantity: string
 }
 
 const trustBadges = ['100% Open Source', 'Made in Germany', 'DSGVO-konform']
@@ -232,22 +240,49 @@ const faqItems: FAQItem[] = [
   },
 ]
 
-const toolOptions: ToolOption[] = [
-  { id: 'm365', label: 'Microsoft 365 (€12/User/Monat)', price: 12 },
-  { id: 'gws', label: 'Google Workspace (€10/User/Monat)', price: 10 },
-  { id: 'sfdc', label: 'Salesforce (€75/User/Monat)', price: 75 },
-  { id: 'dropbox', label: 'Dropbox Business (€15/User/Monat)', price: 15 },
-  { id: 'slack', label: 'Slack (€7/User/Monat)', price: 7 },
-]
-
 const calendlyUrl = '/contact#booking'
+const DEFAULT_VAT_RATE = 19
+
+const generateCustomLicenseId = () => `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
+
+const parseLocalizedNumber = (value: string) => {
+  if (!value) return Number.NaN
+  const normalized = value.replace(',', '.')
+  const parsed = Number(normalized)
+  return Number.isFinite(parsed) ? parsed : Number.NaN
+}
+
+const useValueIncreaseHighlight = (value: number) => {
+  const [isHighlighting, setIsHighlighting] = useState(false)
+  const previousValueRef = useRef(value)
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | undefined
+    if (value > previousValueRef.current) {
+      setIsHighlighting(true)
+      timeout = setTimeout(() => setIsHighlighting(false), 600)
+    } else {
+      setIsHighlighting(false)
+    }
+    previousValueRef.current = value
+
+    return () => {
+      if (timeout) clearTimeout(timeout)
+    }
+  }, [value])
+
+  return isHighlighting
+}
 
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)
-  const [customToolCost, setCustomToolCost] = useState(0)
-  const [vatRate, setVatRate] = useState(19)
-  const [showGrossTotals, setShowGrossTotals] = useState(true)
-  const [ctaHovered, setCtaHovered] = useState(false)
+  const [isContentLocked, setIsContentLocked] = useState(true)
+  const [customLicenses, setCustomLicenses] = useState<CustomLicense[]>([])
+  const [customLicenseForm, setCustomLicenseForm] = useState<CustomLicenseFormState>({
+    name: '',
+    unitPrice: '',
+    quantity: '',
+  })
 
   const calculatorSectionRef = useRef<HTMLElement | null>(null)
   const hasAutoStartedCalculatorTutorial = useRef(false)
@@ -255,8 +290,8 @@ const SetupPage: React.FC = () => {
   const { hasCompleted: tutorialCompleted, hasSkipped: tutorialSkipped, startTutorial } = tutorial
 
   const [toolSelection, setToolSelection] = useState<Record<string, boolean>>(() => {
-    return toolOptions.reduce<Record<string, boolean>>((acc, option) => {
-      acc[option.id] = option.id === 'm365' || option.id === 'slack'
+    return flattenedSaasTools.reduce<Record<string, boolean>>((acc, tool) => {
+      acc[tool.id] = Boolean(tool.defaultSelected)
       return acc
     }, {})
   })
@@ -294,6 +329,42 @@ const SetupPage: React.FC = () => {
     }
   }, [startTutorial, tutorialCompleted, tutorialSkipped])
 
+  const handleCustomLicenseFormChange = useCallback((field: keyof CustomLicenseFormState, value: string) => {
+    setCustomLicenseForm(prev => ({ ...prev, [field]: value }))
+  }, [])
+
+  const canAddCustomLicense = useMemo(() => {
+    const price = parseLocalizedNumber(customLicenseForm.unitPrice)
+    const quantityValue = parseLocalizedNumber(customLicenseForm.quantity)
+    const quantity = Number.isNaN(quantityValue) ? Number.NaN : Math.round(quantityValue)
+    return Boolean(customLicenseForm.name.trim()) && price > 0 && quantity > 0
+  }, [customLicenseForm])
+
+  const addCustomLicense = useCallback(() => {
+    const price = parseLocalizedNumber(customLicenseForm.unitPrice)
+    const quantityValue = parseLocalizedNumber(customLicenseForm.quantity)
+    const quantity = Number.isNaN(quantityValue) ? Number.NaN : Math.round(quantityValue)
+
+    if (!customLicenseForm.name.trim() || !(price > 0) || !(quantity > 0)) {
+      return
+    }
+
+    setCustomLicenses(prev => [
+      ...prev,
+      {
+        id: generateCustomLicenseId(),
+        name: customLicenseForm.name.trim(),
+        unitPrice: price,
+        quantity,
+      },
+    ])
+    setCustomLicenseForm({ name: '', unitPrice: '', quantity: '' })
+  }, [customLicenseForm])
+
+  const removeCustomLicense = useCallback((id: string) => {
+    setCustomLicenses(prev => prev.filter(license => license.id !== id))
+  }, [])
+
   const faqAccordionItems = useMemo(
     () =>
       faqItems.map((item, index) => ({
@@ -315,37 +386,82 @@ const SetupPage: React.FC = () => {
   }, [])
 
   const selectedToolCost = useMemo(() => {
-    return toolOptions.reduce((sum, option) => (toolSelection[option.id] ? sum + option.price : sum), 0)
-  }, [toolSelection])
+    return flattenedSaasTools.reduce((sum, tool) => {
+      if (!toolSelection[tool.id]) return sum
+      if (tool.pricingModel === 'flat') {
+        return sum + (tool.flatMonthlyPrice ?? 0)
+      }
+      return sum + teamSize * (tool.pricePerUser ?? 0)
+    }, 0)
+  }, [teamSize, toolSelection])
+
+  const customLicensesMonthlyCost = useMemo(() => {
+    return customLicenses.reduce((sum, license) => sum + license.unitPrice * license.quantity, 0)
+  }, [customLicenses])
 
   const monthlySaaSCost = useMemo(() => {
-    return teamSize * selectedToolCost + customToolCost
-  }, [teamSize, selectedToolCost, customToolCost])
+    return selectedToolCost + customLicensesMonthlyCost
+  }, [selectedToolCost, customLicensesMonthlyCost])
 
   const yearlySaaSCost = useMemo(() => monthlySaaSCost * 12, [monthlySaaSCost])
 
   const openSourceMonthly = 50 // konservativer Hosting-Ansatz als Basisbetrag
   const openSourceAnnual = openSourceMonthly * 12
 
-  // Calculator: centralize VAT handling so UI + logic stay in sync.
-  const sanitizedVatRate = useMemo(() => {
-    if (Number.isNaN(vatRate)) return 0
-    return Math.min(40, Math.max(0, vatRate))
-  }, [vatRate])
+  const activeToolCount = useMemo(
+    () => flattenedSaasTools.reduce((count, tool) => (toolSelection[tool.id] ? count + 1 : count), 0),
+    [toolSelection]
+  )
 
-  const vatMultiplier = showGrossTotals ? sanitizedVatRate / 100 : 0
+  const estimatedSetupCost = useMemo(() => {
+    const base = 1500
+    const perUser = Math.max(teamSize - 5, 0) * 40
+    const perTool = activeToolCount * 300
+    const raw = base + perUser + perTool
+    const clamped = Math.min(5000, Math.max(1500, raw))
+    return Math.round(clamped / 100) * 100
+  }, [activeToolCount, teamSize])
+
+  const vatMultiplier = DEFAULT_VAT_RATE / 100
   const saasVatYearly = yearlySaaSCost * vatMultiplier
   const saasGrossYearly = yearlySaaSCost + saasVatYearly
+  const saasGrossMonthly = monthlySaaSCost + monthlySaaSCost * vatMultiplier
 
-  const openSourceVatYearly = openSourceAnnual * vatMultiplier
-  const openSourceGrossYearly = openSourceAnnual + openSourceVatYearly
+  // VAT calculation for Open Source (reserved for future display features)
+  // const openSourceVatYearly = openSourceAnnual * vatMultiplier
+  // const openSourceGrossYearly = openSourceAnnual + openSourceVatYearly
 
-  const yearTwoSavings = useMemo(() => yearlySaaSCost - openSourceAnnual, [yearlySaaSCost, openSourceAnnual])
+  const yearOneSavings = useMemo(
+    () => Math.max(0, yearlySaaSCost - (estimatedSetupCost + openSourceAnnual)),
+    [estimatedSetupCost, openSourceAnnual, yearlySaaSCost]
+  )
+  const yearTwoSavings = useMemo(
+    () => Math.max(0, yearlySaaSCost - openSourceAnnual),
+    [yearlySaaSCost, openSourceAnnual]
+  )
 
-  const maxComparisonValue = Math.max(yearlySaaSCost, openSourceAnnual)
+  const maxComparisonValue = Math.max(yearlySaaSCost, openSourceAnnual, 1)
 
   const openCalendly = useCallback(() => {
     window.open(calendlyUrl, '_self')
+  }, [])
+
+  const highlightMonthlyNet = useValueIncreaseHighlight(monthlySaaSCost)
+  const highlightYearlyNet = useValueIncreaseHighlight(yearlySaaSCost)
+  const highlightMonthlyGross = useValueIncreaseHighlight(saasGrossMonthly)
+  const highlightYearlyGross = useValueIncreaseHighlight(saasGrossYearly)
+  const getValueClasses = useCallback(
+    (isHighlighted: boolean) =>
+      cn(
+        'text-base font-semibold text-slate-900 transition-colors duration-300 dark:text-white',
+        isHighlighted && 'text-red-600 dark:text-red-300 drop-shadow-[0_0_12px_rgba(248,113,113,0.45)]'
+      ),
+    []
+  )
+
+  const handleUnlockContent = useCallback(() => {
+    setIsContentLocked(false)
+    window.open('https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz', '_self')
   }, [])
 
   const scrollToROI = useCallback(() => {
@@ -547,10 +663,13 @@ const SetupPage: React.FC = () => {
       <section id="roi-calculator" ref={calculatorSectionRef} className="border-y border-white/5 bg-bg-dark py-20">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">ROI-Kalkulator</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Was sparen Sie mit Open Source?</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">SaaS-Kosten-Radar</p>
+            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">
+              Wie transparent ist Ihre SaaS-Landschaft?
+            </h2>
             <p className="mt-3 text-lg text-text-secondary">
-              Ihre aktuellen Lizenzen vs. Hosting-Kosten – transparent, monatlich und jährlich, optional inklusive USt.
+              Ihre aktuellen Abos, Steuern und Hosting-Kosten im direkten Vergleich. Open-Source-Einsparungen werden als
+              gesperrte Ebene visualisiert und erst im Gespräch freigeschaltet.
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
               <button
@@ -563,11 +682,11 @@ const SetupPage: React.FC = () => {
               <span className="text-xs font-medium text-text-secondary">Geführte Tour durch den Kostenrechner</span>
             </div>
           </div>
-          <div className="mt-12 grid gap-8 rounded-3xl border border-white/10 bg-white/5 p-8 lg:grid-cols-[0.45fr_0.55fr]">
+          <div className="mt-12 grid gap-8 rounded-3xl border border-white/10 bg-white/5 p-8 lg:grid-cols-2">
             <div className="space-y-8">
               <div data-calculator-tutorial="team-size">
                 <label className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                  Anzahl Mitarbeitende
+                  Anzahl Mitarbeitende (lizenzpflichtig)
                 </label>
                 <div className="mt-4 flex flex-col gap-4">
                   <input
@@ -593,244 +712,286 @@ const SetupPage: React.FC = () => {
               </div>
 
               <div className="space-y-5" data-calculator-tutorial="tools">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                    Ihre aktuellen SaaS-Tools
-                  </p>
-                  <div className="mt-4 space-y-3">
-                    {toolOptions.map(option => (
-                      <label
-                        key={option.id}
-                        className={`flex items-center justify-between rounded-2xl border px-4 py-3 text-sm transition ${
-                          toolSelection[option.id]
-                            ? 'border-vae-turquoise/60 bg-vae-turquoise/10 text-white'
-                            : 'border-white/10 bg-bg-darker text-text-secondary hover:border-white/30'
-                        }`}
-                      >
-                        <div>
-                          <p className="font-semibold">{option.label}</p>
-                          <p className="text-xs text-text-secondary/80">pro Nutzer:in & Monat</p>
-                        </div>
-                        <input
-                          type="checkbox"
-                          checked={toolSelection[option.id]}
-                          onChange={event =>
-                            setToolSelection(prev => ({
-                              ...prev,
-                              [option.id]: event.target.checked,
-                            }))
-                          }
-                          className="h-5 w-5 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-vae-turquoise/60"
-                        />
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-bg-darker/60 p-5">
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                    Weitere Lizenzkosten (monatlich)
-                  </p>
-                  <p className="mt-2 text-xs text-text-secondary">
-                    Addieren Sie Spezial-Tools oder Agenturleistungen, die noch nicht in der Liste enthalten sind.
-                  </p>
-                  <input
-                    type="number"
-                    min={0}
-                    step={50}
-                    value={customToolCost}
-                    onChange={event => setCustomToolCost(Math.max(0, Number(event.target.value) || 0))}
-                    className="mt-3 w-full rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-lg text-white"
-                    placeholder="0"
-                  />
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
+                  Ihre aktuellen SaaS-Tools
+                </p>
+                <div className="space-y-4">
+                  {saasToolCategories.map(category => (
+                    <div key={category.id} className="rounded-2xl border border-white/10 bg-bg-darker/40 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
+                        {category.title}
+                      </p>
+                      <div className="mt-3 space-y-3">
+                        {category.tools.map(tool => (
+                          <label
+                            key={tool.id}
+                            className={cn(
+                              'flex items-start justify-between gap-3 rounded-2xl border px-4 py-3 text-sm transition',
+                              toolSelection[tool.id]
+                                ? 'border-vae-turquoise/60 bg-vae-turquoise/10 text-white'
+                                : 'border-white/10 bg-bg-darker text-text-secondary hover:border-white/30'
+                            )}
+                          >
+                            <div className="flex-1">
+                              <p className="font-semibold text-white">{tool.name}</p>
+                              <p className="text-xs text-text-secondary/80">
+                                {tool.pricingModel === 'perUser'
+                                  ? `${formatCurrency(tool.pricePerUser ?? 0)} pro Nutzer:in/Monat (netto)`
+                                  : `${formatCurrency(tool.flatMonthlyPrice ?? 0)} pro Monat (netto)`}
+                              </p>
+                            </div>
+                            <input
+                              type="checkbox"
+                              checked={toolSelection[tool.id]}
+                              onChange={event =>
+                                setToolSelection(prev => ({
+                                  ...prev,
+                                  [tool.id]: event.target.checked,
+                                }))
+                              }
+                              className="h-5 w-5 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-vae-turquoise/60"
+                            />
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-bg-darker/60 p-5">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">USt.-Satz</p>
-                    <p className="text-xs text-text-secondary">Konfigurierbar, Standard in Deutschland: 19%</p>
-                  </div>
-                  <label className="flex items-center gap-2 text-xs font-semibold text-text-secondary">
-                    <input
-                      type="checkbox"
-                      checked={showGrossTotals}
-                      onChange={event => setShowGrossTotals(event.target.checked)}
-                      className="h-4 w-4 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-vae-turquoise/60"
-                    />
-                    Bruttowerte anzeigen
-                  </label>
-                </div>
-                <div className="mt-4 flex items-center gap-3">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
+                  Weitere Lizenzen hinzufügen
+                </p>
+                <p className="mt-1 text-xs text-text-secondary">
+                  Für Spezial-Tools, Agenturleistungen oder Pakete ohne Seat-basierte Abrechnung.
+                </p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
                   <input
-                    type="number"
-                    min={0}
-                    max={40}
-                    value={vatRate}
-                    onChange={event => {
-                      const value = Number(event.target.value)
-                      if (Number.isNaN(value)) {
-                        setVatRate(0)
-                        return
-                      }
-                      setVatRate(Math.max(0, Math.min(40, value)))
-                    }}
-                    className="w-28 rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-lg text-white"
+                    type="text"
+                    value={customLicenseForm.name}
+                    onChange={event => handleCustomLicenseFormChange('name', event.target.value)}
+                    placeholder="Tool-Name"
+                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary"
                   />
-                  <span className="text-sm text-text-secondary">%</span>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={customLicenseForm.unitPrice}
+                    onChange={event => handleCustomLicenseFormChange('unitPrice', event.target.value)}
+                    placeholder="Preis pro Nutzer"
+                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary"
+                  />
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={customLicenseForm.quantity}
+                    onChange={event => handleCustomLicenseFormChange('quantity', event.target.value)}
+                    placeholder="Anzahl Nutzer:innen"
+                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary"
+                  />
                 </div>
+                <button
+                  type="button"
+                  onClick={addCustomLicense}
+                  disabled={!canAddCustomLicense}
+                  className={cn(
+                    'mt-4 inline-flex w-full items-center justify-center rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold transition',
+                    canAddCustomLicense
+                      ? 'bg-vae-turquoise/20 text-white hover:border-vae-turquoise/40 hover:bg-vae-turquoise/30'
+                      : 'cursor-not-allowed bg-white/5 text-text-secondary'
+                  )}
+                >
+                  Lizenz hinzufügen
+                </button>
+                {customLicenses.length > 0 && (
+                  <div className="mt-4 space-y-3 border-t border-white/5 pt-4">
+                    {customLicenses.map(license => (
+                      <div
+                        key={license.id}
+                        className="flex flex-wrap items-center justify-between gap-3 text-sm text-white"
+                      >
+                        <div>
+                          <p className="font-semibold">{license.name}</p>
+                          <p className="text-xs text-text-secondary">
+                            {license.quantity} × {formatCurrency(license.unitPrice)} pro Monat
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="font-semibold">{formatCurrency(license.unitPrice * license.quantity)}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeCustomLicense(license.id)}
+                            className="text-xs font-semibold text-text-secondary transition hover:text-white"
+                          >
+                            Entfernen
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
+
+              <p className="text-xs text-text-secondary/70">
+                Hinweis: Die angezeigten Standardpreise beruhen auf öffentlich verfügbaren Quellen und dienen nur als
+                Orientierung. Anbieter können Tarife und Steuersätze jederzeit ändern.
+              </p>
             </div>
 
-            <div className="space-y-6 rounded-3xl border border-white/10 bg-bg-darker/60 p-6">
-              <div className="space-y-6" data-calculator-tutorial="results">
-                <div className="rounded-2xl border border-red-500/40 bg-red-500/10 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-300">
-                    Ihre aktuellen SaaS-Kosten
-                  </p>
-                  <div className="mt-4 space-y-3 text-sm md:text-base">
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>Monatliche Kosten (netto)</span>
-                      <span className="font-semibold text-white">{formatCurrency(monthlySaaSCost)}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>Jährliche Kosten (netto)</span>
-                      <span className="font-semibold text-white">{formatCurrency(yearlySaaSCost)}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>{`davon USt (${sanitizedVatRate}% p.a.)`}</span>
-                      <span className="font-semibold text-white">
-                        {showGrossTotals ? formatCurrency(saasVatYearly) : '—'}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>Bruttokosten p.a.</span>
-                      <span className="font-semibold text-white">
-                        {showGrossTotals ? formatCurrency(saasGrossYearly) : '—'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-vae-green/40 bg-vae-green/10 rounded-2xl border p-5">
-                  <div className="flex items-center justify-between">
-                    <p className="text-vae-green text-xs font-semibold uppercase tracking-[0.3em]">Mit Open Source</p>
-                    <Lock className="text-vae-green h-4 w-4" />
-                  </div>
-                  <div className="mt-4 space-y-3 text-sm md:text-base">
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>Monatliche Hosting-Kosten (netto)</span>
-                      <span className="font-semibold text-white">{formatCurrency(openSourceMonthly)}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>Jährliche Hosting-Kosten (netto)</span>
-                      <span className="font-semibold text-white">{formatCurrency(openSourceAnnual)}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>{`davon USt (${sanitizedVatRate}% p.a.)`}</span>
-                      <span className="font-semibold text-white">
-                        {showGrossTotals ? formatCurrency(openSourceVatYearly) : '—'}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-text-secondary">
-                      <span>Bruttokosten p.a.</span>
-                      <span className="font-semibold text-white">
-                        {showGrossTotals ? formatCurrency(openSourceGrossYearly) : '—'}
-                      </span>
-                    </div>
-                  </div>
-                  {/* Locked Setup placeholder – reveals CTA without exposing pricing */}
-                  <div className="mt-5 rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-text-secondary">
-                    <div className="flex items-center justify-between text-white">
-                      <span className="flex items-center gap-2 text-sm font-semibold">
-                        <Lock className="text-vae-green h-4 w-4" />
-                        Einmalige Setup-Kosten (individuell) 🔒
-                      </span>
-                      <span className="text-sm font-semibold">auf Anfrage</span>
-                    </div>
-                    <p className="mt-2 text-xs text-text-secondary">
-                      Diese Zeile ist bewusst gesperrt. Wir kalkulieren Setup & Implementierung individuell.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">Einsparungen</p>
-                  <div className="mt-4 space-y-4 text-sm md:text-base">
-                    <div>
-                      <div className="flex items-center justify-between text-text-secondary">
-                        <span>Einsparung Jahr 1 (Setup individuell 🔒)</span>
-                        <span className="font-semibold text-white">–</span>
+            <div
+              className="space-y-6 rounded-3xl border border-white/10 bg-bg-darker/60 p-6 lg:sticky lg:top-24 lg:self-start"
+              data-calculator-tutorial="results"
+            >
+              <div className="rounded-2xl border border-red-500/40 bg-red-500/5 p-5 backdrop-blur-sm">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-400">
+                  Ihre aktuellen SaaS-Kosten
+                </p>
+                <div className="mt-4 space-y-5 text-sm text-slate-600 dark:text-text-secondary">
+                  <div className="flex flex-col gap-3 border-b border-white/10 pb-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-800 dark:text-red-200">
+                          Monatliche Kosten
+                        </p>
+                        <p className="text-xs text-slate-500 dark:text-text-secondary/70">
+                          Ihre aktuellen SaaS-Lizenzen
+                        </p>
                       </div>
-                      <p className="mt-1 text-xs text-text-secondary">
-                        Formel: SaaS pro Jahr – (Hosting + individuelles Setup 🔒). Wir rechnen dies nach dem Scoping.
+                      <div className="space-y-1 text-right">
+                        <p className={getValueClasses(highlightMonthlyNet)}>
+                          {formatCurrency(monthlySaaSCost)}{' '}
+                          <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
+                            / Monat netto
+                          </span>
+                        </p>
+                        <p className={getValueClasses(highlightMonthlyGross)}>
+                          {formatCurrency(saasGrossMonthly)}{' '}
+                          <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
+                            / Monat brutto
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-800 dark:text-red-200">
+                        Jährliche Kosten
                       </p>
+                      <p className="text-xs text-slate-500 dark:text-text-secondary/70">12 Monate Nutzung</p>
                     </div>
-                    <div>
-                      <div className="flex items-center justify-between text-text-secondary">
-                        <span>Einsparung ab Jahr 2 (nur Hosting)</span>
-                        <span className="font-semibold text-white">{formatCurrency(yearTwoSavings)}</span>
-                      </div>
-                      <p className="mt-1 text-xs text-text-secondary">
-                        Ab Jahr 2 fällt nur noch Hosting an – keine Lizenzen, keine Vendor-Lock-ins.
+                    <div className="space-y-1 text-right">
+                      <p className={getValueClasses(highlightYearlyNet)}>
+                        {formatCurrency(yearlySaaSCost)}{' '}
+                        <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
+                          / Jahr netto
+                        </span>
+                      </p>
+                      <p className={getValueClasses(highlightYearlyGross)}>
+                        {formatCurrency(saasGrossYearly)}{' '}
+                        <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
+                          / Jahr brutto
+                        </span>
                       </p>
                     </div>
                   </div>
-                </div>
-
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
-                    Kostenvergleich
-                  </p>
-                  <div className="mt-4 space-y-3 text-sm">
-                    <div>
-                      <div className="flex items-center justify-between text-text-secondary">
-                        <span>Ihre SaaS-Kosten pro Jahr</span>
-                        <span className="font-semibold text-white">{formatCurrency(yearlySaaSCost)}</span>
-                      </div>
-                      <div className="mt-2 h-2 rounded-full bg-white/10">
-                        <div
-                          className="h-2 rounded-full bg-red-400"
-                          style={{
-                            width: `${maxComparisonValue ? Math.max((yearlySaaSCost / maxComparisonValue) * 100, 5) : 0}%`,
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between text-text-secondary">
-                        <span>Open Source ab Jahr 2 (Hosting)</span>
-                        <span className="font-semibold text-white">{formatCurrency(openSourceAnnual)}</span>
-                      </div>
-                      <div className="mt-2 h-2 rounded-full bg-white/10">
-                        <div
-                          className="bg-vae-green h-2 rounded-full"
-                          style={{
-                            width: `${maxComparisonValue ? Math.max((openSourceAnnual / maxComparisonValue) * 100, 5) : 0}%`,
-                          }}
-                        />
-                      </div>
-                    </div>
+                  <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-600 dark:text-text-secondary">
+                    <span>{`davon USt (${DEFAULT_VAT_RATE}% p.a.)`}</span>
+                    <span className="text-base font-semibold text-slate-900 dark:text-white">
+                      {formatCurrency(saasVatYearly)}
+                    </span>
                   </div>
                 </div>
+                <p className="mt-4 text-xs text-red-800/70 dark:text-red-200/70">
+                  Bruttowerte basieren auf dem gesetzlichen Regelsatz (19 %).
+                </p>
               </div>
 
-              <MagneticButton intensity={0.06} scaleEffect data-calculator-tutorial="cta">
-                <button
-                  onClick={openCalendly}
-                  onMouseEnter={() => setCtaHovered(true)}
-                  onMouseLeave={() => setCtaHovered(false)}
-                  className="btn-primary mt-2 w-full justify-center gap-2"
-                >
-                  {ctaHovered ? <LockOpen className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
-                  Individuelle Berechnung anfragen
-                </button>
-              </MagneticButton>
-              <p className="text-sm text-text-secondary">
-                Hinweis: Dies ist eine vereinfachte Schätzung. Im kostenlosen Beratungsgespräch erhalten Sie eine exakte
-                Berechnung, inklusive Ihrer individuellen Setup-Kosten.
-              </p>
+              <LockedSection
+                isLocked={isContentLocked}
+                onUnlock={handleUnlockContent}
+                overlayTitle="Einsparpotenzial freischalten"
+                overlayDescription="Buchen Sie ein kostenloses Beratungsgespräch, um Ihre individuellen Einsparungen zu berechnen"
+                ctaText="Sparpotenzial ermitteln"
+                ctaDataAttribute="cta"
+                className="rounded-3xl"
+              >
+                <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-6">
+                  <div className="mb-6 flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-vae-green text-xs font-semibold uppercase tracking-[0.3em]">
+                        Einsparungen mit Open Source
+                      </p>
+                      <p className="text-sm text-text-secondary">Ihre individuelle Kostenanalyse</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 p-5">
+                      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/5 bg-gradient-to-br from-white/5 via-transparent to-bg-dark/70" />
+                      <div className="relative space-y-5 text-sm text-white">
+                        <div>
+                          <div className="flex items-center justify-between">
+                            <span>Ihre SaaS-Kosten ab Jahr 1</span>
+                            <span className="font-semibold">{formatCurrency(yearlySaaSCost)}</span>
+                          </div>
+                          <div className="mt-2 h-2 rounded-full bg-white/10">
+                            <div
+                              className="h-2 rounded-full bg-red-400"
+                              style={{
+                                width: `${maxComparisonValue ? Math.max((yearlySaaSCost / maxComparisonValue) * 100, 5) : 0}%`,
+                              }}
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex items-center justify-between">
+                            <span>Open Source ab Jahr 2 (nur Hosting)</span>
+                            <span className="font-semibold">{formatCurrency(openSourceAnnual)}</span>
+                          </div>
+                          <div className="mt-2 h-2 rounded-full bg-white/10">
+                            <div
+                              className="bg-vae-green h-2 rounded-full"
+                              style={{
+                                width: `${maxComparisonValue ? Math.max((openSourceAnnual / maxComparisonValue) * 100, 5) : 0}%`,
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="border-vae-green/30 bg-vae-green/10 space-y-3 rounded-2xl border p-5">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-white/90">Einsparung im ersten Jahr (inkl. Setup)</span>
+                        <span className="text-vae-green text-lg font-semibold">{formatCurrency(yearOneSavings)}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-white/90">Einsparung ab Jahr 2</span>
+                        <span className="text-vae-green text-lg font-semibold">{formatCurrency(yearTwoSavings)}</span>
+                      </div>
+                      <div className="mt-3 border-t border-white/10 pt-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-semibold text-white">Geschätzter Setup-Aufwand</span>
+                          <span className="text-base font-bold text-white">{formatCurrency(estimatedSetupCost)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="mt-4 text-xs text-text-secondary">
+                    Konkrete Einsparungen berechnen wir individuell auf Basis Ihrer Systeme, Lizenzen und Anforderungen.
+                  </p>
+                </div>
+              </LockedSection>
+
+              <div className="space-y-2 text-xs text-text-secondary">
+                <p>
+                  Diese Darstellung ersetzt keine individuelle Angebotserstellung. Im Beratungsgespräch berücksichtigen
+                  wir Verträge, Rabatte und Ihre Steuersituation.
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -500,7 +500,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
         </div>
 
         <ExpandableContent isOpen={isExpanded} animationsEnabled={animationsEnabled}>
-          <div className="mt-8 grid gap-6 pb-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-6 pb-6 lg:grid-cols-3">
             <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Messbare Ergebnisse</p>
               <ul className="mt-4 space-y-4 text-sm text-text-secondary">
@@ -562,10 +562,11 @@ interface ExpandableContentProps {
 const ExpandableContent: React.FC<ExpandableContentProps> = ({ isOpen, children, animationsEnabled }) => {
   const innerRef = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState(0)
+  const heightBuffer = 32
 
   const recomputeHeight = useCallback(() => {
     if (!innerRef.current) return
-    const nextHeight = innerRef.current.scrollHeight
+    const nextHeight = innerRef.current.scrollHeight + heightBuffer
     setHeight(nextHeight)
   }, [])
 
@@ -592,10 +593,16 @@ const ExpandableContent: React.FC<ExpandableContentProps> = ({ isOpen, children,
 
   return (
     <div
-      className={`overflow-hidden ${animationsEnabled ? 'transition-[max-height,opacity] duration-500 ease-in-out' : ''}`}
-      style={{ maxHeight: isOpen ? `${height}px` : '0px', opacity: isOpen ? 1 : 0 }}
+      className={`${animationsEnabled ? 'transition-[max-height,opacity] duration-500 ease-in-out' : ''}`}
+      style={{
+        maxHeight: isOpen ? `${height}px` : '0px',
+        opacity: isOpen ? 1 : 0,
+        overflow: isOpen ? 'visible' : 'hidden',
+      }}
     >
-      <div ref={innerRef}>{children}</div>
+      <div ref={innerRef} className="pb-4">
+        {children}
+      </div>
     </div>
   )
 }

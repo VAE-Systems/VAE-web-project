@@ -1,11 +1,12 @@
 import { DropdownMenu } from '@/components/navigation/dropdown/DropdownMenu'
+import { MENU_DATA } from '@/components/navigation/dropdown/menuData'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useAttentionSignal } from '@/hooks'
-import { Calendar, Moon, Sun } from 'lucide-react'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Calendar, LogIn, Menu, Moon, Sun, X } from 'lucide-react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const CTA_URL = 'https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz'
+const CTA_URL = '/contact#booking'
 const LOGIN_URL = 'https://nc.intern.vae.systems/login?clear=1'
 
 interface MagneticButtonProps {
@@ -194,9 +195,18 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
 const HeaderModern: React.FC = () => {
   const { theme, toggleTheme } = useTheme()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [hideOnMobile, setHideOnMobile] = useState(false)
   const lastScrollState = useRef(false)
   const scrollRafRef = useRef<number | null>(null)
   const ctaRef = useRef<HTMLAnchorElement>(null)
+  const sheetRef = useRef<HTMLDivElement>(null)
+  const previouslyFocused = useRef<HTMLElement | null>(null)
+  const bodyOverflowRef = useRef<string | null>(null)
+  const bodyPositionRef = useRef<string | null>(null)
+  const bodyTopRef = useRef<string | null>(null)
+  const lockedScrollY = useRef(0)
+  const lastScrollY = useRef(0)
 
   useAttentionSignal(ctaRef, {
     intervalMs: 30000,
@@ -219,6 +229,21 @@ const HeaderModern: React.FC = () => {
         lastScrollState.current = nextState
         setIsScrolled(nextState)
       }
+
+      const isDesktop = window.innerWidth >= 1024
+      if (!isDesktop) {
+        const delta = currentScroll - lastScrollY.current
+        if (currentScroll > 80 && delta > 4) {
+          setHideOnMobile(true)
+        } else if (delta < -4) {
+          setHideOnMobile(false)
+        }
+        lastScrollY.current = currentScroll
+      } else {
+        setHideOnMobile(false)
+      }
+
+      setIsMobileMenuOpen(false)
     }
 
     const handleScroll = () => {
@@ -228,21 +253,103 @@ const HeaderModern: React.FC = () => {
 
     evaluateScrollState()
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', evaluateScrollState)
 
     return () => {
       if (scrollRafRef.current != null) {
         window.cancelAnimationFrame(scrollRafRef.current)
       }
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', evaluateScrollState)
     }
   }, [])
 
+  useEffect(() => {
+    if (typeof document === 'undefined') return undefined
+    const body = document.body
+    const root = document.documentElement
+
+    if (bodyOverflowRef.current === null) bodyOverflowRef.current = body.style.overflow
+    if (bodyPositionRef.current === null) bodyPositionRef.current = body.style.position
+    if (bodyTopRef.current === null) bodyTopRef.current = body.style.top
+
+    if (isMobileMenuOpen) {
+      lockedScrollY.current = window.scrollY
+      body.style.overflow = 'hidden'
+      root.style.overflow = 'hidden'
+      body.style.position = 'fixed'
+      body.style.top = `-${lockedScrollY.current}px`
+      body.style.width = '100%'
+      body.style.touchAction = 'none'
+    } else {
+      body.style.overflow = bodyOverflowRef.current
+      root.style.overflow = ''
+      body.style.position = bodyPositionRef.current
+      body.style.top = bodyTopRef.current
+      body.style.width = ''
+      body.style.touchAction = ''
+      if (lockedScrollY.current) {
+        window.scrollTo(0, lockedScrollY.current)
+      }
+    }
+
+    return () => {
+      body.style.overflow = bodyOverflowRef.current ?? ''
+      root.style.overflow = ''
+      body.style.position = bodyPositionRef.current ?? ''
+      body.style.top = bodyTopRef.current ?? ''
+      body.style.width = ''
+      body.style.touchAction = ''
+    }
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    if (isMobileMenuOpen) setHideOnMobile(false)
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined
+    previouslyFocused.current = document.activeElement as HTMLElement | null
+    const focusableSelectors =
+      'a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"]),input,select,textarea,label[tabindex="0"]'
+    const focusables = sheetRef.current?.querySelectorAll<HTMLElement>(focusableSelectors)
+    focusables?.[0]?.focus()
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false)
+        return
+      }
+      if (event.key !== 'Tab' || !focusables || focusables.length === 0) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      previouslyFocused.current?.focus()
+    }
+  }, [isMobileMenuOpen])
+
   const isDark = theme === 'dark'
+  const navSections = useMemo(() => MENU_DATA ?? [], [])
+  const closeMenu = () => setIsMobileMenuOpen(false)
 
   return (
-    <header
-      className={`
-        fixed left-0 right-0 top-0 z-50 transition-all duration-300 ease-out
+    <>
+      <header
+        className={`
+        duration-400 fixed left-0 right-0 top-0 z-50 transition-transform ease-out
+        ${hideOnMobile ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'}
+        transition-colors
         ${
           isScrolled
             ? isDark
@@ -253,64 +360,67 @@ const HeaderModern: React.FC = () => {
               : 'bg-white/98 border-b border-gray-100/80 backdrop-blur-sm'
         }
       `}
-    >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-4 py-4 lg:h-20 lg:flex-row lg:items-center lg:gap-8">
-          <div className="flex items-center justify-between gap-4">
+      >
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+          {/* Mobile compact bar */}
+          <div className="flex items-center justify-between gap-4 py-3 lg:hidden">
             <Link to="/" className="group flex items-center gap-1">
-              <div className="relative h-[4.6rem] transition-transform duration-300 group-hover:scale-105 md:h-[5.2rem]">
+              <div className="relative h-12 transition-transform duration-300 group-hover:scale-105">
                 <img
                   src="/App_Logo_light.svg"
                   alt="VAE Systems"
-                  className="light-invert h-full w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)] transition-all duration-300 dark:drop-shadow-[0_0_20px_rgba(0,255,165,0.25)]"
+                  className="light-invert h-full w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)] transition-all duration-300"
                 />
-              </div>
-              <div className="hidden flex-col border-l border-vae-turquoise/30 pl-3 md:flex">
-                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/85">
-                  Versatile AI
-                </span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
-                  Enhanced
-                </span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
-                  Systems
-                </span>
               </div>
             </Link>
 
             <button
-              onClick={toggleTheme}
-              className={`p-2 transition-all duration-200 lg:hidden ${
-                isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+              onClick={() => setIsMobileMenuOpen(prev => !prev)}
+              className={`flex h-11 w-11 items-center justify-center rounded-full border text-sm font-semibold transition-all duration-200 ${
+                isDark
+                  ? 'border-white/10 bg-white/[0.06] text-white hover:border-vae-turquoise/50 hover:text-vae-turquoise'
+                  : 'border-gray-200/90 bg-white text-gray-800 shadow-sm hover:border-vae-turquoise hover:text-vae-turquoise'
               }`}
-              aria-label="Darstellung wechseln"
+              aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
             >
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
 
-          <div className="flex w-full flex-col gap-4 lg:flex-1 lg:flex-row lg:items-center lg:gap-6">
-            <DropdownMenu className="w-full" isHeaderScrolled={isScrolled} />
+          <div className="hidden flex-col gap-4 py-4 lg:flex lg:h-20 lg:flex-row lg:items-center lg:gap-8">
+            <div className="flex items-center justify-between gap-4">
+              <Link to="/" className="group flex items-center gap-1">
+                <div className="relative h-[4.6rem] transition-transform duration-300 group-hover:scale-105 md:h-[5.2rem]">
+                  <img
+                    src="/App_Logo_light.svg"
+                    alt="VAE Systems"
+                    className="light-invert h-full w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)] transition-all duration-300 dark:drop-shadow-[0_0_20px_rgba(0,255,165,0.25)]"
+                  />
+                </div>
+                <div className="hidden flex-col border-l border-vae-turquoise/30 pl-3 md:flex">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/85">
+                    Versatile AI
+                  </span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
+                    Enhanced
+                  </span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
+                    Systems
+                  </span>
+                </div>
+              </Link>
+            </div>
 
-            <div className="flex items-center gap-3 lg:hidden">
-              <a
-                href={CTA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
-                  isDark
-                    ? 'text-vae-turquoise hover:text-vae-turquoise/80'
-                    : 'text-vae-turquoise hover:text-vae-turquoise/80'
-                }`}
-              >
-                <Calendar className="h-4 w-4" />
-                Beratung buchen
-              </a>
+            <div className="hidden w-full flex-col gap-4 lg:flex lg:flex-1 lg:flex-row lg:items-center lg:gap-6">
+              <DropdownMenu className="w-full" isHeaderScrolled={isScrolled} />
+            </div>
+
+            <div className="hidden items-center gap-6 lg:flex">
               <a
                 href={LOGIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`rounded-md px-3 py-2 text-xs font-medium transition-all duration-200 ${
+                className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ${
                   isDark
                     ? 'text-gray-400 hover:bg-white/5 hover:text-vae-turquoise'
                     : 'text-gray-600 hover:bg-gray-100 hover:text-vae-turquoise'
@@ -318,41 +428,112 @@ const HeaderModern: React.FC = () => {
               >
                 Kundenlogin
               </a>
+
+              <MagneticButton href={CTA_URL} forwardRef={ctaRef as React.RefObject<HTMLAnchorElement>}>
+                <Calendar className="h-4 w-4" />
+                <span>Beratung buchen</span>
+              </MagneticButton>
+
+              <button
+                onClick={toggleTheme}
+                className={`p-2 transition-all duration-200 ${
+                  isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+                }`}
+                aria-label="Darstellung wechseln"
+              >
+                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </button>
             </div>
           </div>
+        </div>
+      </header>
 
-          <div className="hidden items-center gap-6 lg:flex">
-            <a
-              href={LOGIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ${
-                isDark
-                  ? 'text-gray-400 hover:bg-white/5 hover:text-vae-turquoise'
-                  : 'text-gray-600 hover:bg-gray-100 hover:text-vae-turquoise'
-              }`}
-            >
-              Kundenlogin
-            </a>
+      {/* Mobile bottom-sheet menu is rendered outside the transforming header so it correctly fills the viewport */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[9999] lg:hidden">
+          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={closeMenu} aria-hidden="true" />
+          <div
+            ref={sheetRef}
+            className="absolute inset-0 bg-bg-darker text-white shadow-[0_20px_80px_rgba(0,0,0,0.55)]"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Hauptmenü"
+            onClick={event => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 pb-2 pt-5">
+              <span className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise">Menü</span>
+              <button
+                onClick={closeMenu}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                aria-label="Menü schließen"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
 
-            <MagneticButton href={CTA_URL} forwardRef={ctaRef as React.RefObject<HTMLAnchorElement>}>
-              <Calendar className="h-4 w-4" />
-              <span>Beratung buchen</span>
-            </MagneticButton>
+            <div className="h-full overflow-y-auto px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
+              <div className="space-y-6">
+                <div className="grid gap-4">
+                  {navSections.map(section => (
+                    <div key={section.id} className="rounded-2xl border border-white/5 bg-white/[0.03] p-4">
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">
+                          {section.label}
+                        </p>
+                        {section.subtitle && (
+                          <span className="text-xs font-medium text-white/60">{section.subtitle}</span>
+                        )}
+                      </div>
+                      <div className="mt-3 grid gap-2">
+                        {section.menuItems.map(item => (
+                          <Link
+                            key={item.id}
+                            to={item.href}
+                            onClick={closeMenu}
+                            className="rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 text-sm font-semibold text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-            <button
-              onClick={toggleTheme}
-              className={`p-2 transition-all duration-200 ${
-                isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
-              }`}
-              aria-label="Darstellung wechseln"
-            >
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </button>
+                <div className="grid gap-3">
+                  <a
+                    href={CTA_URL}
+                    onClick={closeMenu}
+                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-vae-turquoise to-emerald-400 px-4 py-3 text-sm font-semibold text-gray-900 shadow-lg shadow-vae-turquoise/30 transition hover:shadow-vae-turquoise/50"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    Beratung buchen
+                  </a>
+                  <a
+                    href={LOGIN_URL}
+                    onClick={closeMenu}
+                    className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                  >
+                    <LogIn className="h-4 w-4" />
+                    Kundenlogin
+                  </a>
+                  <button
+                    onClick={() => {
+                      toggleTheme()
+                    }}
+                    className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                  >
+                    {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                    {isDark ? 'Light Mode' : 'Dark Mode'}
+                  </button>
+                </div>
+                <div className="h-4" aria-hidden="true" />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   )
 }
 

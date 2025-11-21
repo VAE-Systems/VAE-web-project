@@ -4,7 +4,6 @@ import HeroSection from '../sections/HeroSection'
 import HomeProcessTeaserSection from '../sections/HomeProcessTeaserSection'
 import ServicesOverviewSection from '../sections/ServicesOverviewSection'
 import SocialProofSection from '../sections/SocialProofSection'
-import TechShowcaseSection from '../sections/TechShowcaseSection'
 import WhyOpenSourceSection from '../sections/WhyOpenSourceSection'
 import Seo from '../ui/Seo'
 
@@ -30,16 +29,13 @@ const HomePage: React.FC = () => {
       {/* 3. Services Überblick */}
       <ServicesOverviewSection />
 
-      {/* 4. Tech Showcase */}
-      <TechShowcaseSection />
-
-      {/* 5. Social Proof */}
+      {/* 4. Social Proof */}
       <SocialProofSection />
 
-      {/* 6. Prozess */}
+      {/* 5. Prozess */}
       <HomeProcessTeaserSection className="pt-0" />
 
-      {/* 7. Abschluss */}
+      {/* 6. Abschluss */}
       <FinalCtaSection />
     </div>
   )

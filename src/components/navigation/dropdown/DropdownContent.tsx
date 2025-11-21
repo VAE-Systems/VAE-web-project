@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
 import { MenuContent } from './menuData'
 
@@ -52,13 +53,10 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
       <div className="pt-6">
         <a
           href={content.ctaHref}
-          className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/70 px-5 py-2 text-sm font-semibold text-gray-900
-            transition-all duration-200 hover:-translate-y-0.5 hover:border-vae-turquoise hover:bg-vae-turquoise/15 hover:text-vae-turquoise
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise dark:border-vae-turquoise/60 dark:text-white
-            dark:hover:border-vae-turquoise dark:hover:bg-vae-turquoise/10 dark:hover:text-vae-turquoise"
+          className="btn-convert inline-flex items-center gap-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-darker"
         >
           {content.ctaText}
-          <span aria-hidden>↗</span>
+          <ArrowUpRight className="h-4 w-4" aria-hidden />
         </a>
       </div>
     </div>

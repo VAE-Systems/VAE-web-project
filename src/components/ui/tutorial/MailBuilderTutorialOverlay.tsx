@@ -2,7 +2,7 @@ import { SpotlightTutorialController } from '@/hooks/useSpotlightTutorial'
 import { useTheme } from '@/contexts/ThemeContext'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, GraduationCap } from 'lucide-react'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 interface SpotlightTutorialOverlayProps {
   tutorial: SpotlightTutorialController
@@ -17,8 +17,10 @@ interface ElementRect {
 
 export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> = ({ tutorial }) => {
   const overlayRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
   const { isActive, currentStep, totalSteps, nextStep, previousStep, skipTutorial, getCurrentStepConfig } = tutorial
   const [highlightedRect, setHighlightedRect] = useState<ElementRect | null>(null)
+  const [cardStyle, setCardStyle] = useState<React.CSSProperties>({})
   const { theme } = useTheme()
   const isDark = theme === 'dark'
 
@@ -68,6 +70,69 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
     }
   }, [isActive, currentStep, currentConfig])
 
+  // Position the card so it never overlaps the highlight and prefers the configured side.
+  useLayoutEffect(() => {
+    if (!isActive || !currentConfig || !highlightedRect) return
+
+    const updateCardPosition = () => {
+      const viewportWidth = window.innerWidth
+      const viewportHeight = window.innerHeight
+      const margin = viewportWidth < 640 ? 12 : 20
+      const cardRect = cardRef.current?.getBoundingClientRect()
+      const cardWidth = cardRect?.width ?? 0
+      const cardHeight = cardRect?.height ?? 0
+
+      // Prefer placing vertically centered to the highlighted element.
+      const highlightCenterY = highlightedRect.top + highlightedRect.height / 2
+      let top = highlightCenterY - cardHeight / 2
+
+      // Prefer placing horizontally to the requested side. Fallback to the opposite side if it would overflow.
+      const placeRight = () => highlightedRect.left + highlightedRect.width + margin
+      const placeLeft = () => highlightedRect.left - cardWidth - margin
+
+      let left =
+        currentConfig.position === 'right'
+          ? placeRight()
+          : currentConfig.position === 'left'
+            ? placeLeft()
+            : (viewportWidth - cardWidth) / 2
+
+      const exceedsRight = left + cardWidth > viewportWidth - margin
+      const exceedsLeft = left < margin
+
+      if (currentConfig.position === 'right' && exceedsRight) {
+        left = Math.max(placeLeft(), margin)
+      } else if (currentConfig.position === 'left' && exceedsLeft) {
+        left = Math.min(placeRight(), viewportWidth - cardWidth - margin)
+      }
+
+      // On small screens, prefer sitting below the target instead of overlapping when vertical space allows.
+      if (viewportWidth < 768) {
+        top = highlightedRect.top + highlightedRect.height + margin
+      }
+
+      // Clamp within viewport
+      top = Math.min(Math.max(top, margin), viewportHeight - cardHeight - margin)
+      left = Math.min(Math.max(left, margin), viewportWidth - cardWidth - margin)
+
+      setCardStyle({
+        top,
+        left,
+        right: 'auto',
+        bottom: 'auto',
+      })
+    }
+
+    updateCardPosition()
+    window.addEventListener('resize', updateCardPosition)
+    window.addEventListener('scroll', updateCardPosition)
+
+    return () => {
+      window.removeEventListener('resize', updateCardPosition)
+      window.removeEventListener('scroll', updateCardPosition)
+    }
+  }, [currentConfig, highlightedRect, isActive])
+
   if (!isActive || !currentConfig) return null
 
   const progressPercentage = (currentStep / totalSteps) * 100
@@ -82,12 +147,6 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
     : 'border border-slate-900/10 bg-slate-900/5 text-slate-700 hover:border-slate-900/25 hover:bg-slate-900/10 hover:text-slate-900 disabled:hover:border-slate-900/10 disabled:hover:bg-slate-900/5'
   const skipButtonClasses = isDark ? 'text-white/60 hover:text-white' : 'text-slate-500 hover:text-slate-900'
   const primaryButtonTextClass = isDark ? 'text-bg-darker' : 'text-slate-900'
-  const positionClasses =
-    currentConfig.position === 'right'
-      ? 'right-4 top-20 items-start justify-end md:right-8 md:top-24'
-      : currentConfig.position === 'left'
-        ? 'left-4 top-20 items-start justify-start md:left-8 md:top-24'
-        : 'inset-0 items-end justify-center md:items-center'
 
   return (
     <AnimatePresence mode="wait">
@@ -180,16 +239,12 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.95 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className={`pointer-events-none fixed z-10 flex p-4 md:p-8 ${positionClasses}`}
+          className="pointer-events-none fixed z-10 flex p-3 sm:p-4 md:p-6"
+          style={cardStyle}
         >
           <div
-            className={`relative w-full max-w-lg rounded-[32px] border ${cardBaseClasses} p-8 backdrop-blur-xl ${
-              currentStep === 5
-                ? 'md:ml-[2%] md:mr-auto'
-                : currentConfig.position === 'right'
-                  ? ''
-                  : 'md:ml-auto md:mr-[2%]'
-            }`}
+            ref={cardRef}
+            className={`relative w-full max-w-[540px] rounded-[32px] border ${cardBaseClasses} p-6 shadow-xl backdrop-blur-xl md:max-w-[580px] md:p-8 md:shadow-2xl`}
             style={{ pointerEvents: 'auto' }}
           >
             {/* Progress bar */}
@@ -214,7 +269,7 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
             </div>
 
             {/* Content */}
-            <div className="space-y-3">
+            <div className="space-y-4 md:space-y-5">
               <h3 className={`text-2xl font-semibold ${titleClass}`}>{currentConfig.title}</h3>
               {/* Action Hint - Mini instruction text */}
               <p className="text-sm font-medium text-vae-turquoise/90">{currentConfig.actionHint}</p>
@@ -222,23 +277,26 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
             </div>
 
             {/* Navigation buttons */}
-            <div className="mt-8 flex items-center justify-between gap-4">
+            <div className="mt-8 grid w-full gap-3 sm:grid-cols-[auto_1fr_auto] sm:items-center">
               <button
                 onClick={previousStep}
                 disabled={currentStep === 1}
-                className={`flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-40 ${previousButtonClasses}`}
+                className={`inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto ${previousButtonClasses}`}
               >
                 <ArrowLeft className="h-4 w-4" />
                 Zurück
               </button>
 
-              <button onClick={skipTutorial} className={`text-sm font-medium transition-colors ${skipButtonClasses}`}>
+              <button
+                onClick={skipTutorial}
+                className={`inline-flex w-full items-center justify-center rounded-2xl px-4 py-2.5 text-sm font-medium transition-colors sm:w-full ${skipButtonClasses}`}
+              >
                 Tutorial überspringen
               </button>
 
               <button
                 onClick={nextStep}
-                className={`flex items-center gap-2 rounded-2xl bg-vae-turquoise px-6 py-2.5 text-sm font-semibold transition-all hover:bg-vae-turquoise-dark hover:shadow-lg hover:shadow-vae-turquoise/30 ${primaryButtonTextClass}`}
+                className={`flex w-full items-center justify-center gap-2 rounded-2xl bg-vae-turquoise px-6 py-3 text-sm font-semibold transition-all hover:bg-vae-turquoise-dark hover:shadow-lg hover:shadow-vae-turquoise/30 sm:w-auto ${primaryButtonTextClass}`}
               >
                 {currentStep === totalSteps ? 'Fertig' : 'Weiter'}
                 <ArrowRight className="h-4 w-4" />

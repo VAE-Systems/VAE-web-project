@@ -28,27 +28,27 @@ const quickFacts = [
 
 const BlogPage: React.FC = () => {
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="Blog | VAE Systems"
         description="Knowledge Hub für KI, Open-Source-Infrastruktur und produktive Digitalisierung – kuratiert von VAE Systems."
         canonicalPath="/ressourcen/blog"
       />
 
-      <section className="relative overflow-hidden border-b border-white/5 bg-gradient-to-b from-bg-darker via-[#050505] to-bg-dark py-28">
-        <div className="pointer-events-none absolute inset-0 opacity-80" aria-hidden="true">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.28),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_75%)]" />
-          <div className="absolute inset-x-0 top-0 mx-auto h-64 w-[90%] rounded-[40px] border border-white/10 bg-white/[0.02] blur-3xl" />
+      <section className="relative overflow-hidden border-b border-gray-200/80 bg-gradient-to-b from-white via-[#f2fff8] to-white py-28 dark:border-white/5 dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
+        <div className="pointer-events-none absolute inset-0 opacity-90" aria-hidden="true">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.16),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,199,160,0.12),transparent_75%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.28),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_75%)]" />
+          <div className="absolute inset-x-0 top-0 mx-auto h-64 w-[90%] rounded-[40px] border border-gray-100/80 bg-white/60 blur-3xl dark:border-white/10 dark:bg-white/[0.02]" />
         </div>
         <div className="container-vae relative flex flex-col gap-16 lg:flex-row lg:items-center">
           <div className="flex-1 space-y-6 text-center lg:text-left">
             <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/80">
               Unser Blog
             </p>
-            <h1 className="text-4xl font-semibold leading-tight text-white md:text-5xl">
+            <h1 className="text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
               Insights & Knowledge Hub für souveräne Tech-Projekte
             </h1>
-            <p className="text-lg leading-relaxed text-text-secondary">
+            <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
               Beiträge aus echten Projekten, Workshops und internen Playbooks. Wir erklären, wie wir KI, Open Source und
               Produktentwicklung kombinieren – transparent, dokumentiert und ohne Buzzword-Overload.
             </p>
@@ -78,10 +78,10 @@ const BlogPage: React.FC = () => {
               {quickFacts.map(fact => (
                 <div
                   key={fact.label}
-                  className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-3 text-left text-sm text-white/75"
+                  className="rounded-2xl border border-gray-200/80 bg-white px-5 py-3 text-left text-sm text-gray-700 shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75"
                 >
                   <p className="text-[0.65rem] uppercase tracking-[0.3em] text-vae-turquoise/70">{fact.label}</p>
-                  <p className="mt-1 font-semibold text-white">{fact.value}</p>
+                  <p className="mt-1 font-semibold text-gray-900 dark:text-white">{fact.value}</p>
                 </div>
               ))}
             </div>
@@ -89,31 +89,31 @@ const BlogPage: React.FC = () => {
           <div className="flex-1">
             <div
               aria-live="polite"
-              className="rounded-[32px] border border-white/10 bg-white/[0.03] p-8 text-left shadow-[0_25px_70px_rgba(0,0,0,0.4)] transition-[height,width,opacity] duration-300 ease-out"
+              className="rounded-[32px] border border-gray-200/80 bg-white/90 p-8 text-left shadow-[0_25px_70px_rgba(15,23,42,0.12)] transition-[height,width,opacity] duration-300 ease-out dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_25px_70px_rgba(0,0,0,0.4)]"
             >
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">
                 Was erwartet Sie?
               </p>
-              <ul className="mt-6 space-y-5 text-base leading-relaxed text-white/80">
-                <li className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4">
+              <ul className="mt-6 space-y-5 text-base leading-relaxed text-gray-700 dark:text-white/80">
+                <li className="rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
                   <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">
-                    Deep Dives statt Marketing
+                    Deep Dives aus Projekten
                   </p>
-                  <p className="mt-2 text-sm text-white/70">
-                    Architektur-Skizzen, Repos und Entscheidungsgrundlagen – dokumentiert wie in unseren Projekträumen.
+                  <p className="mt-2 text-sm text-gray-700 dark:text-white/70">
+                    Architektur-Skizzen, Repos und Entscheidungsgrundlagen – festgehalten wie in unseren Projekträumen.
                   </p>
                 </li>
-                <li className="rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4">
+                <li className="rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
                   <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">
                     Externer Zugang
                   </p>
-                  <p className="mt-2 text-sm text-white/70">
+                  <p className="mt-2 text-sm text-gray-700 dark:text-white/70">
                     Der Blog liegt auf unserer Dokumentationsplattform. Link öffnet in einem neuen Tab, damit Sie hier
                     bleiben können.
                   </p>
                 </li>
               </ul>
-              <div className="mt-6 rounded-2xl border border-dashed border-white/20 px-4 py-3 text-xs text-white/60">
+              <div className="mt-6 rounded-2xl border border-dashed border-gray-200 px-4 py-3 text-xs text-gray-600 dark:border-white/20 dark:text-white/60">
                 Hinweis: Kein Tracking, keine Paywall. Wenn Sie Fragen zu einem Beitrag haben, erreichen Sie uns direkt
                 über Kontakt oder LinkedIn.
               </div>
@@ -122,12 +122,14 @@ const BlogPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-b border-white/5 bg-bg-dark py-20">
+      <section className="border-b border-gray-100 bg-white py-20 dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Themen</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">Worüber wir schreiben</h2>
-            <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-white/70">
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Worüber wir schreiben
+            </h2>
+            <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-gray-700 dark:text-white/70">
               Jeder Artikel beantwortet Fragen, die Kund:innen und Partner uns stellen. Wir dokumentieren
               Entscheidungen, Lessons Learned und konkrete Playbooks.
             </p>
@@ -136,13 +138,13 @@ const BlogPage: React.FC = () => {
             {topics.map(topic => (
               <div
                 key={topic.title}
-                className="group rounded-[28px] border border-white/10 bg-white/[0.02] p-6 text-left shadow-[0_20px_50px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:border-vae-turquoise/40"
+                className="group rounded-[28px] border border-gray-200 bg-white p-6 text-left shadow-[0_20px_50px_rgba(15,23,42,0.12)] transition hover:-translate-y-1 hover:border-vae-turquoise/50 dark:border-white/10 dark:bg-white/[0.02] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] dark:hover:border-vae-turquoise/40"
               >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-vae-turquoise">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-vae-turquoise dark:border-white/15 dark:bg-white/[0.04]">
                   <ExternalLink className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 text-xl font-semibold text-white">{topic.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/70">{topic.description}</p>
+                <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">{topic.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-white/70">{topic.description}</p>
               </div>
             ))}
           </div>

@@ -35,7 +35,9 @@
     "archive/Header_old.tsx",
     "archive/HeaderModern.tsx",
     "archive/pages/ProductsPage.tsx",
-    "archive/pages/ServicesPage.tsx"
+    "archive/pages/ServicesPage.tsx",
+    "src/components/layout/Header.tsx",
+    "archive/layout/HeaderModern.tsx"
   ],
   "exclude": ["node_modules"],
   "references": [

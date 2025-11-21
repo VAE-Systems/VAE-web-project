@@ -62,7 +62,7 @@ const ResourcesFaqPage: React.FC = () => {
   const totalFaqs = filteredFaqs.length
 
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="FAQ & Knowledge Base | VAE Systems"
         description="Klare Antworten auf technische, organisatorische und Karriere-Fragen rund um VAE Systems – filterbar, suchbar, ehrlich."
@@ -70,23 +70,23 @@ const ResourcesFaqPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker to-bg-dark py-24 text-center dark:border-white/5">
-        <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.25),transparent_60%)]"
-          aria-hidden="true"
-        />
+      <section className="relative overflow-hidden border-b border-gray-200/80 bg-gradient-to-b from-white via-[#f2fff8] to-white py-24 text-center dark:border-white/5 dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
+        <div aria-hidden="true">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.16),transparent_60%)] dark:hidden" />
+          <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.25),transparent_60%)] dark:block" />
+        </div>
         <div className="container-vae relative flex flex-col items-center gap-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise">
+          <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise">
             FAQ · Knowledge Base
           </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white md:text-5xl">
+          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
             Antworten ohne Fluff – direkt aus Projekten
           </h1>
-          <p className="max-w-3xl text-base text-text-secondary">
+          <p className="max-w-3xl text-base text-gray-700 dark:text-text-secondary">
             Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. {faqEntries.length} Fragen, strukturiert
             wie eine echte Knowledge Base. Preise klären wir im Gespräch, weil jedes Projekt anders gebaut wird.
           </p>
-          <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
+          <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-2 text-sm text-vae-turquoise/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
             <ShieldCheck className="h-4 w-4 text-vae-turquoise" />
             Keine Standardpakete · 100% transparente Kommunikation
           </p>
@@ -105,20 +105,24 @@ const ResourcesFaqPage: React.FC = () => {
             </MagneticButton>
           </div>
           <div className="mt-10 grid w-full gap-4 md:grid-cols-3">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
-              <p className="text-xs uppercase tracking-[0.3em] text-white/60">Kategorien</p>
-              <p className="mt-2 text-2xl font-semibold text-white">5 Bereiche</p>
-              <p className="text-sm text-text-secondary">Technologie, Business, Karriere, Use Cases, Sonstiges.</p>
+            <div className="rounded-3xl border border-gray-100/80 bg-white p-5 text-left shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+              <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">Kategorien</p>
+              <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">5 Bereiche</p>
+              <p className="text-sm text-gray-600 dark:text-text-secondary">
+                Technologie, Business, Karriere, Use Cases, Sonstiges.
+              </p>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
-              <p className="text-xs uppercase tracking-[0.3em] text-white/60">Einträge</p>
-              <p className="mt-2 text-2xl font-semibold text-white">{faqEntries.length} Fragen</p>
-              <p className="text-sm text-text-secondary">Kuratiert, keine generischen SEO-Antworten.</p>
+            <div className="rounded-3xl border border-gray-100/80 bg-white p-5 text-left shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+              <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">Einträge</p>
+              <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">{faqEntries.length} Fragen</p>
+              <p className="text-sm text-gray-600 dark:text-text-secondary">
+                Kuratiert, keine generischen SEO-Antworten.
+              </p>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-5 text-left">
-              <p className="text-xs uppercase tracking-[0.3em] text-white/60">Philosophie</p>
-              <p className="mt-2 text-2xl font-semibold text-white">Lösungsorientiert</p>
-              <p className="text-sm text-text-secondary">
+            <div className="rounded-3xl border border-gray-100/80 bg-white p-5 text-left shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+              <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">Philosophie</p>
+              <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">Lösungsorientiert</p>
+              <p className="text-sm text-gray-600 dark:text-text-secondary">
                 Preisfragen führen direkt zu einem CTA statt zu Ratespielen.
               </p>
             </div>
@@ -127,24 +131,24 @@ const ResourcesFaqPage: React.FC = () => {
       </section>
 
       {/* Filters */}
-      <section className="border-b border-black/5 bg-bg-dark/80 py-12 backdrop-blur dark:border-white/5">
+      <section className="border-b border-gray-100 bg-white/85 py-12 backdrop-blur dark:border-white/5 dark:bg-bg-dark/80">
         <div className="container-vae space-y-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="text-base text-text-secondary">
+            <div className="text-base text-gray-700 dark:text-text-secondary">
               <p className="text-sm uppercase tracking-[0.3em] text-vae-turquoise/80">Filter · Suche</p>
-              <p className="text-white">
+              <p className="text-gray-900 dark:text-white">
                 {totalFaqs} von {faqEntries.length} Antworten sichtbar
               </p>
             </div>
-            <label className="flex w-full items-center gap-3 rounded-full border border-white/10 bg-bg-darker px-4 py-3 text-sm text-text-secondary shadow-[0_15px_35px_rgba(3,7,18,0.45)] focus-within:border-vae-turquoise/80 md:max-w-xl">
-              <SearchIcon className="h-4 w-4 text-white/60" />
+            <label className="flex w-full items-center gap-3 rounded-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-[0_12px_30px_rgba(15,23,42,0.12)] focus-within:border-vae-turquoise/60 focus-within:ring-1 focus-within:ring-vae-turquoise/60 dark:border-white/10 dark:bg-bg-darker dark:text-text-secondary dark:shadow-[0_15px_35px_rgba(3,7,18,0.45)] md:max-w-xl">
+              <SearchIcon className="h-4 w-4 text-gray-500 dark:text-white/60" />
               <span className="sr-only">FAQ durchsuchen</span>
               <input
                 type="search"
                 value={searchQuery}
                 onChange={event => setSearchQuery(event.target.value)}
                 placeholder="Keywords, Technologien oder Fragen eingeben…"
-                className="w-full bg-transparent text-white placeholder:text-white/40 focus:outline-none"
+                className="w-full bg-transparent text-gray-900 placeholder:text-gray-500 focus:outline-none dark:text-white dark:placeholder:text-white/40"
                 aria-label="FAQ durchsuchen"
               />
             </label>
@@ -159,8 +163,8 @@ const ResourcesFaqPage: React.FC = () => {
                   onClick={() => setActiveCategory(filter.id)}
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                     isActive
-                      ? 'border-vae-turquoise bg-vae-turquoise/15 text-white shadow-[0_10px_30px_rgba(13,148,136,0.35)]'
-                      : 'border-white/10 text-white/70 hover:border-white/40 hover:text-white'
+                      ? 'border-vae-turquoise bg-vae-turquoise/15 text-vae-turquoise shadow-[0_10px_30px_rgba(13,148,136,0.18)] dark:text-white dark:shadow-[0_10px_30px_rgba(13,148,136,0.35)]'
+                      : 'border-gray-200 bg-white text-gray-700 shadow-sm hover:border-vae-turquoise/50 hover:text-vae-turquoise dark:border-white/10 dark:bg-transparent dark:text-white/70 dark:hover:border-white/40 dark:hover:text-white'
                   }`}
                 >
                   {filter.label}
@@ -172,13 +176,13 @@ const ResourcesFaqPage: React.FC = () => {
       </section>
 
       {/* Categories + FAQ */}
-      <section className="bg-gradient-to-b from-bg-darker via-[#050505] to-bg-darker py-16">
+      <section className="bg-gradient-to-b from-white via-gray-50 to-white py-16 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker">
         <div className="container-vae space-y-10">
           <div className="grid gap-5 md:grid-cols-5">
             {faqCategories.map(category => (
               <div
                 key={category.id}
-                className="rounded-3xl border border-black/5 bg-white/95 p-4 text-left text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.15)] transition hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+                className="rounded-3xl border border-gray-100 bg-white p-4 text-left text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.12)] transition hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">{category.label}</p>
                 <p className="mt-3 text-sm text-slate-600 dark:text-white/70">{category.description}</p>

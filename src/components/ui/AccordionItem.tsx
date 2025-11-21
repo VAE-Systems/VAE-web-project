@@ -50,20 +50,24 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
   }, [isOpen])
 
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+    <article className="rounded-2xl border border-gray-200/80 bg-white shadow-sm transition dark:border-white/10 dark:bg-white/5 dark:shadow-none">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${id}`}
-        className="flex w-full items-center justify-between px-6 py-5 text-left text-white transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60"
+        className="flex w-full items-center justify-between px-6 py-5 text-left text-gray-900 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 dark:text-white"
       >
-        <span className="text-lg font-semibold text-white">{question}</span>
-        {isOpen ? <Minus className="h-5 w-5 text-text-secondary" /> : <Plus className="h-5 w-5 text-text-secondary" />}
+        <span className="text-lg font-semibold text-gray-900 dark:text-white">{question}</span>
+        {isOpen ? (
+          <Minus className="h-5 w-5 text-gray-500 dark:text-text-secondary" />
+        ) : (
+          <Plus className="h-5 w-5 text-gray-500 dark:text-text-secondary" />
+        )}
       </button>
       <div id={`accordion-content-${id}`} ref={contentRef} className="h-0 overflow-hidden" aria-hidden={!isOpen}>
         <div className="px-6 pb-6">
-          <p className="text-base leading-relaxed text-text-secondary">{answer}</p>
+          <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">{answer}</p>
         </div>
       </div>
     </article>

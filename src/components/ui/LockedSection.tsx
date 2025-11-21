@@ -1,3 +1,4 @@
+import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/classNames'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Lock, LockOpen } from 'lucide-react'
@@ -31,13 +32,15 @@ const LockedSection: React.FC<LockedSectionProps> = ({
   onUnlock,
   overlayTitle = 'Inhalt freischalten',
   overlayDescription = 'Klicken Sie, um den vollständigen Inhalt zu sehen',
-  ctaText = 'Sparpotenzial ermitteln',
+  ctaText = 'Sparpotenzial anfordern',
   className,
   ctaDataAttribute,
 }) => {
   const [internalLocked, setInternalLocked] = useState(true)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   const [isPreviewActive, setIsPreviewActive] = useState(false)
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   // Check for prefers-reduced-motion
   useEffect(() => {
@@ -76,6 +79,29 @@ const LockedSection: React.FC<LockedSectionProps> = ({
     setIsPreviewActive(false)
   }, [])
 
+  const overlayBackgroundClass = isDark
+    ? isPreviewActive
+      ? 'bg-bg-darker/15 backdrop-blur-sm'
+      : 'bg-bg-darker/70 backdrop-blur-xl'
+    : isPreviewActive
+      ? 'bg-white/30 backdrop-blur-md'
+      : 'bg-white/85 backdrop-blur-xl'
+  const cardToneClass = isDark
+    ? 'border-vae-green/60 text-white shadow-[0_0_80px_rgba(5,248,200,0.25)]'
+    : 'border-vae-green/20 text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.12)]'
+  const cardStateClass = isDark
+    ? isPreviewActive
+      ? 'from-bg-dark/45 via-bg-darker/50 to-bg-dark/45'
+      : 'from-bg-dark/96 via-bg-darker/98 to-bg-dark/95'
+    : isPreviewActive
+      ? 'from-white/95 via-white to-white'
+      : 'from-white via-white to-white'
+  const titleClass = isDark ? 'text-white' : 'text-slate-900'
+  const descriptionClass = isDark ? 'text-text-secondary' : 'text-slate-600'
+  const glowClass = isDark
+    ? 'bg-[radial-gradient(circle_at_50%_50%,rgba(5,248,200,0.15),transparent_70%)]'
+    : 'bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.08),transparent_70%)]'
+
   return (
     <div className={cn('relative', className)}>
       {/* Content with blur effect when locked */}
@@ -83,10 +109,10 @@ const LockedSection: React.FC<LockedSectionProps> = ({
         animate={
           isLocked
             ? {
-                filter: isPreviewActive
-                  ? 'blur(12px) grayscale(25%) brightness(75%)'
-                  : 'blur(22px) grayscale(60%) brightness(40%)',
-                opacity: isPreviewActive ? 0.85 : 0.5,
+                // When preview is active show a softer blur and remove grayscale so silhouettes shine through
+                filter: isPreviewActive ? 'blur(4px) brightness(98%)' : 'blur(22px) grayscale(60%) brightness(35%)',
+                // Keep overlay opacity high in preview so content remains unreadable but visible
+                opacity: isPreviewActive ? 0.96 : 0.45,
               }
             : {
                 filter: 'blur(0px) grayscale(0%) brightness(100%)',
@@ -115,7 +141,13 @@ const LockedSection: React.FC<LockedSectionProps> = ({
             className="absolute inset-0 z-40 flex items-center justify-center p-6"
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-bg-darker/60 backdrop-blur-xl" />
+            <div
+              className={cn(
+                'absolute inset-0',
+                prefersReducedMotion ? '' : 'transition-all duration-500',
+                overlayBackgroundClass
+              )}
+            />
 
             {/* CTA Card */}
             <motion.div
@@ -130,7 +162,12 @@ const LockedSection: React.FC<LockedSectionProps> = ({
                       ease: [0.4, 0, 0.2, 1],
                     }
               }
-              className="border-vae-green/60 from-bg-dark/98 via-bg-darker/98 to-bg-dark/98 relative z-10 mx-auto max-w-md rounded-3xl border-2 bg-gradient-to-br p-8 text-center shadow-[0_0_80px_rgba(5,248,200,0.25)] backdrop-blur-xl"
+              className={cn(
+                'relative z-10 mx-auto max-w-md rounded-3xl border-2 bg-gradient-to-br p-8 text-center backdrop-blur-xl',
+                prefersReducedMotion ? '' : 'transition-all duration-500',
+                cardToneClass,
+                cardStateClass
+              )}
             >
               {/* Animated Lock Icon */}
               <motion.div
@@ -163,10 +200,10 @@ const LockedSection: React.FC<LockedSectionProps> = ({
               </motion.div>
 
               {/* Title */}
-              <h3 className="mb-3 text-2xl font-semibold text-white">{overlayTitle}</h3>
+              <h3 className={cn('mb-3 text-2xl font-semibold', titleClass)}>{overlayTitle}</h3>
 
               {/* Description */}
-              <p className="mb-6 text-base leading-relaxed text-text-secondary">{overlayDescription}</p>
+              <p className={cn('mb-6 text-base leading-relaxed', descriptionClass)}>{overlayDescription}</p>
 
               {/* CTA Button */}
               <MagneticButton intensity={0.12} scaleEffect className="block">
@@ -187,7 +224,7 @@ const LockedSection: React.FC<LockedSectionProps> = ({
               </MagneticButton>
 
               {/* Decorative glow */}
-              <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_50%_50%,rgba(5,248,200,0.15),transparent_70%)]" />
+              <div className={cn('pointer-events-none absolute inset-0 rounded-3xl', glowClass)} />
             </motion.div>
           </motion.div>
         )}

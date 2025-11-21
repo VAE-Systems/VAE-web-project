@@ -276,7 +276,7 @@ const useValueIncreaseHighlight = (value: number) => {
 
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)
-  const [isContentLocked, setIsContentLocked] = useState(true)
+  const [isContentLocked] = useState(true)
   const [customLicenses, setCustomLicenses] = useState<CustomLicense[]>([])
   const [customLicenseForm, setCustomLicenseForm] = useState<CustomLicenseFormState>({
     name: '',
@@ -460,7 +460,6 @@ const SetupPage: React.FC = () => {
   )
 
   const handleUnlockContent = useCallback(() => {
-    setIsContentLocked(false)
     window.open('https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz', '_self')
   }, [])
 
@@ -913,11 +912,11 @@ const SetupPage: React.FC = () => {
                 onUnlock={handleUnlockContent}
                 overlayTitle="Einsparpotenzial freischalten"
                 overlayDescription="Buchen Sie ein kostenloses Beratungsgespräch, um Ihre individuellen Einsparungen zu berechnen"
-                ctaText="Sparpotenzial ermitteln"
+                ctaText="Sparpotenzial anfordern"
                 ctaDataAttribute="cta"
                 className="rounded-3xl"
               >
-                <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-6">
+                <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-6 transition-opacity duration-300 hover:opacity-70">
                   <div className="mb-6 flex items-center justify-between gap-4">
                     <div>
                       <p className="text-vae-green text-xs font-semibold uppercase tracking-[0.3em]">

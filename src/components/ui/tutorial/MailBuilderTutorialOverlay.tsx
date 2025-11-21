@@ -1,4 +1,5 @@
 import { SpotlightTutorialController } from '@/hooks/useSpotlightTutorial'
+import { useTheme } from '@/contexts/ThemeContext'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, GraduationCap } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
@@ -18,6 +19,8 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
   const overlayRef = useRef<HTMLDivElement>(null)
   const { isActive, currentStep, totalSteps, nextStep, previousStep, skipTutorial, getCurrentStepConfig } = tutorial
   const [highlightedRect, setHighlightedRect] = useState<ElementRect | null>(null)
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const currentConfig = getCurrentStepConfig()
 
@@ -36,7 +39,6 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
 
     // Add highlight class to element
     targetElement.style.position = 'relative'
-    targetElement.style.zIndex = '10000'
     targetElement.style.transition = 'all 0.3s ease-out'
 
     // Get element position
@@ -61,7 +63,6 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
 
     return () => {
       targetElement.style.position = ''
-      targetElement.style.zIndex = ''
       window.removeEventListener('resize', updateRect)
       window.removeEventListener('scroll', updateRect)
     }
@@ -70,6 +71,23 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
   if (!isActive || !currentConfig) return null
 
   const progressPercentage = (currentStep / totalSteps) * 100
+  const progressTrackClass = isDark ? 'bg-white/10' : 'bg-slate-900/10'
+  const cardBaseClasses = isDark
+    ? 'border-white/20 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker text-white shadow-[0_30px_80px_rgba(0,0,0,0.6)]'
+    : 'border-black/5 bg-gradient-to-br from-white/95 via-white to-white/95 text-slate-900 shadow-[0_30px_60px_rgba(15,23,42,0.12)]'
+  const titleClass = isDark ? 'text-white' : 'text-slate-900'
+  const descriptionClass = isDark ? 'text-white/80' : 'text-slate-600'
+  const previousButtonClasses = isDark
+    ? 'border border-white/10 bg-white/5 text-white/80 hover:border-white/30 hover:bg-white/10 hover:text-white disabled:hover:border-white/10 disabled:hover:bg-white/5'
+    : 'border border-slate-900/10 bg-slate-900/5 text-slate-700 hover:border-slate-900/25 hover:bg-slate-900/10 hover:text-slate-900 disabled:hover:border-slate-900/10 disabled:hover:bg-slate-900/5'
+  const skipButtonClasses = isDark ? 'text-white/60 hover:text-white' : 'text-slate-500 hover:text-slate-900'
+  const primaryButtonTextClass = isDark ? 'text-bg-darker' : 'text-slate-900'
+  const positionClasses =
+    currentConfig.position === 'right'
+      ? 'right-4 top-20 items-start justify-end md:right-8 md:top-24'
+      : currentConfig.position === 'left'
+        ? 'left-4 top-20 items-start justify-start md:left-8 md:top-24'
+        : 'inset-0 items-end justify-center md:items-center'
 
   return (
     <AnimatePresence mode="wait">
@@ -162,14 +180,10 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.95 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className={`pointer-events-none fixed z-10 flex p-4 md:p-8 ${
-            currentConfig.position === 'right'
-              ? 'right-4 top-20 md:right-8 md:top-24'
-              : 'inset-0 items-end justify-center md:items-center'
-          }`}
+          className={`pointer-events-none fixed z-10 flex p-4 md:p-8 ${positionClasses}`}
         >
           <div
-            className={`relative w-full max-w-lg rounded-[32px] border border-white/20 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker p-8 shadow-[0_30px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl ${
+            className={`relative w-full max-w-lg rounded-[32px] border ${cardBaseClasses} p-8 backdrop-blur-xl ${
               currentStep === 5
                 ? 'md:ml-[2%] md:mr-auto'
                 : currentConfig.position === 'right'
@@ -189,7 +203,7 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
                   Schritt {currentStep} / {totalSteps}
                 </span>
               </div>
-              <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+              <div className={`mt-3 h-1.5 w-full overflow-hidden rounded-full ${progressTrackClass}`}>
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${progressPercentage}%` }}
@@ -201,10 +215,10 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
 
             {/* Content */}
             <div className="space-y-3">
-              <h3 className="text-2xl font-semibold text-white">{currentConfig.title}</h3>
+              <h3 className={`text-2xl font-semibold ${titleClass}`}>{currentConfig.title}</h3>
               {/* Action Hint - Mini instruction text */}
               <p className="text-sm font-medium text-vae-turquoise/90">{currentConfig.actionHint}</p>
-              <p className="text-base leading-relaxed text-white/80">{currentConfig.description}</p>
+              <p className={`text-base leading-relaxed ${descriptionClass}`}>{currentConfig.description}</p>
             </div>
 
             {/* Navigation buttons */}
@@ -212,22 +226,19 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
               <button
                 onClick={previousStep}
                 disabled={currentStep === 1}
-                className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/80 transition-all hover:border-white/30 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-white/10 disabled:hover:bg-white/5"
+                className={`flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-40 ${previousButtonClasses}`}
               >
                 <ArrowLeft className="h-4 w-4" />
                 Zurück
               </button>
 
-              <button
-                onClick={skipTutorial}
-                className="text-sm font-medium text-white/70 transition-colors hover:text-white dark:text-white/60 dark:hover:text-white"
-              >
+              <button onClick={skipTutorial} className={`text-sm font-medium transition-colors ${skipButtonClasses}`}>
                 Tutorial überspringen
               </button>
 
               <button
                 onClick={nextStep}
-                className="flex items-center gap-2 rounded-2xl bg-vae-turquoise px-6 py-2.5 text-sm font-semibold text-bg-darker transition-all hover:bg-vae-turquoise-dark hover:shadow-lg hover:shadow-vae-turquoise/30"
+                className={`flex items-center gap-2 rounded-2xl bg-vae-turquoise px-6 py-2.5 text-sm font-semibold transition-all hover:bg-vae-turquoise-dark hover:shadow-lg hover:shadow-vae-turquoise/30 ${primaryButtonTextClass}`}
               >
                 {currentStep === totalSteps ? 'Fertig' : 'Weiter'}
                 <ArrowRight className="h-4 w-4" />

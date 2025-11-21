@@ -21,7 +21,7 @@ const SETUP_CALCULATOR_TUTORIAL_STEPS: SetupCalculatorTutorialStepConfig[] = [
     description:
       'Alle Berechnungen skalieren automatisch mit. Sie können jederzeit nachjustieren und Beobachten, wie sich SaaS- und Hosting-Kosten verändern.',
     highlightTarget: '[data-calculator-tutorial="team-size"]',
-    position: 'left',
+    position: 'center',
   },
   {
     step: 2,
@@ -30,7 +30,7 @@ const SETUP_CALCULATOR_TUTORIAL_STEPS: SetupCalculatorTutorialStepConfig[] = [
     description:
       'Wir kalkulieren für jedes aktivierte Tool die monatlichen Lizenzkosten pro Nutzer:in und rechnen individuelle Zusatzkosten hinzu.',
     highlightTarget: '[data-calculator-tutorial="tools"]',
-    position: 'left',
+    position: 'center',
   },
   {
     step: 3,
@@ -39,14 +39,14 @@ const SETUP_CALCULATOR_TUTORIAL_STEPS: SetupCalculatorTutorialStepConfig[] = [
     description:
       'Wir zeigen Netto- und Bruttowerte nebeneinander, damit Sie sofort erkennen, wie stark die USt. Ihre SaaS-Gesamtkosten beeinflusst.',
     highlightTarget: '[data-calculator-tutorial="results"]',
-    position: 'right',
+    position: 'left',
   },
   {
     step: 4,
     title: 'Sparpotenzial anfordern',
-    actionHint: 'Hover zeigt Ihnen die Vorschau, ein Klick auf „Sparpotenzial ermitteln“ öffnet die Kontaktseite.',
+    actionHint: 'Wir berechnen Ihnen gerne Ihr Sparpotenzial in einer kostenlosen Erstberatung.',
     description:
-      'Die detaillierte Berechnung bleibt gesperrt. Mit dem CTA nehmen Sie Kontakt auf und erhalten Ihre individuelle Kalkulation inklusive Einsparung im ersten Jahr.',
+      'Hier zeigen wir Ihnen in Brutto und Netto unterteilt Ihre aktuellen approximativen Kosten, um Ihnen einen Überblick zu schaffen.',
     highlightTarget: '[data-calculator-tutorial="cta"]',
     position: 'right',
   },

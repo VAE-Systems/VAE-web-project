@@ -17,7 +17,6 @@ const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
   { id: 'why-open-source', iconName: 'lightbulb', label: 'Warum Open Source?' },
   { id: 'services', iconName: 'settings', label: 'Services' },
-  { id: 'tech-showcase', iconName: 'code', label: 'Technologien' },
   { id: 'social-proof', iconName: 'work', label: 'Projekte' },
   { id: 'process', iconName: 'timeline', label: 'Prozess' },
   { id: 'abschluss', iconName: 'check_circle', label: 'Kontakt' },

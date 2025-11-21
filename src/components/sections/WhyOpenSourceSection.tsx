@@ -1,14 +1,7 @@
-import React from 'react'
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
+import React from 'react'
 
 const WhyOpenSourceSection: React.FC = () => {
-  const scrollToTech = React.useCallback(() => {
-    const target = document.getElementById('tech-showcase')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }, [])
-
   return (
     <section
       id="why-open-source"
@@ -49,15 +42,6 @@ const WhyOpenSourceSection: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <div className="mt-8">
-              <button
-                type="button"
-                onClick={scrollToTech}
-                className="text-sm font-semibold text-vae-turquoise underline-offset-4 transition hover:underline"
-              >
-                Tech-Stack ansehen ↓
-              </button>
-            </div>
           </article>
         </div>
       </div>

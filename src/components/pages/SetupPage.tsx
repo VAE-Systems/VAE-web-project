@@ -16,8 +16,8 @@ import {
 } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { flattenedSaasTools, saasToolCategories } from '@/data/saasTools'
 import { faqEntries } from '@/data/faqData'
+import { flattenedSaasTools, saasToolCategories } from '@/data/saasTools'
 import { useSetupCalculatorTutorial } from '@/hooks/useSetupCalculatorTutorial'
 import { cn } from '@/lib/classNames'
 import MagneticButton from '../ui/buttons/MagneticButton'
@@ -431,21 +431,23 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/5 bg-gradient-to-br from-bg-dark via-bg-darker to-bg-dark py-24 md:py-28">
-        <div className="pointer-events-none absolute inset-0 opacity-60">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.25),transparent_55%),radial-gradient(circle_at_80%_30%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)]" />
-        </div>
+      <section className="section-card-container border-b bg-white py-24 dark:border-white/5 dark:bg-bg-dark md:py-28">
+        <div className="section-card-backdrop" />
+
         <div className="container-vae relative flex flex-col items-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             <ServerCog className="h-4 w-4" /> Infrastructure Setup
           </span>
           <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-white md:text-5xl">
-            Von SaaS zu Open Source — in 3–6 Wochen produktionsbereit
+            Infrastruktur-Design für eine KI-geprägte Arbeitswelt, in der Sie die Kontrolle behalten.
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-text-secondary md:text-lg">
-            Nach der strategischen Entscheidung folgt die technische Umsetzung: Wir bauen Ihre komplette
-            Open-Source-Infrastruktur auf. Nextcloud statt Dropbox. Odoo statt Salesforce. Alles konfiguriert, migriert,
-            gehärtet und produktionsreif – ohne Vendor-Lock-in, mit voller Datenkontrolle.
+            Wir entwerfen Ihre Informationsinfrastruktur – das Betriebssystem Ihres Unternehmens. Selbstgehostet, offen
+            und so gebaut, dass Sie auch morgen noch flexibel entscheiden können.
+          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 dark:text-gray-400">
+            Statt weitere KI-Tools einfach oben drauf zu setzen, schaffen wir ein stabiles Zusammenspiel aus Systemen,
+            Datenflüssen und Workflows, auf dem Ihre Entscheidungen und Automatisierungen sicher laufen.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <MagneticButton intensity={0.08} scaleEffect>
@@ -476,46 +478,151 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 2 */}
-      <section className="border-b border-white/5 py-20" id="definition">
-        <div className="container-vae grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">
-              Was ist Infrastructure Setup?
-            </p>
-            <h2 className="text-3xl font-semibold text-white md:text-4xl">
-              Was bedeutet Infrastructure Setup bei VAE?
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Infrastructure Setup ist die technische Umsetzungsphase nach der strategischen Beratung. Wir ersetzen
-              proprietäre SaaS-Tools durch produktionsreife Open-Source-Alternativen – ohne Vendor-Lock-in und mit
-              voller Datenkontrolle.
-            </p>
-            <ul className="space-y-3 text-text-secondary">
-              {[
-                'Nextcloud aufsetzen (Files, Calendar, Contacts, Talk)',
-                'CRM/ERP-System konfigurieren (Odoo oder SuiteCRM)',
-                'Automationen aufbauen (n8n für Workflows)',
-                'Daten migrieren (Microsoft 365, Google, Salesforce, …)',
-                'Server-Infrastruktur aufbauen (Docker, Traefik, SSL)',
-                'Team schulen (Workshops & Dokumentation)',
-              ].map(item => (
-                <li key={item} className="flex items-start gap-3">
-                  <Check className="mt-1 h-4 w-4 text-vae-turquoise" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-text-secondary">
-              Am Ende haben Sie ein vollständig funktionierendes System, das Ihr Team sofort nutzen kann. Plus:
-              vollständige Dokumentation, automatisierte Backups und 1 Monat Post-Launch-Support inklusive.
-            </p>
-            <p className="italic text-gray-600 dark:text-text-secondary/80">
-              Typische Projektdauer: 3–6 Wochen. Investition abhängig von Umfang und Komplexität. Im kostenlosen
-              Erstgespräch erhalten Sie eine präzise Schätzung.
+      {/* ==================== STUDIEN-SEKTION ==================== */}
+      <section className="animate-section border-b border-gray-200 bg-[hsl(165,59%,97%)] py-16 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(165,20%,8%)]">
+        <div className="container-vae">
+          <div className="mb-12 text-center">
+            <h2 className="h2 heading-gradient mb-4">Warum Unternehmen auf selbstgehostete Lösungen setzen</h2>
+            <p className="mx-auto max-w-2xl text-lg text-gray-700 dark:text-text-secondary">
+              SaaS-Kosten explodieren, Vendor Lock-in wird zum Risiko – Open Source ist die Antwort.
             </p>
           </div>
-          <div className="relative min-h-[320px] rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 via-white/5 to-transparent p-8 shadow-lg backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/5">
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Statistik 1: SaaS-Explosion */}
+            <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
+              <div className="mb-4 text-5xl font-bold text-vae-turquoise">300 Mrd. $</div>
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">SaaS-Ausgaben 2025</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                +20% Wachstum gegenüber 2024 – getrieben durch AI-Tools und Cloud-Migration.
+              </p>
+              <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
+                Quelle:{' '}
+                <a
+                  href="https://www.saastr.com/gartner-saas-spend-is-actually-accelerating-will-hit-300-billion-in-2025/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-vae-turquoise hover:underline"
+                >
+                  Gartner 2024
+                </a>
+              </p>
+            </div>
+
+            {/* Statistik 2: Vendor Lock-in */}
+            <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
+              <div className="mb-4 text-5xl font-bold text-vae-turquoise">47%</div>
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Vendor Lock-in-Sorgen</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Fast die Hälfte aller Unternehmen sieht AWS/Azure/GCP-Abhängigkeit als strategisches Risiko.
+              </p>
+              <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
+                Quelle:{' '}
+                <a
+                  href="https://www.qovery.com/blog/the-high-cost-of-vendor-lock-in-in-cloud-computing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-vae-turquoise hover:underline"
+                >
+                  Qovery 2024
+                </a>
+              </p>
+            </div>
+
+            {/* Statistik 3: Open Source-Adoption */}
+            <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
+              <div className="mb-4 text-5xl font-bold text-vae-turquoise">83%</div>
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Open Source-Akzeptanz</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Enterprises sehen Open Source als wertvoll für ihre Zukunft – 86% berichten höhere Produktivität.
+              </p>
+              <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
+                Quelle:{' '}
+                <a
+                  href="https://canonical.com/blog/state-of-global-open-source-2025"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-vae-turquoise hover:underline"
+                >
+                  Canonical 2025
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2 */}
+      <section
+        className="section-card-container border-b bg-gray-50 py-20 dark:border-white/5 dark:bg-bg-darker"
+        id="definition"
+      >
+        <div className="section-card-backdrop" />
+
+        <div className="container-vae relative grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="space-y-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">
+              Infrastructure-Design
+            </p>
+            <h2 className="text-3xl font-semibold text-white md:text-4xl">
+              Was bedeutet Infrastructure-Design bei VAE?
+            </h2>
+            <p className="text-lg text-gray-700 dark:text-text-secondary">
+              Bei VAE entwickeln wir Ihre Informationsinfrastruktur – also die Arbeitsumgebung, in der Daten, Workflows
+              und Systeme so zusammenspielen, dass Sie Entscheidungen treffen, Prozesse steuern und KI sinnvoll
+              einsetzen können.
+            </p>
+            <p className="text-base text-gray-700 dark:text-text-secondary">
+              In vielen Organisationen ist eine gewachsene SaaS-Landschaft entstanden: verstreute Daten, harte
+              Abhängigkeiten von einzelnen Anbietern und wenig Überblick über Risiken.
+            </p>
+            <p className="text-base text-gray-700 dark:text-text-secondary">
+              In dieser Situation weitere Tools und KI-Dienste oben draufzusetzen, erhöht zwar das Tempo – aber selten
+              die Kontrolle.
+            </p>
+            <p className="text-base text-gray-700 dark:text-text-secondary">
+              Unser Ansatz: Wir analysieren Ihre bestehende Landschaft, skizzieren eine schnittstellenoptimierte,
+              möglichst vendor-neutrale Architektur und setzen sie mit ausgewählten Open-Source-Systemen um. Dazu
+              gehören Migration, Konfiguration, Dokumentation und Schulung Ihres Teams – am Ende steht ein
+              produzierbares Setup, kein Foliensatz.
+            </p>
+
+            {/* Abgrenzungs-Box zur Strategieberatung */}
+            <div className="mt-6 rounded-xl border border-gray-300 bg-gray-50 p-5 dark:border-white/10 dark:bg-white/5">
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Sie können Infrastructure-Design mit oder ohne vorherige Strategieberatung buchen. Wenn die Richtung
+                bereits klar ist, sorgen wir dafür, dass Ihre Systeme sie tragen – wenn nicht, klären wir sie gemeinsam
+                in der{' '}
+                <a href="/leistungen/strategie" className="font-medium text-vae-turquoise hover:underline">
+                  Strategieberatung
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+          {/* TODO (VAE.5): Vorher/Nachher-Visual als Animation umsetzen */}
+          {/* Konzept:
+              Vorher-Zustand:
+              - Viele kleine Bubbles/Badges mit Logos oder generischen Icons (Mail, Chat, CRM, Files, Tickets)
+              - Unruhig verteilt, leicht überlappend, teilweise halbtransparent
+              - Subtile "Float"-Animation: langsames, unregelmäßiges Schweben
+
+              Übergang:
+              - Beim Scroll-Eintreten (ScrollTrigger) sammelt sich der Schwarm in der Mitte
+              - Bubbles ordnen sich auf Kreisbahn/Linie und verschmelzen in vereinfachtes Stack-Icon
+              - Dauer: 800-1200ms, einmalig beim ersten Sichtkontakt
+
+              Nachher-Zustand:
+              - Klares, ruhiges Icon oder kleiner Stack aus 3-4 Blöcken ("Storage / Apps / Automations / Interfaces")
+              - Leichter Glow, keine Bewegung mehr → wirkt stabil, kontrolliert
+
+              Barrierefreiheit:
+              - prefers-reduced-motion respektieren → nur statische Vorher/Nachher-Cards zeigen
+          */}
+          <div
+            id="before-after-visual"
+            className="relative min-h-[320px] rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 via-white/5 to-transparent p-8 shadow-lg backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/5"
+          >
             <div className="relative flex h-full flex-col justify-between gap-8">
               <div className="rounded-2xl border border-red-500/30 bg-red-500/5 p-5 backdrop-blur-sm">
                 <p className="mb-1 text-sm font-semibold uppercase tracking-[0.3em] text-red-400/80 dark:text-red-300/70">
@@ -546,7 +653,9 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 3 - Produktionsreife Systeme */}
-      <section className="relative overflow-hidden py-20">
+      <section className="section-card-container bg-white py-20 dark:bg-bg-dark">
+        <div className="section-card-backdrop" />
+
         <div className="container-vae relative">
           <header className="mx-auto mb-14 max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">Ihre Infrastruktur</p>
@@ -584,8 +693,10 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 4 - Original Content */}
-      <section className="py-20">
-        <div className="container-vae">
+      <section className="section-card-container bg-gray-50 py-20 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+
+        <div className="container-vae relative">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">Was ist enthalten?</p>
             <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Was Sie erhalten</h2>
@@ -593,20 +704,38 @@ const SetupPage: React.FC = () => {
               Vollständiges Setup, produktionsbereit, ohne versteckte Kosten.
             </p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {serviceCards.map(card => (
-              <div
-                key={card.title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition duration-200 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:bg-white/10"
-              >
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/10 text-vae-turquoise">
-                  <card.icon className="h-6 w-6" />
+          <div className="card-group mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {serviceCards.map(card => {
+              const Icon = card.icon
+              return (
+                <div
+                  key={card.title}
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-6 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
+                >
+                  <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+
+                  <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/30 transition-transform duration-300 group-hover:scale-110">
+                    <Icon className="relative z-[1] h-6 w-6" />
+                    <div className="absolute inset-0 bg-vae-turquoise/10 blur-[14px]" />
+                  </div>
+
+                  <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">{card.title}</h3>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">{card.description}</p>
+
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="absolute inset-0 bg-gradient-to-br from-vae-turquoise/10 via-transparent to-vae-turquoise/10" />
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white">{card.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{card.description}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
+
+          {/* Hinweis zu individueller Planung */}
+          <p className="mt-12 text-center text-sm text-gray-600 dark:text-gray-400">
+            Jedes Setup wird individuell geplant – abhängig von Teamgröße, Prozessen und bestehender Landschaft.
+            Konkrete Stack-Vorschläge erhalten Sie im{' '}
+            <span className="font-medium text-vae-turquoise">kostenlosen Erstgespräch</span>.
+          </p>
         </div>
       </section>
 
@@ -948,8 +1077,10 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
       {/* Section 5 Process */}
-      <section className="py-20">
-        <div className="container-vae">
+      <section className="section-card-container bg-white py-20 dark:bg-bg-dark">
+        <div className="section-card-backdrop" />
+
+        <div className="container-vae relative">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">Prozess-Ablauf</p>
             <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Wie läuft der Setup ab?</h2>
@@ -976,51 +1107,25 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 6 Scenarios */}
-      <section className="border-y border-white/5 bg-bg-dark py-20">
+      {/* ==================== NACH DEM SETUP: LANGFRISTIGE BETREUUNG ==================== */}
+      <section className="border-y border-gray-200 bg-gray-50 py-16 dark:border-white/5 dark:bg-bg-darker">
         <div className="container-vae">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">Beispiel-Setups</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Wie könnte Ihr Setup aussehen?</h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {scenarioCards.map(card => (
-              <div
-                key={card.title}
-                className={`rounded-3xl border p-6 transition duration-200 hover:-translate-y-1 ${
-                  card.featured
-                    ? 'border-vae-turquoise/60 bg-white/10 shadow-lg shadow-vae-turquoise/20'
-                    : 'border-white/10 bg-white/5'
-                }`}
+          <div className="mx-auto max-w-3xl rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-8 text-center backdrop-blur-sm dark:border-vae-turquoise/20 dark:bg-vae-turquoise/10">
+            <h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
+              Nach dem Setup: Langfristige Betreuung
+            </h3>
+            <p className="mb-6 text-base leading-relaxed text-gray-700 dark:text-gray-300">
+              Infrastruktur ist kein einmaliges Projekt – sie muss mit Ihrem Unternehmen wachsen. Wir bieten laufende
+              Betreuung, Erweiterungen und strategische IT-Beratung.
+            </p>
+            <MagneticButton intensity={0.08} scaleEffect>
+              <a
+                href="/leistungen/betreuung"
+                className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-base"
               >
-                {card.featured && (
-                  <span className="mb-4 inline-flex items-center rounded-full border border-vae-turquoise/50 bg-vae-turquoise/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
-                    Most Popular
-                  </span>
-                )}
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
-                  <card.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-4 text-2xl font-semibold text-white">{card.title}</h3>
-                <p className="mt-2 text-base text-text-secondary">{card.description}</p>
-                <ul className="mt-4 space-y-2 text-sm text-text-secondary">
-                  {card.highlights.map(highlight => (
-                    <li key={highlight} className="flex items-start gap-2">
-                      <Check className="text-vae-green mt-0.5 h-4 w-4" />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 text-sm text-text-secondary">
-                  <p>
-                    <span className="font-semibold text-white">Typische Dauer:</span> {card.duration}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-white">Geschätzter Aufwand:</span> {card.effort}
-                  </p>
-                </div>
-              </div>
-            ))}
+                Mehr zur langfristigen Betreuung
+              </a>
+            </MagneticButton>
           </div>
         </div>
       </section>

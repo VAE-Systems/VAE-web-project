@@ -1,23 +1,25 @@
 import { faqEntries } from '@/data/faqData'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Link } from 'react-router-dom'
 import {
   AlertCircle,
+  ArrowRight,
   BarChart3,
-  Building2,
   Calendar,
+  CheckCircle,
   CheckCircle2,
   ChevronDown,
   FileText,
   GitBranch,
-  Heart,
   Map,
-  Rocket,
   Search,
+  Shield,
   Target,
+  TrendingUp,
+  Zap,
 } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
@@ -75,6 +77,7 @@ interface TransformationStat {
   ariaLabel: string
   description: string
   source: string
+  sourceUrl?: string
 }
 
 const features: FeatureCard[] = [
@@ -115,7 +118,7 @@ const features: FeatureCard[] = [
     title: 'Szenario-Planung',
     description:
       'Nicht die "eine perfekte Lösung", sondern 3 realistische Strategieoptionen – zugeschnitten auf Budget, Zeitrahmen und Risikobereitschaft.',
-    badge: '3 Optionen',
+    badge: 'Strategieoptionen',
     outputs: ['Risiko-/Budget-Abgleich', 'Realistische Alternativen'],
   },
   {
@@ -172,39 +175,39 @@ const processSteps: ProcessStep[] = [
 
 const targetProfiles: TargetProfile[] = [
   {
-    icon: Building2,
-    title: 'Mittelständische Unternehmen',
-    subtitle: '10–200 Mitarbeitende',
+    icon: TrendingUp,
+    title: 'SaaS-Kosten außer Kontrolle',
+    subtitle: 'Sie zahlen €20.000+/Jahr für Cloud-Tools',
     features: [
-      'Hohe SaaS-Kosten (€20.000+/Jahr)',
-      'Bedarf an digitaler Souveränität',
-      'DSGVO-konforme Lösungen erforderlich',
+      'Vendor-Lock-in bei Microsoft, Salesforce & Co.',
+      'Lizenzkosten steigen mit jedem Team-Zuwachs',
+      'DSGVO-Compliance wird zur Herausforderung',
     ],
-    badge: 'Optimal geeignet',
+    badge: 'ROI in 12–18 Monaten',
     badgeVariant: 'optimal',
   },
   {
-    icon: Rocket,
-    title: 'Wachstumsunternehmen',
-    subtitle: '5–100 Mitarbeitende',
+    icon: Zap,
+    title: 'Wachstum überfordert die Struktur',
+    subtitle: 'Ihr Team wächst schneller als Ihre Systeme',
     features: [
-      'Budgetbewusste Skalierung notwendig',
-      'Schnelles Wachstum erfordert flexible Systeme',
-      'Zukunftssichere Infrastruktur gefragt',
+      'Manuelle Prozesse bremsen das Geschäft',
+      'Jede Abteilung nutzt eigene Tools (Silos)',
+      'Onboarding neuer Mitarbeitender dauert Wochen',
     ],
-    badge: 'Sehr geeignet',
+    badge: 'Skalierung ohne Chaos',
     badgeVariant: 'sehr',
   },
   {
-    icon: Heart,
-    title: 'Non-Profit-Organisationen',
-    subtitle: '5–50 Mitarbeitende',
+    icon: Shield,
+    title: 'KI ohne Governance',
+    subtitle: 'Sie nutzen KI-Tools, aber ohne Strategie',
     features: [
-      'Limitierte IT-Budgets optimal nutzen',
-      'Hohe Datenschutz-Anforderungen',
-      'Interesse an Open-Source-Lösungen',
+      'Keine Richtlinien für ChatGPT, Copilot & Co.',
+      'Unsicherheit bei EU AI Act & Datenschutz',
+      'IT-Budget wächst, aber ROI unklar',
     ],
-    badge: 'Perfekt geeignet',
+    badge: 'Compliance-Ready',
     badgeVariant: 'perfekt',
   },
 ]
@@ -223,7 +226,7 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: 2–6 Monate (je nach Umfang)',
     investment: 'Investition: Individuell nach Projektumfang',
-    cta: { label: 'Kostenlose Beratung anfragen', href: '/contact#booking' },
+    cta: { label: 'Full-Service anfragen', href: '/contact#booking' },
   },
   {
     option: 'Option B',
@@ -238,7 +241,7 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: 1–2 Wochen',
     investment: 'Investition: Individuell nach Projektumfang',
-    cta: { label: 'Kostenlose Beratung anfragen', href: '/contact#booking' },
+    cta: { label: 'Strategiegespräch buchen', href: '/contact#booking' },
   },
   {
     option: 'Option C',
@@ -253,7 +256,7 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: Nach Umfang abgestimmt',
     investment: 'Investition: Individuell nach Projektumfang',
-    cta: { label: 'Kostenlose Beratung anfragen', href: '/contact#booking' },
+    cta: { label: 'Hybrides Modell besprechen', href: '/contact#booking' },
   },
   {
     option: 'Option D',
@@ -267,8 +270,8 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: 3–12 Monate (Retainer)',
     investment: 'Investition: Monatlicher Retainer (individuell)',
-    cta: { label: 'Beratung anfragen', href: '/contact#booking' },
-    secondary: { label: 'Zur langfristigen Betreuung →', href: '/leistungen/betreuung' },
+    cta: { label: 'Retainer-Details anfragen', href: '/contact#booking' },
+    secondary: { label: 'Zur langfristigen Betreuung', href: '/leistungen/betreuung' },
   },
 ]
 
@@ -278,21 +281,26 @@ const transformationStats: TransformationStat[] = [
     highlight: 'Nur 1 von 3',
     ariaLabel: 'Nur 1 von 3 Transformationen',
     description: 'Transformationen erreicht ihre Wachstums- und Wertschöpfungsziele.',
-    source: 'Quelle: Boston Consulting Group, 2025',
+    source: 'BCG, 2025',
+    sourceUrl:
+      'https://www.bcg.com/press/29october2020-companies-can-flip-the-odds-of-success-in-digital-transformations-from-30-to-80',
   },
   {
     id: 'bain',
     highlight: '88%',
     ariaLabel: 'Achtundachtzig Prozent',
     description: 'der Business-Transformationen verfehlen ihre ursprünglichen Ziele.',
-    source: 'Quelle: Bain & Company, 2024',
+    source: 'Bain & Company, 2024',
+    sourceUrl:
+      'https://www.bain.com/about/media-center/press-releases/2024/88-of-business-transformations-fail-to-achieve-their-original-ambitions/',
   },
   {
     id: 'zylo',
     highlight: '$18 Mio.',
     ariaLabel: 'Achtzehn Millionen US-Dollar',
     description: 'verschwendet ein durchschnittliches Unternehmen jährlich durch ungenutzte SaaS-Lizenzen.',
-    source: 'Quelle: Zylo SaaS Management Index, 2024',
+    source: 'Zylo, 2024',
+    sourceUrl: 'https://zylo.com/news/2024-saas-management-index/',
   },
 ]
 
@@ -407,9 +415,9 @@ const BeratungPage: React.FC = () => {
       />
 
       {/* ==================== HERO SECTION ==================== */}
-      <section className="relative overflow-hidden border-b border-vae-turquoise/25 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-vae-turquoise/25 dark:from-[hsl(0,0%,8%)] dark:via-[#12151a] dark:to-[hsl(0,0%,4%)] md:py-40">
-        <div className="pointer-events-none absolute inset-0 opacity-30">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,255,165,0.12),transparent_60%),radial-gradient(circle_at_70%_80%,rgba(0,255,165,0.08),transparent_60%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(0,255,165,0.22),transparent_60%),radial-gradient(circle_at_70%_80%,rgba(0,255,165,0.16),transparent_60%)]" />
+      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:from-bg-dark dark:via-[#0e1117] dark:to-bg-dark md:py-40">
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.35),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(var(--vae-turquoise-rgb),0.18),transparent_60%)]" />
         </div>
 
         <div className="container-vae relative">
@@ -476,7 +484,7 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== STUDIEN-SEKTION ==================== */}
-      <section className="animate-section mt-24 border-b border-gray-200/70 bg-[hsl(165,59%,97%)] py-24 dark:border-white/5 dark:bg-[hsl(165,20%,8%)]">
+      <section className="animate-section mt-24 border-b border-gray-200 bg-[hsl(165,59%,97%)] py-24 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(165,20%,8%)]">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -489,12 +497,29 @@ const BeratungPage: React.FC = () => {
 
           <div className="mt-12 grid gap-10 md:grid-cols-3">
             {transformationStats.map(stat => (
-              <article key={stat.id} className="text-center">
+              <article
+                key={stat.id}
+                className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 text-center backdrop-blur-sm transition-all hover:scale-105 hover:border-vae-turquoise/50 dark:border-vae-turquoise/20 dark:bg-white/5"
+              >
                 <div className="text-4xl font-semibold tracking-tight text-vae-turquoise">
                   <span aria-label={stat.ariaLabel}>{stat.highlight}</span>
                 </div>
-                <p className="mt-4 text-base leading-relaxed text-gray-800 dark:text-white/85">{stat.description}</p>
-                <p className="mt-3 text-sm italic text-gray-500 dark:text-white/60">{stat.source}</p>
+                <p className="mt-4 text-base leading-relaxed text-gray-900 dark:text-white">{stat.description}</p>
+                <p className="mt-3 text-sm italic text-gray-500 dark:text-white/60">
+                  Quelle:{' '}
+                  {stat.sourceUrl ? (
+                    <a
+                      href={stat.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-vae-turquoise hover:underline"
+                    >
+                      {stat.source}
+                    </a>
+                  ) : (
+                    stat.source
+                  )}
+                </p>
               </article>
             ))}
           </div>
@@ -517,8 +542,10 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== WAS IST STRATEGISCHE BERATUNG ==================== */}
-      <section className="animate-section border-b border-gray-200 py-24 dark:border-[hsl(0,0%,12%)]">
-        <div className="container-vae">
+      <section className="section-card-container animate-section border-b bg-white pb-24 pt-24 dark:border-[hsl(0,0%,12%)] dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+
+        <div className="container-vae relative">
           <h2 className="h2 heading-gradient mb-16 text-center">Was bedeutet Strategische Beratung bei VAE?</h2>
 
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
@@ -643,17 +670,21 @@ const BeratungPage: React.FC = () => {
         </div>
       </section>
 
+      {/* ==================== VISUELLER ÜBERGANG (Must-Fix 1, Stufe 1) ==================== */}
+      <div className="h-12 bg-gradient-to-b from-white to-gray-50 dark:from-bg-darker dark:to-[#0b0e13]" />
+
       {/* ==================== WAS IST ENTHALTEN (FEATURES) ==================== */}
-      <section className="animate-section relative overflow-hidden border-b border-gray-200 bg-gray-50 py-24 dark:border-[hsl(0,0%,12%)] dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#0b0e13] dark:to-bg-darker">
-        <div className="pointer-events-none absolute inset-0 opacity-80">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.08),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.06),transparent_40%),linear-gradient(135deg,rgba(255,255,255,0.8),rgba(255,255,255,0.25))] dark:bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.18),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.12),transparent_45%),linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))]" />
-          <div className="absolute inset-6 rounded-[32px] border border-white/60 bg-white/40 backdrop-blur-md dark:border-white/5 dark:bg-white/10" />
-        </div>
+      <section className="section-card-container animate-section border-b bg-gray-50/50 pb-24 pt-32 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(0,0%,8%)]">
+        <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
           <div className="mb-16 text-center">
             <h2 className="h2 heading-gradient mb-4">Was Sie erhalten</h2>
             <p className="text-lg text-gray-600 dark:text-[hsl(0,0%,75%)]">Konkret, messbar, transparent</p>
+            <p className="mx-auto mb-0 mt-4 max-w-2xl text-center text-base text-gray-600 dark:text-[hsl(0,0%,75%)]">
+              Damit Sie genau wissen, was Sie erhalten: Hier sind die konkreten Deliverables unserer Strategieberatung –
+              von der Erstanalyse bis zur finalen Entscheidungsgrundlage.
+            </p>
           </div>
 
           <div className="card-group grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -702,11 +733,9 @@ const BeratungPage: React.FC = () => {
       {/* ==================== PROZESS-ABLAUF ==================== */}
       <section
         id="process-section"
-        className="relative overflow-hidden border-b border-gray-200 bg-white py-24 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker"
+        className="section-card-container animate-section border-b bg-white pb-24 pt-24 dark:border-[hsl(0,0%,12%)] dark:bg-bg-darker"
       >
-        <div className="pointer-events-none absolute inset-0 opacity-60">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.18),transparent_55%),radial-gradient(circle_at_80%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_65%)]" />
-        </div>
+        <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
           <div className="mx-auto max-w-2xl text-center">
@@ -719,42 +748,86 @@ const BeratungPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="mt-12 space-y-8 border-l border-gray-300 pl-6 dark:border-white/10 md:pl-10">
+          {/* MOBILE: Vertikale Timeline (< lg) */}
+          <div className="mt-12 space-y-8 border-l border-gray-300 pl-6 dark:border-white/10 lg:hidden">
             {processSteps.map(step => (
               <article
                 key={step.number}
                 className="relative rounded-2xl border border-gray-200 bg-white p-6 shadow-lg transition duration-300 hover:border-vae-turquoise/40 hover:shadow-xl dark:border-white/10 dark:bg-white/5 dark:shadow-black/30 dark:backdrop-blur-md dark:hover:bg-white/10"
               >
-                <div className="absolute -left-12 top-6 hidden h-12 w-12 items-center justify-center rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-900 dark:border-white/20 dark:bg-bg-darker dark:text-white md:flex">
-                  {step.number}
+                {/* Nummer-Badge inline (Mobile) */}
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-vae-turquoise">
+                  <span className="text-lg font-bold text-white">{step.number}</span>
                 </div>
 
-                <div className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">
-                  Phase {step.number}
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">{step.title}</h3>
-                <p className="mt-1 text-sm font-semibold text-vae-turquoise/80">{step.duration}</p>
-                <p className="mt-2 text-base leading-relaxed text-gray-700 dark:text-white/80">{step.description}</p>
-                <p className="mt-1 text-sm font-medium text-gray-700 dark:text-white/80">{step.outcome}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{step.title}</h3>
+                <p className="mt-2 text-sm text-text-muted">{step.duration}</p>
+                <p className="mt-2 font-medium text-vae-turquoise">{step.outcome}</p>
+                <p className="mt-4 text-gray-700 dark:text-text-secondary">{step.description}</p>
 
-                <ul className="mt-4 space-y-2 text-sm text-gray-600 dark:text-white/70">
-                  {step.details.map(detail => (
-                    <li key={detail} className="flex items-start gap-2">
-                      <span className="mt-0.5 text-base font-semibold text-vae-turquoise">→</span>
-                      <span>{detail}</span>
+                <ul className="mt-6 space-y-3">
+                  {step.details.map((detail, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                      <span className="text-sm text-gray-700 dark:text-text-secondary">{detail}</span>
                     </li>
                   ))}
                 </ul>
               </article>
             ))}
           </div>
+
+          {/* DESKTOP: Horizontale Timeline (>= lg) */}
+          <div className="mt-12 hidden lg:block">
+            <div className="relative grid grid-cols-3 gap-8">
+              {processSteps.map((step, index) => (
+                <div key={step.number} className="relative">
+                  {/* Card */}
+                  <article className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-white/10 dark:bg-white/5">
+                    {/* Nummer-Badge (oben zentriert) */}
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-vae-turquoise">
+                      <span className="text-xl font-bold text-white">{step.number}</span>
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="mb-2 text-center text-2xl font-bold text-gray-900 dark:text-white">{step.title}</h3>
+                    <p className="mb-2 text-center text-sm text-text-muted">{step.duration}</p>
+                    <p className="mb-6 text-center font-medium text-vae-turquoise">{step.outcome}</p>
+
+                    <p className="mb-6 text-gray-700 dark:text-text-secondary">{step.description}</p>
+
+                    <ul className="space-y-3">
+                      {step.details.map((detail, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                          <span className="text-sm text-gray-700 dark:text-text-secondary">{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+
+                  {/* Verbindungspfeil (nur zwischen Cards) */}
+                  {index < processSteps.length - 1 && (
+                    <div className="absolute -right-4 top-8 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise">
+                      <ArrowRight className="h-6 w-6 text-white" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ==================== FÜR WEN GEEIGNET ==================== */}
-      <section className="animate-section border-b border-gray-200 bg-gray-50 py-24 dark:border-[hsl(0,0%,12%)] dark:bg-transparent">
-        <div className="container-vae">
-          <h2 className="h2 heading-gradient mb-16 text-center">Für wen ist strategische Beratung geeignet?</h2>
+      <section className="section-card-container animate-section border-b bg-white pb-24 pt-24 dark:border-[hsl(0,0%,12%)] dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+
+        <div className="container-vae relative">
+          <h2 className="h2 heading-gradient mb-4 text-center">In welcher Situation befinden Sie sich gerade?</h2>
+          <p className="mx-auto mb-16 max-w-2xl text-center text-base text-gray-600 dark:text-[hsl(0,0%,75%)]">
+            Strategische Beratung ist dann wertvoll, wenn Sie eine dieser Business-Herausforderungen erkennen.
+          </p>
 
           <div className="card-group mb-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {targetProfiles.map((profile, idx) => {
@@ -799,32 +872,47 @@ const BeratungPage: React.FC = () => {
             })}
           </div>
 
-          {/* Warning Box */}
-          <div className="mx-auto max-w-3xl rounded-2xl border border-orange-300 bg-orange-50 p-6 dark:border-orange-500/30 dark:bg-orange-500/10">
-            <div className="flex items-start gap-4">
-              <AlertCircle className="mt-1 h-6 w-6 flex-shrink-0 text-orange-600 dark:text-orange-400" />
-              <div>
-                <h4 className="mb-2 font-semibold text-orange-800 dark:text-orange-300">Nicht optimal für:</h4>
-                <p className="text-sm leading-relaxed text-orange-700 dark:text-orange-200/80">
-                  Enterprise-Unternehmen (&gt;500 MA) mit komplexen Legacy-Systemen. Firmen, die ausschließlich
-                  Microsoft 365 nutzen wollen.
-                </p>
+          {/* Info Boxes */}
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+            {/* Noch nicht bereit */}
+            <div className="rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-6 dark:border-vae-turquoise/20 dark:bg-vae-turquoise/10">
+              <div className="mb-3 flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-vae-turquoise" />
+                <h4 className="font-semibold text-gray-900 dark:text-white">Noch nicht bereit?</h4>
               </div>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-white/80">
+                Perfekt geeignet für Unternehmen <strong>VOR</strong> dem Systemchaos. Wenn Sie jetzt investieren,
+                sparen Sie später 10× mehr.
+              </p>
+            </div>
+
+            {/* Nicht optimal */}
+            <div className="rounded-2xl border border-orange-300 bg-orange-50 p-6 dark:border-orange-500/30 dark:bg-orange-500/10">
+              <div className="mb-3 flex items-start gap-2">
+                <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-600 dark:text-orange-400" />
+                <h4 className="font-semibold text-orange-800 dark:text-orange-300">Nicht optimal für:</h4>
+              </div>
+              <p className="text-sm leading-relaxed text-orange-700 dark:text-orange-200/80">
+                Enterprise (&gt;500 MA) mit etablierter IT-Abteilung • Reine Cloud-only-Strategien • Fehlende
+                Budgetflexibilität
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ==================== 3 WEGE ZUR ZUSAMMENARBEIT ==================== */}
-      <section className="animate-section border-b border-gray-200 py-24 dark:border-[hsl(0,0%,12%)]">
-        <div className="container-vae">
+      <section className="section-card-container animate-section border-b bg-gray-50/50 pb-24 pt-24 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(0,0%,8%)]">
+        <div className="section-card-backdrop" />
+
+        <div className="container-vae relative">
           <h2 className="h2 heading-gradient text-center">4 Optionen, wie wir zusammenarbeiten</h2>
           <p className="mx-auto mb-16 mt-4 max-w-3xl text-center text-base text-gray-600 dark:text-[hsl(0,0%,80%)]">
             Drei klare Projektpfade plus ein langfristiger Retainer – Sie wählen die Tiefe, wir liefern Transparenz bei
             Aufwand, Risiko und ROI.
           </p>
 
-          <div className="card-group grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="card-group grid gap-6 md:grid-cols-2 2xl:grid-cols-4">
             {phases.map((phase, idx) => (
               <div
                 key={idx}
@@ -842,7 +930,7 @@ const BeratungPage: React.FC = () => {
                 <h3 className="mb-2 mt-6 text-2xl font-semibold text-gray-900 dark:text-white">{phase.title}</h3>
                 <p className="mb-6 text-sm text-gray-700 dark:text-[hsl(0,0%,80%)]">{phase.description}</p>
 
-                <ul className="mb-6 space-y-2">
+                <ul className="mb-6 space-y-3">
                   {phase.features.map((feature, featureIdx) => (
                     <li key={featureIdx} className="flex items-start gap-3">
                       <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
@@ -851,7 +939,7 @@ const BeratungPage: React.FC = () => {
                   ))}
                 </ul>
 
-                <div className="mb-6 space-y-1 text-sm font-medium text-vae-turquoise/90">
+                <div className="mb-6 mt-auto space-y-2 pt-6 text-sm font-medium text-vae-turquoise/90">
                   {phase.duration && <p>{phase.duration}</p>}
                   <p>{phase.investment}</p>
                 </div>
@@ -860,9 +948,10 @@ const BeratungPage: React.FC = () => {
                   <MagneticButton intensity={0.08} scaleEffect glowEffect>
                     <Link
                       to={phase.cta.href}
-                      className="btn-primary flex w-full items-center justify-center gap-2 text-sm"
+                      className="btn-primary group/cta flex w-full items-center justify-center gap-2 text-sm"
                     >
                       {phase.cta.label}
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
                     </Link>
                   </MagneticButton>
                 )}
@@ -870,9 +959,10 @@ const BeratungPage: React.FC = () => {
                 {phase.secondary && (
                   <Link
                     to={phase.secondary.href}
-                    className="mt-3 text-center text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise/80"
+                    className="group/secondary mt-3 flex items-center justify-center gap-1.5 text-center text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise/80"
                   >
                     {phase.secondary.label}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/secondary:translate-x-0.5" />
                   </Link>
                 )}
               </div>

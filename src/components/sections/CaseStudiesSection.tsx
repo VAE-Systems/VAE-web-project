@@ -1,46 +1,15 @@
-import React, { useEffect, useRef } from 'react'
+import Icon from '@/components/ui/Icon'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
-import Icon from '@/components/ui/Icon'
+import React, { useEffect, useRef } from 'react'
 import { caseStudies, upcomingCasePlaceholders } from '../../content/caseStudies'
+import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 
 /**
  * CaseStudiesSection
  * Replaces old Testimonials with authentic / evolving project stories.
  */
 const CaseStudiesSection: React.FC = () => {
-  // Early exit with notice when no case studies are available
-  if (caseStudies.length === 0) {
-    return (
-      <section
-        id="case-studies"
-        className="border-border-primary surface-dark overlay-grid overlay-diag edge-glow-top relative border-t py-32 dark:border-white/5"
-      >
-        <div className="container-vae text-center">
-          <h2 className="h2 heading-gradient mb-6">Case Studies & Pilots</h2>
-          <p className="mb-6 text-sm text-text-secondary">
-            Aktuell werden Pilots kuratiert & aufbereitet. Bleib informiert oder nimm direkt Kontakt auf.
-          </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            <a
-              href="/newsletter"
-              className="rounded-lg border border-vae-turquoise/40 bg-vae-turquoise/15 px-6 py-3 text-sm font-medium text-vae-turquoise transition-all hover:bg-vae-turquoise hover:text-bg-darker"
-            >
-              Newsletter abonnieren
-            </a>
-            <a
-              href="/contact"
-              className="rounded-lg border border-vae-turquoise/40 bg-vae-turquoise/15 px-6 py-3 text-sm font-medium text-vae-turquoise transition-all hover:bg-vae-turquoise hover:text-bg-darker"
-            >
-              Kontakt aufnehmen
-            </a>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
@@ -89,6 +58,37 @@ const CaseStudiesSection: React.FC = () => {
     }, sectionRef)
     return () => ctx.revert()
   }, [])
+
+  // Early exit with notice when no case studies are available
+  if (caseStudies.length === 0) {
+    return (
+      <section
+        id="case-studies"
+        className="border-border-primary surface-dark overlay-grid overlay-diag edge-glow-top relative border-t py-32 dark:border-white/5"
+      >
+        <div className="container-vae text-center">
+          <h2 className="h2 heading-gradient mb-6">Case Studies & Pilots</h2>
+          <p className="mb-6 text-sm text-text-secondary">
+            Aktuell werden Pilots kuratiert & aufbereitet. Bleib informiert oder nimm direkt Kontakt auf.
+          </p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <a
+              href="/newsletter"
+              className="rounded-lg border border-vae-turquoise/40 bg-vae-turquoise/15 px-6 py-3 text-sm font-medium text-vae-turquoise transition-all hover:bg-vae-turquoise hover:text-bg-darker"
+            >
+              Newsletter abonnieren
+            </a>
+            <a
+              href="/contact"
+              className="rounded-lg border border-vae-turquoise/40 bg-vae-turquoise/15 px-6 py-3 text-sm font-medium text-vae-turquoise transition-all hover:bg-vae-turquoise hover:text-bg-darker"
+            >
+              Kontakt aufnehmen
+            </a>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   const displayCases = [...caseStudies]
   if (caseStudies.length < 3) {

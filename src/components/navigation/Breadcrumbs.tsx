@@ -27,13 +27,13 @@ interface BreadcrumbsProps {
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, currentStep, totalSteps }) => {
-  if (!items.length) return null
-
   const showProgress = currentStep !== undefined && totalSteps !== undefined && totalSteps > 1
   const progressStyle = useMemo(
-    () => (showProgress ? { width: `${(currentStep / totalSteps) * 100}%` } : {}),
+    () => (showProgress ? { width: `${(currentStep! / totalSteps!) * 100}%` } : {}),
     [showProgress, currentStep, totalSteps]
   )
+
+  if (!items.length) return null
 
   return (
     <nav aria-label="Breadcrumb" className={['container-vae py-4', className].filter(Boolean).join(' ')}>

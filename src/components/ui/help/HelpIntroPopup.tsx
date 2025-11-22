@@ -53,7 +53,7 @@ export const HelpIntroPopup: React.FC = () => {
               </h3>
             </div>
             <div className="mt-6 space-y-3">
-              <p className="text-lg font-semibold leading-relaxed text-white">So funktioniert's:</p>
+              <p className="text-lg font-semibold leading-relaxed text-white">So funktioniert&apos;s:</p>
               <ul className="ml-6 space-y-2 text-base leading-relaxed text-white/80">
                 <li className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise" />
@@ -87,7 +87,7 @@ export const HelpIntroPopup: React.FC = () => {
         <div className="mt-6 flex flex-col gap-3">
           <MagneticButton intensity={0.075}>
             <button type="button" onClick={closeIntroPopup} className="btn-primary w-full">
-              Verstanden, los geht's!
+              Verstanden, los geht&apos;s!
             </button>
           </MagneticButton>
 

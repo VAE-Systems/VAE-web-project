@@ -17,6 +17,7 @@ import {
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { flattenedSaasTools, saasToolCategories } from '@/data/saasTools'
+import { faqEntries } from '@/data/faqData'
 import { useSetupCalculatorTutorial } from '@/hooks/useSetupCalculatorTutorial'
 import { cn } from '@/lib/classNames'
 import MagneticButton from '../ui/buttons/MagneticButton'
@@ -46,11 +47,6 @@ interface ScenarioCard {
   duration: string
   effort: string
   featured?: boolean
-}
-
-interface FAQItem {
-  question: string
-  answer: string
 }
 
 interface CustomLicense {
@@ -197,49 +193,6 @@ const scenarioCards: ScenarioCard[] = [
   },
 ]
 
-const faqItems: FAQItem[] = [
-  {
-    question: 'Ist ein Infrastructure-Setup für uns das Richtige – oder brauchen wir erst Beratung?',
-    answer:
-      'Wenn Sie bereits wissen, welche Tools Sie benötigen und eine klare Migrationsstrategie haben, können wir direkt mit dem Setup beginnen. Falls Sie unsicher sind, welche Lösung wirtschaftlich und technisch sinnvoll ist, empfehlen wir zuerst unsere strategische Beratung. Dort analysieren wir Ihre Anforderungen und entwickeln 3 konkrete Handlungsoptionen – danach können Sie fundiert entscheiden.',
-  },
-  {
-    question: 'Was unterscheidet VAE-Setup von Freelancern oder klassischen IT-Dienstleistern?',
-    answer:
-      'Wir liefern nicht nur technische Installation, sondern ein produktionsreifes End-to-End-System: Server-Hardening, automatisierte Backups, Dokumentation, Team-Training und 1 Monat Post-Launch-Support inklusive. Freelancer fokussieren oft nur auf Installation, klassische IT-Dienstleister verkaufen proprietäre Lösungen. Wir setzen auf Open Source, volle Datenkontrolle und langfristige Unabhängigkeit – ohne Vendor-Lock-in.',
-  },
-  {
-    question: 'Wie lange dauert ein typisches Setup?',
-    answer:
-      'Je nach Umfang 3–6 Wochen. Starter-Setups (Nextcloud + Basis-Tools) dauern 2–3 Wochen, Professional-Setups mit CRM & erweiterten Automationen 4–5 Wochen, Enterprise-Setups mit Hochverfügbarkeit 6–8 Wochen. Im Erstgespräch geben wir Ihnen eine präzise Zeitschätzung für Ihre Anforderungen.',
-  },
-  {
-    question: 'Was kostet ein Infrastructure-Setup?',
-    answer:
-      'Die Investition hängt von Nutzerzahl, gewählten Tools und Komplexität ab. Im kostenlosen Erstgespräch erhalten Sie eine erste Einschätzung, nach der detaillierten Analyse ein transparentes Festpreis-Angebot – ohne versteckte Kosten. Typische Bandbreite: Starter-Setups ab ca. 3.500 €, Professional-Setups 6.000–12.000 €, Enterprise-Setups individuell.',
-  },
-  {
-    question: 'Was passiert bei technischen Problemen nach dem Go-Live?',
-    answer:
-      '1 Monat Post-Launch-Support ist im Setup-Preis enthalten – wir beheben Bugs, optimieren Performance und beantworten alle Fragen. Nach diesem Monat können Sie entweder eigenständig weiterarbeiten (mit unserer vollständigen Dokumentation) oder unsere langfristige Betreuung buchen (ab 149 €/Monat mit garantierter Response-Zeit).',
-  },
-  {
-    question: 'Müssen wir eigene Server haben?',
-    answer:
-      'Nein. Wir setzen auf Hetzner, Ionos, AWS oder Ihre bestehende Infrastruktur auf. Alternativ übernehmen wir das Hosting komplett (Server in Deutschland, DSGVO-konform, ab ca. 50 €/Monat je nach Anforderungen). Sie entscheiden, ob Sie volle Kontrolle über die Hardware wünschen oder unser Managed Hosting nutzen.',
-  },
-  {
-    question: 'Werden unsere Daten sicher migriert?',
-    answer:
-      'Ja. Wir arbeiten mit verschlüsselter Übertragung (TLS 1.3), isolierten Test-Umgebungen und vollständigen Backups vor jeder Migration. Sensible Daten (z.B. aus Microsoft 365, Salesforce) werden niemals über unsichere Kanäle übertragen. Sie erhalten vor der produktiven Migration einen detaillierten Migrations-Plan zur Freigabe.',
-  },
-  {
-    question: 'Können wir später weitere Tools hinzufügen?',
-    answer:
-      'Ja, das Setup ist vollständig modular. Neue Tools (z.B. Nextcloud Talk, zusätzliche Odoo-Module, erweiterte n8n-Workflows) lassen sich jederzeit ergänzen. Wir dokumentieren die Architektur so, dass Sie oder ein anderer Dienstleister problemlos erweitern können – keine künstliche Abhängigkeit.',
-  },
-]
-
 const calendlyUrl = '/contact#booking'
 const DEFAULT_VAT_RATE = 19
 
@@ -365,16 +318,15 @@ const SetupPage: React.FC = () => {
     setCustomLicenses(prev => prev.filter(license => license.id !== id))
   }, [])
 
-  const faqAccordionItems = useMemo(
-    () =>
-      faqItems.map((item, index) => ({
-        id: `setup-faq-${index}`,
-        question: item.question,
-        defaultOpen: index === 0,
-        answer: <p className="text-base leading-relaxed text-text-secondary">{item.answer}</p>,
-      })),
-    []
-  )
+  const faqAccordionItems = useMemo(() => {
+    const setupFaqs = faqEntries.filter(entry => entry.tags?.includes('setup'))
+    return setupFaqs.map((item, index) => ({
+      id: `setup-faq-${item.id ?? index}`,
+      question: item.question,
+      defaultOpen: index === 0,
+      answer: <p className="text-base leading-relaxed text-text-secondary">{item.answer}</p>,
+    }))
+  }, [])
 
   const formatCurrency = useCallback((value: number) => {
     if (Number.isNaN(value)) return '€0'
@@ -1074,12 +1026,12 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 7 FAQ */}
-      <section className="bg-gradient-to-b from-bg-darker via-[#050505] to-bg-darker py-20">
+      <section className="bg-gradient-to-b from-white via-gray-50 to-white py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae">
-          <div className="mx-auto max-w-2xl text-center text-white">
+          <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">FAQ</p>
-            <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Häufige Fragen</h2>
-            <p className="mt-4 text-base text-text-secondary">
+            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-text-secondary dark:text-white/70">
               Alles rund um Infrastruktur-Setups – von Migration bis Kosten-Transparenz.
             </p>
           </div>

@@ -41,6 +41,7 @@ const LockedSection: React.FC<LockedSectionProps> = ({
   const [isPreviewActive, setIsPreviewActive] = useState(false)
   const { theme } = useTheme()
   const isDark = theme === 'dark'
+  const previewAffectsBlur = isDark && isPreviewActive
 
   // Check for prefers-reduced-motion
   useEffect(() => {
@@ -80,22 +81,18 @@ const LockedSection: React.FC<LockedSectionProps> = ({
   }, [])
 
   const overlayBackgroundClass = isDark
-    ? isPreviewActive
-      ? 'bg-bg-darker/15 backdrop-blur-sm'
+    ? previewAffectsBlur
+      ? 'bg-bg-darker/18 backdrop-blur-sm'
       : 'bg-bg-darker/70 backdrop-blur-xl'
-    : isPreviewActive
-      ? 'bg-white/30 backdrop-blur-md'
-      : 'bg-white/85 backdrop-blur-xl'
+    : 'bg-white/85 backdrop-blur-md'
   const cardToneClass = isDark
     ? 'border-vae-green/60 text-white shadow-[0_0_80px_rgba(5,248,200,0.25)]'
     : 'border-vae-green/20 text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.12)]'
   const cardStateClass = isDark
-    ? isPreviewActive
+    ? previewAffectsBlur
       ? 'from-bg-dark/45 via-bg-darker/50 to-bg-dark/45'
       : 'from-bg-dark/96 via-bg-darker/98 to-bg-dark/95'
-    : isPreviewActive
-      ? 'from-white/95 via-white to-white'
-      : 'from-white via-white to-white'
+    : 'from-white via-white to-white'
   const titleClass = isDark ? 'text-white' : 'text-slate-900'
   const descriptionClass = isDark ? 'text-text-secondary' : 'text-slate-600'
   const glowClass = isDark
@@ -109,10 +106,12 @@ const LockedSection: React.FC<LockedSectionProps> = ({
         animate={
           isLocked
             ? {
-                // When preview is active show a softer blur and remove grayscale so silhouettes shine through
-                filter: isPreviewActive ? 'blur(4px) brightness(98%)' : 'blur(22px) grayscale(60%) brightness(35%)',
-                // Keep overlay opacity high in preview so content remains unreadable but visible
-                opacity: isPreviewActive ? 0.96 : 0.45,
+                filter: previewAffectsBlur
+                  ? 'blur(4px) brightness(98%)'
+                  : isDark
+                    ? 'blur(22px) grayscale(60%) brightness(35%)'
+                    : 'blur(18px) grayscale(45%) brightness(60%)',
+                opacity: previewAffectsBlur ? 0.96 : isDark ? 0.45 : 0.7,
               }
             : {
                 filter: 'blur(0px) grayscale(0%) brightness(100%)',
@@ -174,19 +173,30 @@ const LockedSection: React.FC<LockedSectionProps> = ({
                 animate={
                   prefersReducedMotion
                     ? {}
-                    : {
-                        rotate: isPreviewActive ? 0 : [0, -10, 10, -10, 0],
-                        scale: isPreviewActive ? 1 : [1, 1.1, 1],
-                      }
+                    : isDark
+                      ? {
+                          rotate: previewAffectsBlur ? 0 : [0, -10, 10, -10, 0],
+                          scale: previewAffectsBlur ? 1 : [1, 1.1, 1],
+                        }
+                      : {
+                          scale: isPreviewActive ? 1.06 : 1,
+                          rotate: 0,
+                        }
                 }
                 transition={
                   prefersReducedMotion
                     ? { duration: 0 }
-                    : {
-                        duration: 2,
-                        repeat: isPreviewActive ? 0 : Infinity,
-                        repeatDelay: 3,
-                      }
+                    : isDark
+                      ? {
+                          duration: 2,
+                          repeat: previewAffectsBlur ? 0 : Infinity,
+                          repeatDelay: 3,
+                        }
+                      : {
+                          type: 'spring',
+                          stiffness: 260,
+                          damping: 18,
+                        }
                 }
                 className="mb-6 flex justify-center"
               >

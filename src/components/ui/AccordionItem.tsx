@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react'
-import { Minus, Plus } from 'lucide-react'
 import { gsap } from 'gsap'
+import { Minus, Plus } from 'lucide-react'
+import React, { useEffect, useRef } from 'react'
 
 interface AccordionItemProps {
   question: string
-  answer: string
+  answer: React.ReactNode
   isOpen: boolean
   onToggle: () => void
   id: string | number
@@ -29,7 +29,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
         height: element.scrollHeight,
         duration: 0.4,
         ease: 'power2.out',
-        onComplete: () => gsap.set(element, { height: 'auto' }),
+        onComplete: () => {
+          gsap.set(element, { height: 'auto' })
+        },
         force3D: true,
       })
     } else {
@@ -50,7 +52,13 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
   }, [isOpen])
 
   return (
-    <article className="rounded-2xl border border-gray-200/80 bg-white shadow-sm transition dark:border-white/10 dark:bg-white/5 dark:shadow-none">
+    <article
+      className={`group relative overflow-hidden rounded-2xl border transition duration-200 ${
+        isOpen
+          ? 'border-white/15 bg-white/[0.06] shadow-[0_18px_45px_rgba(0,0,0,0.35)] dark:border-white/10 dark:bg-white/[0.05]'
+          : 'border-white/8 hover:border-white/14 bg-white/[0.03] shadow-[0_10px_28px_rgba(0,0,0,0.25)] dark:border-white/5 dark:bg-white/[0.03] dark:hover:border-white/10'
+      }`}
+    >
       <button
         type="button"
         onClick={onToggle}
@@ -60,14 +68,14 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
       >
         <span className="text-lg font-semibold text-gray-900 dark:text-white">{question}</span>
         {isOpen ? (
-          <Minus className="h-5 w-5 text-gray-500 dark:text-text-secondary" />
+          <Minus className="h-5 w-5 text-vae-turquoise transition duration-200 group-hover:scale-110" />
         ) : (
-          <Plus className="h-5 w-5 text-gray-500 dark:text-text-secondary" />
+          <Plus className="h-5 w-5 text-text-secondary transition duration-200 group-hover:scale-110 dark:text-white/50" />
         )}
       </button>
       <div id={`accordion-content-${id}`} ref={contentRef} className="h-0 overflow-hidden" aria-hidden={!isOpen}>
         <div className="px-6 pb-6">
-          <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">{answer}</p>
+          <div className="text-base leading-relaxed text-text-secondary dark:text-white/70">{answer}</div>
         </div>
       </div>
     </article>

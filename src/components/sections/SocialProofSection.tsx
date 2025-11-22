@@ -26,7 +26,7 @@ const SocialProofSection: React.FC = () => {
                       src={project.logo}
                       alt={`${project.client} Logo`}
                       className={[
-                        'h-12 w-auto transition-transform duration-300 group-hover:scale-110',
+                        'h-14 w-auto max-w-[180px] transition-transform duration-300 group-hover:scale-110',
                         (project.invertOnDark || project.invertOnLight) && 'filter',
                         project.invertOnDark && 'dark:invert',
                         project.invertOnLight && 'invert',
@@ -35,6 +35,7 @@ const SocialProofSection: React.FC = () => {
                         .filter(Boolean)
                         .join(' ')}
                       loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-sm font-semibold uppercase tracking-[0.35em] text-gray-700 dark:bg-white/10 dark:text-white/70">

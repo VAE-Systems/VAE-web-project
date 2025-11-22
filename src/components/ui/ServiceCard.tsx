@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import MagneticButton from './MagneticButton'
 import { ServiceData } from '../../types'
+import Icon from './Icon'
+import MagneticButton from './MagneticButton'
 
 interface ServiceCardProps {
   service: ServiceData
@@ -16,7 +17,7 @@ const ServiceCard: React.FC<ServiceCardProps> = React.memo(({ service, servicePa
       <div className="relative z-10 mb-6 flex items-start justify-between">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/20 text-vae-turquoise">
-            <span className="material-symbols-outlined text-xl">{service.iconName}</span>
+            <Icon name={service.iconName} className="text-vae-turquoise" size={24} />
           </div>
           <span className="text-xs font-semibold uppercase tracking-wider text-vae-turquoise/80">
             {service.title.split(' – ')[0]}

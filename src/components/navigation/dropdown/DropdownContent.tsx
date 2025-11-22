@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { MenuContent } from './menuData'
 
 interface DropdownContentProps {
@@ -51,13 +52,15 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
       </div>
 
       <div className="pt-6">
-        <a
-          href={content.ctaHref}
-          className="btn-convert inline-flex items-center gap-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-darker"
-        >
-          {content.ctaText}
-          <ArrowUpRight className="h-4 w-4" aria-hidden />
-        </a>
+        <MagneticButton intensity={0.04} scaleEffect={false} className="inline-flex">
+          <a
+            href={content.ctaHref}
+            className="btn-convert inline-flex items-center gap-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-darker"
+          >
+            {content.ctaText}
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </a>
+        </MagneticButton>
       </div>
     </div>
   )

@@ -4,8 +4,8 @@
  * Common helper functions used throughout the application
  */
 
-import type { LoadingState } from '../types'
 import { ANIMATION } from '../config'
+import type { LoadingState } from '../types'
 
 // ============================================================================
 // VALIDATION UTILITIES
@@ -17,7 +17,7 @@ export const validateEmail = (email: string): boolean => {
 }
 
 export const validatePhone = (phone: string): boolean => {
-  const phoneRegex = /^[\+]?[\d\s\-\(\)]{7,}$/
+  const phoneRegex = /^[+]?[\d\s\-()]{7,}$/
   return phoneRegex.test(phone.trim())
 }
 

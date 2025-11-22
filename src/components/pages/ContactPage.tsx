@@ -9,7 +9,7 @@ import {
   MessageSquare,
 } from 'lucide-react'
 import React, { useEffect, useRef } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { getHelpModeClasses, HelpButton, HelpIntroPopup, HelpPopup, useHelpMode } from '@/components/ui/help'
@@ -369,13 +369,6 @@ const ContactPage: React.FC = () => {
                   <ArrowUpRight className="h-5 w-5" />
                 </button>
               </MagneticButton>
-              <Link
-                to="/referenzen"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:border-vae-turquoise/60 hover:text-vae-turquoise dark:border-white/15 dark:text-white/70 dark:hover:text-white sm:w-auto"
-              >
-                Referenzen ansehen
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
             </div>
           </div>
           <div className="flex-1 rounded-[32px] border border-gray-200 bg-white p-8 text-left shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_80px_rgba(0,0,0,0.45)]">

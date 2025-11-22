@@ -77,7 +77,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
   if (loadingState === 'success') {
     return (
       <div className={cn(className)}>
-        <p className="mb-4 text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
         <div className="rounded-lg border border-vae-turquoise/30 bg-vae-turquoise/10 p-8 text-center">
           <div className="mb-4 text-2xl text-vae-turquoise">✓</div>
           <h3 className="mb-2 text-lg font-medium text-text-light">Nachricht erfolgreich gesendet!</h3>
@@ -92,6 +91,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
   // ============================================================================
   // FORM RENDER
   // ============================================================================
+
+  const hasError = (term: string) => formState.errors.some(e => e.message.toLowerCase().includes(term.toLowerCase()))
 
   return (
     <form onSubmit={handleSubmit} className={cn('space-y-6', className)}>
@@ -111,7 +112,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleInputChange('name')}
             placeholder="Ihr vollständiger Name"
             disabled={disabled || isSubmitting}
-            className={cn(baseInputClasses, formState.errors.name && errorInputClasses)}
+            className={cn(baseInputClasses, hasError('name') && errorInputClasses)}
             required
           />
         </div>
@@ -130,7 +131,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleInputChange('email')}
             placeholder="Ihre.Email@beispiel.de"
             disabled={disabled || isSubmitting}
-            className={cn(baseInputClasses, formState.errors.email && errorInputClasses)}
+            className={cn(baseInputClasses, (hasError('e-mail') || hasError('email')) && errorInputClasses)}
             required
           />
         </div>

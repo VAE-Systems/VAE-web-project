@@ -18,6 +18,7 @@ import {
   Zap,
 } from 'lucide-react'
 import React, { useCallback, useMemo } from 'react'
+import { faqEntries } from '@/data/faqData'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
@@ -203,55 +204,16 @@ const reasonCards: Array<{ icon: LucideIcon; title: string; description: string 
   },
 ]
 
-const faqItems = [
-  {
-    question: 'Wie funktioniert die monatliche Kündigung?',
-    answer:
-      'Sie geben uns Bescheid, im Folgemonat läuft der Vertrag aus. Sie erhalten vollständige Dokumentation, Daten-Export in Standardformaten und auf Wunsch einen 2h-Handover-Call. Infrastruktur und Daten bleiben bei Ihnen.',
-  },
-  {
-    question: 'Warum kostet monatlich kündbar mehr?',
-    answer:
-      'Flexibilität hat einen Preis. Der Aufschlag kompensiert unser Risiko, damit Sie jederzeit aussteigen können – ohne Kleingedrucktes und ohne Abhängigkeiten.',
-  },
-  {
-    question: 'Können wir zwischen den Service-Leveln wechseln?',
-    answer:
-      'Ja, jederzeit. Starten Sie mit Infrastruktur-Managed und wechseln Sie bei Bedarf auf Full-Partnership oder zurück. Wir passen SLAs und Umfang dynamisch an.',
-  },
-  {
-    question: 'Was kostet langfristige Betreuung?',
-    answer:
-      'Es hängt von Teamgröße, Infrastruktur-Landschaft, gewünschter KI-Automation und Reaktionszeit ab. Im kostenlosen Beratungsgespräch kalkulieren wir transparent: individuelles Angebot statt Pauschalpreis.',
-  },
-  {
-    question: 'Wie schnell reagieren Sie bei Problemen?',
-    answer:
-      'Infrastruktur-Managed: < 24h. Full-Partnership: < 6h. Kritische Incidents werden sofort priorisiert – auch nachts oder am Wochenende.',
-  },
-  {
-    question: 'Können wir auch einzelne Leistungen buchen?',
-    answer:
-      'Ja, auf Stundenbasis (ab 65 €/h) für Ad-hoc-Support, Consulting oder Mini-Projekte. Ideal, wenn Sie ohne monatliche Bindung testen möchten.',
-  },
-  {
-    question: 'Wie oft informieren Sie über Trends & Potenziale?',
-    answer:
-      'Full-Partnership: monatliche Strategy-Reviews mit konkreten Empfehlungen zu KI, Open Source und Automatisierung. Infrastruktur-Managed: monatliche Trend-Updates als Teil der Reviews.',
-  },
-]
-
 const BetreuungPage: React.FC = () => {
-  const faqAccordionItems = useMemo(
-    () =>
-      faqItems.map((item, index) => ({
-        id: `betreuung-faq-${index}`,
-        question: item.question,
-        defaultOpen: index === 0,
-        answer: <p className="text-base leading-relaxed text-text-secondary">{item.answer}</p>,
-      })),
-    []
-  )
+  const faqAccordionItems = useMemo(() => {
+    const careFaqs = faqEntries.filter(entry => entry.tags?.includes('betreuung'))
+    return careFaqs.map((item, index) => ({
+      id: `betreuung-faq-${item.id ?? index}`,
+      question: item.question,
+      defaultOpen: index === 0,
+      answer: <p className="text-base leading-relaxed text-text-secondary">{item.answer}</p>,
+    }))
+  }, [])
 
   const openCalendly = useCallback(() => {
     if (typeof window === 'undefined') return
@@ -687,12 +649,12 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 7: FAQ */}
-      <section className="bg-gradient-to-b from-bg-darker via-[#050505] to-bg-darker py-20">
+      <section className="bg-gradient-to-b from-white via-gray-50 to-white py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae">
-          <div className="mx-auto max-w-3xl text-center text-white">
+          <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">FAQ</p>
-            <h2 className="mt-3 text-3xl font-semibold md:text-4xl">Häufige Fragen</h2>
-            <p className="mt-4 text-base text-text-secondary">
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-text-secondary dark:text-white/70">
               Antworten zur monatlich kündbaren Betreuung – transparent, ohne Buzzword-Schleier.
             </p>
           </div>

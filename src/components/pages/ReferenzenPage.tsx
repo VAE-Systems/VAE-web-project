@@ -104,9 +104,8 @@ const caseStudies: CaseStudy[] = [
       {
         title: 'Infrastructure & Operations',
         items: [
-          'Self-hosted Hetzner-Stack',
+          'Kundenseitig bereitgestellter Contabo-Server (self-managed)',
           'Docker-basiertes Deployment & Server Management',
-          'Tägliche Backups',
           'Arbeitsstruktur für Teams & Projekte',
           'Anhaltende Weiterentwicklung & Skalierung',
         ],
@@ -157,7 +156,7 @@ const caseStudies: CaseStudy[] = [
     logo: { src: '/art-affair-logo.svg', alt: 'Art Affair Logo', invertOnLight: true, wide: true },
     icon: QrCode,
     title: 'KI-optimiertes QR-Code-Lead-System',
-    organization: 'Art Affair',
+    organization: 'Art Affair GmbH & Co. KG',
     industry: 'Event-Management · Art Consulting',
     status: 'Produktiv im Einsatz',
     statusVariant: 'live',
@@ -296,30 +295,7 @@ const caseStudies: CaseStudy[] = [
 ]
 
 const upcomingProjects: ProjectTeaser[] = [
-  {
-    id: 'manufacturing',
-    icon: Building2,
-    title: 'Mittelständisches Unternehmen (Manufacturing)',
-    description:
-      'Migration von Microsoft 365 zu Nextcloud + Odoo ERP für 50 Mitarbeitende inkl. CRM-Integration. Start: Q1 2026.',
-    status: 'In Planung',
-  },
-  {
-    id: 'saas-startup',
-    icon: Rocket,
-    title: 'Startup (SaaS-Produkt)',
-    description:
-      'KI-integrierte Infrastruktur: n8n für Automationen, LangChain für Produktfeatures, Self-hosted LLMs. Start: Q4 2025.',
-    status: 'In Konzeption',
-  },
-  {
-    id: 'ngo-secure',
-    icon: ShieldCheck,
-    title: 'NGO (Datenschutz-fokussiert)',
-    description:
-      'Nextcloud-basierte Infrastruktur für sensible Daten-Verwaltung. DSGVO-konform, verschlüsselt, rechtssicher. Start: Q1 2026.',
-    status: 'In Gesprächen',
-  },
+  // Platzhalter für zukünftige Freigaben; Details werden erst nach Kundenerlaubnis veröffentlicht.
 ]
 
 const expertiseAreas: ExpertiseArea[] = [
@@ -542,15 +518,6 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
       {showLogoModal && study.logo && <LogoModal logo={study.logo} onClose={() => setShowLogoModal(false)} />}
     </>
   )
-}
-
-const upcomingStatusStyles: Record<string, string> = {
-  'In Planung':
-    'border-amber-500/20 bg-amber-500/10 text-amber-700 dark:border-amber-400/40 dark:bg-amber-400/10 dark:text-amber-200',
-  'In Konzeption':
-    'border-sky-500/20 bg-sky-500/10 text-sky-700 dark:border-sky-400/40 dark:bg-sky-400/10 dark:text-sky-200',
-  'In Gesprächen':
-    'border-pink-500/20 bg-pink-500/10 text-pink-700 dark:border-pink-400/40 dark:bg-pink-400/10 dark:text-pink-200',
 }
 
 interface ExpandableContentProps {
@@ -814,36 +781,10 @@ const ReferenzenPage: React.FC = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">In Entwicklung</p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Momentum für die nächsten Projekte</h2>
             <p className="text-base text-text-secondary">
-              Laufende Engagements – detaillierte Case Studies veröffentlichen wir nach Kund:innenfreigabe.
+              Aktuelle Projekte werden hier gelistet, sobald Kund:innen der Veröffentlichung zustimmen. Bis dahin nennen
+              wir keine laufenden Engagements.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {upcomingProjects.map(project => {
-              const Icon = project.icon
-              return (
-                <div
-                  key={project.id}
-                  className="rounded-3xl border border-black/5 bg-white p-6 text-text-light shadow-[0_15px_45px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-[0_25px_70px_rgba(13,148,136,0.15)] dark:border-white/10 dark:bg-white/[0.04] dark:text-text-light dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-black/5 bg-white/70 dark:border-white/10 dark:bg-white/10">
-                      <Icon className="h-6 w-6 text-vae-turquoise" />
-                    </div>
-                    <span
-                      className={`rounded-full border px-3 py-1 text-xs font-semibold ${upcomingStatusStyles[project.status]}`}
-                    >
-                      {project.status}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-xl font-semibold text-text-light">{project.title}</h3>
-                  <p className="mt-2 text-sm text-text-secondary">{project.description}</p>
-                </div>
-              )
-            })}
-          </div>
-          <p className="text-center text-sm text-text-muted">
-            Details zu laufenden Projekten veröffentlichen wir nach Abschluss mit Kundenerlaubnis.
-          </p>
         </div>
       </section>
 

@@ -1,9 +1,18 @@
-/* Local Fonts (Inter) via @font-face; Material Symbols temporary via index.html */
+/* Local Fonts (Plus Jakarta Sans & Inter) via @font-face */
 
-/* Inter Variable font (preferred) */
+/* Plus Jakarta Sans (Primary Brand Font) */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/plus-jakarta-sans/PlusJakartaSans-Variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter Variable font (Fallback) */
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Variable.woff2') format('woff2');
+  src: url('/fonts/inter/InterVariable.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -25,11 +34,11 @@
   font-display: swap;
 }
 
-/* Use Inter (or fallback family) */
+/* Use Plus Jakarta Sans as primary, Inter as fallback */
 :root {
   --font-family-sans:
-    'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+    'Plus Jakarta Sans', 'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
 }
 
 /* Material Symbols - Outlined */

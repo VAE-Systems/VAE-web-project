@@ -243,7 +243,9 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
         particleGeometry?.dispose?.()
         particleMaterial?.dispose?.()
         renderer?.dispose?.()
-      } catch {}
+      } catch {
+        // ignore cleanup errors
+      }
       if (currentMount && renderer.domElement) currentMount.removeChild(renderer.domElement)
     }
     // Recreate on theme changes to update colors

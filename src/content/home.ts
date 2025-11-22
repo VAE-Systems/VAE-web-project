@@ -356,14 +356,14 @@ export const referenceProjects: ReferenceProject[] = [
   },
   {
     id: 'qr-mail',
-    client: 'Art Affair',
+    client: 'Art Affair GmbH & Co. KG',
     title: 'Pilot-Projekt: QR-Code-Automation für art KARLSRUHE',
     description:
-      'Automatisierte Lead-Erfassung per QR-Code für den Stand auf der art KARLSRUHE. Entwickelt mit ActivePieces und eigenen Automationen, nahtlos in die bestehende Infrastruktur integriert.',
+      'Automatisierte Lead-Erfassung per QR-Code für den Stand auf der art KARLSRUHE. Galerie für moderne Kunst aus Regensburg (Neue-Waag-Gasse 2) – Lösung mit ActivePieces und Custom-Automationen, nahtlos in die bestehende Infrastruktur integriert.',
     highlights: [
       'ActivePieces + Custom-Code-Automationen',
       'Integration in bestehende Infrastruktur',
-      'Pilot-Projekt für Event-Automation',
+      'Galerie-Setup in Regensburg (Neue-Waag-Gasse 2)',
     ],
     status: 'Produktiv im Einsatz',
     badge: 'Pilot 2025',

@@ -561,4 +561,200 @@ export const faqEntries: FaqEntry[] = [
     answer: 'Ja. Kein Surveillance, keine Dark Patterns, keine Projekte gegen unsere Werte.',
     keywords: ['ethik', 'ablehnung', 'werte'],
   },
+
+  // Service-spezifisch (wird seitenübergreifend wiederverwendet)
+  // Strategieberatung
+  {
+    id: 'consulting-fit',
+    categoryId: 'business',
+    question: 'Für wen ist diese Beratung geeignet?',
+    answer:
+      'Für Unternehmen, die mit KI-Strategien, Digitalisierung oder Automatisierung strategisch weiterkommen möchten – aber unsicher sind, welche Lösung sinnvoll, realistisch und wirtschaftlich ist. Besonders wertvoll ist unsere Beratung, wenn Sie bereits Berührungspunkte mit dem Thema hatten, aber noch keine klare Entscheidung treffen können.',
+    keywords: ['beratung', 'strategie', 'zielgruppe'],
+    tags: ['consulting', 'strategieberatung'],
+  },
+  {
+    id: 'consulting-difference',
+    categoryId: 'business',
+    question: 'Worin liegt der Unterschied zu klassischen IT-Beratungen?',
+    answer:
+      'Wir konzentrieren uns nicht auf Infrastruktur-Setup oder technische Detailimplementierung, sondern auf strategische Entscheidungsgrundlagen: Was ist möglich? Was ist sinnvoll? Was ist wirtschaftlich? Statt fertiger Lösungen entwickeln wir mit Ihnen gemeinsam eine fundierte Strategie – transparent, nachvollziehbar und ohne Abhängigkeit.',
+    keywords: ['beratung', 'strategie', 'unterschied'],
+    tags: ['consulting', 'strategieberatung'],
+  },
+  {
+    id: 'consulting-pricing',
+    categoryId: 'business',
+    question: 'Was kostet die Beratung?',
+    answer:
+      'Das kostenlose Strategiegespräch (45 Minuten) ist unverbindlich. Die Strategieentwicklung mit detaillierter Analyse, Business-Case-Kalkulation und schriftlichem Strategiepapier wird individuell nach Projektumfang kalkuliert. Sie erhalten nach dem Erstgespräch ein transparentes, schriftliches Angebot – ohne versteckte Kosten.',
+    keywords: ['beratung', 'kosten', 'angebot'],
+    tags: ['consulting', 'strategieberatung'],
+  },
+  {
+    id: 'consulting-duration',
+    categoryId: 'business',
+    question: 'Wie lange dauert eine typische Beratung?',
+    answer:
+      'Das Erstgespräch findet innerhalb weniger Tage statt. Die Strategieentwicklung dauert je nach Komplexität 1–2 Wochen. Die optionale strategische Begleitung ist flexibel nach Ihrem Bedarf buchbar – von einmaligen Review-Terminen bis zu regelmäßiger Ad-hoc-Unterstützung.',
+    keywords: ['beratung', 'dauer', 'timeline'],
+    tags: ['consulting', 'strategieberatung'],
+  },
+  {
+    id: 'consulting-recommendations',
+    categoryId: 'business',
+    question: 'Erhalte ich konkrete Handlungsempfehlungen?',
+    answer:
+      'Ja. Sie erhalten ein schriftliches Strategiepapier mit einer klaren IST-Analyse, Business-Case-Kalkulation und mindestens 3 konkreten Handlungsoptionen – von „minimal investment" bis zu umfassenden Szenarien. Jede Option wird hinsichtlich Aufwand, Kosten, Nutzen und Risiken transparent dargestellt.',
+    keywords: ['beratung', 'empfehlungen', 'strategiepapier'],
+    tags: ['consulting', 'strategieberatung'],
+  },
+  {
+    id: 'consulting-vendor-choice',
+    categoryId: 'business',
+    question: 'Muss ich mich danach für VAE entscheiden?',
+    answer:
+      'Nein. Unser Ziel ist strategische Klarheit, nicht Verkauf. Sie erhalten fundierte Entscheidungsgrundlagen und können dann selbst entscheiden – ob mit uns, mit einem anderen Partner oder durch interne Umsetzung. Unsere Empfehlungen sind technologieneutral und auf Ihre strategischen Ziele ausgerichtet.',
+    keywords: ['beratung', 'unabhängigkeit', 'entscheidung'],
+    tags: ['consulting', 'strategieberatung'],
+  },
+
+  // Infrastructure-Setup
+  {
+    id: 'setup-fit',
+    categoryId: 'projects',
+    question: 'Ist ein Infrastructure-Setup für uns das Richtige – oder brauchen wir erst Beratung?',
+    answer:
+      'Wenn Sie bereits wissen, welche Tools Sie benötigen und eine klare Migrationsstrategie haben, können wir direkt mit dem Setup beginnen. Falls Sie unsicher sind, welche Lösung wirtschaftlich und technisch sinnvoll ist, empfehlen wir zuerst unsere strategische Beratung. Dort analysieren wir Ihre Anforderungen und entwickeln 3 konkrete Handlungsoptionen – danach können Sie fundiert entscheiden.',
+    keywords: ['setup', 'infrastruktur', 'beratung'],
+    tags: ['setup', 'infrastruktur'],
+  },
+  {
+    id: 'setup-differentiator',
+    categoryId: 'projects',
+    question: 'Was unterscheidet VAE-Setup von Freelancern oder klassischen IT-Dienstleistern?',
+    answer:
+      'Wir liefern nicht nur technische Installation, sondern ein produktionsreifes End-to-End-System: Server-Hardening, automatisierte Backups, Dokumentation, Team-Training und 1 Monat Post-Launch-Support inklusive. Freelancer fokussieren oft nur auf Installation, klassische IT-Dienstleister verkaufen proprietäre Lösungen. Wir setzen auf Open Source, volle Datenkontrolle und langfristige Unabhängigkeit – ohne Vendor-Lock-in.',
+    keywords: ['setup', 'vergleich', 'dienstleister'],
+    tags: ['setup', 'infrastruktur'],
+  },
+  {
+    id: 'setup-duration',
+    categoryId: 'projects',
+    question: 'Wie lange dauert ein typisches Setup?',
+    answer:
+      'Je nach Umfang 3–6 Wochen. Starter-Setups (Nextcloud + Basis-Tools) dauern 2–3 Wochen, Professional-Setups mit CRM & erweiterten Automationen 4–5 Wochen, Enterprise-Setups mit Hochverfügbarkeit 6–8 Wochen. Im Erstgespräch geben wir Ihnen eine präzise Zeitschätzung für Ihre Anforderungen.',
+    keywords: ['setup', 'dauer', 'zeitplan'],
+    tags: ['setup', 'infrastruktur'],
+  },
+  {
+    id: 'setup-pricing',
+    categoryId: 'projects',
+    question: 'Was kostet ein Infrastructure-Setup?',
+    answer:
+      'Die Investition hängt von Nutzerzahl, gewählten Tools und Komplexität ab. Im kostenlosen Erstgespräch erhalten Sie eine erste Einschätzung, nach der detaillierten Analyse ein transparentes Festpreis-Angebot – ohne versteckte Kosten. Typische Bandbreite: Starter-Setups ab ca. 3.500 €, Professional-Setups 6.000–12.000 €, Enterprise-Setups individuell.',
+    keywords: ['setup', 'kosten', 'angebot'],
+    tags: ['setup', 'infrastruktur'],
+  },
+  {
+    id: 'setup-support',
+    categoryId: 'projects',
+    question: 'Was passiert bei technischen Problemen nach dem Go-Live?',
+    answer:
+      '1 Monat Post-Launch-Support ist im Setup-Preis enthalten – wir beheben Bugs, optimieren Performance und beantworten alle Fragen. Nach diesem Monat können Sie entweder eigenständig weiterarbeiten (mit unserer vollständigen Dokumentation) oder unsere langfristige Betreuung buchen (ab 149 €/Monat mit garantierter Response-Zeit).',
+    keywords: ['setup', 'support', 'go live'],
+    tags: ['setup', 'infrastruktur'],
+  },
+  {
+    id: 'setup-hosting',
+    categoryId: 'projects',
+    question: 'Müssen wir eigene Server haben?',
+    answer:
+      'Nein. Wir setzen auf Hetzner, Ionos, AWS oder Ihre bestehende Infrastruktur auf. Alternativ übernehmen wir das Hosting komplett (Server in Deutschland, DSGVO-konform, ab ca. 50 €/Monat je nach Anforderungen). Sie entscheiden, ob Sie volle Kontrolle über die Hardware wünschen oder unser Managed Hosting nutzen.',
+    keywords: ['setup', 'hosting', 'server'],
+    tags: ['setup', 'infrastruktur'],
+  },
+  {
+    id: 'setup-migration',
+    categoryId: 'projects',
+    question: 'Werden unsere Daten sicher migriert?',
+    answer:
+      'Ja. Wir arbeiten mit verschlüsselter Übertragung (TLS 1.3), isolierten Test-Umgebungen und vollständigen Backups vor jeder Migration. Sensible Daten (z.B. aus Microsoft 365, Salesforce) werden niemals über unsichere Kanäle übertragen. Sie erhalten vor der produktiven Migration einen detaillierten Migrations-Plan zur Freigabe.',
+    keywords: ['setup', 'migration', 'sicherheit'],
+    tags: ['setup', 'infrastruktur'],
+  },
+  {
+    id: 'setup-modularity',
+    categoryId: 'projects',
+    question: 'Können wir später weitere Tools hinzufügen?',
+    answer:
+      'Ja, das Setup ist vollständig modular. Neue Tools (z.B. Nextcloud Talk, zusätzliche Odoo-Module, erweiterte n8n-Workflows) lassen sich jederzeit ergänzen. Wir dokumentieren die Architektur so, dass Sie oder ein anderer Dienstleister problemlos erweitern können – keine künstliche Abhängigkeit.',
+    keywords: ['setup', 'modular', 'erweiterung'],
+    tags: ['setup', 'infrastruktur'],
+  },
+
+  // Betreuung / Managed Services
+  {
+    id: 'care-cancel',
+    categoryId: 'business',
+    question: 'Wie funktioniert die monatliche Kündigung?',
+    answer:
+      'Sie geben uns Bescheid, im Folgemonat läuft der Vertrag aus. Sie erhalten vollständige Dokumentation, Daten-Export in Standardformaten und auf Wunsch einen 2h-Handover-Call. Infrastruktur und Daten bleiben bei Ihnen.',
+    keywords: ['betreuung', 'kündigung', 'vertragsende'],
+    tags: ['betreuung', 'managed-service'],
+  },
+  {
+    id: 'care-flex-pricing',
+    categoryId: 'business',
+    question: 'Warum kostet monatlich kündbar mehr?',
+    answer:
+      'Flexibilität hat einen Preis. Der Aufschlag kompensiert unser Risiko, damit Sie jederzeit aussteigen können – ohne Kleingedrucktes und ohne Abhängigkeiten.',
+    keywords: ['betreuung', 'kosten', 'flexibilität'],
+    tags: ['betreuung', 'managed-service'],
+  },
+  {
+    id: 'care-switch-levels',
+    categoryId: 'business',
+    question: 'Können wir zwischen den Service-Leveln wechseln?',
+    answer:
+      'Ja, jederzeit. Starten Sie mit Infrastruktur-Managed und wechseln Sie bei Bedarf auf Full-Partnership oder zurück. Wir passen SLAs und Umfang dynamisch an.',
+    keywords: ['betreuung', 'service level', 'sla'],
+    tags: ['betreuung', 'managed-service'],
+  },
+  {
+    id: 'care-pricing',
+    categoryId: 'business',
+    question: 'Was kostet langfristige Betreuung?',
+    answer:
+      'Es hängt von Teamgröße, Infrastruktur-Landschaft, gewünschter KI-Automation und Reaktionszeit ab. Im kostenlosen Beratungsgespräch kalkulieren wir transparent: individuelles Angebot statt Pauschalpreis.',
+    keywords: ['betreuung', 'kosten', 'angebot'],
+    tags: ['betreuung', 'managed-service'],
+  },
+  {
+    id: 'care-response-time',
+    categoryId: 'business',
+    question: 'Wie schnell reagieren Sie bei Problemen?',
+    answer:
+      'Infrastruktur-Managed: < 24h. Full-Partnership: < 6h. Kritische Incidents werden sofort priorisiert – auch nachts oder am Wochenende.',
+    keywords: ['betreuung', 'sla', 'reaktionszeit'],
+    tags: ['betreuung', 'managed-service'],
+  },
+  {
+    id: 'care-a-la-carte',
+    categoryId: 'business',
+    question: 'Können wir auch einzelne Leistungen buchen?',
+    answer:
+      'Ja, auf Stundenbasis (ab 65 €/h) für Ad-hoc-Support, Consulting oder Mini-Projekte. Ideal, wenn Sie ohne monatliche Bindung testen möchten.',
+    keywords: ['betreuung', 'leistungen', 'stundenbasis'],
+    tags: ['betreuung', 'managed-service'],
+  },
+  {
+    id: 'care-trends',
+    categoryId: 'business',
+    question: 'Wie oft informieren Sie über Trends & Potenziale?',
+    answer:
+      'Full-Partnership: monatliche Strategy-Reviews mit konkreten Empfehlungen zu KI, Open Source und Automatisierung. Infrastruktur-Managed: monatliche Trend-Updates als Teil der Reviews.',
+    keywords: ['betreuung', 'reviews', 'trends'],
+    tags: ['betreuung', 'managed-service'],
+  },
 ]

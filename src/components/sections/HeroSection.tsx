@@ -169,11 +169,11 @@ const TypewriterEffect: React.FC<{ texts: readonly string[]; reducedMotion?: boo
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [currentText, setCurrentText] = React.useState('')
   const [isDeleting, setIsDeleting] = React.useState(false)
-  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  const timeoutRef = React.useRef<number | null>(null)
 
   const clearTimer = React.useCallback(() => {
     if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
+      window.clearTimeout(timeoutRef.current)
       timeoutRef.current = null
     }
   }, [])

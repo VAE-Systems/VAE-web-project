@@ -1,5 +1,7 @@
+import { faqEntries } from '@/data/faqData'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Link } from 'react-router-dom'
 import {
   AlertCircle,
   BarChart3,
@@ -52,14 +54,20 @@ interface PhaseCard {
   title: string
   description: string
   features: string[]
-  timeline?: string
-  pricing: string
-  highlighted?: boolean
+  duration?: string
+  investment: string
+  action?: {
+    label: string
+    href: string
+  }
 }
 
-interface FAQItem {
-  question: string
-  answer: string
+interface TransformationStat {
+  id: string
+  highlight: string
+  ariaLabel: string
+  description: string
+  source: string
 }
 
 const features: FeatureCard[] = [
@@ -184,73 +192,65 @@ const targetProfiles: TargetProfile[] = [
 
 const phases: PhaseCard[] = [
   {
-    title: 'Strategiegespräch',
-    description: '45 Minuten kostenlos & unverbindlich',
+    title: 'Nur Beratung',
+    description: 'Sie setzen intern um, wir begleiten beratend.',
     features: [
-      'Ihre Ausgangslage verstehen',
-      'Erste strategische Einschätzung',
-      'Mögliche Handlungsoptionen aufzeigen',
-      'Keine Verkaufspräsentation',
-    ],
-    pricing: 'Kostenlos',
-    highlighted: true,
-  },
-  {
-    title: 'Strategieentwicklung',
-    description: 'Detaillierte Analyse und Konzeption',
-    features: [
-      'IST-Analyse Ihrer Systemlandschaft',
+      '45-minütiges Strategiegespräch (kostenlos)',
+      'Detaillierte Analyse Ihrer Systemlandschaft',
       'Business-Case-Kalkulation',
-      '3 strategische Handlungsoptionen',
-      'Schriftliches Strategiepapier',
+      'Strategische Roadmap mit klaren Handlungsempfehlungen',
+      'Schriftlicher Analyse-Report',
     ],
-    timeline: 'Dauer: 1–2 Wochen',
-    pricing: 'Individuell nach Projektumfang',
+    duration: 'Dauer: 1–2 Wochen',
+    investment: 'Investition: Individuell nach Projektumfang',
   },
   {
-    title: 'Strategische Begleitung',
-    description: 'Laufende Unterstützung nach Bedarf',
+    title: 'Full-Service',
+    description: 'Wir übernehmen die komplette Umsetzung.',
     features: [
-      'Ad-hoc-Beratung bei strategischen Fragen',
-      'Regelmäßige Review-Termine',
-      'Begleitung bei Implementierungsentscheidungen',
-      'Flexible Zusammenarbeit',
+      'Alles aus „Nur Beratung“',
+      'Komplette Umsetzung der Infrastruktur',
+      'Setup & Konfiguration',
+      'Dokumentation & Training',
+      'Go-Live-Begleitung',
     ],
-    timeline: 'Nach Vereinbarung',
-    pricing: 'Individuelles Beratungsangebot',
+    duration: 'Dauer: 2–6 Monate (je nach Umfang)',
+    investment: 'Investition: Individuell nach Projektumfang',
+  },
+  {
+    title: 'Langfristige Partnerschaft',
+    description:
+      'Nach erfolgreichem Setup bleiben wir Ihr IT-Partner – für laufende Betreuung, Support und strategische Begleitung.',
+    features: ['Laufende Betreuung & Support', 'Regelmäßige Strategie-Reviews', 'Direkter Zugang zum Expertenteam'],
+    investment: 'Investition: Monatlicher Retainer (individuell nach Umfang)',
+    action: {
+      label: 'Zur langfristigen Betreuung →',
+      href: '/leistungen/betreuung',
+    },
   },
 ]
 
-const faqData: FAQItem[] = [
+const transformationStats: TransformationStat[] = [
   {
-    question: 'Für wen ist diese Beratung geeignet?',
-    answer:
-      'Für Unternehmen, die mit KI-Strategien, Digitalisierung oder Automatisierung strategisch weiterkommen möchten – aber unsicher sind, welche Lösung sinnvoll, realistisch und wirtschaftlich ist. Besonders wertvoll ist unsere Beratung, wenn Sie bereits Berührungspunkte mit dem Thema hatten, aber noch keine klare Entscheidung treffen können.',
+    id: 'bcg',
+    highlight: 'Nur 1 von 3',
+    ariaLabel: 'Nur 1 von 3 Transformationen',
+    description: 'Transformationen erreicht ihre Wachstums- und Wertschöpfungsziele.',
+    source: 'Quelle: Boston Consulting Group, 2025',
   },
   {
-    question: 'Worin liegt der Unterschied zu klassischen IT-Beratungen?',
-    answer:
-      'Wir konzentrieren uns nicht auf Infrastruktur-Setup oder technische Detailimplementierung, sondern auf strategische Entscheidungsgrundlagen: Was ist möglich? Was ist sinnvoll? Was ist wirtschaftlich? Statt fertiger Lösungen entwickeln wir mit Ihnen gemeinsam eine fundierte Strategie – transparent, nachvollziehbar und ohne Abhängigkeit.',
+    id: 'bain',
+    highlight: '88%',
+    ariaLabel: 'Achtundachtzig Prozent',
+    description: 'der Business-Transformationen verfehlen ihre ursprünglichen Ziele.',
+    source: 'Quelle: Bain & Company, 2024',
   },
   {
-    question: 'Was kostet die Beratung?',
-    answer:
-      'Das kostenlose Strategiegespräch (45 Minuten) ist unverbindlich. Die Strategieentwicklung mit detaillierter Analyse, Business-Case-Kalkulation und schriftlichem Strategiepapier wird individuell nach Projektumfang kalkuliert. Sie erhalten nach dem Erstgespräch ein transparentes, schriftliches Angebot – ohne versteckte Kosten.',
-  },
-  {
-    question: 'Wie lange dauert eine typische Beratung?',
-    answer:
-      'Das Erstgespräch findet innerhalb weniger Tage statt. Die Strategieentwicklung dauert je nach Komplexität 1–2 Wochen. Die optionale strategische Begleitung ist flexibel nach Ihrem Bedarf buchbar – von einmaligen Review-Terminen bis zu regelmäßiger Ad-hoc-Unterstützung.',
-  },
-  {
-    question: 'Erhalte ich konkrete Handlungsempfehlungen?',
-    answer:
-      'Ja. Sie erhalten ein schriftliches Strategiepapier mit einer klaren IST-Analyse, Business-Case-Kalkulation und mindestens 3 konkreten Handlungsoptionen – von „minimal investment" bis zu umfassenden Szenarien. Jede Option wird hinsichtlich Aufwand, Kosten, Nutzen und Risiken transparent dargestellt.',
-  },
-  {
-    question: 'Muss ich mich danach für VAE entscheiden?',
-    answer:
-      'Nein. Unser Ziel ist strategische Klarheit, nicht Verkauf. Sie erhalten fundierte Entscheidungsgrundlagen und können dann selbst entscheiden – ob mit uns, mit einem anderen Partner oder durch interne Umsetzung. Unsere Empfehlungen sind technologieneutral und auf Ihre strategischen Ziele ausgerichtet.',
+    id: 'zylo',
+    highlight: '$18 Mio.',
+    ariaLabel: 'Achtzehn Millionen US-Dollar',
+    description: 'verschwendet ein durchschnittliches Unternehmen jährlich durch ungenutzte SaaS-Lizenzen.',
+    source: 'Quelle: Zylo SaaS Management Index, 2024',
   },
 ]
 
@@ -260,15 +260,16 @@ const faqData: FAQItem[] = [
 
 const BeratungPage: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null)
+  const consultingFaqs = useMemo(() => faqEntries.filter(entry => entry.tags?.includes('consulting')), [])
   const faqAccordionItems = useMemo(
     () =>
-      faqData.map((faq, idx) => ({
-        id: `beratung-faq-${idx}`,
+      consultingFaqs.map((faq, idx) => ({
+        id: `beratung-faq-${faq.id ?? idx}`,
         question: faq.question,
         defaultOpen: idx === 0,
         answer: <p className="text-base leading-relaxed text-text-secondary">{faq.answer}</p>,
       })),
-    []
+    [consultingFaqs]
   )
 
   // Booking CTA now routes über Landing-Page
@@ -428,6 +429,47 @@ const BeratungPage: React.FC = () => {
                 <span>Kein Sales-Pitch</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== STUDIEN-SEKTION ==================== */}
+      <section className="animate-section mt-24 border-b border-gray-200/70 bg-[hsl(165,59%,97%)] py-24 dark:border-white/5 dark:bg-[hsl(165,20%,8%)]">
+        <div className="container-vae">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Warum Transformationen so häufig scheitern
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-white/80">
+              Ohne fundierte Strategie sind die Erfolgsaussichten gering — die Zahlen zeigen es deutlich.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-10 md:grid-cols-3">
+            {transformationStats.map(stat => (
+              <article key={stat.id} className="text-center">
+                <div className="text-4xl font-semibold tracking-tight text-vae-turquoise">
+                  <span aria-label={stat.ariaLabel}>{stat.highlight}</span>
+                </div>
+                <p className="mt-4 text-base leading-relaxed text-gray-800 dark:text-white/85">{stat.description}</p>
+                <p className="mt-3 text-sm italic text-gray-500 dark:text-white/60">{stat.source}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="animate-section border-b border-gray-200 py-16 dark:border-[hsl(0,0%,12%)]">
+        <div className="container-vae">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-lg leading-8 text-gray-700 dark:text-[hsl(0,0%,80%)]">
+              Gerade deshalb braucht es fundierte Strategieberatung. Transformationen scheitern selten an fehlender
+              Technologie — sondern an unklaren Zielen, fehlender Planung und Ad-hoc-Entscheidungen. In einem Markt mit
+              hunderten KI-Tools und Dienstleistern ist nicht pauschal alles schlecht. Aber wann was richtig ist und
+              wann was falsch ist — dafür braucht es echte Expertise. Wir analysieren Ihre Systeme, identifizieren
+              Ineffizienzen und entwickeln einen klaren, umsetzbaren Fahrplan — individuell auf Ihre Organisation
+              zugeschnitten.
+            </p>
           </div>
         </div>
       </section>
@@ -707,20 +749,20 @@ const BeratungPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ==================== WIE WIR ZUSAMMENARBEITEN ==================== */}
+      {/* ==================== 3 WEGE ZUR ZUSAMMENARBEIT ==================== */}
       <section className="animate-section border-b border-gray-200 py-24 dark:border-[hsl(0,0%,12%)]">
         <div className="container-vae">
-          <h2 className="h2 heading-gradient mb-16 text-center">Wie wir zusammenarbeiten</h2>
+          <h2 className="h2 heading-gradient text-center">3 Wege, mit VAE zu arbeiten</h2>
+          <p className="mx-auto mb-16 mt-4 max-w-3xl text-center text-base text-gray-600 dark:text-[hsl(0,0%,80%)]">
+            Sie entscheiden, wie tief die Zusammenarbeit geht — von strategischer Beratung bis zur langfristigen
+            Partnerschaft.
+          </p>
 
-          <div className="card-group mb-12 grid gap-8 md:grid-cols-3">
+          <div className="card-group grid gap-8 md:grid-cols-3">
             {phases.map((phase, idx) => (
               <div
                 key={idx}
-                className={`relative overflow-hidden rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                  phase.highlighted
-                    ? 'border-vae-turquoise/50 bg-vae-turquoise/5 shadow-lg shadow-vae-turquoise/10 dark:bg-vae-turquoise/10 dark:shadow-vae-turquoise/20'
-                    : 'border-vae-turquoise/20 bg-white shadow-sm hover:border-vae-turquoise/40 dark:bg-[hsl(0,0%,8%)]/50'
-                }`}
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg hover:shadow-vae-turquoise/10 dark:border-vae-turquoise/20 dark:bg-[hsl(0,0%,8%)]/50"
               >
                 <h3 className="mb-3 text-2xl font-semibold text-gray-900 dark:text-white">{phase.title}</h3>
                 <p className="mb-6 text-sm text-gray-700 dark:text-[hsl(0,0%,80%)]">{phase.description}</p>
@@ -734,46 +776,43 @@ const BeratungPage: React.FC = () => {
                   ))}
                 </ul>
 
-                {phase.timeline && <p className="mb-3 text-sm font-medium text-vae-turquoise/80">{phase.timeline}</p>}
-
-                <div className="rounded-lg bg-gray-100 px-4 py-3 dark:bg-[hsla(0,0%,6%,1)]">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{phase.pricing}</p>
+                <div className="mb-6 space-y-1 text-sm font-medium text-vae-turquoise/90">
+                  {phase.duration && <p>{phase.duration}</p>}
+                  <p>{phase.investment}</p>
                 </div>
 
-                {phase.highlighted && (
-                  <div className="mt-6">
-                    <MagneticButton intensity={0.08} scaleEffect>
-                      <button
-                        onClick={openCalendly}
-                        className="btn-primary flex w-full items-center justify-center gap-2 text-sm"
-                      >
-                        <Calendar className="h-4 w-4" />
-                        Termin buchen
-                      </button>
-                    </MagneticButton>
-                  </div>
+                {phase.action && (
+                  <MagneticButton intensity={0.08} scaleEffect>
+                    <Link
+                      to={phase.action.href}
+                      className="btn-primary flex w-full items-center justify-center gap-2 text-sm"
+                    >
+                      {phase.action.label}
+                    </Link>
+                  </MagneticButton>
                 )}
               </div>
             ))}
           </div>
 
           {/* Info Box */}
-          <div className="mx-auto max-w-3xl rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-6 text-center">
+          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-6 text-center">
             <p className="text-sm leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
               Im kostenlosen Strategiegespräch erhalten Sie eine erste fundierte Einschätzung. Nach der detaillierten
-              Analyse bekommen Sie ein transparentes Angebot — präzise auf Ihre strategischen Ziele zugeschnitten.
+              Analyse bekommen Sie ein transparentes Angebot — präzise auf Ihre strategischen Ziele zugeschnitten. Keine
+              versteckten Kosten.
             </p>
           </div>
         </div>
       </section>
 
       {/* ==================== FAQ + FINAL CTA ==================== */}
-      <section className="animate-section bg-gradient-to-b from-bg-darker via-[#050505] to-bg-darker py-24 text-white">
+      <section className="animate-section bg-gradient-to-b from-white via-gray-50 to-white py-24 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">FAQ</p>
-            <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Häufige Fragen</h2>
-            <p className="mt-4 text-base text-text-secondary">
+            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-text-secondary dark:text-white/70">
               Strategische Klarheit vor jedem Projekt: Antworten auf die wichtigsten Fragen rund um Umfang, Dauer und
               ROI unserer Beratung.
             </p>
@@ -782,17 +821,17 @@ const BeratungPage: React.FC = () => {
           </div>
 
           <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-10 text-center shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise">
+            <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white p-10 text-center shadow-[0_18px_50px_rgba(15,23,42,0.12)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:border-white/15 dark:bg-white/5">
                 Schritt 1
               </div>
-              <h3 className="text-3xl font-semibold text-white">Bereit für den ersten Schritt?</h3>
-              <p className="mt-4 text-base text-text-secondary">
+              <h3 className="text-3xl font-semibold text-gray-900 dark:text-white">Bereit für den ersten Schritt?</h3>
+              <p className="mt-4 text-base text-text-secondary dark:text-white/70">
                 Buchen Sie Ihr kostenloses Strategiegespräch. Wir analysieren Ihre Situation, priorisieren Ziele und
                 zeigen konkrete Optionen – ohne Sales-Pitch.
               </p>
 
-              <ul className="mt-8 space-y-3 text-sm text-text-secondary">
+              <ul className="mt-8 space-y-3 text-sm text-text-secondary dark:text-white/70">
                 <li className="flex items-center justify-center gap-3">
                   <CheckCircle2 className="h-5 w-5 text-vae-turquoise" /> 45 Minuten, kostenlos & unverbindlich
                 </li>
@@ -814,12 +853,12 @@ const BeratungPage: React.FC = () => {
                 </button>
               </MagneticButton>
 
-              <p className="mt-4 text-xs text-text-secondary">
+              <p className="mt-4 text-xs text-text-secondary dark:text-white/60">
                 Bereit, aber noch unsicher? Wir klären jede Frage live.
               </p>
 
               <div className="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center opacity-60">
-                <div className="h-32 w-32 rounded-full bg-vae-turquoise/30 blur-[80px]" />
+                <div className="h-32 w-32 rounded-full bg-vae-turquoise/20 blur-[80px] dark:bg-vae-turquoise/30" />
               </div>
             </div>
           </div>

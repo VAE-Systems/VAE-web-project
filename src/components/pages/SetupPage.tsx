@@ -1,12 +1,11 @@
 import {
+  ArrowUpRight,
   BookOpen,
-  Briefcase,
-  Building2,
   Check,
+  CheckCircle2,
   GraduationCap,
   Headphones,
   Repeat,
-  Rocket,
   Server,
   ServerCog,
   ShieldCheck,
@@ -15,6 +14,7 @@ import {
   Users,
 } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { faqEntries } from '@/data/faqData'
 import { flattenedSaasTools, saasToolCategories } from '@/data/saasTools'
@@ -39,15 +39,15 @@ interface ProcessPhase {
   details: string[]
 }
 
-interface ScenarioCard {
-  icon: React.ElementType
-  title: string
-  description: string
-  highlights: string[]
-  duration: string
-  effort: string
-  featured?: boolean
-}
+// interface ScenarioCard {
+//   icon: React.ElementType
+//   title: string
+//   description: string
+//   highlights: string[]
+//   duration: string
+//   effort: string
+//   featured?: boolean
+// }
 
 interface CustomLicense {
   id: string
@@ -122,23 +122,23 @@ const processPhases: ProcessPhase[] = [
   {
     number: '02',
     title: 'Setup & Konfiguration (Woche 2–3)',
-    description: 'Server aufbauen, Tools installieren, Integrationen und Workflows abbilden.',
+    description: 'Server aufbauen, Systeme einrichten, Integrationen und Workflows abbilden.',
     details: [
-      '→ Server-Aufbau (Docker, Traefik, SSL)',
-      '→ Tool-Installation (Nextcloud, Odoo, n8n)',
-      '→ Integration & Automationen',
-      '→ Test-Umgebung',
+      '→ Server-Aufbau (Container-Umgebung, Reverse Proxy, TLS-Konfiguration)',
+      '→ Einrichtung der Kernsysteme (Dateien, Kollaboration, Business-Systeme, Automationen)',
+      '→ Integration in bestehende Tools und Datenflüsse',
+      '→ Einrichtung einer Staging- / Test-Umgebung',
     ],
   },
   {
     number: '03',
     title: 'Migration & Testing (Woche 4–5)',
-    description: 'Wir migrieren produktive Daten, testen End-to-End und schulen Ihr Team.',
+    description: 'Je nach Ausgangslage migrieren wir produktive Daten, testen End-to-End und schulen Ihr Team.',
     details: [
-      '→ Daten-Migration (Dateien, Kontakte, E-Mails)',
-      '→ Systemtests & QA',
-      '→ Team-Training',
-      '→ Dokumentation',
+      '→ Daten-Migration (falls relevant: Dateien, Kontakte, E-Mails und weitere Systeme)',
+      '→ Systemtests & QA (End-to-End)',
+      '→ Team-Training in den neuen Workflows',
+      '→ Abschlussdokumentation für Betrieb und Admins',
     ],
   },
   {
@@ -149,49 +149,50 @@ const processPhases: ProcessPhase[] = [
   },
 ]
 
-const scenarioCards: ScenarioCard[] = [
-  {
-    icon: Rocket,
-    title: 'Starter-Setup',
-    description: 'Für Teams mit 5–15 Personen, die schnell raus aus Microsoft 365 oder Google wollen.',
-    highlights: [
-      'Nextcloud (Files, Calendar, Contacts)',
-      'OnlyOffice',
-      'Basis-n8n-Automationen',
-      'Backups & Monitoring',
-    ],
-    duration: '2–3 Wochen',
-    effort: 'Individuelles Angebot nach Beratung',
-  },
-  {
-    icon: Briefcase,
-    title: 'Professional-Setup',
-    description: 'Skalierende Unternehmen mit CRM-/ERP-Bedarf und komplexeren Workflows.',
-    highlights: [
-      'Nextcloud Full Stack',
-      'Odoo CRM/ERP (Sales, Invoicing)',
-      'n8n (erweiterte Automationen)',
-      'Mail-Server optional',
-    ],
-    duration: '4–5 Wochen',
-    effort: 'Individuelles Angebot nach Beratung',
-    featured: true,
-  },
-  {
-    icon: Building2,
-    title: 'Enterprise-Setup',
-    description: '50+ Mitarbeitende, Multi-Location, Hochverfügbarkeit und dedizierter Support.',
-    highlights: [
-      'Nextcloud HA-Cluster',
-      'Odoo Full ERP mit Custom-Modulen',
-      'n8n (komplexe Workflows)',
-      'Mail, Chat, Telefonie',
-      'Redundante Backups & 24/7 Monitoring',
-    ],
-    duration: '6–8 Wochen',
-    effort: 'Individuelles Angebot nach Beratung',
-  },
-]
+// Commented out for future use - will be used for scenario comparison section
+// const scenarioCards: ScenarioCard[] = [
+//   {
+//     icon: Rocket,
+//     title: 'Starter-Setup',
+//     description: 'Für Teams mit 5–15 Personen, die schnell raus aus Microsoft 365 oder Google wollen.',
+//     highlights: [
+//       'Nextcloud (Files, Calendar, Contacts)',
+//       'OnlyOffice',
+//       'Basis-n8n-Automationen',
+//       'Backups & Monitoring',
+//     ],
+//     duration: '2–3 Wochen',
+//     effort: 'Individuelles Angebot nach Beratung',
+//   },
+//   {
+//     icon: Briefcase,
+//     title: 'Professional-Setup',
+//     description: 'Skalierende Unternehmen mit CRM-/ERP-Bedarf und komplexeren Workflows.',
+//     highlights: [
+//       'Nextcloud Full Stack',
+//       'Odoo CRM/ERP (Sales, Invoicing)',
+//       'n8n (erweiterte Automationen)',
+//       'Mail-Server optional',
+//     ],
+//     duration: '4–5 Wochen',
+//     effort: 'Individuelles Angebot nach Beratung',
+//     featured: true,
+//   },
+//   {
+//     icon: Building2,
+//     title: 'Enterprise-Setup',
+//     description: '50+ Mitarbeitende, Multi-Location, Hochverfügbarkeit und dedizierter Support.',
+//     highlights: [
+//       'Nextcloud HA-Cluster',
+//       'Odoo Full ERP mit Custom-Modulen',
+//       'n8n (komplexe Workflows)',
+//       'Mail, Chat, Telefonie',
+//       'Redundante Backups & 24/7 Monitoring',
+//     ],
+//     duration: '6–8 Wochen',
+//     effort: 'Individuelles Angebot nach Beratung',
+//   },
+// ]
 
 const calendlyUrl = '/contact#booking'
 const DEFAULT_VAT_RATE = 19
@@ -436,18 +437,14 @@ const SetupPage: React.FC = () => {
 
         <div className="container-vae relative flex flex-col items-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
-            <ServerCog className="h-4 w-4" /> Infrastructure Setup
+            <ServerCog className="h-4 w-4" /> Infrastruktur Design/Setup
           </span>
           <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-white md:text-5xl">
-            Infrastruktur-Design für eine KI-geprägte Arbeitswelt, in der Sie die Kontrolle behalten.
+            Eine KI-geprägte Arbeitswelt, in der Sie die Kontrolle behalten.
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-text-secondary md:text-lg">
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-300 md:text-xl">
             Wir entwerfen Ihre Informationsinfrastruktur – das Betriebssystem Ihres Unternehmens. Selbstgehostet, offen
             und so gebaut, dass Sie auch morgen noch flexibel entscheiden können.
-          </p>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 dark:text-gray-400">
-            Statt weitere KI-Tools einfach oben drauf zu setzen, schaffen wir ein stabiles Zusammenspiel aus Systemen,
-            Datenflüssen und Workflows, auf dem Ihre Entscheidungen und Automatisierungen sicher laufen.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <MagneticButton intensity={0.08} scaleEffect>
@@ -458,18 +455,20 @@ const SetupPage: React.FC = () => {
                 Kostenloses Erstgespräch buchen
               </button>
             </MagneticButton>
-            <button
-              onClick={scrollToROI}
-              className="btn-ghost border border-white/20 px-8 py-4 text-base text-white transition hover:border-vae-turquoise hover:text-vae-turquoise"
-            >
-              ROI-Rechner ansehen ↓
-            </button>
+            <MagneticButton intensity={0.05} scaleEffect>
+              <button
+                onClick={scrollToROI}
+                className="btn-outline flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+              >
+                ROI-Rechner ansehen ↓
+              </button>
+            </MagneticButton>
           </div>
           <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm font-semibold text-text-secondary">
             {trustBadges.map(badge => (
               <span
                 key={badge}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1"
+                className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary"
               >
                 <Check className="h-4 w-4 text-vae-turquoise" /> {badge}
               </span>
@@ -479,8 +478,10 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* ==================== STUDIEN-SEKTION ==================== */}
-      <section className="animate-section border-b border-gray-200 bg-[hsl(165,59%,97%)] py-16 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(165,20%,8%)]">
-        <div className="container-vae">
+      <section className="section-card-container animate-section border-b border-gray-200 bg-[hsl(165,59%,97%)] py-24 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(165,20%,8%)]">
+        <div className="section-card-backdrop" />
+
+        <div className="container-vae relative">
           <div className="mb-12 text-center">
             <h2 className="h2 heading-gradient mb-4">Warum Unternehmen auf selbstgehostete Lösungen setzen</h2>
             <p className="mx-auto max-w-2xl text-lg text-gray-700 dark:text-text-secondary">
@@ -568,6 +569,10 @@ const SetupPage: React.FC = () => {
               Was bedeutet Infrastructure-Design bei VAE?
             </h2>
             <p className="text-lg text-gray-700 dark:text-text-secondary">
+              Statt weitere KI-Tools einfach oben drauf zu setzen, schaffen wir ein stabiles Zusammenspiel aus Systemen,
+              Datenflüssen und Workflows, auf dem Ihre Entscheidungen und Automatisierungen sicher laufen.
+            </p>
+            <p className="text-base text-gray-700 dark:text-text-secondary">
               Bei VAE entwickeln wir Ihre Informationsinfrastruktur – also die Arbeitsumgebung, in der Daten, Workflows
               und Systeme so zusammenspielen, dass Sie Entscheidungen treffen, Prozesse steuern und KI sinnvoll
               einsetzen können.
@@ -692,6 +697,130 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Section: Nach dem Setup */}
+      <section className="section-card-container border-b border-gray-200 bg-gradient-to-b from-white via-gray-50 to-white py-20 dark:border-white/5 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Nach dem Setup</p>
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Welche Optionen haben Sie nach dem Setup?
+            </h2>
+            <p className="mt-4 text-base text-gray-700 dark:text-text-secondary md:text-lg">
+              Nach der Implementierung können Sie Ihre Infrastruktur entweder eigenständig betreiben oder langfristig
+              von VAE betreuen lassen.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Option 1: Setup + Übergabe */}
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+                <CheckCircle2 className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Setup + Übergabe</h3>
+              <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+                Wir implementieren die Infrastruktur, dokumentieren alles detailliert und schulen Ihr Team. Sie erhalten
+                eine vollständig betreibbare Plattform und übernehmen den laufenden Betrieb eigenständig.
+              </p>
+              <ul className="mt-4 space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Vollständige Dokumentation & Runbooks
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Team-Schulungen für eigenständigen Betrieb
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Knowledge-Transfer & Best Practices
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    1 Monat Post-Launch-Support inklusive
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Option 2: Setup + Langfristige Betreuung */}
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border-2 border-vae-turquoise/40 bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-xl dark:border-vae-turquoise/30 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise to-vae-turquoise/0" />
+
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/15 transition-transform duration-300 group-hover:scale-110">
+                <Users className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Setup + Langfristige Betreuung</h3>
+              <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+                Wir implementieren die Infrastruktur und übernehmen anschließend auch die langfristige Instandhaltung,
+                Weiterentwicklung und das Monitoring – Sie konzentrieren sich voll auf Ihr Kerngeschäft.
+              </p>
+              <ul className="mt-4 space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Kontinuierliche Updates & Security-Patches
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    24/7-Monitoring & proaktive Wartung
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Performance-Optimierung & Skalierung
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Flexible Betreuungsmodelle (monatlich kündbar)
+                  </span>
+                </li>
+              </ul>
+              <div className="mt-6 flex justify-center">
+                <MagneticButton intensity={0.05} scaleEffect>
+                  <Link
+                    to="/leistungen/betreuung#service-levels"
+                    className="btn-outline inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold"
+                  >
+                    <span>Betreuungsmodelle ansehen</span>
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </MagneticButton>
+              </div>
+            </div>
+          </div>
+
+          {/* Hinweis zu Hosting-Optionen */}
+          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-vae-turquoise/30 bg-gradient-to-br from-vae-turquoise/10 via-vae-turquoise/5 to-transparent p-6 backdrop-blur-sm dark:border-vae-turquoise/20 dark:from-vae-turquoise/15 dark:via-vae-turquoise/10">
+            <p className="text-center text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+              <strong className="text-gray-900 dark:text-white">Hosting-Optionen:</strong> Detaillierte Informationen zu
+              den verschiedenen Deployment-Modellen finden Sie{' '}
+              <Link
+                to="/leistungen/betreuung#deployment-modelle"
+                className="font-semibold text-vae-turquoise underline decoration-vae-turquoise/30 underline-offset-2 transition-colors hover:decoration-vae-turquoise"
+              >
+                in der Hosting-Sektion →
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Section 4 - Original Content */}
       <section className="section-card-container bg-gray-50 py-20 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
@@ -752,13 +881,15 @@ const SetupPage: React.FC = () => {
               gesperrte Ebene visualisiert und erst im Gespräch freigeschaltet.
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
-              <button
-                onClick={startTutorial}
-                className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-white transition hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:bg-white/10"
-              >
-                <GraduationCap className="h-4 w-4 text-vae-turquoise transition group-hover:text-vae-turquoise/80" />
-                Tutorial starten
-              </button>
+              <MagneticButton intensity={0.05}>
+                <button
+                  onClick={startTutorial}
+                  className="btn-outline inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-[0.35em]"
+                >
+                  <GraduationCap className="h-4 w-4" />
+                  Tutorial starten
+                </button>
+              </MagneticButton>
               <span className="text-xs font-medium text-text-secondary">Geführte Tour durch den Kostenrechner</span>
             </div>
           </div>
@@ -1000,7 +1131,7 @@ const SetupPage: React.FC = () => {
                 <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-6 transition-opacity duration-300 hover:opacity-70">
                   <div className="mb-6 flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-vae-green text-xs font-semibold uppercase tracking-[0.3em]">
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
                         Einsparungen mit Open Source
                       </p>
                       <p className="text-sm text-text-secondary">Ihre individuelle Kostenanalyse</p>
@@ -1032,7 +1163,7 @@ const SetupPage: React.FC = () => {
                           </div>
                           <div className="mt-2 h-2 rounded-full bg-white/10">
                             <div
-                              className="bg-vae-green h-2 rounded-full"
+                              className="h-2 rounded-full bg-vae-turquoise"
                               style={{
                                 width: `${maxComparisonValue ? Math.max((openSourceAnnual / maxComparisonValue) * 100, 5) : 0}%`,
                               }}
@@ -1042,14 +1173,18 @@ const SetupPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="border-vae-green/30 bg-vae-green/10 space-y-3 rounded-2xl border p-5">
+                    <div className="space-y-3 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-5">
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-white/90">Einsparung im ersten Jahr (inkl. Setup)</span>
-                        <span className="text-vae-green text-lg font-semibold">{formatCurrency(yearOneSavings)}</span>
+                        <span className="text-lg font-semibold text-vae-turquoise">
+                          {formatCurrency(yearOneSavings)}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-white/90">Einsparung ab Jahr 2</span>
-                        <span className="text-vae-green text-lg font-semibold">{formatCurrency(yearTwoSavings)}</span>
+                        <span className="text-lg font-semibold text-vae-turquoise">
+                          {formatCurrency(yearTwoSavings)}
+                        </span>
                       </div>
                       <div className="mt-3 border-t border-white/10 pt-3">
                         <div className="flex items-center justify-between">
@@ -1077,56 +1212,100 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
       {/* Section 5 Process */}
-      <section className="section-card-container bg-white py-20 dark:bg-bg-dark">
+      <section
+        id="prozess"
+        className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-dark"
+      >
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">Prozess-Ablauf</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Wie läuft der Setup ab?</h2>
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Prozess-Ablauf</p>
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Wie läuft der Setup ab?
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base text-gray-700 dark:text-text-secondary md:text-lg">
+              Von der Analyse bis zum Go-Live in klar strukturierten Phasen – transparent, planbar und messbar.
+            </p>
           </div>
-          <div className="mt-12 space-y-8 border-l border-white/10 pl-6 md:pl-10">
-            {processPhases.map(phase => (
-              <div key={phase.number} className="relative rounded-2xl border border-white/10 bg-white/5 p-6">
-                <div className="absolute -left-12 top-6 hidden h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-bg-darker text-lg font-semibold text-white md:flex">
-                  {phase.number}
+
+          {/* Timeline-Grid */}
+          <div className="relative">
+            {/* Horizontale Linie nur auf Desktop - läuft durch die Mitte der Nummer-Badges */}
+            <div className="pointer-events-none absolute inset-x-0 top-5 hidden h-px bg-gradient-to-r from-transparent via-vae-turquoise/20 to-transparent md:block" />
+
+            <div className="grid gap-8 md:grid-cols-4">
+              {processPhases.map(phase => (
+                <div key={phase.number} className="relative flex h-full flex-col">
+                  {/* Nummer-Badge - außerhalb der Card, ganz oben */}
+                  <div className="relative z-10 mx-auto mb-6 flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-200 bg-vae-turquoise/15 text-sm font-semibold text-vae-turquoise dark:border-white/10 dark:bg-vae-turquoise/20">
+                    {phase.number}
+                  </div>
+
+                  {/* Card-Content */}
+                  <div className="flex h-full flex-col gap-4 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/5">
+                    {/* Phase-Label */}
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-vae-turquoise/70 md:text-center">
+                      Phase {phase.number}
+                    </p>
+
+                    {/* Titel */}
+                    <h3 className="text-lg font-semibold leading-snug text-gray-900 dark:text-white md:text-center">
+                      {phase.title.includes('(') ? (
+                        <>
+                          {phase.title.split('(')[0].trim()}
+                          <br />
+                          <span className="text-base">({phase.title.split('(')[1]}</span>
+                        </>
+                      ) : (
+                        phase.title
+                      )}
+                    </h3>
+
+                    {/* Beschreibung */}
+                    <p className="mt-1 text-sm text-gray-700 dark:text-text-secondary md:text-center">
+                      {phase.description}
+                    </p>
+
+                    {/* Bullets */}
+                    <ul className="mt-3 space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                      {phase.details.map(detail => (
+                        <li key={detail} className="flex items-start gap-2">
+                          <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise/70" />
+                          <span>{detail.replace('→ ', '')}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <div className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">
-                  Phase {phase.number}
-                </div>
-                <h3 className="text-2xl font-semibold text-white">{phase.title}</h3>
-                <p className="mt-2 text-base text-text-secondary">{phase.description}</p>
-                <ul className="mt-4 space-y-1 text-sm text-text-secondary">
-                  {phase.details.map(detail => (
-                    <li key={detail}>{detail}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ==================== NACH DEM SETUP: LANGFRISTIGE BETREUUNG ==================== */}
-      <section className="border-y border-gray-200 bg-gray-50 py-16 dark:border-white/5 dark:bg-bg-darker">
-        <div className="container-vae">
-          <div className="mx-auto max-w-3xl rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-8 text-center backdrop-blur-sm dark:border-vae-turquoise/20 dark:bg-vae-turquoise/10">
-            <h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-              Nach dem Setup: Langfristige Betreuung
-            </h3>
-            <p className="mb-6 text-base leading-relaxed text-gray-700 dark:text-gray-300">
-              Infrastruktur ist kein einmaliges Projekt – sie muss mit Ihrem Unternehmen wachsen. Wir bieten laufende
-              Betreuung, Erweiterungen und strategische IT-Beratung.
-            </p>
-            <MagneticButton intensity={0.08} scaleEffect>
-              <a
-                href="/leistungen/betreuung"
-                className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-base"
-              >
-                Mehr zur langfristigen Betreuung
-              </a>
-            </MagneticButton>
-          </div>
+      <section className="border-y border-gray-200 bg-gray-50 py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
+        <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Nächster Schritt</p>
+          <h3 className="text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl">
+            Nach dem Setup: Langfristige Betreuung
+          </h3>
+          <p className="max-w-3xl px-4 text-base leading-relaxed text-gray-700 dark:text-white/70">
+            Infrastruktur ist kein einmaliges Projekt – sie muss mit Ihrem Unternehmen wachsen. Wir bieten laufende
+            Betreuung, Erweiterungen und strategische IT-Beratung, damit Ihre Systeme auch morgen noch performant und
+            sicher laufen.
+          </p>
+          <MagneticButton intensity={0.08} scaleEffect glowEffect>
+            <a
+              href="/leistungen/betreuung"
+              className="btn-primary inline-flex items-center gap-2 px-6 py-3 text-sm md:px-8 md:py-4 md:text-base"
+            >
+              <span className="hidden sm:inline">Mehr zur langfristigen Betreuung</span>
+              <span className="sm:hidden">Zur Betreuung</span>
+              <ArrowUpRight className="h-4 w-4 md:h-5 md:w-5" />
+            </a>
+          </MagneticButton>
         </div>
       </section>
 
@@ -1145,24 +1324,30 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 8 CTA */}
-      <section className="border-t border-white/5 bg-gradient-to-br from-bg-dark to-bg-darker py-20">
-        <div className="container-vae text-center">
-          <h2 className="text-3xl font-semibold text-white md:text-4xl">Bereit für digitale Souveränität?</h2>
-          <p className="mt-4 text-lg text-text-secondary">
+      <section className="border-t border-white/5 bg-gradient-to-br from-bg-dark to-bg-darker py-16 md:py-20">
+        <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Bereit loszulegen?</p>
+          <h2 className="px-4 text-2xl font-semibold text-white md:text-3xl lg:text-4xl">
+            Bereit für digitale Souveränität?
+          </h2>
+          <p className="max-w-3xl px-4 text-base leading-relaxed text-text-secondary">
             Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen Ihnen,
             wie Open Source konkret für Ihre Organisation funktioniert.
           </p>
-          <MagneticButton intensity={0.08} scaleEffect>
-            <button
-              onClick={openCalendly}
-              className="btn-primary mt-8 inline-flex items-center justify-center px-8 py-4 text-base"
-            >
-              Kostenloses Erstgespräch buchen
-            </button>
-          </MagneticButton>
-          <p className="mt-3 text-sm text-text-secondary">
-            45 Minuten, unverbindlich, kein Verkaufs-Pitch. Binnen 48h Termin verfügbar.
-          </p>
+          <div className="flex flex-col items-center gap-3 md:gap-4">
+            <MagneticButton intensity={0.08} scaleEffect glowEffect>
+              <button
+                onClick={openCalendly}
+                className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-8 md:py-4 md:text-base"
+              >
+                <span className="hidden sm:inline">Kostenloses Erstgespräch buchen</span>
+                <span className="sm:hidden">Erstgespräch buchen</span>
+              </button>
+            </MagneticButton>
+            <p className="px-4 text-xs text-text-secondary md:text-sm">
+              45 Minuten, unverbindlich, kein Verkaufs-Pitch. Binnen 48h Termin verfügbar.
+            </p>
+          </div>
         </div>
       </section>
       <SpotlightTutorialOverlay tutorial={tutorial} />

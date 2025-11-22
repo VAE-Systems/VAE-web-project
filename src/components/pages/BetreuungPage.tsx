@@ -1,3 +1,4 @@
+import { faqEntries } from '@/data/faqData'
 import {
   type LucideIcon,
   Activity,
@@ -6,6 +7,7 @@ import {
   Building2,
   Check,
   CheckCircle2,
+  Cloud,
   Layers,
   Lightbulb,
   Minus,
@@ -18,14 +20,13 @@ import {
   Zap,
 } from 'lucide-react'
 import React, { useCallback, useMemo } from 'react'
-import { faqEntries } from '@/data/faqData'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 
 const calendlyUrl = '/contact#booking'
 
-const trustBadges = ['Monatlich kündbar', 'Flexible Bindung', '< 6h Reaktionszeit']
+const trustBadges = ['Flexible Bindung', 'Zuverlässig', 'Transparent']
 
 const hiddenCosts = [
   '5–10 Stunden/Monat für Wartung, Updates und Patches',
@@ -82,17 +83,15 @@ const serviceLevels: ServiceLevel[] = [
     id: 'infrastructure',
     icon: Server,
     title: 'Infrastruktur-Managed',
-    subtitle: 'Technik läuft, Sie sind unabhängig',
+    subtitle: 'Betrieb der bestehenden Informationsinfrastruktur',
     description:
-      'Ideal für Teams mit IT-Know-how. Wir übernehmen Betrieb, Security, Monitoring und Optimierung – Sie behalten volle Kontrolle und Technical Ownership.',
+      'Fokus auf Betrieb der Kernsysteme: Wir übernehmen Patching, Monitoring und sorgen für planbare Reaktionszeiten im Störungsfall. Sie behalten die Kontrolle, wir halten den Betrieb stabil.',
     included: [
-      'Monatliche System-Updates & Patches',
-      '24/7-Monitoring, Uptime & Alerting',
-      'Automatisierte, verschlüsselte Backups',
-      'Security-Management (Firewall, SSL, Hardening)',
-      'Performance-Tuning & Ressourcen-Optimierung',
-      'Support-Tickets mit < 24h Reaktionszeit',
-      'Trends & Potenziale in monatlichen Reviews',
+      'Betrieb, Patching und Monitoring der Kernsysteme',
+      'Umsetzung kleiner Changes und Bugfixes im vereinbarten Rahmen',
+      'Planbare Reaktionszeiten im Störungsfall während Geschäftszeiten',
+      'Automatisierte Backups und Security-Updates',
+      'Performance-Monitoring und grundlegende Optimierungen',
     ],
     excluded: ['User-Support (bleibt intern)', 'Feature-Entwicklung', 'Trainings & Schulungen'],
     suitable: ['Teams mit IT-Erfahrung', '5–30 Mitarbeitende', 'Maximale Unabhängigkeit gewünscht'],
@@ -104,26 +103,25 @@ const serviceLevels: ServiceLevel[] = [
   {
     id: 'full',
     icon: Users,
-    title: 'Full-Partnership',
-    subtitle: 'Wir sind Ihr IT-Team',
+    title: 'Full Partnership',
+    subtitle: 'Wir sind faktisch Ihr IT-/Ops-Team',
     description:
-      'Sie wollen sich voll auf das Business konzentrieren? Wir übernehmen Infrastruktur, Support, KI-Optimierung und Innovation – wie ein internes IT-Team, nur fokussierter.',
+      'Sie wollen sich voll auf das Business konzentrieren? Wir übernehmen nicht nur Betrieb, sondern auch aktive Weiterentwicklung, Strategie-Reviews und enge Einbindung in Ihre Produkt- und Prozessplanung.',
     included: [
       'Alles aus Infrastruktur-Managed',
-      'Direkter User-Support (< 6h Reaktionszeit)',
-      'Regelmäßige Schulungen & Workshops',
+      'Aktive Weiterentwicklung der Systemlandschaft',
+      'Regelmäßige Architektur- und Strategie-Reviews',
+      'Engere Einbindung in Produkt- und Prozessplanung',
       'KI-Workflow-Optimierung & Feature-Entwicklung',
-      'Monatliche Strategy-Reviews (Trends & Potenziale)',
-      'Proaktive Optimierung & Innovationsvorschläge',
-      'Flexible Bindung, monatlich kündbar',
+      'Proaktive Innovationsvorschläge und Roadmaps',
     ],
     suitable: ['Teams ohne IT-Abteilung', '20–100+ Mitarbeitende', 'Business- statt IT-Fokus'],
-    binding: 'Monatlich kündbar – keine Langzeitbindung nötig',
-    ctaLabel: 'Beratung buchen',
+    binding: 'Monatlich kündbar – keine Langzeitbindung',
+    ctaLabel: 'Jetzt Beratung sichern',
     highlighted: true,
     badge: 'Populär',
     footnote:
-      'Individuelles Angebot – abgestimmt auf Infrastruktur, Reaktionszeiten und Umfang der KI-Optimierungen. Klarheit in 45 Minuten Call.',
+      'Individuelles Premium-Angebot. 45 Min. Call für Klarheit zu Infrastruktur, Reaktionszeiten & KI-Potenzialen.',
   },
 ]
 
@@ -167,7 +165,7 @@ const detailedServices: Array<{ icon: LucideIcon; title: string; description: st
     icon: Users,
     title: 'Support & Beratung',
     description:
-      'Ihr Team erhält Antworten, Sparring und Priorisierung. Infrastruktur-Managed: < 24h, Full-Partnership: < 6h.',
+      'Ihr Team erhält Antworten, Sparring und Priorisierung – von Alltagsthemen bis zu strategischen Entscheidungen rund um Ihre Infrastruktur.',
   },
   {
     icon: Target,
@@ -240,20 +238,18 @@ const BetreuungPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:border-white/5 dark:from-bg-dark dark:via-[#0e1117] dark:to-bg-dark">
-        <div className="pointer-events-none absolute inset-0 opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.35),transparent_55%),radial-gradient(circle_at_70%_30%,rgba(var(--vae-turquoise-rgb),0.18),transparent_60%)]" />
-        </div>
+      <section className="section-card-container relative overflow-hidden border-b border-gray-200 bg-white dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
         <div className="container-vae relative flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
-            SERVICE
+            MANAGED OPERATIONS
           </span>
           <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
             Weniger IT-Overhead. Mehr Zeit für Ihr Business.
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-700 dark:text-text-secondary md:text-lg">
-            Ihr IT-Team, aber outsourced. Wir kümmern uns um Infrastruktur, Updates, Security und KI-Optimierung – Sie
-            konzentrieren sich auf das, was Ressourcen wirklich nach vorne bringt.
+            Wir übernehmen Betrieb, Wartung und Weiterentwicklung Ihrer Informationsinfrastruktur – damit Ihr Team sich
+            auf Produkt, Kund:innen und Wachstum konzentrieren kann.
           </p>
           <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
             <MagneticButton intensity={0.08} scaleEffect className="w-full sm:w-auto">
@@ -264,23 +260,23 @@ const BetreuungPage: React.FC = () => {
                 Service-Level besprechen
               </button>
             </MagneticButton>
-            <MagneticButton intensity={0.05} className="w-full sm:w-auto">
+            <MagneticButton intensity={0.05} scaleEffect className="w-full sm:w-auto">
               <button
                 onClick={e => {
                   e.preventDefault()
                   scrollToServiceLevels(e)
                 }}
-                className="btn-ghost flex w-full items-center justify-center border border-gray-300 px-8 py-4 text-base text-gray-900 transition hover:border-vae-turquoise hover:text-vae-turquoise dark:border-white/20 dark:text-white"
+                className="btn-outline flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 Service-Optionen ansehen ↓
               </button>
             </MagneticButton>
           </div>
-          <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm font-semibold text-gray-600 dark:text-text-secondary">
+          <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm font-semibold">
             {trustBadges.map(badge => (
               <span
                 key={badge}
-                className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-1 dark:border-white/10 dark:bg-white/5"
+                className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary"
               >
                 <Check className="h-4 w-4 text-vae-turquoise" /> {badge}
               </span>
@@ -289,9 +285,115 @@ const BetreuungPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Ressourcen-Shift: Von Firefighting zu Innovation */}
+      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Von Firefighting zu Innovation.
+            </h2>
+          </div>
+
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Visual: Balkenvergleich */}
+            <div className="space-y-10">
+              {/* Zustand A: Ohne VAE */}
+              <div>
+                <h3 className="mb-6 text-lg font-semibold text-gray-900 dark:text-white">Ohne VAE</h3>
+                <div className="space-y-4">
+                  <div>
+                    <div className="mb-2 flex items-baseline justify-between">
+                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
+                        Wartung & Firefighting
+                      </span>
+                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">60–70%</span>
+                    </div>
+                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-red-400 to-orange-400 shadow-sm transition-all duration-700"
+                        style={{ width: '65%' }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mb-2 flex items-baseline justify-between">
+                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
+                        Innovation & Produkt
+                      </span>
+                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">30–40%</span>
+                    </div>
+                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm transition-all duration-700"
+                        style={{ width: '35%' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Zustand B: Mit VAE */}
+              <div>
+                <h3 className="mb-6 text-lg font-semibold text-gray-900 dark:text-white">Mit VAE</h3>
+                <div className="space-y-4">
+                  <div>
+                    <div className="mb-2 flex items-baseline justify-between">
+                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
+                        Koordination & Management
+                      </span>
+                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">20–30%</span>
+                    </div>
+                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-gray-400 to-gray-500 shadow-sm transition-all duration-700"
+                        style={{ width: '25%' }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mb-2 flex items-baseline justify-between">
+                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
+                        Innovation & Produkt
+                      </span>
+                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">70–80%</span>
+                    </div>
+                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm transition-all duration-700"
+                        style={{ width: '75%' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Erklärender Text */}
+            <div className="space-y-6">
+              <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
+                Wir drehen das Verhältnis um: Routineaufgaben wandern zu uns, Ihr Team gewinnt Kapazität für Produkt,
+                Kund:innen und strategische Projekte.
+              </p>
+              <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+                Die typische IT-Abteilung verbringt den Großteil ihrer Zeit mit Wartung, Patches und Incident-Response –
+                wertvolle Ressourcen, die dem Kerngeschäft fehlen. Mit VAE als Managed-Operations-Partner verschieben
+                Sie diese Last und schaffen Raum für das, was wirklich zählt: Innovation, Kundenerfolg und Wachstum.
+              </p>
+              <div className="rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-6">
+                <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                  Das Ergebnis: Ihr Team fokussiert sich auf Wertschöpfung, nicht auf Firefighting.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Section 2: Problem */}
-      <section className="border-b border-gray-200 py-20 dark:border-white/5">
-        <div className="container-vae grid gap-12 lg:grid-cols-2 lg:items-center">
+      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="space-y-6">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Das Problem</p>
             <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -319,9 +421,9 @@ const BetreuungPage: React.FC = () => {
               Business Growth – wir halten das IT-Rückgrat stabil.
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-3xl border border-vae-turquoise/30 bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8 shadow-lg dark:from-bg-dark dark:via-[#0e1117] dark:to-bg-darker">
+          <div className="dark:via-white/3 relative overflow-hidden rounded-3xl border border-vae-turquoise/30 bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8 shadow-lg backdrop-blur-sm dark:border-vae-turquoise/20 dark:from-white/5 dark:to-transparent">
             {/* Subtle glow effect at top */}
-            <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_top,rgba(52,211,153,0.12),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(52,211,153,0.08),transparent_60%)]" />
+            <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_top,rgba(52,211,153,0.12),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(8,255,193,0.15),transparent_60%)]" />
 
             <div className="relative z-10">
               <div className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">
@@ -362,8 +464,9 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 3: Lösung */}
-      <section className="border-b border-gray-200 py-20 dark:border-white/5">
-        <div className="container-vae space-y-10">
+      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative space-y-10">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Die Lösung</p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -390,8 +493,9 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Visual Section: Team in Action */}
-      <section className="border-b border-gray-200 py-20 dark:border-white/5">
-        <div className="container-vae">
+      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative">
           <header className="mx-auto mb-14 max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Unser Ansatz</p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -490,16 +594,17 @@ const BetreuungPage: React.FC = () => {
       {/* Section 4: Service Levels */}
       <section
         id="service-levels"
-        className="border-b border-gray-200 bg-gray-50 py-24 dark:border-white/5 dark:bg-transparent"
+        className="section-card-container border-b border-gray-200 bg-white py-24 dark:border-white/5 dark:bg-bg-darker"
       >
-        <div className="container-vae">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Service-Level</p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
-              Zwei Wege – eine Philosophie
+              Wie wir zusammenarbeiten können.
             </h2>
             <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
-              Je nachdem, was Sie outsourcen möchten.
+              Wählen Sie das Modell, das zu Ihrem Team und Ihrer Situation passt.
             </p>
           </div>
           <div className="mt-16 grid gap-8 md:grid-cols-2">
@@ -571,32 +676,150 @@ const BetreuungPage: React.FC = () => {
                   </div>
 
                   <div className="mt-8 flex flex-col gap-3">
-                    <MagneticButton intensity={ctaIntensity} className="w-full">
+                    <MagneticButton
+                      intensity={level.highlighted ? 0.15 : ctaIntensity}
+                      scaleEffect
+                      glowEffect={level.highlighted}
+                      className="w-full"
+                    >
                       <button
                         onClick={openCalendly}
-                        className={`w-full rounded-full px-5 py-3 text-sm font-semibold transition ${
+                        className={`group relative w-full overflow-hidden rounded-xl px-6 py-3.5 text-sm font-bold transition-all duration-300 ${
                           level.highlighted
-                            ? 'bg-vae-turquoise text-bg-dark hover:bg-white'
-                            : 'border border-gray-300 text-gray-900 hover:border-vae-turquoise hover:text-vae-turquoise dark:border-white/20 dark:text-white'
+                            ? 'bg-gradient-to-br from-vae-turquoise via-vae-turquoise/95 to-vae-turquoise/90 text-bg-dark shadow-[0_8px_32px_-8px_rgba(8,255,193,0.5),inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.1)] hover:shadow-[0_12px_40px_-6px_rgba(8,255,193,0.65),inset_0_1px_1px_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(0,0,0,0.15)] dark:shadow-[0_12px_40px_-8px_rgba(8,255,193,0.6),inset_0_2px_2px_rgba(255,255,255,0.3),inset_0_-1px_1px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_16px_50px_-6px_rgba(8,255,193,0.75),inset_0_2px_2px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.25)]'
+                            : 'btn-outline'
                         }`}
                       >
-                        {level.ctaLabel}
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                          {level.ctaLabel}
+                          {level.highlighted && <span className="opacity-70">→</span>}
+                        </span>
+                        {level.highlighted && (
+                          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                        )}
                       </button>
                     </MagneticButton>
                     <p className="text-center text-xs text-gray-600 dark:text-text-secondary">
-                      Individuelles Angebot · Abhängig von Teamgröße, Infrastruktur und KI-Umfang
+                      {level.highlighted
+                        ? '45 Min. · Keine Langzeitbindung'
+                        : 'Individuelles Angebot nach Infrastruktur-Umfang'}
                     </p>
                   </div>
                 </div>
               )
             })}
           </div>
+
+          {/* SLA-Hinweis */}
+          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/5">
+            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+              Service-Level-Agreements & Premium-Support
+            </h3>
+            <p className="mb-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+              Alle Betreuungsmodelle beinhalten feste Ansprechpartner:innen, Monitoring und planbare Reaktionszeiten im
+              Störungsfall.
+            </p>
+            <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+              Für besonders kritische Systeme oder größere Teams können wir gemeinsam erweiterte SLAs mit priorisierten
+              Reaktionszeiten und zusätzlichen Supportkanälen vereinbaren – die konkreten Werte legen wir individuell im
+              Angebot fest.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Section: Deployment-Modelle / Hosting-Optionen */}
+      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+        <div id="deployment-modelle" className="container-vae relative">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Hosting & Betrieb</p>
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              Wie kann Ihr Setup betrieben werden?
+            </h2>
+            <p className="mt-4 text-base text-gray-700 dark:text-text-secondary md:text-lg">
+              Wir planen Ihre Informationsinfrastruktur so, dass Hosting und Betrieb zu Ihrer Realität passen – vom
+              eigenen Serverraum bis zur vollständig von VAE betriebenen Umgebung.
+            </p>
+          </div>
+
+          {/* Haupt-Modelle Grid */}
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Modell 1: On-Premise auf Ihrer Hardware */}
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/30 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+                <Server className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">On-Premise auf Ihrer Hardware</h3>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Setup auf Ihrer bestehenden Hardware. Dokumentiert, betreibbar – Betrieb bleibt bei Ihrem Team oder geht
+                später an VAE über.
+              </p>
+            </div>
+
+            {/* Modell 2: Managed auf Ihrer Infrastruktur */}
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/30 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+                <ShieldCheck className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Managed auf Ihrer Infrastruktur</h3>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Setup bei deutschen Anbietern (dedizierte Server auf Ihren Accounts). VAE übernimmt Betrieb, Monitoring,
+                Updates und Security.
+              </p>
+            </div>
+
+            {/* Modell 3: VAE-Managed Plattform */}
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/30 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+                <Cloud className="h-6 w-6 text-vae-turquoise" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">VAE-Managed Plattform</h3>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Komplett von VAE betriebene Umgebung in deutschen Rechenzentren. Betrieb, Security, Monitoring –
+                minimaler Footprint, maximale Entlastung.
+              </p>
+            </div>
+          </div>
+
+          {/* Coming Soon Banner */}
+          <div className="mx-auto mt-8 max-w-3xl">
+            <div className="relative overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 via-white to-vae-turquoise/5 p-6 dark:from-vae-turquoise/10 dark:via-bg-dark dark:to-vae-turquoise/10">
+              <div className="flex flex-col gap-3 text-center md:flex-row md:items-center md:gap-4 md:text-left">
+                <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-vae-turquoise/30 bg-vae-turquoise/10 md:mx-0 md:self-start">
+                  <Server className="h-5 w-5 text-vae-turquoise" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="mb-1 text-base font-semibold text-gray-900 dark:text-white">
+                    Coming Soon: Hardware-Management
+                  </h4>
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                    Für Organisationen mit eigenem Rechenzentrum planen wir ein Angebot, bei dem VAE auch das
+                    Lifecycle-Management der physischen Hardware übernimmt – von Kapazitätsplanung und
+                    Beschaffungsempfehlungen bis zu Wartungskonzepten.
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <span className="inline-block rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-vae-turquoise">
+                    In Vorbereitung
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Section 5: Leistungen */}
-      <section className="border-b border-gray-200 py-20 dark:border-white/5">
-        <div className="container-vae">
+      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Was ist enthalten?</p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -606,17 +829,131 @@ const BetreuungPage: React.FC = () => {
               Hinter den Kulissen: Der tägliche Betrieb.
             </p>
           </div>
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="card-group mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {detailedServices.map(service => (
               <div
                 key={service.title}
-                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-md dark:border-white/10 dark:bg-white/5"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-6 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
               >
-                <service.icon className="mb-4 h-10 w-10 text-vae-turquoise" />
+                <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/10 shadow-[0_0_20px_-5px_rgba(8,255,193,0.3)] transition-all duration-300 group-hover:bg-vae-turquoise/15 group-hover:shadow-[0_0_30px_-5px_rgba(8,255,193,0.5)] dark:bg-vae-turquoise/15 dark:shadow-[0_0_30px_-8px_rgba(8,255,193,0.4)] dark:group-hover:shadow-[0_0_40px_-8px_rgba(8,255,193,0.6)]">
+                  <service.icon className="h-6 w-6 text-vae-turquoise" />
+                </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{service.title}</h3>
-                <p className="mt-3 text-sm text-gray-700 dark:text-text-secondary">{service.description}</p>
+                <p className="mt-3 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                  {service.description}
+                </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Prozess-Sektion */}
+      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+        <div className="section-card-backdrop" />
+        <div className="container-vae relative">
+          <div className="mx-auto mb-14 max-w-3xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Unser Prozess</p>
+            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              So arbeiten wir zusammen
+            </h2>
+            <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
+              Von der Übergabe bis zur kontinuierlichen Optimierung – strukturiert, transparent und messbar.
+            </p>
+          </div>
+
+          {/* Timeline Desktop: Horizontal */}
+          <div className="hidden gap-4 md:grid md:grid-cols-3">
+            {/* Phase 1: Onboarding */}
+            <div className="relative">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/15">
+                <span className="text-2xl font-bold text-vae-turquoise">1</span>
+              </div>
+              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">Onboarding</h3>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Übergabe, Review der bestehenden Systeme, Definition von Scope & Prioritäten. Wir verschaffen uns einen
+                klaren Überblick über Ihre Infrastruktur und legen gemeinsam die Ziele fest.
+              </p>
+            </div>
+
+            {/* Phase 2: Stabilisierung */}
+            <div className="relative">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/15">
+                <span className="text-2xl font-bold text-vae-turquoise">2</span>
+              </div>
+              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">Stabilisierung</h3>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Aufräumen, Monitoring einrichten, erste Verbesserungen umsetzen. In dieser Phase schaffen wir eine
+                stabile Basis für den laufenden Betrieb.
+              </p>
+            </div>
+
+            {/* Phase 3: Laufende Betreuung */}
+            <div className="relative">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/15">
+                <span className="text-2xl font-bold text-vae-turquoise">3</span>
+              </div>
+              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
+                Laufende Betreuung & Optimierung
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Regelmäßige Checks, Roadmaps und kleine Projekte. Wir halten die Systeme aktuell, optimieren
+                kontinuierlich und unterstützen Sie bei neuen Anforderungen.
+              </p>
+            </div>
+          </div>
+
+          {/* Timeline Mobile: Vertical */}
+          <div className="space-y-8 md:hidden">
+            {/* Phase 1: Onboarding */}
+            <div className="relative flex gap-6">
+              <div className="flex flex-col items-center">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                  <span className="text-xl font-bold text-vae-turquoise">1</span>
+                </div>
+                <div className="mt-2 w-0.5 flex-1 bg-vae-turquoise/30" />
+              </div>
+              <div className="pb-8">
+                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Onboarding</h3>
+                <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                  Übergabe, Review der bestehenden Systeme, Definition von Scope & Prioritäten.
+                </p>
+              </div>
+            </div>
+
+            {/* Phase 2: Stabilisierung */}
+            <div className="relative flex gap-6">
+              <div className="flex flex-col items-center">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                  <span className="text-xl font-bold text-vae-turquoise">2</span>
+                </div>
+                <div className="mt-2 w-0.5 flex-1 bg-vae-turquoise/30" />
+              </div>
+              <div className="pb-8">
+                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Stabilisierung</h3>
+                <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                  Aufräumen, Monitoring einrichten, erste Verbesserungen umsetzen.
+                </p>
+              </div>
+            </div>
+
+            {/* Phase 3: Laufende Betreuung */}
+            <div className="relative flex gap-6">
+              <div className="flex flex-col items-center">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                  <span className="text-xl font-bold text-vae-turquoise">3</span>
+                </div>
+              </div>
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+                  Laufende Betreuung & Optimierung
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                  Regelmäßige Checks, Roadmaps und kleine Projekte. Kontinuierliche Optimierung und Support.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -663,26 +1000,29 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 8: CTA */}
-      <section className="bg-gray-50 py-20 dark:bg-transparent">
-        <div className="container-vae">
-          <div className="rounded-3xl border border-vae-turquoise/40 bg-gradient-to-br from-vae-turquoise/15 to-transparent p-10 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">Finale Einladung</p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
-              Bereit, Ressourcen freizulegen?
-            </h2>
-            <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
-              Kostenloses Beratungsgespräch – unverbindlich, monatlich kündbar. Wir zeigen, wie Outsourcing Ihr
-              IT-Rückgrat stärkt und Ressourcen aufs Kernbusiness lenkt.
-            </p>
-            <MagneticButton intensity={0.1} scaleEffect glowEffect className="mx-auto mt-8 inline-flex">
+      <section className="border-t border-gray-200 bg-gray-50 py-16 dark:border-white/5 dark:bg-transparent md:py-20">
+        <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">
+            Bereit für den nächsten Schritt?
+          </p>
+          <h2 className="px-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
+            Langfristige Betreuung für Ihre Systeme.
+          </h2>
+          <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary md:text-lg">
+            Wir halten Ihr IT-Rückgrat stabil, während Ihr Team sich auf Produkt, Kund:innen und Wachstum konzentriert.
+            Monatlich kündbar, ohne Langzeitbindung.
+          </p>
+          <div className="flex flex-col items-center gap-3 md:gap-4">
+            <MagneticButton intensity={0.1} scaleEffect glowEffect>
               <button
                 onClick={openCalendly}
-                className="btn-primary flex items-center justify-center px-10 py-4 text-base font-semibold"
+                className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-10 md:py-4 md:text-base"
               >
-                Beratung buchen
+                <span className="hidden sm:inline">Beratungsgespräch buchen</span>
+                <span className="sm:hidden">Gespräch buchen</span>
               </button>
             </MagneticButton>
-            <p className="mt-4 text-sm text-gray-600 dark:text-text-secondary">
+            <p className="px-4 text-xs text-gray-600 dark:text-text-secondary md:text-sm">
               45 Minuten. Klarheit zu Aufwand, Team-Setup und KI-Potenzialen.
             </p>
           </div>

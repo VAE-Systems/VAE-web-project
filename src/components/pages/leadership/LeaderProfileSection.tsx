@@ -1,9 +1,8 @@
 import { useFadeIn } from '@/components/pages/values/useFadeIn'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { LeaderProfile } from '@/data/leadershipData'
-import { Linkedin } from 'lucide-react'
+import { Linkedin, Mail } from 'lucide-react'
 import React, { useMemo } from 'react'
-import { Mail } from 'lucide-react'
 
 interface LeaderProfileSectionProps {
   leader: LeaderProfile
@@ -127,11 +126,13 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                 src={portraitFallback}
                 alt={leader.portrait.alt}
                 loading="lazy"
-                className="group-hover:contrast-105 group-hover:saturate-110 h-[560px] w-full scale-[1.12] object-cover object-[40%_top] transition-all duration-[900ms] ease-out group-hover:scale-[1.15] group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[620px]"
+                className="group-hover:contrast-105 group-hover:saturate-110 h-[560px] w-full scale-[1.02] object-cover object-[40%_20%] transition-all duration-[900ms] ease-out group-hover:scale-[1.05] group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[620px]"
               />
             </picture>
             {/* Subtiler Vignette-Effekt für natürlichen Bildrand-Fokus */}
             <div className="bg-gradient-radial pointer-events-none absolute inset-0 from-transparent via-transparent to-black/20 opacity-60 transition-opacity duration-500 group-hover:opacity-40 dark:to-black/30 dark:opacity-70" />
+            {/* Bottom Fade-Out für abgeschnittenes Bild */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 via-black/10 to-transparent dark:from-black/60 dark:via-black/20" />
             <figcaption className="sr-only">{leader.portrait.alt}</figcaption>
           </figure>
 

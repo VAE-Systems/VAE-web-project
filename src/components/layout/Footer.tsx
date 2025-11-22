@@ -12,7 +12,7 @@ interface FooterLink {
 const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[]> = {
   services: [
     { label: 'Strategieberatung', to: '/leistungen/strategie' },
-    { label: 'Infrastruktur-Setup', to: '/leistungen/infrastruktur' },
+    { label: 'Infrastruktur Design/Setup', to: '/leistungen/infrastruktur' },
     { label: 'Langfristige Betreuung', to: '/leistungen/betreuung' },
   ],
   resources: [

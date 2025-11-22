@@ -292,7 +292,7 @@ const transformationStats: TransformationStat[] = [
     description: 'der Business-Transformationen verfehlen ihre ursprünglichen Ziele.',
     source: 'Bain & Company, 2024',
     sourceUrl:
-      'https://www.bain.com/about/media-center/press-releases/2024/88-of-business-transformations-fail-to-achieve-their-original-ambitions/',
+      'https://www.bain.com/about/media-center/press-releases/2024/88-of-business-transformations-fail-to-achieve-their-original-ambitions-those-that-succeed-avoid-overloading-top-talent/',
   },
   {
     id: 'zylo',
@@ -781,7 +781,7 @@ const BeratungPage: React.FC = () => {
           <div className="mt-12 hidden lg:block">
             <div className="relative grid grid-cols-3 gap-8">
               {processSteps.map((step, index) => (
-                <div key={step.number} className="relative">
+                <div key={step.number} className="group relative">
                   {/* Card */}
                   <article className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-white/10 dark:bg-white/5">
                     {/* Nummer-Badge (oben zentriert) */}
@@ -806,10 +806,10 @@ const BeratungPage: React.FC = () => {
                     </ul>
                   </article>
 
-                  {/* Verbindungspfeil (nur zwischen Cards) */}
+                  {/* Verbindungspfeil (nur zwischen Cards) - animiert beim Hover mit */}
                   {index < processSteps.length - 1 && (
-                    <div className="absolute -right-4 top-8 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise">
-                      <ArrowRight className="h-6 w-6 text-white" />
+                    <div className="absolute -right-4 top-8 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-vae-turquoise/30">
+                      <ArrowRight className="h-6 w-6 text-white transition-transform duration-300 group-hover:translate-x-0.5" />
                     </div>
                   )}
                 </div>

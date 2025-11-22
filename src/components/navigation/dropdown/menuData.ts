@@ -29,7 +29,7 @@ export const MENU_DATA: DropdownMenu[] = [
     subtitle: 'Professional Services',
     menuItems: [
       { id: 'strategy', label: 'Strategieberatung', href: '/leistungen/strategie' },
-      { id: 'infrastructure', label: 'Infrastruktur-Setup', href: '/leistungen/infrastruktur' },
+      { id: 'infrastructure', label: 'Infrastruktur Design/Setup', href: '/leistungen/infrastruktur' },
       { id: 'betreuung', label: 'Langfristige Betreuung', href: '/leistungen/betreuung' },
     ],
     content: {
@@ -43,7 +43,7 @@ export const MENU_DATA: DropdownMenu[] = [
       },
       infrastructure: {
         id: 'infrastructure',
-        title: 'Infrastruktur-Setup',
+        title: 'Infrastruktur Design/Setup',
         description: 'AI-Ready / KI-optimiert. Langfristig funktionierend. Open Source & selfhosted first.',
         items: [
           'CRM-Systeme',

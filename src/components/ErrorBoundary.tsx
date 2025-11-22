@@ -32,7 +32,7 @@ class ErrorBoundary extends Component<Props, State> {
             <p className="mb-6 text-lg">Entschuldigung, es gab einen Fehler. Bitte laden Sie die Seite neu.</p>
             <button
               onClick={() => window.location.reload()}
-              className="bg-turquoise hover:bg-turquoise-dark rounded-lg px-6 py-3 text-bg-darker transition-colors"
+              className="rounded-lg bg-vae-turquoise px-6 py-3 font-semibold text-gray-900 shadow-lg transition-all hover:bg-vae-turquoise/90 hover:shadow-xl dark:text-bg-darker"
             >
               Seite neu laden
             </button>

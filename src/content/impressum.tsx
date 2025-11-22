@@ -46,8 +46,8 @@ export const impressumContent: ImpressumContent = {
       body: (
         <>
           E-Mail:{' '}
-          <a href="mailto:juliandini@vae-systems.com" className="text-vae-turquoise hover:underline">
-            juliandini@vae-systems.com
+          <a href="mailto:info@vae.systems" className="text-vae-turquoise hover:underline">
+            info@vae.systems
           </a>
           <br />
           Telefon: +49 151 73024549

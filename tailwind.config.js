@@ -45,8 +45,8 @@ export default {
 
       // Typography
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
-        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['"Geist"', 'Inter', 'system-ui', 'sans-serif'],
+        geist: ['"Geist"', 'sans-serif'],
         inter: ['Inter', 'system-ui', 'sans-serif'],
       },
 

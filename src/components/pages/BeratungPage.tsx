@@ -30,6 +30,8 @@ interface FeatureCard {
   icon: React.ElementType
   title: string
   description: string
+  badge: string
+  outputs: string[]
 }
 
 interface ProcessStep {
@@ -51,12 +53,17 @@ interface TargetProfile {
 }
 
 interface PhaseCard {
+  option: string
   title: string
   description: string
   features: string[]
   duration?: string
   investment: string
-  action?: {
+  cta?: {
+    label: string
+    href: string
+  }
+  secondary?: {
     label: string
     href: string
   }
@@ -76,36 +83,48 @@ const features: FeatureCard[] = [
     title: 'Kostenlose Erstanalyse',
     description:
       '45-minütiges Strategiegespräch, um Ihre Ausgangslage zu verstehen. Keine Verkaufspräsentation, keine Verpflichtung.',
+    badge: 'Kickoff',
+    outputs: ['45 Min Strategiegespräch', 'Executive Summary in 24h'],
   },
   {
     icon: Search,
     title: 'Bestandsaufnahme & Gap-Analyse',
     description:
       'Detaillierte Evaluation Ihrer aktuellen Systemlandschaft, Prozesse und Kosten. Inklusive schriftlichem Analyse-Report.',
+    badge: 'Report',
+    outputs: ['System- & Kosten-Review', 'Schriftlicher Analyse-Report'],
   },
   {
     icon: BarChart3,
     title: 'Business-Case-Entwicklung',
     description:
       'Was kostet der Status Quo? Welche ROI-Potenziale bieten Alternativen? Fundierte Zahlen statt Vermutungen.',
+    badge: 'ROI-Modell',
+    outputs: ['Kosten/Nutzen je Option', 'Sensitivitätsanalyse'],
   },
   {
     icon: Map,
     title: 'Strategische Roadmap',
     description:
       'Schrittweiser Transformationsplan: Von der IST-Situation zur SOLL-Architektur. Mit Meilensteinen, Timeline und Ressourcenplanung.',
+    badge: 'Roadmap',
+    outputs: ['Meilensteine & Timeline', 'Ressourcen- und Risiko-Plan'],
   },
   {
     icon: GitBranch,
     title: 'Szenario-Planung',
     description:
       'Nicht die "eine perfekte Lösung", sondern 3 realistische Strategieoptionen – zugeschnitten auf Budget, Zeitrahmen und Risikobereitschaft.',
+    badge: '3 Optionen',
+    outputs: ['Risiko-/Budget-Abgleich', 'Realistische Alternativen'],
   },
   {
     icon: FileText,
     title: 'Transparentes Angebot',
     description:
       'Nach der Beratung erhalten Sie ein detailliertes, schriftliches Angebot mit Preisen, Lieferobjekten und Timeline. Keine versteckten Kosten.',
+    badge: 'Angebot',
+    outputs: ['Lieferobjekte & Preise', 'Timeline ohne Hidden Fees'],
   },
 ]
 
@@ -192,8 +211,24 @@ const targetProfiles: TargetProfile[] = [
 
 const phases: PhaseCard[] = [
   {
-    title: 'Nur Beratung',
-    description: 'Sie setzen intern um, wir begleiten beratend.',
+    option: 'Option A',
+    title: 'Full-Service',
+    description: 'Wir übernehmen die komplette Umsetzung – Ende-zu-Ende, inklusive Go-Live.',
+    features: [
+      'Komplette Umsetzung der Infrastruktur',
+      'Setup & Konfiguration (Security, Monitoring, Backups)',
+      'Migration/Integration mit klaren Cutover-Plänen',
+      'Dokumentation & Training',
+      'Go-Live-Begleitung + Hypercare',
+    ],
+    duration: 'Dauer: 2–6 Monate (je nach Umfang)',
+    investment: 'Investition: Individuell nach Projektumfang',
+    cta: { label: 'Kostenlose Beratung anfragen', href: '/contact#booking' },
+  },
+  {
+    option: 'Option B',
+    title: 'Strategische Anleitung (Nur Beratung)',
+    description: 'Sie setzen intern um, wir steuern und sichern Qualität.',
     features: [
       '45-minütiges Strategiegespräch (kostenlos)',
       'Detaillierte Analyse Ihrer Systemlandschaft',
@@ -203,30 +238,37 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: 1–2 Wochen',
     investment: 'Investition: Individuell nach Projektumfang',
+    cta: { label: 'Kostenlose Beratung anfragen', href: '/contact#booking' },
   },
   {
-    title: 'Full-Service',
-    description: 'Wir übernehmen die komplette Umsetzung.',
+    option: 'Option C',
+    title: 'Hybrides Modell',
+    description: 'Gemeinsame Umsetzung in definierten Teilbereichen – Verantwortung klar verteilt.',
     features: [
-      'Alles aus „Nur Beratung“',
-      'Komplette Umsetzung der Infrastruktur',
-      'Setup & Konfiguration',
-      'Dokumentation & Training',
-      'Go-Live-Begleitung',
+      'Alles aus „Strategische Anleitung“',
+      'Wir übernehmen Kernmodule & kritische Integrationen',
+      'Ihr Team setzt definierte Teilbereiche um',
+      'Gemeinsame Milestones, Code/Infra-Reviews',
+      'Coaching & Pairing-Sessions',
     ],
-    duration: 'Dauer: 2–6 Monate (je nach Umfang)',
+    duration: 'Dauer: Nach Umfang abgestimmt',
     investment: 'Investition: Individuell nach Projektumfang',
+    cta: { label: 'Kostenlose Beratung anfragen', href: '/contact#booking' },
   },
   {
-    title: 'Langfristige Partnerschaft',
-    description:
-      'Nach erfolgreichem Setup bleiben wir Ihr IT-Partner – für laufende Betreuung, Support und strategische Begleitung.',
-    features: ['Laufende Betreuung & Support', 'Regelmäßige Strategie-Reviews', 'Direkter Zugang zum Expertenteam'],
-    investment: 'Investition: Monatlicher Retainer (individuell nach Umfang)',
-    action: {
-      label: 'Zur langfristigen Betreuung →',
-      href: '/leistungen/betreuung',
-    },
+    option: 'Option D',
+    title: 'Langfristige Beratung (Retainer)',
+    description: 'Steuerung, KPI-Monitoring und Entscheidungs-Sparring nach dem Go-Live.',
+    features: [
+      'Regelmäßige Steering- & ROI-Reviews',
+      'KPI-Monitoring und Kostenkontrolle',
+      'Vendor-Management & Verhandlungssupport',
+      'Ad-hoc Risiko- und Architektur-Entscheidungen',
+    ],
+    duration: 'Dauer: 3–12 Monate (Retainer)',
+    investment: 'Investition: Monatlicher Retainer (individuell)',
+    cta: { label: 'Beratung anfragen', href: '/contact#booking' },
+    secondary: { label: 'Zur langfristigen Betreuung →', href: '/leistungen/betreuung' },
   },
 ]
 
@@ -511,8 +553,8 @@ const BeratungPage: React.FC = () => {
 
               <div>
                 <p className="mb-4 text-lg leading-relaxed text-gray-900 dark:text-white">
-                  Auf Basis dieser Analyse entwickeln wir keine theoretischen Idealszenarien, sondern 3 konkrete,
-                  umsetzbare Strategieoptionen:
+                  Auf Basis dieser Analyse entwickeln wir keine theoretischen Idealszenarien, sondern 4 konkrete,
+                  umsetzbare Strategieoptionen – jeweils mit Aufwand, Risiko und ROI-Blick:
                 </p>
 
                 <ol className="space-y-3">
@@ -523,6 +565,10 @@ const BeratungPage: React.FC = () => {
                       text: 'Strategische Anleitung – Sie setzen intern um, wir begleiten beratend',
                     },
                     { label: 'Option C', text: 'Hybrides Modell – gemeinsame Umsetzung in definierten Teilbereichen' },
+                    {
+                      label: 'Option D',
+                      text: 'Langfristige Beratung (Retainer) – Steering, KPI-Monitoring und Entscheidungs-Support',
+                    },
                   ].map((option, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-vae-turquoise/20 text-sm font-bold text-vae-turquoise">
@@ -598,8 +644,13 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== WAS IST ENTHALTEN (FEATURES) ==================== */}
-      <section className="animate-section border-b border-gray-200 bg-gray-50 py-24 dark:border-[hsl(0,0%,12%)] dark:bg-transparent">
-        <div className="container-vae">
+      <section className="animate-section relative overflow-hidden border-b border-gray-200 bg-gray-50 py-24 dark:border-[hsl(0,0%,12%)] dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#0b0e13] dark:to-bg-darker">
+        <div className="pointer-events-none absolute inset-0 opacity-80">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.08),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.06),transparent_40%),linear-gradient(135deg,rgba(255,255,255,0.8),rgba(255,255,255,0.25))] dark:bg-[radial-gradient(circle_at_20%_30%,rgba(var(--vae-turquoise-rgb),0.18),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(var(--vae-turquoise-rgb),0.12),transparent_45%),linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))]" />
+          <div className="absolute inset-6 rounded-[32px] border border-white/60 bg-white/40 backdrop-blur-md dark:border-white/5 dark:bg-white/10" />
+        </div>
+
+        <div className="container-vae relative">
           <div className="mb-16 text-center">
             <h2 className="h2 heading-gradient mb-4">Was Sie erhalten</h2>
             <p className="text-lg text-gray-600 dark:text-[hsl(0,0%,75%)]">Konkret, messbar, transparent</p>
@@ -611,20 +662,35 @@ const BeratungPage: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="group relative overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg hover:shadow-vae-turquoise/10 dark:border-vae-turquoise/20 dark:bg-[hsl(0,0%,8%)]/50 dark:hover:bg-[hsl(0,0%,10%)]/60"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-8 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
                 >
-                  <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-vae-turquoise/20 text-vae-turquoise transition-transform duration-300 group-hover:scale-110">
-                    <Icon className="h-7 w-7" />
+                  <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="relative inline-flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/30 transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="relative z-[1] h-7 w-7" />
+                      <div className="absolute inset-0 bg-vae-turquoise/10 blur-[14px]" />
+                    </div>
+                    <span className="inline-flex items-center rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-vae-turquoise dark:border-vae-turquoise/40 dark:bg-vae-turquoise/15">
+                      {feature.badge}
+                    </span>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">{feature.title}</h3>
+                  <h3 className="mb-3 mt-6 text-xl font-semibold text-gray-900 dark:text-white">{feature.title}</h3>
                   <p className="text-sm leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
                     {feature.description}
                   </p>
 
-                  {/* Subtle hover glow */}
+                  <ul className="mt-4 space-y-2 text-sm text-gray-700 dark:text-[hsl(0,0%,80%)]">
+                    {feature.outputs.map(output => (
+                      <li key={output} className="flex items-start gap-2">
+                        <span className="mt-0.5 text-base font-semibold text-vae-turquoise">→</span>
+                        <span>{output}</span>
+                      </li>
+                    ))}
+                  </ul>
+
                   <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="absolute inset-0 bg-gradient-to-br from-vae-turquoise/5 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-vae-turquoise/10 via-transparent to-vae-turquoise/10" />
                   </div>
                 </div>
               )
@@ -752,19 +818,28 @@ const BeratungPage: React.FC = () => {
       {/* ==================== 3 WEGE ZUR ZUSAMMENARBEIT ==================== */}
       <section className="animate-section border-b border-gray-200 py-24 dark:border-[hsl(0,0%,12%)]">
         <div className="container-vae">
-          <h2 className="h2 heading-gradient text-center">3 Wege, mit VAE zu arbeiten</h2>
+          <h2 className="h2 heading-gradient text-center">4 Optionen, wie wir zusammenarbeiten</h2>
           <p className="mx-auto mb-16 mt-4 max-w-3xl text-center text-base text-gray-600 dark:text-[hsl(0,0%,80%)]">
-            Sie entscheiden, wie tief die Zusammenarbeit geht — von strategischer Beratung bis zur langfristigen
-            Partnerschaft.
+            Drei klare Projektpfade plus ein langfristiger Retainer – Sie wählen die Tiefe, wir liefern Transparenz bei
+            Aufwand, Risiko und ROI.
           </p>
 
-          <div className="card-group grid gap-8 md:grid-cols-3">
+          <div className="card-group grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {phases.map((phase, idx) => (
               <div
                 key={idx}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg hover:shadow-vae-turquoise/10 dark:border-vae-turquoise/20 dark:bg-[hsl(0,0%,8%)]/50"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg hover:shadow-vae-turquoise/10 dark:border-vae-turquoise/20 dark:bg-[hsl(0,0%,8%)]/60"
               >
-                <h3 className="mb-3 text-2xl font-semibold text-gray-900 dark:text-white">{phase.title}</h3>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="inline-flex items-center rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-vae-turquoise dark:border-vae-turquoise/40 dark:bg-vae-turquoise/15">
+                    {phase.option}
+                  </span>
+                  <div className="h-10 w-10 rounded-full border border-vae-turquoise/20 bg-vae-turquoise/5 text-center text-sm font-semibold leading-10 text-vae-turquoise">
+                    {idx + 1}
+                  </div>
+                </div>
+
+                <h3 className="mb-2 mt-6 text-2xl font-semibold text-gray-900 dark:text-white">{phase.title}</h3>
                 <p className="mb-6 text-sm text-gray-700 dark:text-[hsl(0,0%,80%)]">{phase.description}</p>
 
                 <ul className="mb-6 space-y-2">
@@ -781,15 +856,24 @@ const BeratungPage: React.FC = () => {
                   <p>{phase.investment}</p>
                 </div>
 
-                {phase.action && (
-                  <MagneticButton intensity={0.08} scaleEffect>
+                {phase.cta && (
+                  <MagneticButton intensity={0.08} scaleEffect glowEffect>
                     <Link
-                      to={phase.action.href}
+                      to={phase.cta.href}
                       className="btn-primary flex w-full items-center justify-center gap-2 text-sm"
                     >
-                      {phase.action.label}
+                      {phase.cta.label}
                     </Link>
                   </MagneticButton>
+                )}
+
+                {phase.secondary && (
+                  <Link
+                    to={phase.secondary.href}
+                    className="mt-3 text-center text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise/80"
+                  >
+                    {phase.secondary.label}
+                  </Link>
                 )}
               </div>
             ))}

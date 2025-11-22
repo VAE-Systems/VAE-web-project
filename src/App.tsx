@@ -45,6 +45,8 @@ const QualitaetPage = React.lazy(() => import('@/components/pages/values/Qualita
 const SkalierbarkeitPage = React.lazy(() => import('@/components/pages/values/SkalierbarkeitPage'))
 const LeadershipPage = React.lazy(() => import('@components/pages/leadership/LeadershipPage'))
 const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
+const TestphasePage = React.lazy(() => import('@components/pages/TestphasePage'))
+const ProductVaeCorePage = React.lazy(() => import('@components/pages/ProductVaeCorePage'))
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
@@ -102,6 +104,13 @@ const App: React.FC = () => {
                   <Routes>
                     {/* Homepage */}
                     <Route path="/" element={<HomePage />} />
+
+                    {/* Testphase */}
+                    <Route path="/testphase" element={<TestphasePage />} />
+
+                    {/* Products */}
+                    <Route path="/vae-core" element={<ProductVaeCorePage />} />
+                    <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
 
                     {/* Services */}
                     <Route path="/services/setup" element={<SetupPage />} />

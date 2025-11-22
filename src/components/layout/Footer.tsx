@@ -11,19 +11,18 @@ interface FooterLink {
 
 const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[]> = {
   services: [
-    { label: 'Strategische Beratung', to: '/services/beratung' },
-    { label: 'Infrastructure Setup', to: '/services/setup' },
-    { label: 'Langfristige Betreuung', to: '/services/betreuung' },
-    { label: '3-Monate Testphase', to: '/testphase' },
+    { label: 'Strategieberatung', to: '/leistungen/strategie' },
+    { label: 'Infrastruktur-Setup', to: '/leistungen/infrastruktur' },
+    { label: 'Langfristige Betreuung', to: '/leistungen/betreuung' },
   ],
   resources: [
-    { label: 'Consulting Solutions', to: '/#solutions' },
-    { label: 'Case Studies', to: '/about/referenzen' },
-    { label: 'Warum VAE', to: '/#warum' },
-    { label: 'Tech Stack', to: '/#tech-stack' },
+    { label: 'Blog', to: '/ressourcen/blog' },
+    { label: 'Case Studies', to: '/ressourcen/case-studies' },
+    { label: 'FAQ', to: '/ressourcen/faq' },
   ],
   company: [
-    { label: 'Über uns', to: '/about' },
+    { label: 'Werte', to: '/ueber-uns/werte' },
+    { label: 'Leitung', to: '/ueber-uns/leitung' },
     { label: 'Kontakt', to: '/contact' },
     { label: 'Impressum', to: '/impressum' },
     { label: 'Datenschutz', to: '/privacy' },
@@ -85,7 +84,7 @@ const Footer: React.FC = () => {
       <div className="container-vae py-12 md:py-16">
         <Reveal.Group
           stagger={0.08}
-          className="mb-12 grid gap-8 sm:grid-cols-2 sm:gap-12 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6"
+          className="mb-12 grid gap-8 sm:grid-cols-2 sm:gap-12 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5"
         >
           {/* Brand Section */}
           <Reveal preset="fadeUp" className="md:col-span-3 lg:col-span-2 xl:col-span-2">
@@ -109,12 +108,14 @@ const Footer: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            <p className="mb-6 leading-relaxed text-text-muted">
-              Individuelle KI-Automatisierungssysteme für Unternehmen, die Ihre digitale Infrastruktur selbst besitzen
-              wollen. Lokales Hosting, Open-Source-KI und semantische Arbeitsräume mit VAE Core.
+            <p className="mb-3 text-sm font-semibold tracking-wide text-vae-turquoise">
+              Structure is strategy. Business efficiency through open source.
             </p>
-
+            <p className="mb-6 leading-relaxed text-text-muted">
+              Strategische Beratung, Open-Source-Infrastruktur und KI-Workflow-Optimierung für Unternehmen, die
+              Effizienz steigern und Datenkontrolle behalten wollen. Vom Setup bis zur langfristigen Betreuung –
+              dokumentiert und messbar.
+            </p>{' '}
             <div className="mb-6">
               <a
                 href={`mailto:${contactEmail}`}
@@ -126,7 +127,6 @@ const Footer: React.FC = () => {
                 <span>{contactEmail}</span>
               </a>
             </div>
-
             {/* Social Links */}
             <div className="mb-6 flex space-x-4" aria-label="Social Links">
               <a
@@ -158,7 +158,6 @@ const Footer: React.FC = () => {
                 <span className="sr-only">LinkedIn Unternehmensprofil von VAE Systems</span>
               </a>
             </div>
-
             {/* System Status */}
             <div className="flex items-center space-x-2">
               <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
@@ -196,49 +195,6 @@ const Footer: React.FC = () => {
                 ))}
               </ul>
             </div>
-          </Reveal>
-
-          {/* Knowledge Resources */}
-          <Reveal preset="fadeUp" aria-label="Knowledge Resources">
-            <h4 className="mb-4 text-lg font-semibold text-text-light">Knowledge Hub</h4>
-            <ul className="space-y-3 text-sm">
-              {knowledgeResources.map(resource => {
-                const content = (
-                  <>
-                    <span className="font-medium text-text-light">{resource.title}</span>
-                    <span className="block text-xs text-text-muted">{resource.description}</span>
-                  </>
-                )
-
-                return (
-                  <li key={resource.title}>
-                    {resource.isExternal ? (
-                      <a
-                        href={resource.to}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group block rounded-xl border border-bg-secondary bg-bg-secondary/40 px-4 py-3 transition-colors hover:border-vae-turquoise/40 hover:bg-bg-secondary/70"
-                      >
-                        {content}
-                        <span className="mt-1 inline-flex items-center text-[10px] uppercase tracking-[0.25em] text-vae-turquoise">
-                          Folgen
-                        </span>
-                      </a>
-                    ) : (
-                      <Link
-                        to={resource.to}
-                        className="group block rounded-xl border border-bg-secondary bg-bg-secondary/40 px-4 py-3 transition-colors hover:border-vae-turquoise/40 hover:bg-bg-secondary/70"
-                      >
-                        {content}
-                        <span className="mt-1 inline-flex items-center text-[10px] uppercase tracking-[0.25em] text-vae-turquoise">
-                          Mehr lesen
-                        </span>
-                      </Link>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
           </Reveal>
 
           {/* Unternehmen & Rechtliches + Newsletter */}

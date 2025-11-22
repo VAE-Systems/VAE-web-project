@@ -26,8 +26,8 @@ export const privacyContent: PrivacyContent = {
           Deutschland
           <br />
           E-Mail:{' '}
-          <a href="mailto:info@vae-systems.com" className="text-vae-turquoise hover:underline">
-            juliandini@vae-systems.com
+          <a href="mailto:info@vae.systems" className="text-vae-turquoise hover:underline">
+            info@vae.systems
           </a>
         </>
       ),
@@ -148,9 +148,9 @@ export const privacyContent: PrivacyContent = {
       body: (
         <>
           Aktuell werden keine externen Analyse‑ oder Marketingplattformen genutzt. Hosting / Infrastruktur:{' '}
-          <span className="text-vae-turquoise">[Platzhalter Hosting-Provider / Standort eintragen]</span>. Mit
-          eingesetzten Infrastruktur‑/Hosting‑Anbietern besteht bzw. wird – falls erforderlich – ein Vertrag zur
-          Auftragsverarbeitung (AVV) gemäß Art. 28 DSGVO abgeschlossen.
+          <span className="text-vae-turquoise">Contabo GmbH (Deutschland)</span>. Mit eingesetzten
+          Infrastruktur‑/Hosting‑Anbietern besteht bzw. wird – falls erforderlich – ein Vertrag zur Auftragsverarbeitung
+          (AVV) gemäß Art. 28 DSGVO abgeschlossen.
         </>
       ),
     },
@@ -191,8 +191,8 @@ export const privacyContent: PrivacyContent = {
           </ul>
           <p className="mt-3">
             Zur Ausübung Ihrer Rechte genügt eine formlose E‑Mail an{' '}
-            <a href="mailto:info@vae-systems.com" className="text-vae-turquoise hover:underline">
-              juliandini@vae-systems.com
+            <a href="mailto:info@vae.systems" className="text-vae-turquoise hover:underline">
+              info@vae.systems
             </a>
             .
           </p>

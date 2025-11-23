@@ -238,8 +238,7 @@ const BetreuungPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="section-card-container relative overflow-hidden border-b border-gray-200 bg-white dark:border-white/5 dark:bg-bg-darker">
-        <div className="section-card-backdrop" />
+      <section className="relative overflow-hidden border-b border-gray-200 bg-white dark:border-white/5 dark:bg-bg-darker">
         <div className="container-vae relative flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             MANAGED OPERATIONS

@@ -5,13 +5,11 @@ import {
   BadgeCheck,
   Brain,
   Briefcase,
-  Building2,
   CalendarDays,
   ChevronDown,
   Cloud,
   Layers,
   QrCode,
-  Rocket,
   Server,
   Shield,
   ShieldCheck,
@@ -79,6 +77,78 @@ interface ExpertiseArea {
 }
 
 const caseStudies: CaseStudy[] = [
+  {
+    id: 'lukas-sosnowski-consulting',
+    icon: Briefcase,
+    title: 'Finance Automation & CRM Migration',
+    organization: 'Lukas Sosnowski Consulting',
+    industry: 'Versicherungsberatung · Financial Services',
+    status: 'Live seit 2024',
+    statusVariant: 'live',
+    challenge:
+      'Lukas Sosnowski Consulting arbeitete mit Google Sheets für Kundendaten und manuelle Prozesse ohne CRM-Integration. Die Datenflut war unübersichtlich, Automatisierung fehlte komplett, und strategische KI-Integration war nicht möglich.',
+    solutionIntro:
+      'Wir haben eine CRM-Migration durchgeführt, Prozesse von Google Sheets auf Twenty CRM transferiert und eine strategische Beratung für KI-Controlling & Finance-Automation geliefert.',
+    implementation: [
+      {
+        title: 'CRM Migration & Setup',
+        items: [
+          'Migration von Google Sheets zu Twenty CRM',
+          'Kundendatenbank-Strukturierung & Kontaktmanagement',
+          'Workflow-Automation für Versicherungsberatung',
+          'Integration in bestehende Prozesse',
+        ],
+      },
+      {
+        title: 'KI-Strategie & Finance Automation',
+        items: [
+          'Strategische Beratung für AI Controlling',
+          'Finance-Automation-Roadmap',
+          'Prozessoptimierung durch KI-gestützte Datenanalyse',
+          'Skalierbare Infrastruktur für zukünftige Automatisierungen',
+        ],
+      },
+      {
+        title: 'Ansprechpartner & Beratung',
+        items: [
+          'VAE als technischer Ansprechpartner für Infrastruktur',
+          'Langfristige Beratung in CRM & KI-Strategie',
+          'Einführung & Schulung für selbstständige Nutzung',
+        ],
+      },
+    ],
+    results: [
+      { label: 'Daten-Konsolidierung', description: 'Kundendaten zentral im CRM statt fragmentiert in Sheets.' },
+      {
+        label: 'Effizienzgewinn',
+        description: 'Automatisierte Workflows reduzieren manuelle Arbeit signifikant.',
+      },
+      {
+        label: 'KI-Readiness',
+        description: 'Strategische Grundlage für Finance-Automation & AI Controlling geschaffen.',
+      },
+    ],
+    techStack: [
+      { name: 'Twenty CRM', description: 'Open-Source CRM für Kundenverwaltung.', docsUrl: 'https://twenty.com/' },
+      {
+        name: 'Google Sheets API',
+        description: 'Datenmigration aus Google Sheets.',
+        docsUrl: 'https://developers.google.com/sheets/api',
+      },
+      {
+        name: 'Docker',
+        description: 'Container-basiertes Deployment.',
+        docsUrl: 'https://www.docker.com/',
+      },
+      {
+        name: 'PostgreSQL',
+        description: 'Datenbank für CRM-Backend.',
+        docsUrl: 'https://www.postgresql.org/',
+      },
+    ],
+    role: 'VAE Systems übernahm CRM-Migration, strategische KI-Beratung und fungiert als technischer Ansprechpartner für Infrastruktur.',
+    cta: { label: 'CRM-Migration anfragen', href: '/services/beratung' },
+  },
   {
     id: 'aktiv-kollektiv',
     logo: { src: '/Kollektiv-Logo.svg', alt: 'Aktiv Kollektiv e.V. Logo', invertOnDark: true },

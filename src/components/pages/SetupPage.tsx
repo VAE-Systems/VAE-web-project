@@ -432,9 +432,7 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="section-card-container border-b bg-white py-24 dark:border-white/5 dark:bg-bg-dark md:py-28">
-        <div className="section-card-backdrop" />
-
+      <section className="border-b bg-white py-24 dark:border-white/5 dark:bg-bg-dark md:py-28">
         <div className="container-vae relative flex flex-col items-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             <ServerCog className="h-4 w-4" /> Infrastruktur Design/Setup

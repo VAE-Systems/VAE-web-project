@@ -1,8 +1,67 @@
 import Icon from '@/components/ui/Icon'
 import { referenceInsights, referenceProjects } from '@/content/home'
-import React from 'react'
+import { ArrowRight, Briefcase, X } from 'lucide-react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+interface LogoModalProps {
+  logo: { src: string; alt: string; invertOnDark?: boolean; invertOnLight?: boolean }
+  onClose: () => void
+}
+
+const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
+  React.useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-10 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${logo.alt} - Vergrößert`}
+      onClick={onClose}
+    >
+      <div className="relative max-h-[90vh] max-w-4xl" onClick={e => e.stopPropagation()}>
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute -right-4 -top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-gray-900 shadow-lg transition-all hover:scale-110 hover:bg-white dark:bg-bg-darker/90 dark:text-white dark:hover:bg-bg-darker"
+          aria-label="Schließen"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        <div className="rounded-2xl border border-white/20 bg-white/95 p-8 shadow-2xl dark:bg-bg-dark/95">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            className={[
+              'max-h-[75vh] w-full object-contain',
+              (logo.invertOnDark || logo.invertOnLight) && 'filter',
+              logo.invertOnDark && 'dark:invert',
+              logo.invertOnLight && 'invert',
+              logo.invertOnLight && 'dark:invert-0',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const SocialProofSection: React.FC = () => {
+  const [selectedLogo, setSelectedLogo] = useState<{
+    src: string
+    alt: string
+    invertOnDark?: boolean
+    invertOnLight?: boolean
+  } | null>(null)
   return (
     <section
       id="social-proof"
@@ -22,28 +81,38 @@ const SocialProofSection: React.FC = () => {
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   {project.logo ? (
-                    <img
-                      src={project.logo}
-                      alt={`${project.client} Logo`}
-                      className={[
-                        'h-14 w-auto max-w-[180px] transition-transform duration-300 group-hover:scale-110',
-                        (project.invertOnDark || project.invertOnLight) && 'filter',
-                        project.invertOnDark && 'dark:invert',
-                        project.invertOnLight && 'invert',
-                        project.invertOnLight && 'dark:invert-0',
-                      ]
-                        .filter(Boolean)
-                        .join(' ')}
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setSelectedLogo({
+                          src: project.logo!,
+                          alt: `${project.client} Logo`,
+                          invertOnDark: project.invertOnDark,
+                          invertOnLight: project.invertOnLight,
+                        })
+                      }
+                      className="group/logo cursor-pointer transition-opacity hover:opacity-80"
+                      aria-label={`${project.client} Logo vergrößern`}
+                    >
+                      <img
+                        src={project.logo}
+                        alt={`${project.client} Logo`}
+                        className={[
+                          'h-14 w-auto max-w-[180px] transition-transform duration-300 group-hover/logo:scale-110',
+                          (project.invertOnDark || project.invertOnLight) && 'filter',
+                          project.invertOnDark && 'dark:invert',
+                          project.invertOnLight && 'invert',
+                          project.invertOnLight && 'dark:invert-0',
+                        ]
+                          .filter(Boolean)
+                          .join(' ')}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </button>
                   ) : (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-sm font-semibold uppercase tracking-[0.35em] text-gray-700 dark:bg-white/10 dark:text-white/70">
-                      {project.client
-                        .split(' ')
-                        .map(word => word.charAt(0))
-                        .join('')
-                        .slice(0, 2)}
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
+                      <Briefcase className="h-6 w-6" />
                     </div>
                   )}
                   <div>
@@ -70,6 +139,16 @@ const SocialProofSection: React.FC = () => {
                 ))}
               </ul>
               {project.role && <p className="mt-4 text-xs text-gray-500 dark:text-text-muted">{project.role}</p>}
+
+              <div className="mt-6">
+                <Link
+                  to="/ressourcen/case-studies"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise/80"
+                >
+                  Details ansehen
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </article>
           ))}
         </div>
@@ -94,6 +173,8 @@ const SocialProofSection: React.FC = () => {
           Detaillierte Case Studies und Kundenzitate folgen. Aktuell im Aufbau.
         </p>
       </div>
+
+      {selectedLogo && <LogoModal logo={selectedLogo} onClose={() => setSelectedLogo(null)} />}
     </section>
   )
 }

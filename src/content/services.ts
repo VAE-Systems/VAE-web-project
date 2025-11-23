@@ -34,7 +34,7 @@ export const servicesCategories = [
   {
     key: 'infrastructure',
     title: 'Arbeitsinfrastruktur Setup',
-    icon: 'dns',
+    icon: 'storage',
     focus: 'Nextcloud, CRM, Kommunikation & Wissen – produktionsbereit eingerichtet.',
     examples: ['System-Setup', 'Benutzer & Rechte', 'Security & Backups'],
     to: '/infrastruktur',
@@ -140,7 +140,7 @@ export const servicesData = [
     ],
     features: ['Nextcloud Business Suite', 'CRM- & Automationsmodule', 'Backup & Security Framework'],
     cta: 'Setup besprechen',
-    iconName: 'dns',
+    iconName: 'storage',
   },
   {
     key: 'automation',

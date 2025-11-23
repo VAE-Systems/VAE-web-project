@@ -425,20 +425,20 @@ const BeratungPage: React.FC = () => {
             {/* Tag */}
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-vae-turquoise">
-                SERVICE
+                STRATEGY & TRANSFORMATION
               </span>
             </div>
 
             {/* Main Heading */}
             <h1 className="text-4xl font-bold leading-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-              Strategieberatung für digitale Transformation
+              Digitale Transformation beginnt mit der richtigen Strategie.
             </h1>
 
             {/* Subtitle */}
             <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-[hsl(0,0%,75%)] md:text-xl">
-              Von der KI-Strategie bis zur vollständigen Digitalisierung: Wir analysieren Ihre Systeme, identifizieren
-              Ineffizienzen und entwickeln einen klaren, umsetzbaren Fahrplan – individuell auf Ihre Organisation
-              zugeschnitten.
+              Von der Bestandsaufnahme bis zur Umsetzungs-Roadmap: Wir analysieren Ihre Systeme, identifizieren
+              Ineffizienzen und entwickeln einen klaren, umsetzbaren Fahrplan für KI-Integration und Digitalisierung –
+              individuell auf Ihre Organisation zugeschnitten.
             </p>
 
             {/* CTA Buttons */}

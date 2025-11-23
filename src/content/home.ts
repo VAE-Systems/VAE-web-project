@@ -19,7 +19,7 @@ export const heroBenefits: HeroBenefit[] = [
   {
     title: 'Komplett-Setup',
     description: 'Nextcloud, CRM, Automationen – produktionsbereit in 3–6 Wochen.',
-    icon: 'dns',
+    icon: 'settings_suggest',
   },
   {
     title: 'KI-Optimierung',
@@ -171,9 +171,9 @@ export const openSourcePainPoints: OpenSourcePoint[] = [
       'Ihre Daten und KI-Workflows liegen bei US-Konzernen. Features verschwinden? Akzeptieren. API-Preise steigen? Zahlen. Modelle wechseln? Neuintegration. Kein Mitspracherecht.',
   },
   {
-    title: 'DSGVO-Risiken',
+    title: 'DSGVO-Compliance-Risiken',
     description:
-      'Cloud Act, Datentransfers in die USA bei Arbeitssystemen UND KI-APIs, unklare Compliance. Rechtsunsicherheit für europäische Unternehmen.',
+      'Cloud Act macht US-Datentransfers rechtsunsicher – bei Arbeitssystemen UND KI-APIs. Europäische Unternehmen tragen das Compliance-Risiko.',
   },
 ] as const
 
@@ -181,7 +181,7 @@ export const openSourceAdvantages: OpenSourcePoint[] = [
   {
     title: 'Signifikante Kosteneinsparungen',
     description:
-      'Nextcloud statt Microsoft 365. Odoo statt Salesforce. Llama/Mistral statt OpenAI API. Self-hosted, keine monatlichen Lizenzgebühren. Investition in Setup, dann planbare Betriebskosten.',
+      'Open-Source-Alternativen für Arbeitssysteme, Fachanwendungen und KI statt teurer SaaS-Lizenzen – von Kollaboration und CRM bis hin zu Automatisierung und Analytics. Wo heute Proprietär-APIs dominieren, setzen wir zunehmend auf selbst betriebene Open-Source-Modelle (z. B. Llama, Mistral) mit voller Kostenkontrolle. Self-hosted bedeutet: einmalig in Setup und Infrastruktur investieren, danach bleiben die Betriebskosten planbar, ohne Vendor-Preisspirale.',
   },
   {
     title: 'Volle Kontrolle',
@@ -209,50 +209,59 @@ export interface ServiceOverviewCard {
 export const servicesOverviewCards: ServiceOverviewCard[] = [
   {
     id: 'beratung',
-    icon: 'explore',
-    title: 'Strategische Beratung',
-    badge: 'Startpunkt',
+    icon: 'compass_calibration',
+    title: 'Strategieberatung',
+    badge: 'ANALYSE',
     description:
-      'Sie wissen noch nicht genau, was Sie brauchen? Wir analysieren Ihre Situation, zeigen Optionen und entwickeln einen realistischen Fahrplan.',
+      'Sie wollen Klarheit, bevor Sie Systeme umbauen? Wir analysieren Ihre Situation, bewerten Kosten und Nutzen von SaaS vs. Open Source und entwickeln einen umsetzbaren Fahrplan – inklusive KI-Potenzialen.',
     inclusions: [
       'Kostenlose Erstberatung (45 Min)',
       'System-Analyse & Kosten-Nutzen-Rechnung',
-      '3 realistische Migrations-Optionen',
-      'Schriftliches Angebot',
+      '3 realistische Migrations-Optionen (inkl. „Status quo beibehalten")',
+      'Schriftlicher Fahrplan mit konkreten nächsten Schritten',
     ],
-    audience: ['Teams am Anfang ihrer Open-Source-Reise', 'Unsichere über beste Strategie'],
+    audience: [
+      'Teams am Anfang ihrer Open-Source- und KI-Reise',
+      'Organisationen, die noch unsicher über die beste Strategie sind',
+    ],
     cta: { label: 'Mehr erfahren', href: '/services/beratung' },
   },
   {
     id: 'setup',
-    icon: 'dns',
-    title: 'Infrastructure-Setup',
-    badge: '3–6 Wochen',
+    icon: 'storage',
+    title: 'Infrastruktur Design/Setup',
+    badge: '3–6 WOCHEN',
     description:
-      'Von SaaS zu Open Source in 3–6 Wochen. Wir bauen Ihre komplette Infrastruktur auf — produktionsbereit, migriert, geschult.',
+      'Auf Basis der vorhergehenden Strategie-Phase bauen wir Ihre Open-Source-Infrastruktur produktionsbereit in 3–6 Wochen auf – inklusive Migration relevanter Daten und Training für Ihr Team.',
     inclusions: [
-      'Kompletter Server-Aufbau',
-      'Tool-Installation & Konfiguration',
-      'Daten-Migration',
-      'Team-Training & Dokumentation',
+      'Kompletter Server-Aufbau (Container, Netzwerk, Security-Basics)',
+      'Tool-Installation & Konfiguration der Kernsysteme',
+      'Daten-Migration aus bestehenden Systemen (falls relevant)',
+      'Team-Training & Dokumentation für Admins und Key-User',
     ],
-    audience: ['Teams bereit für den Wechsel', 'Wollen professionelles Setup'],
+    audience: [
+      'Teams, die bereit für den Wechsel von SaaS zu Open Source sind',
+      'Unternehmen, die ein professionelles, dokumentiertes Setup wollen',
+    ],
     cta: { label: 'Setup Details', href: '/services/setup' },
   },
   {
     id: 'betreuung',
     icon: 'support_agent',
     title: 'Langfristige Betreuung',
-    badge: 'Kontinuierlich',
+    badge: 'KONTINUIERLICH',
     description:
-      'Ihre Infrastruktur läuft. Wir sorgen dafür, dass sie es bleibt. Updates, Security, KI-Optimierung — wir sind Ihr IT-Rückgrat.',
+      'Ihre Infrastruktur läuft – wir sorgen dafür, dass sie es bleibt. Updates, Security, Monitoring und KI-Optimierung: Wir sind Ihr IT-Rückgrat, während Ihr Team sich auf Produkt und Kund:innen konzentriert.',
     inclusions: [
-      'Monatliche Updates & Security-Patches',
-      '24/7-Monitoring & Backups',
-      'KI-Workflow-Optimierung',
-      'Prioritäts-Support (< 6h)',
+      'Monatliche Updates, Security-Patches & geplanter Wartungsrahmen',
+      '24/7-Monitoring, Backups & Wiederherstellungskonzepte',
+      'KI-Workflow-Optimierung & Automatisierung von Routineaufgaben',
+      'Prioritäts-Support mit klar definierten Reaktionszeiten',
     ],
-    audience: ['Teams ohne IT-Abteilung', 'Fokus auf Kernbusiness, nicht IT'],
+    audience: [
+      'Teams ohne eigene IT-Abteilung oder mit knappen Kapazitäten',
+      'Unternehmen mit Fokus auf Kernbusiness statt Infrastruktur-Betrieb',
+    ],
     cta: { label: 'Betreuung Details', href: '/services/betreuung' },
   },
 ] as const
@@ -341,6 +350,20 @@ export interface ReferenceProject {
 }
 
 export const referenceProjects: ReferenceProject[] = [
+  {
+    id: 'lukas-sosnowski',
+    client: 'Lukas Sosnowski Consulting',
+    title: 'CRM-Migration & KI-Strategie',
+    description:
+      'Von Google Sheets zu Twenty CRM – inklusive strategischer Beratung für Finance Automation und AI Controlling.',
+    highlights: [
+      'Daten-Konsolidierung im CRM',
+      'KI-Readiness für Finance-Automation',
+      'VAE als technischer Ansprechpartner',
+    ],
+    status: 'Live',
+    badge: 'Live seit 2024',
+  },
   {
     id: 'aktiv-kollektiv',
     client: 'Aktiv Kollektiv e.V.',

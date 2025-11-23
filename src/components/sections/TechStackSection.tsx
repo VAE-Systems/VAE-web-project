@@ -4,7 +4,69 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef, useState } from 'react'
 import { ParallaxBackdrop, ParticleField } from './BackgroundEffects'
 
+// Hinweis: Logos nur gemäß Marken-/Brand-Guidelines der jeweiligen Anbieter verwenden.
+// Es werden hier ausschließlich Projekte/Stacks aufgeführt, mit denen wir regelmäßig arbeiten.
 const techStack = [
+  // Sprachen & Kern-Frameworks
+  {
+    name: 'Python',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    website: 'https://python.org',
+  },
+  {
+    name: 'TypeScript',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    website: 'https://typescriptlang.org',
+  },
+  {
+    name: 'JavaScript',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    website: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+  },
+  {
+    name: 'React',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    website: 'https://react.dev',
+  },
+  {
+    name: 'Node.js',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    website: 'https://nodejs.org',
+  },
+
+  // Daten & Backend / Infra
+  {
+    name: 'PostgreSQL',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    website: 'https://postgresql.org',
+  },
+  {
+    name: 'MongoDB',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    website: 'https://mongodb.com',
+  },
+  {
+    name: 'Supabase',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg',
+    website: 'https://supabase.com',
+  },
+  {
+    name: 'Docker',
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    website: 'https://docker.com',
+  },
+  {
+    name: 'Temporal',
+    logo: 'https://images.ctfassets.net/0uuz8ydxyd9p/2W8B7bcLSPX9YaSwkfrhmv/eade3fc61520b8cee84cf8605dce3056/Temporal_Symbol_dark_1_2x.png',
+    website: 'https://temporal.io',
+  },
+
+  // KI-Frameworks & Modelle
+  {
+    name: 'LangChain',
+    logo: 'https://www.infralovers.com/images/posts/ai-for-devops-engineers/langchain_logo.png',
+    website: 'https://langchain.com',
+  },
   {
     name: 'TensorFlow',
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
@@ -20,88 +82,32 @@ const techStack = [
     logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
     website: 'https://openai.com',
   },
-  { name: 'LangChain', logo: 'https://python.langchain.com/img/brand/wordmark.png', website: 'https://langchain.com' },
   {
-    name: 'Claude Sonnet',
-    logo: 'https://avatars.githubusercontent.com/u/121681234?s=200&v=4',
+    name: 'Anthropic',
+    logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/anthropic.png',
     website: 'https://anthropic.com',
   },
   {
-    name: 'ChatGPT',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
-    website: 'https://chat.openai.com',
+    name: 'xAI',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/25/XAI.svg',
+    website: 'https://x.ai',
   },
   {
-    name: 'Python',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-    website: 'https://python.org',
+    name: 'Mistral AI',
+    logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/mistral.png',
+    website: 'https://mistral.ai',
   },
   {
-    name: 'JavaScript',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-    website: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+    name: 'Meta Llama',
+    logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/meta.png',
+    website: 'https://llama.meta.com',
   },
   {
-    name: 'Node.js',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-    website: 'https://nodejs.org',
-  },
-  {
-    name: 'FastAPI',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
-    website: 'https://fastapi.tiangolo.com',
-  },
-  {
-    name: 'React',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    website: 'https://react.dev',
-  },
-  {
-    name: 'TypeScript',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
-    website: 'https://typescriptlang.org',
-  },
-  {
-    name: 'PostgreSQL',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
-    website: 'https://postgresql.org',
-  },
-  {
-    name: 'MongoDB',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-    website: 'https://mongodb.com',
-  },
-  {
-    name: 'Docker',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
-    website: 'https://docker.com',
-  },
-  {
-    name: 'Kubernetes',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
-    website: 'https://kubernetes.io',
-  },
-  {
-    name: 'AWS',
-    logo: 'https://e7.pngegg.com/pngimages/628/589/png-clipart-amazon-web-services-amazon-com-logo-plataform-computer-network-text.png',
-    website: 'https://aws.amazon.com',
-  },
-  {
-    name: 'Temporal',
-    logo: 'https://images.ctfassets.net/0uuz8ydxyd9p/2W8B7bcLSPX9YaSwkfrhmv/eade3fc61520b8cee84cf8605dce3056/Temporal_Symbol_dark_1_2x.png',
-    website: 'https://temporal.io',
+    name: 'Moonshot',
+    logo: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/moonshot.png',
+    website: 'https://moonshot.ai',
   },
   { name: 'Pinecone', logo: 'https://www.pinecone.io/images/pinecone-logo.svg', website: 'https://pinecone.io' },
-  {
-    name: 'Supabase',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg',
-    website: 'https://supabase.com',
-  },
-  {
-    name: 'Corteza',
-    logo: 'https://cortezaproject.org/wp-content/uploads/2024/10/Corteza-logo-340-300x138.png',
-    website: 'https://cortezaproject.org',
-  },
 ] as const
 
 /**
@@ -437,8 +443,8 @@ const TechStackSection: React.FC = () => {
             Open Source Systeme & KI-Modelle
           </h2>
           <p ref={subRef} className="mx-auto max-w-2xl text-xl text-text-secondary">
-            Arbeitssysteme (Nextcloud, Temporal, Docker) + KI-Frameworks (LangChain, Open-Source-LLMs) – unsere
-            Doppel-Kompetenz.
+            Arbeitssysteme, Datenplattformen, Infrastruktur und KI-Frameworks – wir kombinieren Open-Source-Stacks mit
+            modernen Modellen zu einer durchgängigen Toolchain.
           </p>
         </div>
 
@@ -472,6 +478,11 @@ const TechStackSection: React.FC = () => {
               </a>
             ))}
           </div>
+
+          <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+            Die Logos zeigen eine Auswahl von Technologien, mit denen wir regelmäßig arbeiten – der konkrete Stack wird
+            immer an Ihre Organisation und Compliance-Anforderungen angepasst.
+          </p>
         </div>
       </div>
     </section>

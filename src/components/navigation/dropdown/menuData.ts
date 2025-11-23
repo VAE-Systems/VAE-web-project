@@ -34,17 +34,19 @@ export const MENU_DATA: DropdownMenu[] = [
     ],
     content: {
       strategy: {
-        id: 'strategy',
+        id: 'STRATEGY & TRANSFORMATION',
         title: 'Strategieberatung',
-        description: 'Portfolio an Outcomes:',
+        description:
+          'Strategische Beratung für KI-Adoption und digitale Transformation – fundierte Analyse, klare Roadmaps, messbare Ergebnisse.',
         items: ['Strategieberichte', 'KI-Strategie', 'Digitalisierungsroadmaps', 'Prozessoptimierung'],
         ctaText: 'Mehr erfahren',
         ctaHref: '/leistungen/strategie',
       },
       infrastructure: {
-        id: 'infrastructure',
+        id: 'INFRASTRUCTURE',
         title: 'Infrastruktur Design/Setup',
-        description: 'AI-Ready / KI-optimiert. Langfristig funktionierend. Open Source & selfhosted first.',
+        description:
+          'KI-optimierte, produktionsreife Open-Source-Systeme – vollständig konfiguriert, dokumentiert und unter Ihrer Kontrolle.',
         items: [
           'CRM-Systeme',
           'HR-Systeme',
@@ -58,9 +60,10 @@ export const MENU_DATA: DropdownMenu[] = [
         ctaHref: '/leistungen/infrastruktur',
       },
       betreuung: {
-        id: 'betreuung',
+        id: 'MANAGED OPERATIONS',
         title: 'Langfristige Betreuung',
-        description: 'Kontinuierliche Unterstützung für Ihre Systeme.',
+        description:
+          'Wir übernehmen Betrieb, Monitoring und Weiterentwicklung Ihrer Systeme – Sie konzentrieren sich auf Ihr Kerngeschäft.',
         items: ['Wartung & Updates', 'Support & Troubleshooting', 'Skalierung & Optimierung', 'Schulungen'],
         ctaText: 'Mehr erfahren',
         ctaHref: '/leistungen/betreuung',
@@ -78,28 +81,30 @@ export const MENU_DATA: DropdownMenu[] = [
     ],
     content: {
       blog: {
-        id: 'blog',
-        title: 'Blog',
+        id: 'BLOG',
+        title: 'Einblicke & Trends',
         description:
-          'Entdecke Einblicke in KI-Trends, Open Source Best Practices und Digitalisierung auf unserer Dokumentationsplattform.',
-        ctaText: 'Alle Posts ansehen',
+          'KI-Trends, Open-Source-Best-Practices und Digitalisierung – praxisnah erklärt auf unserer Dokumentationsplattform.',
+        ctaText: 'Alle Beiträge ansehen',
         ctaHref: '/ressourcen/blog',
       },
       cases: {
-        id: 'cases',
-        title: 'Case Studies',
+        id: 'CASE STUDIES',
+        title: 'Praxisbeispiele & Projekte',
+        description:
+          'Konkrete Umsetzungen aus Non-Profit, Beratung und Kreativwirtschaft – von CRM bis Website-Rebuild.',
         items: [
-          'Aktiv Kollektiv e.V. — Non-Profit CRM & Mitgliederverwaltung',
-          'Joschka Ludwig Krause — Art Affair Regensburg Website Rebuild',
-          'Lukas Sosnowski — Versicherungsberatung Open Source Infrastruktur',
+          'Lukas Sosnowski Consulting — Finance Automation & CRM Migration',
+          'Non-Profit CRM — Mitgliederverwaltung & Automatisierung für Aktiv Kollektiv e.V.',
+          'Art Affair Regensburg — KI-optimiertes QR-Code-Lead-System',
         ],
-        ctaText: 'Alle ansehen',
+        ctaText: 'Alle Cases ansehen',
         ctaHref: '/ressourcen/case-studies',
       },
       faq: {
-        id: 'faq',
-        title: 'FAQ',
-        description: 'Häufig gestellte Fragen',
+        id: 'FAQ',
+        title: 'Häufig gestellte Fragen',
+        description: 'Antworten zu Kosten, Projektabläufen, Open Source und unserer Arbeitsweise.',
         items: [
           'Was kostet eine Beratung?',
           'Wie lange dauert ein Projekt?',
@@ -123,8 +128,9 @@ export const MENU_DATA: DropdownMenu[] = [
     ],
     content: {
       werte: {
-        id: 'werte',
-        title: 'Unsere Werte',
+        id: 'WERTE',
+        title: 'Philosophie & Prinzipien',
+        description: 'Transparenz, Ownership und nachhaltige Lösungen – die Werte, die unsere Arbeit prägen.',
         items: [
           'Transparenz — Open Source First',
           'Ownership — Eigenverantwortung',
@@ -136,16 +142,16 @@ export const MENU_DATA: DropdownMenu[] = [
         ctaHref: '/ueber-uns/werte',
       },
       leitung: {
-        id: 'leitung',
-        title: 'Leitung',
-        description: 'Julian Goertz Dini (CEO) & Jakob Dünnebeil (CTO)',
-        ctaText: 'Empfehlungen ansehen',
+        id: 'LEITUNG',
+        title: 'Die Köpfe hinter VAE',
+        description: 'Julian Goertz Dini (CEO) & Jakob Dünnebeil (CTO) – Strategie trifft technische Präzision.',
+        ctaText: 'Team kennenlernen',
         ctaHref: '/ueber-uns/leitung',
       },
       kontakt: {
-        id: 'kontakt',
-        title: 'Kontakt',
-        description: 'Direkte Kommunikationswege zu VAE Systems.',
+        id: 'KONTAKT',
+        title: 'Direkter Draht zu VAE',
+        description: 'Vom ersten Kennenlernen bis zu technischen Deep-Dives – wir sind für Sie da.',
         items: ['E-Mail & Kontaktformular', 'Erstgespräch (30 Minuten)', 'Technische Deep-Dives', 'Workshops & Audits'],
         ctaText: 'Kontakt aufnehmen',
         ctaHref: '/contact',

@@ -21,6 +21,9 @@ import { ThemeProvider } from '@/contexts/ThemeContext'
 // Help System
 import { HelpModeProvider } from '@/components/ui/help'
 
+// Theme Tutorial
+import { ThemeModeTutorial } from '@/components/ui/tutorial/ThemeModeTutorial'
+
 // Focus Management
 import { initializeFocusManager } from '@/utils/focusManagement'
 
@@ -98,6 +101,7 @@ const App: React.FC = () => {
               <SkipToContent />
               <ScrollProgressBar />
               <Header />
+              <ThemeModeTutorial />
               <NavigationSwitcher />
               <main id="main-content" className="pt-20">
                 <Suspense fallback={<LoadingSpinner />}>

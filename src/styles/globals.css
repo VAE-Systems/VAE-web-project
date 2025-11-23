@@ -2222,5 +2222,5 @@ body.using-keyboard *:focus {
 
 .section-card-backdrop::after {
   content: '';
-  @apply absolute inset-8 rounded-[24px] border border-white/5 bg-white/5 backdrop-blur-sm;
+  @apply absolute inset-8 rounded-[24px] border border-white/5 bg-white/5;
 }

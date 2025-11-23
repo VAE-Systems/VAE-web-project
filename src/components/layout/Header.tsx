@@ -4,7 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext'
 import { useAttentionSignal } from '@/hooks'
 import { Calendar, LogIn, Menu, Moon, Sun, X } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const CTA_URL = '/contact#booking'
 const LOGIN_URL = 'https://nc.intern.vae.systems/login?clear=1'
@@ -194,6 +194,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
 
 const HeaderModern: React.FC = () => {
   const { theme, toggleTheme } = useTheme()
+  const location = useLocation()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hideOnMobile, setHideOnMobile] = useState(false)
@@ -203,10 +204,14 @@ const HeaderModern: React.FC = () => {
   const sheetRef = useRef<HTMLDivElement>(null)
   const previouslyFocused = useRef<HTMLElement | null>(null)
   const bodyOverflowRef = useRef<string | null>(null)
-  const bodyPositionRef = useRef<string | null>(null)
-  const bodyTopRef = useRef<string | null>(null)
   const lockedScrollY = useRef(0)
   const lastScrollY = useRef(0)
+  const mobileMenuOpenRef = useRef(false)
+
+  // Sync ref with state
+  useEffect(() => {
+    mobileMenuOpenRef.current = isMobileMenuOpen
+  }, [isMobileMenuOpen])
 
   useAttentionSignal(ctaRef, {
     intervalMs: 30000,
@@ -232,18 +237,26 @@ const HeaderModern: React.FC = () => {
 
       const isDesktop = window.innerWidth >= 1024
       if (!isDesktop) {
-        const delta = currentScroll - lastScrollY.current
-        if (currentScroll > 80 && delta > 4) {
-          setHideOnMobile(true)
-        } else if (delta < -4) {
-          setHideOnMobile(false)
+        // Wenn das Mobile-Menü offen ist, Header nicht verstecken
+        if (!mobileMenuOpenRef.current) {
+          const delta = currentScroll - lastScrollY.current
+          if (currentScroll > 80 && delta > 4) {
+            setHideOnMobile(true)
+          } else if (delta < -4) {
+            setHideOnMobile(false)
+          }
         }
         lastScrollY.current = currentScroll
       } else {
         setHideOnMobile(false)
       }
 
-      setIsMobileMenuOpen(false)
+      // Menü schließen beim Scrollen (nur wenn es offen ist)
+      if (mobileMenuOpenRef.current) {
+        setIsMobileMenuOpen(false)
+        // Nach dem Schließen sicherstellen, dass Header sichtbar bleibt
+        setHideOnMobile(false)
+      }
     }
 
     const handleScroll = () => {
@@ -269,36 +282,36 @@ const HeaderModern: React.FC = () => {
     const body = document.body
     const root = document.documentElement
 
-    if (bodyOverflowRef.current === null) bodyOverflowRef.current = body.style.overflow
-    if (bodyPositionRef.current === null) bodyPositionRef.current = body.style.position
-    if (bodyTopRef.current === null) bodyTopRef.current = body.style.top
-
     if (isMobileMenuOpen) {
+      // Speichere aktuelle Scroll-Position
       lockedScrollY.current = window.scrollY
+
+      // Verhindere Scrollen ohne Position-Jump
       body.style.overflow = 'hidden'
       root.style.overflow = 'hidden'
-      body.style.position = 'fixed'
-      body.style.top = `-${lockedScrollY.current}px`
-      body.style.width = '100%'
       body.style.touchAction = 'none'
+
+      // Speichere ursprüngliche Werte nur beim ersten Mal
+      if (bodyOverflowRef.current === null) bodyOverflowRef.current = body.style.overflow
     } else {
-      body.style.overflow = bodyOverflowRef.current
+      // Stelle Scrolling wieder her
+      body.style.overflow = ''
       root.style.overflow = ''
-      body.style.position = bodyPositionRef.current
-      body.style.top = bodyTopRef.current
-      body.style.width = ''
       body.style.touchAction = ''
-      if (lockedScrollY.current) {
-        window.scrollTo(0, lockedScrollY.current)
+
+      // Stelle Scroll-Position wieder her (falls gespeichert)
+      // Nutze requestAnimationFrame um Layout-Thrashing zu vermeiden
+      if (lockedScrollY.current > 0) {
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: lockedScrollY.current, behavior: 'instant' as ScrollBehavior })
+        })
       }
     }
 
     return () => {
-      body.style.overflow = bodyOverflowRef.current ?? ''
+      // Cleanup: Stelle sicher, dass Scrolling wieder funktioniert
+      body.style.overflow = ''
       root.style.overflow = ''
-      body.style.position = bodyPositionRef.current ?? ''
-      body.style.top = bodyTopRef.current ?? ''
-      body.style.width = ''
       body.style.touchAction = ''
     }
   }, [isMobileMenuOpen])
@@ -343,12 +356,28 @@ const HeaderModern: React.FC = () => {
   const navSections = useMemo(() => MENU_DATA ?? [], [])
   const closeMenu = () => setIsMobileMenuOpen(false)
 
+  // Smart logo click handler: scroll to hero if on homepage, otherwise navigate
+  const handleLogoClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (location.pathname === '/') {
+        e.preventDefault()
+        const heroSection = document.getElementById('hero')
+        if (heroSection) {
+          heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+      }
+    },
+    [location.pathname]
+  )
+
   return (
     <>
       <header
         className={`
         duration-400 fixed left-0 right-0 top-0 z-50 transition-transform ease-out
-        ${hideOnMobile ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'}
+        ${hideOnMobile && !isMobileMenuOpen ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'}
         transition-colors
         ${
           isScrolled
@@ -364,7 +393,7 @@ const HeaderModern: React.FC = () => {
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           {/* Mobile compact bar */}
           <div className="flex items-center justify-between gap-4 py-3 lg:hidden">
-            <Link to="/" className="group flex items-center gap-1">
+            <Link to="/" onClick={handleLogoClick} className="group flex items-center gap-1">
               <div className="relative h-12 transition-transform duration-300 group-hover:scale-105">
                 <img
                   src="/App_Logo_light.svg"
@@ -389,7 +418,7 @@ const HeaderModern: React.FC = () => {
 
           <div className="hidden flex-col gap-4 py-4 lg:flex lg:h-20 lg:flex-row lg:items-center lg:gap-8">
             <div className="flex items-center justify-between gap-4">
-              <Link to="/" className="group flex items-center gap-1">
+              <Link to="/" onClick={handleLogoClick} className="group flex items-center gap-1">
                 <div className="relative h-[4.6rem] transition-transform duration-300 group-hover:scale-105 md:h-[5.2rem]">
                   <img
                     src="/App_Logo_light.svg"
@@ -454,13 +483,13 @@ const HeaderModern: React.FC = () => {
           <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={closeMenu} aria-hidden="true" />
           <div
             ref={sheetRef}
-            className="absolute inset-0 bg-bg-darker text-white shadow-[0_20px_80px_rgba(0,0,0,0.55)]"
+            className="absolute bottom-0 left-0 right-0 top-0 flex flex-col overflow-hidden bg-bg-darker text-white shadow-[0_20px_80px_rgba(0,0,0,0.55)]"
             role="dialog"
             aria-modal="true"
             aria-label="Hauptmenü"
             onClick={event => event.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-5 pb-2 pt-5">
+            <div className="flex flex-shrink-0 items-center justify-between px-5 pb-2 pt-5">
               <span className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise">Menü</span>
               <button
                 onClick={closeMenu}
@@ -471,7 +500,7 @@ const HeaderModern: React.FC = () => {
               </button>
             </div>
 
-            <div className="h-full overflow-y-auto px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
+            <div className="flex-1 overflow-y-auto px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
               <div className="space-y-6">
                 <div className="grid gap-4">
                   {navSections.map(section => (

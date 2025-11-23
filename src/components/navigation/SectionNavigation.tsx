@@ -16,6 +16,7 @@ interface SectionData {
 const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
   { id: 'why-open-source', iconName: 'lightbulb', label: 'Warum Open Source?' },
+  { id: 'tech-stack', iconName: 'deployed_code', label: 'Tech Stack' },
   { id: 'services', iconName: 'settings', label: 'Services' },
   { id: 'social-proof', iconName: 'work', label: 'Projekte' },
   { id: 'process', iconName: 'timeline', label: 'Prozess' },

@@ -1,3 +1,4 @@
+import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/data/faqData'
 import {
   type LucideIcon,
@@ -24,7 +25,7 @@ import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 
-const calendlyUrl = '/contact#booking'
+const bookingUrl = BOOKING_LINKS.RETAINER_PLANUNG
 
 const trustBadges = ['Flexible Bindung', 'Zuverlässig', 'Transparent']
 
@@ -213,11 +214,6 @@ const BetreuungPage: React.FC = () => {
     }))
   }, [])
 
-  const openCalendly = useCallback(() => {
-    if (typeof window === 'undefined') return
-    window.open(calendlyUrl, '_self')
-  }, [])
-
   const scrollToServiceLevels = useCallback((e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault()
@@ -255,12 +251,14 @@ const BetreuungPage: React.FC = () => {
           </p>
           <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-6 lg:gap-8">
             <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
-              <button
-                onClick={openCalendly}
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-convert flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 Service-Level besprechen
-              </button>
+              </a>
             </MagneticButton>
             <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
               <button
@@ -678,8 +676,10 @@ const BetreuungPage: React.FC = () => {
 
                   <div className="mt-8 flex flex-col gap-3">
                     <MagneticButton intensity={0.04} scaleEffect={false} glowEffect={false} className="w-full">
-                      <button
-                        onClick={openCalendly}
+                      <a
+                        href={bookingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className={`group relative w-full overflow-hidden rounded-xl px-6 py-3.5 text-sm font-bold transition-all duration-300 ${
                           level.highlighted ? 'btn-convert' : 'btn-outline'
                         }`}
@@ -691,7 +691,7 @@ const BetreuungPage: React.FC = () => {
                         {level.highlighted && (
                           <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                         )}
-                      </button>
+                      </a>
                     </MagneticButton>
                     <p className="text-center text-xs text-gray-600 dark:text-text-secondary">
                       {level.highlighted
@@ -1008,13 +1008,15 @@ const BetreuungPage: React.FC = () => {
           </p>
           <div className="flex flex-col items-center gap-3 md:gap-4">
             <MagneticButton intensity={0.1} scaleEffect glowEffect>
-              <button
-                onClick={openCalendly}
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-convert inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-10 md:py-4 md:text-base"
               >
                 <span className="hidden sm:inline">Beratungsgespräch buchen</span>
                 <span className="sm:hidden">Gespräch buchen</span>
-              </button>
+              </a>
             </MagneticButton>
             <p className="px-4 text-xs text-gray-600 dark:text-text-secondary md:text-sm">
               45 Minuten. Klarheit zu Aufwand, Team-Setup und KI-Potenzialen.

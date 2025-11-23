@@ -1,3 +1,4 @@
+import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/data/faqData'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -322,10 +323,8 @@ const BeratungPage: React.FC = () => {
     [consultingFaqs]
   )
 
-  // Booking CTA now routes über Landing-Page
-  const openCalendly = useCallback(() => {
-    window.open('/contact#booking', '_self')
-  }, [])
+  // Direct Nextcloud booking link for Strategic Advisory
+  const bookingUrl = BOOKING_LINKS.STRATEGIC_ADVISORY
 
   // Smooth scroll to section
   const scrollToProcess = useCallback(() => {
@@ -444,13 +443,15 @@ const BeratungPage: React.FC = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
               <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate">
-                <button
-                  onClick={openCalendly}
+                <a
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-convert flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
                   <Calendar className="h-5 w-5" />
                   Kostenlose Beratung buchen (45 Min)
-                </button>
+                </a>
               </MagneticButton>
 
               <MagneticButton intensity={0.06} className="isolate">
@@ -1018,13 +1019,15 @@ const BeratungPage: React.FC = () => {
               </ul>
 
               <MagneticButton intensity={0.1} scaleEffect glowEffect>
-                <button
-                  onClick={openCalendly}
+                <a
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-convert mt-10 inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
                   <Calendar className="h-5 w-5" />
                   Termin buchen
-                </button>
+                </a>
               </MagneticButton>
 
               <p className="mt-4 text-xs text-text-secondary dark:text-white/60">

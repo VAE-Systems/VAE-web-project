@@ -153,73 +153,52 @@ const caseStudies: CaseStudy[] = [
     id: 'aktiv-kollektiv',
     logo: { src: '/Kollektiv-Logo.svg', alt: 'Aktiv Kollektiv e.V. Logo', invertOnDark: true },
     icon: Users,
-    title: 'Open-Source-Infrastruktur für NGO',
+    title: 'Infrastruktur-Planung & technische Unterstützung',
     organization: 'Aktiv Kollektiv e.V.',
     industry: 'Non-Profit · Vereinsarbeit',
     status: 'Live seit 2025',
     statusVariant: 'live',
     challenge:
-      'Aktiv Kollektiv e.V. arbeitete mit einer fragmentierten Tool-Landschaft: Google Drive, Excel und E-Mail-Threads ohne zentrale Plattform, kein CRM, keine Automatisierung und unklare DSGVO-Compliance. Zusätzlich explodierten die SaaS-Kosten.',
+      'Aktiv Kollektiv e.V. arbeitet aktuell mit einer fragmentierten digitalen Landschaft — ohne zentrale Plattform, ohne strukturiertes Wissensmanagement, ohne skalierbare Kollaborations-Tools.',
     solutionIntro:
-      'Wir haben eine komplette Open-Source-Infrastruktur aufgesetzt, die alle Workflows bündelt, Datenhoheit herstellt und Automatisierung ermöglicht.',
+      'Julian Goertz (Vorstand bei Aktiv Kollektiv e.V.) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur des Vereins — mit Fokus auf Open Source, Self-Hosting und Skalierbarkeit.',
     implementation: [
       {
-        title: 'Nextcloud Hub',
-        items: ['Dateispeicherung & Sharing als Google-Drive-Ersatz', 'Team-Kalender & Kontakte'],
-      },
-      {
-        title: 'Twenty CRM',
-        items: ['Mitgliederverwaltung & Kontakt-Datenbank', 'Mitglieder-Account-Management'],
-      },
-      {
-        title: 'Infrastructure & Operations',
+        title: 'Aktueller Stand',
         items: [
-          'Kundenseitig bereitgestellter Contabo-Server (self-managed)',
-          'Docker-basiertes Deployment & Server Management',
-          'Arbeitsstruktur für Teams & Projekte',
-          'Anhaltende Weiterentwicklung & Skalierung',
+          'Erste Systeme bereits live — Note-Sharing, Kollaboration, Wissensmanagement',
+          'Infrastruktur-Roadmap — Planung für Mitglieder-Accounts, zentrale Datenverwaltung, skalierbare Kommunikationsstrukturen',
         ],
       },
       {
-        title: 'Langfristige Wirkung',
+        title: 'Vision',
         items: [
-          'Blueprint für entstehende Gruppen',
-          'Grundlage für operative Fähigkeit neuer Initiativen',
-          'Dokumentenmanagement & Wissenstransfer',
+          'Die geplante Infrastruktur soll als Blueprint für andere gemeinnützige Initiativen dienen',
+          'Transparent, unabhängig, nachhaltig',
         ],
       },
     ],
     results: [
-      { label: 'Kosten-Reduktion', description: 'Keine monatlichen SaaS-Gebühren mehr – nur planbare Serverkosten.' },
-      { label: 'DSGVO-Compliance', description: '100% Datenhoheit in Deutschland, keine US-Cloud-Transfers.' },
       {
-        label: 'Effizienzsteigerung',
-        description: 'Zentrale Plattform ersetzt fragmentierte Tools – das Team arbeitet spürbar schneller.',
+        label: 'Erste Systeme live',
+        description: 'Note-Sharing, Kollaboration und Wissensmanagement bereits produktiv im Einsatz.',
+      },
+      {
+        label: 'Infrastruktur-Roadmap',
+        description: 'Planung für Mitglieder-Accounts, zentrale Datenverwaltung und skalierbare Kommunikation.',
+      },
+      {
+        label: 'Blueprint-Charakter',
+        description: 'Soll anderen gemeinnützigen Initiativen als transparente, unabhängige Vorlage dienen.',
       },
     ],
-    techStack: [
-      {
-        name: 'Nextcloud',
-        description: 'Self-hosted Collaboration Suite für Files und Kalender.',
-        docsUrl: 'https://nextcloud.com/',
-      },
-      { name: 'Twenty CRM', description: 'CRM für Mitgliederverwaltung.', docsUrl: 'https://twenty.com/' },
-      {
-        name: 'Docker',
-        description: 'Container-Orchestrierung für reproduzierbare Deployments.',
-        docsUrl: 'https://www.docker.com/',
-      },
-      {
-        name: 'PostgreSQL',
-        description: 'Relationale Datenbank für CRM & Automationen.',
-        docsUrl: 'https://www.postgresql.org/',
-      },
-    ],
-    role: 'Julian Goertz ist Vorstand bei Aktiv Kollektiv e.V. und hat die Infrastruktur intern konzipiert und umgesetzt.',
+    techStack: [],
+    role: 'Julian Goertz ist Vorstand bei Aktiv Kollektiv e.V.',
     cta: { label: 'Ähnliches Projekt starten', href: '/services/setup' },
     externalLinks: [
       { label: 'Aktiv Kollektiv auf LinkedIn', href: 'https://www.linkedin.com/company/aktiv-kollektiv/' },
     ],
+    note: 'Konkrete Implementierungsdetails auf Anfrage.',
   },
   {
     id: 'art-affair-qr',

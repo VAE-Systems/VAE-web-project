@@ -105,11 +105,11 @@ const BlogPage: React.FC = () => {
                 </li>
                 <li className="rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
                   <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">
-                    Externer Zugang
+                    Übergangsweise auf Outline
                   </p>
                   <p className="mt-2 text-sm text-gray-700 dark:text-white/70">
-                    Der Blog liegt auf unserer Dokumentationsplattform. Link öffnet in einem neuen Tab, damit Sie hier
-                    bleiben können.
+                    Wir programmieren aktuell an einer eigenen Media-Plattform. Bis dahin nutzen wir Outline für unseren
+                    Blog. Link öffnet in einem neuen Tab.
                   </p>
                 </li>
               </ul>

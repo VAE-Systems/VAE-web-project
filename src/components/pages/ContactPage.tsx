@@ -17,6 +17,7 @@ import Icon from '@/components/ui/Icon'
 import Seo from '@/components/ui/Seo'
 import { MailBuilderTutorialOverlay } from '@/components/ui/tutorial/MailBuilderTutorialOverlay'
 import { ValidationPopup } from '@/components/ui/validation'
+import { BOOKING_LINKS } from '@/config/booking'
 import { contactHero, contactIntro, contactUsps } from '@/content/contact'
 import { useMailBuilderTutorial } from '@/hooks/useMailBuilderTutorial'
 
@@ -436,7 +437,7 @@ const ContactPage: React.FC = () => {
 
             <div className="grid gap-4 md:grid-cols-2">
               <a
-                href="https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz"
+                href={BOOKING_LINKS.ERSTBERATUNG}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
@@ -457,7 +458,7 @@ const ContactPage: React.FC = () => {
               </a>
 
               <a
-                href="https://nc.intern.vae.systems/apps/calendar/appointment/Infra45VAE"
+                href={BOOKING_LINKS.INFRASTRUKTUR_AUDIT}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
@@ -478,7 +479,7 @@ const ContactPage: React.FC = () => {
               </a>
 
               <a
-                href="https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_ADVISORY"
+                href={BOOKING_LINKS.STRATEGIC_ADVISORY}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
@@ -497,7 +498,7 @@ const ContactPage: React.FC = () => {
               </a>
 
               <a
-                href="https://nc.intern.vae.systems/apps/calendar/appointment/PartnerCallVAE"
+                href={BOOKING_LINKS.PARTNERSHIP}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
@@ -518,7 +519,7 @@ const ContactPage: React.FC = () => {
               </a>
 
               <a
-                href="https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_RETAINER"
+                href={BOOKING_LINKS.RETAINER_PLANUNG}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
@@ -537,7 +538,7 @@ const ContactPage: React.FC = () => {
               </a>
 
               <a
-                href="https://nc.intern.vae.systems/apps/calendar/appointment/PLACEHOLDER_WORKSHOP"
+                href={BOOKING_LINKS.WORKSHOP}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"

@@ -16,6 +16,7 @@ import {
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/data/faqData'
 import { flattenedSaasTools, saasToolCategories } from '@/data/saasTools'
 import { useSetupCalculatorTutorial } from '@/hooks/useSetupCalculatorTutorial'
@@ -194,7 +195,7 @@ const processPhases: ProcessPhase[] = [
 //   },
 // ]
 
-const calendlyUrl = '/contact#booking'
+const bookingUrl = BOOKING_LINKS.INFRASTRUKTUR_AUDIT
 const DEFAULT_VAT_RATE = 19
 
 const generateCustomLicenseId = () => `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
@@ -395,9 +396,7 @@ const SetupPage: React.FC = () => {
 
   const maxComparisonValue = Math.max(yearlySaaSCost, openSourceAnnual, 1)
 
-  const openCalendly = useCallback(() => {
-    window.open(calendlyUrl, '_self')
-  }, [])
+  // Direct Nextcloud booking link for Infrastructure Audit
 
   const highlightMonthlyNet = useValueIncreaseHighlight(monthlySaaSCost)
   const highlightYearlyNet = useValueIncreaseHighlight(yearlySaaSCost)
@@ -449,12 +448,14 @@ const SetupPage: React.FC = () => {
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-6 lg:gap-8">
             <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate">
-              <button
-                onClick={openCalendly}
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-convert flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 Kostenloses Erstgespräch buchen
-              </button>
+              </a>
             </MagneticButton>
             <MagneticButton intensity={0.05} scaleEffect className="isolate">
               <button
@@ -1337,13 +1338,15 @@ const SetupPage: React.FC = () => {
           </p>
           <div className="flex flex-col items-center gap-3 md:gap-4">
             <MagneticButton intensity={0.08} scaleEffect glowEffect>
-              <button
-                onClick={openCalendly}
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-convert inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-8 md:py-4 md:text-base"
               >
                 <span className="hidden sm:inline">Kostenloses Erstgespräch buchen</span>
                 <span className="sm:hidden">Erstgespräch buchen</span>
-              </button>
+              </a>
             </MagneticButton>
             <p className="px-4 text-xs text-text-secondary md:text-sm">
               45 Minuten, unverbindlich, kein Verkaufs-Pitch. Binnen 48h Termin verfügbar.

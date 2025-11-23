@@ -7,6 +7,8 @@
  * - Type-safe API to build CTA href + metadata from an ID and optional context
  */
 
+import { BOOKING_LINKS } from './booking'
+
 export type CtaType = 'route' | 'external' | 'mailto'
 
 export interface CtaContext {
@@ -126,12 +128,13 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
       product: ctx => (ctx.product ? String(ctx.product) : undefined),
     },
   },
-  // Direct scheduling (Notion booking link)
+  // Direct scheduling (Nextcloud Erstberatung)
   'contact.schedule_call': {
     id: 'contact.schedule_call',
     type: 'external',
-    url: '/contact#booking',
+    url: BOOKING_LINKS.ERSTBERATUNG,
     label: 'Kostenloses Erstgespräch',
+    newTab: true,
   },
   // Quick email CTA
   'contact.quick_email': {

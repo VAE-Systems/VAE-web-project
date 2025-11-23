@@ -50,6 +50,7 @@ const LeadershipPage = React.lazy(() => import('@components/pages/leadership/Lea
 const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
 const TestphasePage = React.lazy(() => import('@components/pages/TestphasePage'))
 const ProductVaeCorePage = React.lazy(() => import('@components/pages/ProductVaeCorePage'))
+const NotFoundPage = React.lazy(() => import('@components/pages/NotFoundPage'))
 
 // Loading Component
 const LoadingSpinner: React.FC = () => (
@@ -156,6 +157,9 @@ const App: React.FC = () => {
                     <Route path="/privacy" element={<PrivacyPage />} />
                     <Route path="/datenschutz" element={<Navigate to="/privacy" replace />} />
                     <Route path="/privacy/settings" element={<PrivacySettings />} />
+
+                    {/* Catch-all 404 */}
+                    <Route path="*" element={<NotFoundPage />} />
                   </Routes>
                 </Suspense>
               </main>

@@ -371,10 +371,14 @@ export const referenceProjects: ReferenceProject[] = [
   {
     id: 'aktiv-kollektiv',
     client: 'Aktiv Kollektiv e.V.',
-    title: 'Leitung der Open-Source-Infrastruktur',
+    title: 'Infrastruktur-Planung & technische Unterstützung',
     description:
-      'Nextcloud für Zusammenarbeit, Twenty CRM für Mitgliederverwaltung, n8n für Prozess-Automatisierung. Komplettes Setup inkl. Migration und laufende Infrastruktur-Leitung.',
-    highlights: ['Self-hosted auf deutschem Server', 'DSGVO-konform', 'Keine monatlichen SaaS-Gebühren mehr'],
+      'Julian Goertz (Vorstand) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur — mit Fokus auf Open Source, Self-Hosting und Skalierbarkeit.',
+    highlights: [
+      'Erste Systeme bereits live — Note-Sharing, Kollaboration, Wissensmanagement',
+      'Infrastruktur-Roadmap für Mitglieder-Accounts und zentrale Datenverwaltung',
+      'Blueprint für gemeinnützige Initiativen',
+    ],
     status: 'Live',
     badge: 'Live seit 2025',
     logo: '/Kollektiv-Logo.svg',

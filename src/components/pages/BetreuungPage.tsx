@@ -238,8 +238,11 @@ const BetreuungPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-white dark:border-white/5 dark:bg-bg-darker">
-        <div className="container-vae relative flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
+      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-24 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark">
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.10),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]" />
+        </div>
+        <div className="container-vae relative flex min-h-[60vh] flex-col items-center justify-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             MANAGED OPERATIONS
           </span>
@@ -250,16 +253,16 @@ const BetreuungPage: React.FC = () => {
             Wir übernehmen Betrieb, Wartung und Weiterentwicklung Ihrer Informationsinfrastruktur – damit Ihr Team sich
             auf Produkt, Kund:innen und Wachstum konzentrieren kann.
           </p>
-          <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
-            <MagneticButton intensity={0.08} scaleEffect className="w-full sm:w-auto">
+          <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-6 lg:gap-8">
+            <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
               <button
                 onClick={openCalendly}
-                className="btn-primary flex w-full items-center justify-center gap-2 px-8 py-4 text-base"
+                className="btn-convert flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 Service-Level besprechen
               </button>
             </MagneticButton>
-            <MagneticButton intensity={0.05} scaleEffect className="w-full sm:w-auto">
+            <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
               <button
                 onClick={e => {
                   e.preventDefault()
@@ -1015,7 +1018,7 @@ const BetreuungPage: React.FC = () => {
             <MagneticButton intensity={0.1} scaleEffect glowEffect>
               <button
                 onClick={openCalendly}
-                className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-10 md:py-4 md:text-base"
+                className="btn-convert inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-10 md:py-4 md:text-base"
               >
                 <span className="hidden sm:inline">Beratungsgespräch buchen</span>
                 <span className="sm:hidden">Gespräch buchen</span>

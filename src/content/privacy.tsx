@@ -133,12 +133,9 @@ export const privacyContent: PrivacyContent = {
       title: '9. Schriftarten (Fonts)',
       body: (
         <>
-          Derzeit wird die Schriftart „Inter“ & Material Symbols über Google Fonts eingebunden. Dabei wird eine
-          Verbindung zu Servern von Google (Alphabet Inc., USA) aufgebaut. Dadurch können technisch bedingt Ihre
-          IP‑Adresse und Browser‑Metadaten übermittelt werden. Rechtsgrundlage: Berechtigtes Interesse an konsistenter
-          Darstellung (Art. 6 Abs. 1 lit. f). <span className="text-vae-turquoise">Geplante Änderung:</span> Umstellung
-          auf lokale / selbst gehostete Fonts zur Vermeidung externer Requests. Nach Umsetzung wird dieser Abschnitt
-          angepasst.
+          Derzeit werden auf dieser Website verwendete Schriftarten (z. B. „Inter" und „Geist") lokal vom eigenen Server
+          ausgeliefert (Self-Hosted). Es werden keine Verbindungen zu Google-Fonts-Servern oder anderen externen
+          Font-CDNs hergestellt. Sollte sich dies ändern, wird diese Erklärung entsprechend angepasst.
         </>
       ),
     },
@@ -151,6 +148,16 @@ export const privacyContent: PrivacyContent = {
           <span className="text-vae-turquoise">Contabo GmbH (Deutschland)</span>. Mit eingesetzten
           Infrastruktur‑/Hosting‑Anbietern besteht bzw. wird – falls erforderlich – ein Vertrag zur Auftragsverarbeitung
           (AVV) gemäß Art. 28 DSGVO abgeschlossen.
+          <br />
+          <br />
+          <span className="font-medium text-text-light">Externe Inhalte (CDN und Bildquellen)</span>
+          <br />
+          Für einzelne Technologie-Logos und Grafiken binden wir statische Inhalte von Drittanbietern ein (z. B.
+          jsDelivr/CDN, Wikimedia Commons, GitHub). Beim Aufruf der entsprechenden Seiten wird Ihre IP-Adresse technisch
+          bedingt an diese Anbieter übertragen, damit die Inhalte ausgeliefert werden können. Die Nutzung erfolgt auf
+          Grundlage unseres berechtigten Interesses an einer performanten und ansprechenden Darstellung der Website
+          (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen zur Datenverarbeitung finden Sie in den
+          Datenschutzerklärungen der jeweiligen Anbieter.
         </>
       ),
     },

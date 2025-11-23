@@ -4,11 +4,11 @@
  * GDPR-compliant cookie consent banner with category selection
  */
 
-import React, { useState, useEffect } from 'react'
+import Icon from '@/components/ui/Icon'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useConsent } from '../../hooks/useConsent'
 import { COOKIE_CATEGORIES } from '../../types/privacy'
-import Icon from '@/components/ui/Icon'
 
 const CookieBanner: React.FC = () => {
   const { consent, acceptAll, rejectAll, acceptNecessary, updateConsent, hasConsent, isConsentGiven } = useConsent()
@@ -47,7 +47,7 @@ const CookieBanner: React.FC = () => {
             <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
               <div className="flex-1">
                 <h2 id="cookie-banner-title" className="mb-2 text-lg font-semibold text-text-light">
-                  🍪 Cookie-Einstellungen
+                  Cookie-Einstellungen
                 </h2>
                 <p id="cookie-banner-description" className="text-sm leading-relaxed text-text-muted">
                   Wir verwenden Cookies, um Ihre Erfahrung zu verbessern und unsere Services anzubieten. Mit Ihrer

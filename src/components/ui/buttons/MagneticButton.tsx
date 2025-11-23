@@ -80,7 +80,7 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
 
           // Direkte DOM-Manipulation - kein Re-Render
           const translate = `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0)`
-          const scale = scaleEffect && isHovered ? ' scale(1.04)' : ''
+          const scale = scaleEffect && isHovered ? ' scale(1.02)' : ''
           buttonRef.current.style.transform = `${translate}${scale}`
         }
 

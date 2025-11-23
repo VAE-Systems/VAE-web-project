@@ -432,28 +432,31 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="border-b bg-white py-24 dark:border-white/5 dark:bg-bg-dark md:py-28">
+      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-24 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-28">
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
+        </div>
         <div className="container-vae relative flex flex-col items-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             <ServerCog className="h-4 w-4" /> Infrastruktur Design/Setup
           </span>
-          <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-white md:text-5xl">
+          <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
             Eine KI-geprägte Arbeitswelt, in der Sie die Kontrolle behalten.
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-300 md:text-xl">
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-300 md:text-xl">
             Wir entwerfen Ihre Informationsinfrastruktur – das Betriebssystem Ihres Unternehmens. Selbstgehostet, offen
             und so gebaut, dass Sie auch morgen noch flexibel entscheiden können.
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <MagneticButton intensity={0.08} scaleEffect>
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-6 lg:gap-8">
+            <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate">
               <button
                 onClick={openCalendly}
-                className="btn-primary flex items-center justify-center gap-2 px-8 py-4 text-base"
+                className="btn-convert flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 Kostenloses Erstgespräch buchen
               </button>
             </MagneticButton>
-            <MagneticButton intensity={0.05} scaleEffect>
+            <MagneticButton intensity={0.05} scaleEffect className="isolate">
               <button
                 onClick={scrollToROI}
                 className="btn-outline flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
@@ -1297,7 +1300,7 @@ const SetupPage: React.FC = () => {
           <MagneticButton intensity={0.08} scaleEffect glowEffect>
             <a
               href="/leistungen/betreuung"
-              className="btn-primary inline-flex items-center gap-2 px-6 py-3 text-sm md:px-8 md:py-4 md:text-base"
+              className="btn-convert inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold md:px-8 md:py-4 md:text-base"
             >
               <span className="hidden sm:inline">Mehr zur langfristigen Betreuung</span>
               <span className="sm:hidden">Zur Betreuung</span>
@@ -1336,7 +1339,7 @@ const SetupPage: React.FC = () => {
             <MagneticButton intensity={0.08} scaleEffect glowEffect>
               <button
                 onClick={openCalendly}
-                className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-8 md:py-4 md:text-base"
+                className="btn-convert inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-8 md:py-4 md:text-base"
               >
                 <span className="hidden sm:inline">Kostenloses Erstgespräch buchen</span>
                 <span className="sm:hidden">Erstgespräch buchen</span>

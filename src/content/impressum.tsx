@@ -34,7 +34,7 @@ export const impressumContent: ImpressumContent = {
       title: 'Vertretungsberechtigte Geschäftsführer',
       body: (
         <>
-          Julian Darius Dini
+          Julian Darius Goertz Dini
           <br />
           Jakob Dünnebeil
         </>

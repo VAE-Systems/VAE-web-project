@@ -9,7 +9,7 @@ import { useConsent } from '../../hooks/useConsent'
 import { COOKIE_CATEGORIES } from '../../types/privacy'
 
 const PrivacySettings: React.FC = () => {
-  const { consent, updateConsent, resetConsent } = useConsent()
+  const { consent, updateConsent, resetConsent, acceptAll, rejectAll } = useConsent()
   const [activeTab, setActiveTab] = useState<'overview' | 'cookies' | 'data'>('overview')
 
   const handleCategoryToggle = (categoryId: string, enabled: boolean) => {
@@ -78,29 +78,11 @@ const PrivacySettings: React.FC = () => {
             <div className="card-vae">
               <h2 className="mb-4 text-xl font-semibold text-text-light">Schnellaktionen</h2>
               <div className="flex flex-wrap gap-3">
-                <button
-                  onClick={() => {
-                    COOKIE_CATEGORIES.forEach(cat => {
-                      if (!cat.required) {
-                        handleCategoryToggle(cat.id, true)
-                      }
-                    })
-                  }}
-                  className="btn-primary"
-                >
+                <button onClick={acceptAll} className="btn-primary">
                   Alle aktivieren
                 </button>
 
-                <button
-                  onClick={() => {
-                    COOKIE_CATEGORIES.forEach(cat => {
-                      if (!cat.required) {
-                        handleCategoryToggle(cat.id, false)
-                      }
-                    })
-                  }}
-                  className="btn-outline"
-                >
+                <button onClick={rejectAll} className="btn-outline">
                   Alle deaktivieren
                 </button>
 
@@ -178,7 +160,9 @@ const PrivacySettings: React.FC = () => {
                 <div className="border-border-primary rounded-lg border p-4">
                   <h3 className="mb-2 font-medium text-text-light">Cookie-Einwilligung</h3>
                   <p className="mb-2 text-sm text-text-muted">
-                    Ihre Cookie-Einstellungen vom {new Date(consent.timestamp).toLocaleDateString('de-DE')}
+                    {consent.timestamp
+                      ? `Ihre Cookie-Einstellungen vom ${new Date(consent.timestamp).toLocaleDateString('de-DE')}`
+                      : 'Noch keine Cookie-Einstellungen gespeichert'}
                   </p>
                   <div className="text-xs text-text-secondary">Version: {consent.version}</div>
                 </div>
@@ -204,10 +188,18 @@ const PrivacySettings: React.FC = () => {
               </p>
 
               <div className="flex flex-wrap gap-3">
-                <button className="btn-outline">Daten exportieren</button>
-                <button className="border-border-primary rounded-lg border px-4 py-2 text-text-muted transition-colors hover:text-red-400">
+                <a
+                  href="mailto:info@vae.systems?subject=DSGVO%20Anfrage%3A%20Datenexport&body=Sehr%20geehrtes%20VAE%20Systems%20Team%2C%0A%0Ahiermit%20m%C3%B6chte%20ich%20gem%C3%A4%C3%9F%20Art.%2015%20DSGVO%20eine%20Kopie%20aller%20zu%20meiner%20Person%20gespeicherten%20Daten%20anfordern.%0A%0AMeine%20Kontaktdaten%3A%0AName%3A%20%0AE-Mail%3A%20%0A%0AVielen%20Dank%20f%C3%BCr%20die%20Bearbeitung.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen"
+                  className="btn-outline"
+                >
+                  Daten exportieren
+                </a>
+                <a
+                  href="mailto:info@vae.systems?subject=DSGVO%20Anfrage%3A%20Datenl%C3%B6schung&body=Sehr%20geehrtes%20VAE%20Systems%20Team%2C%0A%0Ahiermit%20beantrage%20ich%20gem%C3%A4%C3%9F%20Art.%2017%20DSGVO%20die%20L%C3%B6schung%20aller%20zu%20meiner%20Person%20gespeicherten%20Daten.%0A%0AMeine%20Kontaktdaten%3A%0AName%3A%20%0AE-Mail%3A%20%0A%0AVielen%20Dank%20f%C3%BCr%20die%20Bearbeitung.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen"
+                  className="border-border-primary rounded-lg border px-4 py-2 text-text-muted transition-colors hover:text-red-400"
+                >
                   Alle Daten löschen
-                </button>
+                </a>
               </div>
             </div>
           </div>

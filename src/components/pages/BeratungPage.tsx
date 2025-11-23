@@ -415,16 +415,16 @@ const BeratungPage: React.FC = () => {
       />
 
       {/* ==================== HERO SECTION ==================== */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:from-bg-dark dark:via-[#0e1117] dark:to-bg-dark md:py-40">
+      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
         <div className="pointer-events-none absolute inset-0 opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.35),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(var(--vae-turquoise-rgb),0.18),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.15),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
         </div>
 
         <div className="container-vae relative">
           <div ref={heroRef} className="mx-auto max-w-4xl space-y-8 text-center">
             {/* Tag */}
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-vae-turquoise">
+              <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
                 STRATEGY & TRANSFORMATION
               </span>
             </div>
@@ -442,18 +442,18 @@ const BeratungPage: React.FC = () => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton intensity={0.08} scaleEffect glowEffect>
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
+              <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate">
                 <button
                   onClick={openCalendly}
-                  className="btn-primary flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                  className="btn-convert flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
                   <Calendar className="h-5 w-5" />
                   Kostenlose Beratung buchen (45 Min)
                 </button>
               </MagneticButton>
 
-              <MagneticButton intensity={0.06}>
+              <MagneticButton intensity={0.06} className="isolate">
                 <button
                   onClick={scrollToProcess}
                   className="btn-outline flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
@@ -948,7 +948,7 @@ const BeratungPage: React.FC = () => {
                   <MagneticButton intensity={0.08} scaleEffect glowEffect>
                     <Link
                       to={phase.cta.href}
-                      className="btn-primary group/cta flex w-full items-center justify-center gap-2 text-sm"
+                      className="btn-convert group/cta flex w-full items-center justify-center gap-2 text-sm"
                     >
                       {phase.cta.label}
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
@@ -1020,7 +1020,7 @@ const BeratungPage: React.FC = () => {
               <MagneticButton intensity={0.1} scaleEffect glowEffect>
                 <button
                   onClick={openCalendly}
-                  className="btn-primary mt-10 inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                  className="btn-convert mt-10 inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
                   <Calendar className="h-5 w-5" />
                   Termin buchen

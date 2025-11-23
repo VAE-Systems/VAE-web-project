@@ -238,11 +238,11 @@ const BetreuungPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-24 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark">
+      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
         <div className="pointer-events-none absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.10),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]" />
         </div>
-        <div className="container-vae relative flex min-h-[60vh] flex-col items-center justify-center text-center">
+        <div className="container-vae relative flex flex-col items-center justify-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             MANAGED OPERATIONS
           </span>
@@ -374,17 +374,17 @@ const BetreuungPage: React.FC = () => {
             {/* Erklärender Text */}
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
-                Wir drehen das Verhältnis um: Routineaufgaben wandern zu uns, Ihr Team gewinnt Kapazität für Produkt,
+                Wir drehen das Verhältnis um. Routineaufgaben wandern zu uns, Ihr Team gewinnt Kapazität für Produkt,
                 Kund:innen und strategische Projekte.
               </p>
               <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
-                Die typische IT-Abteilung verbringt den Großteil ihrer Zeit mit Wartung, Patches und Incident-Response –
-                wertvolle Ressourcen, die dem Kerngeschäft fehlen. Mit VAE als Managed-Operations-Partner verschieben
-                Sie diese Last und schaffen Raum für das, was wirklich zählt: Innovation, Kundenerfolg und Wachstum.
+                Die typische IT-Abteilung verbringt den Großteil ihrer Zeit mit Wartung, Patches und Incident-Response.
+                Wertvolle Ressourcen, die dem Kerngeschäft fehlen. Mit VAE als Managed-Operations-Partner verschieben
+                Sie diese Last und schaffen Raum für das, was wirklich zählt – Innovation, Kundenerfolg und Wachstum.
               </p>
               <div className="rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-6">
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Das Ergebnis: Ihr Team fokussiert sich auf Wertschöpfung, nicht auf Firefighting.
+                  Das Ergebnis – Ihr Team fokussiert sich auf Wertschöpfung, nicht auf Firefighting.
                 </p>
               </div>
             </div>
@@ -611,7 +611,6 @@ const BetreuungPage: React.FC = () => {
           </div>
           <div className="mt-16 grid gap-8 md:grid-cols-2">
             {serviceLevels.map(level => {
-              const ctaIntensity = level.highlighted ? 0.09 : 0.05
               return (
                 <div
                   key={level.id}
@@ -678,18 +677,11 @@ const BetreuungPage: React.FC = () => {
                   </div>
 
                   <div className="mt-8 flex flex-col gap-3">
-                    <MagneticButton
-                      intensity={level.highlighted ? 0.15 : ctaIntensity}
-                      scaleEffect
-                      glowEffect={level.highlighted}
-                      className="w-full"
-                    >
+                    <MagneticButton intensity={0.04} scaleEffect={false} glowEffect={false} className="w-full">
                       <button
                         onClick={openCalendly}
                         className={`group relative w-full overflow-hidden rounded-xl px-6 py-3.5 text-sm font-bold transition-all duration-300 ${
-                          level.highlighted
-                            ? 'bg-gradient-to-br from-vae-turquoise via-vae-turquoise/95 to-vae-turquoise/90 text-bg-dark shadow-[0_8px_32px_-8px_rgba(8,255,193,0.5),inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.1)] hover:shadow-[0_12px_40px_-6px_rgba(8,255,193,0.65),inset_0_1px_1px_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(0,0,0,0.15)] dark:shadow-[0_12px_40px_-8px_rgba(8,255,193,0.6),inset_0_2px_2px_rgba(255,255,255,0.3),inset_0_-1px_1px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_16px_50px_-6px_rgba(8,255,193,0.75),inset_0_2px_2px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.25)]'
-                            : 'btn-outline'
+                          level.highlighted ? 'btn-convert' : 'btn-outline'
                         }`}
                       >
                         <span className="relative z-10 flex items-center justify-center gap-2">

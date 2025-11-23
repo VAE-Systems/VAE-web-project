@@ -199,6 +199,7 @@ export interface ServiceOverviewCard {
   id: string
   icon: string
   title: string
+  subtitle?: string
   badge: string
   description: string
   inclusions: string[]
@@ -211,6 +212,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     id: 'beratung',
     icon: 'compass_calibration',
     title: 'Strategieberatung',
+    subtitle: 'Analyse & Fahrplan',
     badge: 'ANALYSE',
     description:
       'Sie wollen Klarheit, bevor Sie Systeme umbauen? Wir analysieren Ihre Situation, bewerten Kosten und Nutzen von SaaS vs. Open Source und entwickeln einen umsetzbaren Fahrplan – inklusive KI-Potenzialen.',
@@ -230,6 +232,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     id: 'setup',
     icon: 'storage',
     title: 'Infrastruktur Design/Setup',
+    subtitle: 'Umsetzung in 3–6 Wochen',
     badge: '3–6 WOCHEN',
     description:
       'Auf Basis der vorhergehenden Strategie-Phase bauen wir Ihre Open-Source-Infrastruktur produktionsbereit in 3–6 Wochen auf – inklusive Migration relevanter Daten und Training für Ihr Team.',
@@ -249,6 +252,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     id: 'betreuung',
     icon: 'support_agent',
     title: 'Langfristige Betreuung',
+    subtitle: 'Betrieb & Optimierung',
     badge: 'KONTINUIERLICH',
     description:
       'Ihre Infrastruktur läuft – wir sorgen dafür, dass sie es bleibt. Updates, Security, Monitoring und KI-Optimierung: Wir sind Ihr IT-Rückgrat, während Ihr Team sich auf Produkt und Kund:innen konzentriert.',

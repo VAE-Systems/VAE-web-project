@@ -1,8 +1,8 @@
-import React from 'react'
 import Icon from '@/components/ui/Icon'
 import { servicesOverviewCards } from '@/content/home'
-import MagneticButton from '../ui/buttons/MagneticButton'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import MagneticButton from '../ui/buttons/MagneticButton'
 
 const ServicesOverviewSection: React.FC = () => {
   return (
@@ -31,13 +31,18 @@ const ServicesOverviewSection: React.FC = () => {
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
                     <Icon name={card.icon} size={22} />
                   </div>
-                  <span className="rounded-full border border-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-text-secondary">
+                  <span className="rounded-full border border-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.3em] text-text-secondary/60">
                     {card.badge}
                   </span>
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-text-light">{card.title}</h3>
-              <p className="mt-2 text-sm text-text-secondary">{card.description}</p>
+              <div className="border-b-2 border-vae-turquoise/30 pb-3 dark:border-vae-turquoise/40">
+                <h3 className="text-2xl font-bold text-text-light">{card.title}</h3>
+                {'subtitle' in card && card.subtitle && (
+                  <p className="mt-1 text-sm font-medium text-text-secondary">{card.subtitle}</p>
+                )}
+              </div>
+              <p className="mt-4 text-sm text-text-secondary">{card.description}</p>
               <div className="mt-5 space-y-3 text-sm text-text-secondary">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Was enthalten</p>
                 <ul className="space-y-1.5">
@@ -66,7 +71,11 @@ const ServicesOverviewSection: React.FC = () => {
                   className="btn-convert flex w-full items-center justify-center gap-2 text-sm font-semibold"
                   aria-label={`${card.title} – Details ansehen`}
                 >
-                  {card.cta.label}
+                  {card.id === 'beratung'
+                    ? 'Mehr zur Strategieberatung'
+                    : card.id === 'setup'
+                      ? 'Setup-Details'
+                      : 'Betreuungs-Details'}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>

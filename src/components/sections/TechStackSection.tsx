@@ -443,8 +443,9 @@ const TechStackSection: React.FC = () => {
             Open Source Systeme & KI-Modelle
           </h2>
           <p ref={subRef} className="mx-auto max-w-2xl text-xl text-text-secondary">
-            Arbeitssysteme, Datenplattformen, Infrastruktur und KI-Frameworks – wir kombinieren Open-Source-Stacks mit
-            modernen Modellen zu einer durchgängigen Toolchain.
+            Wir arbeiten mit einer breiten Palette von Open-Source-Stacks und KI-Modellen. Die Logos geben nur einen
+            Einblick – der konkrete Stack wird gemeinsam mit Ihnen definiert und laufend an technologische und
+            regulatorische Entwicklungen in Ihrer Branche angepasst.
           </p>
         </div>
 
@@ -480,8 +481,10 @@ const TechStackSection: React.FC = () => {
           </div>
 
           <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-            Die Logos zeigen eine Auswahl von Technologien, mit denen wir regelmäßig arbeiten – der konkrete Stack wird
-            immer an Ihre Organisation und Compliance-Anforderungen angepasst.
+            Die dargestellten Technologien sind eine Auswahl und stehen exemplarisch für unser technisches Fundament.
+            Ihre Lösung entsteht aus einer gemeinsamen Bewertung Ihrer Anforderungen, bestehenden Systeme und
+            Compliance-Vorgaben – ergänzt um aktuelle Entwicklungen in Ihrer Branche und im KI- und
+            Open-Source-Ökosystem.
           </p>
         </div>
       </div>

@@ -432,7 +432,7 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-24 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-28">
+      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
         <div className="pointer-events-none absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
         </div>

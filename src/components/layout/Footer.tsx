@@ -31,26 +31,27 @@ const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[
 
 const contactEmail = 'info@vae.systems'
 
-const knowledgeResources = [
-  {
-    title: 'Automation Playbooks',
-    description: 'Architektur-Notizen & Erfahrungsberichte für KI-Automatisierung.',
-    to: '/ressourcen/blog',
-    isExternal: false,
-  },
-  {
-    title: 'FAQ & Troubleshooting',
-    description: 'Antworten auf Integrations- & Betriebsfragen rund um VAE Systeme.',
-    to: '/ressourcen/faq',
-    isExternal: false,
-  },
-  {
-    title: 'LinkedIn Updates',
-    description: 'Produkt-Roadmap, Events und Einblicke direkt vom VAE Team.',
-    to: 'https://www.linkedin.com/company/vae-systems',
-    isExternal: true,
-  },
-] as const
+// Knowledge resources section - reserved for future use
+// const knowledgeResources = [
+//   {
+//     title: 'Automation Playbooks',
+//     description: 'Architektur-Notizen & Erfahrungsberichte für KI-Automatisierung.',
+//     to: '/ressourcen/blog',
+//     isExternal: false,
+//   },
+//   {
+//     title: 'FAQ & Troubleshooting',
+//     description: 'Antworten auf Integrations- & Betriebsfragen rund um VAE Systeme.',
+//     to: '/ressourcen/faq',
+//     isExternal: false,
+//   },
+//   {
+//     title: 'LinkedIn Updates',
+//     description: 'Produkt-Roadmap, Events und Einblicke direkt vom VAE Team.',
+//     to: 'https://www.linkedin.com/company/vae-systems',
+//     isExternal: true,
+//   },
+// ] as const
 
 /**
  * Footer Component

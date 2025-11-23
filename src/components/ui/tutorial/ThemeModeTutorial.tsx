@@ -152,12 +152,12 @@ export const ThemeModeTutorial: React.FC = () => {
             <p className={`text-sm leading-relaxed ${isDark ? 'text-white/90' : 'text-slate-700'}`}>
               {isDark ? (
                 <>
-                  Die Website ist im <strong>Dark Mode</strong>. Du kannst jederzeit zum <strong>Light Mode</strong>{' '}
+                  Die Website ist im <strong>Dark Mode</strong>. Sie können jederzeit zum <strong>Light Mode</strong>{' '}
                   wechseln!
                 </>
               ) : (
                 <>
-                  Die Website ist im <strong>Light Mode</strong>. Du kannst jederzeit zum <strong>Dark Mode</strong>{' '}
+                  Die Website ist im <strong>Light Mode</strong>. Sie können jederzeit zum <strong>Dark Mode</strong>{' '}
                   wechseln!
                 </>
               )}
@@ -171,7 +171,7 @@ export const ThemeModeTutorial: React.FC = () => {
               }`}
             >
               <span className="text-vae-turquoise">↑</span>
-              Klick auf das Icon im Header
+              Klicken Sie auf das Icon im Header
             </div>
           </div>
 

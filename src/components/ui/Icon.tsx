@@ -175,7 +175,9 @@ const MAP: Record<string, IconComponent> = {
   hub: LayoutGrid,
   apps: LayoutGrid,
   category: Shapes,
+  shapes: Shapes,
   widgets: Puzzle,
+  'layout-grid': LayoutGrid,
 
   // People & Social Icons
   handshake: Handshake,
@@ -232,6 +234,7 @@ const MAP: Record<string, IconComponent> = {
   // Creative & Enhancement Icons
   lightbulb: Lightbulb,
   auto_awesome: Sparkles,
+  sparkles: Sparkles,
   tune: SlidersHorizontal,
   design_services: Pencil,
   workspace_premium: Award,

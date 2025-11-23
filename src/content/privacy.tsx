@@ -93,7 +93,7 @@ export const privacyContent: PrivacyContent = {
     },
     {
       id: 'kontaktformular',
-      title: '6. Kontaktformular',
+      title: '6. Kontaktformular & E-Mail-Kontakt',
       body: (
         <>
           Über das Kontaktformular übermittelte Daten werden ausschließlich zur Bearbeitung der Anfrage verwendet.
@@ -101,6 +101,15 @@ export const privacyContent: PrivacyContent = {
           vorvertragliche Kommunikation (Art. 6 Abs. 1 lit. b) oder berechtigtes Interesse (f). Nach Abschluss der
           Bearbeitung werden Anfragen regelmäßig gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten
           entgegenstehen.
+          <br />
+          <br />
+          <span className="font-medium text-text-light">E-Mail-Kontakt (unverschlüsselt)</span>
+          <br />
+          Wenn Sie uns per E-Mail kontaktieren, erfolgt die Übertragung{' '}
+          <span className="text-text-light">unverschlüsselt</span> über das Internet. Obwohl moderne E-Mail-Provider
+          Transportverschlüsselung (TLS) verwenden, kann eine Ende-zu-Ende-Sicherheit nicht garantiert werden. Sensible
+          Informationen (z.B. Passwörter, Zahlungsdaten) sollten nicht per unverschlüsselter E-Mail versendet werden.
+          Für vertrauliche Kommunikation bieten wir auf Anfrage verschlüsselte Kanäle (z.B. PGP, Signal) an.
         </>
       ),
     },
@@ -123,8 +132,19 @@ export const privacyContent: PrivacyContent = {
       body: (
         <>
           Aktuell setzen wir <span className="text-text-light">keine</span> Cookies für Statistik, Marketing oder
-          Profilbildung ein und keinen externen Analysedienst (z.B. Google Analytics, Matomo). Sollte sich dies ändern,
-          wird die Erklärung aktualisiert und – soweit erforderlich – ein Consent‑Banner implementiert.
+          Profilbildung ein und keinen externen Analysedienst (z.B. Google Analytics, Matomo).
+          <br />
+          <br />
+          <span className="font-medium text-text-light">Cookie-Banner & Opt-in-Prinzip</span>
+          <br />
+          Unser Cookie-Banner arbeitet nach dem <span className="text-text-light">Opt-in-Prinzip</span>: Tracking- oder
+          Analyse-Cookies werden erst gesetzt, nachdem Sie ausdrücklich zugestimmt haben. Technisch notwendige Cookies
+          (z.B. Session-Management) sind von dieser Zustimmungspflicht ausgenommen. Sie können Ihre Einwilligung
+          jederzeit widerrufen und Ihre Cookie-Einstellungen unter{' '}
+          <a href="/privacy/settings" className="text-vae-turquoise hover:underline">
+            /privacy/settings
+          </a>{' '}
+          verwalten. Sollten wir zukünftig Tracking-Tools einsetzen, wird diese Erklärung entsprechend aktualisiert.
         </>
       ),
     },
@@ -133,9 +153,37 @@ export const privacyContent: PrivacyContent = {
       title: '9. Schriftarten (Fonts)',
       body: (
         <>
-          Derzeit werden auf dieser Website verwendete Schriftarten (z. B. „Inter" und „Geist") lokal vom eigenen Server
-          ausgeliefert (Self-Hosted). Es werden keine Verbindungen zu Google-Fonts-Servern oder anderen externen
-          Font-CDNs hergestellt. Sollte sich dies ändern, wird diese Erklärung entsprechend angepasst.
+          Wir nutzen eine{' '}
+          <span className="text-text-light">Kombination aus lokal gehosteten Schriftarten und CDN-basierten Fonts</span>
+          :
+          <br />
+          <br />
+          <ul className="ml-6 list-disc space-y-1">
+            <li>
+              <span className="font-medium text-text-light">Self-Hosted Fonts:</span> Primäre Schriftarten (z.B.
+              „Inter", „Geist") werden lokal von unserem Server ausgeliefert. Hierbei findet keine Datenübertragung an
+              Dritte statt.
+            </li>
+            <li>
+              <span className="font-medium text-text-light">CDN-basierte Fonts:</span> Für bestimmte Spezial-Schriften
+              (z.B. Icon-Fonts, Display-Schriften) nutzen wir Content Delivery Networks (CDN) wie Google Fonts oder
+              jsDelivr. Beim Laden dieser Schriften wird Ihre IP-Adresse technisch bedingt an den CDN-Anbieter
+              übertragen. Rechtsgrundlage: berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) an performanter
+              Auslieferung und optimaler Darstellung.
+            </li>
+          </ul>
+          <br />
+          Weitere Informationen zur Datenverarbeitung finden Sie in den Datenschutzerklärungen der jeweiligen
+          CDN-Anbieter (z.B.{' '}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-vae-turquoise hover:underline"
+          >
+            Google Fonts Privacy Policy
+          </a>
+          ).
         </>
       ),
     },
@@ -217,7 +265,7 @@ export const privacyContent: PrivacyContent = {
       ),
     },
   ],
-  updated: 'August 2025',
+  updated: 'November 2025',
 }
 
 export default privacyContent

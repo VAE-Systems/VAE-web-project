@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import { prefersReducedMotion } from '@/utils/motion'
 import {
   ArrowRight,
@@ -25,6 +26,12 @@ import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
 const bookingRoute = '/contact#booking'
+
+const REFERENZEN_BREADCRUMBS = [
+  { label: 'Home', path: '/' },
+  { label: 'Über uns' },
+  { label: 'Referenzen & Case Studies' },
+]
 
 interface Metric {
   label: string
@@ -58,16 +65,18 @@ interface CaseStudy {
   role: string
   cta?: { label: string; href: string }
   externalLinks?: { label: string; href: string }[]
+  note?: string
   icon: React.ElementType
 }
 
-interface ProjectTeaser {
-  id: string
-  icon: React.ElementType
-  title: string
-  description: string
-  status: string
-}
+// ProjectTeaser interface - reserved for future project teasers section
+// interface ProjectTeaser {
+//   id: string
+//   icon: React.ElementType
+//   title: string
+//   description: string
+//   status: string
+// }
 
 interface ExpertiseArea {
   id: string
@@ -164,10 +173,21 @@ const caseStudies: CaseStudy[] = [
       'Julian Goertz (Vorstand bei Aktiv Kollektiv e.V.) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur des Vereins — mit Fokus auf Open Source, Self-Hosting und Skalierbarkeit.',
     implementation: [
       {
+        title: 'Infrastruktur-Aufbau',
+        items: [
+          'Mitgliedermanagement-System für strukturierte Vereinsverwaltung',
+          'Kollaborationsplattform als Fundament für Zusammenarbeit zwischen Gruppen innerhalb des Aktiv Kollektivs',
+          'Note-Sharing, Wissensmanagement und zentrale Datenverwaltung',
+          'Skalierbare Kommunikationsstrukturen für wachsende Teams',
+        ],
+      },
+      {
         title: 'Aktueller Stand',
         items: [
-          'Erste Systeme bereits live — Note-Sharing, Kollaboration, Wissensmanagement',
-          'Infrastruktur-Roadmap — Planung für Mitglieder-Accounts, zentrale Datenverwaltung, skalierbare Kommunikationsstrukturen',
+          'Implementationsphase läuft — Teilimplementationen bereits abgeschlossen',
+          'Erste Systeme produktiv im Einsatz (Kollaboration, Wissensmanagement)',
+          'Stetige Beratung und Adaption von KI in Vereinstätigkeiten geplant',
+          'Infrastruktur-Roadmap für schrittweisen Ausbau definiert',
         ],
       },
       {
@@ -175,21 +195,27 @@ const caseStudies: CaseStudy[] = [
         items: [
           'Die geplante Infrastruktur soll als Blueprint für andere gemeinnützige Initiativen dienen',
           'Transparent, unabhängig, nachhaltig',
+          'KI-gestützte Workflows zur Effizienzsteigerung in Non-Profit-Strukturen',
         ],
       },
     ],
     results: [
       {
-        label: 'Erste Systeme live',
-        description: 'Note-Sharing, Kollaboration und Wissensmanagement bereits produktiv im Einsatz.',
+        label: 'Infrastruktur im Aufbau',
+        description: 'Mitgliedermanagement, Kollaborationsplattform und zentrale Datenverwaltung in Implementierung.',
       },
       {
-        label: 'Infrastruktur-Roadmap',
-        description: 'Planung für Mitglieder-Accounts, zentrale Datenverwaltung und skalierbare Kommunikation.',
+        label: 'Teilsysteme produktiv',
+        description: 'Erste Kollaborations- und Wissensmanagement-Tools bereits live und im aktiven Einsatz.',
+      },
+      {
+        label: 'KI-Integration geplant',
+        description: 'Stetige Beratung und Adaption von KI-Workflows für effizientere Vereinstätigkeiten.',
       },
       {
         label: 'Blueprint-Charakter',
-        description: 'Soll anderen gemeinnützigen Initiativen als transparente, unabhängige Vorlage dienen.',
+        description:
+          'Fundament für Zusammenarbeit von Gruppen — skalierbar, transparent und für Non-Profits reproduzierbar.',
       },
     ],
     techStack: [],
@@ -343,9 +369,10 @@ const caseStudies: CaseStudy[] = [
   },
 ]
 
-const upcomingProjects: ProjectTeaser[] = [
-  // Platzhalter für zukünftige Freigaben; Details werden erst nach Kundenerlaubnis veröffentlicht.
-]
+// Upcoming projects - reserved for future case studies
+// const upcomingProjects: ProjectTeaser[] = [
+//   // Platzhalter für zukünftige Freigaben; Details werden erst nach Kundenerlaubnis veröffentlicht.
+// ]
 
 const expertiseAreas: ExpertiseArea[] = [
   {
@@ -562,6 +589,11 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
               </div>
             </div>
           </div>
+          {study.note && (
+            <div className="mt-4 rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-4 text-center">
+              <p className="text-sm italic text-text-secondary">{study.note}</p>
+            </div>
+          )}
         </ExpandableContent>
       </article>
       {showLogoModal && study.logo && <LogoModal logo={study.logo} onClose={() => setShowLogoModal(false)} />}
@@ -757,7 +789,7 @@ const ReferenzenPage: React.FC = () => {
       name: 'Referenzen & Case Studies | VAE Systems',
       description:
         'Konkrete Open-Source-Infrastrukturen und KI-Workflows, die wir umgesetzt haben: NGOs, Events, interne Best Practices.',
-      url: 'https://www.vae-systems.com/about/referenzen',
+      url: 'https://vae.systems/ressourcen/case-studies',
       hasPart: caseStudyLd,
     }
   }, [])
@@ -770,6 +802,7 @@ const ReferenzenPage: React.FC = () => {
         canonicalPath="/about/referenzen"
         jsonLd={seoJsonLd}
       />
+      <Breadcrumbs items={REFERENZEN_BREADCRUMBS} className="mb-4" />
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker to-bg-dark dark:border-white/5">

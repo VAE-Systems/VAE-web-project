@@ -29,11 +29,9 @@ export const LeadershipCTA: React.FC = () => {
   )
 
   return (
-    <section className="relative overflow-hidden border-t border-black/5 bg-gradient-to-b from-gray-50 via-white to-gray-50 py-24 dark:border-white/5 dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark">
+    <section className="relative overflow-hidden border-t border-black/5 bg-bg-dark py-24 dark:border-white/5">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.15),transparent_65%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.25),transparent_65%)]" />
-        <div className="absolute -left-32 bottom-0 h-64 w-64 rounded-full bg-vae-turquoise/10 blur-3xl dark:bg-vae-turquoise/20" />
-        <div className="bg-emerald-400/8 absolute -right-20 top-12 h-60 w-60 rounded-full blur-3xl dark:bg-emerald-400/15" />
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.08),transparent_70%)]" />
       </div>
 
       <div className="container-vae relative grid gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
@@ -61,7 +59,7 @@ export const LeadershipCTA: React.FC = () => {
             </MagneticButton>
             <MagneticButton intensity={0.06} className="w-full sm:w-auto">
               <Link
-                to="/about/referenzen"
+                to="/ueber-uns/referenzen"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 px-6 py-3 text-sm font-semibold text-text-muted transition-colors duration-200 hover:border-vae-turquoise/60 hover:text-text-light"
               >
                 Case Studies ansehen

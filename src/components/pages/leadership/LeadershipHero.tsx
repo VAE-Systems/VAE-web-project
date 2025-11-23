@@ -5,11 +5,9 @@ export const LeadershipHero: React.FC = () => {
   const bodyParagraphs = useMemo(() => HERO_CONTENT.body.split(' — ').map(chunk => chunk.trim()), [])
 
   return (
-    <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-darker/95 to-bg-dark py-28 text-text-light dark:border-white/5">
+    <section className="relative overflow-hidden border-b border-black/5 bg-bg-darker py-28 text-text-light dark:border-white/5">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.22),transparent_60%),radial-gradient(circle_at_70%_40%,rgba(var(--color-vae-turquoise-rgb),0.15),transparent_70%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(130deg,rgba(255,255,255,0.09)_0%,transparent_55%)] mix-blend-screen" />
-        <div className="absolute -right-16 top-24 h-64 w-64 rounded-full bg-vae-turquoise/25 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.15),transparent_65%)]" />
       </div>
 
       <div className="container-vae relative">

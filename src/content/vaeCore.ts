@@ -256,7 +256,7 @@ export const vaeCoreContent = {
           { text: 'Kostenloses Vorgespräch', href: '/contact?intent=advisory', style: 'primary' },
           { text: 'GitHub Repository', href: 'https://github.com/vae-systems/vae-core', style: 'secondary' },
         ],
-        secondary_info: 'Direkter Kontakt: core@vae-systems.com',
+        secondary_info: 'Direkter Kontakt: core@vae.systems',
       },
     },
     builders: {
@@ -444,7 +444,7 @@ export const vaeCoreContent = {
           { text: 'Demo buchen', href: '/contact?intent=demo', style: 'primary' },
           { text: 'GitHub Repository', href: 'https://github.com/vae-systems/vae-core', style: 'secondary' },
         ],
-        secondary_info: 'Fragen? core@vae-systems.com',
+        secondary_info: 'Fragen? core@vae.systems',
       },
     },
     agencies: {
@@ -611,7 +611,7 @@ export const vaeCoreContent = {
           { text: 'Partner‑Programm anfragen', href: '/contact?intent=partner', style: 'primary' },
           { text: 'GitHub Repository', href: 'https://github.com/vae-systems/vae-core', style: 'secondary' },
         ],
-        secondary_info: 'Kontakt: partners@vae-systems.com',
+        secondary_info: 'Kontakt: partners@vae.systems',
       },
     },
     oss: {

@@ -408,9 +408,30 @@ const BeratungPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-gray-900 dark:bg-[hsl(0,0%,4%)] dark:text-[hsl(0,0%,95%)]">
       <Seo
-        title="Strategische Beratung | VAE Systems"
+        title="KI-Strategieberatung Heidelberg | VAE Systems"
         description="Strategieberatung für digitale Transformation: KI-Strategie, Digitalisierung, Prozessautomatisierung. Kostenlose Erstanalyse zur digitalen Souveränität."
-        canonicalPath="/services/beratung"
+        canonicalPath="/leistungen/strategie"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          serviceType: 'KI-Strategieberatung',
+          provider: {
+            '@type': 'Organization',
+            name: 'VAE Systems UG',
+            url: 'https://vae.systems',
+          },
+          areaServed: {
+            '@type': 'Place',
+            name: 'Deutschland',
+          },
+          description: 'Individuelle KI-Roadmaps und Digitalisierungsstrategien für Unternehmen',
+          offers: {
+            '@type': 'Offer',
+            url: 'https://vae.systems/leistungen/strategie',
+            priceCurrency: 'EUR',
+            price: 'auf Anfrage',
+          },
+        }}
       />
 
       {/* ==================== HERO SECTION ==================== */}
@@ -441,23 +462,23 @@ const BeratungPage: React.FC = () => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
-              <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate">
+            <div className="flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
+              <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
                 <a
                   href={bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-convert flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                  className="btn-convert flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
-                  <Calendar className="h-5 w-5" />
+                  <Calendar className="h-5 w-5 flex-shrink-0" />
                   Kostenlose Beratung buchen (45 Min)
                 </a>
               </MagneticButton>
 
-              <MagneticButton intensity={0.06} className="isolate">
+              <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
                 <button
                   onClick={scrollToProcess}
-                  className="btn-outline flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                  className="btn-outline flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
                   Prozess ansehen
                   <ChevronDown className="h-5 w-5" />

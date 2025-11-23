@@ -59,8 +59,8 @@ export interface BuiltCta {
 }
 
 // Central business email — adjust once, used everywhere
-// Prefer kontakt@vae-systems.com (unify domain references)
-const BUSINESS_EMAIL = 'kontakt@vae-systems.com'
+// Prefer zentrale Kontaktadresse
+const BUSINESS_EMAIL = 'info@vae.systems'
 
 // Utility: simple template interpolation with {{var}} syntax
 const interpolate = (tpl: string, ctx: CtaContext = {}): string =>

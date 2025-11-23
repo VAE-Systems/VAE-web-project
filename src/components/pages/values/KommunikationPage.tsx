@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Seo from '@/components/ui/Seo'
 import { ArrowRight, MessageSquare } from 'lucide-react'
@@ -58,6 +59,12 @@ const EXAMPLES = [
   },
 ]
 
+const KOMMUNIKATION_BREADCRUMBS = [
+  { label: 'Home', path: '/' },
+  { label: 'Wissen' },
+  { label: 'Kommunikation', path: '/wissen/klare-projektkommunikation' },
+]
+
 const KommunikationPage: React.FC = () => {
   return (
     <div className="bg-bg-darker text-text-light">
@@ -66,6 +73,7 @@ const KommunikationPage: React.FC = () => {
         description="Wie VAE Systems Projektkommunikation strukturiert: Stakeholder-Updates, frühzeitige Warnungen und zielgruppen-gerechte Formate."
         canonicalPath="/wissen/klare-projektkommunikation"
       />
+      <Breadcrumbs items={KOMMUNIKATION_BREADCRUMBS} className="mb-4" />
 
       <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 dark:border-white/5">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -205,9 +213,14 @@ const KommunikationPage: React.FC = () => {
             und Missverständnisse vermeiden können.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
-            <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">
+            <a
+              href="https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+            >
               <ArrowRight className="h-4 w-4" /> Erstgespräch buchen
-            </Link>
+            </a>
           </MagneticButton>
         </div>
       </section>

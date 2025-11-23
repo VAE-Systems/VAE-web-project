@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 /**
  * ScrollProgress
@@ -8,6 +8,10 @@ import React, { useEffect, useState } from 'react'
  */
 const ScrollProgress: React.FC = () => {
   const [progress, setProgress] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const trackWidthClass = isDragging || isHovering ? 'w-[12px] md:w-[14px]' : 'w-[8px] md:w-[10px]'
 
   useEffect(() => {
     const calc = () => {
@@ -19,7 +23,7 @@ const ScrollProgress: React.FC = () => {
 
     let ticking = false
     const onScroll = () => {
-      if (ticking) return
+      if (ticking || isDragging) return
       ticking = true
       requestAnimationFrame(() => {
         calc()
@@ -34,13 +38,63 @@ const ScrollProgress: React.FC = () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', calc)
     }
-  }, [])
+  }, [isDragging])
+
+  const handlePointer = (clientY: number) => {
+    const track = trackRef.current
+    if (!track) return
+    const rect = track.getBoundingClientRect()
+    const ratio = Math.min(1, Math.max(0, (clientY - rect.top) / rect.height))
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight
+    const targetScroll = docHeight * ratio
+    window.scrollTo({ top: targetScroll, behavior: 'auto' })
+    setProgress(ratio)
+  }
+
+  useEffect(() => {
+    if (!isDragging) return
+    const handleMove = (event: PointerEvent) => {
+      event.preventDefault()
+      handlePointer(event.clientY)
+    }
+    const handleUp = () => {
+      setIsDragging(false)
+      window.removeEventListener('pointermove', handleMove)
+      window.removeEventListener('pointerup', handleUp)
+    }
+    window.addEventListener('pointermove', handleMove)
+    window.addEventListener('pointerup', handleUp)
+    return () => {
+      window.removeEventListener('pointermove', handleMove)
+      window.removeEventListener('pointerup', handleUp)
+    }
+  }, [isDragging])
 
   const pct = Math.round(progress * 100)
 
   return (
-    <div className="fixed right-4 top-1/2 z-40 -translate-y-1/2 select-none" aria-label={`Scroll Fortschritt ${pct}%`}>
-      <div className="bg-bg-primary/8 dark:bg-white/8 border-border-primary/15 relative h-[340px] w-2 overflow-hidden rounded-full border backdrop-blur-sm dark:border-white/15">
+    <div
+      className="fixed right-3 top-1/2 z-40 -translate-y-1/2 select-none pr-1 md:right-4 md:pr-0"
+      aria-label={`Scroll Fortschritt ${pct}%`}
+    >
+      <div
+        ref={trackRef}
+        className={`bg-bg-primary/8 dark:bg-white/8 border-border-primary/15 group/track relative h-[320px] overflow-hidden rounded-full border backdrop-blur-sm transition-all duration-200 ${trackWidthClass} hover:scale-[1.03] active:scale-[1.04] dark:border-white/15`}
+        role="slider"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={pct}
+        onPointerDown={event => {
+          event.preventDefault()
+          setIsDragging(true)
+          handlePointer(event.clientY)
+        }}
+        onPointerEnter={() => setIsHovering(true)}
+        onPointerLeave={() => setIsHovering(false)}
+        onBlur={() => setIsHovering(false)}
+        onFocus={() => setIsHovering(true)}
+        style={{ touchAction: 'none' }}
+      >
         {/* Track subtle glow */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)] opacity-40" />
         {/* Fill (top -> down) */}
@@ -48,18 +102,16 @@ const ScrollProgress: React.FC = () => {
           className="absolute left-0 top-0 w-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise/80 to-vae-turquoise-dark shadow-[0_0_8px_-2px_rgba(var(--vae-turquoise-rgb),0.6)] transition-[height] duration-150 ease-out [height:var(--progress)]"
           style={{ '--progress': `${pct}%` } as React.CSSProperties}
         />
-        {/* Circular badge (static) */}
-        <div className="absolute -left-20 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3">
-          <div
-            className="relative h-16 w-16 rounded-full border border-vae-turquoise/40 bg-[conic-gradient(rgba(var(--vae-turquoise-rgb),0.85)_var(--pct),rgba(255,255,255,0.07)_var(--pct)_100%),radial-gradient(circle_at_30%_30%,rgba(var(--vae-turquoise-rgb),0.4),rgba(var(--vae-turquoise-rgb),0.05))] p-[3px] shadow-[0_0_18px_-4px_rgba(var(--vae-turquoise-rgb),0.6)] backdrop-blur-md"
-            style={{ '--pct': `${pct}%` } as React.CSSProperties}
-          >
-            <div className="absolute inset-[4px] flex items-center justify-center rounded-full bg-[linear-gradient(145deg,rgba(8,24,22,0.9),rgba(6,18,16,0.65))] text-sm font-semibold tracking-wide text-vae-turquoise">
-              {pct}%
-            </div>
-          </div>
-          <span className="select-none text-[10px] font-medium uppercase tracking-wider text-text-muted">Progress</span>
+        {/* Drag handle */}
+        <div
+          className={`absolute left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-vae-turquoise/50 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark shadow-[0_8px_20px_rgba(8,255,193,0.35)] transition-transform duration-150 ${
+            isDragging || isHovering ? 'scale-110' : ''
+          }`}
+          style={{ top: `${pct}%` }}
+        >
+          <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-[2px]" />
         </div>
+        {/* Dynamic island-style bubble */}
       </div>
     </div>
   )

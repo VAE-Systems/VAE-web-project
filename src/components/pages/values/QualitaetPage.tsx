@@ -1,8 +1,15 @@
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Seo from '@/components/ui/Seo'
 import { ArrowRight, Award } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+
+const QUALITAET_BREADCRUMBS = [
+  { label: 'Home', path: '/' },
+  { label: 'Wissen' },
+  { label: 'Qualität', path: '/wissen/handwerkskunst-statt-schnellschuss' },
+]
 
 const PRINCIPLES = [
   {
@@ -66,6 +73,7 @@ const QualitaetPage: React.FC = () => {
         description="Wie VAE Systems Qualität liefert: saubere Architektur, automatisierte Tests und langfristig wartbare Systeme."
         canonicalPath="/wissen/handwerkskunst-statt-schnellschuss"
       />
+      <Breadcrumbs items={QUALITAET_BREADCRUMBS} className="mb-4" />
 
       <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 dark:border-white/5">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -204,9 +212,14 @@ const QualitaetPage: React.FC = () => {
             Architektur, automatisierte Tests und klare Prozesse.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
-            <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">
+            <a
+              href="https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+            >
               <ArrowRight className="h-4 w-4" /> Erstgespräch buchen
-            </Link>
+            </a>
           </MagneticButton>
         </div>
       </section>

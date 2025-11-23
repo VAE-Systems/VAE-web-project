@@ -84,7 +84,7 @@ const serviceCards: ServiceCard[] = [
   {
     icon: SlidersHorizontal,
     title: 'Anpassungen',
-    description: 'Workflows, Automationen und Rollenmodelle, exakt passend zu euren Prozessen.',
+    description: 'Workflows, Automationen und Rollenmodelle, exakt passend zu Ihren Prozessen.',
   },
   {
     icon: Users,
@@ -94,7 +94,8 @@ const serviceCards: ServiceCard[] = [
   {
     icon: BookOpen,
     title: 'Dokumentation',
-    description: 'Systemarchitektur, Admin-Runbooks, User-Guides und Troubleshooting – sauber dokumentiert.',
+    description:
+      'Systemarchitektur, Admin-Runbooks (Betriebshandbuch), User-Guides und Troubleshooting – sauber dokumentiert.',
   },
   {
     icon: ShieldCheck,
@@ -128,7 +129,7 @@ const processPhases: ProcessPhase[] = [
       '→ Server-Aufbau (Container-Umgebung, Reverse Proxy, TLS-Konfiguration)',
       '→ Einrichtung der Kernsysteme (Dateien, Kollaboration, Business-Systeme, Automationen)',
       '→ Integration in bestehende Tools und Datenflüsse',
-      '→ Einrichtung einer Staging- / Test-Umgebung',
+      '→ Einrichtung einer Staging- / Test-Umgebung (abgesicherter Testbetrieb)',
     ],
   },
   {
@@ -425,9 +426,31 @@ const SetupPage: React.FC = () => {
   return (
     <div className="bg-bg-darker text-text-light">
       <Seo
-        title="Infrastructure Setup – Open-Source-Betriebsumgebung in 3–6 Wochen | VAE"
-        description="Technische Umsetzung nach strategischer Beratung: Wir ersetzen Ihre SaaS-Landschaft durch produktionsreife Open-Source-Infrastruktur. Nextcloud, Odoo, n8n – inklusive Migration, Security und Dokumentation."
-        canonicalPath="/services/setup"
+        title="Infrastruktur-Setup Heidelberg | VAE Systems"
+        description="Open-Source-Infrastruktur statt SaaS: Nextcloud, Odoo, n8n aufbauen. Migration, Security & Dokumentation inklusive. Heidelberg & deutschlandweit."
+        canonicalPath="/leistungen/infrastruktur"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          serviceType: 'Infrastruktur-Setup',
+          provider: {
+            '@type': 'Organization',
+            name: 'VAE Systems UG',
+            url: 'https://vae.systems',
+          },
+          areaServed: {
+            '@type': 'Place',
+            name: 'Deutschland',
+          },
+          description:
+            'Open-Source-Infrastruktur aufbauen: CRM, Projektmanagement, Kommunikation. Migration & Security inklusive.',
+          offers: {
+            '@type': 'Offer',
+            url: 'https://vae.systems/leistungen/infrastruktur',
+            priceCurrency: 'EUR',
+            price: 'auf Anfrage',
+          },
+        }}
       />
 
       {/* Hero */}
@@ -446,21 +469,21 @@ const SetupPage: React.FC = () => {
             Wir entwerfen Ihre Informationsinfrastruktur – das Betriebssystem Ihres Unternehmens. Selbstgehostet, offen
             und so gebaut, dass Sie auch morgen noch flexibel entscheiden können.
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-6 lg:gap-8">
-            <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate">
+          <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-6 lg:gap-8">
+            <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
               <a
                 href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-convert flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                className="btn-convert flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 Kostenloses Erstgespräch buchen
               </a>
             </MagneticButton>
-            <MagneticButton intensity={0.05} scaleEffect className="isolate">
+            <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
               <button
                 onClick={scrollToROI}
-                className="btn-outline flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                className="btn-outline flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 ROI-Rechner ansehen ↓
               </button>
@@ -571,27 +594,23 @@ const SetupPage: React.FC = () => {
               Was bedeutet Infrastructure-Design bei VAE?
             </h2>
             <p className="text-lg text-gray-700 dark:text-text-secondary">
-              Statt weitere KI-Tools einfach oben drauf zu setzen, schaffen wir ein stabiles Zusammenspiel aus Systemen,
-              Datenflüssen und Workflows, auf dem Ihre Entscheidungen und Automatisierungen sicher laufen.
+              Statt weitere KI-Tools auf eine wackelige Basis zu setzen, schaffen wir ein stabiles Fundament.
             </p>
             <p className="text-base text-gray-700 dark:text-text-secondary">
-              Bei VAE entwickeln wir Ihre Informationsinfrastruktur – also die Arbeitsumgebung, in der Daten, Workflows
-              und Systeme so zusammenspielen, dass Sie Entscheidungen treffen, Prozesse steuern und KI sinnvoll
-              einsetzen können.
+              Bei VAE bauen wir Ihre Informationsinfrastruktur so, dass Daten, Workflows und Systeme zusammenarbeiten —
+              nicht gegeneinander.
             </p>
             <p className="text-base text-gray-700 dark:text-text-secondary">
-              In vielen Organisationen ist eine gewachsene SaaS-Landschaft entstanden: verstreute Daten, harte
-              Abhängigkeiten von einzelnen Anbietern und wenig Überblick über Risiken.
+              Viele Organisationen haben eine gewachsene SaaS-Landschaft: verstreute Daten, Abhängigkeiten von
+              Anbietern, wenig Überblick.
             </p>
             <p className="text-base text-gray-700 dark:text-text-secondary">
-              In dieser Situation weitere Tools und KI-Dienste oben draufzusetzen, erhöht zwar das Tempo – aber selten
-              die Kontrolle.
+              Weitere Tools oben draufzusetzen erhöht das Tempo — aber nicht die Kontrolle.
             </p>
             <p className="text-base text-gray-700 dark:text-text-secondary">
-              Unser Ansatz: Wir analysieren Ihre bestehende Landschaft, skizzieren eine schnittstellenoptimierte,
-              möglichst vendor-neutrale Architektur und setzen sie mit ausgewählten Open-Source-Systemen um. Dazu
-              gehören Migration, Konfiguration, Dokumentation und Schulung Ihres Teams – am Ende steht ein
-              produzierbares Setup, kein Foliensatz.
+              Unser Ansatz: Wir analysieren Ihre Landschaft, entwerfen eine vendor-neutrale Architektur und setzen sie
+              mit Open-Source-Systemen um. Migration, Konfiguration, Dokumentation, Team-Schulung inklusive. Am Ende
+              steht ein funktionierendes System — kein Foliensatz.
             </p>
 
             {/* Abgrenzungs-Box zur Strategieberatung */}
@@ -696,6 +715,50 @@ const SetupPage: React.FC = () => {
               <p className="text-sm text-text-secondary">Security, Backups, Monitoring inklusive</p>
             </div>
           </div>
+
+          {/* Infrastructure Images */}
+          <div className="mx-auto mt-16 max-w-5xl">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
+                <picture>
+                  <source
+                    srcSet="/images/optimized/Bild-von-Login-Screen-in-die-VAE-Cloud-als-Beispiel-für-Infrastruktur.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/images/optimized/Bild-von-Login-Screen-in-die-VAE-Cloud-als-Beispiel-für-Infrastruktur.webp"
+                    alt="Login-Screen der VAE-Cloud: Moderne Infrastruktur mit Single-Sign-On"
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                    width={1600}
+                    height={1067}
+                    sizes="(min-width: 768px) 40vw, 90vw"
+                  />
+                </picture>
+              </div>
+
+              <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
+                <picture>
+                  <source
+                    srcSet="/images/optimized/Bild-von-OpenProject-Ticketing-Software-2-bester-blick.jpg"
+                    type="image/jpeg"
+                  />
+                  <img
+                    src="/images/optimized/Bild-von-OpenProject-Ticketing-Software-2-bester-blick.jpg"
+                    alt="OpenProject Ticketing-System: Projektmanagement und Aufgabenverwaltung"
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                    width={1600}
+                    height={1067}
+                    sizes="(min-width: 768px) 40vw, 90vw"
+                  />
+                </picture>
+              </div>
+            </div>
+            <p className="mt-6 text-center text-sm leading-relaxed text-text-secondary">
+              Ihre Infrastruktur – produktionsreif, sicher und vollständig unter Ihrer Kontrolle.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -731,7 +794,7 @@ const SetupPage: React.FC = () => {
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
                   <span className="text-sm text-gray-700 dark:text-text-secondary">
-                    Vollständige Dokumentation & Runbooks
+                    Vollständige Dokumentation & Runbooks (Betriebshandbuch)
                   </span>
                 </li>
                 <li className="flex items-start gap-3">

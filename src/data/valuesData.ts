@@ -176,5 +176,5 @@ export const CTA = {
   heading: 'Lassen Sie uns zusammenarbeiten',
   copy: 'Diese Werte sind keine Floskeln – sie sind unser Arbeitsalltag. Wenn das zu Ihrer Vorstellung von Technologiepartnerschaft passt, sprechen wir darüber.',
   text: 'Kostenloses Erstgespräch vereinbaren',
-  href: '/kontakt',
+  href: '/contact',
 }

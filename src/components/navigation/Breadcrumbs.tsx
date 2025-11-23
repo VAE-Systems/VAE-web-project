@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom'
 export interface BreadcrumbItem {
   /** Visible label for the breadcrumb entry */
   label: string
-  /** Target path; final item uses this only as key */
-  path: string
+  /** Target path; optional for current/last item */
+  path?: string
 }
 
 interface BreadcrumbsProps {
@@ -58,13 +58,15 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, currentStep
               <span className="font-medium text-text-light" aria-current="page">
                 {item.label}
               </span>
-            ) : (
+            ) : item.path ? (
               <Link
                 to={item.path}
                 className="text-vae-turquoise transition-all duration-200 hover:text-vae-turquoise/80 hover:underline"
               >
                 {item.label}
               </Link>
+            ) : (
+              <span className="text-text-secondary">{item.label}</span>
             )}
           </li>
         ))}

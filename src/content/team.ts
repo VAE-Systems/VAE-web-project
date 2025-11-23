@@ -21,7 +21,7 @@ export const teamMembers: TeamMember[] = [
     experience: '2+ Jahre Open-Source Business Infrastructure',
     education: 'Informatik & VWL, Universität Heidelberg',
     image: '/images/team/julian.jpg',
-    email: 'juliandini@vae-systems.com',
+    email: 'juliangoertz@vae.systems',
     linkedin: 'https://www.linkedin.com/in/julian-darius-goertz-dini-8a716a277',
   },
   {
@@ -33,7 +33,7 @@ export const teamMembers: TeamMember[] = [
     experience: 'Enterprise Open-Source Implementation',
     education: 'Technischer Hintergrund',
     image: '/images/team/jakob.jpg',
-    email: 'jakobduennebeil@vae-systems.com',
+    email: 'jakobduennebeil@vae.systems',
     linkedin: 'https://www.linkedin.com/in/jakob-d%C3%BCnnebeil-54b25936b/',
   },
 ]

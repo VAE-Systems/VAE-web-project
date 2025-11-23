@@ -88,11 +88,11 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
           <div className="space-y-5">
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
-                to="/testphase"
+                to="/leistungen/strategie"
                 className="btn-primary flex flex-1 items-center justify-center text-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
               >
                 <Icon name="auto_awesome" className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
-                3-Monate Testphase starten
+                Mehr zur Strategieberatung
               </Link>
               <CtaLink
                 ctaId="contact.schedule_call"
@@ -117,7 +117,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
             </div>
             <div className="flex flex-wrap justify-center gap-2">
               <Link
-                to="/infrastruktur"
+                to="/leistungen/infrastruktur"
                 className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
               >
                 Infrastruktur Setup
@@ -129,16 +129,12 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                 AI-Workflows
               </Link>
               <Link
-                to="/betreuung"
+                to="/leistungen/betreuung"
                 className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
               >
                 Betreuung & Ausbau
               </Link>
             </div>
-            <p className="mx-auto max-w-md text-[11px] leading-relaxed text-text-muted/80">
-              Testphase: <span className="font-medium text-text-secondary">€89/Monat</span> für die reinen Serverkosten.
-              Danach frei wählbar: Vollservice für €289/Monat oder kostenfrei beenden.
-            </p>
           </div>
         </div>
       </div>

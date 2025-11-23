@@ -48,7 +48,6 @@ const QualitaetPage = React.lazy(() => import('@/components/pages/values/Qualita
 const SkalierbarkeitPage = React.lazy(() => import('@/components/pages/values/SkalierbarkeitPage'))
 const LeadershipPage = React.lazy(() => import('@components/pages/leadership/LeadershipPage'))
 const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
-const TestphasePage = React.lazy(() => import('@components/pages/TestphasePage'))
 const ProductVaeCorePage = React.lazy(() => import('@components/pages/ProductVaeCorePage'))
 const NotFoundPage = React.lazy(() => import('@components/pages/NotFoundPage'))
 
@@ -96,7 +95,12 @@ const App: React.FC = () => {
     <ErrorBoundary>
       <ThemeProvider>
         <HelpModeProvider>
-          <Router>
+          <Router
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true,
+            }}
+          >
             <ScrollToTop />
             <div className="min-h-[100dvh] bg-bg-darker text-text-light">
               <SkipToContent />
@@ -109,9 +113,6 @@ const App: React.FC = () => {
                   <Routes>
                     {/* Homepage */}
                     <Route path="/" element={<HomePage />} />
-
-                    {/* Testphase */}
-                    <Route path="/testphase" element={<TestphasePage />} />
 
                     {/* Products */}
                     <Route path="/vae-core" element={<ProductVaeCorePage />} />

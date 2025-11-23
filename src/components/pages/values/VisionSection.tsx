@@ -7,10 +7,10 @@ import React, { useEffect, useRef } from 'react'
 gsap.registerPlugin(ScrollTrigger)
 
 const visionIcons = [
-  { name: 'shapes', label: 'Digitale Souveränität' },
+  { name: 'shield', label: 'Digitale Souveränität' },
   { name: 'handshake', label: 'Partnerschaften' },
-  { name: 'layout-grid', label: 'Modulare Infrastruktur' },
-  { name: 'sparkles', label: 'Innovation' },
+  { name: 'layers', label: 'Modulare Infrastruktur' },
+  { name: 'lightbulb', label: 'Innovation' },
 ]
 
 export const VisionSection: React.FC = () => {

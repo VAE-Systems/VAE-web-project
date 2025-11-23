@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import { CTASection } from '@/components/pages/values/CTASection'
 import { ValueSection } from '@/components/pages/values/ValueSection'
 import { VisionSection } from '@/components/pages/values/VisionSection'
@@ -5,6 +6,12 @@ import Icon from '@/components/ui/Icon'
 import Seo from '@/components/ui/Seo'
 import { HERO_COPY, VALUES_DATA } from '@/data/valuesData'
 import React from 'react'
+
+const VALUES_BREADCRUMBS = [
+  { label: 'Home', path: '/' },
+  { label: 'Über uns' },
+  { label: 'Werte', path: '/ueber-uns/werte' },
+]
 
 const ValuesPage: React.FC = () => {
   const jsonLd = {
@@ -30,6 +37,7 @@ const ValuesPage: React.FC = () => {
         canonicalPath="/ueber-uns/werte"
         jsonLd={jsonLd}
       />
+      <Breadcrumbs items={VALUES_BREADCRUMBS} className="mb-4" />
 
       {/* Hero - Konsistentes Design wie Referenzen-Seite */}
       <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker to-bg-dark dark:border-white/5">

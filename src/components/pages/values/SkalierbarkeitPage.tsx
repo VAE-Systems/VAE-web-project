@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Seo from '@/components/ui/Seo'
 import { ArrowRight, TrendingUp } from 'lucide-react'
@@ -17,6 +18,12 @@ const PRINCIPLES = [
     title: 'Observability ab Tag 1',
     body: 'Monitoring, Alerting und Lasttests starten mit dem ersten Deploy. So sehen Sie Engpässe, bevor sie zum Problem werden.',
   },
+]
+
+const SKALIERBARKEIT_BREADCRUMBS = [
+  { label: 'Home', path: '/' },
+  { label: 'Wissen' },
+  { label: 'Skalierbarkeit', path: '/wissen/skalierbare-architektur' },
 ]
 
 const PROCESS_STEPS = [
@@ -66,6 +73,7 @@ const SkalierbarkeitPage: React.FC = () => {
         description="Wie VAE Systems skalierbare Systeme plant: Cloud-native Patterns, Observability ab Tag 1 und zukunftssichere Architektur."
         canonicalPath="/wissen/skalierbare-architektur"
       />
+      <Breadcrumbs items={SKALIERBARKEIT_BREADCRUMBS} className="mb-2" />
 
       <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 dark:border-white/5">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -106,7 +114,7 @@ const SkalierbarkeitPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Kapazitätsplanung orientiert sich an deinen Drei- bis Fünf-Jahres-Zielen</span>
+                <span>Kapazitätsplanung orientiert sich an Ihren Drei- bis Fünf-Jahres-Zielen</span>
               </li>
               <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
@@ -203,9 +211,14 @@ const SkalierbarkeitPage: React.FC = () => {
             und klare Skalierungs-Strategien.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
-            <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">
+            <a
+              href="https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+            >
               <ArrowRight className="h-4 w-4" /> Erstgespräch buchen
-            </Link>
+            </a>
           </MagneticButton>
         </div>
       </section>

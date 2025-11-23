@@ -101,7 +101,7 @@ const ProductsHeroSection: React.FC = () => {
                     30‑Min Strategie‑Gespräch buchen
                   </CtaLink>
                   <Link
-                    to="/infrastruktur"
+                    to="/leistungen/infrastruktur"
                     className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
                   >
                     <Icon name="handshake" className="mr-2" />

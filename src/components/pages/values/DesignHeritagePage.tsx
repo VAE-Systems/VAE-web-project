@@ -1,68 +1,47 @@
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Seo from '@/components/ui/Seo'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+const FAMILY_ARTISTS = [
+  {
+    name: 'Jürgen Goertz',
+    role: 'Bildhauer & Künstler',
+    url: 'https://www.juergen-goertz.info/work/',
+  },
+  {
+    name: 'Christa Goertz',
+    role: 'Malerin',
+    url: 'https://studiochristagoertz.com/de/home/',
+  },
+  {
+    name: 'Eva Julia Goertz',
+    role: 'Designerin',
+    url: 'https://www.collezionebysgd.com/',
+  },
+]
+
 const DESIGN_PRINCIPLES = [
   {
     title: 'Design ist Nutzung',
-    body: 'Interfaces gelten bei uns erst als fertig, wenn Menschen ohne Erklärung ans Ziel kommen. Performance-Budgets, Microcopy und Motion-Guidelines sind Teil des Briefings – nicht das Sahnehäubchen.',
+    body: 'Interfaces funktionieren erst, wenn Menschen ohne Anleitung ans Ziel kommen. Wir testen Wahrnehmung und Gefühl – nicht nur technische Performance.',
   },
   {
     title: 'Werkstatt statt Blackbox',
-    body: 'Prototypen, Figma-Dateien und Token-Systeme liegen in Ihren Repos. Sie können nachvollziehen, warum eine Entscheidung gefallen ist und welche Variante verworfen wurde.',
+    body: 'Prototypen und Design-Entscheidungen sind dokumentiert. Sie können nachvollziehen, warum etwas so aussieht, wie es aussieht.',
   },
   {
-    title: 'Künstlerische DNA',
-    body: 'Julian Goertz wuchs zwischen Skulpturen und Entwürfen auf. Präzision, Materialtreue und Geduld sind deshalb gelebte Praxis – nicht Marketingsprache.',
+    title: 'Präzision als Standard',
+    body: 'Skulpturen erlauben keine ungenauen Proportionen. Software auch nicht. Deshalb sind unsere Interfaces konsistent – in Farben, Abständen, Hierarchien.',
   },
 ]
 
-const PROCESS_STEPS = [
-  {
-    label: '01',
-    title: 'Research & Kontext',
-    detail:
-      'Stakeholder-Interviews, Daten aus Support-Logs und Beobachtungen aus laufenden Plattformen. Wir verstehen, welche Jobs-to-be-done Ihr Interface wirklich lösen muss.',
-  },
-  {
-    label: '02',
-    title: 'System & Tokens',
-    detail:
-      'Design Tokens, Komponenten und Content-Guidelines entstehen gemeinsam mit Engineering. So entstehen keine Übergabe-Brüche zwischen Figma und Code.',
-  },
-  {
-    label: '03',
-    title: 'Review & Proof',
-    detail:
-      'Bevor etwas live geht, testen wir Accessibility, Performance und Storybook-Stände. Erst wenn Zahlen und Gefühl stimmen, wird released.',
-  },
-]
-
-const GALLERY = [
-  {
-    id: 'julian',
-    title: 'Julian vor dem VAE-Logo',
-    description:
-      'Strategie-Session zur Wertekommunikation – dokumentiert in 4K und optimiert auf 2000px Breite für Web.',
-    sources: {
-      webp: '/images/optimized/Julian-steht-vor-VAE-Logo-Werte.webp',
-      jpg: '/images/optimized/Julian-steht-vor-VAE-Logo-Werte.jpg',
-      full: '/images/optimized/Julian-steht-vor-VAE-Logo-Werte.jpg',
-    },
-  },
-  {
-    id: 'apps',
-    title: 'Finger zeigt auf VAE Apps',
-    description:
-      'Workshop-Folie mit App-Landschaft. Wir liefern Ihnen die optimierte 1920px-Version plus Zugriff auf die Originaldatei für Print.',
-    sources: {
-      webp: '/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.webp',
-      jpg: '/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.jpg',
-      full: '/images/raw/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.jpg',
-    },
-  },
+const DESIGN_BREADCRUMBS = [
+  { label: 'Home', path: '/' },
+  { label: 'Über uns' },
+  { label: 'Design', path: '/ueber-uns/design-handwerk' },
 ]
 
 const DesignHeritagePage: React.FC = () => {
@@ -73,7 +52,9 @@ const DesignHeritagePage: React.FC = () => {
   return (
     <div className="bg-bg-darker text-text-light">
       <Seo title={pageTitle} description={pageDescription} canonicalPath="/ueber-uns/design-handwerk" />
+      <Breadcrumbs items={DESIGN_BREADCRUMBS} className="mb-2" />
 
+      {/* HERO SECTION */}
       <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 dark:border-white/5">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.16),transparent_60%)]" />
@@ -89,9 +70,9 @@ const DesignHeritagePage: React.FC = () => {
               Design als Werkstatt – nicht als Dekoration
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
-              Wir verbinden künstlerische Herkunft mit belastbarer Produktentwicklung. Jede Visualisierung – vom
-              Werteplakat bis zur App-Landkarte – wird in hoher Auflösung produziert, versioniert und in Ihre Systeme
-              eingebunden.
+              VAE Systems verbindet künstlerische Herkunft mit technischer Präzision. Julian Goertz wuchs in einer
+              Familie auf, in der Skulpturen, Malerei und Design Alltag waren. Diese Perspektive prägt, wie wir Software
+              gestalten — mit Fokus auf Wahrnehmung, Gefühl und User Experience.
             </p>
             <div className="flex flex-wrap gap-4">
               <MagneticButton className="inline-flex">
@@ -107,10 +88,10 @@ const DesignHeritagePage: React.FC = () => {
 
           <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
             <picture>
-              <source srcSet={GALLERY[0].sources.webp} type="image/webp" />
-              <source srcSet={GALLERY[0].sources.jpg} type="image/jpeg" />
+              <source srcSet="/images/optimized/Julian-steht-vor-VAE-Logo-Werte.webp" type="image/webp" />
+              <source srcSet="/images/optimized/Julian-steht-vor-VAE-Logo-Werte.jpg" type="image/jpeg" />
               <img
-                src={GALLERY[0].sources.jpg}
+                src="/images/optimized/Julian-steht-vor-VAE-Logo-Werte.jpg"
                 alt="Julian Goertz steht vor dem VAE-Logo und erklärt das Werte-Framework"
                 loading="eager"
                 className="h-full w-full object-cover"
@@ -119,115 +100,141 @@ const DesignHeritagePage: React.FC = () => {
                 sizes="(min-width: 1024px) 45vw, 90vw"
               />
             </picture>
-            <div className="absolute inset-x-6 bottom-6 rounded-2xl bg-black/50 p-4 text-sm text-white backdrop-blur">
-              <p className="font-semibold">Julian vor dem neuen Werte-Canvas</p>
-              <p className="text-white/80">Aufgenommen in 4K · Export auf 2000px Breite optimiert für Web & Retina</p>
-            </div>
           </div>
         </div>
       </section>
 
+      {/* KÜNSTLERISCHE WURZELN */}
       <section className="border-b border-black/5 bg-bg-dark py-20 dark:border-white/5">
-        <div className="container-vae grid gap-8 md:grid-cols-3">
-          {DESIGN_PRINCIPLES.map(principle => (
-            <article
-              key={principle.title}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)]"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Prinzip</p>
-              <h2 className="mt-3 text-xl font-semibold text-text-light">{principle.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-text-secondary">{principle.body}</p>
-            </article>
-          ))}
+        <div className="container-vae">
+          <div className="mx-auto max-w-4xl space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Künstlerische Wurzeln</h2>
+              <p className="text-lg leading-relaxed text-text-secondary">
+                Wenn man zwischen Ateliers, Galerien und Werkstätten aufwächst, lernt man früh: Jedes Detail zählt. Jede
+                Proportion, jede Farbwahl, jede Komposition ist eine bewusste Entscheidung.
+              </p>
+              <p className="text-lg leading-relaxed text-text-secondary">Julian Goertz' familiärer Hintergrund:</p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {FAMILY_ARTISTS.map(artist => (
+                <a
+                  key={artist.name}
+                  href={artist.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition hover:border-vae-turquoise/30"
+                >
+                  <h3 className="text-xl font-semibold text-text-light group-hover:text-vae-turquoise">
+                    {artist.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-text-secondary">{artist.role}</p>
+                  <p className="mt-3 text-xs text-vae-turquoise/70 group-hover:text-vae-turquoise">Zur Website →</p>
+                </a>
+              ))}
+            </div>
+
+            <p className="text-base leading-relaxed text-text-secondary">
+              Diese Einflüsse prägen unseren Ansatz: Wir gestalten Software mit der gleichen Aufmerksamkeit für Details,
+              Proportionen und Wahrnehmung, die in Skulpturen und Gemälden steckt. Was in der bildenden Kunst
+              selbstverständlich ist – intensive Auseinandersetzung mit Material, Form und Wirkung – übertragen wir auf
+              digitale Produkte.
+            </p>
+            <p className="text-base leading-relaxed text-text-secondary">
+              Das bedeutet konkret: Wir hinterfragen jede Schrift, jeden Abstand, jeden Interaktionsablauf. Nicht aus
+              Perfektionismus, sondern weil schlechtes Design echte Kosten verursacht – verlorene Nutzer,
+              Support-Anfragen, Frustration im Team.
+            </p>
+
+            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 shadow-[0_25px_70px_rgba(0,0,0,0.4)]">
+              <picture>
+                <source srcSet="/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.webp" type="image/webp" />
+                <source srcSet="/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.jpg" type="image/jpeg" />
+                <img
+                  src="/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.jpg"
+                  alt="Workshop-Folie mit VAE App-Landschaft"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                  width={1600}
+                  height={1067}
+                  sizes="90vw"
+                />
+              </picture>
+            </div>
+
+            <p className="text-base leading-relaxed text-text-secondary">
+              Diese Website selbst hat über 100 Stunden Design- und Testing-Arbeit erfahren, um ein außergewöhnlich
+              begründetes und herausstechendes Nutzungserlebnis zu gewährleisten. Jede Animation, jede Transition, jede
+              Farbkombination wurde auf verschiedenen Geräten getestet, mit unterschiedlichen Nutzergruppen validiert
+              und iterativ verfeinert.
+            </p>
+            <p className="text-base leading-relaxed text-text-secondary">
+              Das Ergebnis: Eine Website, die nicht nur gut aussieht, sondern sich gut anfühlt – schnell, intuitiv,
+              zugänglich. Genau so arbeiten wir auch an Ihren Projekten.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="border-b border-black/5 bg-gradient-to-b from-bg-dark to-bg-darker py-24 dark:border-white/5">
-        <div className="container-vae grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="space-y-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Ablauf</p>
-            <h2 className="text-3xl font-semibold text-text-light md:text-4xl">
-              Vom ersten Scribble bis zum Release begleitet
-            </h2>
+      {/* WIE DAS EINFLIESST */}
+      <section className="border-b border-black/5 bg-gradient-to-b from-bg-dark to-bg-darker py-20 dark:border-white/5">
+        <div className="container-vae">
+          <div className="mx-auto max-w-4xl space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Wie das in unsere Arbeit einfließt</h2>
+              <p className="text-lg leading-relaxed text-text-secondary">
+                Design ist bei VAE Systems kein nachträgliches Styling. Es ist von Anfang an Teil der Produktentwicklung
+                – von der ersten Skizze bis zum finalen Release.
+              </p>
+              <p className="text-lg leading-relaxed text-text-secondary">
+                Viele Unternehmen trennen Design und Engineering – erst wird etwas schön gemacht, dann wird es gebaut.
+                Wir arbeiten anders: Design und Entwicklung entstehen parallel, iterativ, in ständigem Austausch.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {DESIGN_PRINCIPLES.map(principle => (
+                <article
+                  key={principle.title}
+                  className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)]"
+                >
+                  <h3 className="text-xl font-semibold text-text-light">{principle.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-text-secondary">{principle.body}</p>
+                </article>
+              ))}
+            </div>
+
             <p className="text-base leading-relaxed text-text-secondary">
               Wir dokumentieren jeden Schritt in denselben Tools, die Ihr Team ohnehin nutzt. Dadurch bleiben
-              Wissensübergaben nachvollziehbar – egal ob Sie das Design intern weiterführen oder mit uns ausbauen
-              möchtest.
+              Wissensübergaben nachvollziehbar – egal ob Sie das Design intern weiterführen oder mit uns ausbauen.
             </p>
-          </div>
-          <div className="space-y-6">
-            {PROCESS_STEPS.map(step => (
-              <div key={step.label} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/60">{step.label}</p>
-                <h3 className="mt-2 text-2xl font-semibold text-text-light">{step.title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-text-secondary">{step.detail}</p>
-              </div>
-            ))}
+            <p className="text-base leading-relaxed text-text-secondary">
+              Das Ergebnis sind Produkte, die nicht nur technisch funktionieren, sondern die Menschen gerne nutzen. Die
+              keine Schulungen brauchen. Die sich richtig anfühlen. Die langfristig wartbar bleiben, weil jede
+              Entscheidung dokumentiert und begründet ist.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="bg-bg-darker py-24">
-        <div className="container-vae">
-          <div className="flex flex-col gap-4 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Bildmaterial</p>
-            <h2 className="text-3xl font-semibold text-text-light md:text-4xl">
-              Optimierte Assets zum direkten Einsatz
-            </h2>
-            <p className="mx-auto max-w-3xl text-base leading-relaxed text-text-secondary">
-              Jede Aufnahme liegt als performante WebP-Version und als hochauflösender Export vor. Für Druck oder
-              Keynotes können Sie die Vollversion (bis zu 4000px Breite) jederzeit aus unserem Asset-Ordner abrufen.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
-            {GALLERY.map(image => (
-              <figure
-                key={image.id}
-                className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.02] shadow-[0_25px_70px_rgba(0,0,0,0.4)]"
-              >
-                <picture>
-                  <source srcSet={image.sources.webp} type="image/webp" />
-                  <source srcSet={image.sources.jpg} type="image/jpeg" />
-                  <img
-                    src={image.sources.jpg}
-                    alt={image.title}
-                    loading="lazy"
-                    className="h-[420px] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-                    width={1600}
-                    height={1067}
-                    sizes="(min-width: 768px) 50vw, 90vw"
-                  />
-                </picture>
-                <figcaption className="flex flex-col gap-1 border-t border-white/10 bg-black/50 px-6 py-4 text-left text-sm text-white backdrop-blur">
-                  <p className="font-semibold">{image.title}</p>
-                  <p className="text-white/80">{image.description}</p>
-                  <a
-                    href={image.sources.full}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80 transition hover:text-vae-turquoise"
-                  >
-                    Vollauflösung öffnen
-                  </a>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* FINAL CTA */}
       <section className="border-t border-vae-turquoise/10 bg-gradient-to-br from-bg-dark via-bg-darker to-bg-dark py-24">
         <div className="container-vae text-center">
-          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Next Step: Ihr Designsystem aufwerten</h2>
+          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Projekt besprechen</h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-secondary">
-            Lassen Sie uns prüfen, wie wir Ihre Marke, Ihre Produkte oder Ihr internes Tooling sichtbarer, schneller und
-            verständlicher machen können – inklusive dokumentierter Assets und klarer Handovers.
+            Lassen Sie uns prüfen, wie wir Ihre Software, Ihr Dashboard oder Ihre Plattform klarer, verständlicher und
+            angenehmer machen können.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
-            <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">
+            <a
+              href="https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+            >
               <ArrowRight className="h-4 w-4" /> Erstgespräch buchen
-            </Link>
+            </a>
           </MagneticButton>
         </div>
       </section>

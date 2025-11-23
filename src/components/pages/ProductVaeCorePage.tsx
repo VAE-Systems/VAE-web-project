@@ -1,24 +1,24 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
-import ReferenceList from '../ui/ReferenceList'
-import Seo from '../ui/Seo'
-import Breadcrumbs from '../navigation/Breadcrumbs'
-import MagneticButton from '../ui/buttons/MagneticButton'
-import { vaeCoreContent } from '../../content/vaeCore'
 import {
-  Settings,
-  TrendingUp,
-  Shield,
-  Link as LinkIcon,
+  Check,
   Layers,
+  Link as LinkIcon,
   Lock,
   RefreshCw,
+  Settings,
+  Shield,
   ShieldCheck,
+  TrendingUp,
   X,
-  Check,
   Zap,
 } from 'lucide-react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { vaeCoreContent } from '../../content/vaeCore'
+import Breadcrumbs from '../navigation/Breadcrumbs'
+import MagneticButton from '../ui/buttons/MagneticButton'
+import ReferenceList from '../ui/ReferenceList'
+import Seo from '../ui/Seo'
 
 /**
  * ProductVaeCorePage Component
@@ -110,12 +110,12 @@ const ProductVaeCorePage: React.FC = () => {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Produkte', item: 'https://www.vae-systems.com/products' },
+              { '@type': 'ListItem', position: 1, name: 'Produkte', item: 'https://vae.systems/products' },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'VAE CORE',
-                item: 'https://www.vae-systems.com/products/vae-core',
+                item: 'https://vae.systems/products/vae-core',
               },
             ],
           },

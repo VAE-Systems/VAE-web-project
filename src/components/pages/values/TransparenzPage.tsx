@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Seo from '@/components/ui/Seo'
 import { ArrowRight, Shield } from 'lucide-react'
@@ -11,7 +12,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Dokumentation als Standard',
-    body: 'Jede Entscheidung wird in Git, Notion oder Tickets festgehalten. So können Sie jederzeit nachvollziehen, warum etwas so gebaut wurde.',
+    body: 'Jede Entscheidung wird in Git, eigenen Notiz-Sharing-Systemen oder Tickets festgehalten. So können Sie jederzeit nachvollziehen, warum etwas so gebaut wurde.',
   },
   {
     title: 'Live-Transparenz',
@@ -58,6 +59,12 @@ const EXAMPLES = [
   },
 ]
 
+const TRANSPARENZ_BREADCRUMBS = [
+  { label: 'Home', path: '/' },
+  { label: 'Wissen' },
+  { label: 'Transparenz', path: '/wissen/transparenz-open-source' },
+]
+
 const TransparenzPage: React.FC = () => {
   return (
     <div className="bg-bg-darker text-text-light">
@@ -66,6 +73,7 @@ const TransparenzPage: React.FC = () => {
         description="Wie VAE Systems Transparenz lebt: Open Source First, Live-Dokumentation und vollständige Ownership für Ihre Organisation."
         canonicalPath="/wissen/transparenz-open-source"
       />
+      <Breadcrumbs items={TRANSPARENZ_BREADCRUMBS} className="mb-4" />
 
       <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 dark:border-white/5">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -106,7 +114,17 @@ const TransparenzPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Live-Dokumentation in Git, Notion und Tickets statt Präsentationen im Nachgang</span>
+                <span>
+                  Live-Dokumentation in Git, eigenen Notiz-Sharing-Systemen und Tickets statt Präsentationen im Nachgang
+                </span>
+              </li>
+              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+                <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12l4 4L19 6" />
+                  </svg>
+                </span>
+                <span>Kunden-Accounts in unseren Systemen ermöglichen direkten Austausch und Kollaboration</span>
               </li>
               <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
@@ -158,8 +176,9 @@ const TransparenzPage: React.FC = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Ablauf</p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Transparenz von Tag 1 an</h2>
             <p className="text-base leading-relaxed text-text-secondary">
-              Wir starten jedes Projekt mit einem Onboarding in Ihre Tools: Git, Notion, Jira, Slack. Sie erhalten
-              Admin-Rechte und sehen jeden Commit, jedes Ticket, jede Entscheidung – live und ungefiltert.
+              Wir starten jedes Projekt mit einem Onboarding in Ihre Tools: Git, eigene Notiz-Sharing-Systeme, Tickets,
+              Slack. Sie erhalten Admin-Rechte und sehen jeden Commit, jedes Ticket, jede Entscheidung – live und
+              ungefiltert.
             </p>
           </div>
           <div className="space-y-6">
@@ -170,6 +189,31 @@ const TransparenzPage: React.FC = () => {
                 <p className="mt-3 text-base leading-relaxed text-text-secondary">{step.detail}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/5 bg-bg-dark py-20 dark:border-white/5">
+        <div className="container-vae">
+          <div className="mx-auto max-w-3xl">
+            <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+              <picture>
+                <source srcSet="/images/optimized/Bild-von-OpenProject-Ticketing-Software-3.jpg" type="image/jpeg" />
+                <img
+                  src="/images/optimized/Bild-von-OpenProject-Ticketing-Software-3.jpg"
+                  alt="Live-Dokumentation in OpenProject: Tickets, Zeiterfassung und Projektstatus in Echtzeit"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                  width={1600}
+                  height={1067}
+                  sizes="(min-width: 1024px) 800px, 90vw"
+                />
+              </picture>
+            </div>
+            <p className="mt-6 text-center text-sm leading-relaxed text-text-secondary">
+              Live-Dokumentation in OpenProject: Sie sehen Tickets, Zeiterfassung und Projektstatus in Echtzeit – keine
+              versteckten Statusupdates.
+            </p>
           </div>
         </div>
       </section>
@@ -205,9 +249,14 @@ const TransparenzPage: React.FC = () => {
             Team, Ihre Stakeholder und externe Audits.
           </p>
           <MagneticButton className="mx-auto mt-10 inline-flex">
-            <Link to="/contact" className="btn-primary flex min-w-[260px] items-center justify-center gap-3">
+            <a
+              href="https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+            >
               <ArrowRight className="h-4 w-4" /> Erstgespräch buchen
-            </Link>
+            </a>
           </MagneticButton>
         </div>
       </section>

@@ -25,7 +25,7 @@ export interface LeaderProfile {
 export const HERO_CONTENT = {
   title: 'Die Köpfe hinter VAE Systems',
   subheading: 'Zwei Gründer, eine Vision: Deutschland technologisch unabhängig machen.',
-  body: 'VAE Systems wurde von zwei Menschen gegründet, die mehr verbindet als eine gemeinsame Geschäftsidee. Julian Goertz Dini und Jakob Dünnebeil kennen sich aus der Community-Arbeit bei <a href="https://www.linkedin.com/company/aktiv-kollektiv/" target="_blank" rel="noopener noreferrer">Aktiv Kollektiv e.V. Heidelberg</a> — einem gemeinnützigen Verein, in dem sie Initiativen aufbauen, Veranstaltungen organisieren und Menschen zusammenbringen. Diese Erfahrung prägt ihre Arbeitsweise: VAE Systems ist nicht nur ein Beratungsunternehmen. Es ist ein Team, das versteht, wie man Communities aufbaut, komplexe Projekte koordiniert und langfristige Partnerschaften pflegt.',
+  body: 'VAE Systems wurde von zwei Menschen gegründet, die mehr verbindet als eine gemeinsame Geschäftsidee. Julian Goertz Dini und Jakob Dünnebeil kennen sich aus der Community-Arbeit bei <a href="https://www.linkedin.com/company/aktiv-kollektiv/" target="_blank" rel="noopener noreferrer">Aktiv Kollektiv e.V. Heidelberg</a> — einem gemeinnützigen Verein, in dem sie Initiativen aufbauen, Veranstaltungen organisieren und Menschen zusammenbringen.',
   seoKeywords: ['Gründer VAE Systems', 'Tech-Beratung Heidelberg', 'Open-Source-Infrastruktur', 'Informatik-Expertise'],
 }
 

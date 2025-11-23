@@ -1,6 +1,7 @@
 import { BarChart3, BrainCircuit, CheckCircle2, Timer, Workflow } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import MagneticButton from '../ui/buttons/MagneticButton'
 import Seo from '../ui/Seo'
 
 const useCases = [
@@ -54,13 +55,23 @@ const KiOptimierungPage: React.FC = () => {
               Wir automatisieren wiederkehrende Aufgaben, verknüpfen Systeme und messen die Wirkung. Jede Iteration
               bringt neue Effizienzgewinne – ohne Kontrollverlust oder komplizierte Handoffs.
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link to="/contact" className="btn-primary flex items-center justify-center gap-2 text-base">
-                Potenzialanalyse buchen
-              </Link>
-              <Link to="/testphase" className="btn-outline flex items-center justify-center gap-2 text-base">
-                In Testphase ausprobieren
-              </Link>
+            <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-6 lg:gap-8">
+              <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
+                <Link
+                  to="/contact"
+                  className="btn-primary flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                >
+                  Potenzialanalyse buchen
+                </Link>
+              </MagneticButton>
+              <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
+                <Link
+                  to="/testphase"
+                  className="btn-outline flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                >
+                  In Testphase ausprobieren
+                </Link>
+              </MagneticButton>
             </div>
             <p className="text-sm text-text-secondary">
               Typische Ergebnisse: <span className="font-semibold text-text-light">2–3 Stunden Zeitgewinn</span> pro

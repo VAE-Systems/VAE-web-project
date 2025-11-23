@@ -124,7 +124,7 @@ const HeroSection: React.FC = () => {
           </ul>
 
           <div className="flex w-full flex-col gap-4 sm:flex-row sm:gap-8 lg:gap-12">
-            <MagneticButton className="flex-1">
+            <MagneticButton className="w-full sm:flex-1">
               <CtaLink
                 ctaId="contact.schedule_call"
                 ctx={{ fromPage: 'home', intent: 'calendly-hero' }}
@@ -135,7 +135,7 @@ const HeroSection: React.FC = () => {
                 Kostenlose Beratung buchen (45 Min)
               </CtaLink>
             </MagneticButton>
-            <MagneticButton className="flex-1">
+            <MagneticButton className="w-full sm:flex-1">
               <button
                 type="button"
                 onClick={scrollToServices}

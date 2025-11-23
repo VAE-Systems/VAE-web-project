@@ -42,30 +42,32 @@ const ServicesOverviewSection: React.FC = () => {
                   <p className="mt-1 text-sm font-medium text-text-secondary">{card.subtitle}</p>
                 )}
               </div>
-              <p className="mt-4 text-sm text-text-secondary">{card.description}</p>
-              <div className="mt-5 space-y-3 text-sm text-text-secondary">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Was enthalten</p>
-                <ul className="space-y-1.5">
-                  {card.inclusions.map(item => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise" aria-hidden />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="mt-4 flex flex-1 flex-col gap-5 text-sm text-text-secondary">
+                <p>{card.description}</p>
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Was enthalten</p>
+                  <ul className="space-y-1.5">
+                    {card.inclusions.map(item => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise" aria-hidden />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>
+                  <ul className="space-y-1.5">
+                    {card.audience.map(item => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/40" aria-hidden />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="mt-5 space-y-3 text-sm text-text-secondary">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>
-                <ul className="space-y-1.5">
-                  {card.audience.map(item => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/40" aria-hidden />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <MagneticButton className="mt-8 w-full">
+              <MagneticButton className="mt-auto w-full pt-4">
                 <Link
                   to={card.cta.href}
                   className="btn-convert flex w-full items-center justify-center gap-2 text-sm font-semibold"

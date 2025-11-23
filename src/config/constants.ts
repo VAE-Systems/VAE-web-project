@@ -5,8 +5,8 @@
  */
 
 export const BUSINESS_INFO = {
-  EMAIL: 'kontakt@vae-systems.com',
-  DOMAIN: 'vae-systems.com',
+  EMAIL: 'info@vae.systems',
+  DOMAIN: 'vae.systems',
   NAME: 'VAE Systems',
 } as const
 

@@ -18,8 +18,9 @@ Allow: /*.js
 Crawl-delay: 1
 
 # Sitemap locations
-Sitemap: https://vae-systems.com/sitemap.xml
-Sitemap: https://vae-systems.com/sitemap-images.xml
+Sitemap: https://vae.systems/sitemap.xml
+Sitemap: https://vae.systems/sitemap-images.xml
+Sitemap: https://vae.systems/ai-sitemap.json
 
 # Additional search engine directives
 User-agent: Googlebot

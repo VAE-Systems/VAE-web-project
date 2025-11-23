@@ -228,11 +228,31 @@ const BetreuungPage: React.FC = () => {
   return (
     <div className="bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
-        title="Langfristige Betreuung & KI-optimierter IT-Betrieb | VAE Systems"
+        title="Langfristige IT-Betreuung Heidelberg | VAE Systems"
         description="Outsourcen Sie Ihr IT-Rückgrat an VAE: Infrastruktur-Managed oder Full-Partnership – mit Fokus auf Ressourcen, KI-Optimierung und langfristige Stabilität."
-        canonicalPath="/services/betreuung"
+        canonicalPath="/leistungen/betreuung"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          serviceType: 'Langfristige IT-Betreuung',
+          provider: {
+            '@type': 'Organization',
+            name: 'VAE Systems UG',
+            url: 'https://vae.systems',
+          },
+          areaServed: {
+            '@type': 'Place',
+            name: 'Deutschland',
+          },
+          description: 'Managed Operations: Betrieb, Wartung und Weiterentwicklung Ihrer IT-Systeme',
+          offers: {
+            '@type': 'Offer',
+            url: 'https://vae.systems/leistungen/betreuung',
+            priceCurrency: 'EUR',
+            price: 'auf Anfrage',
+          },
+        }}
       />
-
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
         <div className="pointer-events-none absolute inset-0 opacity-40">

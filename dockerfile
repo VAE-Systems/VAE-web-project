@@ -16,6 +16,8 @@ COPY ./deploy/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 # Statisches Frontend
 COPY --from=build /app/dist /usr/share/nginx/html
+# Ensure wget is available for HEALTHCHECK on alpine
+RUN apk add --no-cache wget
 # HEALTHCHECK
 HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://127.0.0.1/ >/dev/null 2>&1 || exit 1
 EXPOSE 80

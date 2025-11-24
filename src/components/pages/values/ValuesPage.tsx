@@ -4,7 +4,7 @@ import { ValueSection } from '@/components/pages/values/ValueSection'
 import { VisionSection } from '@/components/pages/values/VisionSection'
 import Icon from '@/components/ui/Icon'
 import Seo from '@/components/ui/Seo'
-import { HERO_COPY, VALUES_DATA } from '@/data/valuesData'
+import { HERO_COPY, VALUES_DATA } from '@/content/shared/valuesData'
 import React from 'react'
 
 const VALUES_BREADCRUMBS = [

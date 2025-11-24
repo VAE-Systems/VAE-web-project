@@ -1,5 +1,5 @@
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { CTA } from '@/data/valuesData'
+import { CTA } from '@/content/shared/valuesData'
 import { ArrowRight } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'

@@ -4,10 +4,10 @@
  * Shows install prompt for PWA when available
  */
 
-import React, { useState, useEffect } from 'react'
-import { usePWA } from '../../hooks/usePWA'
-import TouchButton from '../ui/TouchButton'
 import Icon from '@/components/ui/Icon'
+import React, { useEffect, useState } from 'react'
+import { usePWA } from '../../hooks'
+import TouchButton from '../ui/TouchButton'
 
 const PWAInstallPrompt: React.FC = () => {
   const { canInstall, install, isInstalled, isInstallable } = usePWA()

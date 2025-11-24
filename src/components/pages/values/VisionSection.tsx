@@ -1,5 +1,5 @@
 import Icon from '@/components/ui/Icon'
-import { VISION_CONTENT } from '@/data/valuesData'
+import { VISION_CONTENT } from '@/content/shared/valuesData'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef } from 'react'

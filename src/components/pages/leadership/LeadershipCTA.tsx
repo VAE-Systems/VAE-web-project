@@ -1,5 +1,5 @@
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { LEADERSHIP_CTA } from '@/data/leadershipData'
+import { LEADERSHIP_CTA } from '@/content/shared/leadershipData'
 import { ArrowUpRight, Sparkles } from 'lucide-react'
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'

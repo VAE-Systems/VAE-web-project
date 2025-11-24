@@ -1,6 +1,6 @@
-import React from 'react'
-import { PARTNERSHIP_SECTION } from '@/data/leadershipData'
 import { useFadeIn } from '@/components/pages/values/useFadeIn'
+import { PARTNERSHIP_SECTION } from '@/content/shared/leadershipData'
+import React from 'react'
 
 export const PartnershipSection: React.FC = () => {
   const { ref, isVisible } = useFadeIn({ threshold: 0.2 })

@@ -1,25 +1,24 @@
 import CtaLink from '@/components/ui/CtaLink'
 import Icon from '@/components/ui/Icon'
 import Reveal from '@/components/ui/Reveal'
-import { useScrollScrub } from '@/hooks/useScrollScrub'
+import { useScrollScrub } from '@/hooks'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import Breadcrumbs from '../../src/components/navigation/Breadcrumbs'
-import ServicesHeroSection from '../../src/components/sections/ServicesHeroSection'
-import MagneticButton from '../../src/components/ui/buttons/MagneticButton'
-import Seo from '../../src/components/ui/Seo'
-import SpotlightCard from '../../src/components/ui/SpotlightCard'
+import Breadcrumbs from '@/components/navigation/Breadcrumbs'
+import { FAQSection, ServicesHeroSection } from '@/components/sections'
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
+import Seo from '@/components/ui/Seo'
+import SpotlightCard from '@/components/ui/SpotlightCard'
 import {
   comparisonMatrix,
   finalCta,
   lifecycleBenefits,
   servicesCategories,
   servicesLifecycle,
-} from '../../src/content/services'
-const FAQSection = React.lazy(() => import('../../src/components/sections/FAQSection'))
+} from '@/content/services'
 /**
  * ServicesPage Component
  *

@@ -52,6 +52,7 @@ interface TechBadge {
 interface CaseStudy {
   id: string
   logo?: { src: string; alt: string; invertOnDark?: boolean; invertOnLight?: boolean; wide?: boolean }
+  testimonialImage?: { src: string; alt: string; invertOnDark?: boolean; invertOnLight?: boolean; wide?: boolean }
   title: string
   organization: string
   industry: string
@@ -229,6 +230,10 @@ const caseStudies: CaseStudy[] = [
   {
     id: 'art-affair-qr',
     logo: { src: '/art-affair-logo.svg', alt: 'Art Affair Logo', invertOnLight: true, wide: true },
+    testimonialImage: {
+      src: '/images/optimized/Bewertung_von_Joschka_Ludwig_Krause_zum_Art_Affair_Projekt.webp',
+      alt: 'Testimonial from Joschka Ludwig Krause praising the Art Affair QR-Code project for its efficiency and professionalism',
+    },
     icon: QrCode,
     title: 'KI-optimiertes QR-Code-Lead-System',
     organization: 'Art Affair GmbH & Co. KG',
@@ -552,6 +557,26 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
         </div>
 
         <ExpandableContent isOpen={isExpanded} animationsEnabled={animationsEnabled}>
+          {study.testimonialImage && (
+            <div className="mb-8 mt-8 flex justify-center">
+              <figure className="max-w-full overflow-hidden rounded-2xl border border-black/5 bg-white/90 p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+                <img
+                  src={study.testimonialImage.src}
+                  alt={study.testimonialImage.alt}
+                  className={[
+                    'max-h-96 w-full max-w-2xl object-contain transition-all duration-300',
+                    (study.testimonialImage.invertOnDark || study.testimonialImage.invertOnLight) && 'filter',
+                    study.testimonialImage.invertOnDark && 'dark:invert',
+                    study.testimonialImage.invertOnLight && 'invert',
+                    study.testimonialImage.invertOnLight && 'dark:invert-0',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  loading="lazy"
+                />
+              </figure>
+            </div>
+          )}
           <div className="mt-8 grid gap-6 pb-6 lg:grid-cols-3">
             <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Messbare Ergebnisse</p>

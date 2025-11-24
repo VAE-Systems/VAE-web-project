@@ -1,4 +1,4 @@
-import { HERO_CONTENT } from '@/data/leadershipData'
+import { HERO_CONTENT } from '@/content/shared/leadershipData'
 import React, { useMemo } from 'react'
 
 export const LeadershipHero: React.FC = () => {

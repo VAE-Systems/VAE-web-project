@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react'
-import { useConsent } from '../../hooks/useConsent'
+import { useConsent } from '../../hooks'
 import { COOKIE_CATEGORIES } from '../../types/privacy'
 
 const PrivacySettings: React.FC = () => {

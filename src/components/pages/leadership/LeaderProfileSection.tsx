@@ -1,6 +1,6 @@
 import { useFadeIn } from '@/components/pages/values/useFadeIn'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { LeaderProfile } from '@/data/leadershipData'
+import { LeaderProfile } from '@/content/shared/leadershipData'
 import { Linkedin, Mail } from 'lucide-react'
 import React, { useMemo } from 'react'
 

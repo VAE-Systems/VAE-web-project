@@ -1,5 +1,5 @@
 import { BOOKING_LINKS } from '@/config/booking'
-import { faqEntries } from '@/data/faqData'
+import { faqEntries } from '@/content/shared/faqData'
 import {
   type LucideIcon,
   Activity,
@@ -24,6 +24,7 @@ import React, { useCallback, useMemo } from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
+import FeaturePill from '@/components/ui/FeaturePill'
 
 const bookingUrl = BOOKING_LINKS.RETAINER_PLANUNG
 
@@ -74,6 +75,7 @@ type ServiceLevel = {
   suitable: string[]
   binding: string
   ctaLabel: string
+  ctaSubline?: string
   highlighted?: boolean
   badge?: string
   footnote: string
@@ -93,11 +95,13 @@ const serviceLevels: ServiceLevel[] = [
       'Planbare Reaktionszeiten im Störungsfall während Geschäftszeiten',
       'Automatisierte Backups und Security-Updates',
       'Performance-Monitoring und grundlegende Optimierungen',
+      'Kundenaccount (Chat & Files) für Übergaben, Reports und Abstimmungen',
     ],
     excluded: ['User-Support (bleibt intern)', 'Feature-Entwicklung', 'Trainings & Schulungen'],
     suitable: ['Teams mit IT-Erfahrung', '5–30 Mitarbeitende', 'Maximale Unabhängigkeit gewünscht'],
     binding: 'Monatlich kündbar (Preis-Premium für maximale Flexibilität)',
     ctaLabel: 'Zum Gespräch',
+    ctaSubline: 'Kundenaccount für Übergaben, Reports und abgestimmte Wartung.',
     footnote:
       'Individuelles Angebot – abhängig von Teamgröße, Infrastruktur-Umfang und gewünschtem KI-Einsatz. Transparenz im Beratungsgespräch garantiert.',
   },
@@ -115,10 +119,12 @@ const serviceLevels: ServiceLevel[] = [
       'Engere Einbindung in Produkt- und Prozessplanung',
       'KI-Workflow-Optimierung & Feature-Entwicklung',
       'Proaktive Innovationsvorschläge und Roadmaps',
+      'Kundenaccount (Chat & Files) mit laufenden Verbesserungs-Updates und Release-Notes',
     ],
     suitable: ['Teams ohne IT-Abteilung', '20–100+ Mitarbeitende', 'Business- statt IT-Fokus'],
     binding: 'Monatlich kündbar – keine Langzeitbindung',
     ctaLabel: 'Jetzt Beratung sichern',
+    ctaSubline: 'Kundenaccount inkl. Chat & Dateien, regelmäßige Verbesserungs-Updates.',
     highlighted: true,
     badge: 'Populär',
     footnote:
@@ -654,11 +660,39 @@ const BetreuungPage: React.FC = () => {
                         Was enthalten ist
                       </p>
                       <ul className="mt-3 space-y-2">
-                        {level.included.map(item => (
-                          <li key={item} className="flex items-start gap-2 text-sm">
-                            <Check className="mt-1 h-4 w-4 text-vae-turquoise" /> {item}
-                          </li>
-                        ))}
+                        {level.included.map(item => {
+                          const isAccountItem = item.toLowerCase().includes('kundenaccount')
+                          if (isAccountItem) {
+                            const variant = level.id === 'full' ? 'gold' : 'silver'
+                            return (
+                              <li key={item} className="flex items-center gap-2 text-sm">
+                                {/* left check icon - same size as other list checks, colored by variant */}
+                                <svg
+                                  className={`${variant === 'gold' ? 'text-amber-400' : 'text-sky-300'} h-4 w-4`}
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    d="M20 6L9 17l-5-5"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                                <FeaturePill variant={variant}>{item}</FeaturePill>
+                              </li>
+                            )
+                          }
+
+                          return (
+                            <li key={item} className="flex items-start gap-2 text-sm">
+                              <Check className="mt-1 h-4 w-4 text-vae-turquoise" />
+                              <span>{item}</span>
+                            </li>
+                          )
+                        })}
                       </ul>
                     </div>
                     {level.excluded && (
@@ -714,9 +748,10 @@ const BetreuungPage: React.FC = () => {
                       </a>
                     </MagneticButton>
                     <p className="text-center text-xs text-gray-600 dark:text-text-secondary">
-                      {level.highlighted
-                        ? '45 Min. · Keine Langzeitbindung'
-                        : 'Individuelles Angebot nach Infrastruktur-Umfang'}
+                      {level.ctaSubline ||
+                        (level.highlighted
+                          ? '45 Min. · Keine Langzeitbindung'
+                          : 'Individuelles Angebot nach Infrastruktur-Umfang')}
                     </p>
                   </div>
                 </div>

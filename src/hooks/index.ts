@@ -4,14 +4,28 @@
  * Central export point for all custom React hooks
  */
 
-export { useAttentionSignal } from './useAttentionSignal'
-export { useContactForm } from './useContactForm'
-export { useFocusTrap } from './useFocusTrap'
-export { useNewsletter } from './useNewsletter'
-export { useParallax, useScrollReveal, useScrollRevealBatch } from './useScrollReveal'
+// Animation
+export * from './animation/useAdvancedAnimation'
+export * from './animation/useScrollReveal'
+export * from './animation/useScrollScrub'
 
-// Future hooks can be added here:
-// export { useAuth } from './useAuth'
-// export { useChat } from './useChat'
-// export { useNotifications } from './useNotifications'
-// export { useLocalStorage } from './useLocalStorage'
+// UI
+export * from './ui/useAttentionSignal'
+export * from './ui/useFocusTrap'
+export * from './ui/useMobileMenu'
+export * from './ui/useSwipeGesture'
+
+// Features
+export { useKeyboardNavigation, useFocusTrap as useAccessibilityFocusTrap } from './features/useAccessibility'
+export * from './features/useConsent'
+export * from './features/useContactForm'
+export * from './features/useDesignSystem'
+export * from './features/useNewsletter'
+export * from './features/usePerformance'
+export * from './features/usePWA'
+export * from './features/useServiceWorker'
+
+// Tutorials
+export * from './tutorials/useMailBuilderTutorial'
+export * from './tutorials/useSetupCalculatorTutorial'
+export * from './tutorials/useSpotlightTutorial'

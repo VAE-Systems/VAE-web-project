@@ -1,11 +1,13 @@
 import React from 'react'
-import FinalCtaSection from '../sections/FinalCtaSection'
-import HeroSection from '../sections/HeroSection'
-import HomeProcessTeaserSection from '../sections/HomeProcessTeaserSection'
-import ServicesOverviewSection from '../sections/ServicesOverviewSection'
-import SocialProofSection from '../sections/SocialProofSection'
-import TechStackSection from '../sections/TechStackSection'
-import WhyOpenSourceSection from '../sections/WhyOpenSourceSection'
+import {
+  FinalCtaSection,
+  HeroSection,
+  HomeProcessTeaserSection,
+  ServicesOverviewSection,
+  SocialProofSection,
+  TechStackSection,
+  WhyOpenSourceSection,
+} from '../sections'
 import Seo from '../ui/Seo'
 
 /**

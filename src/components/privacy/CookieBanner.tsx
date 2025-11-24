@@ -7,7 +7,7 @@
 import Icon from '@/components/ui/Icon'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useConsent } from '../../hooks/useConsent'
+import { useConsent } from '../../hooks'
 import { COOKIE_CATEGORIES } from '../../types/privacy'
 
 const CookieBanner: React.FC = () => {

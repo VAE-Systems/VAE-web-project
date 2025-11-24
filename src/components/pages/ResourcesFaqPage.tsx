@@ -2,10 +2,11 @@ import { CalendarDays, ChevronDown, Search as SearchIcon, ShieldCheck } from 'lu
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import FAQSection, { FAQCategory } from '@/components/sections/FAQSection'
+import { FAQSection } from '@/components/sections'
+import { FAQCategory } from '@/components/sections/interactive/FAQSection'
 import Seo from '@/components/ui/Seo'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { faqCategories, FaqCategoryId, faqEntries } from '@/data/faqData'
+import { FaqCategoryId, faqEntries, getCategoriesWithCounts } from '@/content/shared/faqData'
 
 type CategoryFilter = 'all' | FaqCategoryId
 
@@ -23,6 +24,7 @@ const ResourcesFaqPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const normalizedQuery = searchQuery.trim().toLowerCase()
+  const categoriesWithCounts = useMemo(() => getCategoriesWithCounts(), [])
 
   const filteredFaqs = useMemo(() => {
     return faqEntries.filter(entry => {
@@ -38,7 +40,7 @@ const ResourcesFaqPage: React.FC = () => {
 
   const groupedFaqs = useMemo(() => {
     if (activeCategory !== 'all') {
-      const category = faqCategories.find(cat => cat.id === activeCategory)
+      const category = categoriesWithCounts.find(cat => cat.id === activeCategory)
       return category
         ? [
             {
@@ -49,7 +51,7 @@ const ResourcesFaqPage: React.FC = () => {
         : []
     }
 
-    return faqCategories
+    return categoriesWithCounts
       .map(category => ({
         category,
         questions: filteredFaqs
@@ -107,7 +109,9 @@ const ResourcesFaqPage: React.FC = () => {
           <div className="mt-10 grid w-full gap-4 md:grid-cols-3">
             <div className="rounded-3xl border border-gray-100/80 bg-white p-5 text-left shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
               <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">Kategorien</p>
-              <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">5 Bereiche</p>
+              <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">
+                {categoriesWithCounts.length} Bereiche
+              </p>
               <p className="text-sm text-gray-600 dark:text-text-secondary">
                 Technologie, Business, Karriere, Use Cases, Sonstiges.
               </p>
@@ -179,14 +183,14 @@ const ResourcesFaqPage: React.FC = () => {
       <section className="bg-gradient-to-b from-white via-gray-50 to-white py-16 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker">
         <div className="container-vae space-y-10">
           <div className="grid gap-5 md:grid-cols-5">
-            {faqCategories.map(category => (
+            {categoriesWithCounts.map(category => (
               <div
                 key={category.id}
                 className="rounded-3xl border border-gray-100 bg-white p-4 text-left text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.12)] transition hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">{category.label}</p>
                 <p className="mt-3 text-sm text-slate-600 dark:text-white/70">{category.description}</p>
-                <p className="mt-5 text-xs text-slate-400 dark:text-white/40">{category.range}</p>
+                <p className="mt-5 text-xs text-slate-400 dark:text-white/40">{category.actualCount} FAQs</p>
               </div>
             ))}
           </div>

@@ -1,4 +1,4 @@
-import { Value } from '@/data/valuesData'
+import { Value } from '@/content/shared/valuesData'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useFadeIn } from './useFadeIn'

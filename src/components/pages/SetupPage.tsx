@@ -17,9 +17,9 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { BOOKING_LINKS } from '@/config/booking'
-import { faqEntries } from '@/data/faqData'
-import { flattenedSaasTools, saasToolCategories } from '@/data/saasTools'
-import { useSetupCalculatorTutorial } from '@/hooks/useSetupCalculatorTutorial'
+import { faqEntries } from '@/content/shared/faqData'
+import { flattenedSaasTools, saasToolCategories } from '@/content/shared/saasTools'
+import { useSetupCalculatorTutorial } from '@/hooks'
 import { cn } from '@/lib/classNames'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
@@ -787,8 +787,9 @@ const SetupPage: React.FC = () => {
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Setup + Übergabe</h3>
               <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
-                Wir implementieren die Infrastruktur, dokumentieren alles detailliert und schulen Ihr Team. Sie erhalten
-                eine vollständig betreibbare Plattform und übernehmen den laufenden Betrieb eigenständig.
+                Wir implementieren die Infrastruktur, dokumentieren alles detailliert und schulen Ihr Team. Übergabe der
+                Artefakte und Aufzeichnungen erfolgt über unsere sichere Kunden-App (Chat & Files), damit Ihr Team
+                direkt loslegen kann.
               </p>
               <ul className="mt-4 space-y-3">
                 <li className="flex items-start gap-3">
@@ -815,6 +816,12 @@ const SetupPage: React.FC = () => {
                     1 Monat Post-Launch-Support inklusive
                   </span>
                 </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Übergabe & Dateien über Kunden-App (Chat & Files) für Ihr Team bereitgestellt
+                  </span>
+                </li>
               </ul>
             </div>
 
@@ -827,8 +834,9 @@ const SetupPage: React.FC = () => {
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Setup + Langfristige Betreuung</h3>
               <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
-                Wir implementieren die Infrastruktur und übernehmen anschließend auch die langfristige Instandhaltung,
-                Weiterentwicklung und das Monitoring – Sie konzentrieren sich voll auf Ihr Kerngeschäft.
+                Wir implementieren die Infrastruktur und übernehmen anschließend die langfristige Instandhaltung,
+                Weiterentwicklung und das Monitoring. Übergaben und laufende Kommunikation laufen über unsere Kunden-App
+                mit Chat (iOS/Android) und sicherem Cloud-Share – Sie konzentrieren sich voll auf Ihr Kerngeschäft.
               </p>
               <ul className="mt-4 space-y-3">
                 <li className="flex items-start gap-3">
@@ -855,12 +863,24 @@ const SetupPage: React.FC = () => {
                     Flexible Betreuungsmodelle (monatlich kündbar)
                   </span>
                 </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Kundenportal mit Chat-Kanal ins SRE-Team & sicherer Dateiablage
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
+                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                    Verbindliche SLAs mit klaren Reaktionszeiten; Accounts werden bei Bedarf erweitert
+                  </span>
+                </li>
               </ul>
               <div className="mt-6 flex justify-center">
                 <MagneticButton intensity={0.05} scaleEffect>
                   <Link
                     to="/leistungen/betreuung#service-levels"
-                    className="btn-outline inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold"
+                    className="btn-primary inline-flex items-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold"
                   >
                     <span>Betreuungsmodelle ansehen</span>
                     <ArrowUpRight className="h-4 w-4" />
@@ -877,7 +897,7 @@ const SetupPage: React.FC = () => {
               den verschiedenen Deployment-Modellen finden Sie{' '}
               <Link
                 to="/leistungen/betreuung#deployment-modelle"
-                className="font-semibold text-vae-turquoise underline decoration-vae-turquoise/30 underline-offset-2 transition-colors hover:decoration-vae-turquoise"
+                className="whitespace-nowrap font-semibold text-vae-turquoise underline decoration-vae-turquoise/30 underline-offset-2 transition-colors hover:decoration-vae-turquoise"
               >
                 in der Hosting-Sektion →
               </Link>

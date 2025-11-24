@@ -1,10 +1,10 @@
-import React from 'react'
 import Seo from '@/components/ui/Seo'
-import { LeadershipHero } from './LeadershipHero'
+import { LEADERS } from '@/content/shared/leadershipData'
+import React from 'react'
 import { LeaderProfileSection } from './LeaderProfileSection'
-import { PartnershipSection } from './PartnershipSection'
 import { LeadershipCTA } from './LeadershipCTA'
-import { LEADERS } from '@/data/leadershipData'
+import { LeadershipHero } from './LeadershipHero'
+import { PartnershipSection } from './PartnershipSection'
 
 const LeadershipPage: React.FC = () => {
   const jsonLd = {

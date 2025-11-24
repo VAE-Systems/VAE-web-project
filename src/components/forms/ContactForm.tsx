@@ -6,7 +6,7 @@
 
 import { cn } from '@/lib/classNames'
 import React from 'react'
-import { useContactForm } from '../../hooks/useContactForm'
+import { useContactForm } from '../../hooks'
 import type { FormComponentProps } from '../../types'
 
 // ============================================================================

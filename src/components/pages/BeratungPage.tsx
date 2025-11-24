@@ -1,5 +1,5 @@
 import { BOOKING_LINKS } from '@/config/booking'
-import { faqEntries } from '@/data/faqData'
+import { faqEntries } from '@/content/shared/faqData'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {

@@ -2,11 +2,11 @@ import React, { Suspense, lazy } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 
 // Lazy load heavy components
-const NeuralNetworkBackground = lazy(() => import('../sections/NeuralNetworkBackground'))
+const NeuralNetworkBackground = lazy(() => import('@/components/sections/effects/NeuralNetworkBackground'))
 
-const TechStackSection = lazy(() => import('../sections/TechStackSection'))
+const TechStackSection = lazy(() => import('@/components/sections/content/TechStackSection'))
 
-const ProductVaeCorePage = lazy(() => import('../pages/ProductVaeCorePage'))
+const ProductVaeCorePage = lazy(() => import('@/components/pages/ProductVaeCorePage'))
 
 /**
  * Lazy-loaded Neural Network Background with loading fallback

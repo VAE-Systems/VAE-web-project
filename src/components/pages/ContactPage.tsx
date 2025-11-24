@@ -19,7 +19,7 @@ import { MailBuilderTutorialOverlay } from '@/components/ui/tutorial/MailBuilder
 import { ValidationPopup } from '@/components/ui/validation'
 import { BOOKING_LINKS } from '@/config/booking'
 import { contactHero, contactIntro, contactUsps } from '@/content/contact'
-import { useMailBuilderTutorial } from '@/hooks/useMailBuilderTutorial'
+import { useMailBuilderTutorial } from '@/hooks'
 
 const MAIL_TO = 'info@vae.systems'
 
@@ -928,6 +928,6 @@ const ContactPage: React.FC = () => {
   )
 }
 
-const FAQSection = React.lazy(() => import('@/components/sections/FAQSection'))
+const FAQSection = React.lazy(() => import('@/components/sections/interactive/FAQSection'))
 
 export default ContactPage

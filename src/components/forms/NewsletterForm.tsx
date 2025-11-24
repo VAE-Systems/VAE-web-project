@@ -7,7 +7,7 @@
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import React, { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useNewsletter } from '../../hooks/useNewsletter'
+import { useNewsletter } from '../../hooks'
 import type { FormComponentProps } from '../../types'
 
 // ============================================================================

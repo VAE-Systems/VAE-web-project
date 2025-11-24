@@ -20,7 +20,7 @@
       }
     ]
   },
-  "ignorePatterns": ["dist", "node_modules", "*.config.js", "public/sw.js"],
+  "ignorePatterns": ["dist", "node_modules", "*.config.js", "public/sw.js", "archive/**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
@@ -39,8 +39,8 @@
     },
     {
       "files": ["*.jsx", "*.tsx"],
-      "plugins": ["react", "react-hooks"],
-      "extends": ["plugin:react/recommended", "plugin:react-hooks/recommended"],
+      "plugins": ["react", "react-hooks", "jsx-a11y"],
+      "extends": ["plugin:react/recommended", "plugin:react-hooks/recommended", "plugin:jsx-a11y/recommended"],
       "rules": {
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "off"

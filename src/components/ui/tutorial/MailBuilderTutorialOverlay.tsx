@@ -1,5 +1,5 @@
-import { SpotlightTutorialController } from '@/hooks/useSpotlightTutorial'
 import { useTheme } from '@/contexts/ThemeContext'
+import { SpotlightTutorialController } from '@/hooks'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, GraduationCap } from 'lucide-react'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'

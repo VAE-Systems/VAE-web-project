@@ -52,14 +52,16 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          animations: ['framer-motion', 'gsap'],
-          routing: ['react-router-dom'],
-          // Separate heavy libraries
-          three: ['three'],
-          ogl: ['ogl'],
-          // UI components chunk
-          ui: ['lucide-react'],
+          // Core React (most used)
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          // Animation libraries (lazy-loadable)
+          'lib-framer': ['framer-motion'],
+          'lib-gsap': ['gsap'],
+          // Heavy 3D libraries (rarely used, load on-demand)
+          'lib-three': ['three'],
+          'lib-ogl': ['ogl'],
+          // UI essentials
+          'ui-icons': ['lucide-react'],
         },
         // Better file naming for caching
         chunkFileNames: 'assets/js/[name]-[hash].js',
@@ -78,7 +80,7 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-    chunkSizeWarningLimit: 500, // Reduziert von 700
-    assetsInlineLimit: 4096, // Inline kleine Assets
+    chunkSizeWarningLimit: 400, // Optimiert für bessere Performance
+    assetsInlineLimit: 2048, // Reduziert: nur sehr kleine Assets inline (2KB statt 4KB)
   },
 }))

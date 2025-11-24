@@ -1,4 +1,4 @@
-import type { ThemeDefinition, ThemeMetadata, ThemeRegistry, ThemeMode } from './types'
+import type { ThemeDefinition, ThemeMetadata, ThemeMode, ThemeRegistry } from './types'
 
 const spacing: ThemeDefinition['spacing'] = {
   xs: '0.25rem',
@@ -56,21 +56,21 @@ const typography: ThemeDefinition['typography'] = {
     letterSpacing: '-0.01em',
   },
   body: {
-    fontFamily: 'var(--font-base, "Inter", system-ui)',
+    fontFamily: 'var(--font-base, "Geist", system-ui)',
     fontSize: '1rem',
     lineHeight: 1.6,
     fontWeight: 400,
     letterSpacing: '-0.005em',
   },
   bodySmall: {
-    fontFamily: 'var(--font-base, "Inter", system-ui)',
+    fontFamily: 'var(--font-base, "Geist", system-ui)',
     fontSize: '0.9375rem',
     lineHeight: 1.55,
     fontWeight: 400,
     letterSpacing: '-0.003em',
   },
   label: {
-    fontFamily: 'var(--font-base, "Inter", system-ui)',
+    fontFamily: 'var(--font-base, "Geist", system-ui)',
     fontSize: '0.8125rem',
     lineHeight: 1.4,
     fontWeight: 600,

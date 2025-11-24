@@ -8,7 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Critical Performance Optimizations -->
-  <link rel="preload" href="/fonts/inter/InterVariable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/fonts/geist/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin="anonymous"
+    fetchpriority="high" />
+
+  <!-- Preload critical images for faster LCP -->
+  <link rel="preload" href="/App_Logo_light.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+
   <!-- Google Fonts deactivated for GDPR compliance -->
   <!-- <link rel="dns-prefetch" href="//fonts.googleapis.com" /> -->
   <!-- <link rel="dns-prefetch" href="//fonts.gstatic.com" /> -->
@@ -91,7 +96,6 @@
 
   <!-- All icons rendered via lucide-react; no external webfonts needed -->
   <!-- Fonts (Geist + Inter) werden lokal gehostet via @font-face in globals.css -->
-  <link rel="preload" href="/fonts/geist/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
 
   <title>VAE Systems - Structure is strategy. Business efficiency through open source.</title>
 </head>

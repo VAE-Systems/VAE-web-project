@@ -1,8 +1,5 @@
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useEffect, useRef } from 'react'
-
-gsap.registerPlugin(ScrollTrigger)
+import { loadGsap, type GsapModules } from '@/utils/gsapLoader'
+import { useEffect, useRef, useState } from 'react'
 
 export interface UseScrollRevealOptions {
   /** Trigger-Element (Standard: das Element selbst) */
@@ -54,6 +51,7 @@ export interface UseScrollRevealOptions {
  */
 export function useScrollReveal<T extends HTMLElement>(options: UseScrollRevealOptions = {}) {
   const elementRef = useRef<T>(null)
+  const [gsapLoaded, setGsapLoaded] = useState<GsapModules | null>(null)
 
   useEffect(() => {
     const element = elementRef.current
@@ -62,10 +60,24 @@ export function useScrollReveal<T extends HTMLElement>(options: UseScrollRevealO
     // Respektiere prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) {
-      // Zeige Element sofort ohne Animation
-      gsap.set(element, { opacity: 1, y: 0, scale: 1 })
+      // Zeige Element sofort ohne Animation (kein GSAP laden)
+      element.style.opacity = '1'
+      element.style.transform = 'translateY(0) scale(1)'
       return
     }
+
+    // Lazy-load GSAP nur wenn benötigt
+    loadGsap().then(modules => {
+      setGsapLoaded(modules)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!gsapLoaded) return
+    const element = elementRef.current
+    if (!element) return
+
+    const { gsap } = gsapLoaded
 
     const {
       trigger = element,
@@ -85,7 +97,7 @@ export function useScrollReveal<T extends HTMLElement>(options: UseScrollRevealO
     } = options
 
     // Initial State setzen
-    const initialState: gsap.TweenVars = {
+    const initialState: any = {
       opacity,
       y,
       scale,
@@ -96,10 +108,10 @@ export function useScrollReveal<T extends HTMLElement>(options: UseScrollRevealO
       initialState.filter = `blur(${blur}px)`
     }
 
-    gsap.set(element, initialState)
+    gsap.gsap.set(element, initialState)
 
     // Animation erstellen
-    const animation = gsap.to(element, {
+    const animation = gsap.gsap.to(element, {
       opacity: 1,
       y: 0,
       scale: 1,
@@ -118,14 +130,15 @@ export function useScrollReveal<T extends HTMLElement>(options: UseScrollRevealO
     })
 
     return () => {
+      if (!gsapLoaded) return
       animation.kill()
-      ScrollTrigger.getAll().forEach(st => {
+      gsapLoaded.ScrollTrigger.getAll().forEach(st => {
         if (st.trigger === element || st.trigger === trigger) {
           st.kill()
         }
       })
     }
-  }, [options])
+  }, [options, gsapLoaded])
 
   return elementRef
 }

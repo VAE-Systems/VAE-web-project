@@ -153,37 +153,27 @@ export const privacyContent: PrivacyContent = {
       title: '9. Schriftarten (Fonts)',
       body: (
         <>
-          Wir nutzen eine{' '}
-          <span className="text-text-light">Kombination aus lokal gehosteten Schriftarten und CDN-basierten Fonts</span>
-          :
+          Wir nutzen ausschließlich{' '}
+          <span className="text-text-light">lokal gehostete Schriftarten (Self-Hosted Fonts)</span>:
           <br />
           <br />
           <ul className="ml-6 list-disc space-y-1">
             <li>
-              <span className="font-medium text-text-light">Self-Hosted Fonts:</span> Primäre Schriftarten (z.B.
-              „Inter", „Geist") werden lokal von unserem Server ausgeliefert. Hierbei findet keine Datenübertragung an
-              Dritte statt.
+              <span className="font-medium text-text-light">Geist (Primary Font):</span> Unsere primäre Schriftart
+              „Geist" wird vollständig lokal von unserem Server ausgeliefert. Hierbei findet{' '}
+              <span className="text-text-light">keine Datenübertragung an Dritte</span> statt.
             </li>
             <li>
-              <span className="font-medium text-text-light">CDN-basierte Fonts:</span> Für bestimmte Spezial-Schriften
-              (z.B. Icon-Fonts, Display-Schriften) nutzen wir Content Delivery Networks (CDN) wie Google Fonts oder
-              jsDelivr. Beim Laden dieser Schriften wird Ihre IP-Adresse technisch bedingt an den CDN-Anbieter
-              übertragen. Rechtsgrundlage: berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) an performanter
-              Auslieferung und optimaler Darstellung.
+              <span className="font-medium text-text-light">System-Fallback:</span> Als Fallback verwenden wir
+              Standard-System-Schriftarten (system-ui, -apple-system, Segoe UI), die bereits auf Ihrem Gerät installiert
+              sind und keine externe Datenübertragung erfordern.
             </li>
           </ul>
           <br />
-          Weitere Informationen zur Datenverarbeitung finden Sie in den Datenschutzerklärungen der jeweiligen
-          CDN-Anbieter (z.B.{' '}
-          <a
-            href="https://policies.google.com/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-vae-turquoise hover:underline"
-          >
-            Google Fonts Privacy Policy
-          </a>
-          ).
+          <span className="text-text-light">
+            Rechtsgrundlage: Berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) an performanter Auslieferung und
+            optimaler Darstellung unter vollständiger Wahrung Ihrer Privatsphäre.
+          </span>
         </>
       ),
     },
@@ -196,6 +186,27 @@ export const privacyContent: PrivacyContent = {
           <span className="text-vae-turquoise">Contabo GmbH (Deutschland)</span>. Mit eingesetzten
           Infrastruktur‑/Hosting‑Anbietern besteht bzw. wird – falls erforderlich – ein Vertrag zur Auftragsverarbeitung
           (AVV) gemäß Art. 28 DSGVO abgeschlossen.
+          <br />
+          <br />
+          <span className="font-medium text-text-light">Google Search Console</span>
+          <br />
+          Wir nutzen die Google Search Console, ein Webmaster-Tool von Google Ireland Limited („Google"), Gordon House,
+          Barrow Street, Dublin 4, Irland. Die Search Console dient ausschließlich der technischen Analyse unserer
+          Website aus Sicht der Google-Suche (z. B. Indexierungsstatus, Suchanfragen, technische Fehler). Es werden{' '}
+          <span className="text-text-light">
+            keine personenbezogenen Daten von Website-Besuchern erfasst oder getrackt
+          </span>
+          . Die Nutzung erfolgt auf Grundlage unseres berechtigten Interesses an der Optimierung und fehlerfreien
+          Darstellung unserer Website (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen finden Sie in der{' '}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-vae-turquoise hover:underline"
+          >
+            Datenschutzerklärung von Google
+          </a>
+          .
           <br />
           <br />
           <span className="font-medium text-text-light">Externe Inhalte (CDN und Bildquellen)</span>

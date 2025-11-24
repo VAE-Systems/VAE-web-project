@@ -16,36 +16,11 @@
   font-display: swap;
 }
 
-/* Inter Variable font (Fallback) */
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter/InterVariable.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Static fallbacks (if variable not available) */
-@font-face {
-  font-family: 'Inter Fallback';
-  src: url('/fonts/inter/Inter-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter Fallback';
-  src: url('/fonts/inter/Inter-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Use Plus Jakarta Sans as primary, Inter as fallback */
+/* Geist is primary font, system-ui as fallback */
 :root {
   --font-family-sans:
-    'Geist', 'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+    'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji',
+    'Segoe UI Emoji', sans-serif;
 }
 
 /* Material Symbols - Outlined */
@@ -2223,4 +2198,137 @@ body.using-keyboard *:focus {
 .section-card-backdrop::after {
   content: '';
   @apply absolute inset-8 rounded-[24px] border border-white/5 bg-white/5;
+}
+
+/* ========================================
+   CSS Animation Utilities
+   Lightweight alternative to Framer Motion
+   ======================================== */
+
+/* Animation base classes - respects prefers-reduced-motion */
+@layer utilities {
+  /* Fade animations */
+  .animate-fade {
+    animation: fadeIn var(--animation-duration, 400ms) var(--animation-easing, ease-out) var(--animation-delay, 0ms)
+      both;
+  }
+
+  /* Slide animations */
+  .animate-slide-up {
+    animation: slideUp var(--animation-duration, 400ms) var(--animation-easing, ease-out) var(--animation-delay, 0ms)
+      both;
+  }
+
+  .animate-slide-down {
+    animation: slideDown var(--animation-duration, 400ms) var(--animation-easing, ease-out) var(--animation-delay, 0ms)
+      both;
+  }
+
+  .animate-slide-left {
+    animation: slideLeft var(--animation-duration, 400ms) var(--animation-easing, ease-out) var(--animation-delay, 0ms)
+      both;
+  }
+
+  .animate-slide-right {
+    animation: slideRight var(--animation-duration, 400ms) var(--animation-easing, ease-out) var(--animation-delay, 0ms)
+      both;
+  }
+
+  /* Scale animation */
+  .animate-scale {
+    animation: scaleIn var(--animation-duration, 400ms) var(--animation-easing, ease-out) var(--animation-delay, 0ms)
+      both;
+  }
+
+  /* Speed modifiers */
+  .animate-fast {
+    --animation-duration: 200ms;
+  }
+
+  .animate-normal {
+    --animation-duration: 400ms;
+  }
+
+  .animate-slow {
+    --animation-duration: 600ms;
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade,
+    .animate-slide-up,
+    .animate-slide-down,
+    .animate-slide-left,
+    .animate-slide-right,
+    .animate-scale {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
+
+/* Keyframe definitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

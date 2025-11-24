@@ -32,7 +32,6 @@ const HomePage = React.lazy(() => import('@components/pages/HomePage'))
 const SetupPage = React.lazy(() => import('@components/pages/SetupPage'))
 const BetreuungPage = React.lazy(() => import('@components/pages/BetreuungPage'))
 const BeratungPage = React.lazy(() => import('@components/pages/BeratungPage'))
-const AboutPage = React.lazy(() => import('@components/pages/AboutPage'))
 const ReferenzenPage = React.lazy(() => import('@components/pages/ReferenzenPage'))
 const ContactPage = React.lazy(() => import('@components/pages/ContactPage'))
 const ImpressumPage = React.lazy(() => import('@components/pages/ImpressumPage'))
@@ -131,7 +130,7 @@ const App: React.FC = () => {
                     <Route path="/betreuung" element={<Navigate to="/services/betreuung" replace />} />
 
                     {/* Main Pages */}
-                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/about" element={<Navigate to="/ueber-uns/werte" replace />} />
                     <Route path="/about/referenzen" element={<ReferenzenPage />} />
                     <Route path="/case-studies" element={<ReferenzenPage />} />
                     <Route path="/ressourcen/case-studies" element={<ReferenzenPage />} />
@@ -151,7 +150,7 @@ const App: React.FC = () => {
 
                     {/* Redirects */}
                     <Route path="/kontakt" element={<Navigate to="/contact" replace />} />
-                    <Route path="/resources/referenzen" element={<Navigate to="/about/referenzen" replace />} />
+                    <Route path="/resources/referenzen" element={<Navigate to="/ressourcen/case-studies" replace />} />
 
                     {/* Legal */}
                     <Route path="/impressum" element={<ImpressumPage />} />

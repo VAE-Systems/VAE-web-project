@@ -32,12 +32,12 @@ const projectIntents = [
   {
     id: 'infrastructure',
     label: 'Souveräne Infrastruktur',
-    description: 'Selfhosting, Open Source, Observability & Operations',
+    description: 'Selfhosting, Open Source, Monitoring & Betrieb',
   },
   {
     id: 'product',
-    label: 'Produkt & KI-Strategy',
-    description: 'Discovery, Prototyping, Product Ops und Growth-Loops',
+    label: 'Produkt- & KI-Strategie',
+    description: 'Discovery, Prototyping, MVPs und produktionsreife Features',
   },
   {
     id: 'advisory',
@@ -47,7 +47,7 @@ const projectIntents = [
 ]
 
 const timelineOptions = [
-  { id: 'now', label: 'Sofort / < 4 Wochen' },
+  { id: 'now', label: 'Sofort, innerhalb von 4 Wochen' },
   { id: 'soon', label: 'In 4–8 Wochen' },
   { id: 'later', label: 'In diesem Quartal' },
 ]
@@ -69,37 +69,42 @@ const helpTexts = {
   automation: {
     title: 'KI-Automatisierung',
     description:
-      'Wir bauen intelligente Agenten und Workflows, die repetitive Wissensarbeit automatisieren – von Datenverarbeitung bis zu komplexen Entscheidungsprozessen.',
+      'Für Anfragen rund um Agenten, Pipelines und Automatisierung von Wissensarbeit. Wenn Sie z.B. Dokumente, E-Mails oder interne Prozesse mit KI unterstützen möchten.',
   },
   infrastructure: {
     title: 'Souveräne Infrastruktur',
     description:
-      'Self-Hosting, Open-Source-Lösungen und vollständige Kontrolle über Ihre Daten. Ideal für Unternehmen, die Unabhängigkeit von Cloud-Anbietern suchen.',
+      'Für Selfhosting, Open-Source-Lösungen, Monitoring und Betrieb. Wenn Sie Abhängigkeiten von SaaS-Anbietern reduzieren oder eigene Infrastruktur aufbauen wollen.',
   },
   product: {
-    title: 'Produkt & KI-Strategy',
+    title: 'Produkt- & KI-Strategie',
     description:
-      'Von der Idee zum marktreifen Produkt: Discovery-Workshops, Prototyping, Product Operations und datengetriebene Growth-Strategien.',
+      'Für Discovery, Prototyping und strategische Fragen: Welche KI-Features lohnen sich, wie sehen sinnvolle MVPs aus und wie bringen wir Ideen in ein stabiles Produkt.',
   },
   advisory: {
     title: 'Advisory / Sparring',
     description:
-      'Externe Perspektive für kritische Entscheidungen: Technologie-Audits, Architektur-Reviews und strategisches Sparring für CTOs und Geschäftsführung.',
+      'Für Sparring auf Augenhöhe: Sounding Board, Audits oder eine zweite Meinung für Management und Tech-Leads, ohne dass sofort ein großes Projekt starten muss.',
   },
   timeline: {
     title: 'Startzeitpunkt',
     description:
-      'Wann möchten Sie starten? "Sofort" bedeutet binnen 2-4 Wochen, "Quartal" plant längerfristig. Hilft uns bei der Kapazitätsplanung.',
+      'Sie wollen kurzfristig starten oder haben bereits konkreten Druck. Wir prüfen, was realistisch ist, und melden uns mit einem passenden Vorschlag.',
   },
   companyStage: {
     title: 'Team & Setup',
     description:
-      'Ihr aktueller Tech-Reifegrad: Scale-up mit bestehendem Team, Mittelstand mit IT-Abteilung oder Greenfield-Aufbau von Grund auf.',
+      'Sie haben ein eigenes Tech-Team (Scale-up), eine IT/externen Dienstleister (Mittelstand) oder starten im Greenfield. Hilft uns, Architektur- und Automatisierungs-Support passend zu planen.',
   },
   collabMode: {
     title: 'Zusammenarbeitsmodell',
     description:
-      'Projekt = festes Deliverable. Retainer = kontinuierliche Begleitung. Sparring = regelmäßige Strategy-Sessions ohne Umsetzung.',
+      'Projekt: klarer Scope mit Anfang und Ende. Retainer: laufende Zusammenarbeit mit Monatsbudget. Sparring/Audit: zeitlich begrenzte Begleitung für Reviews und Entscheidungen.',
+  },
+  notes: {
+    title: 'Kontext oder Notizen',
+    description:
+      'Optional: Stichpunkte zu Ihrer aktuellen Situation, Systemen oder offenen Fragen. Je mehr Kontext wir haben, desto konkreter kann unsere erste Antwort sein.',
   },
 }
 
@@ -625,9 +630,13 @@ const ContactPage: React.FC = () => {
       <section
         id="mail-builder"
         ref={mailBuilderRef}
-        className="bg-gradient-to-b from-gray-100 via-white to-gray-50 py-24 dark:bg-gradient-to-b dark:from-bg-dark dark:via-[#081014] dark:to-bg-darker"
+        className="relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white py-24 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker"
       >
-        <div className="container-vae grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_90%,rgba(var(--vae-turquoise-rgb),0.2),transparent_55%)]"
+        />
+        <div className="container-vae relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div className="space-y-8">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
@@ -831,7 +840,12 @@ const ContactPage: React.FC = () => {
                 </label>
               </div>
 
-              <label className="flex flex-col gap-2 text-sm text-gray-600 dark:text-white/70">
+              <label
+                className="flex flex-col gap-2 text-sm text-gray-600 dark:text-white/70"
+                onClick={() => {
+                  if (helpMode) showHelp('notes')
+                }}
+              >
                 Kontext oder Notizen
                 <textarea
                   value={notes}

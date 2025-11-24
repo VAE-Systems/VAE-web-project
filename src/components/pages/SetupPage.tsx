@@ -16,6 +16,7 @@ import {
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import FeaturePill from '@/components/ui/FeaturePill'
 import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/content/shared/faqData'
 import { flattenedSaasTools, saasToolCategories } from '@/content/shared/saasTools'
@@ -866,14 +867,23 @@ const SetupPage: React.FC = () => {
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
                   <span className="text-sm text-gray-700 dark:text-text-secondary">
-                    Kundenportal mit Chat-Kanal ins SRE-Team & sicherer Dateiablage
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
-                  <span className="text-sm text-gray-700 dark:text-text-secondary">
                     Verbindliche SLAs mit klaren Reaktionszeiten; Accounts werden bei Bedarf erweitert
                   </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  {/* gold check for highlighted customer portal feature */}
+                  <svg className="h-5 w-5 flex-shrink-0 text-amber-400" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <path
+                      d="M20 6L9 17l-5-5"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <FeaturePill variant="gold">
+                    Kundenaccount (Chat & Files) für Übergaben, Reports und Abstimmungen
+                  </FeaturePill>
                 </li>
               </ul>
               <div className="mt-6 flex justify-center">

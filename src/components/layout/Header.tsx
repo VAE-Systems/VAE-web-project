@@ -1,12 +1,13 @@
 import { DropdownMenu } from '@/components/navigation/dropdown/DropdownMenu'
 import { MENU_DATA } from '@/components/navigation/dropdown/menuData'
+import { BOOKING_LINKS } from '@/config/booking'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useAttentionSignal } from '@/hooks'
 import { Calendar, LogIn, Menu, Moon, Sun, X } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-const CTA_URL = '/contact#booking'
+const CTA_URL = BOOKING_LINKS.ERSTBERATUNG
 const LOGIN_URL = 'https://nc.intern.vae.systems/login?clear=1'
 
 interface MagneticButtonProps {

@@ -1,3 +1,4 @@
+import FeaturePill from '@/components/ui/FeaturePill'
 import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/content/shared/faqData'
 import {
@@ -24,7 +25,6 @@ import React, { useCallback, useMemo } from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
-import FeaturePill from '@/components/ui/FeaturePill'
 
 const bookingUrl = BOOKING_LINKS.RETAINER_PLANUNG
 
@@ -101,7 +101,7 @@ const serviceLevels: ServiceLevel[] = [
     suitable: ['Teams mit IT-Erfahrung', '5–30 Mitarbeitende', 'Maximale Unabhängigkeit gewünscht'],
     binding: 'Monatlich kündbar (Preis-Premium für maximale Flexibilität)',
     ctaLabel: 'Zum Gespräch',
-    ctaSubline: 'Kundenaccount für Übergaben, Reports und abgestimmte Wartung.',
+    ctaSubline: 'Bei konkreter Anfrage erhalten Sie ein individualisiertes Angebot.',
     footnote:
       'Individuelles Angebot – abhängig von Teamgröße, Infrastruktur-Umfang und gewünschtem KI-Einsatz. Transparenz im Beratungsgespräch garantiert.',
   },
@@ -124,7 +124,7 @@ const serviceLevels: ServiceLevel[] = [
     suitable: ['Teams ohne IT-Abteilung', '20–100+ Mitarbeitende', 'Business- statt IT-Fokus'],
     binding: 'Monatlich kündbar – keine Langzeitbindung',
     ctaLabel: 'Jetzt Beratung sichern',
-    ctaSubline: 'Kundenaccount inkl. Chat & Dateien, regelmäßige Verbesserungs-Updates.',
+    ctaSubline: 'Bei konkreter Anfrage erhalten Sie ein individualisiertes Angebot.',
     highlighted: true,
     badge: 'Populär',
     footnote:
@@ -668,7 +668,7 @@ const BetreuungPage: React.FC = () => {
                               <li key={item} className="flex items-center gap-2 text-sm">
                                 {/* left check icon - same size as other list checks, colored by variant */}
                                 <svg
-                                  className={`${variant === 'gold' ? 'text-amber-400' : 'text-sky-300'} h-4 w-4`}
+                                  className={`${variant === 'gold' ? 'text-amber-400' : 'text-black dark:text-white'} ${variant === 'gold' ? 'h-5 w-5' : 'h-4 w-4'}`}
                                   viewBox="0 0 24 24"
                                   fill="none"
                                   aria-hidden="true"

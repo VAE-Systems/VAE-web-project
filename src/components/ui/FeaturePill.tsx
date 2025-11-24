@@ -12,15 +12,16 @@ type Props = {
  * Designed for dark backgrounds (uses translucent white background and gold accent for the icon).
  */
 export const FeaturePill: React.FC<Props> = ({ icon, children, className = '', variant = 'neutral' }) => {
-  // Improved variant styling for better contrast on dark backgrounds.
-  // Gold: warm accent, subtle glow.
-  // Silver: cool, slightly bluish tint so it reads on dark backgrounds.
+  // Variants stay subtle and readable on hell/dunkel:
+  // - gold: warm Akzent, transparenter Hintergrund
+  // - silver: kühler, neutraler Ton
+  // - neutral: minimale Linie, dezente Fläche
   const variantClasses =
     variant === 'gold'
-      ? 'border border-amber-500/30 text-white bg-amber-500/6 shadow-[0_6px_20px_-12px_rgba(212,175,55,0.14)]'
+      ? 'border border-amber-400/50 bg-amber-400/10 text-amber-900 shadow-[0_8px_28px_-16px_rgba(212,175,55,0.18)] dark:border-amber-300/60 dark:bg-amber-300/12 dark:text-white'
       : variant === 'silver'
-        ? 'border border-sky-400/25 text-white bg-sky-400/6'
-        : 'border border-white/6 text-white bg-white/4'
+        ? 'border border-slate-300/70 bg-slate-100/60 text-slate-900 dark:border-white/20 dark:bg-white/5 dark:text-white'
+        : 'border border-black/10 bg-white/70 text-slate-900 dark:border-white/15 dark:bg-white/5 dark:text-white'
 
   return (
     <span

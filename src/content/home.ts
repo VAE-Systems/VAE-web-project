@@ -366,7 +366,7 @@ export const referenceProjects: ReferenceProject[] = [
       'VAE als technischer Ansprechpartner',
     ],
     status: 'Live',
-    badge: 'Live seit 2024',
+    badge: 'Live seit 2025',
   },
   {
     id: 'aktiv-kollektiv',

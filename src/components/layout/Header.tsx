@@ -484,7 +484,7 @@ const HeaderModern: React.FC = () => {
           <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={closeMenu} aria-hidden="true" />
           <div
             ref={sheetRef}
-            className="absolute bottom-0 left-0 right-0 top-0 flex flex-col overflow-hidden bg-bg-darker text-white shadow-[0_20px_80px_rgba(0,0,0,0.55)]"
+            className={`absolute bottom-0 left-0 right-0 top-0 flex flex-col overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.55)] ${isDark ? 'bg-bg-darker text-white' : 'bg-white text-gray-900'}`}
             role="dialog"
             aria-modal="true"
             aria-label="Hauptmenü"
@@ -494,7 +494,7 @@ const HeaderModern: React.FC = () => {
               <span className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise">Menü</span>
               <button
                 onClick={closeMenu}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                className={`flex h-10 w-10 items-center justify-center rounded-full border transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 bg-white/5 text-white' : 'border-gray-200/90 bg-white text-gray-800'}`}
                 aria-label="Menü schließen"
               >
                 <X className="h-5 w-5" />
@@ -505,13 +505,18 @@ const HeaderModern: React.FC = () => {
               <div className="space-y-6">
                 <div className="grid gap-4">
                   {navSections.map(section => (
-                    <div key={section.id} className="rounded-2xl border border-white/5 bg-white/[0.03] p-4">
+                    <div
+                      key={section.id}
+                      className={`rounded-2xl border p-4 ${isDark ? 'border-white/5 bg-white/[0.03]' : 'border-gray-200/80 bg-white/95'}`}
+                    >
                       <div className="flex items-center justify-between gap-2">
                         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">
                           {section.label}
                         </p>
                         {section.subtitle && (
-                          <span className="text-xs font-medium text-white/60">{section.subtitle}</span>
+                          <span className={`text-xs font-medium ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
+                            {section.subtitle}
+                          </span>
                         )}
                       </div>
                       <div className="mt-3 grid gap-2">
@@ -520,7 +525,7 @@ const HeaderModern: React.FC = () => {
                             key={item.id}
                             to={item.href}
                             onClick={closeMenu}
-                            className="rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 text-sm font-semibold text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                            className={`rounded-xl border px-3 py-2 text-sm font-semibold transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/5 bg-white/[0.02] text-white' : 'border-gray-200/80 bg-white/95 text-gray-800'}`}
                           >
                             {item.label}
                           </Link>
@@ -542,7 +547,7 @@ const HeaderModern: React.FC = () => {
                   <a
                     href={LOGIN_URL}
                     onClick={closeMenu}
-                    className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                    className={`flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 text-white' : 'border-gray-200/80 text-gray-800'}`}
                   >
                     <LogIn className="h-4 w-4" />
                     Kundenlogin
@@ -551,7 +556,7 @@ const HeaderModern: React.FC = () => {
                     onClick={() => {
                       toggleTheme()
                     }}
-                    className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                    className={`flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 bg-white/5 text-white' : 'border-gray-200/80 bg-white/95 text-gray-800'}`}
                   >
                     {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                     {isDark ? 'Light Mode' : 'Dark Mode'}

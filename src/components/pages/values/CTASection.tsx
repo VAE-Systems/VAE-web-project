@@ -18,7 +18,7 @@ export const CTASection: React.FC = () => {
           <h2 className="mt-4 text-3xl font-semibold text-text-light md:text-4xl">{CTA.heading}</h2>
           <p className="mt-6 text-base leading-relaxed text-text-secondary sm:text-lg">{CTA.copy}</p>
 
-          <MagneticButton className="mt-10 inline-flex w-full sm:w-auto">
+          <MagneticButton className="mx-auto mt-10 flex w-full max-w-[420px] justify-center sm:w-auto">
             <Link to={CTA.href} className="btn-primary flex min-w-[260px] items-center justify-center gap-3">
               <ArrowRight className="h-4 w-4" />
               {CTA.text}

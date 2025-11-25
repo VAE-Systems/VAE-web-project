@@ -11,7 +11,8 @@ const ScrollProgress: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const trackRef = useRef<HTMLDivElement | null>(null)
-  const trackWidthClass = isDragging || isHovering ? 'w-[12px] md:w-[14px]' : 'w-[8px] md:w-[10px]'
+  const isActive = isDragging || isHovering
+  const trackWidthClass = isActive ? 'w-[10px] sm:w-[12px] md:w-[14px]' : 'w-[6px] sm:w-[8px] md:w-[10px]'
 
   useEffect(() => {
     const calc = () => {
@@ -74,12 +75,12 @@ const ScrollProgress: React.FC = () => {
 
   return (
     <div
-      className="fixed right-3 top-1/2 z-40 -translate-y-1/2 select-none pr-1 md:right-4 md:pr-0"
+      className="fixed right-2 top-1/2 z-40 -translate-y-1/2 select-none pr-1 sm:right-3 md:right-4 md:pr-0"
       aria-label={`Scroll Fortschritt ${pct}%`}
     >
       <div
         ref={trackRef}
-        className={`bg-bg-primary/8 dark:bg-white/8 border-border-primary/15 group/track relative h-[320px] overflow-hidden rounded-full border backdrop-blur-sm transition-all duration-200 ${trackWidthClass} hover:scale-[1.03] active:scale-[1.04] dark:border-white/15`}
+        className={`bg-bg-primary/6 dark:bg-white/8 border-border-primary/15 group/track relative h-[220px] max-h-[70vh] overflow-hidden rounded-full border backdrop-blur-sm transition-all duration-200 sm:h-[260px] md:h-[320px] ${trackWidthClass} hover:scale-[1.03] active:scale-[1.04] dark:border-white/15`}
         role="slider"
         aria-valuemin={0}
         aria-valuemax={100}
@@ -104,8 +105,8 @@ const ScrollProgress: React.FC = () => {
         />
         {/* Drag handle */}
         <div
-          className={`absolute left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-vae-turquoise/50 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark shadow-[0_8px_20px_rgba(8,255,193,0.35)] transition-transform duration-150 ${
-            isDragging || isHovering ? 'scale-110' : ''
+          className={`absolute left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-vae-turquoise/50 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark shadow-[0_8px_20px_rgba(8,255,193,0.35)] transition-transform duration-150 md:h-5 md:w-5 ${
+            isActive ? 'scale-110' : ''
           }`}
           style={{ top: `${pct}%` }}
         >

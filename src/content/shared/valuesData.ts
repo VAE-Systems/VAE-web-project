@@ -27,7 +27,7 @@ export const VALUES_DATA: Value[] = [
     intro:
       'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir kommentieren Pull Requests so, dass Sie sie auch als Nicht-Entwicklerin nachvollziehen können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
     benefits: [
-      'Live-Dokumentation in Git, Notion und Tickets statt Präsentationen im Nachgang',
+      'Live-Dokumentation in Git und Tickets statt Präsentationen im Nachgang',
       'Risiken und Annahmen werden sofort gekennzeichnet – kein Schönreden',
       'Open-Source-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur',
       'Audits bleiben möglich, weil jedes Artefakt versioniert ist',
@@ -49,7 +49,7 @@ export const VALUES_DATA: Value[] = [
     id: 'kommunikation',
     title: 'Klare Kommunikation — Die Grundlage für Erfolg',
     intro:
-      'Sie erhalten Klartext statt Buzzword-Salven. Wir melden Abweichungen unmittelbar – nicht erst im Monatsreport. Jede Zielgruppe erhält das Format, das sie braucht, damit Ihr Projekt steuerbar bleibt. So wissen Sie jederzeit, was als Nächstes passiert.',
+      'Sie bekommen klare Informationen, keine Schlagworte.\nAbweichungen sprechen wir an, sobald sie entstehen – nicht erst im Monatsreport.\nJede Zielgruppe erhält genau die Inhalte, die sie für Entscheidungen braucht.\nSo bleibt Ihr Projekt jederzeit steuerbar.',
     benefits: [
       'Workshops übersetzen komplexe Technik in Entscheidungen für Business-Teams',
       'Status-Reports zeigen Abweichungen früh statt im Nachgang',
@@ -174,7 +174,7 @@ export const TESTIMONIAL = {
 
 export const CTA = {
   heading: 'Lassen Sie uns zusammenarbeiten',
-  copy: 'Diese Werte sind keine Floskeln – sie sind unser Arbeitsalltag. Wenn das zu Ihrer Vorstellung von Technologiepartnerschaft passt, sprechen wir darüber.',
+  copy: 'Wenn diese Werte zu Ihrer Vorstellung von Technologiepartnerschaft passen, nehmen wir uns Zeit für Ihr Setup. Im Erstgespräch erhalten Sie eine ehrliche Einschätzung, wo wir Sie entlasten und welchen Hebel VAE für Ihr Team haben kann.',
   text: 'Kostenloses Erstgespräch vereinbaren',
   href: '/contact',
 }

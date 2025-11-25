@@ -56,8 +56,11 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   const panelRefCallbacks = useRef<Record<string, (node: HTMLDivElement | null) => void>>({})
   const [panelHeights, setPanelHeights] = useState<Record<string, number>>({})
   const [panelRefVersion, setPanelRefVersion] = useState(0)
+  const [preventHoverClose, setPreventHoverClose] = useState(false)
+  const [isPinned, setIsPinned] = useState(false)
 
   const activeContentCache = useMemo(() => activeContentByMenu, [activeContentByMenu])
+  const isTouchDevice = useMemo(() => typeof window !== 'undefined' && 'ontouchstart' in window, [])
 
   useEffect(() => {
     setActiveContentByMenu(mergeInitialActiveState(menus, initialActiveItems))
@@ -73,6 +76,8 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (!containerRef.current?.contains(event.target as Node)) {
         setOpenMenuId(null)
+        setPreventHoverClose(false)
+        setIsPinned(false)
       }
     }
 
@@ -88,6 +93,8 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   useEffect(() => {
     if (!isDesktop) {
       setOpenMenuId(null)
+      setPreventHoverClose(false)
+      setIsPinned(false)
     }
   }, [isDesktop])
 
@@ -140,6 +147,8 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     return () => {
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current)
       if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+      setPreventHoverClose(false)
+      setIsPinned(false)
     }
   }, [])
 
@@ -155,14 +164,34 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     hoverTimeoutRef.current = setTimeout(() => setMenuActiveItem(menuId, itemId), HOVER_DEBOUNCE_MS)
   }
 
-  const openMenu = (menuId: string) => {
+  const openMenu = (menuId: string, options?: { pinned?: boolean }) => {
+    const pinned = options?.pinned ?? false
+    const wasPinnedCurrentMenu = isPinned && openMenuId === menuId
+    if (isPinned && !pinned && openMenuId !== null && openMenuId !== menuId) {
+      return
+    }
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
     setOpenMenuId(menuId)
+    const nextPinned = pinned || wasPinnedCurrentMenu
+    setIsPinned(nextPinned)
+    setPreventHoverClose(nextPinned)
   }
 
   const closeMenu = () => {
+    if (isPinned || preventHoverClose) return
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
-    closeTimeoutRef.current = setTimeout(() => setOpenMenuId(null), CLOSE_DELAY_MS)
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenMenuId(null)
+      setIsPinned(false)
+      setPreventHoverClose(false)
+    }, CLOSE_DELAY_MS)
+  }
+
+  const forceCloseMenu = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+    setOpenMenuId(null)
+    setIsPinned(false)
+    setPreventHoverClose(false)
   }
 
   const handleTriggerKeyDown =
@@ -172,21 +201,21 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault()
         if (openMenuId === menuId) {
-          setOpenMenuId(null)
+          forceCloseMenu()
         } else {
-          openMenu(menuId)
+          openMenu(menuId, { pinned: true })
           itemRefs.current[menuId]?.[0]?.focus()
         }
       }
 
       if (event.key === 'ArrowDown') {
         event.preventDefault()
-        openMenu(menuId)
+        openMenu(menuId, { pinned: true })
         itemRefs.current[menuId]?.[0]?.focus()
       }
 
       if (event.key === 'Escape') {
-        setOpenMenuId(null)
+        forceCloseMenu()
         triggerRefs.current[menuId]?.blur()
       }
     }
@@ -207,7 +236,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 
       if (event.key === 'Escape') {
         event.preventDefault()
-        setOpenMenuId(null)
+        forceCloseMenu()
         triggerRefs.current[menuId]?.focus()
       }
     }
@@ -243,11 +272,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
           <div
             key={menu.id}
             className="relative"
-            onMouseEnter={() => openMenu(menu.id)}
-            onMouseLeave={closeMenu}
-            onFocusCapture={() => openMenu(menu.id)}
+            {...(!isTouchDevice && {
+              onMouseEnter: () => openMenu(menu.id, { pinned: false }),
+              onMouseLeave: closeMenu,
+            })}
+            onFocusCapture={() => openMenu(menu.id, { pinned: false })}
           >
             <button
+              type="button"
               ref={node => {
                 triggerRefs.current[menu.id] = node
               }}
@@ -259,6 +291,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               aria-haspopup="true"
               aria-expanded={panelVisible}
               aria-controls={`${menu.id}-panel`}
+              onClick={() => {
+                if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+                if (openMenuId === menu.id && isPinned) {
+                  forceCloseMenu()
+                  return
+                }
+                openMenu(menu.id, { pinned: true })
+              }}
               onKeyDown={handleTriggerKeyDown(menu.id, menu.menuItems.length > 0)}
             >
               {menu.label}
@@ -302,6 +342,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                           isActive={activeContentId === item.id}
                           onHover={itemId => handleMenuItemHover(menu.id, itemId)}
                           onKeyDown={handleMenuItemKeyDown(menu.id, index, menu.menuItems.length)}
+                          onClick={forceCloseMenu}
                           itemRef={node => {
                             if (!itemRefs.current[menu.id]) itemRefs.current[menu.id] = []
                             itemRefs.current[menu.id][index] = node

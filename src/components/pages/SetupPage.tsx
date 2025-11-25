@@ -75,7 +75,7 @@ const serviceCards: ServiceCard[] = [
   {
     icon: UploadCloud,
     title: 'Tool-Installation',
-    description: 'Nextcloud, Odoo, n8n & weitere Open-Source-Tools – abgestimmt, integriert und branded.',
+    description: 'Kollaboration, Business-Apps und Automations-Workflows – abgestimmt, integriert und branded.',
   },
   {
     icon: Repeat,
@@ -151,51 +151,6 @@ const processPhases: ProcessPhase[] = [
     details: ['→ Go-Live & Monitoring', '→ Optimierungen nach Feedback', '→ Übergabe & Ownership', '→ 1 Monat Support'],
   },
 ]
-
-// Commented out for future use - will be used for scenario comparison section
-// const scenarioCards: ScenarioCard[] = [
-//   {
-//     icon: Rocket,
-//     title: 'Starter-Setup',
-//     description: 'Für Teams mit 5–15 Personen, die schnell raus aus Microsoft 365 oder Google wollen.',
-//     highlights: [
-//       'Nextcloud (Files, Calendar, Contacts)',
-//       'OnlyOffice',
-//       'Basis-n8n-Automationen',
-//       'Backups & Monitoring',
-//     ],
-//     duration: '2–3 Wochen',
-//     effort: 'Individuelles Angebot nach Beratung',
-//   },
-//   {
-//     icon: Briefcase,
-//     title: 'Professional-Setup',
-//     description: 'Skalierende Unternehmen mit CRM-/ERP-Bedarf und komplexeren Workflows.',
-//     highlights: [
-//       'Nextcloud Full Stack',
-//       'Odoo CRM/ERP (Sales, Invoicing)',
-//       'n8n (erweiterte Automationen)',
-//       'Mail-Server optional',
-//     ],
-//     duration: '4–5 Wochen',
-//     effort: 'Individuelles Angebot nach Beratung',
-//     featured: true,
-//   },
-//   {
-//     icon: Building2,
-//     title: 'Enterprise-Setup',
-//     description: '50+ Mitarbeitende, Multi-Location, Hochverfügbarkeit und dedizierter Support.',
-//     highlights: [
-//       'Nextcloud HA-Cluster',
-//       'Odoo Full ERP mit Custom-Modulen',
-//       'n8n (komplexe Workflows)',
-//       'Mail, Chat, Telefonie',
-//       'Redundante Backups & 24/7 Monitoring',
-//     ],
-//     duration: '6–8 Wochen',
-//     effort: 'Individuelles Angebot nach Beratung',
-//   },
-// ]
 
 const bookingUrl = BOOKING_LINKS.INFRASTRUKTUR_AUDIT
 const DEFAULT_VAT_RATE = 19
@@ -428,7 +383,7 @@ const SetupPage: React.FC = () => {
     <div className="bg-bg-darker text-text-light">
       <Seo
         title="Infrastruktur-Setup Heidelberg | VAE Systems"
-        description="Open-Source-Infrastruktur statt SaaS: Nextcloud, Odoo, n8n aufbauen. Migration, Security & Dokumentation inklusive. Heidelberg & deutschlandweit."
+        description="Open-Source-Infrastruktur statt SaaS: Kollaboration, Business-Apps und Automations-Workflows aufbauen. Migration, Security & Dokumentation inklusive. Heidelberg & deutschlandweit."
         canonicalPath="/leistungen/infrastruktur"
         jsonLd={{
           '@context': 'https://schema.org',

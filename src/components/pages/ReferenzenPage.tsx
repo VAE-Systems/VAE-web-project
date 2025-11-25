@@ -93,7 +93,7 @@ const caseStudies: CaseStudy[] = [
     title: 'Finance Automation & CRM Migration',
     organization: 'Lukas Sosnowski Consulting',
     industry: 'Versicherungsberatung · Financial Services',
-    status: 'Live seit 2024',
+    status: 'Live seit 2025',
     statusVariant: 'live',
     challenge:
       'Lukas Sosnowski Consulting arbeitete mit Google Sheets für Kundendaten und manuelle Prozesse ohne CRM-Integration. Die Datenflut war unübersichtlich, Automatisierung fehlte komplett, und strategische KI-Integration war nicht möglich.',
@@ -847,7 +847,7 @@ const ReferenzenPage: React.FC = () => {
             Teams umgesetzt haben – ehrlich, transparent, mit messbaren Ergebnissen.
           </p>
           <p className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/70 px-4 py-2 text-sm text-text-secondary dark:border-white/10 dark:bg-white/5">
-            <ShieldCheck className="h-4 w-4 text-vae-turquoise" /> Alle Projekte: 100% Open Source, DSGVO-konform, Made
+            <ShieldCheck className="h-4 w-4 text-vae-turquoise" /> Alle Projekte: Open-Source-first, DSGVO-konform, Made
             in Germany
           </p>
         </div>

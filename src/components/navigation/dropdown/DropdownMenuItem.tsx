@@ -6,10 +6,18 @@ interface DropdownMenuItemProps {
   isActive: boolean
   onHover: (itemId: string) => void
   onKeyDown: (event: React.KeyboardEvent<HTMLAnchorElement>) => void
+  onClick?: () => void
   itemRef?: (node: HTMLAnchorElement | null) => void
 }
 
-export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({ item, isActive, onHover, onKeyDown, itemRef }) => {
+export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
+  item,
+  isActive,
+  onHover,
+  onKeyDown,
+  onClick,
+  itemRef,
+}) => {
   const handleHover = () => onHover(item.id)
 
   return (
@@ -21,6 +29,7 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({ item, isActi
         onFocus={handleHover}
         onTouchStart={handleHover}
         onKeyDown={onKeyDown}
+        onClick={onClick}
         aria-current={isActive ? 'true' : undefined}
         className={`group flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold tracking-tight transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-darker ${
           isActive

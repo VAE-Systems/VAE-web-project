@@ -68,16 +68,6 @@ const techStack = [
     website: 'https://langchain.com',
   },
   {
-    name: 'TensorFlow',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
-    website: 'https://tensorflow.org',
-  },
-  {
-    name: 'PyTorch',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg',
-    website: 'https://pytorch.org',
-  },
-  {
     name: 'OpenAI',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
     website: 'https://openai.com',

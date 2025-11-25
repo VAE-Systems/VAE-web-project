@@ -19,15 +19,12 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
     .map(segment => segment.trim())
     .filter(Boolean)
 
-  const descriptorLineClass = `h-[3px] w-full rounded-full transition-transform duration-700 ease-out will-change-transform ${
-    isEven ? 'origin-left bg-gradient-to-r' : 'origin-right bg-gradient-to-l'
-  } from-vae-turquoise via-vae-turquoise/70 to-transparent ${
-    isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
-  } motion-reduce:scale-x-100 motion-reduce:opacity-100`
-  const introTextClasses = `max-w-2xl text-base leading-relaxed text-text-secondary/80 md:text-lg ${
-    isEven ? '' : 'lg:self-end lg:text-right'
-  }`
-  const linkAlignment = isEven ? 'self-start' : 'self-end lg:self-end'
+  const descriptorLineClass =
+    'h-[3px] w-full origin-left rounded-full bg-gradient-to-r from-vae-turquoise via-vae-turquoise/70 to-transparent transition-transform duration-700 ease-out will-change-transform ' +
+    (isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0') +
+    ' motion-reduce:scale-x-100 motion-reduce:opacity-100'
+  const introTextClasses = 'max-w-2xl text-base leading-relaxed text-text-secondary/80 md:text-lg text-left'
+  const linkAlignment = 'self-start'
 
   const renderReadMoreLink = () => {
     if (!value.link) {
@@ -97,7 +94,7 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
         <div className={`relative ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
           <div
             className={`relative flex flex-col gap-6 rounded-[28px] border border-vae-turquoise/20 bg-white px-8 py-10 text-vae-black shadow-lg dark:border-white/5 dark:bg-white/[0.02] dark:text-text-light dark:shadow-[0_30px_70px_rgba(0,0,0,0.45)] ${
-              isEven ? 'items-start text-left lg:mr-6' : 'items-end text-right lg:ml-6'
+              isEven ? 'items-start text-left lg:mr-6' : 'items-start text-left lg:ml-6'
             }`}
           >
             <div className="pointer-events-none absolute inset-0 rounded-[28px] border border-vae-turquoise/10 dark:border-white/5 dark:opacity-40" />
@@ -121,11 +118,7 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
               id={`${value.id}-title`}
               className="relative text-balance text-3xl font-semibold leading-tight text-text-light md:text-4xl lg:text-5xl"
             >
-              <span
-                className={`inline-flex flex-wrap gap-2 ${
-                  isEven ? 'justify-start text-left' : 'justify-end text-right'
-                } w-full`}
-              >
+              <span className="inline-flex w-full flex-wrap justify-start gap-2 text-left">
                 {primarySegments.length > 0 ? (
                   primarySegments.map((segment, segmentIndex) => (
                     <React.Fragment key={`${value.id}-primary-${segment}-${segmentIndex}`}>
@@ -141,7 +134,7 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
               </span>
             </h2>
             {descriptorText && (
-              <div className={`flex w-full flex-col gap-2 ${isEven ? 'text-left' : 'text-right'}`}>
+              <div className="flex w-full flex-col gap-2 text-left">
                 <p className="text-sm font-semibold uppercase tracking-[0.35em] text-text-secondary/70 md:text-base">
                   — {descriptorText}
                 </p>
@@ -197,7 +190,7 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
                 </ul>
               </div>
             )}
-            <div className={`flex flex-wrap gap-2 pt-2 ${isEven ? '' : 'justify-end'}`} aria-label="SEO-Schlagworte">
+            <div className="flex flex-wrap gap-2 pt-2" aria-label="SEO-Schlagworte">
               {value.seoKeywords.map((keyword, keywordIndex) => (
                 <span
                   key={keyword}

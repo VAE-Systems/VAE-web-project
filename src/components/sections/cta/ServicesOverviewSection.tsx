@@ -42,18 +42,20 @@ const ServicesOverviewSection: React.FC = () => {
                   <p className="mt-1 text-sm font-medium text-text-secondary">{card.subtitle}</p>
                 )}
               </div>
-              <div className="mt-4 flex flex-1 flex-col gap-5 text-sm text-text-secondary">
-                <p>{card.description}</p>
-                <div className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Was enthalten</p>
-                  <ul className="space-y-1.5">
-                    {card.inclusions.map(item => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise" aria-hidden />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="mt-4 grid flex-1 grid-rows-[1fr_auto] gap-6 text-sm text-text-secondary">
+                <div className="flex flex-col gap-5">
+                  <p>{card.description}</p>
+                  <div className="space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Was enthalten</p>
+                    <ul className="space-y-1.5">
+                      {card.inclusions.map(item => (
+                        <li key={item} className="flex items-start gap-2">
+                          <span className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise" aria-hidden />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
                 <div className="space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>

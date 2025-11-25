@@ -60,7 +60,7 @@ const resourcePillars: Array<{ icon: LucideIcon; title: string; description: str
     icon: Brain,
     title: 'KI-Integrierte Workflows',
     description:
-      'Automation und KI sind Standard: n8n, LLM-Workflows, Monitoring mit Intelligenz. Infrastruktur wird nicht nur betrieben – sie denkt mit.',
+      'Custom Code, maßgeschneiderte Integrationen und (LLM-)Workflows mit Monitoring: Ihre Infrastruktur wird nicht nur betrieben, sondern arbeitet aktiv mit – und bleibt langfristig wartbar',
   },
 ]
 
@@ -160,7 +160,7 @@ const detailedServices: Array<{ icon: LucideIcon; title: string; description: st
     icon: Brain,
     title: 'KI-Workflow-Automation',
     description:
-      'n8n, LLM-Integrationen, Automatisierung von Routineaufgaben. Prozesse werden intelligenter, nicht nur schneller.',
+      'Custom Code, LLM-Integrationen und Automatisierung von Routineaufgaben. Prozesse werden intelligenter, stabiler und langfristig wartbar – nicht nur schneller.',
   },
   {
     icon: Lightbulb,

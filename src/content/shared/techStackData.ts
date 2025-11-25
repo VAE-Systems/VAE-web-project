@@ -387,24 +387,6 @@ export const TECH_TILES: TechTile[] = [
   },
   // Section 3 frameworks foundation
   {
-    id: 'pytorch',
-    name: 'PyTorch',
-    link: 'https://pytorch.org',
-    description: 'Research DL',
-    logo: '/logos/tech/pytorch.svg',
-    category: 'frameworks',
-    group: 'foundation',
-  },
-  {
-    id: 'tensorflow',
-    name: 'TensorFlow',
-    link: 'https://www.tensorflow.org',
-    description: 'Production ML',
-    logo: '/logos/tech/tensorflow.svg',
-    category: 'frameworks',
-    group: 'foundation',
-  },
-  {
     id: 'jax',
     name: 'JAX',
     link: 'https://jax.readthedocs.io',

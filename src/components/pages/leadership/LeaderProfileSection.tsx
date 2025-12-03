@@ -1,7 +1,7 @@
 import { useFadeIn } from '@/components/pages/values/useFadeIn'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { LeaderProfile } from '@/content/shared/leadershipData'
-import { Linkedin, Mail } from 'lucide-react'
+import { ExternalLink, Linkedin, Mail } from 'lucide-react'
 import React, { useMemo } from 'react'
 
 interface LeaderProfileSectionProps {
@@ -69,11 +69,32 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
             </div>
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">Engagement</p>
-              <ul className="mt-3 space-y-2 text-sm text-text-light/75">
+              <ul className="mt-3 space-y-3 text-sm text-text-light/75">
                 {leader.engagement.map(item => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span aria-hidden="true" className="mt-[0.4rem] h-1.5 w-1.5 rounded-full bg-vae-turquoise" />
-                    <span>{item}</span>
+                  <li key={item.text} className="flex flex-col gap-1.5">
+                    <div className="flex items-start gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-vae-turquoise"
+                      />
+                      <span>{item.text}</span>
+                    </div>
+                    {item.links && item.links.length > 0 && (
+                      <div className="ml-3.5 flex flex-wrap gap-1.5">
+                        {item.links.map(link => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[11px] font-medium text-text-light/70 transition-all duration-200 hover:border-vae-turquoise/50 hover:bg-vae-turquoise/10 hover:text-vae-turquoise"
+                          >
+                            <ExternalLink className="h-2.5 w-2.5" />
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>

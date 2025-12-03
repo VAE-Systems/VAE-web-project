@@ -1,3 +1,8 @@
+export interface EngagementItem {
+  text: string
+  links?: { label: string; href: string }[]
+}
+
 export interface LeaderProfile {
   id: string
   name: string
@@ -6,7 +11,7 @@ export interface LeaderProfile {
   background: string
   characterTraits: string[]
   expertise: string[]
-  engagement: string[]
+  engagement: EngagementItem[]
   location: string
   whyItMatters: string
   linkedin: {
@@ -41,7 +46,7 @@ export const LEADERS: LeaderProfile[] = [
       alt: 'Julian Goertz Dini mit freundlichem Blick in einem modernen Porträt vor dunklem Hintergrund.',
     },
     background:
-      'Julian ist Student der VWL und Informatik an der Universität Heidelberg. Er verbindet ökonomisches Verständnis mit technischer Umsetzungskompetenz. Geboren in Karlsruhe, verankert in Heidelberg und vernetzt zwischen Rhein-Neckar und Berlin. — Als Gründer und Vorstand des <a href="https://www.linkedin.com/company/aktiv-kollektiv/" target="_blank" rel="noopener noreferrer">Aktiv Kollektiv e.V.</a> versteht er, wie man komplexe Stakeholder managt und Visionen in realisierbare Projekte übersetzt. Diese Community-Erfahrung prägt die Arbeitsweise bei VAE Systems: dokumentiert, unabhängig, mit Sinn für Design und Details.',
+      'Julian studiert Volkswirtschaftslehre und Informatik an der Universität Heidelberg. Er verbindet ökonomisches Verständnis mit technischer Umsetzungskompetenz. Geboren in Karlsruhe, verankert in Heidelberg und vernetzt zwischen Rhein-Neckar und Berlin. — Als Gründer und Co-Vorsitzender des Aktiv Kollektiv e.V. – einem gemeinnützigen Verein zur Förderung von Ehrenamt und Interessengruppen in Heidelberg – versteht er, wie man komplexe Stakeholder managt und Visionen in realisierbare Projekte übersetzt. — Als Beisitzer im erweiterten Vorstand von Kultur für Europa e.V. unterstützt er mit technischer Expertise die Bewerbung Heidelbergs zur Europäischen Kulturhauptstadt. — Diese Community-Erfahrung prägt die Arbeitsweise bei VAE Systems: dokumentiert, unabhängig, mit Sinn für komplexes Design, Details und Gemeinschaft.',
     characterTraits: ['Direkt und visionär', 'Offen und feedback-freudig', 'Vernetzt, effizient, engagiert'],
     expertise: [
       'Strategische Vision & Business Development',
@@ -50,9 +55,23 @@ export const LEADERS: LeaderProfile[] = [
       'Sales & Partnermanagement',
     ],
     engagement: [
-      'Gründer & Vorstand Aktiv Kollektiv e.V.',
-      'Co-Lead Business Development Gruppe',
-      'Vernetzt in Heidelberg & Berlin',
+      {
+        text: 'Gründer & Co-Vorsitzender Aktiv Kollektiv e.V.',
+        links: [
+          { label: 'LinkedIn', href: 'https://www.linkedin.com/company/aktiv-kollektiv/' },
+          {
+            label: 'Presse',
+            href: 'https://www.rnz.de/region/heidelberg_artikel,-Heidelberg-Aktiv-Kollektiv-make-Ehrenamt-cool-again-_arid,1601776.html',
+          },
+        ],
+      },
+      {
+        text: 'Kultur für Europa e.V. – Technische Expertise für Kulturhauptstadt Heidelberg',
+        links: [{ label: 'Vorstand', href: 'https://kulturfuereuropa.eu/vorstand-beisitzer/' }],
+      },
+      {
+        text: 'Vernetzt in Heidelberg, Rhein-Neckar & Berlin',
+      },
     ],
     location: 'Heidelberg (mit Netzwerk nach Berlin)',
     whyItMatters:
@@ -84,9 +103,9 @@ export const LEADERS: LeaderProfile[] = [
       'Wissenstransfer & Lehren',
     ],
     engagement: [
-      'Initiator der Software-Community im Aktiv Kollektiv e.V.',
-      'Leiter der Technik-Community Heidelberg',
-      'Ehrenamtlich aktiv in Open-Source-Standardisierung',
+      { text: 'Initiator der Software-Community im Aktiv Kollektiv e.V.' },
+      { text: 'Leiter der Technik-Community Heidelberg' },
+      { text: 'Ehrenamtlich aktiv in Open-Source-Standardisierung' },
     ],
     location: 'Frankfurt — Eppelheim (regional vernetzt, mobil)',
     whyItMatters:

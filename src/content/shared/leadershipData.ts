@@ -137,6 +137,6 @@ export const LEADERSHIP_CTA = {
   copy: 'Wenn Sie ein Team suchen, das technische Expertise mit strategischem Denken verbindet – und dabei Wert auf Transparenz, Unabhängigkeit und langfristige Partnerschaften legt – sollten wir sprechen. Jakob und Julian sind direkt, stellen kritische Fragen, denken mit und bauen Systeme, die wachsen.',
   button: {
     label: 'Kontakt aufnehmen',
-    href: '/kontakt',
+    href: '/contact',
   },
 }

@@ -25,7 +25,7 @@ export const VALUES_DATA: Value[] = [
     id: 'transparenz',
     title: 'Transparenz & Ehrlichkeit — Der Anfang von Vertrauen',
     intro:
-      'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir kommentieren Pull Requests so, dass Sie sie auch als Nicht-Entwicklerin nachvollziehen können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
+      'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir dokumentieren jede Entscheidung so, dass Sie sie auch als Nicht‑Entwicklerin nachvollziehen können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
     benefits: [
       'Live-Dokumentation in Git und Tickets statt Präsentationen im Nachgang',
       'Risiken und Annahmen werden sofort gekennzeichnet – kein Schönreden',

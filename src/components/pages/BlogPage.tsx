@@ -30,7 +30,7 @@ const BlogPage: React.FC = () => {
   return (
     <div className="bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
-        title="Blog | VAE Systems"
+        title="Blog – Insights zu KI, Infrastruktur & Open Source | VAE Systems"
         description="Knowledge Hub für KI, Open-Source-Infrastruktur und produktive Digitalisierung – kuratiert von VAE Systems."
         canonicalPath="/ressourcen/blog"
       />
@@ -169,7 +169,7 @@ const BlogPage: React.FC = () => {
               </Link>
             </MagneticButton>
             <MagneticButton>
-              <Link to="/kontakt" className="btn-primary flex items-center gap-2 text-base">
+              <Link to="/contact" className="btn-primary flex items-center gap-2 text-base">
                 Kontakt aufnehmen
                 <ArrowUpRight className="h-5 w-5" />
               </Link>

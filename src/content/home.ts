@@ -161,19 +161,19 @@ export interface OpenSourcePoint {
 
 export const openSourcePainPoints: OpenSourcePoint[] = [
   {
-    title: 'Kosten wachsen unkontrolliert',
+    title: 'Jede Skalierung kostet Sie mehr',
     description:
-      'Microsoft 365, Salesforce, OpenAI API, Anthropic — monatliche Gebühren pro Mitarbeiter:in oder API-Call. Je größer Ihr Team und je mehr KI-Einsatz, desto teurer wird es. Keine Kontrolle über Preissteigerungen.',
+      'Mehr Mitarbeiter, mehr API-Calls – jeden Monat steigt die Rechnung. Und wenn der Anbieter die Preise erhöht? Sie zahlen oder kündigen. Andere Optionen haben Sie nicht.',
   },
   {
-    title: 'Vendor-Lock-in',
+    title: 'Keine Kontrolle über Ihre eigene Infrastruktur',
     description:
-      'Ihre Daten und KI-Workflows liegen bei US-Konzernen. Features verschwinden? Akzeptieren. API-Preise steigen? Zahlen. Modelle wechseln? Neuintegration. Kein Mitspracherecht.',
+      'Ihre Daten, Prozesse und KI-Workflows liegen bei US-Anbietern. Features verschwinden, APIs ändern sich, Preise steigen. Sie können nur reagieren – nicht mitentscheiden.',
   },
   {
-    title: 'DSGVO-Compliance-Risiken',
+    title: 'DSGVO-Risiko liegt bei Ihnen',
     description:
-      'Cloud Act macht US-Datentransfers rechtsunsicher – bei Arbeitssystemen UND KI-APIs. Europäische Unternehmen tragen das Compliance-Risiko.',
+      'US-Anbieter können Ihre Daten an Behörden weitergeben (Cloud Act). Das rechtliche Risiko tragen Sie. Nicht der Anbieter.',
   },
 ] as const
 

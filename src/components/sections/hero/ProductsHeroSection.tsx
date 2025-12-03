@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
 import { useTheme } from '@/contexts/ThemeContext'
+import React, { useRef } from 'react'
 import FaultyTerminal from '../effects/FaultyTerminal'
 // ParallaxBackdrop removed in light mode redesign
-import { productsHeroContent } from '@/content/productsHero'
-import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
 import Icon from '@/components/ui/Icon'
+import { productsHeroContent } from '@/content/productsHero'
+import { Link } from 'react-router-dom'
 
 /**
  * ProductsHeroSection
@@ -117,7 +117,7 @@ const ProductsHeroSection: React.FC = () => {
                 </div>
                 <div className="flex flex-wrap justify-center gap-2">
                   <Link
-                    to="/ki-optimierung"
+                    to="/leistungen/strategie"
                     className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
                   >
                     Custom Solutions

@@ -323,7 +323,7 @@ const caseStudies: CaseStudy[] = [
           'Super Productivity für Time Tracking & Task Management',
           'n8n für internes Automations-Testing (produktive Automationen werden stabil programmiert)',
           'Self-hosted Website auf eigenem Stack',
-          'GitHub für Versionskontrolle',
+          'GitHub für Versionskontrolle (self-hosted Git-Alternativen werden evaluiert)',
           'Docker für sämtliche Services',
         ],
       },

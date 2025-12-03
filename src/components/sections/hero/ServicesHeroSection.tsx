@@ -1,11 +1,11 @@
 import React from 'react'
 import RippleGrid from '../effects/RippleGrid'
 // ParallaxBackdrop removed in light mode redesign
-import { useTheme } from '@/contexts/ThemeContext'
-import MaterialIcon from '@/components/ui/MaterialIcon'
-import Icon from '@/components/ui/Icon'
-import { Link } from 'react-router-dom'
 import CtaLink from '@/components/ui/CtaLink'
+import Icon from '@/components/ui/Icon'
+import MaterialIcon from '@/components/ui/MaterialIcon'
+import { useTheme } from '@/contexts/ThemeContext'
+import { Link } from 'react-router-dom'
 
 interface ServicesHeroSectionProps {
   innerRef?: React.Ref<HTMLDivElement>
@@ -123,7 +123,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
                 Infrastruktur Setup
               </Link>
               <Link
-                to="/ki-optimierung"
+                to="/leistungen/strategie"
                 className="rounded-full bg-vae-turquoise/10 px-4 py-2 text-xs font-medium text-text-secondary transition-colors hover:bg-vae-turquoise/20 hover:text-vae-turquoise"
               >
                 AI-Workflows

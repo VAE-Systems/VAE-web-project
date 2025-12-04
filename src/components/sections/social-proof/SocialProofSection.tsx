@@ -20,7 +20,7 @@ const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-10 backdrop-blur-sm"
+      className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/80 px-4 py-10 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label={`${logo.alt} - Vergrößert`}

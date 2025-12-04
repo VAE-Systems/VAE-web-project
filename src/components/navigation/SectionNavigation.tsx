@@ -125,7 +125,7 @@ const SectionNavigation: React.FC = () => {
   return (
     <nav
       className={`
-        fixed right-3 top-1/2 z-40 -translate-y-1/2 transition-all
+        fixed right-3 top-1/2 z-[1020] -translate-y-1/2 transition-all
         duration-300 ease-out md:right-6
         ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-[120%] opacity-0'}
       `}

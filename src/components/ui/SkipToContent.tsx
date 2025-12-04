@@ -14,7 +14,7 @@ const SkipToContent: React.FC = () => {
   return (
     <a
       href="#main-content"
-      className="skip-to-content focus-ring fixed left-4 top-4 z-[70] -translate-y-20 rounded-lg bg-vae-turquoise px-6 py-3 font-semibold text-white shadow-2xl transition-transform focus:translate-y-0"
+      className="skip-to-content focus-ring fixed left-4 top-4 z-[1035] -translate-y-20 rounded-lg bg-vae-turquoise px-6 py-3 font-semibold text-white shadow-2xl transition-transform focus:translate-y-0"
       tabIndex={0}
     >
       Zum Hauptinhalt springen

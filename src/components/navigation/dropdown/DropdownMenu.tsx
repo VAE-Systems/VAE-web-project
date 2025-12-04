@@ -315,7 +315,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               id={`${menu.id}-panel`}
               role="menu"
               aria-hidden={!panelVisible}
-              className={`absolute left-1/2 top-full z-40 mt-3 w-[min(90vw,56rem)] -translate-x-1/2 overflow-hidden rounded-2xl border shadow-lg backdrop-blur-xl transition-[height,opacity,transform] duration-300 ease-out ${
+              className={`absolute left-1/2 top-full z-[1000] mt-3 w-[min(90vw,56rem)] -translate-x-1/2 overflow-hidden rounded-2xl border shadow-lg backdrop-blur-xl transition-[height,opacity,transform] duration-300 ease-out ${
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'

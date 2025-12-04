@@ -52,7 +52,7 @@ const DesignSystemControls: React.FC<DesignSystemControlsProps> = ({ className =
     return (
       <button
         onClick={() => setIsVisible(true)}
-        className="fixed bottom-4 right-4 z-50 rounded-lg bg-vae-turquoise px-4 py-2 text-white shadow-lg transition-colors hover:bg-vae-turquoise-light"
+        className="fixed bottom-4 right-4 z-[1020] rounded-lg bg-vae-turquoise px-4 py-2 text-white shadow-lg transition-colors hover:bg-vae-turquoise-light"
         title="Design System Controls"
       >
         🎨 DS
@@ -62,7 +62,7 @@ const DesignSystemControls: React.FC<DesignSystemControlsProps> = ({ className =
 
   return (
     <div
-      className={`fixed bottom-4 right-4 z-50 rounded-lg border border-vae-turquoise/30 bg-black/90 p-4 shadow-xl backdrop-blur-sm ${className}`}
+      className={`fixed bottom-4 right-4 z-[1020] rounded-lg border border-vae-turquoise/30 bg-black/90 p-4 shadow-xl backdrop-blur-sm ${className}`}
     >
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-semibold text-vae-turquoise">Design System</h3>

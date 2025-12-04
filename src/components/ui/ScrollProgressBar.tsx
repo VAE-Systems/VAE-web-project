@@ -25,7 +25,7 @@ const ScrollProgressBar: React.FC = () => {
 
   return (
     <motion.div
-      className="fixed left-0 right-0 top-0 z-[60] h-1 origin-left bg-gradient-to-r from-vae-turquoise via-vae-turquoise-dark to-vae-turquoise"
+      className="fixed left-0 right-0 top-0 z-[1035] h-1 origin-left bg-gradient-to-r from-vae-turquoise via-vae-turquoise-dark to-vae-turquoise"
       style={{
         scaleX,
         boxShadow: '0 0 12px rgba(0, 255, 165, 0.5)',

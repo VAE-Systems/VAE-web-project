@@ -137,7 +137,7 @@ const LockedSection: React.FC<LockedSectionProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3 }}
-            className="absolute inset-0 z-40 flex items-center justify-center p-6"
+            className="absolute inset-0 z-10 flex items-center justify-center p-6"
           >
             {/* Backdrop */}
             <div

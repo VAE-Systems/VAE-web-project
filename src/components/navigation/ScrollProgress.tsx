@@ -75,7 +75,7 @@ const ScrollProgress: React.FC = () => {
 
   return (
     <div
-      className="fixed right-2 top-1/2 z-40 -translate-y-1/2 select-none pr-1 sm:right-3 md:right-4 md:pr-0"
+      className="fixed right-2 top-1/2 z-[1020] -translate-y-1/2 select-none pr-1 sm:right-3 md:right-4 md:pr-0"
       aria-label={`Scroll Fortschritt ${pct}%`}
     >
       <div

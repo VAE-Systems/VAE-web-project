@@ -377,7 +377,7 @@ const HeaderModern: React.FC = () => {
     <>
       <header
         className={`
-        duration-400 fixed left-0 right-0 top-0 z-50 transition-transform ease-out
+        duration-400 fixed left-0 right-0 top-0 z-[1030] transition-transform ease-out
         ${hideOnMobile && !isMobileMenuOpen ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'}
         transition-colors
         ${

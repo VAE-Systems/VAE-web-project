@@ -37,7 +37,7 @@ export const HelpButton: React.FC<HelpButtonProps> = ({ className = '', position
   }`
 
   const positionClasses =
-    position === 'fixed' ? 'fixed bottom-8 right-8 h-14 w-14 z-40 shadow-2xl' : 'h-12 w-12 flex-shrink-0'
+    position === 'fixed' ? 'fixed bottom-8 right-8 h-14 w-14 z-[1020] shadow-2xl' : 'h-12 w-12 flex-shrink-0'
 
   return (
     <button

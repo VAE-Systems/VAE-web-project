@@ -272,7 +272,7 @@ const ProductVaeCorePage: React.FC = () => {
 
       {/* Sticky Mini Selector (fixed) */}
       <div
-        className={`fixed left-0 right-0 top-24 z-[45] hidden md:block ${showSticky ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+        className={`fixed left-0 right-0 top-24 z-[1025] hidden md:block ${showSticky ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
         <div className="container-vae max-w-7xl">
           <div className="flex justify-center">

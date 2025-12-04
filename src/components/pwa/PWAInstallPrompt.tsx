@@ -115,7 +115,7 @@ const PWAInstallPrompt: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-40 rounded-lg border border-vae-turquoise/30 bg-bg-darker p-4 shadow-2xl md:left-auto md:right-4 md:w-96">
+    <div className="fixed bottom-4 left-4 right-4 z-[1025] rounded-lg border border-vae-turquoise/30 bg-bg-darker p-4 shadow-2xl md:left-auto md:right-4 md:w-96">
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-vae-turquoise/20">

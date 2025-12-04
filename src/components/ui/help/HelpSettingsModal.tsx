@@ -31,7 +31,7 @@ export const HelpSettingsModal: React.FC<HelpSettingsModalProps> = ({ isOpen, on
 
   return (
     <div
-      className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm duration-200"
+      className="animate-in fade-in fixed inset-0 z-[1050] flex items-center justify-center bg-black/40 backdrop-blur-sm duration-200"
       onClick={onClose}
       role="dialog"
       aria-modal="true"

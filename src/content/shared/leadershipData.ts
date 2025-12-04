@@ -89,8 +89,8 @@ export const LEADERS: LeaderProfile[] = [
     title: 'CTO & Co-Founder',
     roleTag: 'TECHNISCHE VISION | OPEN SOURCE BEFÜRWORTER | SYSTEMARCHITEKTUR',
     portrait: {
-      src: '/images/optimized/Jakob-Leitung-Aufnahme.webp',
-      fallback: '/images/optimized/Jakob-Leitung-Aufnahme.png',
+      src: '/images/optimized/Jakob-Leitungs-Portrait.webp',
+      fallback: '/images/optimized/Jakob-Leitungs-Portrait.png',
       alt: 'Jakob Dünnebeil in einem professionellen Porträt.',
     },
     background:
@@ -103,7 +103,15 @@ export const LEADERS: LeaderProfile[] = [
       'Wissenstransfer & Lehren',
     ],
     engagement: [
-      { text: 'Initiator der Software-Community im Aktiv Kollektiv e.V.' },
+      {
+        text: 'Initiator der Software-Community im Aktiv Kollektiv e.V.',
+        links: [
+          {
+            label: 'LinkedIn Post',
+            href: 'https://www.linkedin.com/posts/julian-goertz-dini-8a716a277_aktivkollektiv-heidelberg-kulturkiosk-activity-7399679541633241088-3ibj',
+          },
+        ],
+      },
       { text: 'Leiter der Technik-Community Heidelberg' },
       { text: 'Ehrenamtlich aktiv in Open-Source-Standardisierung' },
     ],

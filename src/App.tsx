@@ -47,7 +47,6 @@ const QualitaetPage = React.lazy(() => import('@/components/pages/values/Qualita
 const SkalierbarkeitPage = React.lazy(() => import('@/components/pages/values/SkalierbarkeitPage'))
 const LeadershipPage = React.lazy(() => import('@components/pages/leadership/LeadershipPage'))
 const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
-const ProductVaeCorePage = React.lazy(() => import('@components/pages/ProductVaeCorePage'))
 const NotFoundPage = React.lazy(() => import('@components/pages/NotFoundPage'))
 
 // Loading Component
@@ -112,10 +111,6 @@ const App: React.FC = () => {
                   <Routes>
                     {/* Homepage */}
                     <Route path="/" element={<HomePage />} />
-
-                    {/* Products */}
-                    <Route path="/vae-core" element={<ProductVaeCorePage />} />
-                    <Route path="/products/vae-core" element={<ProductVaeCorePage />} />
 
                     {/* Services */}
                     <Route path="/services/setup" element={<SetupPage />} />

@@ -35,7 +35,7 @@ const CookieBanner: React.FC = () => {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50 border-t border-vae-turquoise/20 bg-bg-darker shadow-2xl"
+      className="fixed bottom-0 left-0 right-0 z-[1025] border-t border-vae-turquoise/20 bg-bg-darker shadow-2xl"
       role="dialog"
       aria-labelledby="cookie-banner-title"
       aria-describedby="cookie-banner-description"

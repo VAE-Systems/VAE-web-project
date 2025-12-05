@@ -436,9 +436,23 @@ const BeratungPage: React.FC = () => {
 
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
+        {/* Hero Background Image */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.40] dark:opacity-[0.20]">
+          <picture>
+            <source srcSet="/images/optimized/Hero_Strategy.JPG.webp" type="image/webp" />
+            <img
+              src="/images/optimized/Hero_Strategy.JPG.jpg"
+              alt=""
+              className="h-full w-full object-cover object-center"
+              loading="eager"
+            />
+          </picture>
+        </div>
         <div className="pointer-events-none absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.15),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
         </div>
+        {/* Light Mode: subtiler Glasmorphism-Hintergrund */}
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[85%] max-w-4xl -translate-y-1/2 rounded-3xl bg-white/30 backdrop-blur-[2px] dark:bg-transparent dark:backdrop-blur-none" />
 
         <div className="container-vae relative">
           <div ref={heroRef} className="mx-auto max-w-4xl space-y-8 text-center">

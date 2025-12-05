@@ -87,19 +87,22 @@
   box-shadow: 0 0 0 1px hsla(var(--color-vae-turquoise), 0.35);
 }
 
+/* Primary CTA Button - Light mode default (türkiser Hintergrund) */
 .btn-convert {
   @apply relative inline-flex items-center justify-center overflow-hidden rounded-lg px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-500 focus:outline-none md:px-4 md:py-3 md:text-[11px];
-  background: linear-gradient(135deg, rgba(var(--vae-turquoise-rgb), 0.18), rgba(var(--vae-turquoise-rgb), 0.1));
-  border: 1px solid rgba(var(--vae-turquoise-rgb), 0.45);
-  color: hsl(var(--color-vae-turquoise));
+  background: linear-gradient(135deg, hsl(var(--color-vae-turquoise)), hsl(var(--color-vae-turquoise) / 0.9));
+  border: 1px solid hsl(var(--color-vae-turquoise));
+  color: white;
+  box-shadow: 0 2px 12px -2px rgba(var(--vae-turquoise-rgb), 0.4);
   letter-spacing: 0.08em;
 }
 
-/* Light mode: convert button is neutral by default */
-.theme-light .btn-convert {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0));
-  border-color: rgba(0, 0, 0, 0.12);
-  color: hsl(var(--color-text-secondary));
+/* Dark mode: transparent/glassy look */
+:is(.dark, [data-theme='dark']) .btn-convert {
+  background: linear-gradient(135deg, rgba(var(--vae-turquoise-rgb), 0.18), rgba(var(--vae-turquoise-rgb), 0.1));
+  border: 1px solid rgba(var(--vae-turquoise-rgb), 0.45);
+  color: hsl(var(--color-vae-turquoise));
+  box-shadow: none;
 }
 
 .btn-convert::before,
@@ -114,20 +117,21 @@
     transform 0.6s ease;
 }
 
-/* Glow layer */
+/* Glow layer - Light mode */
 .btn-convert::before {
+  background:
+    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3), transparent 70%),
+    radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.2), transparent 75%);
+  opacity: 0.4;
+  mix-blend-mode: plus-lighter;
+  filter: blur(6px);
+}
+/* Glow layer - Dark mode */
+:is(.dark, [data-theme='dark']) .btn-convert::before {
   background:
     radial-gradient(circle at 30% 50%, rgba(var(--vae-turquoise-rgb), 0.35), transparent 70%),
     radial-gradient(circle at 70% 50%, rgba(var(--vae-turquoise-rgb), 0.25), transparent 75%);
   opacity: 0.35;
-  mix-blend-mode: plus-lighter;
-  filter: blur(6px);
-}
-.theme-light .btn-convert::before {
-  background:
-    radial-gradient(circle at 30% 50%, rgba(0, 0, 0, 0.08), transparent 70%),
-    radial-gradient(circle at 70% 50%, rgba(0, 0, 0, 0.06), transparent 75%);
-  opacity: 0.2;
 }
 
 /* Sheen sweep */
@@ -146,23 +150,20 @@
   filter: blur(10px);
 }
 .btn-convert:hover {
+  background: linear-gradient(135deg, hsl(var(--color-vae-turquoise) / 0.95), hsl(var(--color-vae-turquoise) / 0.85));
+  box-shadow:
+    0 0 0 1px hsl(var(--color-vae-turquoise)),
+    0 6px 22px -4px rgba(var(--vae-turquoise-rgb), 0.5);
+  transform: translateY(-4px) scale(1.04);
+}
+
+/* Dark mode hover */
+:is(.dark, [data-theme='dark']) .btn-convert:hover {
   background: linear-gradient(135deg, rgba(var(--vae-turquoise-rgb), 0.28), rgba(var(--vae-turquoise-rgb), 0.14));
   box-shadow:
     0 0 0 1px rgba(var(--vae-turquoise-rgb), 0.55),
     0 4px 22px -4px rgba(var(--vae-turquoise-rgb), 0.55),
     0 0 40px -6px rgba(var(--vae-turquoise-rgb), 0.55);
-  transform: translateY(-4px) scale(1.04);
-}
-
-/* Light mode hover: subtle green glow + underline signal */
-.theme-light .btn-convert:hover {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0));
-  color: hsl(var(--color-vae-turquoise));
-  box-shadow:
-    0 0 0 1px hsla(var(--color-vae-turquoise), 0.55),
-    0 6px 22px -8px rgba(0, 0, 0, 0.25);
-  text-decoration-line: underline;
-  text-underline-offset: 3px;
 }
 
 .btn-convert:active {

@@ -652,10 +652,10 @@ const BetreuungPage: React.FC = () => {
               return (
                 <div
                   key={level.id}
-                  className={`relative flex h-full flex-col rounded-3xl border bg-white p-8 shadow-md transition hover:-translate-y-1 dark:bg-white/5 ${
+                  className={`relative flex h-full flex-col rounded-3xl bg-white p-8 shadow-md transition hover:-translate-y-1 dark:bg-white/5 ${
                     level.highlighted
-                      ? 'border-vae-turquoise/60 shadow-lg shadow-vae-turquoise/10 dark:shadow-vae-turquoise/20'
-                      : 'border-gray-200 dark:border-white/10'
+                      ? 'border-2 border-vae-turquoise/70 shadow-lg shadow-vae-turquoise/10 dark:shadow-vae-turquoise/20'
+                      : 'border border-gray-200 dark:border-white/10'
                   }`}
                 >
                   {level.badge && (

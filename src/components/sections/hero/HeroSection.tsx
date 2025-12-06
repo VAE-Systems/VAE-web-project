@@ -1,9 +1,9 @@
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import CtaLink from '@/components/ui/CtaLink'
 import Icon from '@/components/ui/Icon'
+import { heroBenefits, heroDescription, heroTitle, heroTypewriterTexts } from '@/content/home'
 import { CalendarClock, CheckCheck, ChevronDown } from 'lucide-react'
 import React from 'react'
-import { heroBenefits, heroDescription, heroTitle, heroTypewriterTexts } from '@/content/home'
-import MagneticButton from '@/components/ui/buttons/MagneticButton'
 const NeuralNetworkBackground = React.lazy(() => import('../effects/NeuralNetworkBackground'))
 
 const trustBadges = ['100% Open Source', 'DSGVO-konform', 'Made in Germany']

@@ -1,9 +1,29 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  SERVICES OVERVIEW SECTION                                                ┃
+ * ┃  "Drei Wege, mit uns zu arbeiten" → Service-Cards mit CTAs.               ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * └── servicesOverviewCards[] → 3 Service-Optionen (Beratung, Setup, Betreuung)
+ *
+ * 🎨 LAYERS
+ * ├── Radial gradients bg     → Dual glow (top + bottom)
+ * └── 3-col card grid         → Je Card: Icon, Title, Description, Inclusions, Audience, CTA
+ *
+ * 🚪 ORCHESTRATOR
+ * └── ServicesOverviewSection → Bindet Cards + MagneticButton + Router Links
+ */
+
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Icon from '@/components/ui/Icon'
 import { servicesOverviewCards } from '@/content/home'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import MagneticButton from '@/components/ui/buttons/MagneticButton'
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ServicesOverviewSection
+// ═══════════════════════════════════════════════════════════════════════════
 const ServicesOverviewSection: React.FC = () => {
   return (
     <section

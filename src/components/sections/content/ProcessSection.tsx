@@ -1,11 +1,37 @@
-import React, { useEffect, useRef } from 'react'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  PROCESS SECTION                                                          ┃
+ * ┃  "Wie wir starten & liefern" → Strukturierte Schritte mit Artefakten.     ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── processSteps[]       → Schritte aus content/process
+ * ├── annotateWithHints()  → Inline-Glossar-Links für Fachbegriffe
+ * └── processDisclaimer    → Fußnote mit Flexibilitäts-Hinweis
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP ScrollTrigger.batch → Staggered card entrance
+ *
+ * 🎨 LAYERS
+ * ├── about-surface-bg     → Themed background
+ * ├── Header + accent bar
+ * └── 2-col grid of step cards
+ */
+
+import { TermHint } from '@/components/ui/Glossary'
+import Icon from '@/components/ui/Icon'
+import { processDisclaimer, processSteps } from '@/content/process'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { processSteps, processDisclaimer } from '@/content/process'
-import Icon from '@/components/ui/Icon'
-import { TermHint } from '@/components/ui/Glossary'
+import React, { useEffect, useRef } from 'react'
 
-// Wrap glossary term occurrences inside text with TermHint (underline hover) – only terms defined in each step glossary.
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — Glossary Annotation Helper
+// ═══════════════════════════════════════════════════════════════════════════
+// Wrap glossary term occurrences inside text with TermHint (underline hover)
 function annotateWithHints(text: string, terms: string[]): (string | JSX.Element)[] {
   if (!terms.length) return [text]
   const sorted = [...terms].sort((a, b) => b.length - a.length)
@@ -28,11 +54,16 @@ interface ProcessSectionProps {
   className?: string
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ProcessSection
+// ═══════════════════════════════════════════════════════════════════════════
 const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', className = '' }) => {
   const ref = useRef<HTMLDivElement>(null)
 
+  // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Batch Animation ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    // ⛓️ GATE — Accessibility Check
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) return
@@ -46,6 +77,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
         once: true,
       })
     }, ref)
+    // 🧹 CLEANUP
     return () => ctx.revert()
   }, [])
 

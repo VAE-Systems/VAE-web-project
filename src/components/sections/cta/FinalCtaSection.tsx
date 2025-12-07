@@ -1,15 +1,38 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  FINAL CTA SECTION                                                        ┃
+ * ┃  Abschluss-CTA am Ende von Pages → Conversion-Trigger.                    ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎨 LAYERS (Visual Stack)
+ * ├── radial-gradient top  → Ambient turquoise glow
+ * ├── linear-gradient grid → Subtle grid overlay
+ * └── content box          → Eyebrow + H2 + Description + CTA
+ *
+ * 🎛️ CORE
+ * ├── finalCtaHome content → Zentralisierte CTA-Texte aus content/home
+ * └── CtaLink via Registry → Konsistente CTA-Aktionen
+ *
+ * 🚪 ORCHESTRATOR
+ * └── FinalCtaSection      → Bindet Content + MagneticButton + CtaLink
+ */
+
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import CtaLink from '@/components/ui/CtaLink'
 import { finalCtaHome } from '@/content/home'
 import { CalendarClock } from 'lucide-react'
 import React from 'react'
-import MagneticButton from '@/components/ui/buttons/MagneticButton'
 
 interface FinalCtaSectionProps {
   className?: string
   id?: string
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — FinalCtaSection
+// ═══════════════════════════════════════════════════════════════════════════
 const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 'abschluss' }) => {
+  // 🎛️ CORE — Content aus zentralem Store
   const { eyebrow, title, description, primary, note } = finalCtaHome
 
   return (

@@ -1,3 +1,23 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  BETREUUNG PAGE                                                           ┃
+ * ┃  Langzeit-Partnerschaft → Managed Infrastruktur & Support.                ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── hiddenCosts[]        → Problem-Statement (versteckte IT-Kosten)
+ * ├── resourceSplit        → Wartung vs. Innovation Ratio
+ * ├── resourcePillars[]    → Vorteile-Cards
+ * └── pricingTiers[]       → Basic, Pro, Enterprise
+ *
+ * 🎨 LAYERS
+ * ├── Hero Section         → Problem + Lösung
+ * ├── Resource Split       → Visualization
+ * ├── Pillars Grid         → Feature-Cards
+ * ├── Pricing Comparison   → Tier-Vergleich
+ * └── FAQ + Final CTA
+ */
+
 import FeaturePill from '@/components/ui/FeaturePill'
 import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/content/shared/faqData'
@@ -26,6 +46,7 @@ import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 
+// ── 🎛️ CORE — Constants ──
 const bookingUrl = BOOKING_LINKS.RETAINER_PLANUNG
 
 const trustBadges = ['Flexible Bindung', 'Zuverlässig', 'Transparent']

@@ -1,6 +1,26 @@
-import React, { useMemo } from 'react'
-import { motion, type Variants as FMVariants } from 'framer-motion'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  REVEAL                                                                   ┃
+ * ┃  Framer Motion Wrapper für Scroll-Reveal-Animationen.                     ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ EXPORTS
+ * ├── Reveal               → Einzelnes animiertes Element
+ * └── Reveal.Group         → Container für gestaggerte Children
+ *
+ * 🎛️ CORE
+ * ├── preset               → Vordefinierte Varianten (fadeUp, fadeIn, etc.)
+ * ├── customVariants       → Custom Framer Motion Variants
+ * └── viewport settings    → once, amount, margin
+ *
+ * 📦 USAGE
+ * ├── <Reveal preset="fadeUp">...</Reveal>
+ * └── <Reveal.Group stagger={0.1}>...</Reveal.Group>
+ */
+
 import { DefaultViewport, Variants as PresetVariants, Springs } from '@/utils/motion'
+import { motion, type Variants as FMVariants } from 'framer-motion'
+import React, { useMemo } from 'react'
 
 type Preset = keyof typeof PresetVariants
 
@@ -14,6 +34,9 @@ interface RevealProps extends React.HTMLAttributes<HTMLElement> {
   customVariants?: FMVariants | ((delay?: number) => FMVariants)
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — Reveal
+// ═══════════════════════════════════════════════════════════════════════════
 export const Reveal: React.FC<RevealProps> & { Group: React.FC<RevealGroupProps> } = ({
   as: Tag = 'div',
   preset = 'fadeUp',
@@ -26,6 +49,7 @@ export const Reveal: React.FC<RevealProps> & { Group: React.FC<RevealGroupProps>
   className,
   ...rest
 }) => {
+  // 🎛️ CORE — Resolve variants
   const variants =
     typeof customVariants === 'function'
       ? (customVariants(delay) as any)
@@ -48,6 +72,9 @@ export const Reveal: React.FC<RevealProps> & { Group: React.FC<RevealGroupProps>
   )
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — RevealGroup (Staggered Container)
+// ═══════════════════════════════════════════════════════════════════════════
 interface RevealGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   stagger?: number
   delayChildren?: number

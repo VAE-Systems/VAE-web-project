@@ -1,19 +1,41 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  HOME OUTCOMES SECTION                                                    ┃
+ * ┃  Homepage-spezifische Darstellung: Highlights + Metrics.                  ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── whyVaeHighlights[]   → Warum VAE (Icon, Title, Description, Proof)
+ * └── outcomeMetrics[]     → Kennzahlen als Social Proof
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP ScrollTrigger.batch → Staggered card entrance
+ *
+ * 🎨 LAYERS
+ * ├── Radial gradient bg   → Ambient glow
+ * ├── Highlight cards grid → Links
+ * └── Metrics sidebar      → Rechts
+ */
+
 import Icon from '@/components/ui/Icon'
+import { homeOutcomesDescription, homeOutcomesHeading, outcomeMetrics, whyVaeHighlights } from '@/content/home'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef } from 'react'
-import { homeOutcomesDescription, homeOutcomesHeading, outcomeMetrics, whyVaeHighlights } from '@/content/home'
 
-/**
- * HomeOutcomesSection
- * Schlanke, homepage-spezifische Variante (keine Prinzipien/Testimonial),
- * neue Kurz-Tagline, um Dopplung "Substanz statt KI-Hype" zu vermeiden.
- */
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — HomeOutcomesSection
+// ═══════════════════════════════════════════════════════════════════════════
 const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id = 'outcomes', className = '' }) => {
   const ref = useRef<HTMLDivElement>(null)
 
+  // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Batch Animation ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    // ⛓️ GATE — Accessibility Check
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) return
@@ -28,6 +50,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
         once: true,
       })
     }, ref)
+    // 🧹 CLEANUP
     return () => ctx.revert()
   }, [])
 

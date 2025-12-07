@@ -1,11 +1,29 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  PRODUCTS CARDS GRID                                                      ┃
+ * ┃  Grid mit ausgewählten Produkt-Kategorien → CTAs zu Details.              ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── productCategories[]  → Alle Kategorien aus navigation/productCategories
+ * └── visibleKeys[]        → Filter für angezeigte Kategorien
+ *
+ * 🎨 LAYERS
+ * └── 3-col card grid      → Infrastruktur, Automation, Packages
+ */
+
+import { productCategories } from '@/components/navigation/productCategories'
+import CtaLink from '@/components/ui/CtaLink'
+import Icon from '@/components/ui/Icon'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import CtaLink from '@/components/ui/CtaLink'
-import { productCategories } from '@/components/navigation/productCategories'
-import Icon from '@/components/ui/Icon'
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ProductsCardsGrid
+// ═══════════════════════════════════════════════════════════════════════════
 const ProductsCardsGrid: React.FC = () => {
-  const visibleKeys = ['infrastruktur', 'automation', 'packages'] // Reihenfolge wie gewünscht
+  // 🎛️ CORE — Filter visible categories
+  const visibleKeys = ['infrastruktur', 'automation', 'packages']
   const items = productCategories.filter(p => visibleKeys.includes(p.key))
 
   return (

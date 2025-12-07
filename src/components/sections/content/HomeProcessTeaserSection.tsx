@@ -1,6 +1,25 @@
-import React from 'react'
-import { homeProcessDescription, homeProcessHeading, homeProcessNote, homeProcessTeaserSteps } from '@/content/home'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  HOME PROCESS TEASER SECTION                                              ┃
+ * ┃  Kompakte Prozess-Übersicht für die Homepage → Link zur Detailseite.      ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── homeProcessTeaserSteps[] → 3 Schritte mit Nummer, Dauer, Titel
+ * └── homeProcessNote          → Link-Text zur Detailseite
+ *
+ * 🎨 LAYERS
+ * ├── Gradient bg              → subtle dark-to-light
+ * ├── Step cards (ol)          → nummerierte Liste
+ * └── Footer link              → zur /services/beratung#prozess
+ */
 
+import { homeProcessDescription, homeProcessHeading, homeProcessNote, homeProcessTeaserSteps } from '@/content/home'
+import React from 'react'
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — HomeProcessTeaserSection
+// ═══════════════════════════════════════════════════════════════════════════
 const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = ({
   id = 'process',
   className = '',

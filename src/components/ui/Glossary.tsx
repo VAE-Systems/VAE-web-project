@@ -1,13 +1,33 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  GLOSSARY                                                                 ┃
+ * ┃  Hover-Definitionen für Fachbegriffe → Inline-Tooltips.                   ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ EXPORTS
+ * ├── TERMS[]              → Statische Glossar-Daten
+ * ├── TermHint             → Inline-Komponente für Hover-Definitionen
+ * └── useGlossaryTerm()    → Hook zum Abrufen einzelner Terme
+ *
+ * 📦 USAGE
+ * └── <TermHint term="Roadmap" /> inline in Textblöcken
+ */
+
 import React from 'react'
 import { createPortal } from 'react-dom'
-// Glossary utilities: Use <TermHint term="Roadmap" /> inline in text blocks for accessible hover definitions.
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — Types
+// ═══════════════════════════════════════════════════════════════════════════
 export type GlossaryTerm = {
   term: string
   short?: string
   definition: string
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — Glossary Data
+// ═══════════════════════════════════════════════════════════════════════════
 export const TERMS: GlossaryTerm[] = [
   {
     term: 'Roadmap',

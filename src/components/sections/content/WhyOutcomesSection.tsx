@@ -1,19 +1,49 @@
-import React, { useEffect, useRef } from 'react'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  WHY OUTCOMES SECTION                                                     ┃
+ * ┃  "Warum VAE" mit Outcomes, Principles, Badges, Testimonial.               ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── outcomes[]           → Haupt-Vorteile mit Icon + Description
+ * ├── principles[]         → Arbeits-Prinzipien
+ * ├── badges[]             → Trust-Signale
+ * └── testimonial          → Kundenreferenz
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP ScrollTrigger.batch → Cards, Principles, Badges entrance
+ *
+ * 🎨 LAYERS
+ * ├── Outcomes grid (3-col)
+ * ├── Principles list
+ * ├── Badges row
+ * └── Testimonial quote
+ */
+
+import Icon from '@/components/ui/Icon'
+import { badges, outcomes, principles, tagline, testimonial } from '@/content/aboutWhy'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { outcomes, principles, badges, testimonial, tagline } from '@/content/aboutWhy'
-import Icon from '@/components/ui/Icon'
+import React, { useEffect, useRef } from 'react'
 
 interface WhyOutcomesSectionProps {
   className?: string
   id?: string
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — WhyOutcomesSection
+// ═══════════════════════════════════════════════════════════════════════════
 const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '', id = 'warum' }) => {
   const rootRef = useRef<HTMLDivElement>(null)
 
+  // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Batch Animations ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    // ⛓️ GATE — Accessibility Check
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) return
@@ -48,6 +78,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
         })
       }
     }, rootRef)
+    // 🧹 CLEANUP
     return () => ctx.revert()
   }, [])
 

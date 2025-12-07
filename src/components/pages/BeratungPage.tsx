@@ -1,3 +1,32 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  BERATUNG PAGE                                                            ┃
+ * ┃  Strategieberatungs-Landingpage → Discovery bis Roadmap.                  ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── FeatureCard[]        → "Was ist enthalten" Cards
+ * ├── ProcessStep[]        → Prozess-Timeline
+ * ├── TargetProfile[]      → Zielgruppen-Karten
+ * ├── PhaseCard[]          → Beratungsphasen-Optionen
+ * └── TransformationStat[] → Kennzahlen/Stats
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP ScrollTrigger    → Section/Card entrance animations
+ *
+ * 📐 LAYOUT
+ * ├── Hero Section
+ * ├── Features Grid
+ * ├── Process Timeline
+ * ├── Target Profiles
+ * ├── Phase Options
+ * ├── Transformation Stats
+ * └── FAQ + Final CTA
+ */
+
 import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/content/shared/faqData'
 import { gsap } from 'gsap'
@@ -25,9 +54,9 @@ import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
 import MagneticButton from '../ui/buttons/MagneticButton'
 
-// =========================================
-// TYPES & DATA
-// =========================================
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — Types & Data
+// ═══════════════════════════════════════════════════════════════════════════
 
 interface FeatureCard {
   icon: React.ElementType

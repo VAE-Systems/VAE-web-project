@@ -1,3 +1,32 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  CONTACT PAGE                                                             ┃
+ * ┃  Kontaktseite mit Mail Builder → Geführtes Formular zur E-Mail-Generierung┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── projectIntents[]     → Themenwahl (Automation, Infra, etc.)
+ * ├── timelineOptions[]    → Startzeitpunkt
+ * ├── companyStages[]      → Team-Setup
+ * ├── collaborationModes[] → Projekt, Retainer, Sparring
+ * └── helpTexts{}          → Tooltips für Help-Mode
+ *
+ * 🔁 SIDE-EFFECTS
+ * ├── useSearchParams      → Query-Param Parsing
+ * └── useMailBuilderTutorial → Tutorial State
+ *
+ * 🎨 LAYERS
+ * ├── Hero Section
+ * ├── Mail Builder (3-Step Form)
+ * ├── Alternative Contact Options
+ * └── FAQ Teaser
+ *
+ * 📐 FEATURES
+ * ├── Help Mode            → Info-Popups für jeden Schritt
+ * ├── Tutorial Overlay     → Geführte Tour
+ * └── Validation Popups    → Fehler-Feedback
+ */
+
 import {
   ArrowUpRight,
   BookOpen,
@@ -21,8 +50,10 @@ import { BOOKING_LINKS } from '@/config/booking'
 import { contactHero, contactIntro, contactUsps } from '@/content/contact'
 import { useMailBuilderTutorial } from '@/hooks'
 
+// ── 🎛️ CORE — Constants ──
 const MAIL_TO = 'info@vae.systems'
 
+// ── 🎛️ CORE — Selection Options ──
 const projectIntents = [
   {
     id: 'automation',
@@ -64,7 +95,7 @@ const collaborationModes = [
   { id: 'sparring', label: 'Sparring / Audit' },
 ]
 
-// Help texts for all interactive elements
+// ── 🎛️ CORE — Help Texts ──
 const helpTexts = {
   automation: {
     title: 'KI-Automatisierung',

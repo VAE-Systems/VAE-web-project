@@ -1,13 +1,40 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  TECH SHOWCASE SECTION                                                    ┃
+ * ┃  Auto-scrolling Carousel mit Tools/Technologies → Pause on Hover.         ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── techShowcaseTools[]  → Tool-Logos aus content/home
+ * ├── AUTO_SCROLL_SPEED    → 35px/s
+ * └── duplicatedTools      → Dupliziert für seamless loop
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Animation disabled
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── requestAnimationFrame → Continuous scroll animation
+ *
+ * 👁️ OBSERVERS
+ * └── isHovered state       → Pause/Resume on pointer events
+ */
+
 import { techShowcaseTools } from '@/content/home'
 import React from 'react'
 
+// ── 🎛️ CORE — Constants ──
 const AUTO_SCROLL_SPEED = 35 // px per second
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — TechShowcaseSection
+// ═══════════════════════════════════════════════════════════════════════════
 const TechShowcaseSection: React.FC = () => {
   const trackRef = React.useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = React.useState(false)
   const offsetRef = React.useRef(0)
   const [segmentWidth, setSegmentWidth] = React.useState(0)
+
+  // ⛓️ GATE — Accessibility Check (memoized)
   const reducedMotion = React.useMemo(
     () =>
       typeof window !== 'undefined' && window.matchMedia
@@ -16,14 +43,17 @@ const TechShowcaseSection: React.FC = () => {
     []
   )
 
+  // 🎛️ CORE — Duplicate tools for seamless loop
   const duplicatedTools = React.useMemo(() => techShowcaseTools.concat(techShowcaseTools), [])
 
+  // 🔁 SIDE-EFFECT — Measure segment width
   React.useLayoutEffect(() => {
     if (trackRef.current) {
       setSegmentWidth(trackRef.current.scrollWidth / 2)
     }
   }, [duplicatedTools])
 
+  // 🔁 SIDE-EFFECT — Animation Loop
   React.useEffect(() => {
     if (reducedMotion) return
     let frameId: number
@@ -44,9 +74,11 @@ const TechShowcaseSection: React.FC = () => {
     }
 
     frameId = requestAnimationFrame(step)
+    // 🧹 CLEANUP
     return () => cancelAnimationFrame(frameId)
   }, [isHovered, segmentWidth, reducedMotion])
 
+  // 👁️ OBSERVER — Hover state handlers
   const handlePause = React.useCallback(() => setIsHovered(true), [])
   const handleResume = React.useCallback(() => setIsHovered(false), [])
 

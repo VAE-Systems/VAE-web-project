@@ -1,10 +1,16 @@
 /**
- * useMobileMenu Hook
+ * useMobileMenu – Mobile navigation state with swipe gestures
  *
- * Manages mobile menu state with swipe gesture support
+ * ⛓️ Gates      → Config validation, gesture thresholds
+ * 🎛️ Core       → isOpen state, open/close/toggle callbacks
+ * 🔁 Side-Effects → Body scroll lock, padding compensation
+ * 👁️ Observers   → Swipe gesture detection (touch events)
+ * 🧹 Cleanup     → Body style reset, event listener removal
+ *
+ * Features: swipe-to-close, body scroll prevention, route change close
+ * Used by: Header mobile navigation
  */
-
-import { useState, useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface MobileMenuConfig {
   enableSwipeGestures?: boolean

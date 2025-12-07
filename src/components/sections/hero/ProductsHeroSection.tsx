@@ -1,3 +1,24 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  PRODUCTS HERO SECTION                                                    ┃
+ * ┃  Hero für /products → Fokus auf VAE-Logo + animiertem Hintergrund.        ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── productsHeroContent  → Texte aus content/productsHero
+ * └── FaultyTerminal       → Animated terminal background (dark mode)
+ *
+ * ⛓️ GATES
+ * └── theme check          → Light vs. Dark Mode unterschiedliche Backgrounds
+ *
+ * 🎨 LAYERS
+ * ├── Background (theme-conditional)
+ * │   ├── Light: Soft radial + grid
+ * │   └── Dark: FaultyTerminal effect
+ * ├── Overlay gradients    → Contrast enhancement
+ * └── Content (headline, subline, CTAs)
+ */
+
 import { useTheme } from '@/contexts/ThemeContext'
 import React, { useRef } from 'react'
 import FaultyTerminal from '../effects/FaultyTerminal'
@@ -7,15 +28,14 @@ import Icon from '@/components/ui/Icon'
 import { productsHeroContent } from '@/content/productsHero'
 import { Link } from 'react-router-dom'
 
-/**
- * ProductsHeroSection
- * Focused hero for the products page using central VAE logo and subtle animated background.
- */
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ProductsHeroSection
+// ═══════════════════════════════════════════════════════════════════════════
 const ProductsHeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { theme } = useTheme()
 
-  // (Optional future: GSAP or Intersection observers can be added here.)
+  // ⛓️ GATE — Theme Check für Background-Auswahl
   const isLight = theme === 'light'
 
   return (

@@ -1,9 +1,28 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  PRODUCTS SECTION                                                         ┃
+ * ┃  "Consulting Solutions" Grid → Lösungs-Pakete als Cards.                  ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * └── productCategories[]  → Kategorien aus navigation/productCategories
+ *
+ * 🎨 LAYERS
+ * ├── ParallaxBackdrop     → Mouse-following depth
+ * ├── ParticleField        → Ambient particles
+ * ├── Radial gradient bg   → Subtle glow
+ * └── 4-col card grid      → Product category cards
+ */
+
+import { productCategories } from '@/components/navigation/productCategories'
+import Icon from '@/components/ui/Icon'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Icon from '@/components/ui/Icon'
-import { productCategories } from '@/components/navigation/productCategories'
 import { ParallaxBackdrop, ParticleField } from '../effects/BackgroundEffects'
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ProductsSection
+// ═══════════════════════════════════════════════════════════════════════════
 const ProductsSection: React.FC = () => {
   return (
     <section

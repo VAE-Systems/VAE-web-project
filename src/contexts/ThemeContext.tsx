@@ -1,3 +1,23 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  THEME CONTEXT                                                            ┃
+ * ┃  Globaler Theme-State (Dark/Light) mit Persistenz + System-Fallback.      ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── ThemeProvider        → Context Provider mit Hydration
+ * ├── useTheme()           → Consumer Hook
+ * └── ThemeMode            → 'light' | 'dark'
+ *
+ * 🔁 SIDE-EFFECTS
+ * ├── initialiseTheme()    → Hydration aus localStorage/System
+ * ├── applyTheme()         → Setzt <html> class + CSS vars
+ * └── persistTheme()       → Speichert in localStorage
+ *
+ * 👁️ OBSERVERS
+ * └── matchMedia listener  → Reagiert auf System-Theme-Wechsel
+ */
+
 import React, {
   createContext,
   useCallback,
@@ -22,6 +42,9 @@ import {
   type ThemeMode,
 } from '../design-system'
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — Types & Context
+// ═══════════════════════════════════════════════════════════════════════════
 interface ThemeContextValue {
   theme: ThemeMode
   definition: ThemeDefinition
@@ -39,12 +62,15 @@ interface ThemeProviderProps {
   children: ReactNode
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ThemeProvider
+// ═══════════════════════════════════════════════════════════════════════════
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<ThemeMode>(defaultTheme)
   const [isReady, setIsReady] = useState(false)
   const hasExplicitPreference = useRef<boolean>(!!getStoredTheme())
 
-  // Hydrate theme on client once DOM APIs are available
+  // 🔁 SIDE-EFFECT — Hydrate theme on client once DOM APIs are available
   useEffect(() => {
     if (!isBrowser()) return
     const mode = initialiseTheme()
@@ -53,7 +79,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setIsReady(true)
   }, [])
 
-  // Re-apply theme whenever the mode changes (after hydration)
+  // 🔁 SIDE-EFFECT — Re-apply theme whenever the mode changes (after hydration)
   useEffect(() => {
     if (!isBrowser() || !isReady) return
     applyTheme(theme)

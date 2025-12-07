@@ -1,22 +1,47 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  CASE STUDIES SECTION                                                     ┃
+ * ┃  Projekt-Stories für Social Proof → authentische Referenzen.              ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── caseStudies[]             → Abgeschlossene Projekte
+ * └── upcomingCasePlaceholders  → Placeholder für kommende Cases
+ *
+ * ⛓️ GATES
+ * ├── caseStudies.length === 0  → Early return wenn keine Cases
+ * └── prefers-reduced-motion    → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP ScrollTrigger        → Header + Cards staggered entrance
+ *
+ * 🎨 LAYERS
+ * ├── ParallaxBackdrop
+ * ├── ParticleField
+ * └── Case Cards Grid
+ */
+
 import Icon from '@/components/ui/Icon'
+import { caseStudies, upcomingCasePlaceholders } from '@/content/caseStudies'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef } from 'react'
-import { caseStudies, upcomingCasePlaceholders } from '@/content/caseStudies'
 import { ParallaxBackdrop, ParticleField } from '../effects/BackgroundEffects'
 
-/**
- * CaseStudiesSection
- * Replaces old Testimonials with authentic / evolving project stories.
- */
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — CaseStudiesSection
+// ═══════════════════════════════════════════════════════════════════════════
 const CaseStudiesSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
+  // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Animations ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    // ⛓️ GATE — No cases to show
     if (caseStudies.length === 0) return
+    // ⛓️ GATE — Accessibility Check
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) {
@@ -56,6 +81,7 @@ const CaseStudiesSection: React.FC = () => {
         })
       }
     }, sectionRef)
+    // 🧹 CLEANUP
     return () => ctx.revert()
   }, [])
 

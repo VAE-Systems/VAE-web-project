@@ -1,6 +1,21 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  CTA LINK                                                                 ┃
+ * ┃  Zentraler Baustein für alle Call-to-Actions. Registry-basiert.           ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ FLOW
+ * ├── ctaId + ctx → buildCta() → { type, href, label, target, rel }
+ * ├── type='route'    → React Router <Link>
+ * └── type='external' → <a> mit target="_blank"
+ *
+ * 📍 REGISTRY: src/config/cta.ts (alle CTAs zentral definiert)
+ * 📍 VARIANTS: btn-primary, btn-secondary, btn-convert, btn-ghost, custom
+ */
+
+import { buildCta, type CtaContext } from '@/config/cta'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { buildCta, type CtaContext } from '@/config/cta'
 
 type Variant = 'primary' | 'secondary' | 'convert' | 'ghost' | 'custom'
 
@@ -20,12 +35,10 @@ const variantClass: Record<Exclude<Variant, 'custom'>, string> = {
   ghost: 'btn-ghost',
 }
 
-/**
- * CtaLink
- * Renders a CTA by id using the centralized registry.
- * - route => <Link to="..." />
- * - external / mailto => <a href="..." target rel />
- */
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🚪 ORCHESTRATOR: CtaLink
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 const CtaLink = React.forwardRef<HTMLAnchorElement, CtaLinkProps>(
   ({ ctaId, ctx, variant = 'primary', children, className = '', ...rest }, ref) => {
     const built = React.useMemo(() => buildCta(ctaId, ctx), [ctaId, ctx])

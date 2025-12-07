@@ -1,3 +1,22 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  RESOURCES FAQ PAGE                                                       ┃
+ * ┃  Vollständige FAQ-Seite mit Suche, Filter und Kategorien.                 ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── faqEntries[]         → Alle FAQ-Einträge aus content/shared/faqData
+ * ├── FILTERS[]            → Kategorie-Filter-Optionen
+ * ├── activeCategory       → Aktueller Filter-State
+ * └── searchQuery          → Suchfeld-State
+ *
+ * 🎨 LAYERS
+ * ├── Hero Section         → Titel + Suche
+ * ├── Category Pills       → Filter-Buttons
+ * ├── FAQSection           → Accordion-Grid
+ * └── CTA Footer
+ */
+
 import { CalendarDays, ChevronDown, Search as SearchIcon, ShieldCheck } from 'lucide-react'
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -8,6 +27,7 @@ import Seo from '@/components/ui/Seo'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { FaqCategoryId, faqEntries, getCategoriesWithCounts } from '@/content/shared/faqData'
 
+// ── 🎛️ CORE — Types & Constants ──
 type CategoryFilter = 'all' | FaqCategoryId
 
 const FILTERS: Array<{ id: CategoryFilter; label: string }> = [

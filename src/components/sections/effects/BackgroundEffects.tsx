@@ -1,18 +1,42 @@
-import React, { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  BACKGROUND EFFECTS                                                       ┃
+ * ┃  Wiederverwendbare Effekt-Komponenten für visuelle Tiefe.                 ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ EXPORTS
+ * ├── ParallaxBackdrop     → Mouse-following parallax layers
+ * └── ParticleField        → Floating ambient particles
+ *
+ * ⛓️ GATES (beide Komponenten)
+ * ├── prefers-reduced-motion → Animation disabled
+ * └── IntersectionObserver   → Animation paused when out of viewport
+ *
+ * 🔁 SIDE-EFFECTS
+ * ├── mousemove listener   → Parallax offset via GSAP
+ * └── CSS animation pause  → ParticleField
+ */
 
+import gsap from 'gsap'
+import React, { useEffect, useRef, useState } from 'react'
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — ParallaxBackdrop
+// ═══════════════════════════════════════════════════════════════════════════
 export const ParallaxBackdrop: React.FC<{ strength?: number }> = ({ strength = 12 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(false)
+
+  // ── 🔁 SIDE-EFFECT — Mouse-following parallax ──
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
 
-    // Respect prefers-reduced-motion
+    // ⛓️ GATE — Accessibility
     const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) return
 
-    // Activate only when in viewport
+    // 👁️ OBSERVER — Activate only when in viewport
     const io = new IntersectionObserver(
       entries => {
         setActive(entries[0]?.isIntersecting ?? false)
@@ -29,11 +53,14 @@ export const ParallaxBackdrop: React.FC<{ strength?: number }> = ({ strength = 1
       gsap.to(el, { x, y, duration: 1.2, ease: 'expo.out' })
     }
     window.addEventListener('mousemove', handler)
+
+    // 🧹 CLEANUP
     return () => {
       window.removeEventListener('mousemove', handler)
       io.disconnect()
     }
   }, [strength, active])
+
   return (
     <div ref={containerRef} className="bg-layered-parallax">
       <div className="parallax-layer layer-1" />
@@ -43,12 +70,18 @@ export const ParallaxBackdrop: React.FC<{ strength?: number }> = ({ strength = 1
   )
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — ParticleField
+// ═══════════════════════════════════════════════════════════════════════════
 export const ParticleField: React.FC<{ count?: number }> = ({ count = 25 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [paused, setPaused] = useState(false)
+
+  // ── 👁️ OBSERVER — Pause when out of viewport ──
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
+    // ⛓️ GATE — Accessibility
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) {
       setPaused(true)

@@ -1,6 +1,28 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  USE SCROLL REVEAL                                                        ┃
+ * ┃  GSAP ScrollTrigger-basierte Reveal-Animationen.                          ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── UseScrollRevealOptions → Animation-Config (y, opacity, duration, etc.)
+ * └── useScrollReveal()       → Ref-basierter Hook
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip animations, show element immediately
+ *
+ * 🔁 SIDE-EFFECTS
+ * ├── loadGsap()             → Lazy-load GSAP + ScrollTrigger
+ * └── ScrollTrigger.create() → Animation setup
+ *
+ * 📦 USAGE
+ * └── const ref = useScrollReveal<HTMLDivElement>({ y: 50, duration: 1 })
+ */
+
 import { loadGsap, type GsapModules } from '@/utils/gsapLoader'
 import { useEffect, useRef, useState } from 'react'
 
+// ── 🎛️ CORE — Options Interface ──
 export interface UseScrollRevealOptions {
   /** Trigger-Element (Standard: das Element selbst) */
   trigger?: string | HTMLElement

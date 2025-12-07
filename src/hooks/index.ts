@@ -1,22 +1,32 @@
 /**
- * Hooks Export Index
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  HOOKS BARREL                                                             ┃
+ * ┃  Zentraler Export für alle Custom React Hooks.                            ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  *
- * Central export point for all custom React hooks
+ * 🗺️ KATEGORIEN
+ * ├── Animation   → useAdvancedAnimation, useScrollReveal, useScrollScrub
+ * ├── UI          → useAttentionSignal, useFocusTrap, useMobileMenu, useSwipeGesture
+ * ├── Features    → useConsent, useContactForm, useDesignSystem, useNewsletter, etc.
+ * └── Tutorials   → useMailBuilderTutorial, useSetupCalculatorTutorial, useSpotlightTutorial
+ *
+ * 📦 USAGE
+ * └── import { useScrollReveal, useMailBuilderTutorial } from '@/hooks'
  */
 
-// Animation
+// ── Animation ──
 export * from './animation/useAdvancedAnimation'
 export * from './animation/useScrollReveal'
 export * from './animation/useScrollScrub'
 
-// UI
+// ── UI ──
 export * from './ui/useAttentionSignal'
 export * from './ui/useFocusTrap'
 export * from './ui/useMobileMenu'
 export * from './ui/useSwipeGesture'
 
-// Features
-export { useKeyboardNavigation, useFocusTrap as useAccessibilityFocusTrap } from './features/useAccessibility'
+// ── Features ──
+export { useFocusTrap as useAccessibilityFocusTrap, useKeyboardNavigation } from './features/useAccessibility'
 export * from './features/useConsent'
 export * from './features/useContactForm'
 export * from './features/useDesignSystem'
@@ -25,7 +35,7 @@ export * from './features/usePerformance'
 export * from './features/usePWA'
 export * from './features/useServiceWorker'
 
-// Tutorials
+// ── Tutorials ──
 export * from './tutorials/useMailBuilderTutorial'
 export * from './tutorials/useSetupCalculatorTutorial'
 export * from './tutorials/useSpotlightTutorial'

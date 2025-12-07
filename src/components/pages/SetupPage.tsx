@@ -1,3 +1,30 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  SETUP PAGE (INFRASTRUKTUR)                                               ┃
+ * ┃  Self-Hosted Setup → Migration von SaaS zu eigener Infrastruktur.         ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── saasToolCategories[] → SaaS-Alternativen-Daten
+ * ├── flattenedSaasTools   → Flache Tool-Liste für Calculator
+ * ├── CustomLicense[]      → User-definierte Lizenzen
+ * └── ProcessPhase[]       → Setup-Prozess-Schritte
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── useSetupCalculatorTutorial → Tutorial-State
+ *
+ * 🎨 LAYERS
+ * ├── Hero Section
+ * ├── SaaS Calculator       → Interaktiver Kostenrechner
+ * ├── Process Timeline
+ * ├── Service Cards Grid
+ * └── FAQ + Final CTA
+ *
+ * 📐 FEATURES
+ * ├── Tutorial Overlay      → Geführte Tour durch Calculator
+ * └── LockedSection         → Premium-Gated Content
+ */
+
 import {
   ArrowUpRight,
   BookOpen,
@@ -28,6 +55,7 @@ import LockedSection from '../ui/LockedSection'
 import Seo from '../ui/Seo'
 import { SpotlightTutorialOverlay } from '../ui/tutorial/MailBuilderTutorialOverlay'
 
+// ── 🎛️ CORE — Types ──
 interface ServiceCard {
   icon: React.ElementType
   title: string

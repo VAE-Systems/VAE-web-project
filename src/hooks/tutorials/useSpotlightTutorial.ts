@@ -1,5 +1,27 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  USE SPOTLIGHT TUTORIAL                                                   ┃
+ * ┃  Generischer Hook für Spotlight-basierte Tutorials.                       ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── SpotlightTutorialStepConfig → Step-Definition (target, position, text)
+ * └── SpotlightTutorialController → API (start, next, prev, skip, complete)
+ *
+ * 💾 PERSISTENCE
+ * ├── storageKey          → Completion-Status
+ * └── skipStorageKey      → Skip-Status
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── useEffect           → Hydrate from localStorage
+ *
+ * 📦 USAGE
+ * └── Wird von useMailBuilderTutorial, useSetupCalculatorTutorial genutzt
+ */
+
 import { useCallback, useEffect, useState } from 'react'
 
+// ── 🎛️ CORE — Types ──
 export interface SpotlightTutorialStepConfig<Step extends number = number> {
   step: Step
   title: string

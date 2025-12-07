@@ -1,6 +1,27 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  WHY OPEN SOURCE SECTION                                                  ┃
+ * ┃  Problem/Lösung-Gegenüberstellung: SaaS-Dilemma vs. Open-Source.          ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── openSourcePainPoints[] → Probleme mit SaaS (content/home)
+ * └── openSourceAdvantages[] → Vorteile von Open Source
+ *
+ * 🎨 LAYERS
+ * ├── Left Card (rose tint)  → "Das Problem" / SaaS-Dilemma
+ * └── Right Card (turquoise) → "Die Lösung" / Open-Source-Alternative
+ *
+ * 📐 LAYOUT
+ * └── 2-spaltig auf Desktop, gestackt auf Mobile
+ */
+
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
 import React from 'react'
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — WhyOpenSourceSection
+// ═══════════════════════════════════════════════════════════════════════════
 const WhyOpenSourceSection: React.FC = () => {
   return (
     <section

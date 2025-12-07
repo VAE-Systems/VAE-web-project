@@ -1,15 +1,42 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  SOCIAL PROOF SECTION                                                     ┃
+ * ┃  Projekte & Referenzen → Vertrauensaufbau durch echte Beispiele.          ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ KOMPONENTEN
+ * ├── LogoModal            → Vergrößerungsansicht für Projekt-Logos
+ * └── SocialProofSection   → Grid mit Projekten + Insights
+ *
+ * 🎛️ CORE
+ * ├── referenceProjects[]  → Projekt-Daten aus content/home
+ * └── referenceInsights[]  → Statistiken/Highlights
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── Keyboard listener    → ESC schließt Modal
+ *
+ * 🎨 LAYERS
+ * ├── Project Cards        → 2-spaltig, hover-animiert
+ * ├── Insights Grid        → 4-spaltig, Icon + Text
+ * └── LogoModal overlay    → Fullscreen mit backdrop-blur
+ */
+
 import Icon from '@/components/ui/Icon'
 import { referenceInsights, referenceProjects } from '@/content/home'
 import { ArrowRight, Briefcase, X } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — LogoModal (Vergrößerungsansicht)
+// ═══════════════════════════════════════════════════════════════════════════
 interface LogoModalProps {
   logo: { src: string; alt: string; invertOnDark?: boolean; invertOnLight?: boolean }
   onClose: () => void
 }
 
 const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
+  // 🔁 SIDE-EFFECT — ESC Key Handler
   React.useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
@@ -55,13 +82,18 @@ const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
   )
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — SocialProofSection
+// ═══════════════════════════════════════════════════════════════════════════
 const SocialProofSection: React.FC = () => {
+  // 🎛️ CORE — Modal State
   const [selectedLogo, setSelectedLogo] = useState<{
     src: string
     alt: string
     invertOnDark?: boolean
     invertOnLight?: boolean
   } | null>(null)
+
   return (
     <section
       id="social-proof"

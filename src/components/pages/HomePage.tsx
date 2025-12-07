@@ -1,3 +1,21 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  HOME PAGE                                                                ┃
+ * ┃  Landing-Seite: Der erste Eindruck. Conversion-optimiert.                 ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ SECTION-FLOW (von oben nach unten)
+ * ├── 1. Hero           → Erste Aufmerksamkeit, USP, Primary CTA
+ * ├── 2. WhyOpenSource  → Differenzierung, Vertrauen aufbauen
+ * ├── 3. TechStack      → Technische Glaubwürdigkeit
+ * ├── 4. Services       → Was wir anbieten (3er Grid)
+ * ├── 5. SocialProof    → Referenzen, Zahlen, Vertrauen
+ * ├── 6. ProcessTeaser  → Wie wir arbeiten (Transparenz)
+ * └── 7. FinalCta       → Letzter Conversion-Push
+ *
+ * 📍 SEO: Schema.org Organization + LocalBusiness für Heidelberg
+ */
+
 import React from 'react'
 import {
   FinalCtaSection,
@@ -10,14 +28,14 @@ import {
 } from '../sections'
 import Seo from '../ui/Seo'
 
-/**
- * HomePage Component
- *
- * Main landing page with all sections
- */
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🚪 ORCHESTRATOR: HomePage
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 const HomePage: React.FC = () => {
   return (
     <div className="min-h-[100dvh]">
+      {/* 🔍 SEO: Meta + Schema.org */}
       <Seo
         title="VAE Systems Heidelberg | Open-Source-Infrastruktur & KI"
         description="Open-Source-Arbeitsinfrastruktur aufbauen, KI-optimieren & betreuen. 3 Monate Testphase. Heidelberg & deutschlandweit."
@@ -66,25 +84,14 @@ const HomePage: React.FC = () => {
           },
         ]}
       />
-      {/* 1. Hero */}
+
+      {/* ── SECTION FLOW ── */}
       <HeroSection />
-
-      {/* 2. Warum Open Source */}
       <WhyOpenSourceSection />
-
-      {/* 3. Tech Stack */}
       <TechStackSection />
-
-      {/* 4. Services Überblick */}
       <ServicesOverviewSection />
-
-      {/* 5. Social Proof */}
       <SocialProofSection />
-
-      {/* 6. Prozess */}
       <HomeProcessTeaserSection className="pt-0" />
-
-      {/* 7. Abschluss */}
       <FinalCtaSection />
     </div>
   )

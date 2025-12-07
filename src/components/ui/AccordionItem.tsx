@@ -1,3 +1,20 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  ACCORDION ITEM                                                           ┃
+ * ┃  Einzelnes FAQ-Accordion-Element mit GSAP-Animation.                      ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── isOpen state (controlled) → Von Parent via props
+ * └── onToggle callback         → Trigger für Öffnen/Schließen
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP height animation     → Smooth expand/collapse
+ *
+ * 🧹 CLEANUP
+ * └── Kill animation on unmount/change
+ */
+
 import { gsap } from 'gsap'
 import { Minus, Plus } from 'lucide-react'
 import React, { useEffect, useRef } from 'react'
@@ -10,15 +27,19 @@ interface AccordionItemProps {
   id: string | number
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — AccordionItem
+// ═══════════════════════════════════════════════════════════════════════════
 const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen, onToggle, id }) => {
   const contentRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<ReturnType<typeof gsap.to> | null>(null)
 
+  // ── 🔁 SIDE-EFFECT — GSAP Height Animation ──
   useEffect(() => {
     const element = contentRef.current
     if (!element) return
 
-    // Kill previous animation
+    // 🧹 CLEANUP — Kill previous animation
     if (animationRef.current) animationRef.current.kill()
 
     if (isOpen) {

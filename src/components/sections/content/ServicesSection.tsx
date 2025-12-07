@@ -1,9 +1,29 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  SERVICES SECTION                                                         ┃
+ * ┃  Umfassende Service-Darstellung mit Lifecycle, Comparison, Categories.    ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── servicesData          → Detaillierte Service-Beschreibungen
+ * ├── servicesCategories    → Kategorisierte Gruppierung
+ * ├── consultingServices    → Beratungs-Angebote
+ * ├── lifecycleBlocks       → Projekt-Phasen
+ * └── comparisonMatrix      → SaaS vs. Open Source Vergleich
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP ScrollTrigger    → Header + Cards entrance animations
+ *
+ * 🗺️ MAPPING
+ * ├── servicePath{}         → ID → URL mapping
+ * └── serviceIdMap{}        → Alias-Auflösung
+ */
+
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Icon from '@/components/ui/Icon'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
-import React, { useEffect, useMemo, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import {
   comparisonMatrix,
   consultingServices,
@@ -12,8 +32,13 @@ import {
   servicesData,
   servicesLifecycle,
 } from '@/content/services'
-import MagneticButton from '@/components/ui/buttons/MagneticButton'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
+import React, { useEffect, useMemo, useRef } from 'react'
+import { Link } from 'react-router-dom'
 
+// ── 🎛️ CORE — Route Mappings ──
 const servicePath: Record<string, string> = {
   consulting: '/services',
   infrastructure: '/infrastruktur',
@@ -30,6 +55,9 @@ const serviceIdMap: Record<string, string> = {
   support: 'longterm-support',
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ServicesSection
+// ═══════════════════════════════════════════════════════════════════════════
 const ServicesSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
@@ -48,8 +76,10 @@ const ServicesSection: React.FC = () => {
     '4': 'VAE Systems Projektsprints (Median pro Iteration)',
   }
 
+  // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Animations ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    // ⛓️ GATE — Accessibility Check
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) {

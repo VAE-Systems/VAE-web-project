@@ -1,9 +1,16 @@
+/**
+ * useFocusTrap – Accessibility focus trap for modals/menus
+ *
+ * ⛓️ Gates      → active check, container ref validation, focusable elements
+ * 🎛️ Core       → FOCUSABLE_SELECTORS, Tab key cycling logic
+ * 👁️ Observers   → Keydown event listener (Tab, Escape)
+ * 🧹 Cleanup     → Event listener removal on deactivate
+ *
+ * A11y: Traps focus in container, cycles Tab, Escape callback
+ * Used by: Mobile menu, modals, dropdowns
+ */
 import { useEffect } from 'react'
 
-/**
- * useFocusTrap
- * Traps focus within a container while active (e.g., dropdown, modal, menu)
- */
 interface FocusTrapOptions {
   initialFocus?: 'first' | 'container' | 'none'
 }

@@ -1,17 +1,47 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  HERO SECTION                                                             ┃
+ * ┃  Der erste Berührungspunkt. Hier entscheidet sich, ob jemand bleibt.      ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ TERRITORIUM-KARTE
+ * ├── ⛓️ Gates        → Accessibility-Checks, Device-Detection
+ * ├── 🎛️ Core-State   → Was diesen Hero "lebendig" macht
+ * ├── 👁️ Observers    → Lazy-Loading & Visibility-Tracking
+ * ├── 🎨 Layers       → Visueller Stack (Background → Overlays → Content)
+ * └── 🚪 Orchestrator → Die Section selbst, die alles zusammenführt
+ *
+ * 📍 CONTENT-QUELLE: src/content/home.ts
+ * 📍 BACKGROUND: ./effects/NeuralNetworkBackground.tsx (Three.js, ~150KB lazy)
+ */
+
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import CtaLink from '@/components/ui/CtaLink'
 import Icon from '@/components/ui/Icon'
 import { heroBenefits, heroDescription, heroTitle, heroTypewriterTexts } from '@/content/home'
 import { CalendarClock, CheckCheck, ChevronDown } from 'lucide-react'
 import React from 'react'
+
 const NeuralNetworkBackground = React.lazy(() => import('../effects/NeuralNetworkBackground'))
 
+// ⚙️ Tuning-Knobs: Hier drehen für Timing-Änderungen
+const TIMING = {
+  bgActivationDelay: 150, // ms nach Viewport-Entry
+  bgThreshold: 0.35, // Viewport-% für Background-Trigger
+  visibilityThresholds: [0.1, 0.5] as number[], // Für Typewriter-Pause
+}
+
+// 🏷️ Social Proof am unteren Rand
 const trustBadges = ['100% Open Source', 'DSGVO-konform', 'Made in Germany']
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🚪 ORCHESTRATOR: HeroSection
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const HeroSection: React.FC = () => {
   const sectionRef = React.useRef<HTMLElement | null>(null)
-  const [enableBg, setEnableBg] = React.useState(false)
-  const [heroVisible, setHeroVisible] = React.useState(true)
+
+  // ⛓️ GATE: Accessibility-Check (einmalig bei Mount)
   const reducedMotion = React.useMemo(
     () =>
       typeof window !== 'undefined' && window.matchMedia
@@ -20,28 +50,32 @@ const HeroSection: React.FC = () => {
     []
   )
 
+  // 🎛️ CORE-STATE: Was den Hero "an" oder "aus" schaltet
+  const [enableBg, setEnableBg] = React.useState(false) // Three.js laden?
+  const [heroVisible, setHeroVisible] = React.useState(true) // Für Typewriter-Pause
+
+  // 👁️ OBSERVER: Lazy-Load des Neural Network Background
+  // → Aktiviert erst wenn Section zu 35% sichtbar ist
   React.useEffect(() => {
     if (reducedMotion) return
     if (typeof window === 'undefined') return
 
     const node = sectionRef.current
     if (!node || typeof IntersectionObserver === 'undefined') {
-      const timeout = window.setTimeout(() => setEnableBg(true), 120)
-      return () => window.clearTimeout(timeout)
+      const t = window.setTimeout(() => setEnableBg(true), 120)
+      return () => window.clearTimeout(t)
     }
 
     let timeout: number | null = null
     const observer = new IntersectionObserver(
-      entries => {
-        const entry = entries[0]
+      ([entry]) => {
         if (entry?.isIntersecting) {
           observer.disconnect()
-          timeout = window.setTimeout(() => setEnableBg(true), 150)
+          timeout = window.setTimeout(() => setEnableBg(true), TIMING.bgActivationDelay)
         }
       },
-      { threshold: 0.35 }
+      { threshold: TIMING.bgThreshold }
     )
-
     observer.observe(node)
 
     return () => {
@@ -50,29 +84,28 @@ const HeroSection: React.FC = () => {
     }
   }, [reducedMotion])
 
+  // 👁️ OBSERVER: Visibility-Tracking für Typewriter-Pause
+  // → Spart CPU wenn User nach unten scrollt
   React.useEffect(() => {
     if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return
     const node = sectionRef.current
     if (!node) return
 
-    const observer = new IntersectionObserver(
-      entries => {
-        const entry = entries[0]
-        setHeroVisible(entry?.isIntersecting ?? false)
-      },
-      { threshold: [0.1, 0.5] }
-    )
-
+    const observer = new IntersectionObserver(([entry]) => setHeroVisible(entry?.isIntersecting ?? false), {
+      threshold: TIMING.visibilityThresholds,
+    })
     observer.observe(node)
     return () => observer.disconnect()
   }, [])
 
+  // 🔁 SIDE-EFFECT: Scroll zu #services
   const scrollToServices = React.useCallback(() => {
-    const target = document.getElementById('services')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [])
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // 🎨 RENDER: Layer-Stack von hinten nach vorne
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   return (
     <section
@@ -80,49 +113,64 @@ const HeroSection: React.FC = () => {
       ref={sectionRef}
       className="from-bg-primary via-bg-primary/90 relative isolate overflow-hidden bg-gradient-to-b to-bg-secondary dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker"
     >
+      {/* 🌐 LAYER 0: Neural Network (Three.js) – lazy, nur wenn sichtbar */}
       {!reducedMotion && enableBg && (
         <React.Suspense fallback={null}>
           <NeuralNetworkBackground />
         </React.Suspense>
       )}
-      {/* Reduzierter Kontrast mit sanfteren Gradienten */}
+
+      {/* 🎨 LAYER 1: Türkis-Glow Overlays – rein dekorativ */}
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-50 mix-blend-screen dark:opacity-30">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.10),transparent_70%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(var(--vae-turquoise-rgb),0.03),transparent_60%)]" />
       </div>
-      {/* Soft Overlay für noch sanfteren Kontrast */}
+
+      {/* 🎨 LAYER 2: Kontrast-Overlay für Lesbarkeit */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-bg-darker/10 dark:bg-bg-darker/20" />
+
+      {/* 📝 LAYER 3: Content */}
       <div className="container-vae relative z-10 py-20 sm:py-28 lg:py-32">
         <div className="mx-auto flex min-h-[70vh] max-w-5xl flex-col items-center justify-center gap-10 text-center">
+          {/* ── MESSAGING BLOCK ── */}
           <div className="space-y-6">
+            {/* Eyebrow */}
             <p className="text-xs font-semibold uppercase tracking-[0.45em] text-vae-turquoise/80">Open Source · KI</p>
+
+            {/* H1: Zwei Zeilen, zweite in Brand-Color */}
             <h1 className="fluid-h1 text-balance font-bold text-text-light">
               <span className="block">{heroTitle[0]}</span>
               <span className="block text-vae-turquoise">{heroTitle[1]}</span>
             </h1>
+
+            {/* Typewriter: Rotierende USPs */}
             <div className="min-h-[2.2rem] text-lg font-medium text-vae-turquoise md:text-xl lg:text-2xl">
               <TypewriterEffect texts={heroTypewriterTexts} reducedMotion={reducedMotion} paused={!heroVisible} />
             </div>
+
+            {/* Description */}
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
               {heroDescription}
             </p>
           </div>
 
+          {/* ── VALUE PROPS ── */}
           <ul className="grid w-full gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
-            {heroBenefits.map(benefit => (
+            {heroBenefits.map(b => (
               <li
-                key={benefit.title}
+                key={b.title}
                 className="border-border-primary/60 bg-bg-primary/30 rounded-2xl border p-5 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_14px_40px_-24px_rgba(var(--vae-turquoise-rgb),0.8)] dark:border-white/10 dark:bg-white/5"
               >
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
-                  <Icon name={benefit.icon} size={20} />
+                  <Icon name={b.icon} size={20} />
                 </div>
-                <p className="text-base font-semibold text-text-light">{benefit.title}</p>
-                <p className="text-sm text-text-secondary">{benefit.description}</p>
+                <p className="text-base font-semibold text-text-light">{b.title}</p>
+                <p className="text-sm text-text-secondary">{b.description}</p>
               </li>
             ))}
           </ul>
 
+          {/* ── CTAs ── */}
           <div className="flex w-full flex-col gap-4 sm:flex-row sm:gap-8 lg:gap-12">
             <MagneticButton className="w-full sm:flex-1">
               <CtaLink
@@ -135,6 +183,7 @@ const HeroSection: React.FC = () => {
                 Kostenlose Beratung buchen (45 Min)
               </CtaLink>
             </MagneticButton>
+
             <MagneticButton className="w-full sm:flex-1">
               <button
                 type="button"
@@ -147,6 +196,7 @@ const HeroSection: React.FC = () => {
             </MagneticButton>
           </div>
 
+          {/* ── TRUST BADGES ── */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold tracking-[0.35em] text-text-secondary">
             {trustBadges.map(badge => (
               <span key={badge} className="inline-flex items-center gap-2 uppercase">
@@ -161,66 +211,72 @@ const HeroSection: React.FC = () => {
   )
 }
 
-const TypewriterEffect: React.FC<{ texts: readonly string[]; reducedMotion?: boolean; paused?: boolean }> = ({
-  texts,
-  reducedMotion,
-  paused,
-}) => {
-  const [currentIndex, setCurrentIndex] = React.useState(0)
-  const [currentText, setCurrentText] = React.useState('')
-  const [isDeleting, setIsDeleting] = React.useState(false)
-  const timeoutRef = React.useRef<number | null>(null)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🎬 TYPEWRITER EFFECT
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+/**
+ * 🎛️ CORE-INTENT: Simulated Typing
+ *
+ * State-Machine:
+ *   TYPING (110ms/char) → PAUSE (1800ms) → DELETING (60ms/char) → NEXT → loop
+ *
+ * ⛓️ Gates:
+ *   - reducedMotion → zeigt statisch ersten Text
+ *   - paused → stoppt Animation (CPU-Saving wenn Hero nicht sichtbar)
+ */
+const TypewriterEffect: React.FC<{
+  texts: readonly string[]
+  reducedMotion?: boolean
+  paused?: boolean
+}> = ({ texts, reducedMotion, paused }) => {
+  const [idx, setIdx] = React.useState(0)
+  const [display, setDisplay] = React.useState('')
+  const [deleting, setDeleting] = React.useState(false)
+  const timer = React.useRef<number | null>(null)
 
-  const clearTimer = React.useCallback(() => {
-    if (timeoutRef.current) {
-      window.clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
-    }
+  const clear = React.useCallback(() => {
+    if (timer.current) window.clearTimeout(timer.current)
+    timer.current = null
   }, [])
 
   React.useEffect(() => {
+    // ⛓️ GATE: Reduced Motion
     if (reducedMotion) {
-      setCurrentText(texts[0] || '')
-      clearTimer()
-      return
+      setDisplay(texts[0] || '')
+      return clear
     }
+    // ⛓️ GATE: Paused
+    if (paused) return clear
 
-    if (paused) {
-      clearTimer()
-      return
-    }
-
-    timeoutRef.current = window.setTimeout(
+    // 🎛️ CORE: Typing/Deleting Logic
+    const full = texts[idx]
+    timer.current = window.setTimeout(
       () => {
-        const fullText = texts[currentIndex]
-
-        if (!isDeleting) {
-          const next = fullText.substring(0, currentText.length + 1)
-          setCurrentText(next)
-          if (next === fullText) {
-            timeoutRef.current = window.setTimeout(() => setIsDeleting(true), 1800)
-          }
+        if (!deleting) {
+          const next = full.substring(0, display.length + 1)
+          setDisplay(next)
+          if (next === full) timer.current = window.setTimeout(() => setDeleting(true), 1800)
         } else {
-          const next = fullText.substring(0, currentText.length - 1)
-          setCurrentText(next)
+          const next = full.substring(0, display.length - 1)
+          setDisplay(next)
           if (next === '') {
-            setIsDeleting(false)
-            setCurrentIndex(prev => (prev + 1) % texts.length)
+            setDeleting(false)
+            setIdx(prev => (prev + 1) % texts.length)
           }
         }
       },
-      isDeleting ? 60 : 110
+      deleting ? 60 : 110
     )
 
-    return () => clearTimer()
-  }, [currentText, currentIndex, isDeleting, texts, reducedMotion, paused, clearTimer])
+    return clear
+  }, [display, idx, deleting, texts, reducedMotion, paused, clear])
 
-  React.useEffect(() => () => clearTimer(), [clearTimer])
+  React.useEffect(() => clear, [clear])
 
   return (
     <span className="inline-block" aria-live="polite">
-      {currentText}
-      <span className="animate-pulse" aria-hidden="true">
+      {display}
+      <span className="animate-pulse" aria-hidden>
         |
       </span>
     </span>

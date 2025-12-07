@@ -1,3 +1,23 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  SERVICES HERO SECTION                                                    ┃
+ * ┃  Hero für /services → RippleGrid-Effekt (dark) oder soft radial (light).  ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * └── RippleGrid           → Interactive grid animation (dark mode)
+ *
+ * ⛓️ GATES
+ * └── theme check          → Light vs. Dark Mode unterschiedliche Backgrounds
+ *
+ * 🎨 LAYERS
+ * ├── Background (theme-conditional)
+ * │   ├── Light: Radial gradients + grid pattern
+ * │   └── Dark: RippleGrid with mouse interaction
+ * ├── Overlay gradients    → Vignette + contrast
+ * └── Content container    → Headline, subline, CTAs
+ */
+
 import React from 'react'
 import RippleGrid from '../effects/RippleGrid'
 // ParallaxBackdrop removed in light mode redesign
@@ -11,8 +31,12 @@ interface ServicesHeroSectionProps {
   innerRef?: React.Ref<HTMLDivElement>
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ServicesHeroSection
+// ═══════════════════════════════════════════════════════════════════════════
 const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) => {
   const { theme } = useTheme()
+  // ⛓️ GATE — Theme Check für Background-Auswahl
   const isLight = theme === 'light'
 
   return (

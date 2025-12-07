@@ -1,7 +1,19 @@
 /**
- * Zentraler Export für UI-Komponenten.
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  UI COMPONENTS BARREL                                                     ┃
+ * ┃  Zentraler Export für alle UI-Komponenten.                                ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
  *
- * Halte Importe konsistent über `@/components/ui` und kapsle interne Struktur.
+ * 🗺️ KATEGORIEN
+ * ├── Buttons      → Button, MagneticButton, TouchButton
+ * ├── Cards        → Card, FeatureCard, SpotlightCard, TouchCard
+ * ├── Navigation   → Icon, MaterialIcon, ThemeToggle
+ * ├── Content      → CtaLink, Glossary, ReferenceList
+ * ├── Feedback     → LoadingSpinner, Reveal
+ * └── SEO          → Seo
+ *
+ * 📦 USAGE
+ * └── import { Button, Icon, MagneticButton } from '@/components/ui'
  */
 
 export { default as Button } from './Button'
@@ -15,11 +27,11 @@ export { default as LoadingSpinner } from './LoadingSpinner'
 export { default as MaterialIcon } from './MaterialIcon'
 export { default as ReferenceList } from './ReferenceList'
 export { default as Reveal } from './Reveal'
+export { default as Seo } from './Seo'
 export { default as SpotlightCard } from './SpotlightCard'
 export { ThemeToggle } from './ThemeToggle'
 export { default as TouchButton } from './TouchButton'
 export { default as TouchCard } from './TouchCard'
-export { default as Seo } from './Seo'
 
 export { MagneticButton } from './buttons'
 

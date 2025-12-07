@@ -1,201 +1,231 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  NEURAL NETWORK BACKGROUND                                                ┃
+ * ┃  Three.js-Canvas: Schwebende Neuronen, pulsierende Verbindungen.          ┃
+ * ┃  Reagiert auf Mausbewegung. Pausiert wenn Tab nicht sichtbar.             ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ TERRITORIUM-KARTE
+ * ├── ⛓️ Gates           → Reduced Motion, Low-Power Device Detection
+ * ├── 🏗️ Scene Setup     → THREE.Scene, Camera, Renderer (WebGL)
+ * ├── 🧠 Neural Elements → Neuronen (Spheres), Connections (Lines), Particles
+ * ├── 🎬 Animation Loop  → requestAnimationFrame, Mouse-Reaktion, Pulsing
+ * ├── 🔁 Side-Effects    → Resize-Handler, Visibility-Tracking
+ * └── 🧹 Cleanup         → GPU-Memory Disposal, Event-Listener Removal
+ *
+ * ⚠️ BUNDLE-IMPACT: ~150KB (Three.js) – daher lazy-loaded in HeroSection
+ * 📍 THEME-AWARE: Türkis-Farbe passt sich Dark/Light Mode an
+ */
+
 import { useTheme } from '@/contexts/ThemeContext'
 import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
-interface NeuralNetworkBackgroundProps {
+// ⚙️ Tuning-Knobs: Hier drehen für visuelle Anpassungen
+const CONFIG = {
+  // Neuron-Anzahl (skaliert mit Device-Power)
+  neurons: { reduced: 60, lowPower: 90, full: 120 },
+  // Partikel-Anzahl
+  particles: { reduced: 0, lowPower: 50, full: 80 },
+  // Verbindungs-Wahrscheinlichkeit (höher = weniger Connections)
+  connectionThreshold: { reduced: 0.985, full: 0.96 },
+  // Max-Distanz für Verbindungen
+  connectionDistance: { reduced: 3.2, full: 4 },
+  // Rotation-Geschwindigkeit
+  rotation: {
+    baseX: { reduced: 0.0007, full: 0.002 },
+    baseY: { reduced: 0.0009, full: 0.003 },
+  },
+  // Farben (Theme-aware)
+  colors: { dark: 0x00ffa5, light: 0x00d3a1 },
+}
+
+interface Props {
   className?: string
 }
 
-const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ className = '' }) => {
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🚪 ORCHESTRATOR: NeuralNetworkBackground
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const NeuralNetworkBackground: React.FC<Props> = ({ className = '' }) => {
   const mountRef = useRef<HTMLDivElement>(null)
-  // Avoid React state to prevent rerenders; use ref for mouse
-  const mouseRef = useRef({ x: 0, y: 0 })
+  const mouseRef = useRef({ x: 0, y: 0 }) // Ref statt State → keine Re-Renders
   const frameRef = useRef<number | null>(null)
   const activeRef = useRef(true)
   const { theme } = useTheme()
 
   useEffect(() => {
     if (!mountRef.current) return
+    const mount = mountRef.current
 
-    const currentMount = mountRef.current
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // ⛓️ GATES: Device & Accessibility Checks
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = currentMount.getBoundingClientRect()
-      const x = ((event.clientX - rect.left) / currentMount.clientWidth) * 2 - 1
-      const y = -(((event.clientY - rect.top) / currentMount.clientHeight) * 2 - 1)
-      mouseRef.current.x = x
-      mouseRef.current.y = y
+    const prefersReduced =
+      typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
+    const deviceMemory = (navigator as { deviceMemory?: number })?.deviceMemory
+    const lowPower = typeof deviceMemory === 'number' ? deviceMemory <= 4 : false
+
+    // Mode-Selector basierend auf Gates
+    const mode = prefersReduced ? 'reduced' : lowPower ? 'lowPower' : 'full'
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 🏗️ SCENE SETUP: Three.js Grundgerüst
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(75, mount.clientWidth / mount.clientHeight, 0.1, 1000)
+    camera.position.z = 12
+
+    const renderer = new THREE.WebGLRenderer({
+      antialias: mode === 'full',
+      alpha: true,
+      powerPreference: mode === 'full' ? 'high-performance' : 'low-power',
+    })
+    renderer.setSize(mount.clientWidth, mount.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mode === 'full' ? 1.75 : 1.25))
+    renderer.setClearColor(0x000000, 0)
+    mount.appendChild(renderer.domElement)
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 🧠 NEURAL ELEMENTS: Neurons + Connections + Particles
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    const color = theme === 'dark' ? CONFIG.colors.dark : CONFIG.colors.light
+
+    // 🔵 NEURONS: Kleine leuchtende Kugeln
+    const neurons = new THREE.Group()
+    const neuronGeo = new THREE.SphereGeometry(0.03, 8, 6)
+    const neuronMat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.6 })
+    const neuronPositions: THREE.Vector3[] = []
+
+    const neuronCount = CONFIG.neurons[mode]
+    for (let i = 0; i < neuronCount; i++) {
+      const mesh = new THREE.Mesh(neuronGeo, neuronMat.clone())
+      const pos = new THREE.Vector3((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 10)
+      mesh.position.copy(pos)
+      neuronPositions.push(pos)
+      neurons.add(mesh)
     }
 
-    currentMount.addEventListener('mousemove', handleMouseMove, { passive: true })
-
-    // Respect reduced motion and low-power environments
-    const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const deviceMemory = (navigator as any)?.deviceMemory as number | undefined
-    const lowPowerDevice = typeof deviceMemory === 'number' ? deviceMemory <= 4 : false
-
-    // Scene Setup
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000)
-    const renderer = new THREE.WebGLRenderer({
-      antialias: !lowPowerDevice,
-      alpha: true,
-      powerPreference: lowPowerDevice ? 'low-power' : 'high-performance',
-    })
-    renderer.setSize(currentMount.clientWidth, currentMount.clientHeight)
-    const cappedDpr = Math.min(window.devicePixelRatio || 1, lowPowerDevice ? 1.25 : 1.75)
-    renderer.setPixelRatio(prefersReduced ? 1 : cappedDpr)
-    renderer.setClearColor(0x000000, 0) // Transparent background
-    currentMount.appendChild(renderer.domElement)
-
-    // Neural Network Setup - Theme-aware colors
-    // Use brand turquoise in both themes; slightly calmer in light to avoid harshness
-    const turquoiseColor = theme === 'dark' ? 0x00ffa5 : 0x00d3a1
-    const neurons = new THREE.Group()
-    const neuronGeometry = new THREE.SphereGeometry(0.03, 8, 6)
-    const neuronMaterial = new THREE.MeshBasicMaterial({
-      color: turquoiseColor,
-      transparent: true,
-      opacity: 0.6,
-    })
-
-    // Connection Lines
+    // 🔗 CONNECTIONS: Linien zwischen nahen Neuronen
     const connections = new THREE.Group()
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: turquoiseColor,
-      transparent: true,
-      opacity: 0.2,
-    })
+    const lineMat = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.2 })
+    const threshold = mode === 'reduced' ? CONFIG.connectionThreshold.reduced : CONFIG.connectionThreshold.full
+    const maxDist = mode === 'reduced' ? CONFIG.connectionDistance.reduced : CONFIG.connectionDistance.full
 
-    // Particle System
-    const particleGeometry = new THREE.BufferGeometry()
-    const particleCount = prefersReduced ? 0 : lowPowerDevice ? 50 : 80
+    for (let i = 0; i < neuronPositions.length; i++) {
+      for (let j = i + 1; j < neuronPositions.length; j++) {
+        if (Math.random() > threshold && neuronPositions[i].distanceTo(neuronPositions[j]) < maxDist) {
+          const geo = new THREE.BufferGeometry().setFromPoints([neuronPositions[i], neuronPositions[j]])
+          const line = new THREE.Line(geo, lineMat.clone())
+          // Midpoint für Cursor-Highlight
+          ;(line.userData as { midpoint: THREE.Vector3 }).midpoint = new THREE.Vector3()
+            .addVectors(neuronPositions[i], neuronPositions[j])
+            .multiplyScalar(0.5)
+          connections.add(line)
+        }
+      }
+    }
+
+    // ✨ PARTICLES: Schwebende Punkte im Hintergrund
+    const particleCount = CONFIG.particles[mode]
+    const particleGeo = new THREE.BufferGeometry()
     const positions = new Float32Array(particleCount * 3)
-
     for (let i = 0; i < particleCount * 3; i += 3) {
       positions[i] = (Math.random() - 0.5) * 30
       positions[i + 1] = (Math.random() - 0.5) * 20
       positions[i + 2] = (Math.random() - 0.5) * 15
     }
-
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-
-    const particleMaterial = new THREE.PointsMaterial({
-      color: turquoiseColor,
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    const particleMat = new THREE.PointsMaterial({
+      color,
       size: 1,
       transparent: true,
       opacity: 0.3,
       blending: THREE.AdditiveBlending,
     })
+    const particles = new THREE.Points(particleGeo, particleMat)
 
-    const particleSystem = new THREE.Points(particleGeometry, particleMaterial)
+    scene.add(neurons, connections, particles)
 
-    // Create Neurons
-    const neuronPositions: THREE.Vector3[] = []
-    const neuronCount = prefersReduced ? 60 : lowPowerDevice ? 90 : 120
-    for (let i = 0; i < neuronCount; i++) {
-      const neuron = new THREE.Mesh(neuronGeometry, neuronMaterial.clone())
-      const position = new THREE.Vector3(
-        (Math.random() - 0.5) * 15,
-        (Math.random() - 0.5) * 12,
-        (Math.random() - 0.5) * 10
-      )
-      neuron.position.copy(position)
-      neuronPositions.push(position)
-      neurons.add(neuron)
-    }
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 🎬 ANIMATION LOOP: Rotation, Pulsing, Mouse-Reaktion
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-    // Create Connections
-    for (let i = 0; i < neuronPositions.length; i++) {
-      for (let j = i + 1; j < neuronPositions.length; j++) {
-        if (Math.random() > (prefersReduced ? 0.985 : 0.96)) {
-          const distance = neuronPositions[i].distanceTo(neuronPositions[j])
-          if (distance < (prefersReduced ? 3.2 : 4)) {
-            const geometry = new THREE.BufferGeometry().setFromPoints([neuronPositions[i], neuronPositions[j]])
-            const line = new THREE.Line(geometry, lineMaterial.clone())
-            ;(line.userData as { midpoint?: THREE.Vector3 }).midpoint = new THREE.Vector3()
-              .addVectors(neuronPositions[i], neuronPositions[j])
-              .multiplyScalar(0.5)
-            connections.add(line)
-          }
-        }
-      }
-    }
-
-    scene.add(neurons)
-    scene.add(connections)
-    scene.add(particleSystem)
-    camera.position.z = 12
-
-    // Animation Loop
     const animate = () => {
       if (!activeRef.current) return
       frameRef.current = requestAnimationFrame(animate)
+
       const mouse = mouseRef.current
+      const mouseActivity = Math.abs(mouse.x) + Math.abs(mouse.y)
 
-      // Mouse-responsive camera movement
-      const targetX = mouse.x * 2.5
-      const targetY = mouse.y * 1.5
-
-      camera.position.x += (targetX - camera.position.x) * 0.04
-      camera.position.y += (targetY - camera.position.y) * 0.04
+      // 📷 Camera folgt Maus sanft
+      camera.position.x += (mouse.x * 2.5 - camera.position.x) * 0.04
+      camera.position.y += (mouse.y * 1.5 - camera.position.y) * 0.04
       camera.lookAt(0, 0, 0)
 
-      // Rotation
-      const mouseActivity = Math.abs(mouse.x) + Math.abs(mouse.y)
-      const mouseInfluence = prefersReduced ? 0.3 : 1 + mouseActivity * 0.8
-      const baseRotX = prefersReduced ? 0.0007 : 0.002
-      const baseRotY = prefersReduced ? 0.0009 : 0.003
-      neurons.rotation.x += baseRotX * mouseInfluence
-      neurons.rotation.y += baseRotY * mouseInfluence
-      connections.rotation.x += baseRotX * mouseInfluence
-      connections.rotation.y += baseRotY * mouseInfluence
+      // 🔄 Rotation (beschleunigt bei Mausaktivität)
+      const influence = mode === 'reduced' ? 0.3 : 1 + mouseActivity * 0.8
+      const rotX = (mode === 'reduced' ? CONFIG.rotation.baseX.reduced : CONFIG.rotation.baseX.full) * influence
+      const rotY = (mode === 'reduced' ? CONFIG.rotation.baseY.reduced : CONFIG.rotation.baseY.full) * influence
 
-      // Particle System Rotation
+      neurons.rotation.x += rotX
+      neurons.rotation.y += rotY
+      connections.rotation.x += rotX
+      connections.rotation.y += rotY
+
       if (particleCount > 0) {
-        particleSystem.rotation.y += (prefersReduced ? 0.001 : 0.005) + mouseActivity * (prefersReduced ? 0.002 : 0.01)
-        particleSystem.rotation.x +=
-          (prefersReduced ? 0.0006 : 0.003) + mouseActivity * (prefersReduced ? 0.001 : 0.005)
+        particles.rotation.y +=
+          (mode === 'reduced' ? 0.001 : 0.005) + mouseActivity * (mode === 'reduced' ? 0.002 : 0.01)
+        particles.rotation.x +=
+          (mode === 'reduced' ? 0.0006 : 0.003) + mouseActivity * (mode === 'reduced' ? 0.001 : 0.005)
       }
 
-      // Pulsing Neurons
+      // 💓 Pulsing Neurons + Cursor-Magnetismus
       const time = Date.now() * 0.001
-      neurons.children.forEach((neuron, index) => {
-        const mesh = neuron as THREE.Mesh
-        const material = mesh.material as THREE.MeshBasicMaterial
+      neurons.children.forEach((n, i) => {
+        const mesh = n as THREE.Mesh
+        const mat = mesh.material as THREE.MeshBasicMaterial
+        const screenPos = mesh.position.clone().project(camera)
+        const mouseDist = Math.sqrt((screenPos.x - mouse.x) ** 2 + (screenPos.y - mouse.y) ** 2)
+        const magnet = mode === 'reduced' ? 0 : Math.max(0, 1 - mouseDist / 1.2)
+        const pulse = Math.sin(time + i * 0.1) * (mode === 'reduced' ? 0.08 : 0.15)
 
-        const neuronPos = mesh.position.clone().project(camera)
-        const mouseDistance = Math.sqrt(Math.pow(neuronPos.x - mouse.x, 2) + Math.pow(neuronPos.y - mouse.y, 2))
-
-        const magneticForce = prefersReduced ? 0 : Math.max(0, 1 - mouseDistance / 1.2)
-        const pulse = Math.sin(time + index * 0.1) * (prefersReduced ? 0.08 : 0.15)
-
-        material.opacity = 0.4 + pulse + magneticForce * (prefersReduced ? 0.15 : 0.3)
-
-        const scale = 1 + pulse * 0.1 + magneticForce * (prefersReduced ? 0.1 : 0.2)
-        mesh.scale.setScalar(scale)
+        mat.opacity = 0.4 + pulse + magnet * (mode === 'reduced' ? 0.15 : 0.3)
+        mesh.scale.setScalar(1 + pulse * 0.1 + magnet * (mode === 'reduced' ? 0.1 : 0.2))
       })
 
-      // Connection opacity with cursor highlight
-      connections.children.forEach(connection => {
-        const line = connection as THREE.Line
-        const material = line.material as THREE.LineBasicMaterial
-        const mouseActivity = Math.abs(mouse.x) + Math.abs(mouse.y)
-        const mid = (line.userData as { midpoint: THREE.Vector3 }).midpoint
-        const screenMid = mid.clone().project(camera)
-        const dist = Math.sqrt(Math.pow(screenMid.x - mouse.x, 2) + Math.pow(screenMid.y - mouse.y, 2))
-        const highlight = prefersReduced ? 0 : Math.max(0, 1 - dist / 0.5)
-        material.opacity =
-          0.15 + mouseActivity * (prefersReduced ? 0.05 : 0.2) + highlight * (prefersReduced ? 0.2 : 0.6)
+      // 🔗 Connection Highlight bei Cursor-Nähe
+      connections.children.forEach(c => {
+        const line = c as THREE.Line
+        const mat = line.material as THREE.LineBasicMaterial
+        const mid = (line.userData as { midpoint: THREE.Vector3 }).midpoint.clone().project(camera)
+        const dist = Math.sqrt((mid.x - mouse.x) ** 2 + (mid.y - mouse.y) ** 2)
+        const highlight = mode === 'reduced' ? 0 : Math.max(0, 1 - dist / 0.5)
+        mat.opacity =
+          0.15 + mouseActivity * (mode === 'reduced' ? 0.05 : 0.2) + highlight * (mode === 'reduced' ? 0.2 : 0.6)
       })
 
       renderer.render(scene, camera)
     }
 
-    // Start/stop with page visibility for battery/perf
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 🔁 SIDE-EFFECTS: Event-Listener
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    // 🖱️ Mouse-Tracking
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = mount.getBoundingClientRect()
+      mouseRef.current.x = ((e.clientX - rect.left) / mount.clientWidth) * 2 - 1
+      mouseRef.current.y = -(((e.clientY - rect.top) / mount.clientHeight) * 2 - 1)
+    }
+    mount.addEventListener('mousemove', onMouseMove, { passive: true })
+
+    // 👁️ Visibility-Tracking (pausiert wenn Tab versteckt)
     const onVisibility = () => {
       activeRef.current = document.visibilityState === 'visible'
       if (activeRef.current && frameRef.current == null) {
@@ -204,52 +234,56 @@ const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = ({ class
     }
     document.addEventListener('visibilitychange', onVisibility)
 
-    // Kick off loop if not reduced
-    if (!prefersReduced) {
+    // 📐 Resize-Handler
+    const onResize = () => {
+      camera.aspect = mount.clientWidth / mount.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(mount.clientWidth, mount.clientHeight)
+    }
+    window.addEventListener('resize', onResize)
+
+    // 🚀 Start Animation
+    if (mode !== 'reduced') {
       frameRef.current = requestAnimationFrame(animate)
     }
 
-    // Handle Resize
-    const handleResize = () => {
-      if (!currentMount) return
-      camera.aspect = currentMount.clientWidth / currentMount.clientHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(currentMount.clientWidth, currentMount.clientHeight)
-    }
-
-    window.addEventListener('resize', handleResize)
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 🧹 CLEANUP: GPU-Memory freigeben, Listener entfernen
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', onVisibility)
-      if (currentMount) currentMount.removeEventListener('mousemove', handleMouseMove)
-      if (frameRef.current != null) cancelAnimationFrame(frameRef.current)
-      // Dispose resources to avoid GPU/CPU leaks
-      try {
-        neurons.children.forEach(n => {
-          const mesh = n as THREE.Mesh
-          ;(mesh.geometry as THREE.BufferGeometry)?.dispose?.()
-          const mat = mesh.material as THREE.Material | THREE.Material[]
-          if (Array.isArray(mat)) mat.forEach(m => m.dispose())
-          else mat?.dispose?.()
-        })
-        connections.children.forEach(c => {
-          const line = c as THREE.Line
-          ;(line.geometry as THREE.BufferGeometry)?.dispose?.()
-          const mat = line.material as THREE.Material | THREE.Material[]
-          if (Array.isArray(mat)) mat.forEach(m => m.dispose())
-          else mat?.dispose?.()
-        })
-        particleGeometry?.dispose?.()
-        particleMaterial?.dispose?.()
-        renderer?.dispose?.()
-      } catch {
-        // ignore cleanup errors
+      mount.removeEventListener('mousemove', onMouseMove)
+      if (frameRef.current) cancelAnimationFrame(frameRef.current)
+
+      // Dispose all GPU resources
+      const disposeMaterial = (mat: THREE.Material | THREE.Material[]) => {
+        if (Array.isArray(mat)) mat.forEach(m => m.dispose())
+        else mat?.dispose?.()
       }
-      if (currentMount && renderer.domElement) currentMount.removeChild(renderer.domElement)
+
+      neurons.children.forEach(n => {
+        const mesh = n as THREE.Mesh
+        mesh.geometry?.dispose?.()
+        disposeMaterial(mesh.material)
+      })
+
+      connections.children.forEach(c => {
+        const line = c as THREE.Line
+        line.geometry?.dispose?.()
+        disposeMaterial(line.material)
+      })
+
+      particleGeo?.dispose?.()
+      particleMat?.dispose?.()
+      renderer?.dispose?.()
+
+      if (mount && renderer.domElement.parentNode === mount) {
+        mount.removeChild(renderer.domElement)
+      }
     }
-    // Recreate on theme changes to update colors
-  }, [theme])
+  }, [theme]) // Recreate on theme change für Farb-Update
 
   return <div ref={mountRef} className={`pointer-events-none absolute inset-0 z-0 ${className}`} />
 }

@@ -1,9 +1,28 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  USE MAIL BUILDER TUTORIAL                                                ┃
+ * ┃  Spotlight-Tutorial für den Mail Builder auf der ContactPage.             ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── TUTORIAL_STEPS[]     → 6 Schritte durch den Mail Builder
+ * └── useSpotlightTutorial → Basis-Hook für Tutorial-State
+ *
+ * 💾 PERSISTENCE
+ * ├── STORAGE_KEY          → Completion-Status in localStorage
+ * └── STORAGE_SKIP_KEY     → Skip-Status in localStorage
+ *
+ * 📦 USAGE
+ * └── const tutorial = useMailBuilderTutorial()
+ */
+
 import {
   SpotlightTutorialController,
   SpotlightTutorialStepConfig,
   useSpotlightTutorial,
 } from '@/hooks/tutorials/useSpotlightTutorial'
 
+// ── 🎛️ CORE — Types ──
 export type TutorialStep = 1 | 2 | 3 | 4 | 5 | 6
 
 export type TutorialStepConfig = SpotlightTutorialStepConfig<TutorialStep>

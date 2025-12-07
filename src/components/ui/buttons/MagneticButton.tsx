@@ -1,8 +1,30 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  MAGNETIC BUTTON                                                          ┃
+ * ┃  Wrapper der Buttons magnetisch zum Cursor zieht. Micro-Interaction.      ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ TERRITORIUM-KARTE
+ * ├── ⛓️ Gate         → Reduced Motion Check, Disabled State
+ * ├── 🎛️ Core        → Position-Berechnung (Offset * Intensity)
+ * ├── 🎨 Effects     → Glow, Ripple, Scale (optional)
+ * └── 🔁 Side-Effect → DOM Transform (kein Re-Render)
+ *
+ * ⚙️ TUNING: intensity prop (0.02 - 0.12 optimal)
+ */
+
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 
 import { cn } from '@/lib/classNames'
 import { prefersReducedMotion } from '@/utils/motion'
 import { type TypographyPreset } from '@design-system/typography'
+
+// ⚙️ Tuning-Knobs
+const MIN_INTENSITY = 0
+const MAX_INTENSITY = 0.2
+const DEFAULT_INTENSITY = 0.075
+
+const clampIntensity = (value: number) => Math.min(Math.max(value, MIN_INTENSITY), MAX_INTENSITY)
 
 interface Ripple {
   id: number
@@ -11,27 +33,18 @@ interface Ripple {
 }
 
 export interface MagneticButtonProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Strength of the magnetic offset; values between 0.02 and 0.12 work best */
   intensity?: number
-  /** Enables a subtle glow on hover */
   glowEffect?: boolean
-  /** Enables a ripple feedback on click */
   rippleEffect?: boolean
-  /** Slightly scale the button while hovering */
   scaleEffect?: boolean
-  /** Typography preset sourced from the design-system tokens */
   textStyle?: TypographyPreset
-  /** Enable hardware acceleration by hinting `will-change` */
   enableHardwareAcceleration?: boolean
-  /** Disabled state for the wrapped component */
   disabled?: boolean
 }
 
-const MIN_INTENSITY = 0
-const MAX_INTENSITY = 0.2
-const DEFAULT_INTENSITY = 0.075
-
-const clampIntensity = (value: number) => Math.min(Math.max(value, MIN_INTENSITY), MAX_INTENSITY)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🚪 ORCHESTRATOR: MagneticButton
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
   (
@@ -59,12 +72,15 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     const [ripples, setRipples] = useState<Ripple[]>([])
     const animationFrame = useRef<number>()
     const rippleTimeouts = useRef<Map<number, number>>(new Map())
-    const reduceMotion = useRef<boolean>(prefersReducedMotion())
 
+    // ⛓️ GATE: Reduced Motion
+    const reduceMotion = useRef<boolean>(prefersReducedMotion())
     const resolvedIntensity = reduceMotion.current ? 0 : clampIntensity(intensity)
 
+    // 🎛️ CORE: Magnet-Berechnung
     const handlePointerMove = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
+        // ⛓️ GATE: Disabled oder keine Intensity
         if (disabled || !buttonRef.current || resolvedIntensity === 0) return
 
         const computePosition = () => {
@@ -78,38 +94,31 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
             y: offsetY * resolvedIntensity,
           }
 
-          // Direkte DOM-Manipulation - kein Re-Render
+          // 🔁 SIDE-EFFECT: Direkte DOM-Manipulation (kein Re-Render)
           const translate = `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0)`
           const scale = scaleEffect && isHovered ? ' scale(1.02)' : ''
           buttonRef.current.style.transform = `${translate}${scale}`
         }
 
-        if (animationFrame.current) {
-          cancelAnimationFrame(animationFrame.current)
-        }
-
+        if (animationFrame.current) cancelAnimationFrame(animationFrame.current)
         animationFrame.current = window.requestAnimationFrame(computePosition)
       },
       [disabled, resolvedIntensity, scaleEffect, isHovered]
     )
 
+    // 🔁 SIDE-EFFECT: Reset bei Leave
     const handlePointerLeave = useCallback(() => {
       setIsHovered(false)
-      if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current)
-      }
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current)
       positionRef.current = { x: 0, y: 0 }
-      if (buttonRef.current) {
-        buttonRef.current.style.transform = 'translate3d(0, 0, 0)'
-      }
+      if (buttonRef.current) buttonRef.current.style.transform = 'translate3d(0, 0, 0)'
     }, [])
 
     const handlePointerEnter = useCallback(() => {
-      if (!disabled) {
-        setIsHovered(true)
-      }
+      if (!disabled) setIsHovered(true)
     }, [disabled])
 
+    // 🎨 EFFECT: Ripple bei Click
     const handleClickInternal = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
         if (disabled) return
@@ -123,50 +132,47 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
             y: event.clientY - rect.top,
           }
 
-          setRipples(previous => [...previous, ripple])
+          setRipples(prev => [...prev, ripple])
 
           const timeout = window.setTimeout(() => {
-            setRipples(previous => previous.filter(item => item.id !== rippleId))
+            setRipples(prev => prev.filter(r => r.id !== rippleId))
             rippleTimeouts.current.delete(rippleId)
           }, 600)
 
           rippleTimeouts.current.set(rippleId, timeout)
         }
 
-        if (onClick) {
-          onClick(event)
-        }
+        onClick?.(event)
       },
       [disabled, rippleEffect, onClick]
     )
 
+    // 🔁 SIDE-EFFECT: Hardware Acceleration Hint
     useEffect(() => {
       if (!buttonRef.current || !enableHardwareAcceleration) return
       const node = buttonRef.current
-      const previousWillChange = node.style.willChange
+      const prev = node.style.willChange
       node.style.willChange = 'transform'
       return () => {
-        node.style.willChange = previousWillChange
+        node.style.willChange = prev
       }
     }, [enableHardwareAcceleration])
 
+    // 🧹 CLEANUP
     useEffect(
       () => () => {
-        if (animationFrame.current) {
-          cancelAnimationFrame(animationFrame.current)
-        }
-        rippleTimeouts.current.forEach(timeout => window.clearTimeout(timeout))
+        if (animationFrame.current) cancelAnimationFrame(animationFrame.current)
+        rippleTimeouts.current.forEach(t => window.clearTimeout(t))
         rippleTimeouts.current.clear()
       },
       []
     )
 
-    const containerStyle = useMemo(
-      () => ({
-        ...style,
-      }),
-      [style]
-    )
+    const containerStyle = useMemo(() => ({ ...style }), [style])
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 🎨 RENDER
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
     return (
       <div
@@ -185,18 +191,17 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
         {...rest}
       >
         <div className="relative z-10">{children}</div>
+
+        {/* 🎨 EFFECT: Ripple Overlay */}
         {rippleEffect && (
           <span className="pointer-events-none absolute inset-0">
-            {ripples.map(ripple => {
-              const rippleStyle = { left: ripple.x, top: ripple.y }
-              return (
-                <span
-                  key={ripple.id}
-                  className="absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 animate-[ripple_0.6s_ease-out_forwards] rounded-full bg-emerald-400/30 opacity-80"
-                  style={rippleStyle}
-                />
-              )
-            })}
+            {ripples.map(ripple => (
+              <span
+                key={ripple.id}
+                className="absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 animate-[ripple_0.6s_ease-out_forwards] rounded-full bg-emerald-400/30 opacity-80"
+                style={{ left: ripple.x, top: ripple.y }}
+              />
+            ))}
           </span>
         )}
       </div>

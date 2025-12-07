@@ -1,10 +1,33 @@
-import React, { useEffect, useRef, useCallback } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  STORY TEAM SECTION                                                       ┃
+ * ┃  Team-Vorstellung mit Story-Intro → persönliche Verbindung.               ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── storyIntro           → Headline, Lead, Body aus content/storyTeam
+ * └── teamMembers[]        → Team-Daten aus content/team
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * ├── GSAP ScrollTrigger.batch → Block entrance animations
+ * └── onError img fallback     → FALLBACK_AVATAR
+ *
+ * 🎨 LAYERS
+ * ├── Story intro (headline + body)
+ * └── Team member cards
+ */
+
+import Icon from '@/components/ui/Icon'
 import { storyIntro } from '@/content/storyTeam'
 import { teamMembers } from '@/content/team'
-import Icon from '@/components/ui/Icon'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useCallback, useEffect, useRef } from 'react'
 
+// ── 🎛️ CORE — Fallback Avatar ──
 const FALLBACK_AVATAR =
   'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320"><rect width="320" height="320" fill="%23121a1a"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" fill="%2300d488" font-family="Arial, sans-serif" font-size="32">VAE</text></svg>'
 
@@ -13,14 +36,21 @@ interface StoryTeamSectionProps {
   className?: string
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — StoryTeamSection
+// ═══════════════════════════════════════════════════════════════════════════
 const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', className = '' }) => {
   const ref = useRef<HTMLDivElement>(null)
+
+  // ── 🔁 SIDE-EFFECT — Image Error Fallback ──
   const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement>) => {
     event.currentTarget.src = FALLBACK_AVATAR
   }, [])
 
+  // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Batch Animations ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    // ⛓️ GATE — Accessibility Check
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) return
@@ -35,6 +65,7 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
         once: true,
       })
     }, ref)
+    // 🧹 CLEANUP
     return () => ctx.revert()
   }, [])
 

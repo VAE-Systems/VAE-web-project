@@ -1,5 +1,20 @@
-import React from 'react'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  THEME TOGGLE                                                             ┃
+ * ┃  Dark/Light Mode Switch mit Icon oder Button-Variante.                    ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── useTheme()           → Theme-Context (theme, toggleTheme, isReady)
+ * └── variant              → 'icon' (nur Icon) oder 'button' (Icon + Label)
+ *
+ * 🎨 VARIANTS
+ * ├── icon    → Runder Button mit Sun/Moon
+ * └── button  → Breiter Button mit Label
+ */
+
 import { Moon, Sun } from 'lucide-react'
+import React from 'react'
 
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/classNames'
@@ -12,11 +27,15 @@ export interface ThemeToggleProps {
 
 const srOnly = 'sr-only'
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — ThemeToggle
+// ═══════════════════════════════════════════════════════════════════════════
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   className,
   label = 'Darstellung umschalten',
   variant = 'icon',
 }) => {
+  // 🎛️ CORE — Theme Context
   const { theme, toggleTheme, isReady } = useTheme()
 
   const isDark = theme === 'dark'

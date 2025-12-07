@@ -1,3 +1,26 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  FAQ SECTION                                                              ┃
+ * ┃  Kategorisiertes Accordion für häufige Fragen → schnelle Einordnung.      ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🎛️ CORE
+ * ├── categories[]         → FAQ-Daten gruppiert nach Kategorie
+ * ├── openItems{}          → State-Map für Accordion-Expansion
+ * └── AccordionItem        → UI-Komponente für einzelne Q&A
+ *
+ * ⛓️ GATES
+ * └── prefers-reduced-motion → Skip GSAP animations
+ *
+ * 🔁 SIDE-EFFECTS
+ * └── GSAP ScrollTrigger   → Staggered entrance animations
+ *
+ * 🎨 LAYERS
+ * ├── Header (title/subtitle)
+ * ├── Category columns     → 2-spaltig, je Kategorie ein Block
+ * └── Optional CTA footer
+ */
+
 import AccordionItem from '@/components/ui/AccordionItem'
 import { faqEntries } from '@/content/shared/faqData'
 import { cn } from '@/lib/classNames'
@@ -5,7 +28,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef, useState } from 'react'
 
-// Types
+// ═══════════════════════════════════════════════════════════════════════════
+// 🎛️ CORE — Types
+// ═══════════════════════════════════════════════════════════════════════════
 export interface FAQItem {
   question: string
   answer: string
@@ -24,6 +49,9 @@ interface FAQSectionProps {
   dense?: boolean // kompakter Stil
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 🚪 ORCHESTRATOR — FAQSection
+// ═══════════════════════════════════════════════════════════════════════════
 const FAQSection: React.FC<FAQSectionProps> = ({
   id = 'faq',
   title = 'Häufige Fragen',
@@ -48,6 +76,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
   className = '',
   dense = false,
 }) => {
+  // ── 🎛️ CORE — Refs & State ──
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
@@ -59,9 +88,10 @@ const FAQSection: React.FC<FAQSectionProps> = ({
     setOpenItems(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
-  // Animations (effizienter: wenige ScrollTrigger statt viele)
+  // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Animations ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    // ⛓️ GATE — Accessibility Check
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const ctx = gsap.context(() => {
       if (reduced) return
@@ -97,6 +127,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
         })
       }
     }, sectionRef)
+    // 🧹 CLEANUP
     return () => ctx.revert()
   }, [cta])
 

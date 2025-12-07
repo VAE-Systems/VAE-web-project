@@ -1,3 +1,15 @@
+/**
+ * useAdvancedAnimation – Advanced animation hook with multiple triggers
+ *
+ * ⛓️ Gates      → Options validation, direction parsing
+ * 🎛️ Core       → UseAdvancedAnimationOptions interface, transform logic
+ * 🔁 Side-Effects → CSS transitions, IntersectionObserver, event listeners
+ * 👁️ Observers   → Scroll observer, hover/click triggers
+ * 🧹 Cleanup     → Observer disconnect, event listener removal
+ *
+ * Usage: Element reveal with scroll/hover/click/load triggers
+ * Supports: direction (up/down/left/right/fade), stagger, repeat
+ */
 import { useEffect, useRef, useState } from 'react'
 
 interface UseAdvancedAnimationOptions {

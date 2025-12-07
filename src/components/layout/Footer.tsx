@@ -1,8 +1,27 @@
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  FOOTER                                                                   ┃
+ * ┃  Globaler Footer: Brand, Navigation, Newsletter, Legal.                   ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ TERRITORIUM-KARTE
+ * ├── 📍 footerNavigation → Link-Struktur (services, resources, company)
+ * └── 🚪 Footer
+ *     ├── 🎨 Brand-Section    → Logo, Tagline, Contact, Social
+ *     ├── 🎨 Nav-Columns      → Services, Resources, Company Links
+ *     ├── 🎨 Newsletter       → Gesperrte Beta (Modal)
+ *     └── 🎨 Legal-Bar        → Copyright, DSGVO, Status
+ */
+
 import Reveal from '@/components/ui/Reveal'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { Mail } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 📍 NAVIGATION DATA
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 interface FooterLink {
   label: string
@@ -31,49 +50,23 @@ const footerNavigation: Record<'services' | 'resources' | 'company', FooterLink[
 
 const contactEmail = 'info@vae.systems'
 
-// Knowledge resources section - reserved for future use
-// const knowledgeResources = [
-//   {
-//     title: 'Automation Playbooks',
-//     description: 'Architektur-Notizen & Erfahrungsberichte für KI-Automatisierung.',
-//     to: '/ressourcen/blog',
-//     isExternal: false,
-//   },
-//   {
-//     title: 'FAQ & Troubleshooting',
-//     description: 'Antworten auf Integrations- & Betriebsfragen rund um VAE Systeme.',
-//     to: '/ressourcen/faq',
-//     isExternal: false,
-//   },
-//   {
-//     title: 'LinkedIn Updates',
-//     description: 'Produkt-Roadmap, Events und Einblicke direkt vom VAE Team.',
-//     to: 'https://www.linkedin.com/company/vae-systems',
-//     isExternal: true,
-//   },
-// ] as const
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🚪 ORCHESTRATOR: Footer
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-/**
- * Footer Component
- *
- * Comprehensive footer with VAE Systems branding, services, tech stack,
- * newsletter signup, and company information
- */
 const Footer: React.FC = () => {
+  // 🎛️ CORE-STATE: Newsletter Modal
   const [isNewsletterNoticeOpen, setIsNewsletterNoticeOpen] = useState(false)
 
   const openNewsletterNotice = () => setIsNewsletterNoticeOpen(true)
   const closeNewsletterNotice = () => setIsNewsletterNoticeOpen(false)
 
+  // 🔒 FOCUS-TRAP: ESC schließt Modal
   useEffect(() => {
-    if (!isNewsletterNoticeOpen || typeof window === 'undefined') {
-      return
-    }
+    if (!isNewsletterNoticeOpen || typeof window === 'undefined') return
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        closeNewsletterNotice()
-      }
+      if (event.key === 'Escape') closeNewsletterNotice()
     }
 
     window.addEventListener('keydown', handleKeyDown)

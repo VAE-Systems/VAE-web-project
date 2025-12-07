@@ -102,10 +102,10 @@ export const ParticleField: React.FC<{ count?: number }> = ({ count = 25 }) => {
       {spans.map((_, i) => {
         const left = Math.random() * 100
         const delay = Math.random() * -10
-        const size = 4 + Math.random() * 6
-        const duration = 8 + Math.random() * 8
-        const blur = Math.random() * 4
-        const opacity = 0.08 + Math.random() * 0.18
+        const size = 3 + Math.random() * 4
+        const duration = 10 + Math.random() * 10
+        const blur = 1 + Math.random() * 3
+        const opacity = 0.015 + Math.random() * 0.025
         return (
           <span
             key={i}
@@ -116,7 +116,7 @@ export const ParticleField: React.FC<{ count?: number }> = ({ count = 25 }) => {
               height: size,
               animationDelay: delay + 's',
               animationDuration: duration + 's',
-              filter: `blur(${blur}px) brightness(1.1)`,
+              filter: `blur(${blur}px) brightness(0.7)`,
               opacity,
             }}
           />

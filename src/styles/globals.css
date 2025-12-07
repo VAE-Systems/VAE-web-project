@@ -2078,13 +2078,11 @@ body.using-keyboard *:focus {
 }
 .particle-field span {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
   background: hsl(var(--color-vae-turquoise));
-  filter: blur(2px) brightness(1.2);
-  opacity: 0.18;
-  animation: particleFloat 10s linear infinite;
+  /* opacity & filter set via inline styles for per-particle variation */
 }
 @keyframes particleFloat {
   0% {
@@ -2092,13 +2090,13 @@ body.using-keyboard *:focus {
     opacity: 0;
   }
   10% {
-    opacity: 0.4;
+    opacity: 0.06;
   }
   50% {
-    opacity: 0.3;
+    opacity: 0.04;
   }
   100% {
-    transform: translateY(-160vh) scale(0.6);
+    transform: translateY(-160vh) scale(0.5);
     opacity: 0;
   }
 }

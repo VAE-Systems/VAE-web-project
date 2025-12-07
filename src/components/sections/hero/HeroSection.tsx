@@ -130,8 +130,8 @@ const HeroSection: React.FC = () => {
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-bg-darker/10 dark:bg-bg-darker/20" />
 
       {/* 📝 LAYER 3: Content */}
-      <div className="container-vae relative z-10 py-20 sm:py-28 lg:py-32">
-        <div className="mx-auto flex min-h-[70vh] max-w-5xl flex-col items-center justify-center gap-10 text-center">
+      <div className="container-vae relative z-10 py-24 sm:py-32 lg:py-40">
+        <div className="relative mx-auto flex min-h-[70vh] max-w-5xl flex-col items-center justify-center gap-12 text-center">
           {/* ── MESSAGING BLOCK ── */}
           <div className="space-y-6">
             {/* Eyebrow */}
@@ -159,7 +159,7 @@ const HeroSection: React.FC = () => {
             {heroBenefits.map(b => (
               <li
                 key={b.title}
-                className="border-border-primary/60 bg-bg-primary/30 rounded-2xl border p-5 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_14px_40px_-24px_rgba(var(--vae-turquoise-rgb),0.8)] dark:border-white/10 dark:bg-white/5"
+                className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/30 hover:bg-white/[0.04] dark:border-white/[0.06] dark:bg-white/[0.02]"
               >
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
                   <Icon name={b.icon} size={20} />

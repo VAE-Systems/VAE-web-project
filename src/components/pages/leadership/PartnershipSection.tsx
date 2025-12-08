@@ -1,8 +1,8 @@
 import { useFadeIn } from '@/components/pages/values/useFadeIn'
-import { PARTNERSHIP_SECTION } from '@/content/shared/leadershipData'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { Activity, Shield, Signal, Target } from 'lucide-react'
+import { PARTNERSHIP_SECTION } from '@/content/shared/leadershipData'
 import { motion, useReducedMotion } from 'framer-motion'
+import { Activity, Shield, Signal, Target } from 'lucide-react'
 import React, { useMemo } from 'react'
 
 export const PartnershipSection: React.FC = () => {

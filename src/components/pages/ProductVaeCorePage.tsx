@@ -92,7 +92,7 @@ const ProductVaeCorePage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-[100dvh]">
+    <div className="relative z-0 min-h-[100dvh]">
       <Seo
         title={safeView.meta.title}
         description={safeView.meta.description}

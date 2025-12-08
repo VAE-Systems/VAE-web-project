@@ -39,7 +39,10 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   initialOpenMenuId = null,
   initialActiveItems,
 }) => {
-  const isDesktop = useMediaQuery('(min-width: 768px)')
+  // 🔧 FIX: Breakpoint von 768px auf 1024px geändert, um mit Header's lg: Klassen zu matchen
+  // Vorher: isDesktop war true ab 768px, aber CSS zeigte Desktop erst ab 1024px (lg:)
+  // Das führte zu inkonsistentem Verhalten auf Tablets (768-1023px)
+  const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [openMenuId, setOpenMenuId] = useState<string | null>(initialOpenMenuId)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [expandedMobileMenus, setExpandedMobileMenus] = useState<Record<string, boolean>>({})
@@ -315,7 +318,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               id={`${menu.id}-panel`}
               role="menu"
               aria-hidden={!panelVisible}
-              className={`absolute left-1/2 top-full z-[1000] mt-3 w-[min(90vw,56rem)] -translate-x-1/2 overflow-hidden rounded-2xl border shadow-lg backdrop-blur-xl transition-[height,opacity,transform] duration-300 ease-out ${
+              className={`fixed left-1/2 top-[5rem] z-[1040] w-[min(calc(100vw-2rem),48rem)] -translate-x-1/2 overflow-hidden rounded-2xl border shadow-lg backdrop-blur-xl transition-[opacity,transform] duration-300 ease-out xl:w-[56rem] ${
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'

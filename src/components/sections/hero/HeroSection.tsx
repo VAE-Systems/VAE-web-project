@@ -17,8 +17,7 @@
 
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import CtaLink from '@/components/ui/CtaLink'
-import Icon from '@/components/ui/Icon'
-import { heroBenefits, heroDescription, heroTitle, heroTypewriterTexts } from '@/content/home'
+import { heroDescription, heroEyebrow, heroTitle, heroTypewriterTexts } from '@/content/home'
 import { CalendarClock, CheckCheck, ChevronDown } from 'lucide-react'
 import React from 'react'
 
@@ -111,7 +110,7 @@ const HeroSection: React.FC = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="from-bg-primary via-bg-primary/90 relative isolate overflow-hidden bg-gradient-to-b to-bg-secondary dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker"
+      className="from-bg-primary via-bg-primary/90 relative isolate z-0 overflow-hidden bg-gradient-to-b to-bg-secondary dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker"
     >
       {/* 🌐 LAYER 0: Neural Network (Three.js) – lazy, nur wenn sichtbar */}
       {!reducedMotion && enableBg && (
@@ -134,8 +133,8 @@ const HeroSection: React.FC = () => {
         <div className="relative mx-auto flex min-h-[70vh] max-w-5xl flex-col items-center justify-center gap-12 text-center">
           {/* ── MESSAGING BLOCK ── */}
           <div className="space-y-6">
-            {/* Eyebrow */}
-            <p className="text-xs font-semibold uppercase tracking-[0.45em] text-vae-turquoise/80">Open Source · KI</p>
+            {/* Eyebrow: Brand Slogan */}
+            <p className="text-xs font-semibold uppercase tracking-[0.45em] text-vae-turquoise/80">{heroEyebrow}</p>
 
             {/* H1: Zwei Zeilen, zweite in Brand-Color */}
             <h1 className="fluid-h1 text-balance font-bold text-text-light">
@@ -144,7 +143,7 @@ const HeroSection: React.FC = () => {
             </h1>
 
             {/* Typewriter: Rotierende USPs */}
-            <div className="min-h-[2.2rem] text-lg font-medium text-vae-turquoise md:text-xl lg:text-2xl">
+            <div className="min-h-[2.5rem] text-xl font-semibold text-vae-turquoise md:text-2xl lg:text-3xl">
               <TypewriterEffect texts={heroTypewriterTexts} reducedMotion={reducedMotion} paused={!heroVisible} />
             </div>
 
@@ -154,30 +153,14 @@ const HeroSection: React.FC = () => {
             </p>
           </div>
 
-          {/* ── VALUE PROPS ── */}
-          <ul className="grid w-full gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
-            {heroBenefits.map(b => (
-              <li
-                key={b.title}
-                className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/30 hover:bg-white/[0.04] dark:border-white/[0.06] dark:bg-white/[0.02]"
-              >
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
-                  <Icon name={b.icon} size={20} />
-                </div>
-                <p className="text-base font-semibold text-text-light">{b.title}</p>
-                <p className="text-sm text-text-secondary">{b.description}</p>
-              </li>
-            ))}
-          </ul>
-
           {/* ── CTAs ── */}
-          <div className="flex w-full flex-col gap-4 sm:flex-row sm:gap-8 lg:gap-12">
+          <div className="flex w-full flex-col gap-4 sm:flex-row sm:gap-6 lg:gap-8">
             <MagneticButton className="w-full sm:flex-1">
               <CtaLink
                 ctaId="contact.schedule_call"
                 ctx={{ fromPage: 'home', intent: 'calendly-hero' }}
                 variant="custom"
-                className="btn-primary flex w-full items-center justify-center gap-3 text-base"
+                className="btn-primary flex w-full items-center justify-center gap-3 px-8 py-4 text-base font-semibold"
               >
                 <CalendarClock className="h-5 w-5" />
                 Kostenlose Beratung buchen (45 Min)
@@ -188,7 +171,7 @@ const HeroSection: React.FC = () => {
               <button
                 type="button"
                 onClick={scrollToServices}
-                className="btn-outline flex w-full items-center justify-center gap-2 text-base"
+                className="btn-outline flex w-full items-center justify-center gap-2 px-6 py-3 text-base"
               >
                 Services ansehen
                 <ChevronDown className="h-5 w-5" />
@@ -197,10 +180,10 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* ── TRUST BADGES ── */}
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold tracking-[0.35em] text-text-secondary">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold tracking-[0.3em] text-vae-turquoise/70">
             {trustBadges.map(badge => (
               <span key={badge} className="inline-flex items-center gap-2 uppercase">
-                <CheckCheck className="h-4 w-4 text-vae-turquoise" />
+                <CheckCheck className="h-5 w-5 text-vae-turquoise" />
                 {badge}
               </span>
             ))}

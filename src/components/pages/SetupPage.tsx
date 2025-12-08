@@ -408,7 +408,7 @@ const SetupPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Infrastruktur-Setup Heidelberg | VAE Systems"
         description="Open-Source-Infrastruktur statt SaaS: Kollaboration, Business-Apps und Automations-Workflows aufbauen. Migration, Security & Dokumentation inklusive. Heidelberg & deutschlandweit."

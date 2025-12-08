@@ -201,9 +201,6 @@ const SocialProofSection: React.FC = () => {
             </div>
           ))}
         </div>
-        <p className="mt-6 text-center text-xs text-gray-500 dark:text-text-muted">
-          Detaillierte Case Studies und Kundenzitate folgen. Aktuell im Aufbau.
-        </p>
       </div>
 
       {selectedLogo && <LogoModal logo={selectedLogo} onClose={() => setSelectedLogo(null)} />}

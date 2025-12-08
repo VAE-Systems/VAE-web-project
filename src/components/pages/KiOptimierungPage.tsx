@@ -31,7 +31,7 @@ const optimisationCycle = [
 
 const KiOptimierungPage: React.FC = () => {
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="AI-Workflow Optimierung – Prozesse automatisieren | VAE Systems"
         description="Wir entwickeln AI-gestützte Workflows für Ihre Arbeitsinfrastruktur: Dokumentenverarbeitung, Service-Automation, Analytics und kontinuierliche Optimierung."

@@ -123,6 +123,7 @@ export const MENU_DATA: DropdownMenu[] = [
     subtitle: 'Team & Philosophie',
     menuItems: [
       { id: 'werte', label: 'Werte', href: '/ueber-uns/werte' },
+      { id: 'team', label: 'Team & Netzwerk', href: '/ueber-uns/team' },
       { id: 'leitung', label: 'Leitung', href: '/ueber-uns/leitung' },
       { id: 'kontakt', label: 'Kontakt', href: '/contact' },
     ],
@@ -141,11 +142,19 @@ export const MENU_DATA: DropdownMenu[] = [
         ctaText: 'Mehr erfahren',
         ctaHref: '/ueber-uns/werte',
       },
+      team: {
+        id: 'TEAM',
+        title: 'Unser Netzwerk',
+        description: 'Freelancer und Partner – kuratierte Expertise für Ihr Projekt.',
+        items: ['Marketing & Sales', 'Software Development', 'Spezialisierte Expertise', 'Flexibles Netzwerk'],
+        ctaText: 'Netzwerk kennenlernen',
+        ctaHref: '/ueber-uns/team',
+      },
       leitung: {
         id: 'LEITUNG',
         title: 'Die Köpfe hinter VAE',
         description: 'Julian Goertz Dini (CEO) & Jakob Dünnebeil (CTO) – Strategie trifft technische Präzision.',
-        ctaText: 'Team kennenlernen',
+        ctaText: 'Mehr erfahren',
         ctaHref: '/ueber-uns/leitung',
       },
       kontakt: {

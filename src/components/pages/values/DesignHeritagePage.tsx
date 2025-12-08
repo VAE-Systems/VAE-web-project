@@ -50,7 +50,7 @@ const DesignHeritagePage: React.FC = () => {
     'Wie VAE Systems Design denkt: Werkstatt-Einblicke, hochauflösende Visuals und Prozesse, die Handwerk und Technologie verbinden.'
 
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo title={pageTitle} description={pageDescription} canonicalPath="/ueber-uns/design-handwerk" />
       <Breadcrumbs items={DESIGN_BREADCRUMBS} className="mb-2" />
 

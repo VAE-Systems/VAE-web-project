@@ -435,7 +435,7 @@ const BeratungPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:bg-[hsl(0,0%,4%)] dark:text-[hsl(0,0%,95%)]">
+    <div className="relative z-0 min-h-screen bg-white text-gray-900 dark:bg-[hsl(0,0%,4%)] dark:text-[hsl(0,0%,95%)]">
       <Seo
         title="KI-Strategieberatung Heidelberg | VAE Systems"
         description="Strategieberatung für digitale Transformation: KI-Strategie, Digitalisierung, Prozessautomatisierung. Kostenlose Erstanalyse zur digitalen Souveränität."

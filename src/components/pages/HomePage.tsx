@@ -7,9 +7,9 @@
  * 🗺️ SECTION-FLOW (von oben nach unten)
  * ├── 1. Hero           → Erste Aufmerksamkeit, USP, Primary CTA
  * ├── 2. WhyOpenSource  → Differenzierung, Vertrauen aufbauen
- * ├── 3. TechStack      → Technische Glaubwürdigkeit
- * ├── 4. Services       → Was wir anbieten (3er Grid)
- * ├── 5. SocialProof    → Referenzen, Zahlen, Vertrauen
+ * ├── 3. Services       → Was wir anbieten (3er Grid)
+ * ├── 4. SocialProof    → Referenzen, Zahlen, Vertrauen
+ * ├── 5. TechStack      → Technische Glaubwürdigkeit (nach Social Proof)
  * ├── 6. ProcessTeaser  → Wie wir arbeiten (Transparenz)
  * └── 7. FinalCta       → Letzter Conversion-Push
  *
@@ -34,7 +34,7 @@ import Seo from '../ui/Seo'
 
 const HomePage: React.FC = () => {
   return (
-    <div className="min-h-[100dvh]">
+    <div className="relative z-0 min-h-[100dvh]">
       {/* 🔍 SEO: Meta + Schema.org */}
       <Seo
         title="VAE Systems Heidelberg | Open-Source-Infrastruktur & KI"
@@ -52,7 +52,7 @@ const HomePage: React.FC = () => {
             contactPoint: {
               '@type': 'ContactPoint',
               contactType: 'Sales',
-              email: 'kontakt@vae.systems',
+              email: 'info@vae.systems',
               availableLanguage: 'de',
             },
             address: {
@@ -88,9 +88,9 @@ const HomePage: React.FC = () => {
       {/* ── SECTION FLOW ── */}
       <HeroSection />
       <WhyOpenSourceSection />
-      <TechStackSection />
       <ServicesOverviewSection />
       <SocialProofSection />
+      <TechStackSection />
       <HomeProcessTeaserSection className="pt-0" />
       <FinalCtaSection />
     </div>

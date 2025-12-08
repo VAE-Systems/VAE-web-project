@@ -67,7 +67,7 @@ const TRANSPARENZ_BREADCRUMBS = [
 
 const TransparenzPage: React.FC = () => {
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Transparenz & Open Source | VAE Systems"
         description="Wie VAE Systems Transparenz lebt: Open Source First, Live-Dokumentation und vollständige Ownership für Ihre Organisation."

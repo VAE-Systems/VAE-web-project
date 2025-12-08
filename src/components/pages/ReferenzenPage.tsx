@@ -820,7 +820,7 @@ const ReferenzenPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="bg-bg-darker text-text-light transition-colors duration-300">
+    <div className="relative z-0 bg-bg-darker text-text-light transition-colors duration-300">
       <Seo
         title="Referenzen & Case Studies | VAE Systems"
         description="Konkrete Projekte mit Open-Source-Infrastruktur und KI-Workflows: Aktiv Kollektiv, QR-Code-Automationen, interne Blueprints."

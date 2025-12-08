@@ -9,7 +9,7 @@ export const PartnershipSection: React.FC = () => {
     <section
       ref={ref}
       aria-labelledby="partnership-title"
-      className={`border-t border-white/5 bg-bg-dark py-20 transition duration-700 ease-out ${
+      className={`relative z-0 border-t border-white/5 bg-bg-dark py-20 transition duration-700 ease-out ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
       }`}
     >

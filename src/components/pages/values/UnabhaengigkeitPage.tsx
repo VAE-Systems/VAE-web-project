@@ -60,7 +60,7 @@ const EXAMPLES = [
 
 const UnabhaengigkeitPage: React.FC = () => {
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Unabhängigkeit & Freiheit | VAE Systems"
         description="Wie VAE Systems technologische Souveränität sichert: Vendor-Lock-ins vermeiden, offene Standards nutzen und vollständige Ownership garantieren."

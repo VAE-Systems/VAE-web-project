@@ -1,28 +1,32 @@
+/**
+ * Team Network CTA Section
+ * Design identisch zu LeadershipCTA
+ */
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { LEADERSHIP_CTA } from '@/content/shared/leadershipData'
-import { ArrowUpRight, Sparkles } from 'lucide-react'
+import { NETWORK_CTA } from '@/content/shared/teamNetworkData'
+import { ArrowUpRight, Sparkles, Users } from 'lucide-react'
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
-export const LeadershipCTA: React.FC = () => {
-  const buttonLabel = useMemo(() => LEADERSHIP_CTA.button.label, [])
-  const copyParagraphs = useMemo(() => LEADERSHIP_CTA.copy.split(' — ').map(paragraph => paragraph.trim()), [])
+export const TeamNetworkCTA: React.FC = () => {
+  const buttonLabel = useMemo(() => NETWORK_CTA.button.label, [])
+  const copyParagraphs = useMemo(() => NETWORK_CTA.copy.split(' — ').map(paragraph => paragraph.trim()), [])
   const supportingPoints = useMemo(
     () => [
       {
-        id: 'sparring',
-        title: 'Strategisches Sparring',
-        description: 'Wir challengen Annahmen, liefern Markt- und Tech-Perspektiven und bereiten Entscheidungen vor.',
+        id: 'netzwerk',
+        title: 'Kuratiertes Netzwerk',
+        description: 'Wir wählen Partner sorgfältig aus – für fachliche Exzellenz und kulturelle Passung.',
       },
       {
-        id: 'systeme',
-        title: 'Systeme, die tragen',
-        description: 'Architekturen, die skalieren, dokumentiert sind und auch ohne uns funktionieren.',
+        id: 'projekte',
+        title: 'Spannende Projekte',
+        description: 'Von KI-Integration bis zur digitalen Infrastruktur – arbeiten Sie an Projekten, die zählen.',
       },
       {
-        id: 'partnerschaft',
-        title: 'Partnerschaftlich & ehrlich',
-        description: 'Transparent, direkt, keine Überraschungen – wir arbeiten wie ein erweitertes internes Team.',
+        id: 'flexibilitaet',
+        title: 'Flexibel & eigenverantwortlich',
+        description: 'Remote-First, transparente Kommunikation und Raum für eigene Ideen.',
       },
     ],
     []
@@ -40,7 +44,7 @@ export const LeadershipCTA: React.FC = () => {
             Zusammenarbeit
           </p>
           <h2 className="text-balance text-3xl font-semibold text-text-light md:text-4xl lg:text-5xl">
-            {LEADERSHIP_CTA.heading}
+            {NETWORK_CTA.heading}
           </h2>
           <div className="max-w-3xl space-y-4 text-base leading-relaxed text-text-light/80 md:text-lg">
             {copyParagraphs.map(paragraph => (
@@ -50,19 +54,20 @@ export const LeadershipCTA: React.FC = () => {
           <div className="flex w-full flex-col gap-4 pt-2 sm:flex-row sm:justify-center lg:justify-start">
             <MagneticButton intensity={0.08} className="w-full sm:w-auto">
               <Link
-                to={LEADERSHIP_CTA.button.href}
+                to={NETWORK_CTA.button.href}
                 className="btn-primary inline-flex w-full items-center justify-center gap-3 px-10 py-4 text-base font-semibold"
               >
+                <Users className="h-5 w-5" />
                 {buttonLabel}
                 <ArrowUpRight className="h-5 w-5" />
               </Link>
             </MagneticButton>
             <MagneticButton intensity={0.06} className="w-full sm:w-auto">
               <Link
-                to="/ueber-uns/team"
+                to="/ueber-uns/leitung"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 px-6 py-3 text-sm font-semibold text-text-muted transition-colors duration-200 hover:border-vae-turquoise/60 hover:text-text-light"
               >
-                Unser Netzwerk kennenlernen
+                Unsere Leitung kennenlernen
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </MagneticButton>

@@ -67,7 +67,7 @@ const EXAMPLES = [
 
 const SkalierbarkeitPage: React.FC = () => {
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Skalierbarkeit als Fundament | VAE Systems"
         description="Wie VAE Systems skalierbare Systeme plant: Cloud-native Patterns, Observability ab Tag 1 und zukunftssichere Architektur."

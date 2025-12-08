@@ -1,13 +1,16 @@
-export const heroTitle = ['Business Efficiency', 'durch Open Source und AI'] as const
+export const heroTitle = ['Ihre Infrastruktur. Ihre Daten.', 'Ihre KI.'] as const
+
+export const heroEyebrow = 'Structure is strategy' as const
 
 export const heroTypewriterTexts = [
-  'Open-Source-Infrastruktur statt Vendor-Lock-in',
-  'KI-optimierte Workflows statt manueller Overhead',
-  'Langfristige Partnerschaft statt einmaliger Installation',
+  '100% Open Source',
+  'Keine Vendor-Lock-ins',
+  'DSGVO ohne Kompromisse',
+  'Self-Hosted in 4 Wochen',
+  'SaaS-Kosten senken. Kontrolle behalten.',
 ] as const
 
-export const heroDescription =
-  'Wir ersetzen teure SaaS-Tools durch Open-Source-Alternativen, optimieren Ihre Workflows mit KI und begleiten Sie langfristig. Für mittelständische Teams, die Effizienz steigern und Kosten senken wollen — ohne Abhängigkeit von Microsoft, Google oder Salesforce.'
+export const heroDescription = 'Self-Hosted Infrastruktur – mit voller Datenkontrolle, ohne Vendor-Lock-in.'
 
 export interface HeroBenefit {
   title: string
@@ -108,8 +111,8 @@ export const outcomeMetrics = [
 ] as const
 
 export const finalCtaHome = {
-  eyebrow: 'Finaler Schritt',
-  title: 'Bereit für Business Efficiency?',
+  eyebrow: 'Nächster Schritt',
+  title: 'Bereit für Ihre eigene Infrastruktur?',
   description:
     'Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen, wie Open Source und KI Ihr Business effizienter machen.',
   primary: {

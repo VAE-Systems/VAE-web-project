@@ -67,7 +67,7 @@ const EXAMPLES = [
 
 const QualitaetPage: React.FC = () => {
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Exzellenz als Standard | VAE Systems"
         description="Wie VAE Systems Qualität liefert: saubere Architektur, automatisierte Tests und langfristig wartbare Systeme."

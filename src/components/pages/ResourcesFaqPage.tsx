@@ -84,7 +84,7 @@ const ResourcesFaqPage: React.FC = () => {
   const totalFaqs = filteredFaqs.length
 
   return (
-    <div className="bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="FAQ & Knowledge Base | VAE Systems"
         description="Klare Antworten auf technische, organisatorische und Karriere-Fragen rund um VAE Systems – filterbar, suchbar, ehrlich."

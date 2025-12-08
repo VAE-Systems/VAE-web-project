@@ -15,7 +15,7 @@ const suggestedPages = [
 
 const NotFoundPage: React.FC = () => {
   return (
-    <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-gradient-to-b from-gray-50 via-white to-gray-100 text-gray-900 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker dark:text-text-light">
+    <div className="relative z-0 flex min-h-[100dvh] flex-col items-center justify-center bg-gradient-to-b from-gray-50 via-white to-gray-100 text-gray-900 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker dark:text-text-light">
       <Seo
         title="404 – Seite nicht gefunden | VAE Systems"
         description="Die gesuchte Seite konnte nicht gefunden werden. Zurück zur Startseite oder direkt Kontakt aufnehmen."

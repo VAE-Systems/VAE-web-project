@@ -253,7 +253,7 @@ const BetreuungPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="Langfristige IT-Betreuung Heidelberg | VAE Systems"
         description="Outsourcen Sie Ihr IT-Rückgrat an VAE: Infrastruktur-Managed oder Full-Partnership – mit Fokus auf Ressourcen, KI-Optimierung und langfristige Stabilität."

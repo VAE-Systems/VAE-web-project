@@ -23,7 +23,7 @@ const LeadershipPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Unsere Leitung | VAE Systems"
         description="Erfahren Sie mehr über die Köpfe hinter VAE Systems: Julian Goertz Dini und Jakob Dünnebeil."

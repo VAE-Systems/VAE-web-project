@@ -359,7 +359,7 @@ const ContactPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="Kontakt aufnehmen – Erstgespräch buchen | VAE Systems"
         description="Sprechen Sie mit VAE Systems über KI-Automatisierungen, souveräne Infrastruktur oder strategisches Sparring."

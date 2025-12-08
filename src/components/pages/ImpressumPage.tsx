@@ -1,10 +1,10 @@
 import React from 'react'
-import Seo from '../ui/Seo'
 import { impressumContent } from '../../content/impressum'
+import Seo from '../ui/Seo'
 
 const ImpressumPage: React.FC = () => {
   return (
-    <div className="min-h-[100dvh] bg-bg-darker">
+    <div className="relative z-0 min-h-[100dvh] bg-bg-darker">
       <Seo
         title="Impressum | VAE Systems"
         description="Impressum der VAE Systems UG (haftungsbeschränkt)."

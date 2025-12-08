@@ -12,13 +12,14 @@ interface SectionData {
   label: string
 }
 
-// Reihenfolge an neue Homepage-Story angepasst
+// Reihenfolge muss exakt dem sichtbaren Page-Flow entsprechen, sonst läuft der Progress-Balken hinterher
+// Flow: Hero → Why → Services → Social Proof → Tech Stack → Prozess → Abschluss
 const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
   { id: 'why-open-source', iconName: 'lightbulb', label: 'Warum Open Source?' },
-  { id: 'tech-stack', iconName: 'deployed_code', label: 'Tech Stack' },
   { id: 'services', iconName: 'settings', label: 'Services' },
   { id: 'social-proof', iconName: 'work', label: 'Projekte' },
+  { id: 'tech-stack', iconName: 'deployed_code', label: 'Tech Stack' },
   { id: 'process', iconName: 'timeline', label: 'Prozess' },
   { id: 'abschluss', iconName: 'check_circle', label: 'Kontakt' },
 ]

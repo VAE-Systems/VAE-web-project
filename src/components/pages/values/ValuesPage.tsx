@@ -30,7 +30,7 @@ const ValuesPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Unsere Werte / Vision | VAE Systems"
         description="Transparenz, Kommunikation, Unabhängigkeit und Skalierbarkeit – die Werte von VAE Systems, die jede Zusammenarbeit prägen."

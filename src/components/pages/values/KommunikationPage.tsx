@@ -67,7 +67,7 @@ const KOMMUNIKATION_BREADCRUMBS = [
 
 const KommunikationPage: React.FC = () => {
   return (
-    <div className="bg-bg-darker text-text-light">
+    <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Klare Kommunikation | VAE Systems"
         description="Wie VAE Systems Projektkommunikation strukturiert: Stakeholder-Updates, frühzeitige Warnungen und zielgruppen-gerechte Formate."

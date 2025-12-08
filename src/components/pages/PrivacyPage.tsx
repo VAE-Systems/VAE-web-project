@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Seo from '../ui/Seo'
 import { privacyContent } from '../../content/privacy'
+import Seo from '../ui/Seo'
 
 /**
  * Datenschutz / Privacy Policy
@@ -11,7 +11,7 @@ import { privacyContent } from '../../content/privacy'
  */
 const PrivacyPage: React.FC = () => {
   return (
-    <div className="min-h-[100dvh] bg-bg-darker">
+    <div className="relative z-0 min-h-[100dvh] bg-bg-darker">
       <Seo
         title="Datenschutz | VAE Systems"
         description="Datenschutzhinweise der VAE Systems UG (haftungsbeschränkt) – Informationen nach DSGVO zu Art, Umfang und Zweck der Verarbeitung personenbezogener Daten."

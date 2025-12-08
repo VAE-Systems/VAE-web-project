@@ -71,6 +71,7 @@ const UnabhaengigkeitPage = React.lazy(() => import('@/components/pages/values/U
 const QualitaetPage = React.lazy(() => import('@/components/pages/values/QualitaetPage'))
 const SkalierbarkeitPage = React.lazy(() => import('@/components/pages/values/SkalierbarkeitPage'))
 const LeadershipPage = React.lazy(() => import('@components/pages/leadership/LeadershipPage'))
+const TeamNetworkPage = React.lazy(() => import('@components/pages/TeamNetworkPage'))
 const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
 const NotFoundPage = React.lazy(() => import('@components/pages/NotFoundPage'))
 
@@ -126,13 +127,13 @@ const App: React.FC = () => {
             }}
           >
             <ScrollToTop />
-            <div className="min-h-[100dvh] bg-bg-darker text-text-light">
+            <div className="relative min-h-[100dvh] bg-bg-darker text-text-light">
               <SkipToContent />
               <ScrollProgressBar />
               <Header />
               <ThemeModeTutorial />
               <NavigationSwitcher />
-              <main id="main-content" className="pt-20">
+              <main id="main-content" className="relative z-0 pt-20">
                 <Suspense fallback={<LoadingSpinner />}>
                   <Routes>
                     {/* Homepage */}
@@ -166,6 +167,7 @@ const App: React.FC = () => {
                     <Route path="/wissen/handwerkskunst-statt-schnellschuss" element={<QualitaetPage />} />
                     <Route path="/wissen/skalierbare-architektur" element={<SkalierbarkeitPage />} />
                     <Route path="/ueber-uns/leitung" element={<LeadershipPage />} />
+                    <Route path="/ueber-uns/team" element={<TeamNetworkPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/termin-buchen" element={<Navigate to="/contact#booking" replace />} />
 

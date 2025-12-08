@@ -17,7 +17,9 @@
  */
 
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
+import { ArrowRight } from 'lucide-react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🚪 ORCHESTRATOR — WhyOpenSourceSection
@@ -64,6 +66,17 @@ const WhyOpenSourceSection: React.FC = () => {
               ))}
             </ul>
           </article>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/leistungen/strategie"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise/80"
+          >
+            Kostenlose Erstberatung vereinbaren
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

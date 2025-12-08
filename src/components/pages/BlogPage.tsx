@@ -28,7 +28,7 @@ const quickFacts = [
 
 const BlogPage: React.FC = () => {
   return (
-    <div className="bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="Blog – Insights zu KI, Infrastruktur & Open Source | VAE Systems"
         description="Knowledge Hub für KI, Open-Source-Infrastruktur und produktive Digitalisierung – kuratiert von VAE Systems."

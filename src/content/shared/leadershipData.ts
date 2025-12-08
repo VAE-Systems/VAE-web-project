@@ -41,12 +41,12 @@ export const LEADERS: LeaderProfile[] = [
     title: 'CEO & Co-Founder',
     roleTag: 'STRATEGISCHE VISION | DESIGN & UX | KI-STRATEGIE | BUSINESS DEVELOPMENT',
     portrait: {
-      src: '/images/optimized/Julian-Portrait-Leitung-mit-Schatten.webp',
-      fallback: '/images/optimized/Julian-Portrait-Leitung-mit-Schatten.png',
-      alt: 'Julian Goertz Dini mit freundlichem Blick in einem modernen Porträt vor dunklem Hintergrund.',
+      src: '/images/optimized/Julian-Portrait-2025.webp',
+      fallback: '/images/optimized/Julian-Portrait-2025.png',
+      alt: 'Julian Goertz Dini in aktuellem Porträt vor dunklem Hintergrund.',
     },
     background:
-      'Julian studiert Volkswirtschaftslehre und Informatik an der Universität Heidelberg. Er verbindet ökonomisches Verständnis mit technischer Umsetzungskompetenz. Geboren in Karlsruhe, verankert in Heidelberg und vernetzt zwischen Rhein-Neckar und Berlin. — Als Gründer und Co-Vorsitzender des Aktiv Kollektiv e.V. – einem gemeinnützigen Verein zur Förderung von Ehrenamt und Interessengruppen in Heidelberg – versteht er, wie man komplexe Stakeholder managt und Visionen in realisierbare Projekte übersetzt. — Als Beisitzer im erweiterten Vorstand von Kultur für Europa e.V. unterstützt er mit technischer Expertise die Bewerbung Heidelbergs zur Europäischen Kulturhauptstadt. — Diese Community-Erfahrung prägt die Arbeitsweise bei VAE Systems: dokumentiert, unabhängig, mit Sinn für komplexes Design, Details und Gemeinschaft.',
+      'Julian studiert Volkswirtschaftslehre und Informatik an der Universität Heidelberg. Er verbindet ökonomisches Verständnis mit technischer Umsetzungskompetenz. Geboren in Karlsruhe, verankert in Heidelberg und vernetzt zwischen Rhein-Neckar und Berlin. — Als Gründer und Co-Vorsitzender des Aktiv Kollektiv e.V. – einem gemeinnützigen Verein zur Förderung von Ehrenamt und Interessengruppen in Heidelberg – versteht er, wie man komplexe Stakeholder managt und Visionen in realisierbare Projekte übersetzt. — Als Beisitzer im erweiterten Vorstand von Kultur für Europa e.V. unterstützt er mit technischer Expertise die Bewerbung Heidelbergs zur Europäischen Kulturhauptstadt. — Diese Community-Erfahrung zeigt sich bei VAE Systems in klarer Dokumentation, Unabhängigkeit und Liebe zum Detail.',
     characterTraits: ['Direkt und visionär', 'Offen und feedback-freudig', 'Vernetzt, effizient, engagiert'],
     expertise: [
       'Strategische Vision & Business Development',
@@ -66,7 +66,7 @@ export const LEADERS: LeaderProfile[] = [
         ],
       },
       {
-        text: 'Kultur für Europa e.V. – Technische Expertise für Kulturhauptstadt Heidelberg',
+        text: 'Im Vorstand von Kultur für Europa e.V. unterstützt er mit technischer Expertise die Bewerbung Heidelbergs zur Europäischen Kulturhauptstadt.',
         links: [{ label: 'Vorstand', href: 'https://kulturfuereuropa.eu/vorstand-beisitzer/' }],
       },
       {
@@ -134,7 +134,7 @@ export const PARTNERSHIP_SECTION = {
     {
       label: 'Agile Führung',
       description:
-        'Iterative Prozesse, schnelle Anpassungsfähigkeit, kontinuierliches Feedback. Wir arbeiten nicht starr, sondern lernen und passen an.',
+        'Iterative Prozesse, schnelle Anpassungsfähigkeit, kontinuierliches Feedback. Wir arbeiten in kurzen Zyklen und passen basierend auf echten Ergebnissen an.',
     },
     {
       label: 'Kontingenzplanung',

@@ -19,7 +19,6 @@ export { default as ProductsHeroSection } from './hero/ProductsHeroSection'
 export { default as ServicesHeroSection } from './hero/ServicesHeroSection'
 
 // ── CONTENT ──
-export { default as HomeOutcomesSection } from './content/HomeOutcomesSection'
 export { default as HomeProcessTeaserSection } from './content/HomeProcessTeaserSection'
 export { default as ProcessSection } from './content/ProcessSection'
 export { default as ProductsSection } from './content/ProductsSection'

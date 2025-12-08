@@ -1,12 +1,13 @@
 /**
  * Team & Netzwerk Daten
- * Kooperationspartner, Freelancer und Netzwerk-Mitglieder
+ * Kooperationspartner und projektbasierte Unterstützung
  */
 
 export interface PartnerProfile {
   id: string
   name: string
   title: string
+  showTitle?: boolean
   roleTag: string
   background: string
   characterTraits: string[]
@@ -29,81 +30,63 @@ export interface PartnerProfile {
 
 export const TEAM_NETWORK_HERO = {
   title: 'Team & Netzwerk',
-  subheading: 'Kuratierte Expertise auf Augenhöhe',
-  body: 'VAE Systems ist kein klassisches Beratungshaus. Wir koordinieren ein Netzwerk aus erfahrenen Freelancern und Partnern, die wir für ihre fachliche Exzellenz und kulturelle Passung ausgewählt haben. — So garantieren wir Ihnen: Die besten Köpfe für Ihr Projekt, ohne Overhead.',
-  seoKeywords: ['Freelancer Netzwerk', 'Tech-Partner', 'VAE Team', 'Rhein-Neckar'],
+  subheading: 'Sie zahlen nur für die Expertise, die Sie brauchen',
+  body: 'VAE Systems arbeitet mit einem Netzwerk aus Spezialist:innen statt mit festem Team. — Für jedes Projekt holen wir die richtigen Leute dazu – gezielt, bedarfsbasiert. — Das spart Kosten, weil wir keine festen Teams mitfinanzieren müssen. — Sie bekommen exakt die Expertise, die Sie brauchen. Nicht mehr, nicht weniger.',
+  seoKeywords: ['Team', 'Netzwerk', 'Bedarfsbasiert', 'Spezialist:innen'],
 }
 
 export const PARTNERS: PartnerProfile[] = [
   {
     id: 'alma-mira-andrassy',
     name: 'Alma Míra Andrássy',
-    title: 'Marketing & Sales Advisor',
-    roleTag: 'MARKTPOSITIONIERUNG | LEAD GENERATION | CONTENT-STRATEGIE | BUSINESS DEVELOPMENT',
+    title: 'Sales & Kundenkontakt',
+    showTitle: false,
+    roleTag: 'SALES | KUNDENKONTAKT | CONTENT',
     background:
-      'Alma verantwortet bei VAE Systems die strategische Marktpositionierung und Lead Generation. Sie entwickelt Content-Strategien für LinkedIn und Website, baut Kundenbeziehungen auf und identifiziert B2B-Opportunities im Mittelstand.',
-    characterTraits: ['Direkter Kundenkontakt', 'Strukturierte Prozesse', 'Messbare Ergebnisse'],
-    expertise: [
-      'Strategische Marktpositionierung',
-      'Lead Generation & CRM',
-      'Content-Strategie (LinkedIn, Website)',
-      'Business Development B2B',
-    ],
+      'Alma ist Ihre erste Ansprechpartnerin für Anfragen und Beratung. Sie klärt Fragen zu unseren Leistungen und begleitet Sie bei der Zusammenarbeit.',
+    characterTraits: [],
+    expertise: ['Kundenkommunikation', 'Vertrieb', 'Content & LinkedIn'],
     location: 'Rhein-Neckar',
     portrait: {
-      src: '/images/optimized/Alma-Portrait-Team-Final.webp',
-      fallback: '/images/optimized/Alma-Portrait-Team-Final.png',
-      alt: 'Alma Míra Andrássy – Marketing & Sales Advisor bei VAE Systems',
+      src: '/images/optimized/Alma-Portrait-Team - weiß.webp',
+      fallback: '/images/optimized/Alma-Portrait-Team - weiß.png',
+      alt: 'Alma Míra Andrássy – Vertrieb & Kundenkontakt für VAE Systems',
     },
     linkedin: {
       text: 'LinkedIn-Profil von Alma Míra Andrássy',
       href: 'https://www.linkedin.com/in/alma-m%C3%ADra-andr%C3%A1ssy-b73940395/',
     },
-    badge: 'Marketing & Sales',
-    seoKeywords: ['Marketing', 'Sales', 'Lead Generation', 'B2B'],
+    badge: 'Sales & Kundenkontakt',
+    seoKeywords: [],
   },
   {
     id: 'tolga-bippus',
     name: 'Tolga Bippus',
-    title: 'Freelancer – Software Development',
-    roleTag: 'BACKEND | CLOUD | UX/UI SUPPORT | SYSTEM-INTEGRATION',
+    title: 'UX/UI Design',
+    showTitle: false,
+    roleTag: 'UX/UI DESIGN | REAKTIVE OBERFLÄCHEN | PROTOTYPING',
     background:
-      'Tolga unterstützt VAE Systems bei Backend-Entwicklung, Cloud-Infrastruktur und UX/UI-Design. Als Werkstudent bei CGI bringt er Erfahrung mit skalierbaren Architekturen und modernen Entwicklungsprozessen mit.',
-    characterTraits: ['Skalierbare Architekturen', 'Konzept bis Deployment', 'Hands-on Mentalität'],
-    expertise: ['Backend-Entwicklung', 'Cloud Infrastructure', 'UX/UI Design-Support', 'System-Integration'],
+      'Tolga unterstützt bei UX/UI-Gestaltung und reaktivem Visual Design für VAE-Projekte – mit Erfahrung aus der Veranstaltungsbranche für Live-Visuals.',
+    characterTraits: ['Reaktive Oberflächen', 'Visuelle Konzepte', 'Hands-on Mentalität'],
+    expertise: ['UX/UI Design', 'Reaktive Oberflächen', 'Prototyping'],
     location: 'Rhein-Neckar',
     portrait: {
-      src: '/images/team/avatar-placeholder.png',
-      alt: 'Tolga Bippus – Freelancer für Software Development bei VAE Systems',
+      src: '/images/optimized/ausgeschnitten-Hände-Programmieren-am-Laptop-bw.webp',
+      fallback: '/images/optimized/ausgeschnitten-Hände-Programmieren-am-Laptop-bw.png',
+      alt: 'Symbolbild (s/w) für UX/UI Design bei VAE Systems',
     },
     linkedin: {
       text: 'LinkedIn-Profil von Tolga Bippus',
       href: 'https://www.linkedin.com/in/tolga-bippus-702823284/',
     },
-    badge: 'Freelancer',
-    seoKeywords: ['Software Development', 'Backend', 'Cloud', 'Freelancer'],
-  },
-  {
-    id: 'partner-placeholder',
-    name: 'Weitere Partner folgen',
-    title: 'Spezialist:in',
-    roleTag: 'NETZWERK | EXPERTISE | ZUSAMMENARBEIT',
-    background: 'Unser Netzwerk wächst kontinuierlich. Interesse an einer Zusammenarbeit?',
-    characterTraits: ['Teamplayer gesucht'],
-    expertise: ['Bereich offen'],
-    location: 'Deutschlandweit',
-    isPlaceholder: true,
-    portrait: {
-      src: '/images/team/avatar-placeholder.png',
-      alt: 'Platzhalter für zukünftige Partner im VAE Systems Netzwerk',
-    },
-    badge: 'Demnächst',
+    badge: 'Design',
+    seoKeywords: ['UX/UI', 'Design', 'Prototyping', 'Oberflächen'],
   },
 ]
 
 export const NETWORK_CTA = {
-  heading: 'Teil unseres Netzwerks werden?',
-  copy: 'Wir suchen kontinuierlich nach Spezialisten, die unser Team ergänzen – für Projekte, als Freelancer oder langfristige Partner. — VAE Systems bietet ein Umfeld für eigenverantwortliches Arbeiten, transparente Kommunikation und spannende Projekte.',
+  heading: 'Gemeinsam verstärken?',
+  copy: 'Wir suchen Spezialist:innen, die unser Team projektweise ergänzen oder langfristig mitgestalten. — VAE Systems bietet eigenverantwortliches Arbeiten, transparente Kommunikation und Projekte mit Wirkung.',
   button: {
     label: 'Partner werden',
     href: '/karriere',

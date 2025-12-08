@@ -427,6 +427,7 @@ const statusStyles: Record<CaseStudy['statusVariant'], string> = {
 }
 
 interface CaseStudyCardProps {
+  anchorId?: string
   study: CaseStudy
   isExpanded: boolean
   onToggle: () => void
@@ -435,6 +436,7 @@ interface CaseStudyCardProps {
 }
 
 const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
+  anchorId,
   study,
   isExpanded,
   onToggle,
@@ -446,6 +448,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
   return (
     <>
       <article
+        id={anchorId || study.id}
         className="group relative rounded-3xl border border-black/5 bg-white/90 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.2)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.25)]"
         aria-expanded={isExpanded}
       >
@@ -870,6 +873,7 @@ const ReferenzenPage: React.FC = () => {
             {caseStudies.map(study => (
               <CaseStudyCard
                 key={study.id}
+                anchorId={study.id}
                 study={study}
                 isExpanded={expandedCase === study.id}
                 onToggle={() => setExpandedCase(prev => (prev === study.id ? null : study.id))}

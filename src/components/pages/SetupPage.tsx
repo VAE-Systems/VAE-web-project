@@ -25,6 +25,7 @@
  * └── LockedSection         → Premium-Gated Content
  */
 
+import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
 import {
   ArrowUpRight,
   BookOpen,
@@ -93,6 +94,19 @@ interface CustomLicenseFormState {
 }
 
 const trustBadges = ['100% Open Source', 'Made in Germany', 'DSGVO-konform']
+
+const beforeAfterContent = {
+  before: {
+    label: 'Vorher',
+    title: 'Fragmentierte SaaS-Landschaft',
+    body: 'Viele Tools, hohe Kosten, Daten verstreut, Abhängigkeit von Anbietern.',
+  },
+  after: {
+    label: 'Nachher',
+    title: 'Einheitliche Open-Source-Plattform',
+    body: 'Alle Prozesse auf Ihrer Infrastruktur, vollständig in Ihrer Kontrolle.',
+  },
+} as const
 
 const serviceCards: ServiceCard[] = [
   {
@@ -624,55 +638,7 @@ const SetupPage: React.FC = () => {
               </p>
             </div>
           </div>
-          {/* TODO (VAE.5): Vorher/Nachher-Visual als Animation umsetzen */}
-          {/* Konzept:
-              Vorher-Zustand:
-              - Viele kleine Bubbles/Badges mit Logos oder generischen Icons (Mail, Chat, CRM, Files, Tickets)
-              - Unruhig verteilt, leicht überlappend, teilweise halbtransparent
-              - Subtile "Float"-Animation: langsames, unregelmäßiges Schweben
-
-              Übergang:
-              - Beim Scroll-Eintreten (ScrollTrigger) sammelt sich der Schwarm in der Mitte
-              - Bubbles ordnen sich auf Kreisbahn/Linie und verschmelzen in vereinfachtes Stack-Icon
-              - Dauer: 800-1200ms, einmalig beim ersten Sichtkontakt
-
-              Nachher-Zustand:
-              - Klares, ruhiges Icon oder kleiner Stack aus 3-4 Blöcken ("Storage / Apps / Automations / Interfaces")
-              - Leichter Glow, keine Bewegung mehr → wirkt stabil, kontrolliert
-
-              Barrierefreiheit:
-              - prefers-reduced-motion respektieren → nur statische Vorher/Nachher-Cards zeigen
-          */}
-          <div
-            id="before-after-visual"
-            className="relative min-h-[320px] rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 via-white/5 to-transparent p-8 shadow-lg backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/5"
-          >
-            <div className="relative flex h-full flex-col justify-between gap-8">
-              <div className="rounded-2xl border border-red-500/30 bg-red-500/5 p-5 backdrop-blur-sm">
-                <p className="mb-1 text-sm font-semibold uppercase tracking-[0.3em] text-red-400/80 dark:text-red-300/70">
-                  Vorher
-                </p>
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Fragmentierte SaaS-Landschaft</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
-                  Viele Tools, hohe Kosten, Daten verstreut, Abhängigkeit von Anbietern.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/10 p-5 backdrop-blur-sm">
-                <p className="mb-1 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/90">Nachher</p>
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                  Einheitliche Open-Source-Plattform
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
-                  Alle Prozesse auf Ihrer Infrastruktur, vollständig in Ihrer Kontrolle.
-                </p>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-text-secondary">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
-                End-to-end orchestriert von VAE
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
-              </div>
-            </div>
-          </div>
+          <AnimatedBeforeAfter />
         </div>
       </section>
 
@@ -1445,6 +1411,277 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
       <SpotlightTutorialOverlay tutorial={tutorial} />
+    </div>
+  )
+}
+
+// ── Animated Before/After Visual ────────────────────────────────────────────
+const AnimatedBeforeAfter: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion()
+  const [state, setState] = useState<'before' | 'after'>('before')
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const isInView = useInView(containerRef, { once: true, amount: 0.45 })
+
+  useEffect(() => {
+    if (prefersReducedMotion) return
+    if (!isInView) return
+    const timer = window.setTimeout(() => setState('after'), 1100)
+    return () => window.clearTimeout(timer)
+  }, [isInView, prefersReducedMotion])
+
+  const bubbleItems = useMemo(
+    () => [
+      { label: 'Mail', x: 12, y: 18, size: 58, hue: 'bg-white/70 text-slate-900 dark:bg-white/15 dark:text-white' },
+      {
+        label: 'Chat',
+        x: 52,
+        y: 20,
+        size: 52,
+        hue: 'bg-vae-turquoise/25 text-slate-900 dark:bg-vae-turquoise/25 dark:text-white',
+      },
+      { label: 'CRM', x: 72, y: 34, size: 50, hue: 'bg-white/60 text-slate-900 dark:bg-white/10 dark:text-white' },
+      {
+        label: 'Files',
+        x: 24,
+        y: 44,
+        size: 54,
+        hue: 'bg-amber-200/60 text-slate-900 dark:bg-amber-200/15 dark:text-amber-50',
+      },
+      {
+        label: 'Tickets',
+        x: 40,
+        y: 64,
+        size: 56,
+        hue: 'bg-sky-200/60 text-slate-900 dark:bg-sky-200/15 dark:text-sky-50',
+      },
+      { label: 'Docs', x: 70, y: 62, size: 50, hue: 'bg-white/55 text-slate-900 dark:bg-white/10 dark:text-white' },
+      {
+        label: 'Automation',
+        x: 18,
+        y: 70,
+        size: 64,
+        hue: 'bg-vae-turquoise/25 text-slate-900 dark:bg-vae-turquoise/25 dark:text-white',
+      },
+    ],
+    []
+  )
+
+  const StackedBlocks = () => (
+    <svg viewBox="0 0 320 220" role="presentation" className="h-full w-full">
+      <defs>
+        <linearGradient id="stackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="rgba(45,214,175,0.75)" />
+          <stop offset="100%" stopColor="rgba(45,214,175,0.18)" />
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="320" height="220" rx="18" fill="rgba(45,214,175,0.08)" />
+      <g
+        transform="translate(80 60)"
+        fill="url(#stackGradient)"
+        stroke="rgba(255,255,255,0.3)"
+        strokeWidth="2"
+        className="drop-shadow-[0_14px_38px_rgba(45,214,175,0.38)]"
+      >
+        <rect x="0" y="0" rx="16" ry="16" width="160" height="48" />
+        <rect x="14" y="60" rx="14" ry="14" width="132" height="42" />
+        <rect x="26" y="118" rx="12" ry="12" width="108" height="38" />
+      </g>
+      <circle cx="62" cy="188" r="9" fill="rgba(255,255,255,0.5)" />
+      <circle cx="258" cy="188" r="9" fill="rgba(255,255,255,0.35)" />
+      <line x1="72" y1="188" x2="248" y2="188" stroke="rgba(255,255,255,0.28)" strokeWidth="2" strokeDasharray="6 8" />
+    </svg>
+  )
+
+  const card = beforeAfterContent[state]
+  const isBefore = state === 'before'
+
+  if (prefersReducedMotion) {
+    return (
+      <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-white via-vae-turquoise/5 to-white p-6 shadow-lg dark:from-bg-dark/70 dark:via-vae-turquoise/10 dark:to-bg-dark">
+        <div className="flex items-center justify-between gap-4">
+          <div className="rounded-full border border-white/10 bg-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted dark:bg-white/10">
+            Infrastructure-Design
+          </div>
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-text-secondary">
+            Vorher / Nachher
+          </span>
+        </div>
+
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {(['before', 'after'] as const).map(key => {
+            const item = beforeAfterContent[key]
+            return (
+              <div
+                key={key}
+                className="rounded-2xl border border-white/10 bg-white/80 p-4 shadow-md dark:border-white/10 dark:bg-white/5"
+              >
+                <p
+                  className={cn(
+                    'mb-2 text-[11px] font-semibold uppercase tracking-[0.32em]',
+                    key === 'before' ? 'text-red-400/80 dark:text-red-300/80' : 'text-vae-turquoise/90'
+                  )}
+                >
+                  {item.label}
+                </p>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">{item.body}</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div
+      id="before-after-visual"
+      ref={containerRef}
+      className="relative min-h-[360px] overflow-hidden rounded-3xl border border-vae-turquoise/25 bg-gradient-to-br from-vae-turquoise/10 via-white/10 to-white/5 p-6 shadow-xl backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/10 dark:to-bg-dark"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
+      <div className="flex items-center justify-between gap-4">
+        <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted">
+          Infrastructure-Design
+        </div>
+        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 text-xs font-semibold text-text-muted">
+          {(['before', 'after'] as const).map(key => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setState(key)}
+              aria-pressed={state === key}
+              className={cn(
+                'rounded-full px-3 py-1 transition-colors duration-200',
+                state === key
+                  ? 'border border-vae-turquoise/40 bg-vae-turquoise/25 text-text-light'
+                  : 'text-text-muted hover:text-text-light'
+              )}
+            >
+              {key === 'before' ? 'Vorher' : 'Nachher'}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-4 grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+        <div className="space-y-3">
+          <p
+            className={cn(
+              'text-xs font-semibold uppercase tracking-[0.32em]',
+              isBefore ? 'text-red-300/80 dark:text-red-300/70' : 'text-vae-turquoise/90'
+            )}
+          >
+            {card.label}
+          </p>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={state}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.32, ease: 'easeOut' }}
+              className="space-y-2"
+            >
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">{card.title}</h3>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">{card.body}</p>
+            </motion.div>
+          </AnimatePresence>
+          <div className="flex items-center gap-3 pt-3 text-sm text-gray-600 dark:text-text-secondary">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
+            End-to-end orchestriert von VAE
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
+          </div>
+        </div>
+
+        <div className="relative h-[260px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_20%,rgba(45,214,175,0.22),transparent_55%)]" />
+
+          {/* Scatter → Stack animation */}
+          <div className="relative h-full w-full">
+            {bubbleItems.map((bubble, idx) => {
+              const baseScale = bubble.size / 60
+              return (
+                <motion.div
+                  key={bubble.label}
+                  className={cn(
+                    'absolute flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-[12px] font-semibold shadow-[0_10px_30px_rgba(0,0,0,0.15)] backdrop-blur-md',
+                    bubble.hue
+                  )}
+                  aria-hidden
+                  style={{
+                    left: `${bubble.x}%`,
+                    top: `${bubble.y}%`,
+                  }}
+                  animate={
+                    isBefore
+                      ? {
+                          left: `${bubble.x}%`,
+                          top: `${bubble.y}%`,
+                          opacity: 0.92,
+                          scale: baseScale,
+                          x: [0, 2, -3, 0],
+                          y: [0, -6, 4, 0],
+                        }
+                      : {
+                          left: '52%',
+                          top: '54%',
+                          opacity: 0.18,
+                          scale: baseScale * 0.45,
+                          x: 0,
+                          y: 0,
+                        }
+                  }
+                  transition={
+                    isBefore
+                      ? {
+                          duration: 6 + idx * 0.25,
+                          repeat: Infinity,
+                          repeatType: 'mirror',
+                          ease: 'easeInOut',
+                          delay: idx * 0.12,
+                        }
+                      : {
+                          duration: 0.9,
+                          ease: 'easeInOut',
+                          delay: idx * 0.05,
+                        }
+                  }
+                >
+                  <span className="bg-current/60 h-2 w-2 rounded-full" aria-hidden />
+                  <span className="truncate">{bubble.label}</span>
+                </motion.div>
+              )
+            })}
+
+            <AnimatePresence mode="wait" initial={false}>
+              {isBefore ? (
+                <motion.div
+                  key="before-pulse"
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.12 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="absolute inset-6 rounded-[24px] border border-white/10 bg-white/5" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="after-stack"
+                  className="absolute inset-0 flex items-center justify-center"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                >
+                  <StackedBlocks />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

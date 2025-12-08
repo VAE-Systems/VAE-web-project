@@ -44,7 +44,7 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
               partner.isPlaceholder ? 'text-text-muted' : 'text-text-light'
             }`}
           >
-            {partner.name} — {partner.title}
+            {partner.showTitle === false || !partner.title ? partner.name : `${partner.name} — ${partner.title}`}
           </h2>
           <span className="inline-flex items-center rounded-full border border-white/10 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-text-muted">
             {partner.roleTag}
@@ -56,23 +56,6 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
               <p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
             ))}
           </div>
-
-          {/* Persönlichkeit */}
-          {partner.characterTraits && partner.characterTraits.length > 0 && !partner.isPlaceholder && (
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">Persönlichkeit</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {partner.characterTraits.map(trait => (
-                  <span
-                    key={trait}
-                    className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium text-text-light/75 transition duration-300 hover:-translate-y-0.5 hover:border-vae-turquoise/60"
-                  >
-                    {trait}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* Expertise */}
           {partner.expertise && partner.expertise.length > 0 && !partner.isPlaceholder && (

@@ -22,10 +22,17 @@
  */
 
 import Icon from '@/components/ui/Icon'
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { referenceInsights, referenceProjects } from '@/content/home'
 import { ArrowRight, Briefcase, X } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+
+const caseStudyAnchors: Record<string, string> = {
+  'lukas-sosnowski': '/about/referenzen#lukas-sosnowski-consulting',
+  'aktiv-kollektiv': '/about/referenzen#aktiv-kollektiv',
+  'qr-mail': '/about/referenzen#art-affair-qr',
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🎛️ CORE — LogoModal (Vergrößerungsansicht)
@@ -97,18 +104,24 @@ const SocialProofSection: React.FC = () => {
   return (
     <section
       id="social-proof"
-      className="relative border-t border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker sm:py-28"
+      className="relative overflow-hidden border-t border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker sm:py-28"
     >
+      <div className="pointer-events-none absolute inset-0 opacity-70">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.06),transparent_35%)] dark:bg-[radial-gradient(circle_at_25%_25%,rgba(var(--vae-turquoise-rgb),0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(26,54,68,0.25),transparent_35%)]" />
+      </div>
       <div className="container-vae">
         <header className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Social Proof</p>
           <h2 className="fluid-h2 mt-3 font-semibold text-gray-900 dark:text-text-light">Projekte & Referenzen</h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-text-secondary">
+            Echte Umsetzungen mit klaren Ergebnissen – ohne Buzzwords.
+          </p>
         </header>
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
           {referenceProjects.map(project => (
             <article
               key={project.id}
-              className="group flex flex-col rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-lg hover:shadow-vae-turquoise/10 dark:border-white/10 dark:bg-white/5 dark:shadow-vae-turquoise/20"
+              className="group flex flex-col rounded-3xl border border-gray-200 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/60 hover:shadow-[0_18px_60px_-30px_rgba(var(--vae-turquoise-rgb),0.45)] active:scale-[0.995] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-vae-turquoise/20"
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -154,7 +167,7 @@ const SocialProofSection: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <span className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary">
+                <span className="rounded-full border border-gray-200 bg-gray-50/95 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-gray-700 shadow-sm dark:border-white/15 dark:bg-white/10 dark:text-white/90">
                   {project.badge}
                 </span>
               </div>
@@ -162,7 +175,7 @@ const SocialProofSection: React.FC = () => {
               <p className="mt-3 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 {project.description}
               </p>
-              <ul className="mt-5 space-y-2 text-sm text-gray-700 dark:text-text-secondary">
+              <ul className="mt-5 space-y-2 rounded-2xl bg-gray-50/80 p-4 text-sm text-gray-700 shadow-inner shadow-gray-200/30 transition-colors duration-200 dark:bg-white/[0.03] dark:text-text-secondary dark:shadow-none">
                 {project.highlights.map(highlight => (
                   <li key={highlight} className="flex items-start gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise" aria-hidden />
@@ -173,13 +186,15 @@ const SocialProofSection: React.FC = () => {
               {project.role && <p className="mt-4 text-xs text-gray-500 dark:text-text-muted">{project.role}</p>}
 
               <div className="mt-6">
-                <Link
-                  to="/ressourcen/case-studies"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise/80"
-                >
-                  Details ansehen
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                <MagneticButton>
+                  <Link
+                    to={caseStudyAnchors[project.id] ?? '/about/referenzen'}
+                    className="btn-ghost inline-flex items-center gap-2 text-sm font-semibold"
+                  >
+                    Details ansehen
+                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  </Link>
+                </MagneticButton>
               </div>
             </article>
           ))}
@@ -189,7 +204,7 @@ const SocialProofSection: React.FC = () => {
           {referenceInsights.map(insight => (
             <div
               key={insight.id}
-              className="group flex flex-col gap-2 rounded-2xl border border-gray-200 bg-gray-50 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-md dark:border-white/10 dark:bg-white/[0.05]"
+              className="group flex flex-col gap-2 rounded-2xl border border-gray-200 bg-white/80 p-5 text-center shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-[0_18px_40px_-24px_rgba(var(--vae-turquoise-rgb),0.35)] dark:border-white/10 dark:bg-white/[0.05]"
             >
               <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/15 text-vae-turquoise transition-transform duration-300 group-hover:scale-110">
                 <Icon name={insight.icon} size={20} />

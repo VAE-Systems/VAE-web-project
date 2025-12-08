@@ -32,6 +32,29 @@ import React, { useEffect, useRef } from 'react'
 const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id = 'outcomes', className = '' }) => {
   const ref = useRef<HTMLDivElement>(null)
 
+  // 🧮 Hilfsfunktion: Zahl aus KPI-String extrahieren (z.B. "68 %", "€2.400", "9,6 / 10")
+  // Berücksichtigt Tausenderpunkte ("2.400" → 2400) und Komma-Decimals ("9,6" → 9.6).
+  const parseNumericValue = (raw: string) => {
+    const cleaned = raw.replace(/[^0-9,.-]/g, '')
+    // Entferne Tausenderpunkte (nur wenn vor exakt 3 Ziffern) und konvertiere Komma zu Punkt
+    const normalized = cleaned.replace(/\.(?=\d{3}(?:\D|$))/g, '').replace(',', '.')
+    const match = normalized.match(/-?\d+(?:\.\d+)?/)
+    return match ? parseFloat(match[0]) : 0
+  }
+
+  const normalizedMetrics = React.useMemo(() => {
+    const parsed = outcomeMetrics.map(m => ({
+      ...m,
+      numeric: parseNumericValue(m.value),
+    }))
+    const max = parsed.reduce((acc, cur) => (cur.numeric > acc ? cur.numeric : acc), 0) || 1
+    const minWidth = 24 // % Mindestbreite für Sichtbarkeit
+    return parsed.map(m => ({
+      ...m,
+      width: Math.max(minWidth, Math.min(100, minWidth + (m.numeric / max) * (100 - minWidth))),
+    }))
+  }, [])
+
   // ── 🔁 SIDE-EFFECT — GSAP ScrollTrigger Batch Animation ──
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -112,9 +135,20 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
               <h3 className="mt-2 text-xl font-semibold text-text-light">Was Pilotkund:innen erreichen</h3>
             </div>
             <ul className="space-y-6">
-              {outcomeMetrics.map(metric => (
+              {normalizedMetrics.map(metric => (
                 <li key={metric.label} className="flex items-start gap-4">
-                  <span className="text-4xl font-bold leading-none text-vae-turquoise sm:text-5xl">{metric.value}</span>
+                  <div className="relative flex flex-col">
+                    <span className="text-4xl font-bold leading-none text-vae-turquoise sm:text-5xl">
+                      {metric.value}
+                    </span>
+                    <span className="mt-2 block h-1.5 w-28 overflow-hidden rounded-full bg-white/15">
+                      <span
+                        className="block h-full rounded-full bg-gradient-to-r from-vae-turquoise to-vae-turquoise-dark transition-all duration-500"
+                        style={{ width: `${metric.width}%` }}
+                        aria-hidden
+                      />
+                    </span>
+                  </div>
                   <p className="text-sm leading-relaxed text-text-secondary sm:text-base">{metric.label}</p>
                 </li>
               ))}

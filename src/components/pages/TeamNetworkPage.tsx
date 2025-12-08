@@ -29,7 +29,7 @@ const TeamNetworkPage: React.FC = () => {
     <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Team & Netzwerk | VAE Systems"
-        description="Lernen Sie unser Netzwerk kennen: Freelancer und Partner, die VAE Systems mit spezifischer Expertise ergänzen."
+        description="Sie zahlen nur für die Expertise, die Sie brauchen: VAE Systems holt je Projekt die passenden Spezialist:innen dazu – bedarfsbasiert, ohne Overhead."
         canonicalPath="/ueber-uns/team"
         jsonLd={jsonLd}
       />

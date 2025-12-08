@@ -14,6 +14,8 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
   const isRightAligned = alignment === 'right'
   const infoColumnOrder = isRightAligned ? 'lg:order-2 lg:pl-14' : 'lg:order-1 lg:pr-14'
   const cardColumnOrder = isRightAligned ? 'lg:order-1' : 'lg:order-2'
+  const isJakob = leader.id === 'jakob-duennebeil'
+  const scaleClasses = isJakob ? 'scale-[1.02] group-hover:scale-[1.05]' : 'scale-[0.82] group-hover:scale-[0.88]'
   const portraitFallback = leader.portrait.fallback ?? leader.portrait.src
   const backgroundParagraphs = useMemo(
     () => leader.background.split(' — ').map(chunk => chunk.trim()),
@@ -42,19 +44,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
               <p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
             ))}
           </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">Persönlichkeit</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {leader.characterTraits.map(trait => (
-                <span
-                  key={trait}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium text-text-light/75 transition duration-300 hover:-translate-y-0.5 hover:border-vae-turquoise/60"
-                >
-                  {trait}
-                </span>
-              ))}
-            </div>
-          </div>
+          {/* Persönlichkeit ausgeblendet laut Vorgabe */}
           <div className="grid gap-6 md:grid-cols-2">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">Expertise</p>
@@ -147,7 +137,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                 src={portraitFallback}
                 alt={leader.portrait.alt}
                 loading="lazy"
-                className="group-hover:contrast-105 group-hover:saturate-110 h-[560px] w-full scale-[1.02] object-cover object-[40%_20%] transition-all duration-[900ms] ease-out group-hover:scale-[1.05] group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[620px]"
+                className={`group-hover:contrast-105 group-hover:saturate-110 h-[560px] w-full ${scaleClasses} object-cover object-[40%_20%] transition-all duration-[900ms] ease-out group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[620px]`}
               />
             </picture>
             {/* Subtiler Vignette-Effekt für natürlichen Bildrand-Fokus */}
@@ -157,9 +147,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
             <figcaption className="sr-only">{leader.portrait.alt}</figcaption>
           </figure>
 
-          <div className="rounded-[32px] border border-dashed border-white/15 bg-white/[0.03] px-6 py-4 text-xs text-text-muted shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
-            LinkedIn Feed wird hier zukünftig integriert. Bis dahin: direkter Austausch bevorzugt.
-          </div>
+          {/* Info-Kachel entfernt laut Vorgabe */}
         </aside>
       </div>
     </section>

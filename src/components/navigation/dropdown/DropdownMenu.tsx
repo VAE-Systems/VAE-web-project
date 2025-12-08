@@ -322,13 +322,13 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'
-              } border-gray-200/60 bg-white/95 shadow-gray-900/5 dark:border-white/10 dark:bg-[hsla(0,0%,6%,0.98)] dark:shadow-black/40`}
+              } border-gray-200/60 bg-white shadow-gray-900/5 dark:border-white/10 dark:bg-[#050505] dark:shadow-black/40`}
               style={{ height: panelHeight ? `${panelHeight}px` : undefined }}
             >
               <div ref={getPanelRefHandler(menu.id)}>
                 {/* Subtitle Header - elegant am Anfang des Dropdowns */}
                 {menu.subtitle && (
-                  <div className="border-b border-gray-200/50 bg-white/60 px-6 py-3 dark:border-white/10 dark:bg-white/0">
+                  <div className="border-b border-gray-200/50 bg-white px-6 py-3 dark:border-white/10 dark:bg-[#050505]">
                     <p className="text-xs font-medium uppercase tracking-[0.25em] text-gray-500/80 dark:text-white/65">
                       {menu.subtitle}
                     </p>

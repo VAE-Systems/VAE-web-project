@@ -16,8 +16,10 @@
  * └── 2-spaltig auf Desktop, gestackt auf Mobile
  */
 
+import AnimatedSaaSTransformation from '@/components/ui/animations/AnimatedSaaSTransformation'
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Lightbulb } from 'lucide-react'
+import { motion } from 'framer-motion'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -37,10 +39,39 @@ const WhyOpenSourceSection: React.FC = () => {
             Warum wechseln Unternehmen von SaaS zu Open Source?
           </h2>
         </div>
+
+        <div className="mt-10">
+          <AnimatedSaaSTransformation autoPlayDelay={3600} />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-8 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-6 backdrop-blur-sm"
+        >
+          <div className="flex items-start gap-4">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-vae-turquoise/15">
+              <Lightbulb className="h-5 w-5 text-vae-turquoise" />
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Vision</p>
+              <p className="text-base leading-relaxed text-text-secondary">
+                Wir wollen eine Zukunft, in der Open-Source-Infrastruktur für jedes Unternehmen zugänglich ist. VAE
+                dokumentiert Standards, sorgt für transparente Prozesse und liefert echte Datensouveränität – damit Ihre
+                Systeme nicht nur günstiger, sondern auch planbar und kontrollierbar bleiben.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
         <div className="mt-12 grid gap-10 md:grid-cols-2">
           <article className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-[0_30px_120px_-50px_rgba(5,212,182,0.35)] backdrop-blur-sm">
             <header className="mb-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-rose-200/80">Das Problem</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-red-400 dark:text-red-300">
+                Das Problem
+              </p>
               <h3 className="text-2xl font-semibold text-text-light">Das SaaS-Dilemma</h3>
             </header>
             <ul className="space-y-5 text-sm leading-relaxed text-text-secondary">

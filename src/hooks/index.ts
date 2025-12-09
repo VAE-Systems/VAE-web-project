@@ -34,6 +34,7 @@ export * from './features/useNewsletter'
 export * from './features/usePerformance'
 export * from './features/usePWA'
 export * from './features/useServiceWorker'
+export * from './useHumanTypewriter'
 
 // ── Tutorials ──
 export * from './tutorials/useMailBuilderTutorial'

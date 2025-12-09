@@ -52,6 +52,10 @@ const HeroSection: React.FC = () => {
   // 🎛️ CORE-STATE: Was den Hero "an" oder "aus" schaltet
   const [enableBg, setEnableBg] = React.useState(false) // Three.js laden?
   const [heroVisible, setHeroVisible] = React.useState(true) // Für Typewriter-Pause
+  const longestTypewriterPhrase = React.useMemo(
+    () => heroTypewriterTexts.reduce((longest, current) => (current.length > longest.length ? current : longest), ''),
+    []
+  )
 
   // 👁️ OBSERVER: Lazy-Load des Neural Network Background
   // → Aktiviert erst wenn Section zu 35% sichtbar ist
@@ -75,6 +79,7 @@ const HeroSection: React.FC = () => {
       },
       { threshold: TIMING.bgThreshold }
     )
+
     observer.observe(node)
 
     return () => {
@@ -93,6 +98,7 @@ const HeroSection: React.FC = () => {
     const observer = new IntersectionObserver(([entry]) => setHeroVisible(entry?.isIntersecting ?? false), {
       threshold: TIMING.visibilityThresholds,
     })
+
     observer.observe(node)
     return () => observer.disconnect()
   }, [])
@@ -119,14 +125,13 @@ const HeroSection: React.FC = () => {
         </React.Suspense>
       )}
 
-      {/* 🎨 LAYER 1: Türkis-Glow Overlays – rein dekorativ */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-50 mix-blend-screen dark:opacity-30">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.10),transparent_70%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(var(--vae-turquoise-rgb),0.03),transparent_60%)]" />
-      </div>
+      {/* 🌑 LAYER 1: Dark Overlay (Gradient) */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-transparent dark:from-black/35" />
 
-      {/* 🎨 LAYER 2: Kontrast-Overlay für Lesbarkeit */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-bg-darker/10 dark:bg-bg-darker/20" />
+      {/* 🌫️ LAYER 2: Noise & Glow */}
+      <div className="pointer-events-none absolute inset-0 opacity-50 mix-blend-screen">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_30%),radial-gradient(circle_at_80%_20%,rgba(0,255,200,0.06),transparent_35%),radial-gradient(circle_at_50%_80%,rgba(0,220,255,0.05),transparent_40%)]" />
+      </div>
 
       {/* 📝 LAYER 3: Content */}
       <div className="container-vae relative z-10 py-24 sm:py-32 lg:py-40">
@@ -144,7 +149,19 @@ const HeroSection: React.FC = () => {
 
             {/* Typewriter: Rotierende USPs */}
             <div className="min-h-[2.5rem] text-xl font-semibold text-vae-turquoise md:text-2xl lg:text-3xl">
-              <TypewriterEffect texts={heroTypewriterTexts} reducedMotion={reducedMotion} paused={!heroVisible} />
+              <span
+                className="inline-grid justify-center"
+                aria-live="polite"
+                style={{ minWidth: `${Math.max(longestTypewriterPhrase.length, 12)}ch` }}
+              >
+                <span className="invisible select-none" aria-hidden>
+                  {longestTypewriterPhrase}
+                </span>
+                <span className="col-start-1 row-start-1 inline-flex items-center gap-2">
+                  <TypewriterEffect texts={heroTypewriterTexts} reducedMotion={reducedMotion} paused={!heroVisible} />
+                  <span className="inline-block h-6 w-[2px] animate-pulse bg-vae-turquoise" aria-hidden />
+                </span>
+              </span>
             </div>
 
             {/* Description */}
@@ -194,19 +211,11 @@ const HeroSection: React.FC = () => {
   )
 }
 
+export default HeroSection
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 🎬 TYPEWRITER EFFECT
+// 🎬 TYPEWRITER EFFECT (klassisch, konstante Geschwindigkeit)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-/**
- * 🎛️ CORE-INTENT: Simulated Typing
- *
- * State-Machine:
- *   TYPING (110ms/char) → PAUSE (1800ms) → DELETING (60ms/char) → NEXT → loop
- *
- * ⛓️ Gates:
- *   - reducedMotion → zeigt statisch ersten Text
- *   - paused → stoppt Animation (CPU-Saving wenn Hero nicht sichtbar)
- */
 const TypewriterEffect: React.FC<{
   texts: readonly string[]
   reducedMotion?: boolean
@@ -223,15 +232,12 @@ const TypewriterEffect: React.FC<{
   }, [])
 
   React.useEffect(() => {
-    // ⛓️ GATE: Reduced Motion
     if (reducedMotion) {
       setDisplay(texts[0] || '')
       return clear
     }
-    // ⛓️ GATE: Paused
     if (paused) return clear
 
-    // 🎛️ CORE: Typing/Deleting Logic
     const full = texts[idx]
     timer.current = window.setTimeout(
       () => {
@@ -241,14 +247,14 @@ const TypewriterEffect: React.FC<{
           if (next === full) timer.current = window.setTimeout(() => setDeleting(true), 1800)
         } else {
           const next = full.substring(0, display.length - 1)
-          setDisplay(next)
+          setDisplay(next || '\u00a0')
           if (next === '') {
             setDeleting(false)
             setIdx(prev => (prev + 1) % texts.length)
           }
         }
       },
-      deleting ? 60 : 110
+      deleting ? 70 : 110
     )
 
     return clear
@@ -256,14 +262,5 @@ const TypewriterEffect: React.FC<{
 
   React.useEffect(() => clear, [clear])
 
-  return (
-    <span className="inline-block" aria-live="polite">
-      {display}
-      <span className="animate-pulse" aria-hidden>
-        |
-      </span>
-    </span>
-  )
+  return <span className="inline-block">{display || '\u00a0'}</span>
 }
-
-export default HeroSection

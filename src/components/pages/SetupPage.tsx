@@ -96,7 +96,13 @@ interface CustomLicenseFormState {
   quantity: string
 }
 
-const trustBadges = ['100% Open Source', 'Made in Germany', 'DSGVO-konform']
+const trustBadges = [
+  '100% Open Source',
+  'Keine Vendor-Lock-ins',
+  'Private AI auf eigener Hardware',
+  'Monatliche Fixkosten statt Per-User-Preise',
+  'DSGVO ohne Kompromisse',
+]
 
 const beforeAfterContent = {
   before: {
@@ -233,13 +239,15 @@ const useValueIncreaseHighlight = (value: number) => {
 
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)
-  const [isContentLocked] = useState(true)
+  const isContentLocked = true
   const [customLicenses, setCustomLicenses] = useState<CustomLicense[]>([])
   const [customLicenseForm, setCustomLicenseForm] = useState<CustomLicenseFormState>({
     name: '',
     unitPrice: '',
     quantity: '',
   })
+  const [mailHintVisible, setMailHintVisible] = useState(false)
+  const mailHintTimeoutRef = useRef<number | null>(null)
 
   const calculatorSectionRef = useRef<HTMLElement | null>(null)
   const hasAutoStartedCalculatorTutorial = useRef(false)
@@ -285,6 +293,14 @@ const SetupPage: React.FC = () => {
       }
     }
   }, [startTutorial, tutorialCompleted, tutorialSkipped])
+
+  useEffect(() => {
+    return () => {
+      if (mailHintTimeoutRef.current) {
+        window.clearTimeout(mailHintTimeoutRef.current)
+      }
+    }
+  }, [])
 
   const handleCustomLicenseFormChange = useCallback((field: keyof CustomLicenseFormState, value: string) => {
     setCustomLicenseForm(prev => ({ ...prev, [field]: value }))
@@ -364,6 +380,16 @@ const SetupPage: React.FC = () => {
   const openSourceMonthly = 50 // konservativer Hosting-Ansatz als Basisbetrag
   const openSourceAnnual = openSourceMonthly * 12
 
+  const scrollToROI = useCallback(() => {
+    const target = document.getElementById('roi-calculator')
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      setTimeout(() => {
+        startTutorial()
+      }, 600)
+    }
+  }, [startTutorial])
+
   const activeToolCount = useMemo(
     () => flattenedSaasTools.reduce((count, tool) => (toolSelection[tool.id] ? count + 1 : count), 0),
     [toolSelection]
@@ -378,51 +404,98 @@ const SetupPage: React.FC = () => {
     return Math.round(clamped / 100) * 100
   }, [activeToolCount, teamSize])
 
-  const vatMultiplier = DEFAULT_VAT_RATE / 100
-  const saasVatYearly = yearlySaaSCost * vatMultiplier
-  const saasGrossYearly = yearlySaaSCost + saasVatYearly
-  const saasGrossMonthly = monthlySaaSCost + monthlySaaSCost * vatMultiplier
-
-  // VAT calculation for Open Source (reserved for future display features)
+  // VAT calculation reserved for future display features
+  // const vatMultiplier = DEFAULT_VAT_RATE / 100
+  // const saasVatYearly = yearlySaaSCost * vatMultiplier
+  // const saasGrossYearly = yearlySaaSCost + saasVatYearly
+  // const saasGrossMonthly = monthlySaaSCost + monthlySaaSCost * vatMultiplier
   // const openSourceVatYearly = openSourceAnnual * vatMultiplier
   // const openSourceGrossYearly = openSourceAnnual + openSourceVatYearly
 
-  const yearOneSavings = useMemo(
-    () => Math.max(0, yearlySaaSCost - (estimatedSetupCost + openSourceAnnual)),
-    [estimatedSetupCost, openSourceAnnual, yearlySaaSCost]
-  )
-  const yearTwoSavings = useMemo(
-    () => Math.max(0, yearlySaaSCost - openSourceAnnual),
-    [yearlySaaSCost, openSourceAnnual]
-  )
-
   const maxComparisonValue = Math.max(yearlySaaSCost, openSourceAnnual, 1)
+  const yearOneSavings = Math.max(0, yearlySaaSCost - (estimatedSetupCost + openSourceAnnual))
+  const yearTwoSavings = Math.max(0, yearlySaaSCost - openSourceAnnual)
 
-  // Direct Nextcloud booking link for Infrastructure Audit
+  const buildSavingsMailto = useCallback(() => {
+    const selectedTools = flattenedSaasTools.filter(tool => toolSelection[tool.id])
+
+    const selectedToolLines = selectedTools.map(tool => {
+      const monthly = tool.pricingModel === 'flat' ? (tool.flatMonthlyPrice ?? 0) : (tool.pricePerUser ?? 0) * teamSize
+      const detail =
+        tool.pricingModel === 'flat'
+          ? `${formatCurrency(tool.flatMonthlyPrice ?? 0)} / Monat`
+          : `${formatCurrency(tool.pricePerUser ?? 0)} pro Nutzer:in → ${formatCurrency(monthly)} / Monat`
+      return `- ${tool.name}: ${detail}`
+    })
+
+    const customLicenseLines = customLicenses.map(license => {
+      const monthly = license.unitPrice * license.quantity
+      return `- ${license.name}: ${license.quantity} x ${formatCurrency(license.unitPrice)} = ${formatCurrency(monthly)} / Monat`
+    })
+
+    const bodyLines = [
+      'Hallo VAE-Team,',
+      '',
+      'ich möchte mein Sparpotenzial berechnen und habe den SaaS-Kosten-Radar ausgefüllt.',
+      '',
+      `Teamgröße: ${teamSize} Personen`,
+      '',
+      `Ausgewählte SaaS-Tools (${selectedTools.length}):`,
+      selectedToolLines.length ? selectedToolLines.join('\n') : '- (keine ausgewählt)',
+      '',
+      'Weitere Lizenzen / Spezial-Posten:',
+      customLicenseLines.length ? customLicenseLines.join('\n') : '- (keine ergänzt)',
+      '',
+      'Aktuelle Kosten (netto):',
+      `- Monatlich: ${formatCurrency(monthlySaaSCost)}`,
+      `- Jährlich: ${formatCurrency(yearlySaaSCost)}`,
+      '',
+      'Eure Schätzung (netto):',
+      `- Geschätzter Setup-Aufwand: ${formatCurrency(estimatedSetupCost)}`,
+      `- Einsparung Jahr 1: ${formatCurrency(yearOneSavings)}`,
+      `- Einsparung ab Jahr 2: ${formatCurrency(yearTwoSavings)}`,
+      '',
+      'Bitte meldet euch für eine kurze Abstimmung.',
+      'Vielen Dank!',
+    ]
+
+    const subject = 'Sparpotenzial berechnen – Infrastruktur'
+    return `mailto:juliangoertz@vae.systems?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`
+  }, [
+    customLicenses,
+    estimatedSetupCost,
+    formatCurrency,
+    monthlySaaSCost,
+    teamSize,
+    toolSelection,
+    yearOneSavings,
+    yearTwoSavings,
+    yearlySaaSCost,
+  ])
 
   const highlightMonthlyNet = useValueIncreaseHighlight(monthlySaaSCost)
   const highlightYearlyNet = useValueIncreaseHighlight(yearlySaaSCost)
-  const highlightMonthlyGross = useValueIncreaseHighlight(saasGrossMonthly)
-  const highlightYearlyGross = useValueIncreaseHighlight(saasGrossYearly)
+
+  const handleUnlockContent = useCallback(() => {
+    const mailto = buildSavingsMailto()
+    window.location.href = mailto
+    setMailHintVisible(true)
+    if (mailHintTimeoutRef.current) {
+      window.clearTimeout(mailHintTimeoutRef.current)
+    }
+    mailHintTimeoutRef.current = window.setTimeout(() => {
+      setMailHintVisible(false)
+    }, 4500)
+  }, [buildSavingsMailto])
+
   const getValueClasses = useCallback(
     (isHighlighted: boolean) =>
       cn(
-        'text-base font-semibold text-slate-900 transition-colors duration-300 dark:text-white',
-        isHighlighted && 'text-red-600 dark:text-red-300 drop-shadow-[0_0_12px_rgba(248,113,113,0.45)]'
+        'text-lg font-semibold text-white',
+        isHighlighted ? 'text-vae-turquoise drop-shadow-[0_0_8px_rgba(8,255,193,0.35)]' : 'text-text-secondary'
       ),
     []
   )
-
-  const handleUnlockContent = useCallback(() => {
-    window.open('https://nc.intern.vae.systems/apps/calendar/appointment/RgxJERqNkfZz', '_self')
-  }, [])
-
-  const scrollToROI = useCallback(() => {
-    const target = document.getElementById('roi-calculator')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }, [])
 
   return (
     <div className="relative z-0 bg-bg-darker text-text-light">
@@ -497,7 +570,10 @@ const SetupPage: React.FC = () => {
             </MagneticButton>
             <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
               <button
-                onClick={scrollToROI}
+                onClick={() => {
+                  scrollToROI()
+                  setTimeout(() => startTutorial(), 600)
+                }}
                 className="btn-outline flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
               >
                 ROI-Rechner ansehen ↓
@@ -517,8 +593,10 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ==================== STUDIEN-SEKTION ==================== */}
-      <section className="section-card-container animate-section border-b border-gray-200 bg-[hsl(165,59%,97%)] py-24 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(165,20%,8%)]">
+      <section
+        className="section-card-container border-b bg-gray-50 py-20 dark:border-white/5 dark:bg-bg-darker"
+        id="study"
+      >
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
@@ -592,7 +670,6 @@ const SetupPage: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* Section 2 */}
       <section
         className="section-card-container border-b bg-gray-50 py-20 dark:border-white/5 dark:bg-bg-darker"
@@ -645,28 +722,32 @@ const SetupPage: React.FC = () => {
             </div>
 
             <div className="rounded-xl border border-gray-300/70 bg-gray-50/70 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-text-secondary/80">
                     Buchung
                   </p>
                   <p className="text-sm text-gray-700 dark:text-gray-300">Direkt oder nach Strategieberatung.</p>
                 </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <a
-                    href={bookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise transition hover:border-vae-turquoise/60 hover:bg-vae-turquoise/20"
-                  >
-                    Direkt buchen
-                  </a>
-                  <a
-                    href="/leistungen/strategie"
-                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
-                  >
-                    Strategieberatung
-                  </a>
+                <div className="flex flex-wrap items-center gap-3">
+                  <MagneticButton intensity={0.06} scaleEffect>
+                    <a
+                      href={bookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-convert inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
+                    >
+                      <span>Direkt buchen</span>
+                    </a>
+                  </MagneticButton>
+                  <MagneticButton intensity={0.06}>
+                    <a
+                      href="/leistungen/strategie"
+                      className="btn-outline inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
+                    >
+                      <span>Strategieberatung</span>
+                    </a>
+                  </MagneticButton>
                 </div>
               </div>
             </div>
@@ -965,11 +1046,11 @@ const SetupPage: React.FC = () => {
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">SaaS-Kosten-Radar</p>
             <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">
-              Wie transparent ist Ihre SaaS-Landschaft?
+              Was kostet Ihre SaaS-Landschaft wirklich?
             </h2>
             <p className="mt-3 text-lg text-text-secondary">
-              Ihre aktuellen Abos, Steuern und Hosting-Kosten im direkten Vergleich. Open-Source-Einsparungen werden als
-              gesperrte Ebene visualisiert und erst im Gespräch freigeschaltet.
+              Ermitteln Sie Ihr Einsparpotenzial – wir erstellen Ihnen ein Angebot für eine Cloud-Alternative ohne
+              Vendor-Lock-in.
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
               <MagneticButton intensity={0.05}>
@@ -978,10 +1059,10 @@ const SetupPage: React.FC = () => {
                   className="btn-outline inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-[0.35em]"
                 >
                   <GraduationCap className="h-4 w-4" />
-                  Tutorial starten
+                  Guided Tour starten
                 </button>
               </MagneticButton>
-              <span className="text-xs font-medium text-text-secondary">Geführte Tour durch den Kostenrechner</span>
+              <span className="text-xs font-medium text-text-secondary">Interaktive Anleitung (2 Min)</span>
             </div>
           </div>
           <div className="mt-12 grid gap-8 rounded-3xl border border-white/10 bg-white/5 p-8 lg:grid-cols-2">
@@ -1160,53 +1241,35 @@ const SetupPage: React.FC = () => {
                           Ihre aktuellen SaaS-Lizenzen
                         </p>
                       </div>
-                      <div className="space-y-1 text-right">
+                      <div className="text-right">
                         <p className={getValueClasses(highlightMonthlyNet)}>
                           {formatCurrency(monthlySaaSCost)}{' '}
                           <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
                             / Monat netto
                           </span>
                         </p>
-                        <p className={getValueClasses(highlightMonthlyGross)}>
-                          {formatCurrency(saasGrossMonthly)}{' '}
-                          <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
-                            / Monat brutto
-                          </span>
-                        </p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div className="flex items-center justify-between">
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-800 dark:text-red-200">
                         Jährliche Kosten
                       </p>
                       <p className="text-xs text-slate-500 dark:text-text-secondary/70">12 Monate Nutzung</p>
                     </div>
-                    <div className="space-y-1 text-right">
+                    <div className="text-right">
                       <p className={getValueClasses(highlightYearlyNet)}>
                         {formatCurrency(yearlySaaSCost)}{' '}
                         <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
                           / Jahr netto
                         </span>
                       </p>
-                      <p className={getValueClasses(highlightYearlyGross)}>
-                        {formatCurrency(saasGrossYearly)}{' '}
-                        <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
-                          / Jahr brutto
-                        </span>
-                      </p>
                     </div>
-                  </div>
-                  <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-600 dark:text-text-secondary">
-                    <span>{`davon USt (${DEFAULT_VAT_RATE}% p.a.)`}</span>
-                    <span className="text-base font-semibold text-slate-900 dark:text-white">
-                      {formatCurrency(saasVatYearly)}
-                    </span>
                   </div>
                 </div>
                 <p className="mt-4 text-xs text-red-800/70 dark:text-red-200/70">
-                  Bruttowerte basieren auf dem gesetzlichen Regelsatz (19 %).
+                  Alle Beträge netto; {DEFAULT_VAT_RATE}% USt. kämen hinzu.
                 </p>
               </div>
 
@@ -1214,8 +1277,8 @@ const SetupPage: React.FC = () => {
                 isLocked={isContentLocked}
                 onUnlock={handleUnlockContent}
                 overlayTitle="Einsparpotenzial freischalten"
-                overlayDescription="Buchen Sie ein kostenloses Beratungsgespräch, um Ihre individuellen Einsparungen zu berechnen"
-                ctaText="Sparpotenzial anfordern"
+                overlayDescription="Senden Sie Ihre Kalkulation – wir berechnen Ihr Sparpotenzial und schicken einen Stack-Vorschlag."
+                ctaText="Sparpotenzial per E-Mail anfordern"
                 ctaDataAttribute="cta"
                 className="rounded-3xl"
               >
@@ -1444,6 +1507,62 @@ const SetupPage: React.FC = () => {
         </div>
       </section>
       <SpotlightTutorialOverlay tutorial={tutorial} />
+
+      {/* Mail-Feedback Modal */}
+      <AnimatePresence>
+        {mailHintVisible && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/60 px-4 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mail-hint-title"
+            aria-describedby="mail-hint-description"
+            onClick={() => setMailHintVisible(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              className="w-full max-w-md rounded-2xl border border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
+              onClick={event => event.stopPropagation()}
+            >
+              <div className="mb-3 flex items-center justify-between gap-4">
+                <h3 id="mail-hint-title" className="text-lg font-semibold text-text-light">
+                  Mail wird vorbereitet
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setMailHintVisible(false)}
+                  className="text-sm font-semibold uppercase tracking-[0.2em] text-text-muted transition-colors hover:text-text-light"
+                  aria-label="Hinweis schließen"
+                >
+                  &times;
+                </button>
+              </div>
+              <p id="mail-hint-description" className="mb-6 text-sm leading-relaxed text-text-muted">
+                Ihr Mail-Client öffnet sich jetzt. Falls dort noch keine absendefähige Mail steht, drücken Sie bitte
+                nochmal den Button.
+              </p>
+              <div className="flex justify-end">
+                <MagneticButton intensity={0.075}>
+                  <button
+                    type="button"
+                    onClick={() => setMailHintVisible(false)}
+                    className="btn-ghost inline-flex items-center justify-center px-6 py-2"
+                  >
+                    Verstanden
+                  </button>
+                </MagneticButton>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -1458,42 +1577,68 @@ const AnimatedBeforeAfter: React.FC = () => {
   useEffect(() => {
     if (prefersReducedMotion) return
     if (!isInView) return
-    const timer = window.setTimeout(() => setState('after'), 1400)
+    // Längeres Delay: Bubbles animieren (2s) + Fusion (1s) + Pause (0.5s) = 3.5s
+    const timer = window.setTimeout(() => setState('after'), 3500)
     return () => window.clearTimeout(timer)
   }, [isInView, prefersReducedMotion])
 
   const bubbleItems = useMemo(
     () => [
-      { label: 'Mail', x: 12, y: 18, size: 58, hue: 'bg-white/70 text-slate-900 dark:bg-white/15 dark:text-white' },
+      {
+        label: 'Mail',
+        x: 12,
+        y: 18,
+        size: 58,
+        hue: 'bg-slate-200 text-slate-900 border-slate-300 dark:bg-white/15 dark:text-white dark:border-white/15',
+        icon: MessagesSquare,
+      },
       {
         label: 'Chat',
         x: 52,
         y: 20,
         size: 52,
-        hue: 'bg-vae-turquoise/25 text-slate-900 dark:bg-vae-turquoise/25 dark:text-white',
+        hue: 'bg-vae-turquoise/40 text-slate-900 border-vae-turquoise/50 dark:bg-vae-turquoise/25 dark:text-white dark:border-white/15',
+        icon: MessagesSquare,
       },
-      { label: 'CRM', x: 72, y: 34, size: 50, hue: 'bg-white/60 text-slate-900 dark:bg-white/10 dark:text-white' },
+      {
+        label: 'CRM',
+        x: 72,
+        y: 34,
+        size: 50,
+        hue: 'bg-blue-100 text-slate-900 border-blue-200 dark:bg-white/10 dark:text-white dark:border-white/15',
+        icon: Users,
+      },
       {
         label: 'Files',
         x: 24,
         y: 44,
         size: 54,
-        hue: 'bg-amber-200/60 text-slate-900 dark:bg-amber-200/15 dark:text-amber-50',
+        hue: 'bg-amber-200 text-amber-900 border-amber-300 dark:bg-amber-200/15 dark:text-amber-50 dark:border-white/15',
+        icon: Database,
       },
       {
         label: 'Tickets',
         x: 40,
         y: 64,
         size: 56,
-        hue: 'bg-sky-200/60 text-slate-900 dark:bg-sky-200/15 dark:text-sky-50',
+        hue: 'bg-sky-200 text-sky-900 border-sky-300 dark:bg-sky-200/15 dark:text-sky-50 dark:border-white/15',
+        icon: Headphones,
       },
-      { label: 'Docs', x: 70, y: 62, size: 50, hue: 'bg-white/55 text-slate-900 dark:bg-white/10 dark:text-white' },
+      {
+        label: 'Docs',
+        x: 70,
+        y: 62,
+        size: 50,
+        hue: 'bg-purple-100 text-purple-900 border-purple-200 dark:bg-white/10 dark:text-white dark:border-white/15',
+        icon: BookOpen,
+      },
       {
         label: 'Automation',
         x: 18,
         y: 70,
         size: 64,
-        hue: 'bg-vae-turquoise/25 text-slate-900 dark:bg-vae-turquoise/25 dark:text-white',
+        hue: 'bg-emerald-200 text-emerald-900 border-emerald-300 dark:bg-vae-turquoise/25 dark:text-white dark:border-white/15',
+        icon: SlidersHorizontal,
       },
     ],
     []
@@ -1604,16 +1749,23 @@ const AnimatedBeforeAfter: React.FC = () => {
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
       <div className="flex items-center justify-between gap-4">
-        <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted">
+        <motion.div
+          className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           Infrastructure-Design
-        </div>
+        </motion.div>
         <div className="flex items-center gap-2">
           {(['before', 'after'] as const).map(key => (
-            <button
+            <motion.button
               key={key}
               type="button"
               onClick={() => setState(key)}
               aria-pressed={state === key}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className={cn(
                 'btn-outline px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]',
                 'transition-all duration-200',
@@ -1623,7 +1775,7 @@ const AnimatedBeforeAfter: React.FC = () => {
               )}
             >
               {key === 'before' ? 'Vorher' : 'Nachher'}
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -1633,7 +1785,7 @@ const AnimatedBeforeAfter: React.FC = () => {
           <p
             className={cn(
               'text-xs font-semibold uppercase tracking-[0.32em]',
-              isBefore ? 'text-red-300/80 dark:text-red-300/70' : 'text-vae-turquoise/90'
+              isBefore ? 'text-red-400 dark:text-red-300' : 'text-vae-turquoise/90'
             )}
           >
             {card.label}
@@ -1651,15 +1803,45 @@ const AnimatedBeforeAfter: React.FC = () => {
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">{card.body}</p>
             </motion.div>
           </AnimatePresence>
-          <div className="flex items-center gap-3 pt-3 text-sm text-gray-600 dark:text-text-secondary">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
-            End-to-end orchestriert von VAE
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent" />
-          </div>
+          <motion.div
+            className="flex items-center gap-3 pt-3 text-sm text-gray-600 dark:text-text-secondary"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <motion.div
+              className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            />
+            <span className="whitespace-nowrap">End-to-end orchestriert von VAE</span>
+            <motion.div
+              className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            />
+          </motion.div>
         </div>
 
-        <div className="relative h-[320px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 md:h-[360px]">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_20%,rgba(45,214,175,0.22),transparent_55%)]" />
+        <motion.div
+          className="relative h-[480px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 md:h-[560px]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <motion.div
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_20%,rgba(45,214,175,0.22),transparent_55%)]"
+            animate={{
+              opacity: [0.5, 0.7, 0.5],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
 
           {/* Scatter → Stack animation */}
           <div className="relative h-full w-full">
@@ -1670,11 +1852,14 @@ const AnimatedBeforeAfter: React.FC = () => {
                   className="absolute inset-0"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  exit={{
+                    opacity: 0,
+                    transition: { duration: 0.6, ease: 'easeInOut' },
+                  }}
                 >
                   {bubbleItems.map((bubble, idx) => {
                     const baseScale = bubble.size / 60
+                    const BubbleIcon = bubble.icon
                     return (
                       <motion.div
                         key={bubble.label}
@@ -1688,20 +1873,33 @@ const AnimatedBeforeAfter: React.FC = () => {
                           top: `${bubble.y}%`,
                         }}
                         animate={{
-                          opacity: 0.9,
-                          scale: baseScale,
-                          x: [0, 1.5, -2, 0],
-                          y: [0, -4, 3, 0],
+                          opacity: [0.85, 0.95, 0.85],
+                          scale: [baseScale * 0.95, baseScale * 1.05, baseScale * 0.95],
+                          x: [0, 3, -3, 2, -2, 0],
+                          y: [0, -6, 4, -3, 5, 0],
+                          rotate: [0, 2, -2, 1, -1, 0],
+                        }}
+                        exit={{
+                          x: `calc(50% - ${bubble.x}%)`,
+                          y: `calc(50% - ${bubble.y}%)`,
+                          scale: 0,
+                          opacity: 0,
+                          rotate: 360,
+                          transition: {
+                            duration: 1,
+                            ease: [0.43, 0.13, 0.23, 0.96],
+                            delay: idx * 0.05,
+                          },
                         }}
                         transition={{
-                          duration: 7 + idx * 0.35,
+                          duration: 8 + idx * 0.4,
                           repeat: Infinity,
                           repeatType: 'mirror',
                           ease: 'easeInOut',
-                          delay: idx * 0.12,
+                          delay: idx * 0.15,
                         }}
                       >
-                        <span className="bg-current/60 h-2 w-2 rounded-full" aria-hidden />
+                        <BubbleIcon className="h-3.5 w-3.5" aria-hidden />
                         <span className="truncate">{bubble.label}</span>
                       </motion.div>
                     )
@@ -1711,7 +1909,11 @@ const AnimatedBeforeAfter: React.FC = () => {
                     className="absolute inset-6 rounded-[24px] border border-white/10 bg-white/5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.12 }}
-                    exit={{ opacity: 0 }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.8,
+                      transition: { duration: 0.8, ease: 'easeInOut' },
+                    }}
                     transition={{ duration: 0.35, ease: 'easeOut' }}
                   />
                 </motion.div>
@@ -1727,22 +1929,44 @@ const AnimatedBeforeAfter: React.FC = () => {
                   transition={{ duration: 0.5, ease: 'easeOut' }}
                 >
                   <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                    }}
+                    transition={{
+                      duration: 0.6,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                     className="relative w-full max-w-[360px] rounded-3xl border border-vae-turquoise/30 bg-gradient-to-b from-bg-darker/60 via-bg-darker/70 to-bg-dark/80 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.45)] backdrop-blur"
                   >
-                    <div className="absolute inset-0 rounded-3xl border border-white/10" aria-hidden />
+                    <motion.div
+                      className="absolute inset-0 rounded-3xl border border-white/10"
+                      aria-hidden
+                      animate={{
+                        opacity: [0.3, 0.5, 0.3],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                    />
                     <div className="relative space-y-4">
-                      <div className="flex items-center justify-between gap-3 rounded-2xl border border-vae-turquoise/30 bg-white/5 px-4 py-3 text-vae-turquoise">
+                      <motion.div
+                        className="flex items-center justify-between gap-3 rounded-2xl border border-vae-turquoise/30 bg-white/5 px-4 py-3 text-vae-turquoise"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.2 }}
+                      >
                         <div className="flex items-center gap-2 text-sm font-semibold">
                           <Layers className="h-5 w-5" /> Unified Platform Stack
                         </div>
                         <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-vae-turquoise">
                           Orchestriert
                         </span>
-                      </div>
-
+                      </motion.div>{' '}
                       <motion.div
                         initial="hidden"
                         animate="visible"
@@ -1760,46 +1984,80 @@ const AnimatedBeforeAfter: React.FC = () => {
                             <motion.div
                               key={layer.title}
                               variants={{
-                                hidden: { opacity: 0, x: -14 },
-                                visible: { opacity: 1, x: 0 },
+                                hidden: { opacity: 0, x: -20, scale: 0.95 },
+                                visible: { opacity: 1, x: 0, scale: 1 },
                               }}
-                              transition={{ duration: 0.38, ease: 'easeOut', delay: idx * 0.06 }}
-                              className="relative overflow-hidden rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-white shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
+                              transition={{
+                                duration: 0.5,
+                                ease: [0.22, 1, 0.36, 1],
+                                delay: idx * 0.1,
+                              }}
+                              whileHover={{
+                                scale: 1.02,
+                                transition: { duration: 0.2 },
+                              }}
+                              className="relative cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-white shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
                             >
-                              <div
-                                className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-60"
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5"
                                 aria-hidden
+                                animate={{
+                                  opacity: [0.5, 0.7, 0.5],
+                                  x: ['-100%', '100%'],
+                                }}
+                                transition={{
+                                  opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+                                  x: { duration: 3, repeat: Infinity, ease: 'linear', delay: idx * 0.3 },
+                                }}
                               />
                               <div className="relative flex items-start gap-3">
-                                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
+                                <motion.span
+                                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise"
+                                  whileHover={{
+                                    scale: 1.1,
+                                    rotate: 5,
+                                    backgroundColor: 'rgba(45, 214, 175, 0.25)',
+                                  }}
+                                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                                >
                                   <Icon className="h-5 w-5" />
-                                </span>
+                                </motion.span>
                                 <div className="space-y-0.5">
                                   <p className="text-sm font-semibold leading-tight">{layer.title}</p>
                                   <p className="text-xs text-text-secondary">{layer.subtitle}</p>
                                 </div>
                                 {idx === 0 && (
-                                  <span className="ml-auto flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-vae-turquoise">
+                                  <motion.span
+                                    className="ml-auto flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-vae-turquoise"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.4, delay: 0.5 }}
+                                    whileHover={{ scale: 1.05 }}
+                                  >
                                     <Database className="h-3.5 w-3.5" /> Unified Storage
-                                  </span>
+                                  </motion.span>
                                 )}
                               </div>
                             </motion.div>
                           )
                         })}
                       </motion.div>
-
-                      <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-text-secondary">
+                      <motion.div
+                        className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-text-secondary"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.6 }}
+                      >
                         <span>SSO, Policies, Backups integriert</span>
                         <span className="text-vae-turquoise">VAE orchestriert</span>
-                      </div>
+                      </motion.div>
                     </div>
                   </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

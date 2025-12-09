@@ -7,10 +7,11 @@ export const heroTypewriterTexts = [
   'Keine Vendor-Lock-ins',
   'DSGVO ohne Kompromisse',
   'Self-Hosted in 4 Wochen',
-  'SaaS-Kosten senken. Kontrolle behalten.',
+  'Private AI auf eigener Hardware',
 ] as const
 
-export const heroDescription = 'Self-Hosted Infrastruktur – mit voller Datenkontrolle, ohne Vendor-Lock-in.'
+export const heroDescription =
+  'Self-Hosted Infrastruktur – mit voller Datenkontrolle, ohne Vendor-Lock-in. Wir bauen und betreuen moderne Open-Source-Systeme für dein Unternehmen.'
 
 export interface HeroBenefit {
   title: string
@@ -35,25 +36,6 @@ export const heroBenefits: HeroBenefit[] = [
     icon: 'support_agent',
   },
 ]
-
-export const testphaseBanner = {
-  headline: '3 Monate testen – volle Infrastruktur, planbare Kosten',
-  description:
-    'Wir liefern eine komplette Arbeitsumgebung, begleiten Ihr Team durch die Pilotphase und geben klare Entscheidungsgrundlagen für den anschließenden Rollout.',
-  inclusions: [
-    'Nextcloud Business Setup (Dateien, Kommunikation, Freigaben)',
-    'CRM-Konfiguration (Odoo oder alternative Open-Source-Stacks)',
-    'AI-Workflows für Dokumente, Prozesse & Automationen',
-    'Backup-, Security- & Monitoring-Framework',
-    'Trainings & Onboarding für alle Rollen',
-    'Begleitender Support und KPI-Reviews',
-  ],
-  pricingHeadline: 'Transparente Testphase',
-  pricingDetails:
-    '3 Monate: €189/Monat (Server & Betrieb) · Danach: €489/Monat Vollservice oder €149/Monat Infrastruktur only',
-  primaryCta: 'Testphase jetzt starten',
-  secondaryCta: 'Mehr Details anzeigen',
-} as const
 
 export const whyVaeHighlights = [
   {

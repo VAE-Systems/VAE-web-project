@@ -42,12 +42,35 @@ type Particle = {
   vy: number
 }
 
-const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({ autoPlayDelay = 3500 }) => {
+const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({ autoPlayDelay = 15000 }) => {
   const prefersReducedMotion = useReducedMotion()
   const [state, setState] = useState<'problem' | 'solution'>('problem')
   const [showParticles, setShowParticles] = useState(false)
+  const [currentUSPIndex, setCurrentUSPIndex] = useState(0)
+  const [currentProblemIndex, setCurrentProblemIndex] = useState(0)
+  const [visibleToolsCount, setVisibleToolsCount] = useState(6)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.5 })
+
+  // USPs für rotating text
+  const usps = [
+    'langfristig konzipiert ist',
+    'preiswert ist',
+    'übersichtlich ist',
+    'austauschbar ist',
+    'KI-optimiert ist',
+    'viele Schnittstellen hat',
+  ]
+
+  // Problem-Texte für rotating text
+  const problems = [
+    'teuer wird',
+    'unübersichtlich ist',
+    'intransparent ist',
+    'abhängig macht',
+    'nicht skaliert',
+    'Daten abgreift',
+  ]
 
   useEffect(() => {
     if (prefersReducedMotion || !isInView) return
@@ -61,17 +84,55 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
     return () => clearTimeout(timer)
   }, [autoPlayDelay, isInView, prefersReducedMotion])
 
+  // Rotating USP text effect
+  useEffect(() => {
+    if (state !== 'solution') return
+    const interval = setInterval(() => {
+      setCurrentUSPIndex(prev => (prev + 1) % usps.length)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [state, usps.length])
+
+  // Rotating Problem text effect
+  useEffect(() => {
+    if (state !== 'problem') return
+    const interval = setInterval(() => {
+      setCurrentProblemIndex(prev => (prev + 1) % problems.length)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [state, problems.length])
+
+  // Unkontrolliertes Wachstum - Tools kommen schrittweise hinzu
+  useEffect(() => {
+    if (state !== 'problem' || !isInView) return
+
+    // Phase 1: Start mit 6 Tools (sofort)
+    setVisibleToolsCount(6)
+
+    // Phase 2: Nach 2,5s: HubSpot → Salesforce + Marketing-Tools (7-9)
+    const timer1 = setTimeout(() => setVisibleToolsCount(9), 2500)
+
+    // Phase 3: Nach 5s kommen +2 Tools (Support & Storage) = Chaos
+    const timer2 = setTimeout(() => setVisibleToolsCount(11), 5000)
+
+    return () => {
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+    }
+  }, [state, isInView])
+
   const isProblem = state === 'problem'
 
-  // Chaotic SaaS Tools - designed chaos (looks wild but balanced)
-  const saasTools = useMemo<SaaSToolCard[]>(
+  // Alle SaaS Tools - Realistischer Stack-Wachstum (11 Tools total)
+  const allSaasTools = useMemo<SaaSToolCard[]>(
     () => [
-      { id: 'slack', name: 'Slack', cost: '€8/mo', position: { x: 22, y: 18 }, hasChain: true, chainTarget: 'notion' },
+      // Phase 1: Start-Stack (6 Tools)
+      { id: 'slack', name: 'Slack', cost: '€8/mo', position: { x: 38, y: 28 }, hasChain: true, chainTarget: 'notion' },
       {
         id: 'notion',
         name: 'Notion',
         cost: '€10/mo',
-        position: { x: 52, y: 15 },
+        position: { x: 50, y: 22 },
         hasChain: true,
         chainTarget: 'hubspot',
       },
@@ -79,15 +140,80 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
         id: 'hubspot',
         name: 'HubSpot',
         cost: '€50/mo',
-        position: { x: 78, y: 22 },
+        position: { x: 62, y: 28 },
         hasChain: true,
         chainTarget: 'asana',
       },
-      { id: 'asana', name: 'Asana', cost: '€12/mo', position: { x: 72, y: 58 }, hasChain: true, chainTarget: 'figma' },
-      { id: 'figma', name: 'Figma', cost: '€15/mo', position: { x: 38, y: 72 }, hasChain: true, chainTarget: 'slack' },
-      { id: 'drive', name: 'G Drive', cost: '€6/mo', position: { x: 18, y: 48 } },
+      { id: 'asana', name: 'Asana', cost: '€12/mo', position: { x: 60, y: 52 }, hasChain: true, chainTarget: 'figma' },
+      { id: 'figma', name: 'Figma', cost: '€15/mo', position: { x: 40, y: 52 }, hasChain: true, chainTarget: 'drive' },
+      { id: 'drive', name: 'G Drive', cost: '€6/mo', position: { x: 50, y: 60 }, hasChain: true, chainTarget: 'slack' },
+
+      // Phase 2: Marketing wächst + HubSpot wird durch Salesforce ersetzt (Upgrade)
+      {
+        id: 'mailchimp',
+        name: 'Mailchimp',
+        cost: '€25/mo',
+        position: { x: 32, y: 38 },
+        hasChain: true,
+        chainTarget: 'salesforce',
+      },
+      {
+        id: 'salesforce',
+        name: 'Salesforce',
+        cost: '€75/mo',
+        position: { x: 62, y: 28 },
+        hasChain: true,
+        chainTarget: 'zendesk',
+      }, // Ersetzt HubSpot Position
+      {
+        id: 'zapier',
+        name: 'Zapier',
+        cost: '€20/mo',
+        position: { x: 50, y: 42 },
+        hasChain: true,
+        chainTarget: 'mailchimp',
+      },
+
+      // Phase 3: Chaos +3 Tools (Support & Storage)
+      {
+        id: 'zendesk',
+        name: 'Zendesk',
+        cost: '€49/mo',
+        position: { x: 44, y: 48 },
+        hasChain: true,
+        chainTarget: 'dropbox',
+      },
+      {
+        id: 'dropbox',
+        name: 'Dropbox',
+        cost: '€16/mo',
+        position: { x: 56, y: 48 },
+        hasChain: true,
+        chainTarget: 'intercom',
+      },
+      {
+        id: 'intercom',
+        name: 'Intercom',
+        cost: '€39/mo',
+        position: { x: 50, y: 56 },
+        hasChain: true,
+        chainTarget: 'zapier',
+      },
     ],
     []
+  )
+
+  // Zeige nur die aktuell relevanten Tools (HubSpot verschwindet ab Phase 2)
+  const saasTools = useMemo(
+    () =>
+      allSaasTools.filter((tool, index) => {
+        // Phase 1 (6 Tools): Zeige erste 6
+        if (visibleToolsCount <= 6) return index < 6
+        // Phase 2+ (9+ Tools): Verstecke HubSpot (index 2), zeige Rest
+        if (tool.id === 'hubspot') return false
+        return index < visibleToolsCount
+      }),
+    [allSaasTools, visibleToolsCount]
   )
 
   // System Clusters - weiter in die Ecken positioniert
@@ -228,11 +354,15 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
       className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/85 via-bg-darker to-bg-dark p-6 shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)]"
     >
       <div className="mb-5 flex items-center justify-between">
-        <div className="space-y-1">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-vae-turquoise">
-            SaaS vs. Open Source
+        <div className="space-y-2">
+          <p className="text-base font-bold uppercase tracking-[0.24em] sm:text-lg">
+            <span className="text-red-400">SaaS</span>
+            <span className="mx-2 text-text-secondary/40">vs.</span>
+            <span className="text-emerald-400">Open Source</span>
           </p>
-          <p className="text-sm text-text-secondary">Vom Chaos zur souveränen Infrastruktur</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-text-secondary/70 sm:text-sm">
+            VAE orchestriert
+          </p>
         </div>
         <div className="flex gap-2">
           <motion.button
@@ -250,7 +380,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                 : 'border border-white/10 bg-white/5 text-text-secondary hover:border-white/20'
             )}
           >
-            Chaos
+            Das Problem
           </motion.button>
           <motion.button
             type="button"
@@ -270,9 +400,124 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                 : 'border border-white/10 bg-white/5 text-text-secondary hover:border-white/20'
             )}
           >
-            Infrastruktur
+            Die Lösung
           </motion.button>
         </div>
+      </div>
+
+      {/* Container für beide Headlines - beide am gleichen Platz */}
+      <div className="relative mb-6" style={{ minHeight: '4rem' }}>
+        {/* Animierte Headline mit rotierenden Problemen - nur im Problem-Modus */}
+        <AnimatePresence mode="wait">
+          {state === 'problem' && (
+            <motion.div
+              key="problem-headline"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0"
+            >
+              <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
+                {/* Fixer Teil */}
+                <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">SaaS-Chaos, das</h2>
+
+                {/* Rotierender Teil mit Overlay */}
+                <div
+                  className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
+                  style={{ minHeight: '1.2em' }}
+                >
+                  {/* Invisible spacer - hält Container-Breite konstant */}
+                  <span className="invisible whitespace-nowrap">unübersichtlich ist</span>
+
+                  {/* Alle Problem-Texte übereinander - nur Opacity wechselt */}
+                  {problems.map((problem, index) => (
+                    <span key={problem} className="absolute left-0 top-0 whitespace-nowrap">
+                      <motion.span
+                        animate={{
+                          opacity: index === currentProblemIndex ? 1 : 0,
+                          y: index === currentProblemIndex ? 0 : 5,
+                        }}
+                        transition={{ duration: 0.5, ease: 'easeInOut' }}
+                        className="relative inline-block text-red-400"
+                        style={{ pointerEvents: index === currentProblemIndex ? 'auto' : 'none' }}
+                      >
+                        {problem}
+                        {/* Underline direkt am jeweiligen Text - passt sich der Textlänge an */}
+                        {index === currentProblemIndex && (
+                          <motion.span
+                            key={`underline-problem-${currentProblemIndex}`}
+                            className="absolute bottom-0 left-0 h-[2px] w-full bg-red-400"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            style={{ transformOrigin: 'left' }}
+                          />
+                        )}
+                      </motion.span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Animierte Headline mit rotierenden USPs - nur im Solution-Modus */}
+        <AnimatePresence mode="wait">
+          {state === 'solution' && (
+            <motion.div
+              key="solution-headline"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0"
+            >
+              <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
+                {/* Fixer Teil */}
+                <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">Infrastruktur, die</h2>
+
+                {/* Rotierender Teil mit Overlay */}
+                <div
+                  className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
+                  style={{ minHeight: '1.2em' }}
+                >
+                  {/* Invisible spacer - hält Container-Breite konstant */}
+                  <span className="invisible whitespace-nowrap">viele Schnittstellen hat</span>
+
+                  {/* Alle USPs übereinander - nur Opacity wechselt */}
+                  {usps.map((usp, index) => (
+                    <span key={usp} className="absolute left-0 top-0 whitespace-nowrap">
+                      <motion.span
+                        animate={{
+                          opacity: index === currentUSPIndex ? 1 : 0,
+                          y: index === currentUSPIndex ? 0 : 5,
+                        }}
+                        transition={{ duration: 0.5, ease: 'easeInOut' }}
+                        className="relative inline-block text-vae-turquoise"
+                        style={{ pointerEvents: index === currentUSPIndex ? 'auto' : 'none' }}
+                      >
+                        {usp}
+                        {/* Underline direkt am jeweiligen Text - passt sich der Textlänge an */}
+                        {index === currentUSPIndex && (
+                          <motion.span
+                            key={`underline-${currentUSPIndex}`}
+                            className="absolute bottom-0 left-0 h-[2px] w-full bg-vae-turquoise"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            style={{ transformOrigin: 'left' }}
+                          />
+                        )}
+                      </motion.span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="relative h-[400px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-[500px] lg:h-[600px]">
@@ -308,7 +553,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
               {saasTools.map((tool, index) => (
                 <motion.div
                   key={tool.id}
-                  className="absolute w-[140px] max-w-[45vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-3 py-2.5 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10"
+                  className="absolute w-[120px] max-w-[40vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-2.5 py-2 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10"
                   style={{
                     left: `${tool.position.x}%`,
                     top: `${tool.position.y}%`,
@@ -317,13 +562,15 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                   initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
                   animate={{
                     opacity: 1,
-                    scale: [1, 1.02, 1],
-                    rotate: [index % 2 === 0 ? -3 : 3, index % 2 === 0 ? 3 : -3, index % 2 === 0 ? -3 : 3],
+                    scale: [1, 1.04, 1],
+                    rotate: [index % 2 === 0 ? -5 : 5, index % 2 === 0 ? 5 : -5, index % 2 === 0 ? -5 : 5],
+                    y: [0, -3, 0, 3, 0],
                   }}
                   transition={{
                     opacity: { duration: 0.3, delay: index * 0.08 },
-                    scale: { duration: 2.2 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
-                    rotate: { duration: 3.5 + index * 0.3, repeat: Infinity, ease: 'easeInOut' },
+                    scale: { duration: 2 + index * 0.15, repeat: Infinity, ease: 'easeInOut' },
+                    rotate: { duration: 3 + index * 0.25, repeat: Infinity, ease: 'easeInOut' },
+                    y: { duration: 2.5 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
                   }}
                   exit={{
                     opacity: 0,
@@ -343,7 +590,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                 </motion.div>
               ))}
 
-              {/* Chain connections */}
+              {/* Chain connections - fragmentiert und chaotisch */}
               {saasTools
                 .filter(t => t.hasChain && t.chainTarget)
                 .map(tool => {
@@ -354,51 +601,80 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                       key={`chain-${tool.id}`}
                       className="pointer-events-none absolute inset-0 h-full w-full"
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.4 }}
+                      animate={{ opacity: 0.5 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
+                      {/* Fragmentierte Linie - mehrere Segmente */}
                       <motion.line
                         x1={`${tool.position.x}%`}
                         y1={`${tool.position.y}%`}
                         x2={`${target.position.x}%`}
                         y2={`${target.position.y}%`}
-                        stroke="rgba(234, 88, 12, 0.6)"
-                        strokeWidth="2"
-                        strokeDasharray="6 4"
-                        className="dark:stroke-orange-500/50"
+                        stroke="rgba(234, 88, 12, 0.7)"
+                        strokeWidth="2.5"
+                        strokeDasharray="8 6 3 6"
+                        strokeLinecap="round"
+                        className="dark:stroke-orange-500/60"
                         animate={{
-                          strokeDashoffset: [0, -20],
+                          strokeDashoffset: [0, -30],
+                          opacity: [0.5, 0.7, 0.5],
                         }}
                         transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: 'linear',
+                          strokeDashoffset: { duration: 3, repeat: Infinity, ease: 'linear' },
+                          opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+                        }}
+                      />
+                      {/* Zusätzliche fragmentierte Linie (Chaos-Effekt) */}
+                      <motion.line
+                        x1={`${tool.position.x}%`}
+                        y1={`${tool.position.y}%`}
+                        x2={`${target.position.x}%`}
+                        y2={`${target.position.y}%`}
+                        stroke="rgba(234, 88, 12, 0.3)"
+                        strokeWidth="1.5"
+                        strokeDasharray="4 8"
+                        strokeLinecap="round"
+                        className="dark:stroke-orange-400/30"
+                        animate={{
+                          strokeDashoffset: [0, 20],
+                          opacity: [0.3, 0.5, 0.3],
+                        }}
+                        transition={{
+                          strokeDashoffset: { duration: 2.5, repeat: Infinity, ease: 'linear' },
+                          opacity: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
                         }}
                       />
                     </motion.svg>
                   )
                 })}
 
-              {/* Flying money symbols */}
-              {[0, 1, 2].map(i => (
+              {/* Flying money symbols - Mehr Dollar je mehr Tools */}
+              {Array.from({ length: Math.min(visibleToolsCount, 12) }, (_, i) => (
                 <motion.div
                   key={`money-${i}`}
-                  className="absolute left-1/2 top-3/4 -translate-x-1/2"
-                  initial={{ y: 0, opacity: 0 }}
+                  className="absolute"
+                  style={{
+                    left: `${35 + (i % 4) * 10}%`,
+                    top: `${55 + Math.floor(i / 4) * 12}%`,
+                  }}
+                  initial={{ y: 0, opacity: 0, scale: 0.8 }}
                   animate={{
-                    y: [-20, -80, -140],
-                    x: [(i - 1) * 30, (i - 1) * 35, (i - 1) * 40],
-                    opacity: [0, 0.7, 0],
+                    y: [-10, -60, -110, -160],
+                    x: [(i % 2 === 0 ? -1 : 1) * (10 + i * 3), (i % 2 === 0 ? -1 : 1) * (15 + i * 3)],
+                    opacity: [0, 0.8, 0.9, 0],
+                    scale: [0.8, 1, 1.1, 0.6],
+                    rotate: [0, i % 2 === 0 ? -15 : 15, 0],
                   }}
                   transition={{
-                    duration: 2.5,
-                    delay: i * 0.5,
+                    duration: 2.5 + (i % 3) * 0.5,
+                    delay: i * 0.3 + (visibleToolsCount > 6 ? (i - 6) * 0.2 : 0),
                     repeat: Infinity,
-                    repeatDelay: 0.5,
+                    repeatDelay: 0.2,
+                    ease: 'easeOut',
                   }}
                 >
-                  <DollarSign className="h-5 w-5 text-red-400" />
+                  <DollarSign className="h-5 w-5 text-red-400 drop-shadow-[0_2px_8px_rgba(239,68,68,0.6)]" />
                 </motion.div>
               ))}
             </motion.div>
@@ -480,11 +756,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                     style={{
                       left: `${centerX}%`,
                       top: `${centerY}%`,
-                      width: 'clamp(95px, 22vw, 130px)',
-                      height: 'clamp(95px, 22vw, 130px)',
-                      padding: 'clamp(6px, 1.5vw, 10px)',
-                      marginLeft: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
-                      marginTop: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
+                      width: 'clamp(85px, 20vw, 115px)',
+                      height: 'clamp(85px, 20vw, 115px)',
+                      padding: 'clamp(5px, 1.2vw, 8px)',
+                      marginLeft: 'calc(-0.5 * clamp(85px, 20vw, 115px))',
+                      marginTop: 'calc(-0.5 * clamp(85px, 20vw, 115px))',
                       zIndex: 2,
                     }}
                     initial={{ opacity: 0, scale: 0.85, y: 10 }}

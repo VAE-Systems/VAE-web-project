@@ -94,7 +94,7 @@ export const LEADERS: LeaderProfile[] = [
       alt: 'Jakob Dünnebeil in einem professionellen Porträt.',
     },
     background:
-      'Jakob bringt technischen Tiefgang in jedes Projekt. Mit Physik-Background und laufendem Informatikstudium an der Universität Heidelberg kombiniert er wissenschaftliches Denken mit praktischer Softwareentwicklung. — Tief in der Open-Source-Community verankert, versteht er Systemarchitektur von Grund auf, denkt in Selfhosting-Lösungen und baut Infrastruktur, die betriebsbereit bleibt – auch ohne externes Team.',
+      'Jakob bringt technischen Tiefgang. Mit Physik-Background und Informatikstudium kombiniert er wissenschaftliches Denken mit praktischer Softwareentwicklung. — Tief in der Open-Source-Community verankert, baut er Systemarchitekturen, die skalieren und langfristig wartbar bleiben.',
     characterTraits: ['Kritisch, ehrlich und klar', 'Präzise und ausgeglichen', 'Fokus auf technische Exzellenz'],
     expertise: [
       'Softwarekonzeption & Systemarchitektur',

@@ -31,8 +31,11 @@ import {
   BookOpen,
   Check,
   CheckCircle2,
+  Database,
   GraduationCap,
   Headphones,
+  Layers,
+  MessagesSquare,
   Repeat,
   Server,
   ServerCog,
@@ -597,45 +600,75 @@ const SetupPage: React.FC = () => {
       >
         <div className="section-card-backdrop" />
 
-        <div className="container-vae relative grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-5">
+        <div className="container-vae relative grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center xl:max-w-6xl 2xl:max-w-7xl">
+          <div className="max-w-3xl space-y-6">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">
               Infrastructure-Design
             </p>
             <h2 className="text-3xl font-semibold text-white md:text-4xl">
-              Was bedeutet Infrastructure-Design bei VAE?
+              Systeme, die zusammenarbeiten – nicht gegeneinander
             </h2>
-            <p className="text-lg text-gray-700 dark:text-text-secondary">
-              Statt weitere KI-Tools auf eine wackelige Basis zu setzen, schaffen wir ein stabiles Fundament.
-            </p>
-            <p className="text-base text-gray-700 dark:text-text-secondary">
-              Bei VAE bauen wir Ihre Informationsinfrastruktur so, dass Daten, Workflows und Systeme zusammenarbeiten —
-              nicht gegeneinander.
-            </p>
-            <p className="text-base text-gray-700 dark:text-text-secondary">
-              Viele Organisationen haben eine gewachsene SaaS-Landschaft: verstreute Daten, Abhängigkeiten von
-              Anbietern, wenig Überblick.
-            </p>
-            <p className="text-base text-gray-700 dark:text-text-secondary">
-              Weitere Tools oben draufzusetzen erhöht das Tempo — aber nicht die Kontrolle.
-            </p>
-            <p className="text-base text-gray-700 dark:text-text-secondary">
-              Unser Ansatz: Wir analysieren Ihre Landschaft, entwerfen eine vendor-neutrale Architektur und setzen sie
-              mit Open-Source-Systemen um. Migration, Konfiguration, Dokumentation, Team-Schulung inklusive. Am Ende
-              steht ein funktionierendes System — kein Foliensatz.
+            <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
+              Wir bauen Informationsinfrastruktur, die Daten, Workflows und Systeme integriert. Vendor-neutral,
+              Open-Source-basiert, wartbar.
             </p>
 
-            {/* Abgrenzungs-Box zur Strategieberatung */}
-            <div className="mt-6 rounded-xl border border-gray-300 bg-gray-50 p-5 dark:border-white/10 dark:bg-white/5">
-              <p className="text-sm text-gray-700 dark:text-gray-300">
-                Sie können Infrastructure-Design mit oder ohne vorherige Strategieberatung buchen. Wenn die Richtung
-                bereits klar ist, sorgen wir dafür, dass Ihre Systeme sie tragen – wenn nicht, klären wir sie gemeinsam
-                in der{' '}
-                <a href="/leistungen/strategie" className="font-medium text-vae-turquoise hover:underline">
-                  Strategieberatung
-                </a>
-                .
-              </p>
+            <div className="grid gap-4 sm:grid-cols-2 sm:items-stretch">
+              <div className="flex h-full flex-col gap-3 rounded-2xl border border-red-200/60 bg-white/75 p-5 shadow-sm dark:border-red-500/20 dark:bg-white/5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-red-500 dark:text-red-300/90">
+                  Problem
+                </p>
+                <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                  Verstreute Daten, Vendor Lock-ins, kein Überblick. Neue Tools verschlimmern das, wenn die Basis fehlt.
+                </p>
+              </div>
+
+              <div className="flex h-full flex-col gap-3 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-5 shadow-sm dark:border-vae-turquoise/25 dark:bg-vae-turquoise/15">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-vae-turquoise">
+                  Unsere Lösung
+                </p>
+                <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                  Wir analysieren Ihre Landschaft, entwerfen eine vendor-neutrale Architektur und setzen sie mit
+                  Open-Source-Systemen um.
+                </p>
+                <ul className="space-y-2 text-sm text-gray-700 dark:text-text-secondary">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise/70" aria-hidden />
+                    Migration, Konfiguration, Dokumentation, Team-Schulung.
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-[6px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise/70" aria-hidden />
+                    Ergebnis: Betriebsbereites System.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-gray-300/70 bg-gray-50/70 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-text-secondary/80">
+                    Buchung
+                  </p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">Direkt oder nach Strategieberatung.</p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href={bookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise transition hover:border-vae-turquoise/60 hover:bg-vae-turquoise/20"
+                  >
+                    Direkt buchen
+                  </a>
+                  <a
+                    href="/leistungen/strategie"
+                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary transition hover:border-vae-turquoise/40 hover:text-vae-turquoise"
+                  >
+                    Strategieberatung
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           <AnimatedBeforeAfter />
@@ -1425,7 +1458,7 @@ const AnimatedBeforeAfter: React.FC = () => {
   useEffect(() => {
     if (prefersReducedMotion) return
     if (!isInView) return
-    const timer = window.setTimeout(() => setState('after'), 1100)
+    const timer = window.setTimeout(() => setState('after'), 1400)
     return () => window.clearTimeout(timer)
   }, [isInView, prefersReducedMotion])
 
@@ -1466,30 +1499,30 @@ const AnimatedBeforeAfter: React.FC = () => {
     []
   )
 
-  const StackedBlocks = () => (
-    <svg viewBox="0 0 320 220" role="presentation" className="h-full w-full">
-      <defs>
-        <linearGradient id="stackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="rgba(45,214,175,0.75)" />
-          <stop offset="100%" stopColor="rgba(45,214,175,0.18)" />
-        </linearGradient>
-      </defs>
-      <rect x="0" y="0" width="320" height="220" rx="18" fill="rgba(45,214,175,0.08)" />
-      <g
-        transform="translate(80 60)"
-        fill="url(#stackGradient)"
-        stroke="rgba(255,255,255,0.3)"
-        strokeWidth="2"
-        className="drop-shadow-[0_14px_38px_rgba(45,214,175,0.38)]"
-      >
-        <rect x="0" y="0" rx="16" ry="16" width="160" height="48" />
-        <rect x="14" y="60" rx="14" ry="14" width="132" height="42" />
-        <rect x="26" y="118" rx="12" ry="12" width="108" height="38" />
-      </g>
-      <circle cx="62" cy="188" r="9" fill="rgba(255,255,255,0.5)" />
-      <circle cx="258" cy="188" r="9" fill="rgba(255,255,255,0.35)" />
-      <line x1="72" y1="188" x2="248" y2="188" stroke="rgba(255,255,255,0.28)" strokeWidth="2" strokeDasharray="6 8" />
-    </svg>
+  const stackLayers = useMemo(
+    () => [
+      {
+        title: 'Kommunikation',
+        subtitle: 'Chat | Files | Mail',
+        icon: MessagesSquare,
+      },
+      {
+        title: 'CRM & Kundenmanagement',
+        subtitle: 'Kontakte | Deals | Support',
+        icon: Users,
+      },
+      {
+        title: 'Wissensbasis & Dokumentation',
+        subtitle: 'Docs | Wiki | Playbooks',
+        icon: BookOpen,
+      },
+      {
+        title: 'Governance & Sicherheit',
+        subtitle: 'SSO | Policies | Backups',
+        icon: ShieldCheck,
+      },
+    ],
+    []
   )
 
   const card = beforeAfterContent[state]
@@ -1497,7 +1530,7 @@ const AnimatedBeforeAfter: React.FC = () => {
 
   if (prefersReducedMotion) {
     return (
-      <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-white via-vae-turquoise/5 to-white p-6 shadow-lg dark:from-bg-dark/70 dark:via-vae-turquoise/10 dark:to-bg-dark">
+      <div className="relative min-h-[340px] overflow-hidden rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-white via-vae-turquoise/5 to-white p-6 shadow-lg dark:from-bg-dark/70 dark:via-vae-turquoise/10 dark:to-bg-dark">
         <div className="flex items-center justify-between gap-4">
           <div className="rounded-full border border-white/10 bg-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted dark:bg-white/10">
             Infrastructure-Design
@@ -1529,6 +1562,36 @@ const AnimatedBeforeAfter: React.FC = () => {
             )
           })}
         </div>
+
+        <div className="mt-6 rounded-2xl border border-white/10 bg-white/70 p-5 shadow-md dark:border-white/10 dark:bg-white/5">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise">
+              <Layers className="h-4 w-4" /> Unified Stack
+            </div>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-text-secondary">
+              Orchestriert
+            </span>
+          </div>
+          <div className="space-y-3">
+            {stackLayers.map(layer => {
+              const Icon = layer.icon
+              return (
+                <div
+                  key={layer.title}
+                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-bg-darker/50 px-4 py-3 text-white shadow-sm"
+                >
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <div className="space-y-0.5">
+                    <p className="text-sm font-semibold">{layer.title}</p>
+                    <p className="text-xs text-text-secondary">{layer.subtitle}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
     )
   }
@@ -1537,14 +1600,14 @@ const AnimatedBeforeAfter: React.FC = () => {
     <div
       id="before-after-visual"
       ref={containerRef}
-      className="relative min-h-[360px] overflow-hidden rounded-3xl border border-vae-turquoise/25 bg-gradient-to-br from-vae-turquoise/10 via-white/10 to-white/5 p-6 shadow-xl backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/10 dark:to-bg-dark"
+      className="relative min-h-[380px] overflow-hidden rounded-3xl border border-vae-turquoise/25 bg-gradient-to-br from-vae-turquoise/10 via-white/10 to-white/5 p-7 shadow-xl backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/10 dark:to-bg-dark md:p-8"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
       <div className="flex items-center justify-between gap-4">
         <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted">
           Infrastructure-Design
         </div>
-        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 text-xs font-semibold text-text-muted">
+        <div className="flex items-center gap-2">
           {(['before', 'after'] as const).map(key => (
             <button
               key={key}
@@ -1552,10 +1615,11 @@ const AnimatedBeforeAfter: React.FC = () => {
               onClick={() => setState(key)}
               aria-pressed={state === key}
               className={cn(
-                'rounded-full px-3 py-1 transition-colors duration-200',
+                'btn-outline px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]',
+                'transition-all duration-200',
                 state === key
-                  ? 'border border-vae-turquoise/40 bg-vae-turquoise/25 text-text-light'
-                  : 'text-text-muted hover:text-text-light'
+                  ? 'border-vae-turquoise/60 bg-vae-turquoise/20 text-white shadow-[0_10px_35px_rgba(8,255,193,0.25)]'
+                  : 'text-text-secondary hover:text-white'
               )}
             >
               {key === 'before' ? 'Vorher' : 'Nachher'}
@@ -1564,7 +1628,7 @@ const AnimatedBeforeAfter: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-4 grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+      <div className="mt-6 space-y-6">
         <div className="space-y-3">
           <p
             className={cn(
@@ -1594,88 +1658,143 @@ const AnimatedBeforeAfter: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative h-[260px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5">
+        <div className="relative h-[320px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 md:h-[360px]">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_20%,rgba(45,214,175,0.22),transparent_55%)]" />
 
           {/* Scatter → Stack animation */}
           <div className="relative h-full w-full">
-            {bubbleItems.map((bubble, idx) => {
-              const baseScale = bubble.size / 60
-              return (
+            <AnimatePresence mode="wait" initial={false}>
+              {isBefore && (
                 <motion.div
-                  key={bubble.label}
-                  className={cn(
-                    'absolute flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-[12px] font-semibold shadow-[0_10px_30px_rgba(0,0,0,0.15)] backdrop-blur-md',
-                    bubble.hue
-                  )}
-                  aria-hidden
-                  style={{
-                    left: `${bubble.x}%`,
-                    top: `${bubble.y}%`,
-                  }}
-                  animate={
-                    isBefore
-                      ? {
+                  key="before-bubbles"
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                >
+                  {bubbleItems.map((bubble, idx) => {
+                    const baseScale = bubble.size / 60
+                    return (
+                      <motion.div
+                        key={bubble.label}
+                        className={cn(
+                          'absolute flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-[12px] font-semibold shadow-[0_10px_30px_rgba(0,0,0,0.15)] backdrop-blur-md',
+                          bubble.hue
+                        )}
+                        aria-hidden
+                        style={{
                           left: `${bubble.x}%`,
                           top: `${bubble.y}%`,
-                          opacity: 0.92,
+                        }}
+                        animate={{
+                          opacity: 0.9,
                           scale: baseScale,
-                          x: [0, 2, -3, 0],
-                          y: [0, -6, 4, 0],
-                        }
-                      : {
-                          left: '52%',
-                          top: '54%',
-                          opacity: 0.18,
-                          scale: baseScale * 0.45,
-                          x: 0,
-                          y: 0,
-                        }
-                  }
-                  transition={
-                    isBefore
-                      ? {
-                          duration: 6 + idx * 0.25,
+                          x: [0, 1.5, -2, 0],
+                          y: [0, -4, 3, 0],
+                        }}
+                        transition={{
+                          duration: 7 + idx * 0.35,
                           repeat: Infinity,
                           repeatType: 'mirror',
                           ease: 'easeInOut',
                           delay: idx * 0.12,
-                        }
-                      : {
-                          duration: 0.9,
-                          ease: 'easeInOut',
-                          delay: idx * 0.05,
-                        }
-                  }
-                >
-                  <span className="bg-current/60 h-2 w-2 rounded-full" aria-hidden />
-                  <span className="truncate">{bubble.label}</span>
-                </motion.div>
-              )
-            })}
+                        }}
+                      >
+                        <span className="bg-current/60 h-2 w-2 rounded-full" aria-hidden />
+                        <span className="truncate">{bubble.label}</span>
+                      </motion.div>
+                    )
+                  })}
 
-            <AnimatePresence mode="wait" initial={false}>
-              {isBefore ? (
-                <motion.div
-                  key="before-pulse"
-                  className="absolute inset-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.12 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="absolute inset-6 rounded-[24px] border border-white/10 bg-white/5" />
+                  <motion.div
+                    className="absolute inset-6 rounded-[24px] border border-white/10 bg-white/5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.12 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                  />
                 </motion.div>
-              ) : (
+              )}
+
+              {!isBefore && (
                 <motion.div
                   key="after-stack"
                   className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 8 }}
                   transition={{ duration: 0.5, ease: 'easeOut' }}
                 >
-                  <StackedBlocks />
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                    className="relative w-full max-w-[360px] rounded-3xl border border-vae-turquoise/30 bg-gradient-to-b from-bg-darker/60 via-bg-darker/70 to-bg-dark/80 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.45)] backdrop-blur"
+                  >
+                    <div className="absolute inset-0 rounded-3xl border border-white/10" aria-hidden />
+                    <div className="relative space-y-4">
+                      <div className="flex items-center justify-between gap-3 rounded-2xl border border-vae-turquoise/30 bg-white/5 px-4 py-3 text-vae-turquoise">
+                        <div className="flex items-center gap-2 text-sm font-semibold">
+                          <Layers className="h-5 w-5" /> Unified Platform Stack
+                        </div>
+                        <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-vae-turquoise">
+                          Orchestriert
+                        </span>
+                      </div>
+
+                      <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                          hidden: {},
+                          visible: {
+                            transition: { staggerChildren: 0.08 },
+                          },
+                        }}
+                        className="space-y-3"
+                      >
+                        {stackLayers.map((layer, idx) => {
+                          const Icon = layer.icon
+                          return (
+                            <motion.div
+                              key={layer.title}
+                              variants={{
+                                hidden: { opacity: 0, x: -14 },
+                                visible: { opacity: 1, x: 0 },
+                              }}
+                              transition={{ duration: 0.38, ease: 'easeOut', delay: idx * 0.06 }}
+                              className="relative overflow-hidden rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-white shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
+                            >
+                              <div
+                                className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-60"
+                                aria-hidden
+                              />
+                              <div className="relative flex items-start gap-3">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
+                                  <Icon className="h-5 w-5" />
+                                </span>
+                                <div className="space-y-0.5">
+                                  <p className="text-sm font-semibold leading-tight">{layer.title}</p>
+                                  <p className="text-xs text-text-secondary">{layer.subtitle}</p>
+                                </div>
+                                {idx === 0 && (
+                                  <span className="ml-auto flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-vae-turquoise">
+                                    <Database className="h-3.5 w-3.5" /> Unified Storage
+                                  </span>
+                                )}
+                              </div>
+                            </motion.div>
+                          )
+                        })}
+                      </motion.div>
+
+                      <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-text-secondary">
+                        <span>SSO, Policies, Backups integriert</span>
+                        <span className="text-vae-turquoise">VAE orchestriert</span>
+                      </div>
+                    </div>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>

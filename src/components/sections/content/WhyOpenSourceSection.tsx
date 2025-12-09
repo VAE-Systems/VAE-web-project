@@ -18,8 +18,8 @@
 
 import AnimatedSaaSTransformation from '@/components/ui/animations/AnimatedSaaSTransformation'
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
-import { ArrowRight, Lightbulb } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { ArrowRight, Lightbulb } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 

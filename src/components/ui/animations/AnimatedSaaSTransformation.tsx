@@ -90,7 +90,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
     []
   )
 
-  // System Clusters - responsive positioning für alle Screen-Größen
+  // System Clusters - weiter in die Ecken positioniert
   const systemClusters = useMemo<SystemCluster[]>(
     () => [
       {
@@ -98,7 +98,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
         icon: MessageSquare,
         title: 'Communication',
         systems: 'Chat • Files • Mail',
-        position: { x: -28, y: -32 }, // Optimiert für Desktop/Tablet/Mobile
+        position: { x: -38, y: -34 }, // Links oben - weiter links und höher
         color: 'bg-blue-500/20 border-blue-600/60 text-blue-900 dark:text-blue-200',
       },
       {
@@ -106,7 +106,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
         icon: Users,
         title: 'CRM & Contacts',
         systems: 'Contacts • Deals • Support',
-        position: { x: 28, y: -32 },
+        position: { x: 38, y: -34 }, // Rechts oben - weiter rechts und höher
         color: 'bg-purple-500/20 border-purple-600/60 text-purple-900 dark:text-purple-200',
       },
       {
@@ -114,7 +114,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
         icon: BookOpen,
         title: 'Knowledge Base',
         systems: 'Docs • Wiki • Playbooks',
-        position: { x: -28, y: 32 },
+        position: { x: -38, y: 34 }, // Links unten - weiter links und tiefer
         color: 'bg-emerald-500/20 border-emerald-600/60 text-emerald-900 dark:text-emerald-200',
       },
       {
@@ -122,7 +122,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
         icon: Shield,
         title: 'Governance',
         systems: 'Security • Compliance • Audit',
-        position: { x: 28, y: 32 },
+        position: { x: 38, y: 34 }, // Rechts unten - weiter rechts und tiefer
         color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
       },
     ],
@@ -275,7 +275,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
         </div>
       </div>
 
-      <div className="relative h-[420px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-3 sm:h-[480px] sm:p-4 lg:h-[540px]">
+      <div className="relative h-[400px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-[500px] lg:h-[600px]">
         {/* Background effects */}
         <div
           className={cn(
@@ -411,26 +411,36 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
             >
-              {/* Central Server Icon - Exakt zentriert ohne translate */}
+              {/* Central Server Icon - Exakt zentriert */}
               <motion.div
                 className="group absolute cursor-pointer"
                 style={{
                   left: '50%',
                   top: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  zIndex: 10,
+                  marginLeft: '-60px',
+                  marginTop: '-60px',
+                  zIndex: 3,
                 }}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{
                   opacity: 1,
-                  scale: [1, 1.02, 1],
+                  scale: [1, 1.015, 1],
                 }}
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.04, y: -3 }}
                 transition={{
                   opacity: { duration: 0.5, delay: 0.3 },
-                  scale: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                  scale: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
                 }}
               >
+                {/* Blur-Glow Background */}
+                <div
+                  className="absolute inset-0 -z-10"
+                  style={{
+                    background: 'radial-gradient(100% 100%, rgba(8, 255, 193, 0.35) 0%, rgba(8, 255, 193, 0) 70%)',
+                    filter: 'blur(60px)',
+                    transform: 'scale(1.8)',
+                  }}
+                />
                 <div className="rounded-[20px] border-[3px] border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 via-vae-turquoise/15 to-vae-turquoise/10 p-4 shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-5 lg:p-6">
                   <div className="flex flex-col items-center gap-1.5 sm:gap-2">
                     <Server className="h-10 w-10 text-vae-turquoise drop-shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
@@ -446,68 +456,98 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                 </div>
               </motion.div>
 
-              {/* System Clusters - Zentren exakt auf Linien-Enden */}
+              {/* System Clusters - fixe Positionen mit Blur-Glow */}
               {systemClusters.map((cluster, index) => {
                 const Icon = cluster.icon
-                // Berechne exakte Pixel-Position für SVG-Match
-                const centerX = 50 + cluster.position.x // z.B. 50 + (-28) = 22
-                const centerY = 50 + cluster.position.y // z.B. 50 + (-32) = 18
+                const centerX = 50 + cluster.position.x
+                const centerY = 50 + cluster.position.y
+
+                // Individuelle Glow-Farben pro Cluster
+                const glowColors = {
+                  communication: 'rgba(59, 130, 246, 0.3)', // blue
+                  crm: 'rgba(168, 85, 247, 0.3)', // purple
+                  knowledge: 'rgba(16, 185, 129, 0.3)', // emerald
+                  governance: 'rgba(245, 158, 11, 0.3)', // amber
+                }
 
                 return (
                   <motion.div
                     key={cluster.id}
                     className={cn(
-                      'group absolute w-[140px] max-w-[42vw] cursor-pointer rounded-[16px] border-[2.5px] px-2.5 py-2.5 shadow-[0_6px_24px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] sm:w-[155px] sm:rounded-[18px] sm:px-3 sm:py-3 lg:w-[170px]',
+                      'absolute rounded-[12px] border-[1.5px] shadow-[0_4px_16px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md sm:rounded-[14px]',
                       cluster.color
                     )}
                     style={{
                       left: `${centerX}%`,
                       top: `${centerY}%`,
-                      transform: 'translate(-50%, -50%)',
-                      zIndex: 5,
+                      width: 'clamp(95px, 22vw, 130px)',
+                      height: 'clamp(95px, 22vw, 130px)',
+                      padding: 'clamp(6px, 1.5vw, 10px)',
+                      marginLeft: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
+                      marginTop: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
+                      zIndex: 2,
                     }}
-                    initial={{ opacity: 0, scale: 0.85 }}
+                    initial={{ opacity: 0, scale: 0.85, y: 10 }}
                     animate={{
                       opacity: 1,
                       scale: 1,
+                      y: 0,
                     }}
-                    whileHover={{ scale: 1.05 }}
                     transition={{
-                      opacity: { duration: 0.45, delay: 0.6 + index * 0.12 },
-                      scale: { duration: 0.45, delay: 0.6 + index * 0.12 },
+                      opacity: { duration: 0.4, delay: 0.5 + index * 0.1 },
+                      scale: { duration: 0.4, delay: 0.5 + index * 0.1 },
+                      y: { duration: 0.4, delay: 0.5 + index * 0.1 },
                     }}
                   >
-                    {/* Inner container für Float-Animation (beeinflusst Position nicht) */}
-                    <motion.div
-                      animate={{
-                        y: [0, -2.5, 0],
+                    {/* Blur-Glow Background per Cluster */}
+                    <div
+                      className="absolute inset-0 -z-10"
+                      style={{
+                        background: `radial-gradient(100% 100%, ${glowColors[cluster.id as keyof typeof glowColors]} 0%, rgba(0,0,0,0) 70%)`,
+                        filter: 'blur(50px)',
+                        transform: 'scale(1.6)',
                       }}
-                      transition={{
-                        y: { duration: 3.5 + index * 0.4, repeat: Infinity, ease: 'easeInOut' },
-                      }}
+                    />
+                    <div
+                      style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(4px, 1vw, 6px)', height: '100%' }}
                     >
-                      <div className="space-y-1.5">
-                        <div className="flex items-start gap-2">
-                          <div className="rounded-[10px] bg-white/20 p-1.5 shadow-inner dark:bg-white/15">
-                            <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                          </div>
-                          <div className="flex-1 space-y-0.5">
-                            <p className="text-[10px] font-bold leading-tight sm:text-[11px]">{cluster.title}</p>
-                            <p className="text-[8px] leading-tight opacity-80 sm:text-[9px]">{cluster.systems}</p>
-                          </div>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'clamp(4px, 1vw, 6px)', flex: 1 }}>
+                        <div
+                          className="rounded-[8px] bg-white/20 shadow-inner dark:bg-white/15"
+                          style={{ padding: 'clamp(3px, 0.8vw, 5px)' }}
+                        >
+                          <Icon className="h-[clamp(12px,3vw,16px)] w-[clamp(12px,3vw,16px)]" />
                         </div>
-                        <div className="border-current/10 border-t pt-1">
-                          <p className="text-[7px] font-semibold uppercase tracking-wide opacity-50 sm:text-[8px]">
-                            System Module
+                        <div
+                          style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'clamp(2px, 0.5vw, 3px)' }}
+                        >
+                          <p style={{ fontSize: 'clamp(8px, 2vw, 10px)', fontWeight: 700, lineHeight: 1.2 }}>
+                            {cluster.title}
+                          </p>
+                          <p style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', lineHeight: 1.2, opacity: 0.75 }}>
+                            {cluster.systems}
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                      <div className="border-current/10 border-t" style={{ paddingTop: 'clamp(2px, 0.5vw, 3px)' }}>
+                        <p
+                          style={{
+                            fontSize: 'clamp(5px, 1.2vw, 7px)',
+                            fontWeight: 600,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.05em',
+                            opacity: 0.4,
+                          }}
+                        >
+                          System Module
+                        </p>
+                      </div>
+                    </div>
                   </motion.div>
                 )
               })}
 
-              {/* Connection lines with animated data flow - IMPROVED: Multiple data packets per line */}
+              {/* Connection lines with animated data flow - Linien verbinden Zentren */}
               <svg className="pointer-events-none absolute inset-0 h-full w-full" style={{ zIndex: 1 }}>
                 <defs>
                   <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -542,6 +582,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
 
                     fromX = serverX
                     fromY = serverY
+                    // SVG-Koordinaten = CSS-Position (da transform: translate(-50%, -50%))
+                    // Die Bubble steht visuell bei (50 + x%, 50 + y%) NACH der Transformation
                     toX = 50 + toCluster.position.x
                     toY = 50 + toCluster.position.y
                   } else {
@@ -580,25 +622,25 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({
                         filter="url(#glow)"
                       />
 
-                      {/* TWO animated data packets per line - like Fastlane design */}
-                      {[0, 0.5].map((offset, packetIdx) => (
+                      {/* TWO animated data packets per line */}
+                      {[0, 0.6].map((offset, packetIdx) => (
                         <motion.circle
                           key={`packet-${packetIdx}`}
-                          r={isServerConnection ? '4' : '3'}
+                          r={isServerConnection ? '4.5' : '3.5'}
                           fill="rgba(8, 255, 193, 1)"
                           filter="url(#strongGlow)"
                           initial={{ opacity: 0 }}
                           animate={{
                             cx: [`${fromX}%`, `${toX}%`],
                             cy: [`${fromY}%`, `${toY}%`],
-                            opacity: [0, 1, 1, 1, 0],
+                            opacity: [0, 0.8, 1, 0.8, 0],
                           }}
                           transition={{
-                            duration: isServerConnection ? 2.5 : 3,
-                            delay: 1.2 + idx * 0.3 + offset * 1.5,
+                            duration: isServerConnection ? 2.2 : 2.8,
+                            delay: 1 + idx * 0.2 + offset * 1.3,
                             repeat: Infinity,
-                            repeatDelay: isServerConnection ? 1.5 : 2,
-                            ease: 'easeInOut',
+                            repeatDelay: isServerConnection ? 1.2 : 1.6,
+                            ease: 'linear',
                           }}
                         />
                       ))}

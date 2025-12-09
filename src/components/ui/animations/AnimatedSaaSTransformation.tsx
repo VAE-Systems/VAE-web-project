@@ -1,7 +1,8 @@
 import { cn } from '@/lib/classNames'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
-import { BookOpen, DollarSign, MessageSquare, Server, Shield, Users, Zap } from 'lucide-react'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { AlertCircle, BookOpen, DollarSign, Lightbulb, MessageSquare, Server, Shield, Users, Zap } from 'lucide-react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import MagneticButton from '../MagneticButton'
 
 interface AnimatedSaaSTransformationProps {
   autoPlayDelay?: number
@@ -42,922 +43,1165 @@ type Particle = {
   vy: number
 }
 
-const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = ({ autoPlayDelay = 15000 }) => {
-  const prefersReducedMotion = useReducedMotion()
-  const [state, setState] = useState<'problem' | 'solution'>('problem')
-  const [showParticles, setShowParticles] = useState(false)
-  const [currentUSPIndex, setCurrentUSPIndex] = useState(0)
-  const [currentProblemIndex, setCurrentProblemIndex] = useState(0)
-  const [visibleToolsCount, setVisibleToolsCount] = useState(6)
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const isInView = useInView(containerRef, { once: true, amount: 0.5 })
+const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = React.memo(
+  ({ autoPlayDelay = 20000 }) => {
+    const prefersReducedMotion = useReducedMotion()
+    const [state, setState] = useState<'problem' | 'solution'>('problem')
+    const [showParticles, setShowParticles] = useState(false)
+    const [currentUSPIndex, setCurrentUSPIndex] = useState(0)
+    const [currentProblemIndex, setCurrentProblemIndex] = useState(0)
+    const [visibleToolsCount, setVisibleToolsCount] = useState(6)
+    const [hasAutoPlayed, setHasAutoPlayed] = useState(false)
+    const particleTimerRef = useRef<number | null>(null)
+    const containerRef = useRef<HTMLDivElement | null>(null)
+    const isInView = useInView(containerRef, { once: true, amount: 0.5 })
 
-  // USPs für rotating text
-  const usps = [
-    'langfristig konzipiert ist',
-    'preiswert ist',
-    'übersichtlich ist',
-    'austauschbar ist',
-    'KI-optimiert ist',
-    'viele Schnittstellen hat',
-  ]
+    // USPs für rotating text
+    const usps = [
+      'AI-ready konzipiert ist',
+      'unabhängig macht',
+      'Open Source ist',
+      'langfristig konzipiert ist',
+      'preiswert bleibt',
+      'übersichtlich ist',
+      'Ihnen gehört',
+      'transparent ist',
+      'frei skalierbar ist',
+      'keine Limits hat',
+      'zukunftssicher ist',
+      'DSGVO-konform ist',
+    ]
 
-  // Problem-Texte für rotating text
-  const problems = [
-    'teuer wird',
-    'unübersichtlich ist',
-    'intransparent ist',
-    'abhängig macht',
-    'nicht skaliert',
-    'Daten abgreift',
-  ]
+    // Problem-Texte für rotating text
+    const problems = [
+      'abhängig macht',
+      'teuer wird',
+      'unübersichtlich ist',
+      'versteckte Kosten hat',
+      'nicht mitwächst',
+      'Sie einschränkt',
+      'ständig teurer wird',
+      'intransparent ist',
+      'keine Kontrolle gibt',
+      'Vendor-Lock-in hat',
+      'nicht erweiterbar ist',
+    ]
 
-  useEffect(() => {
-    if (prefersReducedMotion || !isInView) return
-    const timer = setTimeout(() => {
+    // Auto-Play: Nur einmal beim ersten Laden
+    useEffect(() => {
+      if (prefersReducedMotion || !isInView || hasAutoPlayed) return
+      const timer = setTimeout(() => {
+        setHasAutoPlayed(true)
+        setShowParticles(true)
+        particleTimerRef.current = window.setTimeout(() => {
+          setState('solution')
+          setShowParticles(false)
+          particleTimerRef.current = null
+        }, 800)
+      }, autoPlayDelay)
+      return () => {
+        clearTimeout(timer)
+        if (particleTimerRef.current) {
+          clearTimeout(particleTimerRef.current)
+          particleTimerRef.current = null
+        }
+      }
+    }, [autoPlayDelay, isInView, prefersReducedMotion, hasAutoPlayed])
+
+    // Rotating USP text effect
+    useEffect(() => {
+      if (state !== 'solution') return
+      const interval = setInterval(() => {
+        setCurrentUSPIndex(prev => (prev + 1) % usps.length)
+      }, 2500)
+      return () => clearInterval(interval)
+    }, [state, usps.length])
+
+    // Rotating Problem text effect
+    useEffect(() => {
+      if (state !== 'problem') return
+      const interval = setInterval(() => {
+        setCurrentProblemIndex(prev => (prev + 1) % problems.length)
+      }, 2500)
+      return () => clearInterval(interval)
+    }, [state, problems.length])
+
+    // Unkontrolliertes Wachstum - Tools kommen schrittweise hinzu
+    useEffect(() => {
+      if (state !== 'problem' || !isInView) return
+
+      // Phase 1: Start mit 6 Tools (sofort)
+      setVisibleToolsCount(6)
+
+      // Phase 2: Nach 2,5s: HubSpot → Salesforce + Marketing-Tools (7-9)
+      const timer1 = setTimeout(() => setVisibleToolsCount(9), 2500)
+
+      // Phase 3: Nach 5s kommen +2 Tools (Support & Storage) = Chaos
+      const timer2 = setTimeout(() => setVisibleToolsCount(11), 5000)
+
+      return () => {
+        clearTimeout(timer1)
+        clearTimeout(timer2)
+      }
+    }, [state, isInView])
+
+    const isProblem = state === 'problem'
+
+    // Memoize handlers to prevent re-renders
+    const handleProblemClick = useCallback(() => {
+      // Stoppe Auto-Play bei manueller Interaktion
+      setHasAutoPlayed(true)
+      if (particleTimerRef.current) {
+        clearTimeout(particleTimerRef.current)
+        particleTimerRef.current = null
+      }
+      setState('problem')
+      setShowParticles(false)
+    }, [])
+
+    const handleSolutionClick = useCallback(() => {
+      // Stoppe Auto-Play bei manueller Interaktion
+      setHasAutoPlayed(true)
+      if (particleTimerRef.current) {
+        clearTimeout(particleTimerRef.current)
+        particleTimerRef.current = null
+      }
       setShowParticles(true)
-      setTimeout(() => {
+      particleTimerRef.current = window.setTimeout(() => {
         setState('solution')
         setShowParticles(false)
+        particleTimerRef.current = null
       }, 800)
-    }, autoPlayDelay)
-    return () => clearTimeout(timer)
-  }, [autoPlayDelay, isInView, prefersReducedMotion])
+    }, [])
 
-  // Rotating USP text effect
-  useEffect(() => {
-    if (state !== 'solution') return
-    const interval = setInterval(() => {
-      setCurrentUSPIndex(prev => (prev + 1) % usps.length)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [state, usps.length])
+    // Alle SaaS Tools - Realistischer Stack-Wachstum (11 Tools total)
+    const allSaasTools = useMemo<SaaSToolCard[]>(
+      () => [
+        // Phase 1: Start-Stack (6 Tools) - mit Sicherheitsabstand vom Rand
+        {
+          id: 'slack',
+          name: 'Slack',
+          cost: '€8/mo',
+          position: { x: 40, y: 32 },
+          hasChain: true,
+          chainTarget: 'notion',
+        },
+        {
+          id: 'notion',
+          name: 'Notion',
+          cost: '€10/mo',
+          position: { x: 50, y: 28 },
+          hasChain: true,
+          chainTarget: 'hubspot',
+        },
+        {
+          id: 'hubspot',
+          name: 'HubSpot',
+          cost: '€50/mo',
+          position: { x: 60, y: 32 },
+          hasChain: true,
+          chainTarget: 'asana',
+        },
+        {
+          id: 'asana',
+          name: 'Asana',
+          cost: '€12/mo',
+          position: { x: 58, y: 54 },
+          hasChain: true,
+          chainTarget: 'figma',
+        },
+        {
+          id: 'figma',
+          name: 'Figma',
+          cost: '€15/mo',
+          position: { x: 42, y: 54 },
+          hasChain: true,
+          chainTarget: 'drive',
+        },
+        {
+          id: 'drive',
+          name: 'G Drive',
+          cost: '€6/mo',
+          position: { x: 50, y: 62 },
+          hasChain: true,
+          chainTarget: 'slack',
+        },
 
-  // Rotating Problem text effect
-  useEffect(() => {
-    if (state !== 'problem') return
-    const interval = setInterval(() => {
-      setCurrentProblemIndex(prev => (prev + 1) % problems.length)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [state, problems.length])
+        // Phase 2: Marketing wächst + HubSpot wird durch Salesforce ersetzt (Upgrade)
+        {
+          id: 'mailchimp',
+          name: 'Mailchimp',
+          cost: '€25/mo',
+          position: { x: 36, y: 40 },
+          hasChain: true,
+          chainTarget: 'salesforce',
+        },
+        {
+          id: 'salesforce',
+          name: 'Salesforce',
+          cost: '€75/mo',
+          position: { x: 60, y: 32 },
+          hasChain: true,
+          chainTarget: 'zendesk',
+        }, // Ersetzt HubSpot Position
+        {
+          id: 'zapier',
+          name: 'Zapier',
+          cost: '€20/mo',
+          position: { x: 50, y: 42 },
+          hasChain: true,
+          chainTarget: 'mailchimp',
+        },
 
-  // Unkontrolliertes Wachstum - Tools kommen schrittweise hinzu
-  useEffect(() => {
-    if (state !== 'problem' || !isInView) return
+        // Phase 3: Chaos +3 Tools (Support & Storage)
+        {
+          id: 'zendesk',
+          name: 'Zendesk',
+          cost: '€49/mo',
+          position: { x: 44, y: 48 },
+          hasChain: true,
+          chainTarget: 'dropbox',
+        },
+        {
+          id: 'dropbox',
+          name: 'Dropbox',
+          cost: '€16/mo',
+          position: { x: 56, y: 48 },
+          hasChain: true,
+          chainTarget: 'intercom',
+        },
+        {
+          id: 'intercom',
+          name: 'Intercom',
+          cost: '€39/mo',
+          position: { x: 50, y: 56 },
+          hasChain: true,
+          chainTarget: 'zapier',
+        },
+      ],
+      []
+    )
 
-    // Phase 1: Start mit 6 Tools (sofort)
-    setVisibleToolsCount(6)
+    // Zeige nur die aktuell relevanten Tools (HubSpot verschwindet ab Phase 2)
+    const saasTools = useMemo(
+      () =>
+        allSaasTools.filter((tool, index) => {
+          // Phase 1 (6 Tools): Zeige erste 6
+          if (visibleToolsCount <= 6) return index < 6
+          // Phase 2+ (9+ Tools): Verstecke HubSpot (index 2), zeige Rest
+          if (tool.id === 'hubspot') return false
+          return index < visibleToolsCount
+        }),
+      [allSaasTools, visibleToolsCount]
+    )
 
-    // Phase 2: Nach 2,5s: HubSpot → Salesforce + Marketing-Tools (7-9)
-    const timer1 = setTimeout(() => setVisibleToolsCount(9), 2500)
+    // System Clusters - sicher im sichtbaren Bereich positioniert
+    const systemClusters = useMemo<SystemCluster[]>(
+      () => [
+        {
+          id: 'communication',
+          icon: MessageSquare,
+          title: 'Communication',
+          systems: 'Chat • Files • Mail',
+          position: { x: -30, y: -26 }, // Links oben - mit Sicherheitsabstand vom Rand
+          color: 'bg-blue-500/20 border-blue-600/60 text-blue-900 dark:text-blue-200',
+        },
+        {
+          id: 'crm',
+          icon: Users,
+          title: 'CRM & Contacts',
+          systems: 'Contacts • Deals • Support',
+          position: { x: 30.5, y: -25.8 }, // Minimal verschoben für SVG-Rendering
+          color: 'bg-purple-500/20 border-purple-600/60 text-purple-900 dark:text-purple-200',
+        },
+        {
+          id: 'knowledge',
+          icon: BookOpen,
+          title: 'Knowledge Base',
+          systems: 'Docs • Wiki • Playbooks',
+          position: { x: -29.5, y: 26 }, // Minimal verschoben für SVG-Rendering
+          color: 'bg-emerald-500/20 border-emerald-600/60 text-emerald-900 dark:text-emerald-200',
+        },
+        {
+          id: 'governance',
+          icon: Shield,
+          title: 'Governance',
+          systems: 'Security • Compliance • Audit',
+          position: { x: 30, y: 25.8 }, // Minimal verschoben für SVG-Rendering
+          color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
+        },
+        {
+          id: 'ai-agents',
+          icon: Zap,
+          title: 'AI Agents',
+          systems: 'Automation • Analysis • Support',
+          position: { x: 0.5, y: 38 }, // Minimal verschoben für SVG-Rendering-Fix
+          color: 'bg-pink-500/20 border-pink-600/60 text-pink-900 dark:text-pink-200',
+        },
+      ],
+      []
+    )
 
-    // Phase 3: Nach 5s kommen +2 Tools (Support & Storage) = Chaos
-    const timer2 = setTimeout(() => setVisibleToolsCount(11), 5000)
+    // System connections - shows orchestration
+    const systemConnections = useMemo<SystemConnection[]>(
+      () => [
+        // Server to all clusters (vertical/diagonal lines)
+        { from: 'server', to: 'communication' },
+        { from: 'server', to: 'crm' },
+        { from: 'server', to: 'knowledge' },
+        { from: 'server', to: 'governance' },
+        { from: 'server', to: 'ai-agents' },
+        // Horizontal connections between clusters
+        { from: 'communication', to: 'crm' },
+        { from: 'knowledge', to: 'governance' },
+        // Diagonal cross-connections
+        { from: 'communication', to: 'knowledge' },
+        { from: 'crm', to: 'governance' },
+        // AI Agents connections - learns from all modules
+        { from: 'ai-agents', to: 'communication' },
+        { from: 'ai-agents', to: 'crm' },
+        { from: 'ai-agents', to: 'knowledge' },
+        { from: 'ai-agents', to: 'governance' },
+      ],
+      []
+    )
 
-    return () => {
-      clearTimeout(timer1)
-      clearTimeout(timer2)
-    }
-  }, [state, isInView])
+    // Particles for chain-breaking effect
+    const particles = useMemo<Particle[]>(() => {
+      const ps: Particle[] = []
+      for (let i = 0; i < 20; i++) {
+        ps.push({
+          id: `particle-${i}`,
+          x: 50 + (Math.random() - 0.5) * 30,
+          y: 50 + (Math.random() - 0.5) * 30,
+          vx: (Math.random() - 0.5) * 60,
+          vy: (Math.random() - 0.5) * 60,
+        })
+      }
+      return ps
+    }, [])
 
-  const isProblem = state === 'problem'
+    // Memoize money symbols count array
+    const moneySymbolsArray = useMemo(
+      () => Array.from({ length: Math.min(visibleToolsCount, 12) }, (_, i) => i),
+      [visibleToolsCount]
+    )
 
-  // Alle SaaS Tools - Realistischer Stack-Wachstum (11 Tools total)
-  const allSaasTools = useMemo<SaaSToolCard[]>(
-    () => [
-      // Phase 1: Start-Stack (6 Tools)
-      { id: 'slack', name: 'Slack', cost: '€8/mo', position: { x: 38, y: 28 }, hasChain: true, chainTarget: 'notion' },
-      {
-        id: 'notion',
-        name: 'Notion',
-        cost: '€10/mo',
-        position: { x: 50, y: 22 },
-        hasChain: true,
-        chainTarget: 'hubspot',
-      },
-      {
-        id: 'hubspot',
-        name: 'HubSpot',
-        cost: '€50/mo',
-        position: { x: 62, y: 28 },
-        hasChain: true,
-        chainTarget: 'asana',
-      },
-      { id: 'asana', name: 'Asana', cost: '€12/mo', position: { x: 60, y: 52 }, hasChain: true, chainTarget: 'figma' },
-      { id: 'figma', name: 'Figma', cost: '€15/mo', position: { x: 40, y: 52 }, hasChain: true, chainTarget: 'drive' },
-      { id: 'drive', name: 'G Drive', cost: '€6/mo', position: { x: 50, y: 60 }, hasChain: true, chainTarget: 'slack' },
-
-      // Phase 2: Marketing wächst + HubSpot wird durch Salesforce ersetzt (Upgrade)
-      {
-        id: 'mailchimp',
-        name: 'Mailchimp',
-        cost: '€25/mo',
-        position: { x: 32, y: 38 },
-        hasChain: true,
-        chainTarget: 'salesforce',
-      },
-      {
-        id: 'salesforce',
-        name: 'Salesforce',
-        cost: '€75/mo',
-        position: { x: 62, y: 28 },
-        hasChain: true,
-        chainTarget: 'zendesk',
-      }, // Ersetzt HubSpot Position
-      {
-        id: 'zapier',
-        name: 'Zapier',
-        cost: '€20/mo',
-        position: { x: 50, y: 42 },
-        hasChain: true,
-        chainTarget: 'mailchimp',
-      },
-
-      // Phase 3: Chaos +3 Tools (Support & Storage)
-      {
-        id: 'zendesk',
-        name: 'Zendesk',
-        cost: '€49/mo',
-        position: { x: 44, y: 48 },
-        hasChain: true,
-        chainTarget: 'dropbox',
-      },
-      {
-        id: 'dropbox',
-        name: 'Dropbox',
-        cost: '€16/mo',
-        position: { x: 56, y: 48 },
-        hasChain: true,
-        chainTarget: 'intercom',
-      },
-      {
-        id: 'intercom',
-        name: 'Intercom',
-        cost: '€39/mo',
-        position: { x: 50, y: 56 },
-        hasChain: true,
-        chainTarget: 'zapier',
-      },
-    ],
-    []
-  )
-
-  // Zeige nur die aktuell relevanten Tools (HubSpot verschwindet ab Phase 2)
-  const saasTools = useMemo(
-    () =>
-      allSaasTools.filter((tool, index) => {
-        // Phase 1 (6 Tools): Zeige erste 6
-        if (visibleToolsCount <= 6) return index < 6
-        // Phase 2+ (9+ Tools): Verstecke HubSpot (index 2), zeige Rest
-        if (tool.id === 'hubspot') return false
-        return index < visibleToolsCount
-      }),
-    [allSaasTools, visibleToolsCount]
-  )
-
-  // System Clusters - weiter in die Ecken positioniert
-  const systemClusters = useMemo<SystemCluster[]>(
-    () => [
-      {
-        id: 'communication',
-        icon: MessageSquare,
-        title: 'Communication',
-        systems: 'Chat • Files • Mail',
-        position: { x: -38, y: -34 }, // Links oben - weiter links und höher
-        color: 'bg-blue-500/20 border-blue-600/60 text-blue-900 dark:text-blue-200',
-      },
-      {
-        id: 'crm',
-        icon: Users,
-        title: 'CRM & Contacts',
-        systems: 'Contacts • Deals • Support',
-        position: { x: 38, y: -34 }, // Rechts oben - weiter rechts und höher
-        color: 'bg-purple-500/20 border-purple-600/60 text-purple-900 dark:text-purple-200',
-      },
-      {
-        id: 'knowledge',
-        icon: BookOpen,
-        title: 'Knowledge Base',
-        systems: 'Docs • Wiki • Playbooks',
-        position: { x: -38, y: 34 }, // Links unten - weiter links und tiefer
-        color: 'bg-emerald-500/20 border-emerald-600/60 text-emerald-900 dark:text-emerald-200',
-      },
-      {
-        id: 'governance',
-        icon: Shield,
-        title: 'Governance',
-        systems: 'Security • Compliance • Audit',
-        position: { x: 38, y: 34 }, // Rechts unten - weiter rechts und tiefer
-        color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
-      },
-    ],
-    []
-  )
-
-  // System connections - shows orchestration
-  const systemConnections = useMemo<SystemConnection[]>(
-    () => [
-      // Server to all clusters (vertical/diagonal lines)
-      { from: 'server', to: 'communication' },
-      { from: 'server', to: 'crm' },
-      { from: 'server', to: 'knowledge' },
-      { from: 'server', to: 'governance' },
-      // Horizontal connections between clusters
-      { from: 'communication', to: 'crm' },
-      { from: 'knowledge', to: 'governance' },
-      // Diagonal cross-connections
-      { from: 'communication', to: 'knowledge' },
-      { from: 'crm', to: 'governance' },
-    ],
-    []
-  )
-
-  // Particles for chain-breaking effect
-  const particles = useMemo<Particle[]>(() => {
-    const ps: Particle[] = []
-    for (let i = 0; i < 20; i++) {
-      ps.push({
-        id: `particle-${i}`,
-        x: 50 + (Math.random() - 0.5) * 30,
-        y: 50 + (Math.random() - 0.5) * 30,
-        vx: (Math.random() - 0.5) * 60,
-        vy: (Math.random() - 0.5) * 60,
-      })
-    }
-    return ps
-  }, [])
-
-  const renderFallbackGrid = () => (
-    <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-8">
-      <div className="mb-6 flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
-          SaaS vs. Open Source
-        </span>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => setState('problem')}
-            className={cn(
-              'rounded-lg px-4 py-2 text-xs font-semibold transition',
-              state === 'problem'
-                ? 'border border-red-400/50 bg-red-500/15 text-red-200'
-                : 'border border-white/10 bg-white/5 text-text-secondary'
-            )}
-          >
-            Problem
-          </button>
-          <button
-            type="button"
-            onClick={() => setState('solution')}
-            className={cn(
-              'rounded-lg px-4 py-2 text-xs font-semibold transition',
-              state === 'solution'
-                ? 'border border-vae-turquoise/40 bg-vae-turquoise/15 text-vae-turquoise'
-                : 'border border-white/10 bg-white/5 text-text-secondary'
-            )}
-          >
-            Infrastruktur
-          </button>
-        </div>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {state === 'problem'
-          ? saasTools.map(tool => (
-              <div key={tool.id} className="rounded-2xl border border-orange-400/40 bg-orange-500/10 p-4">
-                <p className="font-semibold text-text-light">{tool.name}</p>
-                <p className="text-xs text-text-secondary">{tool.cost}</p>
-              </div>
-            ))
-          : systemClusters.map(cluster => {
-              const Icon = cluster.icon
-              return (
-                <div key={cluster.id} className={cn('rounded-2xl border p-4', cluster.color)}>
-                  <Icon className="mb-2 h-6 w-6" />
-                  <p className="font-semibold text-text-light">{cluster.title}</p>
-                  <p className="text-xs text-text-secondary">{cluster.systems}</p>
-                </div>
-              )
-            })}
-      </div>
-    </div>
-  )
-
-  if (prefersReducedMotion) {
-    return renderFallbackGrid()
-  }
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/85 via-bg-darker to-bg-dark p-6 shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)]"
-    >
-      <div className="mb-5 flex items-center justify-between">
-        <div className="space-y-2">
-          <p className="text-base font-bold uppercase tracking-[0.24em] sm:text-lg">
-            <span className="text-red-400">SaaS</span>
-            <span className="mx-2 text-text-secondary/40">vs.</span>
-            <span className="text-emerald-400">Open Source</span>
-          </p>
-          <p className="text-xs font-medium uppercase tracking-wider text-text-secondary/70 sm:text-sm">
-            VAE orchestriert
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => {
-              setState('problem')
-              setShowParticles(false)
-            }}
-            className={cn(
-              'rounded-lg px-4 py-2 text-xs font-semibold transition',
-              isProblem
-                ? 'border border-orange-400/50 bg-orange-500/15 text-orange-200 shadow-[0_0_0_1px_rgba(251,146,60,0.25)]'
-                : 'border border-white/10 bg-white/5 text-text-secondary hover:border-white/20'
-            )}
-          >
-            Das Problem
-          </motion.button>
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => {
-              setShowParticles(true)
-              setTimeout(() => {
-                setState('solution')
-                setShowParticles(false)
-              }, 800)
-            }}
-            className={cn(
-              'rounded-lg px-4 py-2 text-xs font-semibold transition',
-              !isProblem
-                ? 'border border-vae-turquoise/40 bg-vae-turquoise/15 text-vae-turquoise shadow-[0_0_0_1px_rgba(8,255,193,0.25)]'
-                : 'border border-white/10 bg-white/5 text-text-secondary hover:border-white/20'
-            )}
-          >
-            Die Lösung
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Container für beide Headlines - beide am gleichen Platz */}
-      <div className="relative mb-6" style={{ minHeight: '4rem' }}>
-        {/* Animierte Headline mit rotierenden Problemen - nur im Problem-Modus */}
-        <AnimatePresence mode="wait">
-          {state === 'problem' && (
-            <motion.div
-              key="problem-headline"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4 }}
-              className="absolute inset-0"
+    const renderFallbackGrid = () => (
+      <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-8">
+        <div className="mb-6 flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
+            SaaS vs. Open Source
+          </span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setState('problem')}
+              className={cn(
+                'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                state === 'problem'
+                  ? 'border border-red-400/50 bg-red-500/15 text-red-200'
+                  : 'border border-white/10 bg-white/5 text-text-secondary'
+              )}
             >
-              <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
-                {/* Fixer Teil */}
-                <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">SaaS-Chaos, das</h2>
-
-                {/* Rotierender Teil mit Overlay */}
-                <div
-                  className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
-                  style={{ minHeight: '1.2em' }}
-                >
-                  {/* Invisible spacer - hält Container-Breite konstant */}
-                  <span className="invisible whitespace-nowrap">unübersichtlich ist</span>
-
-                  {/* Alle Problem-Texte übereinander - nur Opacity wechselt */}
-                  {problems.map((problem, index) => (
-                    <span key={problem} className="absolute left-0 top-0 whitespace-nowrap">
-                      <motion.span
-                        animate={{
-                          opacity: index === currentProblemIndex ? 1 : 0,
-                          y: index === currentProblemIndex ? 0 : 5,
-                        }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}
-                        className="relative inline-block text-red-400"
-                        style={{ pointerEvents: index === currentProblemIndex ? 'auto' : 'none' }}
-                      >
-                        {problem}
-                        {/* Underline direkt am jeweiligen Text - passt sich der Textlänge an */}
-                        {index === currentProblemIndex && (
-                          <motion.span
-                            key={`underline-problem-${currentProblemIndex}`}
-                            className="absolute bottom-0 left-0 h-[2px] w-full bg-red-400"
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                            style={{ transformOrigin: 'left' }}
-                          />
-                        )}
-                      </motion.span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Animierte Headline mit rotierenden USPs - nur im Solution-Modus */}
-        <AnimatePresence mode="wait">
-          {state === 'solution' && (
-            <motion.div
-              key="solution-headline"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4 }}
-              className="absolute inset-0"
+              Problem
+            </button>
+            <button
+              type="button"
+              onClick={() => setState('solution')}
+              className={cn(
+                'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                state === 'solution'
+                  ? 'border border-vae-turquoise/40 bg-vae-turquoise/15 text-vae-turquoise'
+                  : 'border border-white/10 bg-white/5 text-text-secondary'
+              )}
             >
-              <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
-                {/* Fixer Teil */}
-                <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">Infrastruktur, die</h2>
-
-                {/* Rotierender Teil mit Overlay */}
-                <div
-                  className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
-                  style={{ minHeight: '1.2em' }}
-                >
-                  {/* Invisible spacer - hält Container-Breite konstant */}
-                  <span className="invisible whitespace-nowrap">viele Schnittstellen hat</span>
-
-                  {/* Alle USPs übereinander - nur Opacity wechselt */}
-                  {usps.map((usp, index) => (
-                    <span key={usp} className="absolute left-0 top-0 whitespace-nowrap">
-                      <motion.span
-                        animate={{
-                          opacity: index === currentUSPIndex ? 1 : 0,
-                          y: index === currentUSPIndex ? 0 : 5,
-                        }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}
-                        className="relative inline-block text-vae-turquoise"
-                        style={{ pointerEvents: index === currentUSPIndex ? 'auto' : 'none' }}
-                      >
-                        {usp}
-                        {/* Underline direkt am jeweiligen Text - passt sich der Textlänge an */}
-                        {index === currentUSPIndex && (
-                          <motion.span
-                            key={`underline-${currentUSPIndex}`}
-                            className="absolute bottom-0 left-0 h-[2px] w-full bg-vae-turquoise"
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                            style={{ transformOrigin: 'left' }}
-                          />
-                        )}
-                      </motion.span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <div className="relative h-[400px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-[500px] lg:h-[600px]">
-        {/* Background effects */}
-        <div
-          className={cn(
-            'pointer-events-none absolute inset-0 transition-opacity duration-700',
-            isProblem ? 'opacity-100' : 'opacity-0'
-          )}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(251,146,60,0.12),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(239,68,68,0.08),transparent_50%)]" />
-        </div>
-        <div
-          className={cn(
-            'pointer-events-none absolute inset-0 transition-opacity duration-700',
-            !isProblem ? 'opacity-100' : 'opacity-0'
-          )}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--vae-turquoise-rgb),0.14),transparent_55%)]" />
+              Infrastruktur
+            </button>
+          </div>
         </div>
 
-        <AnimatePresence mode="wait" initial={false}>
-          {isProblem ? (
-            <motion.div
-              key="problem"
-              className="relative h-full w-full"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              {/* Chaotic SaaS Tool Cards */}
-              {saasTools.map((tool, index) => (
-                <motion.div
-                  key={tool.id}
-                  className="absolute w-[120px] max-w-[40vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-2.5 py-2 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10"
-                  style={{
-                    left: `${tool.position.x}%`,
-                    top: `${tool.position.y}%`,
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                  initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-                  animate={{
-                    opacity: 1,
-                    scale: [1, 1.04, 1],
-                    rotate: [index % 2 === 0 ? -5 : 5, index % 2 === 0 ? 5 : -5, index % 2 === 0 ? -5 : 5],
-                    y: [0, -3, 0, 3, 0],
-                  }}
-                  transition={{
-                    opacity: { duration: 0.3, delay: index * 0.08 },
-                    scale: { duration: 2 + index * 0.15, repeat: Infinity, ease: 'easeInOut' },
-                    rotate: { duration: 3 + index * 0.25, repeat: Infinity, ease: 'easeInOut' },
-                    y: { duration: 2.5 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scale: 0.7,
-                    rotate: index % 2 === 0 ? -45 : 45,
-                    y: 60,
-                    transition: { duration: 0.6, ease: 'easeIn' },
-                  }}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <div>
-                      <p className="text-xs font-semibold text-orange-900 dark:text-orange-100">{tool.name}</p>
-                      <p className="text-[10px] text-orange-800 dark:text-orange-300/70">{tool.cost}</p>
-                    </div>
-                    <Zap className="h-4 w-4 text-orange-700 dark:text-orange-400" />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {state === 'problem'
+            ? saasTools.map(tool => (
+                <div key={tool.id} className="rounded-2xl border border-orange-400/40 bg-orange-500/10 p-4">
+                  <p className="font-semibold text-text-light">{tool.name}</p>
+                  <p className="text-xs text-text-secondary">{tool.cost}</p>
+                </div>
+              ))
+            : systemClusters.map(cluster => {
+                const Icon = cluster.icon
+                return (
+                  <div key={cluster.id} className={cn('rounded-2xl border p-4', cluster.color)}>
+                    <Icon className="mb-2 h-6 w-6" />
+                    <p className="font-semibold text-text-light">{cluster.title}</p>
+                    <p className="text-xs text-text-secondary">{cluster.systems}</p>
                   </div>
-                </motion.div>
-              ))}
+                )
+              })}
+        </div>
+      </div>
+    )
 
-              {/* Chain connections - fragmentiert und chaotisch */}
-              {saasTools
-                .filter(t => t.hasChain && t.chainTarget)
-                .map(tool => {
-                  const target = saasTools.find(t => t.id === tool.chainTarget)
-                  if (!target) return null
-                  return (
-                    <motion.svg
-                      key={`chain-${tool.id}`}
-                      className="pointer-events-none absolute inset-0 h-full w-full"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.5 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {/* Fragmentierte Linie - mehrere Segmente */}
-                      <motion.line
-                        x1={`${tool.position.x}%`}
-                        y1={`${tool.position.y}%`}
-                        x2={`${target.position.x}%`}
-                        y2={`${target.position.y}%`}
-                        stroke="rgba(234, 88, 12, 0.7)"
-                        strokeWidth="2.5"
-                        strokeDasharray="8 6 3 6"
-                        strokeLinecap="round"
-                        className="dark:stroke-orange-500/60"
-                        animate={{
-                          strokeDashoffset: [0, -30],
-                          opacity: [0.5, 0.7, 0.5],
-                        }}
-                        transition={{
-                          strokeDashoffset: { duration: 3, repeat: Infinity, ease: 'linear' },
-                          opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
-                        }}
-                      />
-                      {/* Zusätzliche fragmentierte Linie (Chaos-Effekt) */}
-                      <motion.line
-                        x1={`${tool.position.x}%`}
-                        y1={`${tool.position.y}%`}
-                        x2={`${target.position.x}%`}
-                        y2={`${target.position.y}%`}
-                        stroke="rgba(234, 88, 12, 0.3)"
-                        strokeWidth="1.5"
-                        strokeDasharray="4 8"
-                        strokeLinecap="round"
-                        className="dark:stroke-orange-400/30"
-                        animate={{
-                          strokeDashoffset: [0, 20],
-                          opacity: [0.3, 0.5, 0.3],
-                        }}
-                        transition={{
-                          strokeDashoffset: { duration: 2.5, repeat: Infinity, ease: 'linear' },
-                          opacity: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
-                        }}
-                      />
-                    </motion.svg>
-                  )
-                })}
+    if (prefersReducedMotion) {
+      return renderFallbackGrid()
+    }
 
-              {/* Flying money symbols - Mehr Dollar je mehr Tools */}
-              {Array.from({ length: Math.min(visibleToolsCount, 12) }, (_, i) => (
-                <motion.div
-                  key={`money-${i}`}
-                  className="absolute"
-                  style={{
-                    left: `${35 + (i % 4) * 10}%`,
-                    top: `${55 + Math.floor(i / 4) * 12}%`,
-                  }}
-                  initial={{ y: 0, opacity: 0, scale: 0.8 }}
-                  animate={{
-                    y: [-10, -60, -110, -160],
-                    x: [(i % 2 === 0 ? -1 : 1) * (10 + i * 3), (i % 2 === 0 ? -1 : 1) * (15 + i * 3)],
-                    opacity: [0, 0.8, 0.9, 0],
-                    scale: [0.8, 1, 1.1, 0.6],
-                    rotate: [0, i % 2 === 0 ? -15 : 15, 0],
-                  }}
-                  transition={{
-                    duration: 2.5 + (i % 3) * 0.5,
-                    delay: i * 0.3 + (visibleToolsCount > 6 ? (i - 6) * 0.2 : 0),
-                    repeat: Infinity,
-                    repeatDelay: 0.2,
-                    ease: 'easeOut',
-                  }}
-                >
-                  <DollarSign className="h-5 w-5 text-red-400 drop-shadow-[0_2px_8px_rgba(239,68,68,0.6)]" />
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="solution"
-              className="relative h-full w-full"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              {/* Central Server Icon - Exakt zentriert */}
-              <motion.div
-                className="group absolute cursor-pointer"
-                style={{
-                  left: '50%',
-                  top: '50%',
-                  marginLeft: '-60px',
-                  marginTop: '-60px',
-                  zIndex: 3,
-                }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{
-                  opacity: 1,
-                  scale: [1, 1.015, 1],
-                }}
-                whileHover={{ scale: 1.04, y: -3 }}
-                transition={{
-                  opacity: { duration: 0.5, delay: 0.3 },
-                  scale: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
-                }}
+    return (
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/85 via-bg-darker to-bg-dark p-6 shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)]"
+      >
+        <div className="mb-5 flex items-center justify-between">
+          <div className="space-y-2">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] sm:text-base sm:tracking-[0.24em]">
+              <span className="text-red-400">SaaS</span>
+              <span className="mx-2 text-text-secondary/40">vs.</span>
+              <span className="text-emerald-400">Open Source</span>
+            </p>
+            <p className="text-xs font-medium uppercase tracking-wider text-text-secondary/70 sm:text-sm">
+              VAE orchestriert
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <MagneticButton intensity={0.08}>
+              <button
+                type="button"
+                onClick={handleProblemClick}
+                className={cn(
+                  'group flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ease-out hover:scale-105',
+                  isProblem
+                    ? 'border-2 border-orange-400/60 bg-gradient-to-br from-orange-500/20 to-red-500/10 text-orange-200 shadow-[0_0_20px_rgba(251,146,60,0.4),0_0_0_1px_rgba(251,146,60,0.3)]'
+                    : 'border border-white/10 bg-white/5 text-text-secondary hover:border-orange-400/40 hover:bg-orange-500/5 hover:text-orange-300 hover:shadow-[0_0_15px_rgba(251,146,60,0.2)]'
+                )}
               >
-                {/* Blur-Glow Background */}
-                <div
-                  className="absolute inset-0 -z-10"
-                  style={{
-                    background: 'radial-gradient(100% 100%, rgba(8, 255, 193, 0.35) 0%, rgba(8, 255, 193, 0) 70%)',
-                    filter: 'blur(60px)',
-                    transform: 'scale(1.8)',
-                  }}
+                <AlertCircle
+                  className={cn(
+                    'h-4 w-4 transition-transform duration-300 ease-out',
+                    isProblem ? 'rotate-0' : 'group-hover:rotate-12'
+                  )}
                 />
-                <div className="rounded-[20px] border-[3px] border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 via-vae-turquoise/15 to-vae-turquoise/10 p-4 shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-5 lg:p-6">
-                  <div className="flex flex-col items-center gap-1.5 sm:gap-2">
-                    <Server className="h-10 w-10 text-vae-turquoise drop-shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
-                    <div className="text-center">
-                      <p className="text-[9px] font-semibold uppercase tracking-wider text-vae-turquoise sm:text-[10px]">
-                        Unified Stack
-                      </p>
-                      <p className="text-[7px] uppercase tracking-wide text-vae-turquoise/60 sm:text-[8px]">
-                        Central System
-                      </p>
-                    </div>
+                Das Problem
+              </button>
+            </MagneticButton>
+            <MagneticButton intensity={0.08}>
+              <button
+                type="button"
+                onClick={handleSolutionClick}
+                className={cn(
+                  'group flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ease-out hover:scale-105',
+                  !isProblem
+                    ? 'border-2 border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.4),0_0_0_1px_rgba(8,255,193,0.3)]'
+                    : 'border border-white/10 bg-white/5 text-text-secondary hover:border-vae-turquoise/40 hover:bg-vae-turquoise/5 hover:text-vae-turquoise hover:shadow-[0_0_15px_rgba(8,255,193,0.2)]'
+                )}
+              >
+                <Lightbulb
+                  className={cn(
+                    'h-4 w-4 transition-transform duration-300 ease-out',
+                    !isProblem ? 'rotate-0' : 'group-hover:rotate-12'
+                  )}
+                />
+                Die Lösung
+                {isProblem && (
+                  <motion.span
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="ml-1 flex h-2 w-2 items-center justify-center"
+                  >
+                    <span className="absolute h-2 w-2 animate-ping rounded-full bg-vae-turquoise/50" />
+                    <span className="relative h-1.5 w-1.5 rounded-full bg-vae-turquoise" />
+                  </motion.span>
+                )}
+              </button>
+            </MagneticButton>
+          </div>
+        </div>
+
+        {/* Container für beide Headlines - beide am gleichen Platz */}
+        <div className="relative mb-6" style={{ minHeight: '4rem' }}>
+          {/* Animierte Headline mit rotierenden Problemen - nur im Problem-Modus */}
+          <AnimatePresence mode="wait">
+            {state === 'problem' && (
+              <motion.div
+                key="problem-headline"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="absolute inset-0"
+              >
+                <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
+                  {/* Fixer Teil */}
+                  <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">SaaS-Chaos, das</h2>
+
+                  {/* Rotierender Teil mit Overlay */}
+                  <div
+                    className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
+                    style={{ minHeight: '1.2em' }}
+                  >
+                    {/* Invisible spacer - hält Container-Breite konstant */}
+                    <span className="invisible whitespace-nowrap">unübersichtlich ist</span>
+
+                    {/* Alle Problem-Texte übereinander - nur Opacity wechselt */}
+                    {problems.map((problem, index) => (
+                      <span key={problem} className="absolute left-0 top-0 whitespace-nowrap">
+                        <motion.span
+                          animate={{
+                            opacity: index === currentProblemIndex ? 1 : 0,
+                            y: index === currentProblemIndex ? 0 : 5,
+                          }}
+                          transition={{ duration: 0.5, ease: 'easeInOut' }}
+                          className="relative inline-block text-red-400"
+                          style={{ pointerEvents: index === currentProblemIndex ? 'auto' : 'none' }}
+                        >
+                          {problem}
+                          {/* Underline direkt am jeweiligen Text - passt sich der Textlänge an */}
+                          {index === currentProblemIndex && (
+                            <motion.span
+                              key={`underline-problem-${currentProblemIndex}`}
+                              className="absolute bottom-0 left-0 h-[2px] w-full bg-red-400"
+                              initial={{ scaleX: 0 }}
+                              animate={{ scaleX: 1 }}
+                              transition={{ duration: 0.5, delay: 0.2 }}
+                              style={{ transformOrigin: 'left' }}
+                            />
+                          )}
+                        </motion.span>
+                      </span>
+                    ))}
                   </div>
                 </div>
               </motion.div>
+            )}
+          </AnimatePresence>
 
-              {/* System Clusters - fixe Positionen mit Blur-Glow */}
-              {systemClusters.map((cluster, index) => {
-                const Icon = cluster.icon
-                const centerX = 50 + cluster.position.x
-                const centerY = 50 + cluster.position.y
+          {/* Animierte Headline mit rotierenden USPs - nur im Solution-Modus */}
+          <AnimatePresence mode="wait">
+            {state === 'solution' && (
+              <motion.div
+                key="solution-headline"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="absolute inset-0"
+              >
+                <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
+                  {/* Fixer Teil */}
+                  <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">Infrastruktur, die</h2>
 
-                // Individuelle Glow-Farben pro Cluster
-                const glowColors = {
-                  communication: 'rgba(59, 130, 246, 0.3)', // blue
-                  crm: 'rgba(168, 85, 247, 0.3)', // purple
-                  knowledge: 'rgba(16, 185, 129, 0.3)', // emerald
-                  governance: 'rgba(245, 158, 11, 0.3)', // amber
-                }
+                  {/* Rotierender Teil mit Overlay */}
+                  <div
+                    className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
+                    style={{ minHeight: '1.2em' }}
+                  >
+                    {/* Invisible spacer - hält Container-Breite konstant */}
+                    <span className="invisible whitespace-nowrap">viele Schnittstellen hat</span>
 
-                return (
+                    {/* Alle USPs übereinander - nur Opacity wechselt */}
+                    {usps.map((usp, index) => (
+                      <span key={usp} className="absolute left-0 top-0 whitespace-nowrap">
+                        <motion.span
+                          animate={{
+                            opacity: index === currentUSPIndex ? 1 : 0,
+                            y: index === currentUSPIndex ? 0 : 5,
+                          }}
+                          transition={{ duration: 0.5, ease: 'easeInOut' }}
+                          className="relative inline-block text-vae-turquoise"
+                          style={{ pointerEvents: index === currentUSPIndex ? 'auto' : 'none' }}
+                        >
+                          {usp}
+                          {/* Underline direkt am jeweiligen Text - passt sich der Textlänge an */}
+                          {index === currentUSPIndex && (
+                            <motion.span
+                              key={`underline-${currentUSPIndex}`}
+                              className="absolute bottom-0 left-0 h-[2px] w-full bg-vae-turquoise"
+                              initial={{ scaleX: 0 }}
+                              animate={{ scaleX: 1 }}
+                              transition={{ duration: 0.5, delay: 0.2 }}
+                              style={{ transformOrigin: 'left' }}
+                            />
+                          )}
+                        </motion.span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <div
+          className="relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-[560px] md:h-[600px] lg:h-[640px]"
+          style={{ contain: 'layout style paint' }}
+        >
+          {/* Background effects */}
+          <div
+            className={cn(
+              'pointer-events-none absolute inset-0 transition-opacity duration-700',
+              isProblem ? 'opacity-100' : 'opacity-0'
+            )}
+            style={{ willChange: 'opacity' }}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(251,146,60,0.12),transparent_50%),radial-gradient(circle_at_70%_70%,rgba(239,68,68,0.08),transparent_50%)]" />
+          </div>
+          <div
+            className={cn(
+              'pointer-events-none absolute inset-0 transition-opacity duration-700',
+              !isProblem ? 'opacity-100' : 'opacity-0'
+            )}
+            style={{ willChange: 'opacity' }}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--vae-turquoise-rgb),0.14),transparent_55%)]" />
+          </div>
+
+          <AnimatePresence mode="wait" initial={false}>
+            {isProblem ? (
+              <motion.div
+                key="problem"
+                className="relative h-full w-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                {/* Chaotic SaaS Tool Cards */}
+                {saasTools.map((tool, index) => (
                   <motion.div
-                    key={cluster.id}
-                    className={cn(
-                      'absolute rounded-[12px] border-[1.5px] shadow-[0_4px_16px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md sm:rounded-[14px]',
-                      cluster.color
-                    )}
+                    key={tool.id}
+                    className="absolute w-[120px] max-w-[40vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-2.5 py-2 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10"
                     style={{
-                      left: `${centerX}%`,
-                      top: `${centerY}%`,
-                      width: 'clamp(85px, 20vw, 115px)',
-                      height: 'clamp(85px, 20vw, 115px)',
-                      padding: 'clamp(5px, 1.2vw, 8px)',
-                      marginLeft: 'calc(-0.5 * clamp(85px, 20vw, 115px))',
-                      marginTop: 'calc(-0.5 * clamp(85px, 20vw, 115px))',
-                      zIndex: 2,
+                      left: `${tool.position.x}%`,
+                      top: `${tool.position.y}%`,
+                      transform: 'translate(-50%, -50%) translateZ(0)',
+                      willChange: 'transform, opacity',
+                      pointerEvents: 'none',
                     }}
-                    initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                    initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
                     animate={{
                       opacity: 1,
-                      scale: 1,
-                      y: 0,
+                      scale: [1, 1.04, 1],
+                      rotate: [index % 2 === 0 ? -5 : 5, index % 2 === 0 ? 5 : -5, index % 2 === 0 ? -5 : 5],
+                      y: [0, -3, 0, 3, 0],
                     }}
                     transition={{
-                      opacity: { duration: 0.4, delay: 0.5 + index * 0.1 },
-                      scale: { duration: 0.4, delay: 0.5 + index * 0.1 },
-                      y: { duration: 0.4, delay: 0.5 + index * 0.1 },
+                      opacity: { duration: 0.3, delay: index * 0.08 },
+                      scale: { duration: 2 + index * 0.15, repeat: Infinity, ease: 'easeInOut' },
+                      rotate: { duration: 3 + index * 0.25, repeat: Infinity, ease: 'easeInOut' },
+                      y: { duration: 2.5 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.7,
+                      rotate: index % 2 === 0 ? -45 : 45,
+                      y: 60,
+                      transition: { duration: 0.6, ease: 'easeIn' },
                     }}
                   >
-                    {/* Blur-Glow Background per Cluster */}
-                    <div
-                      className="absolute inset-0 -z-10"
-                      style={{
-                        background: `radial-gradient(100% 100%, ${glowColors[cluster.id as keyof typeof glowColors]} 0%, rgba(0,0,0,0) 70%)`,
-                        filter: 'blur(50px)',
-                        transform: 'scale(1.6)',
-                      }}
-                    />
-                    <div
-                      style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(4px, 1vw, 6px)', height: '100%' }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'clamp(4px, 1vw, 6px)', flex: 1 }}>
-                        <div
-                          className="rounded-[8px] bg-white/20 shadow-inner dark:bg-white/15"
-                          style={{ padding: 'clamp(3px, 0.8vw, 5px)' }}
-                        >
-                          <Icon className="h-[clamp(12px,3vw,16px)] w-[clamp(12px,3vw,16px)]" />
-                        </div>
-                        <div
-                          style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'clamp(2px, 0.5vw, 3px)' }}
-                        >
-                          <p style={{ fontSize: 'clamp(8px, 2vw, 10px)', fontWeight: 700, lineHeight: 1.2 }}>
-                            {cluster.title}
-                          </p>
-                          <p style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', lineHeight: 1.2, opacity: 0.75 }}>
-                            {cluster.systems}
-                          </p>
-                        </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <div>
+                        <p className="text-xs font-semibold text-orange-900 dark:text-orange-100">{tool.name}</p>
+                        <p className="text-[10px] text-orange-800 dark:text-orange-300/70">{tool.cost}</p>
                       </div>
-                      <div className="border-current/10 border-t" style={{ paddingTop: 'clamp(2px, 0.5vw, 3px)' }}>
-                        <p
-                          style={{
-                            fontSize: 'clamp(5px, 1.2vw, 7px)',
-                            fontWeight: 600,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em',
-                            opacity: 0.4,
+                      <Zap className="h-4 w-4 text-orange-700 dark:text-orange-400" />
+                    </div>
+                  </motion.div>
+                ))}
+
+                {/* Chain connections - fragmentiert und chaotisch */}
+                {saasTools
+                  .filter(t => t.hasChain && t.chainTarget)
+                  .map(tool => {
+                    const target = saasTools.find(t => t.id === tool.chainTarget)
+                    if (!target) return null
+                    return (
+                      <motion.svg
+                        key={`chain-${tool.id}`}
+                        className="pointer-events-none absolute inset-0 h-full w-full"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.5 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        shapeRendering="optimizeSpeed"
+                      >
+                        {/* Fragmentierte Linie - mehrere Segmente */}
+                        <motion.line
+                          x1={`${tool.position.x}%`}
+                          y1={`${tool.position.y}%`}
+                          x2={`${target.position.x}%`}
+                          y2={`${target.position.y}%`}
+                          stroke="rgba(234, 88, 12, 0.7)"
+                          strokeWidth="2.5"
+                          strokeDasharray="8 6 3 6"
+                          strokeLinecap="round"
+                          className="dark:stroke-orange-500/60"
+                          animate={{
+                            strokeDashoffset: [0, -30],
+                            opacity: [0.5, 0.7, 0.5],
                           }}
-                        >
-                          System Module
+                          transition={{
+                            strokeDashoffset: { duration: 3, repeat: Infinity, ease: 'linear' },
+                            opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+                          }}
+                        />
+                        {/* Zusätzliche fragmentierte Linie (Chaos-Effekt) */}
+                        <motion.line
+                          x1={`${tool.position.x}%`}
+                          y1={`${tool.position.y}%`}
+                          x2={`${target.position.x}%`}
+                          y2={`${target.position.y}%`}
+                          stroke="rgba(234, 88, 12, 0.3)"
+                          strokeWidth="1.5"
+                          strokeDasharray="4 8"
+                          strokeLinecap="round"
+                          className="dark:stroke-orange-400/30"
+                          animate={{
+                            strokeDashoffset: [0, 20],
+                            opacity: [0.3, 0.5, 0.3],
+                          }}
+                          transition={{
+                            strokeDashoffset: { duration: 2.5, repeat: Infinity, ease: 'linear' },
+                            opacity: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
+                          }}
+                        />
+                      </motion.svg>
+                    )
+                  })}
+
+                {/* Flying money symbols - Mehr Dollar je mehr Tools */}
+                {moneySymbolsArray.map(i => (
+                  <motion.div
+                    key={`money-${i}`}
+                    className="absolute"
+                    style={{
+                      left: `${35 + (i % 4) * 10}%`,
+                      top: `${55 + Math.floor(i / 4) * 12}%`,
+                      willChange: 'transform, opacity',
+                      transform: 'translateZ(0)',
+                    }}
+                    initial={{ y: 0, opacity: 0, scale: 0.8 }}
+                    animate={{
+                      y: [-10, -60, -110, -160],
+                      x: [(i % 2 === 0 ? -1 : 1) * (10 + i * 3), (i % 2 === 0 ? -1 : 1) * (15 + i * 3)],
+                      opacity: [0, 0.8, 0.9, 0],
+                      scale: [0.8, 1, 1.1, 0.6],
+                      rotate: [0, i % 2 === 0 ? -15 : 15, 0],
+                    }}
+                    transition={{
+                      duration: 2.5 + (i % 3) * 0.5,
+                      delay: i * 0.3 + (visibleToolsCount > 6 ? (i - 6) * 0.2 : 0),
+                      repeat: Infinity,
+                      repeatDelay: 0.2,
+                      ease: 'easeOut',
+                    }}
+                  >
+                    <DollarSign className="h-5 w-5 text-red-400 drop-shadow-[0_2px_8px_rgba(239,68,68,0.6)]" />
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="solution"
+                className="relative h-full w-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                {/* Central Server Icon - Exakt zentriert */}
+                <motion.div
+                  className="group absolute cursor-pointer"
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    marginLeft: '-60px',
+                    marginTop: '-60px',
+                    zIndex: 3,
+                    willChange: 'transform',
+                    transform: 'translateZ(0)',
+                  }}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{
+                    opacity: 1,
+                    scale: [1, 1.015, 1],
+                  }}
+                  whileHover={{ scale: 1.04, y: -3 }}
+                  transition={{
+                    opacity: { duration: 0.5, delay: 0.3 },
+                    scale: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
+                  }}
+                >
+                  {/* Blur-Glow Background */}
+                  <div
+                    className="absolute inset-0 -z-10"
+                    style={{
+                      background: 'radial-gradient(100% 100%, rgba(8, 255, 193, 0.35) 0%, rgba(8, 255, 193, 0) 70%)',
+                      filter: 'blur(40px)',
+                      transform: 'scale(1.8)',
+                      willChange: 'transform',
+                    }}
+                  />
+                  <div className="rounded-[20px] border-[3px] border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 via-vae-turquoise/15 to-vae-turquoise/10 p-4 shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-5 lg:p-6">
+                    <div className="flex flex-col items-center gap-1.5 sm:gap-2">
+                      <Server className="h-10 w-10 text-vae-turquoise drop-shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
+                      <div className="text-center">
+                        <p className="text-[9px] font-semibold uppercase tracking-wider text-vae-turquoise sm:text-[10px]">
+                          Unified Stack
+                        </p>
+                        <p className="text-[7px] uppercase tracking-wide text-vae-turquoise/60 sm:text-[8px]">
+                          Central System
                         </p>
                       </div>
                     </div>
-                  </motion.div>
-                )
-              })}
+                  </div>
+                </motion.div>
 
-              {/* Connection lines with animated data flow - Linien verbinden Zentren */}
-              <svg className="pointer-events-none absolute inset-0 h-full w-full" style={{ zIndex: 1 }}>
-                <defs>
-                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="rgba(8, 255, 193, 0.15)" />
-                    <stop offset="50%" stopColor="rgba(8, 255, 193, 0.6)" />
-                    <stop offset="100%" stopColor="rgba(8, 255, 193, 0.15)" />
-                  </linearGradient>
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                  <filter id="strongGlow">
-                    <feGaussianBlur stdDeviation="6" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-                {systemConnections.map((conn, idx) => {
-                  const serverX = 50
-                  const serverY = 50
+                {/* System Clusters - fixe Positionen mit Blur-Glow */}
+                {systemClusters.map(cluster => {
+                  const Icon = cluster.icon
+                  const centerX = 50 + cluster.position.x
+                  const centerY = 50 + cluster.position.y
 
-                  let fromX, fromY, toX, toY
-
-                  if (conn.from === 'server') {
-                    const toCluster = systemClusters.find(c => c.id === conn.to)
-                    if (!toCluster) return null
-
-                    fromX = serverX
-                    fromY = serverY
-                    // SVG-Koordinaten = CSS-Position (da transform: translate(-50%, -50%))
-                    // Die Bubble steht visuell bei (50 + x%, 50 + y%) NACH der Transformation
-                    toX = 50 + toCluster.position.x
-                    toY = 50 + toCluster.position.y
-                  } else {
-                    const fromCluster = systemClusters.find(c => c.id === conn.from)
-                    const toCluster = systemClusters.find(c => c.id === conn.to)
-                    if (!fromCluster || !toCluster) return null
-
-                    fromX = 50 + fromCluster.position.x
-                    fromY = 50 + fromCluster.position.y
-                    toX = 50 + toCluster.position.x
-                    toY = 50 + toCluster.position.y
+                  // Individuelle Glow-Farben pro Cluster
+                  const glowColors = {
+                    communication: 'rgba(59, 130, 246, 0.3)', // blue
+                    crm: 'rgba(168, 85, 247, 0.3)', // purple
+                    knowledge: 'rgba(16, 185, 129, 0.3)', // emerald
+                    governance: 'rgba(245, 158, 11, 0.3)', // amber
+                    'ai-agents': 'rgba(236, 72, 153, 0.4)', // pink - stärker als andere
                   }
 
-                  const isServerConnection = conn.from === 'server'
+                  // AI-Agents Bubble erscheint später (zeigt modulare Erweiterbarkeit)
+                  const isAIAgents = cluster.id === 'ai-agents'
+                  // Sync with Server→AI connection line animation (starts at 2.5s)
+                  const baseDelay = isAIAgents ? 2.5 : 0.5
 
                   return (
-                    <g key={`${conn.from}-${conn.to}`}>
-                      {/* Connection line - thicker with stronger glow */}
-                      <motion.line
-                        x1={`${fromX}%`}
-                        y1={`${fromY}%`}
-                        x2={`${toX}%`}
-                        y2={`${toY}%`}
-                        stroke="url(#lineGradient)"
-                        strokeWidth={isServerConnection ? '3' : '2'}
-                        strokeLinecap="round"
-                        initial={{ opacity: 0, pathLength: 0 }}
-                        animate={{
-                          opacity: isServerConnection ? 0.7 : 0.5,
-                          pathLength: 1,
+                    <motion.div
+                      key={cluster.id}
+                      className={cn(
+                        'group absolute cursor-pointer rounded-[12px] border-[1.5px] shadow-[0_4px_16px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md transition-shadow duration-300 sm:rounded-[14px]',
+                        cluster.color
+                      )}
+                      style={{
+                        left: `${centerX}%`,
+                        top: `${centerY}%`,
+                        width: 'clamp(95px, 22vw, 130px)',
+                        height: 'clamp(95px, 22vw, 130px)',
+                        padding: 'clamp(6px, 1.4vw, 10px)',
+                        marginLeft: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
+                        marginTop: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
+                        zIndex: 2,
+                        willChange: 'transform',
+                        transform: 'translateZ(0)',
+                      }}
+                      initial={{ opacity: 0, scale: 0.9, y: 8 }}
+                      animate={{
+                        opacity: 1,
+                        scale: 1,
+                        y: 0,
+                      }}
+                      whileHover={{
+                        scale: 1.04,
+                        y: -3,
+                      }}
+                    >
+                      {/* Blur-Glow Background per Cluster */}
+                      <div
+                        className="absolute inset-0 -z-10 transition-transform duration-[150ms] ease-out group-hover:scale-105"
+                        style={{
+                          background: `radial-gradient(100% 100%, ${glowColors[cluster.id as keyof typeof glowColors]} 0%, rgba(0,0,0,0) 70%)`,
+                          filter: isAIAgents ? 'blur(40px)' : 'blur(30px)',
+                          transform: 'scale(1.6)',
+                          willChange: 'transform',
                         }}
-                        transition={{
-                          opacity: { duration: 0.6, delay: 0.5 + idx * 0.15 },
-                          pathLength: { duration: 1.4, delay: 0.5 + idx * 0.15 },
-                        }}
-                        filter="url(#glow)"
                       />
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 'clamp(4px, 1vw, 6px)',
+                          height: '100%',
+                        }}
+                      >
+                        {/* Header: Icon + Title */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(4px, 1vw, 6px)' }}>
+                          <motion.div
+                            className="rounded-[8px] bg-white/20 shadow-inner dark:bg-white/15"
+                            style={{ padding: 'clamp(3px, 0.8vw, 5px)' }}
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{
+                              duration: 0.2,
+                              delay: baseDelay,
+                              ease: 'easeOut',
+                            }}
+                          >
+                            <Icon className="h-[clamp(12px,3vw,16px)] w-[clamp(12px,3vw,16px)]" />
+                          </motion.div>
+                          <motion.p
+                            style={{ fontSize: 'clamp(8px, 2vw, 10px)', fontWeight: 700, lineHeight: 1.2, flex: 1 }}
+                            initial={{ opacity: 0, x: -3 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{
+                              duration: 0.2,
+                              delay: baseDelay,
+                              ease: 'easeOut',
+                            }}
+                          >
+                            {cluster.title}
+                          </motion.p>
+                        </div>
 
-                      {/* TWO animated data packets per line */}
-                      {[0, 0.6].map((offset, packetIdx) => (
-                        <motion.circle
-                          key={`packet-${packetIdx}`}
-                          r={isServerConnection ? '4.5' : '3.5'}
-                          fill="rgba(8, 255, 193, 1)"
-                          filter="url(#strongGlow)"
-                          initial={{ opacity: 0 }}
-                          animate={{
-                            cx: [`${fromX}%`, `${toX}%`],
-                            cy: [`${fromY}%`, `${toY}%`],
-                            opacity: [0, 0.8, 1, 0.8, 0],
+                        {/* Stacked Systems List */}
+                        <motion.div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 'clamp(1px, 0.3vw, 2px)',
+                            paddingLeft: 'clamp(16px, 4vw, 22px)',
+                            flex: 1,
                           }}
+                          initial={{ opacity: 0, y: 3 }}
+                          animate={{ opacity: 1, y: 0 }}
                           transition={{
-                            duration: isServerConnection ? 2.2 : 2.8,
-                            delay: 1 + idx * 0.2 + offset * 1.3,
-                            repeat: Infinity,
-                            repeatDelay: isServerConnection ? 1.2 : 1.6,
-                            ease: 'linear',
+                            duration: 0.3,
+                            delay: baseDelay + 0.1,
+                            ease: 'easeOut',
                           }}
-                        />
-                      ))}
-                    </g>
+                        >
+                          {cluster.systems.split(' • ').map((system, idx) => (
+                            <p
+                              key={idx}
+                              style={{
+                                fontSize: 'clamp(6px, 1.5vw, 8px)',
+                                lineHeight: 1.3,
+                                opacity: 0.75,
+                              }}
+                            >
+                              {system}
+                            </p>
+                          ))}
+                        </motion.div>
+
+                        <div className="border-current/10 border-t" style={{ paddingTop: 'clamp(2px, 0.5vw, 3px)' }}>
+                          <p
+                            style={{
+                              fontSize: 'clamp(5px, 1.2vw, 7px)',
+                              fontWeight: 600,
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              opacity: 0.4,
+                            }}
+                          >
+                            System Module
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
                   )
                 })}
-              </svg>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
-        {/* Chain-breaking particle effect */}
-        <AnimatePresence>
-          {showParticles && (
-            <motion.div
-              className="pointer-events-none absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              {particles.map(p => (
-                <motion.div
-                  key={p.id}
-                  className="absolute h-1.5 w-1.5 rounded-full bg-orange-400"
-                  style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                  initial={{ scale: 1, opacity: 1 }}
-                  animate={{
-                    x: p.vx,
-                    y: p.vy,
-                    scale: [1, 0.5, 0],
-                    opacity: [1, 0.8, 0],
-                  }}
-                  transition={{ duration: 0.8, ease: 'easeOut' }}
-                />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+                {/* Connection lines with animated data flow - Linien verbinden Zentren */}
+                <svg
+                  className="pointer-events-none absolute inset-0 h-full w-full"
+                  style={{ zIndex: 1 }}
+                  shapeRendering="optimizeSpeed"
+                >
+                  <defs>
+                    {/* Türkis Gradient für normale Linien */}
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(8, 255, 193, 0.15)" />
+                      <stop offset="50%" stopColor="rgba(8, 255, 193, 0.6)" />
+                      <stop offset="100%" stopColor="rgba(8, 255, 193, 0.15)" />
+                    </linearGradient>
+                    {/* Pink Gradient für AI-Linien - VERSTÄRKT */}
+                    <linearGradient id="aiLineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(236, 72, 153, 0.4)" />
+                      <stop offset="50%" stopColor="rgba(236, 72, 153, 0.9)" />
+                      <stop offset="100%" stopColor="rgba(236, 72, 153, 0.4)" />
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                      <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                    <filter id="strongGlow">
+                      <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                      <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  {systemConnections.map((conn, idx) => {
+                    const serverX = 50
+                    const serverY = 50
+
+                    let fromX, fromY, toX, toY
+
+                    if (conn.from === 'server') {
+                      const toCluster = systemClusters.find(c => c.id === conn.to)
+                      if (!toCluster) return null
+
+                      fromX = serverX
+                      fromY = serverY
+                      // SVG-Koordinaten = CSS-Position (da transform: translate(-50%, -50%))
+                      // Die Bubble steht visuell bei (50 + x%, 50 + y%) NACH der Transformation
+                      toX = 50 + toCluster.position.x
+                      toY = 50 + toCluster.position.y
+                    } else {
+                      const fromCluster = systemClusters.find(c => c.id === conn.from)
+                      const toCluster = systemClusters.find(c => c.id === conn.to)
+                      if (!fromCluster || !toCluster) return null
+
+                      fromX = 50 + fromCluster.position.x
+                      fromY = 50 + fromCluster.position.y
+                      toX = 50 + toCluster.position.x
+                      toY = 50 + toCluster.position.y
+                    }
+
+                    const isServerConnection = conn.from === 'server'
+                    const isAIConnection = conn.from === 'ai-agents' || conn.to === 'ai-agents'
+                    const isAIServerConnection =
+                      (conn.from === 'server' && conn.to === 'ai-agents') ||
+                      (conn.from === 'ai-agents' && conn.to === 'server')
+
+                    // Linien-Hierarchie: Server-AI (dickste) > Server-Module > AI-Module = Module-Module
+                    let strokeWidth = '2'
+                    if (isAIServerConnection) strokeWidth = '4'
+                    else if (isServerConnection) strokeWidth = '3'
+
+                    // Server-AI benutzt pink Gradient, rest wie vorher
+                    const lineStroke = isAIServerConnection
+                      ? 'url(#aiLineGradient)'
+                      : isAIConnection
+                        ? 'url(#aiLineGradient)'
+                        : 'url(#lineGradient)'
+
+                    return (
+                      <g key={`${conn.from}-${conn.to}`}>
+                        {/* Connection line - AI lines are pink and dashed */}
+                        <motion.line
+                          x1={`${fromX}%`}
+                          y1={`${fromY}%`}
+                          x2={`${toX}%`}
+                          y2={`${toY}%`}
+                          stroke={lineStroke}
+                          strokeWidth={strokeWidth}
+                          strokeLinecap="round"
+                          strokeDasharray={isAIConnection && !isAIServerConnection ? '6 4' : 'none'}
+                          strokeOpacity={isAIServerConnection ? 1 : undefined}
+                          style={{ mixBlendMode: isAIServerConnection ? 'screen' : 'normal' }}
+                          initial={{ opacity: 0, pathLength: 0 }}
+                          animate={{
+                            opacity: isAIServerConnection ? 1 : isServerConnection ? 0.7 : 0.5,
+                            pathLength: 1,
+                          }}
+                          transition={{
+                            opacity: { duration: 0.6, delay: isAIConnection ? 2.5 + idx * 0.2 : 0.5 + idx * 0.15 },
+                            pathLength: { duration: 1.4, delay: isAIConnection ? 2.5 + idx * 0.2 : 0.5 + idx * 0.15 },
+                          }}
+                          filter="url(#glow)"
+                        />
+
+                        {/* Data packets - AI connections have only 1 packet with PINK color */}
+                        {isAIConnection ? (
+                          <motion.circle
+                            r={isAIServerConnection ? '5' : '4'}
+                            fill="rgba(236, 72, 153, 1)"
+                            filter="url(#strongGlow)"
+                            initial={{ opacity: 0 }}
+                            animate={{
+                              cx: [`${fromX}%`, `${toX}%`],
+                              cy: [`${fromY}%`, `${toY}%`],
+                              opacity: [0, 0.9, 1, 0.9, 0],
+                            }}
+                            transition={{
+                              duration: isAIServerConnection ? 2.8 : 3.2,
+                              delay: 3 + idx * 0.3,
+                              repeat: Infinity,
+                              repeatDelay: 2.0,
+                              ease: 'linear',
+                            }}
+                          />
+                        ) : (
+                          /* Regular connections have TWO turquoise packets */
+                          [0, 0.6].map((offset, packetIdx) => (
+                            <motion.circle
+                              key={`packet-${packetIdx}`}
+                              r={isServerConnection ? '4.5' : '3.5'}
+                              fill="rgba(8, 255, 193, 1)"
+                              filter="url(#strongGlow)"
+                              initial={{ opacity: 0 }}
+                              animate={{
+                                cx: [`${fromX}%`, `${toX}%`],
+                                cy: [`${fromY}%`, `${toY}%`],
+                                opacity: [0, 0.8, 1, 0.8, 0],
+                              }}
+                              transition={{
+                                duration: isServerConnection ? 2.2 : 2.8,
+                                delay: 1 + idx * 0.2 + offset * 1.3,
+                                repeat: Infinity,
+                                repeatDelay: isServerConnection ? 1.2 : 1.6,
+                                ease: 'linear',
+                              }}
+                            />
+                          ))
+                        )}
+                      </g>
+                    )
+                  })}
+                </svg>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Chain-breaking particle effect */}
+          <AnimatePresence>
+            {showParticles && (
+              <motion.div
+                className="pointer-events-none absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {particles.map(p => (
+                  <motion.div
+                    key={p.id}
+                    className="absolute h-1.5 w-1.5 rounded-full bg-orange-400"
+                    style={{
+                      left: `${p.x}%`,
+                      top: `${p.y}%`,
+                      willChange: 'transform, opacity',
+                      transform: 'translateZ(0)',
+                    }}
+                    initial={{ scale: 1, opacity: 1 }}
+                    animate={{
+                      x: p.vx,
+                      y: p.vy,
+                      scale: [1, 0.5, 0],
+                      opacity: [1, 0.8, 0],
+                    }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                  />
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
+
+AnimatedSaaSTransformation.displayName = 'AnimatedSaaSTransformation'
 
 export default AnimatedSaaSTransformation

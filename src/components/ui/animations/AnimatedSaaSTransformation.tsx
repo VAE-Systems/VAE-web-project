@@ -304,7 +304,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           title: 'Communication',
           systems: 'Chat • Files • Mail',
           position: { x: -30, y: -26 }, // Links oben - mit Sicherheitsabstand vom Rand
-          color: 'bg-blue-500/20 border-blue-600/60 text-blue-900 dark:text-blue-200',
+          color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
         },
         {
           id: 'crm',
@@ -320,7 +320,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           title: 'Knowledge Base',
           systems: 'Docs • Wiki • Playbooks',
           position: { x: -29.5, y: 26 }, // Minimal verschoben für SVG-Rendering
-          color: 'bg-emerald-500/20 border-emerald-600/60 text-emerald-900 dark:text-emerald-200',
+          color: 'bg-blue-500/20 border-blue-600/60 text-blue-900 dark:text-blue-200',
         },
         {
           id: 'governance',

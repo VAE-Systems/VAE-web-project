@@ -175,8 +175,8 @@
     --shadow-turquoise: 0 8px 32px hsla(var(--color-vae-turquoise), 0.15);
     --shadow-turquoise-glow: 0 0 40px hsla(var(--color-vae-turquoise), 0.2);
 
-    /* Modern Tailwind compatibility - Light Mode */
-    --color-vae-turquoise: 157 75% 42%;
+    /* Modern Tailwind compatibility - Light Mode: Dunkleres, kräftigeres Türkis */
+    --color-vae-turquoise: 157 85% 32%;
     --color-vae-black: 160 15% 12%;
 
     /* Background Colors */
@@ -476,7 +476,7 @@ body.using-keyboard *:focus {
 
   /* Strong outline button (consistent with secondary) */
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-xl border-2 border-vae-turquoise/60 bg-transparent px-6 py-2 text-sm font-semibold text-vae-turquoise transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker md:px-8 md:py-3 md:text-base;
+    @apply inline-flex items-center justify-center rounded-xl border-2 border-vae-turquoise/60 bg-transparent px-6 py-2 text-sm font-semibold text-vae-turquoise transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise md:px-8 md:py-3 md:text-base;
     transition-timing-function: var(--ease-spring-out);
   }
   .theme-light .btn-outline {

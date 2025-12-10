@@ -70,7 +70,7 @@
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-medium text-text-secondary transition-transform duration-300 hover:border-vae-turquoise/60 hover:bg-white/5 hover:text-vae-turquoise focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker md:px-6 md:py-3 md:text-base;
+  @apply inline-flex items-center justify-center rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-medium text-text-secondary transition-transform duration-300 hover:border-vae-turquoise/60 hover:bg-white/5 hover:text-vae-turquoise focus:outline-none focus:ring-2 focus:ring-vae-turquoise md:px-6 md:py-3 md:text-base;
   transition-timing-function: var(--ease-spring-out);
 }
 .theme-light .btn-outline {

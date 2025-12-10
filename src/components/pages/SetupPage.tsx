@@ -31,6 +31,7 @@ import {
   BookOpen,
   Check,
   CheckCircle2,
+  Cpu,
   Database,
   GraduationCap,
   Headphones,
@@ -107,13 +108,13 @@ const trustBadges = [
 const beforeAfterContent = {
   before: {
     label: 'Vorher',
-    title: 'Fragmentierte SaaS-Landschaft',
-    body: 'Viele Tools, hohe Kosten, Daten verstreut, Abhängigkeit von Anbietern.',
+    title: 'SaaS-Chaos, das abhängig macht',
+    body: 'Fragmentierte Tools, unkontrollierbare Kosten, Vendor-Lock-in, keine Datensouveränität, ständige Preiserhöhungen.',
   },
   after: {
     label: 'Nachher',
-    title: 'Einheitliche Open-Source-Plattform',
-    body: 'Alle Prozesse auf Ihrer Infrastruktur, vollständig in Ihrer Kontrolle.',
+    title: 'Einheitliche Plattform, die Ihnen gehört',
+    body: 'Open Source, DSGVO-konform, vollständig in Ihrer Kontrolle, AI-ready konzipiert, frei skalierbar.',
   },
 } as const
 
@@ -580,15 +581,27 @@ const SetupPage: React.FC = () => {
               </button>
             </MagneticButton>
           </div>
-          <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm font-semibold text-text-secondary">
-            {trustBadges.map(badge => (
-              <span
-                key={badge}
-                className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary"
-              >
-                <Check className="h-4 w-4 text-vae-turquoise" /> {badge}
-              </span>
-            ))}
+          <div className="mt-10 flex flex-col items-center gap-3 text-sm font-semibold text-text-secondary">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              {trustBadges.slice(0, 3).map(badge => (
+                <span
+                  key={badge}
+                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary sm:px-4"
+                >
+                  <Check className="h-4 w-4 flex-shrink-0 text-vae-turquoise" /> {badge}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              {trustBadges.slice(3).map(badge => (
+                <span
+                  key={badge}
+                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary sm:px-4"
+                >
+                  <Check className="h-4 w-4 flex-shrink-0 text-vae-turquoise" /> {badge}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -1586,59 +1599,103 @@ const AnimatedBeforeAfter: React.FC = () => {
     () => [
       {
         label: 'Mail',
-        x: 12,
-        y: 18,
+        x: 10,
+        y: 15,
         size: 58,
-        hue: 'bg-slate-200 text-slate-900 border-slate-300 dark:bg-white/15 dark:text-white dark:border-white/15',
+        hue: 'bg-amber-200 text-amber-900 border-amber-300 dark:bg-amber-500/30 dark:text-amber-200 dark:border-amber-500/50',
         icon: MessagesSquare,
+        hasWarning: false,
+        speed: 1.0,
       },
       {
         label: 'Chat',
-        x: 52,
-        y: 20,
+        x: 50,
+        y: 18,
         size: 52,
-        hue: 'bg-vae-turquoise/40 text-slate-900 border-vae-turquoise/50 dark:bg-vae-turquoise/25 dark:text-white dark:border-white/15',
+        hue: 'bg-amber-200 text-amber-900 border-amber-300 dark:bg-amber-500/30 dark:text-amber-200 dark:border-amber-500/50',
         icon: MessagesSquare,
+        hasWarning: true,
+        speed: 1.3,
       },
       {
         label: 'CRM',
-        x: 72,
-        y: 34,
+        x: 70,
+        y: 32,
         size: 50,
-        hue: 'bg-blue-100 text-slate-900 border-blue-200 dark:bg-white/10 dark:text-white dark:border-white/15',
+        hue: 'bg-purple-200 text-purple-900 border-purple-300 dark:bg-purple-500/30 dark:text-purple-200 dark:border-purple-500/50',
         icon: Users,
+        hasWarning: true,
+        speed: 0.9,
       },
       {
         label: 'Files',
-        x: 24,
-        y: 44,
+        x: 22,
+        y: 42,
         size: 54,
-        hue: 'bg-amber-200 text-amber-900 border-amber-300 dark:bg-amber-200/15 dark:text-amber-50 dark:border-white/15',
+        hue: 'bg-amber-200 text-amber-900 border-amber-300 dark:bg-amber-500/30 dark:text-amber-200 dark:border-amber-500/50',
         icon: Database,
+        hasWarning: false,
+        speed: 1.1,
+      },
+      {
+        label: 'Calendar',
+        x: 55,
+        y: 50,
+        size: 46,
+        hue: 'bg-indigo-200 text-indigo-900 border-indigo-300 dark:bg-indigo-500/30 dark:text-indigo-200 dark:border-indigo-500/50',
+        icon: GraduationCap,
+        hasWarning: true,
+        speed: 1.5,
       },
       {
         label: 'Tickets',
-        x: 40,
-        y: 64,
+        x: 35,
+        y: 65,
         size: 56,
-        hue: 'bg-sky-200 text-sky-900 border-sky-300 dark:bg-sky-200/15 dark:text-sky-50 dark:border-white/15',
+        hue: 'bg-purple-200 text-purple-900 border-purple-300 dark:bg-purple-500/30 dark:text-purple-200 dark:border-purple-500/50',
         icon: Headphones,
+        hasWarning: false,
+        speed: 0.85,
       },
       {
         label: 'Docs',
-        x: 70,
-        y: 62,
+        x: 68,
+        y: 65,
         size: 50,
-        hue: 'bg-purple-100 text-purple-900 border-purple-200 dark:bg-white/10 dark:text-white dark:border-white/15',
+        hue: 'bg-blue-200 text-blue-900 border-blue-300 dark:bg-blue-500/30 dark:text-blue-200 dark:border-blue-500/50',
         icon: BookOpen,
+        hasWarning: false,
+        speed: 1.2,
+      },
+      {
+        label: 'Analytics',
+        x: 5,
+        y: 55,
+        size: 48,
+        hue: 'bg-teal-200 text-teal-900 border-teal-300 dark:bg-teal-500/30 dark:text-teal-200 dark:border-teal-500/50',
+        icon: Layers,
+        hasWarning: true,
+        speed: 1.4,
+      },
+      {
+        label: 'Storage',
+        x: 75,
+        y: 48,
+        size: 52,
+        hue: 'bg-orange-200 text-orange-900 border-orange-300 dark:bg-orange-500/30 dark:text-orange-200 dark:border-orange-500/50',
+        icon: ServerCog,
+        hasWarning: true,
+        speed: 0.95,
       },
       {
         label: 'Automation',
-        x: 18,
-        y: 70,
+        x: 15,
+        y: 75,
         size: 64,
-        hue: 'bg-emerald-200 text-emerald-900 border-emerald-300 dark:bg-vae-turquoise/25 dark:text-white dark:border-white/15',
+        hue: 'bg-pink-200 text-pink-900 border-pink-300 dark:bg-pink-500/30 dark:text-pink-200 dark:border-pink-500/50',
         icon: SlidersHorizontal,
+        hasWarning: false,
+        speed: 1.0,
       },
     ],
     []
@@ -1650,21 +1707,36 @@ const AnimatedBeforeAfter: React.FC = () => {
         title: 'Kommunikation',
         subtitle: 'Chat | Files | Mail',
         icon: MessagesSquare,
+        color:
+          'bg-amber-500/30 border-amber-700/70 text-amber-950 dark:bg-amber-500/20 dark:border-amber-600/60 dark:text-amber-200',
       },
       {
         title: 'CRM & Kundenmanagement',
         subtitle: 'Kontakte | Deals | Support',
         icon: Users,
+        color:
+          'bg-purple-500/30 border-purple-700/70 text-purple-950 dark:bg-purple-500/20 dark:border-purple-600/60 dark:text-purple-200',
       },
       {
         title: 'Wissensbasis & Dokumentation',
         subtitle: 'Docs | Wiki | Playbooks',
         icon: BookOpen,
+        color:
+          'bg-blue-500/30 border-blue-700/70 text-blue-950 dark:bg-blue-500/20 dark:border-blue-600/60 dark:text-blue-200',
       },
       {
         title: 'Governance & Sicherheit',
         subtitle: 'SSO | Policies | Backups',
         icon: ShieldCheck,
+        color:
+          'bg-emerald-500/30 border-emerald-700/70 text-emerald-950 dark:bg-emerald-500/20 dark:border-emerald-600/60 dark:text-emerald-200',
+      },
+      {
+        title: 'Intelligente Automation',
+        subtitle: 'AI | Workflows | Automations',
+        icon: Cpu,
+        color:
+          'bg-pink-500/30 border-pink-700/70 text-pink-950 dark:bg-pink-500/20 dark:border-pink-600/60 dark:text-pink-200',
       },
     ],
     []
@@ -1745,38 +1817,61 @@ const AnimatedBeforeAfter: React.FC = () => {
     <div
       id="before-after-visual"
       ref={containerRef}
-      className="relative min-h-[380px] overflow-hidden rounded-3xl border border-vae-turquoise/25 bg-gradient-to-br from-vae-turquoise/10 via-white/10 to-white/5 p-7 shadow-xl backdrop-blur-sm dark:from-vae-turquoise/10 dark:via-white/10 dark:to-bg-dark md:p-8"
+      className={cn(
+        'relative min-h-[380px] overflow-hidden rounded-3xl border-2 p-7 shadow-xl backdrop-blur-sm md:p-8',
+        isBefore
+          ? 'border-red-500/40 bg-gradient-to-br from-red-50 via-white to-gray-50 dark:bg-gradient-to-br dark:from-red-500/10 dark:via-white/10 dark:to-bg-dark'
+          : 'border-vae-turquoise/40 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:bg-gradient-to-br dark:from-vae-turquoise/10 dark:via-white/10 dark:to-bg-dark'
+      )}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.06),transparent_60%)] dark:bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
       <div className="flex items-center justify-between gap-4">
         <motion.div
-          className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted"
+          className="whitespace-nowrap rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           Infrastructure-Design
         </motion.div>
-        <div className="flex items-center gap-2">
-          {(['before', 'after'] as const).map(key => (
-            <motion.button
-              key={key}
-              type="button"
-              onClick={() => setState(key)}
-              aria-pressed={state === key}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={cn(
-                'btn-outline px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]',
-                'transition-all duration-200',
-                state === key
-                  ? 'border-vae-turquoise/60 bg-vae-turquoise/20 text-white shadow-[0_10px_35px_rgba(8,255,193,0.25)]'
-                  : 'text-text-secondary hover:text-white'
-              )}
-            >
-              {key === 'before' ? 'Vorher' : 'Nachher'}
-            </motion.button>
-          ))}
+        <div className="flex items-center gap-3">
+          {(['before', 'after'] as const).map(key => {
+            const isActive = state === key
+            const isBeforeBtn = key === 'before'
+
+            return (
+              <MagneticButton key={key} intensity={0.08}>
+                <button
+                  type="button"
+                  onClick={() => setState(key)}
+                  aria-pressed={isActive}
+                  className={cn(
+                    'btn-outline px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em]',
+                    'transition-all duration-300 ease-out',
+                    // VORHER-Button (rot)
+                    isBeforeBtn &&
+                      isActive &&
+                      '!border-2 !border-red-500/60 !bg-gradient-to-br !from-red-500/20 !to-red-500/10 !text-red-400 !shadow-[0_0_20px_rgba(239,68,68,0.4),0_0_0_1px_rgba(239,68,68,0.3)]',
+                    isBeforeBtn &&
+                      !isActive &&
+                      '!border !border-white/10 !bg-white/5 !text-text-secondary hover:!-translate-y-1 hover:!border-red-500/70 hover:!bg-gradient-to-br hover:!from-red-500/25 hover:!to-red-500/15 hover:!text-red-400 hover:!shadow-[0_0_18px_rgba(239,68,68,0.35)]',
+                    // NACHHER-Button (grün)
+                    !isBeforeBtn &&
+                      isActive &&
+                      '!border-2 !border-vae-turquoise/60 !bg-gradient-to-br !from-vae-turquoise/20 !to-vae-turquoise/10 !text-vae-turquoise !shadow-[0_0_20px_rgba(8,255,193,0.4),0_0_0_1px_rgba(8,255,193,0.3)]',
+                    !isBeforeBtn &&
+                      !isActive &&
+                      '!border !border-white/10 !bg-white/5 !text-text-secondary hover:!-translate-y-1 hover:!border-vae-turquoise/70 hover:!bg-gradient-to-br hover:!from-vae-turquoise/25 hover:!to-vae-turquoise/15 hover:!text-vae-turquoise hover:!shadow-[0_0_18px_rgba(8,255,193,0.35)]',
+                    // Focus: rot bei Vorher-Button, grün bei Nachher-Button (ohne ring-offset)
+                    isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-red-500/60',
+                    !isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-vae-turquoise/60'
+                  )}
+                >
+                  {key === 'before' ? 'Vorher' : 'Nachher'}
+                </button>
+              </MagneticButton>
+            )
+          })}
         </div>
       </div>
 
@@ -1815,7 +1910,7 @@ const AnimatedBeforeAfter: React.FC = () => {
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             />
-            <span className="whitespace-nowrap">End-to-end orchestriert von VAE</span>
+            <span className="whitespace-nowrap">Orchestriert von VAE – Unabhängig betrieben von Ihnen</span>
             <motion.div
               className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent"
               initial={{ scaleX: 0 }}
@@ -1826,7 +1921,7 @@ const AnimatedBeforeAfter: React.FC = () => {
         </div>
 
         <motion.div
-          className="relative h-[480px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 md:h-[560px]"
+          className="relative h-[540px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 md:h-[640px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -1857,26 +1952,77 @@ const AnimatedBeforeAfter: React.FC = () => {
                     transition: { duration: 0.6, ease: 'easeInOut' },
                   }}
                 >
+                  {/* Fliegende Euro-Zeichen (zeigen: ständig steigende Kosten) */}
+                  {[
+                    { x: 45, y: 15, delay: 0.5 },
+                    { x: 78, y: 72, delay: 1.2 },
+                    { x: 32, y: 82, delay: 1.8 },
+                  ].map((pos, idx) => (
+                    <motion.div
+                      key={`euro-${idx}`}
+                      className="absolute text-2xl font-bold text-red-400/70 dark:text-red-300/60"
+                      style={{
+                        left: `${pos.x}%`,
+                        top: `${pos.y}%`,
+                      }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{
+                        opacity: [0, 0.7, 0.8, 0.7, 0],
+                        scale: [0.8, 1, 1.1, 1, 0.9],
+                        y: [0, -15, -30, -45, -60],
+                        x: [0, 3, -2, 4, -3],
+                        rotate: [0, 5, -5, 3, -3],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: pos.delay,
+                      }}
+                      aria-hidden
+                    >
+                      €
+                    </motion.div>
+                  ))}
+
                   {bubbleItems.map((bubble, idx) => {
                     const baseScale = bubble.size / 60
                     const BubbleIcon = bubble.icon
+                    const duration = 8 + idx * 0.4
+                    const adjustedDuration = duration * (bubble.speed ?? 1.0)
                     return (
                       <motion.div
                         key={bubble.label}
                         className={cn(
-                          'absolute flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-[12px] font-semibold shadow-[0_10px_30px_rgba(0,0,0,0.15)] backdrop-blur-md',
+                          'absolute flex items-center gap-2 rounded-full border px-3 py-2 text-[12px] font-semibold shadow-[0_10px_30px_rgba(0,0,0,0.15)] backdrop-blur-md',
+                          bubble.hasWarning ? 'border-red-400/40' : 'border-white/15',
                           bubble.hue
                         )}
                         aria-hidden
                         style={{
                           left: `${bubble.x}%`,
                           top: `${bubble.y}%`,
+                          zIndex: bubble.hasWarning ? 10 : 5,
                         }}
                         animate={{
-                          opacity: [0.85, 0.95, 0.85],
+                          opacity: [0.9, 1.0, 0.9],
                           scale: [baseScale * 0.95, baseScale * 1.05, baseScale * 0.95],
-                          x: [0, 3, -3, 2, -2, 0],
-                          y: [0, -6, 4, -3, 5, 0],
+                          x: [
+                            0,
+                            3 * (bubble.speed ?? 1.0),
+                            -3 * (bubble.speed ?? 1.0),
+                            2 * (bubble.speed ?? 1.0),
+                            -2 * (bubble.speed ?? 1.0),
+                            0,
+                          ],
+                          y: [
+                            0,
+                            -6 * (bubble.speed ?? 1.0),
+                            4 * (bubble.speed ?? 1.0),
+                            -3 * (bubble.speed ?? 1.0),
+                            5 * (bubble.speed ?? 1.0),
+                            0,
+                          ],
                           rotate: [0, 2, -2, 1, -1, 0],
                         }}
                         exit={{
@@ -1892,7 +2038,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                           },
                         }}
                         transition={{
-                          duration: 8 + idx * 0.4,
+                          duration: adjustedDuration,
                           repeat: Infinity,
                           repeatType: 'mirror',
                           ease: 'easeInOut',
@@ -1901,6 +2047,24 @@ const AnimatedBeforeAfter: React.FC = () => {
                       >
                         <BubbleIcon className="h-3.5 w-3.5" aria-hidden />
                         <span className="truncate">{bubble.label}</span>
+                        {bubble.hasWarning && (
+                          <motion.span
+                            className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500/80 text-[10px] text-white shadow-[0_2px_8px_rgba(239,68,68,0.5)]"
+                            initial={{ scale: 0 }}
+                            animate={{
+                              scale: [1, 1.1, 1],
+                              opacity: [0.8, 1, 0.8],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: 'easeInOut',
+                            }}
+                            title="Keine Integration"
+                          >
+                            ⚠
+                          </motion.span>
+                        )}
                       </motion.div>
                     )
                   })}
@@ -1955,15 +2119,16 @@ const AnimatedBeforeAfter: React.FC = () => {
                     />
                     <div className="relative space-y-4">
                       <motion.div
-                        className="flex items-center justify-between gap-3 rounded-2xl border border-vae-turquoise/30 bg-white/5 px-4 py-3 text-vae-turquoise"
+                        className="flex items-center justify-between gap-3 rounded-2xl border-2 border-vae-turquoise/40 bg-gradient-to-r from-vae-turquoise/15 to-vae-turquoise/5 px-4 py-3 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.3)]"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.2 }}
                       >
-                        <div className="flex items-center gap-2 text-sm font-semibold">
-                          <Layers className="h-5 w-5" /> Unified Platform Stack
+                        <div className="flex items-center gap-2 text-sm font-bold">
+                          <Layers className="h-5 w-5" />
+                          <span>Unified Platform Stack</span>
                         </div>
-                        <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-vae-turquoise">
+                        <span className="rounded-full border-2 border-vae-turquoise/40 bg-vae-turquoise/20 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-vae-turquoise shadow-[0_0_10px_rgba(8,255,193,0.2)]">
                           Orchestriert
                         </span>
                       </motion.div>{' '}
@@ -1976,69 +2141,83 @@ const AnimatedBeforeAfter: React.FC = () => {
                             transition: { staggerChildren: 0.08 },
                           },
                         }}
-                        className="space-y-3"
+                        className="space-y-2"
                       >
                         {stackLayers.map((layer, idx) => {
                           const Icon = layer.icon
                           return (
-                            <motion.div
-                              key={layer.title}
-                              variants={{
-                                hidden: { opacity: 0, x: -20, scale: 0.95 },
-                                visible: { opacity: 1, x: 0, scale: 1 },
-                              }}
-                              transition={{
-                                duration: 0.5,
-                                ease: [0.22, 1, 0.36, 1],
-                                delay: idx * 0.1,
-                              }}
-                              whileHover={{
-                                scale: 1.02,
-                                transition: { duration: 0.2 },
-                              }}
-                              className="relative cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-bg-darker/60 px-4 py-3 text-white shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
-                            >
+                            <React.Fragment key={layer.title}>
                               <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5"
-                                aria-hidden
-                                animate={{
-                                  opacity: [0.5, 0.7, 0.5],
-                                  x: ['-100%', '100%'],
+                                variants={{
+                                  hidden: { opacity: 0, x: -20, scale: 0.95 },
+                                  visible: { opacity: 1, x: 0, scale: 1 },
                                 }}
                                 transition={{
-                                  opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
-                                  x: { duration: 3, repeat: Infinity, ease: 'linear', delay: idx * 0.3 },
+                                  duration: 0.5,
+                                  ease: [0.22, 1, 0.36, 1],
+                                  delay: idx * 0.1,
                                 }}
-                              />
-                              <div className="relative flex items-start gap-3">
-                                <motion.span
-                                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise"
-                                  whileHover={{
-                                    scale: 1.1,
-                                    rotate: 5,
-                                    backgroundColor: 'rgba(45, 214, 175, 0.25)',
-                                  }}
-                                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                                >
-                                  <Icon className="h-5 w-5" />
-                                </motion.span>
-                                <div className="space-y-0.5">
-                                  <p className="text-sm font-semibold leading-tight">{layer.title}</p>
-                                  <p className="text-xs text-text-secondary">{layer.subtitle}</p>
-                                </div>
-                                {idx === 0 && (
-                                  <motion.span
-                                    className="ml-auto flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-vae-turquoise"
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.4, delay: 0.5 }}
-                                    whileHover={{ scale: 1.05 }}
-                                  >
-                                    <Database className="h-3.5 w-3.5" /> Unified Storage
-                                  </motion.span>
+                                whileHover={{
+                                  scale: 1.02,
+                                  transition: { duration: 0.2 },
+                                }}
+                                className={cn(
+                                  'relative cursor-pointer overflow-hidden rounded-2xl border px-4 py-3 text-white shadow-[0_14px_40px_rgba(0,0,0,0.35)]',
+                                  layer.color
                                 )}
-                              </div>
-                            </motion.div>
+                              >
+                                <motion.div
+                                  className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5"
+                                  aria-hidden
+                                  animate={{
+                                    opacity: [0.5, 0.7, 0.5],
+                                    x: ['-100%', '100%'],
+                                  }}
+                                  transition={{
+                                    opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+                                    x: { duration: 3, repeat: Infinity, ease: 'linear', delay: idx * 0.3 },
+                                  }}
+                                />
+                                <div className="relative flex items-start gap-3">
+                                  <motion.span
+                                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10"
+                                    whileHover={{
+                                      scale: 1.1,
+                                      rotate: 5,
+                                      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                                    }}
+                                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                                  >
+                                    <Icon className="h-5 w-5" />
+                                  </motion.span>
+                                  <div className="space-y-0.5">
+                                    <p className="text-sm font-semibold leading-tight">{layer.title}</p>
+                                    <p className="text-xs text-text-secondary">{layer.subtitle}</p>
+                                  </div>
+                                  {idx === 0 && (
+                                    <motion.span
+                                      className="ml-auto flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-vae-turquoise"
+                                      initial={{ opacity: 0, scale: 0.8 }}
+                                      animate={{ opacity: 1, scale: 1 }}
+                                      transition={{ duration: 0.4, delay: 0.5 }}
+                                      whileHover={{ scale: 1.05 }}
+                                    >
+                                      <Database className="h-3.5 w-3.5" /> Unified Storage
+                                    </motion.span>
+                                  )}
+                                </div>
+                              </motion.div>
+                              {idx < stackLayers.length - 1 && (
+                                <motion.div
+                                  className="relative -my-1 mx-auto h-2 w-px"
+                                  initial={{ opacity: 0, scaleY: 0 }}
+                                  animate={{ opacity: 0.3, scaleY: 1 }}
+                                  transition={{ duration: 0.4, delay: idx * 0.1 + 0.3 }}
+                                >
+                                  <div className="h-full w-full bg-gradient-to-b from-vae-turquoise/50 to-vae-turquoise/50" />
+                                </motion.div>
+                              )}
+                            </React.Fragment>
                           )
                         })}
                       </motion.div>
@@ -2048,8 +2227,8 @@ const AnimatedBeforeAfter: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.6 }}
                       >
-                        <span>SSO, Policies, Backups integriert</span>
-                        <span className="text-vae-turquoise">VAE orchestriert</span>
+                        <span>Ihre Infrastruktur</span>
+                        <span className="text-vae-turquoise">Ihre Kontrolle</span>
                       </motion.div>
                     </div>
                   </motion.div>

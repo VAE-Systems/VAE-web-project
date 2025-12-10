@@ -138,6 +138,30 @@ export const saasToolCategories: SaaSToolCategory[] = [
       },
     ],
   },
+  {
+    id: 'automation',
+    title: 'Automation & Workflows',
+    tools: [
+      {
+        id: 'zapier',
+        name: 'Zapier Professional',
+        pricingModel: 'flat',
+        flatMonthlyPrice: 49,
+      },
+      {
+        id: 'make',
+        name: 'Make (Integromat) Pro',
+        pricingModel: 'flat',
+        flatMonthlyPrice: 29,
+      },
+      {
+        id: 'n8n-cloud',
+        name: 'n8n Cloud Starter',
+        pricingModel: 'flat',
+        flatMonthlyPrice: 20,
+      },
+    ],
+  },
 ]
 
 export const flattenedSaasTools = saasToolCategories.flatMap(category => category.tools)

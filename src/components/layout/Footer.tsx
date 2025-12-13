@@ -238,6 +238,7 @@ const Footer: React.FC = () => {
             <p className="text-sm text-text-secondary">
               &copy; {new Date().getFullYear()} VAE Systems UG (haftungsbeschränkt)
             </p>
+            <p className="text-xs text-text-muted">Built by VAE Systems – Julian Goertz Dini</p>
             <p className="text-xs text-text-muted md:text-[11px]">
               Inhalte und Gestaltung dieser Website sind urheberrechtlich geschützt.
               <br className="hidden md:block" />

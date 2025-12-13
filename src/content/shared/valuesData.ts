@@ -132,30 +132,6 @@ export const VALUES_DATA: Value[] = [
       external: false,
     },
   },
-  {
-    id: 'skalierbarkeit',
-    title: 'Skalierbarkeit als Fundament — Ideen brauchen Raum',
-    intro:
-      'Wir planen Plattformen so, dass sie heute effizient laufen und morgen zehnmal so viele Nutzer:innen tragen. Kapazitäten, Datenflüsse und Betriebsprozesse werden von Anfang an gemessen. So wächst Ihr System ohne Re-Write und ohne Überraschungskosten. Skalierbarkeit ist das Fundament, nicht die Kür.',
-    benefits: [
-      'Kapazitätsplanung orientiert sich an Ihren Drei- bis Fünf-Jahres-Zielen',
-      'Cloud-native Patterns kommen nur zum Einsatz, wenn sie echten Nutzen bringen',
-      'Observability und Alerting starten mit dem ersten Deploy',
-      'Runbooks und Handover sichern den Betrieb im eigenen Team',
-    ],
-    deepDive:
-      'Viele Plattformen sind nach dem ersten Wachstumsschub am Limit. Jede neue Kund:in macht das System instabil und das Team reagiert nur noch auf Feuer. Das ist vermeidbar, wenn Skalierungsziele von Anfang an Teil des Scope sind.\n\nWir definieren daher Szenarien: doppelter Traffic, neue Märkte, regulatorische Anforderungen. Für jedes Szenario planen wir Architektur, Kosten und Betrieb durch – inklusive Lasttests und Observability-KPIs.\n\nSkalierbarkeit bedeutet nicht überall Microservices, sondern bewusste Entscheidungen. Manchmal reicht ein modulärer Monolith, manchmal braucht es Event-Streaming. Wichtig ist, dass Sie jederzeit wissen, wie Sie wachsen können.',
-    seoKeywords: [
-      'skalierbare Cloud-Architektur',
-      'Kapazitätsplanung IT',
-      'Observability ab Tag eins',
-      'zukunftssichere Plattformen',
-    ],
-    link: {
-      text: 'Weiterlesen: Skalierung planen',
-      href: '/wissen/skalierbare-architektur',
-    },
-  },
 ]
 
 export const VISION_CONTENT = {

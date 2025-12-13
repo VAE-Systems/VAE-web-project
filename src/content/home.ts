@@ -226,10 +226,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       '3 realistische Migrations-Optionen (inkl. „Status quo beibehalten")',
       'Schriftlicher Fahrplan mit konkreten nächsten Schritten',
     ],
-    audience: [
-      'Teams am Anfang ihrer Open-Source- und KI-Reise',
-      'Organisationen, die noch unsicher über die beste Strategie sind',
-    ],
+    audience: ['Startphase (Open Source / KI)', 'Unsicher über nächste Schritte'],
     cta: { label: 'Mehr erfahren', href: '/services/beratung' },
   },
   {
@@ -246,10 +243,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       'Daten-Migration aus bestehenden Systemen (falls relevant)',
       'Team-Training & Dokumentation für Admins und Key-User',
     ],
-    audience: [
-      'Teams, die bereit für den Wechsel von SaaS zu Open Source sind',
-      'Unternehmen, die ein professionelles, dokumentiertes Setup wollen',
-    ],
+    audience: ['SaaS-Ablösung geplant', 'Professionelles Setup + Doku'],
     cta: { label: 'Setup Details', href: '/services/setup' },
   },
   {
@@ -259,17 +253,14 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     subtitle: 'Betrieb & Optimierung',
     badge: 'KONTINUIERLICH',
     description:
-      'Ihre Infrastruktur läuft – wir sorgen dafür, dass sie es bleibt. Updates, Security, Monitoring und KI-Optimierung: Wir sind Ihr IT-Rückgrat, während Ihr Team sich auf Produkt und Kund:innen konzentriert.',
+      'Wir sorgen dafür, dass Ihre Infrastruktur läuft – während Ihr Team sich auf Produkt und Kund:innen konzentriert.',
     inclusions: [
-      'Monatliche Updates, Security-Patches & geplanter Wartungsrahmen',
-      '24/7-Monitoring, Backups & Wiederherstellungskonzepte',
-      'KI-Workflow-Optimierung & Automatisierung von Routineaufgaben',
-      'Prioritäts-Support mit klar definierten Reaktionszeiten',
+      'Updates & Security-Patches',
+      'Monitoring, Backups & Wiederherstellung',
+      'KI-Optimierung & Automatisierung',
+      'Prioritäts-Support',
     ],
-    audience: [
-      'Teams ohne eigene IT-Abteilung oder mit knappen Kapazitäten',
-      'Unternehmen mit Fokus auf Kernbusiness statt Infrastruktur-Betrieb',
-    ],
+    audience: ['Keine eigene IT-Abteilung', 'Fokus auf Kernbusiness'],
     cta: { label: 'Betreuung Details', href: '/services/betreuung' },
   },
 ] as const

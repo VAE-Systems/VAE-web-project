@@ -78,9 +78,12 @@ const ServicesOverviewSection: React.FC = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.45em] text-vae-turquoise/80">Unser Ansatz</p>
           <h2 className="fluid-h2 mt-3 font-semibold text-text-light">Drei Wege, mit uns zu arbeiten</h2>
           <p className="mt-4 text-base text-text-secondary">Von Beratung bis Langzeit-Partnerschaft</p>
+          <p className="mt-2 text-sm text-text-secondary/80">
+            Oft als Abfolge genutzt – alle Bausteine sind auch einzeln buchbar.
+          </p>
         </div>
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {servicesOverviewCards.map(card => (
+          {servicesOverviewCards.map((card, index) => (
             <article
               key={card.id}
               className="border-border-primary/50 bg-bg-primary flex h-full flex-col rounded-3xl border p-6 backdrop-blur-lg transition-all hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_20px_70px_-40px_rgba(var(--vae-turquoise-rgb),0.8)] dark:border-white/10 dark:bg-white/[0.08]"
@@ -90,42 +93,49 @@ const ServicesOverviewSection: React.FC = () => {
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
                     <Icon name={card.icon} size={22} />
                   </div>
-                  <span className="rounded-full border border-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.3em] text-text-secondary/60">
+                  <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
                     {card.badge}
                   </span>
                 </div>
+                <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
+                  Etappe {index + 1}
+                </span>
               </div>
               <div className="border-b-2 border-vae-turquoise/30 pb-3 dark:border-vae-turquoise/40">
                 <h3 className="text-2xl font-bold text-text-light">{card.title}</h3>
                 {'subtitle' in card && card.subtitle && (
-                  <p className="mt-1 text-sm font-medium text-text-secondary">{card.subtitle}</p>
+                  <p className="mt-1 text-sm font-semibold text-text-secondary/90">{card.subtitle}</p>
                 )}
               </div>
-              <div className="mt-4 grid flex-1 grid-rows-[1fr_auto] gap-6 text-sm text-text-secondary">
-                <div className="flex flex-col gap-5">
-                  <p>{card.description}</p>
+              <div className="mt-4 flex flex-1 flex-col gap-6 text-sm text-text-secondary">
+                <p className="line-clamp-4 text-sm leading-relaxed text-text-secondary">{card.description}</p>
+
+                <div className="grid gap-6 sm:grid-cols-2">
                   <div className="space-y-3">
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Was enthalten</p>
                     <ul className="space-y-1.5">
-                      {card.inclusions.map(item => (
+                      {card.inclusions.slice(0, 4).map(item => (
                         <li key={item} className="flex items-start gap-2">
-                          <span className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise" aria-hidden />
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-vae-turquoise" aria-hidden />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                </div>
-                <div className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>
-                  <ul className="space-y-1.5">
-                    {card.audience.map(item => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/40" aria-hidden />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+
+                  <div className="space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>
+                    <div className="flex flex-wrap gap-2">
+                      {card.audience.slice(0, 3).map(item => (
+                        <span
+                          key={item}
+                          className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[12px] font-medium leading-none text-text-secondary"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
               <MagneticButton className="mt-auto w-full pt-4">

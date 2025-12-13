@@ -16,7 +16,7 @@ export const impressumContent: ImpressumContent = {
   sections: [
     {
       id: 'legal',
-      title: 'Angaben gemäß § 5 TMG',
+      title: 'Angaben gemäß § 2 DDG (Digitale-Dienste-Gesetz)',
       body: (
         <>
           VAE Systems UG (haftungsbeschränkt)
@@ -37,6 +37,20 @@ export const impressumContent: ImpressumContent = {
           Julian Darius Goertz Dini
           <br />
           Jakob Dünnebeil
+        </>
+      ),
+    },
+    {
+      id: 'responsible',
+      title: 'Inhaltlich verantwortlich gemäß § 18 Abs. 2 MStV',
+      body: (
+        <>
+          Julian Darius Goertz Dini
+          <br />
+          Jakob Dünnebeil
+          <br />
+          <br />
+          Anschrift siehe oben
         </>
       ),
     },
@@ -77,10 +91,10 @@ export const impressumContent: ImpressumContent = {
       title: 'Haftung für Inhalte',
       body: (
         <>
-          Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
-          Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
-          übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf
-          eine rechtswidrige Tätigkeit hinweisen.
+          Als Diensteanbieter sind wir gemäß § 2 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+          verantwortlich. Nach §§ 3 bis 5 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
+          gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+          Tätigkeit hinweisen.
         </>
       ),
     },

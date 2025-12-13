@@ -58,17 +58,19 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
             {title}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-text-secondary sm:text-lg">{description}</p>
-          <MagneticButton className="mt-10 inline-flex w-full sm:w-auto">
-            <CtaLink
-              ctaId={primary.ctaId}
-              ctx={{ fromPage: 'home', intent: 'final-cta' }}
-              variant="custom"
-              className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
-            >
-              <CalendarClock className="h-5 w-5" />
-              {primary.label}
-            </CtaLink>
-          </MagneticButton>
+          <div className="mt-10 flex justify-center">
+            <MagneticButton className="w-full sm:w-auto">
+              <CtaLink
+                ctaId={primary.ctaId}
+                ctx={{ fromPage: 'home', intent: 'final-cta' }}
+                variant="custom"
+                className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+              >
+                <CalendarClock className="h-5 w-5" />
+                {primary.label}
+              </CtaLink>
+            </MagneticButton>
+          </div>
           {note && <p className="mt-4 text-xs text-text-muted">{note}</p>}
         </div>
       </div>

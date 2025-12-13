@@ -142,41 +142,60 @@ export const homeProcessTeaserSteps: HomeProcessTeaserStep[] = [
 export interface OpenSourcePoint {
   title: string
   description: string
+  bullets?: string[]
 }
 
-export const openSourcePainPoints: OpenSourcePoint[] = [
+export interface OpenSourcePointWithBullets {
+  title: string
+  description: string
+  bullets?: string[]
+}
+
+export const openSourcePainPoints: OpenSourcePointWithBullets[] = [
   {
-    title: 'Jede Skalierung kostet Sie mehr',
-    description:
-      'Mehr Mitarbeiter, mehr API-Calls – jeden Monat steigt die Rechnung. Und wenn der Anbieter die Preise erhöht? Sie zahlen oder kündigen. Andere Optionen haben Sie nicht.',
+    title: 'Steigende Kosten bei Wachstum',
+    description: 'Mehr Nutzer = höhere Rechnung. Jeden Monat.',
+    bullets: ['API-Calls skalieren linear mit Kosten', 'Preiserhöhung? Sie zahlen oder kündigen'],
   },
   {
-    title: 'Keine Kontrolle über Ihre eigene Infrastruktur',
-    description:
-      'Ihre Daten, Prozesse und KI-Workflows liegen bei US-Anbietern. Features verschwinden, APIs ändern sich, Preise steigen. Sie können nur reagieren – nicht mitentscheiden.',
+    title: 'Keine Kontrolle über Ihre Daten',
+    description: 'Ihre Infrastruktur bei US-Anbietern. Sie reagieren nur.',
+    bullets: ['Features verschwinden ohne Vorwarnung', 'API-Änderungen zwingen zu Refactoring'],
   },
   {
-    title: 'DSGVO-Risiko liegt bei Ihnen',
-    description:
-      'US-Anbieter können Ihre Daten an Behörden weitergeben (Cloud Act). Das rechtliche Risiko tragen Sie. Nicht der Anbieter.',
+    title: 'DSGVO-Risiko trägt Ihr Unternehmen',
+    description: 'US-Anbieter geben Daten weiter (Cloud Act).',
+    bullets: ['Das rechtliche Risiko liegt bei Ihnen', 'Nicht beim SaaS-Anbieter'],
   },
 ] as const
 
-export const openSourceAdvantages: OpenSourcePoint[] = [
+export const openSourceAdvantages: OpenSourcePointWithBullets[] = [
   {
-    title: 'Signifikante Kosteneinsparungen',
+    title: 'Einheitliche Plattform – AI-ready konzipiert',
     description:
-      'Open-Source-Alternativen für Arbeitssysteme, Fachanwendungen und KI statt teurer SaaS-Lizenzen – von Kollaboration und CRM bis hin zu Automatisierung und Analytics. Wo heute Proprietär-APIs dominieren, setzen wir zunehmend auf selbst betriebene Open-Source-Modelle (z. B. Llama, Mistral) mit voller Kostenkontrolle. Self-hosted bedeutet: einmalig in Setup und Infrastruktur investieren, danach bleiben die Betriebskosten planbar, ohne Vendor-Preisspirale.',
+      'Alle Systeme integriert und einheitlich dokumentiert. Mit der richtigen Anfangsinvestition senken Sie Folgekosten für KI-Optimierung – und bleiben langfristig wettbewerbsfähig.',
+    bullets: [
+      'CRM, Dokumentenverwaltung, KI-Workflows aus einer Hand',
+      'Einheitliches System reduziert Folgekosten für KI-Optimierung dramatisch',
+    ],
   },
   {
-    title: 'Volle Kontrolle',
-    description:
-      'Ihre Daten, Ihre KI-Modelle, Ihr Server, Ihre Regeln. Keine versteckten Preiserhöhungen, keine Feature-Entfernungen. Digitale Souveränität bei Systemen UND KI.',
+    title: 'Planbare Kosten statt monatlicher Abos',
+    description: 'Einmalige Setup-Investition, danach planbare Betriebskosten.',
+    bullets: ['Keine Vendor-Preisspirale', 'Keine SaaS-Überraschungen'],
   },
   {
     title: 'DSGVO-konform by Design',
-    description:
-      'Server in Deutschland, volle Datenhoheit bei Arbeitssystemen und KI-Inferenz, keine US-Cloud-Transfers. Rechtssicherheit ohne Kompromisse.',
+    description: 'Server in Deutschland. Volle Datenhoheit.',
+    bullets: ['Keine US-Cloud-Transfers bei Systemen und KI', 'Rechtssicherheit ohne Kompromisse'],
+  },
+  {
+    title: 'Erweiterbar durch selfhosted AI',
+    description: 'Eigene KI-Modelle statt proprietärer APIs. Fundament für KI-Optimierung.',
+    bullets: [
+      'Llama, Mistral, oder andere Open-Source-Modelle integrierbar',
+      'Mit Startinvestition meiste aus KI rausholen – ohne API-Kosten',
+    ],
   },
 ] as const
 

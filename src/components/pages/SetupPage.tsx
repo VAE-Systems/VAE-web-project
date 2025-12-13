@@ -1818,23 +1818,23 @@ const AnimatedBeforeAfter: React.FC = () => {
       id="before-after-visual"
       ref={containerRef}
       className={cn(
-        'relative min-h-[380px] overflow-hidden rounded-3xl border-2 p-7 shadow-xl backdrop-blur-sm md:p-8',
+        'relative min-h-[380px] overflow-hidden rounded-2xl border p-4 shadow-xl backdrop-blur-sm sm:rounded-3xl sm:border-2 sm:p-7 md:p-8',
         isBefore
           ? 'border-red-500/40 bg-gradient-to-br from-red-50 via-white to-gray-50 dark:bg-gradient-to-br dark:from-red-500/10 dark:via-white/10 dark:to-bg-dark'
           : 'border-vae-turquoise/40 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:bg-gradient-to-br dark:from-vae-turquoise/10 dark:via-white/10 dark:to-bg-dark'
       )}
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.06),transparent_60%)] dark:bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-4">
         <motion.div
-          className="whitespace-nowrap rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-text-muted"
+          className="whitespace-nowrap rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-text-muted sm:px-3 sm:text-[11px] sm:tracking-[0.3em]"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           Infrastructure-Design
         </motion.div>
-        <div className="flex items-center gap-3">
+        <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
           {(['before', 'after'] as const).map(key => {
             const isActive = state === key
             const isBeforeBtn = key === 'before'
@@ -1846,7 +1846,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                   onClick={() => setState(key)}
                   aria-pressed={isActive}
                   className={cn(
-                    'btn-outline px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em]',
+                    'btn-outline flex-1 whitespace-nowrap px-3 py-2 text-[10px] font-semibold uppercase tracking-wider sm:flex-initial sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.2em]',
                     'transition-all duration-300 ease-out',
                     // VORHER-Button (rot)
                     isBeforeBtn &&
@@ -1899,20 +1899,20 @@ const AnimatedBeforeAfter: React.FC = () => {
             </motion.div>
           </AnimatePresence>
           <motion.div
-            className="flex items-center gap-3 pt-3 text-sm text-gray-600 dark:text-text-secondary"
+            className="flex items-center gap-2 pt-3 text-xs text-gray-600 dark:text-text-secondary sm:gap-3 sm:text-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <motion.div
-              className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent"
+              className="hidden h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent sm:block"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             />
-            <span className="whitespace-nowrap">Orchestriert von VAE – Unabhängig betrieben von Ihnen</span>
+            <span className="text-center">Orchestriert von VAE – Unabhängig betrieben von Ihnen</span>
             <motion.div
-              className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent"
+              className="hidden h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/50 to-transparent sm:block"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -1921,7 +1921,7 @@ const AnimatedBeforeAfter: React.FC = () => {
         </div>
 
         <motion.div
-          className="relative h-[540px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 md:h-[640px]"
+          className="relative h-[600px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 sm:h-[620px] sm:p-4 md:h-[660px] lg:h-[700px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -2103,7 +2103,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                       duration: 0.6,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="relative w-full max-w-[360px] rounded-3xl border border-vae-turquoise/30 bg-gradient-to-b from-bg-darker/60 via-bg-darker/70 to-bg-dark/80 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.45)] backdrop-blur"
+                    className="relative w-full max-w-[92%] rounded-2xl border border-vae-turquoise/30 bg-gradient-to-b from-bg-darker/60 via-bg-darker/70 to-bg-dark/80 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.45)] backdrop-blur sm:max-w-[400px] sm:rounded-3xl sm:p-6"
                   >
                     <motion.div
                       className="absolute inset-0 rounded-3xl border border-white/10"
@@ -2128,7 +2128,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                           <Layers className="h-5 w-5" />
                           <span>Unified Platform Stack</span>
                         </div>
-                        <span className="rounded-full border-2 border-vae-turquoise/40 bg-vae-turquoise/20 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-vae-turquoise shadow-[0_0_10px_rgba(8,255,193,0.2)]">
+                        <span className="rounded-full border-2 border-vae-turquoise/40 bg-vae-turquoise/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-vae-turquoise shadow-[0_0_10px_rgba(8,255,193,0.2)] sm:px-3 sm:py-1 sm:text-[11px] sm:tracking-[0.24em]">
                           Orchestriert
                         </span>
                       </motion.div>{' '}
@@ -2141,7 +2141,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                             transition: { staggerChildren: 0.08 },
                           },
                         }}
-                        className="space-y-2"
+                        className="space-y-1 sm:space-y-2"
                       >
                         {stackLayers.map((layer, idx) => {
                           const Icon = layer.icon
@@ -2196,20 +2196,21 @@ const AnimatedBeforeAfter: React.FC = () => {
                                   </div>
                                   {idx === 0 && (
                                     <motion.span
-                                      className="ml-auto flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-vae-turquoise"
+                                      className="ml-auto hidden items-center gap-1.5 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-vae-turquoise sm:flex sm:gap-2 sm:px-2.5 sm:py-1 sm:text-[11px] sm:tracking-[0.2em]"
                                       initial={{ opacity: 0, scale: 0.8 }}
                                       animate={{ opacity: 1, scale: 1 }}
                                       transition={{ duration: 0.4, delay: 0.5 }}
                                       whileHover={{ scale: 1.05 }}
                                     >
-                                      <Database className="h-3.5 w-3.5" /> Unified Storage
+                                      <Database className="h-3 w-3 sm:h-3.5 sm:w-3.5" />{' '}
+                                      <span className="hidden sm:inline">Unified Storage</span>
                                     </motion.span>
                                   )}
                                 </div>
                               </motion.div>
                               {idx < stackLayers.length - 1 && (
                                 <motion.div
-                                  className="relative -my-1 mx-auto h-2 w-px"
+                                  className="relative -my-1 mx-auto h-1 w-px sm:h-2"
                                   initial={{ opacity: 0, scaleY: 0 }}
                                   animate={{ opacity: 0.3, scaleY: 1 }}
                                   transition={{ duration: 0.4, delay: idx * 0.1 + 0.3 }}

@@ -25,6 +25,7 @@ type SystemCluster = {
   title: string
   systems: string
   position: { x: number; y: number }
+  mobilePosition?: { x: number; y: number } // Optional für Mobile-spezifisch
   color: string
 }
 
@@ -53,6 +54,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     const [visibleToolsCount, setVisibleToolsCount] = useState(6)
     const [hasAutoPlayed, setHasAutoPlayed] = useState(false)
     const particleTimerRef = useRef<number | null>(null)
+    const autoPlayTimerRef = useRef<number | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { once: true, amount: 0.5 })
 
@@ -90,7 +92,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     // Auto-Play: Nur einmal beim ersten Laden
     useEffect(() => {
       if (prefersReducedMotion || !isInView || hasAutoPlayed) return
-      const timer = setTimeout(() => {
+      autoPlayTimerRef.current = window.setTimeout(() => {
         setHasAutoPlayed(true)
         setShowParticles(true)
         particleTimerRef.current = window.setTimeout(() => {
@@ -100,7 +102,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
         }, 800)
       }, autoPlayDelay)
       return () => {
-        clearTimeout(timer)
+        if (autoPlayTimerRef.current) {
+          clearTimeout(autoPlayTimerRef.current)
+          autoPlayTimerRef.current = null
+        }
         if (particleTimerRef.current) {
           clearTimeout(particleTimerRef.current)
           particleTimerRef.current = null
@@ -149,40 +154,47 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
 
     // Memoize handlers to prevent re-renders
     const handleProblemClick = useCallback(() => {
-      // Stoppe Auto-Play bei manueller Interaktion
+      // Brich SOFORT alle laufenden Animationen ab
       setHasAutoPlayed(true)
+      if (autoPlayTimerRef.current) {
+        clearTimeout(autoPlayTimerRef.current)
+        autoPlayTimerRef.current = null
+      }
       if (particleTimerRef.current) {
         clearTimeout(particleTimerRef.current)
         particleTimerRef.current = null
       }
-      setState('problem')
+      // Sofortiger State-Wechsel ohne Animation - IMMER ausführbar
       setShowParticles(false)
+      setState('problem')
+      setVisibleToolsCount(6) // Reset Tool-Count
     }, [])
 
     const handleSolutionClick = useCallback(() => {
-      // Stoppe Auto-Play bei manueller Interaktion
+      // Brich SOFORT alle laufenden Animationen ab
       setHasAutoPlayed(true)
+      if (autoPlayTimerRef.current) {
+        clearTimeout(autoPlayTimerRef.current)
+        autoPlayTimerRef.current = null
+      }
       if (particleTimerRef.current) {
         clearTimeout(particleTimerRef.current)
         particleTimerRef.current = null
       }
-      setShowParticles(true)
-      particleTimerRef.current = window.setTimeout(() => {
-        setState('solution')
-        setShowParticles(false)
-        particleTimerRef.current = null
-      }, 800)
+      // Sofortiger State-Wechsel - keine Verzögerung
+      setState('solution')
+      setShowParticles(false)
     }, [])
 
     // Alle SaaS Tools - Realistischer Stack-Wachstum (11 Tools total)
     const allSaasTools = useMemo<SaaSToolCard[]>(
       () => [
-        // Phase 1: Start-Stack (6 Tools) - mit Sicherheitsabstand vom Rand
+        // Phase 1: Start-Stack (6 Tools) - responsive Positionen
         {
           id: 'slack',
           name: 'Slack',
           cost: '€8/mo',
-          position: { x: 40, y: 32 },
+          position: { x: 40, y: 25 }, // Mobile: mehr Y-Spread
           hasChain: true,
           chainTarget: 'notion',
         },
@@ -190,7 +202,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'notion',
           name: 'Notion',
           cost: '€10/mo',
-          position: { x: 50, y: 28 },
+          position: { x: 50, y: 20 }, // Mobile: höher
           hasChain: true,
           chainTarget: 'hubspot',
         },
@@ -198,7 +210,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'hubspot',
           name: 'HubSpot',
           cost: '€50/mo',
-          position: { x: 60, y: 32 },
+          position: { x: 60, y: 25 }, // Mobile: mehr Y-Spread
           hasChain: true,
           chainTarget: 'asana',
         },
@@ -206,7 +218,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'asana',
           name: 'Asana',
           cost: '€12/mo',
-          position: { x: 58, y: 54 },
+          position: { x: 58, y: 50 }, // Mobile: mittiger Bereich
           hasChain: true,
           chainTarget: 'figma',
         },
@@ -214,7 +226,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'figma',
           name: 'Figma',
           cost: '€15/mo',
-          position: { x: 42, y: 54 },
+          position: { x: 42, y: 50 }, // Mobile: mittiger Bereich
           hasChain: true,
           chainTarget: 'drive',
         },
@@ -222,7 +234,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'drive',
           name: 'G Drive',
           cost: '€6/mo',
-          position: { x: 50, y: 62 },
+          position: { x: 50, y: 60 }, // Mobile: tiefer
           hasChain: true,
           chainTarget: 'slack',
         },
@@ -232,7 +244,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'mailchimp',
           name: 'Mailchimp',
           cost: '€25/mo',
-          position: { x: 36, y: 40 },
+          position: { x: 36, y: 35 }, // Mobile: vertikal gestreckter
           hasChain: true,
           chainTarget: 'salesforce',
         },
@@ -240,7 +252,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'salesforce',
           name: 'Salesforce',
           cost: '€75/mo',
-          position: { x: 60, y: 32 },
+          position: { x: 60, y: 25 }, // Mobile: höher
           hasChain: true,
           chainTarget: 'zendesk',
         }, // Ersetzt HubSpot Position
@@ -248,7 +260,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'zapier',
           name: 'Zapier',
           cost: '€20/mo',
-          position: { x: 50, y: 42 },
+          position: { x: 50, y: 37 }, // Mobile: vertikal gestreckter
           hasChain: true,
           chainTarget: 'mailchimp',
         },
@@ -258,7 +270,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'zendesk',
           name: 'Zendesk',
           cost: '€49/mo',
-          position: { x: 44, y: 48 },
+          position: { x: 44, y: 45 }, // Mobile: mittiger Bereich
           hasChain: true,
           chainTarget: 'dropbox',
         },
@@ -266,7 +278,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'dropbox',
           name: 'Dropbox',
           cost: '€16/mo',
-          position: { x: 56, y: 48 },
+          position: { x: 56, y: 45 }, // Mobile: mittiger Bereich
           hasChain: true,
           chainTarget: 'intercom',
         },
@@ -274,7 +286,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'intercom',
           name: 'Intercom',
           cost: '€39/mo',
-          position: { x: 50, y: 56 },
+          position: { x: 50, y: 55 }, // Mobile: tiefer
           hasChain: true,
           chainTarget: 'zapier',
         },
@@ -295,15 +307,16 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
       [allSaasTools, visibleToolsCount]
     )
 
-    // System Clusters - sicher im sichtbaren Bereich positioniert
+    // System Clusters - responsive Positionen
     const systemClusters = useMemo<SystemCluster[]>(
       () => [
         {
           id: 'communication',
           icon: MessageSquare,
-          title: 'Communication',
+          title: 'Communicate',
           systems: 'Chat • Files • Mail',
-          position: { x: -30, y: -26 }, // Links oben - mit Sicherheitsabstand vom Rand
+          position: { x: -30, y: -26 },
+          mobilePosition: { x: -27, y: -30 },
           color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
         },
         {
@@ -311,7 +324,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           icon: Users,
           title: 'CRM & Contacts',
           systems: 'Contacts • Deals • Support',
-          position: { x: 30.5, y: -25.8 }, // Minimal verschoben für SVG-Rendering
+          position: { x: 30.5, y: -25.8 },
+          mobilePosition: { x: 27, y: -30 },
           color: 'bg-purple-500/20 border-purple-600/60 text-purple-900 dark:text-purple-200',
         },
         {
@@ -319,7 +333,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           icon: BookOpen,
           title: 'Knowledge Base',
           systems: 'Docs • Wiki • Playbooks',
-          position: { x: -29.5, y: 26 }, // Minimal verschoben für SVG-Rendering
+          position: { x: -29.5, y: 26 },
+          mobilePosition: { x: -27, y: 18 },
           color: 'bg-blue-500/20 border-blue-600/60 text-blue-900 dark:text-blue-200',
         },
         {
@@ -327,7 +342,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           icon: Shield,
           title: 'Governance',
           systems: 'Security • Compliance • Audit',
-          position: { x: 30, y: 25.8 }, // Minimal verschoben für SVG-Rendering
+          position: { x: 30, y: 25.8 },
+          mobilePosition: { x: 27, y: 18 },
           color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
         },
         {
@@ -335,7 +351,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           icon: Zap,
           title: 'AI Agents',
           systems: 'Automation • Analysis • Support',
-          position: { x: 0.5, y: 38 }, // Minimal verschoben für SVG-Rendering-Fix
+          position: { x: 0.5, y: 38 },
+          mobilePosition: { x: 0, y: 38 },
           color: 'bg-pink-500/20 border-pink-600/60 text-pink-900 dark:text-pink-200',
         },
       ],
@@ -450,38 +467,38 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     return (
       <div
         ref={containerRef}
-        className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/85 via-bg-darker to-bg-dark p-6 shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)]"
+        className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-bg-dark/85 via-bg-darker to-bg-dark p-4 shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)] sm:rounded-3xl sm:p-6"
       >
-        <div className="mb-5 flex items-center justify-between">
-          <div className="space-y-2">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] sm:text-base sm:tracking-[0.24em]">
+        <div className="mb-3 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex-shrink-0 space-y-0.5">
+            <p className="text-[10px] font-bold uppercase leading-tight tracking-wider sm:text-base sm:tracking-[0.24em]">
               <span className="text-red-400">SaaS</span>
-              <span className="mx-2 text-text-secondary/40">vs.</span>
+              <span className="mx-1 text-text-secondary/40 sm:mx-2">vs.</span>
               <span className="text-emerald-400">Open Source</span>
             </p>
-            <p className="text-xs font-medium uppercase tracking-wider text-text-secondary/70 sm:text-sm">
+            <p className="text-[9px] font-medium uppercase leading-tight tracking-wide text-text-secondary/70 sm:text-sm">
               VAE orchestriert
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-3">
             <MagneticButton intensity={0.08}>
               <button
                 type="button"
                 onClick={handleProblemClick}
                 className={cn(
-                  'group flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ease-out hover:scale-105',
+                  'group flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-bold transition-all duration-300 ease-out hover:scale-105 sm:gap-2 sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-sm',
                   isProblem
-                    ? 'border-2 border-orange-400/60 bg-gradient-to-br from-orange-500/20 to-red-500/10 text-orange-200 shadow-[0_0_20px_rgba(251,146,60,0.4),0_0_0_1px_rgba(251,146,60,0.3)]'
+                    ? 'border-2 border-orange-600/80 bg-gradient-to-br from-orange-600/40 to-red-600/30 text-orange-950 shadow-[0_0_20px_rgba(251,146,60,0.4),0_0_0_1px_rgba(251,146,60,0.3)] dark:border-orange-400/60 dark:from-orange-500/20 dark:to-red-500/10 dark:text-orange-200'
                     : 'border border-white/10 bg-white/5 text-text-secondary hover:border-orange-400/40 hover:bg-orange-500/5 hover:text-orange-300 hover:shadow-[0_0_15px_rgba(251,146,60,0.2)]'
                 )}
               >
                 <AlertCircle
                   className={cn(
-                    'h-4 w-4 transition-transform duration-300 ease-out',
+                    'h-3 w-3 transition-transform duration-300 ease-out sm:h-4 sm:w-4',
                     isProblem ? 'rotate-0' : 'group-hover:rotate-12'
                   )}
                 />
-                Das Problem
+                <span className="whitespace-nowrap">Das Problem</span>
               </button>
             </MagneticButton>
             <MagneticButton intensity={0.08}>
@@ -489,7 +506,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 type="button"
                 onClick={handleSolutionClick}
                 className={cn(
-                  'group flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ease-out hover:scale-105',
+                  'group flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-bold transition-all duration-300 ease-out hover:scale-105 sm:gap-2 sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-sm',
                   !isProblem
                     ? 'border-2 border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.4),0_0_0_1px_rgba(8,255,193,0.3)]'
                     : 'border border-white/10 bg-white/5 text-text-secondary hover:border-vae-turquoise/40 hover:bg-vae-turquoise/5 hover:text-vae-turquoise hover:shadow-[0_0_15px_rgba(8,255,193,0.2)]'
@@ -497,11 +514,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
               >
                 <Lightbulb
                   className={cn(
-                    'h-4 w-4 transition-transform duration-300 ease-out',
+                    'h-3 w-3 transition-transform duration-300 ease-out sm:h-4 sm:w-4',
                     !isProblem ? 'rotate-0' : 'group-hover:rotate-12'
                   )}
                 />
-                Die Lösung
+                <span className="whitespace-nowrap">Die Lösung</span>
                 {isProblem && (
                   <motion.span
                     initial={{ scale: 0, opacity: 0 }}
@@ -532,13 +549,13 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 transition={{ duration: 0.4 }}
                 className="absolute inset-0"
               >
-                <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
+                <div className="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:justify-center sm:gap-3">
                   {/* Fixer Teil */}
-                  <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">SaaS-Chaos, das</h2>
+                  <h2 className="text-xl font-bold text-text-light sm:text-3xl lg:text-4xl">SaaS-Chaos, das</h2>
 
                   {/* Rotierender Teil mit Overlay */}
                   <div
-                    className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
+                    className="relative inline-block text-center text-xl font-bold sm:text-3xl lg:text-4xl"
                     style={{ minHeight: '1.2em' }}
                   >
                     {/* Invisible spacer - hält Container-Breite konstant */}
@@ -588,13 +605,13 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 transition={{ duration: 0.4 }}
                 className="absolute inset-0"
               >
-                <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
+                <div className="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:justify-center sm:gap-3">
                   {/* Fixer Teil */}
-                  <h2 className="text-2xl font-bold text-text-light sm:text-3xl lg:text-4xl">Infrastruktur, die</h2>
+                  <h2 className="text-xl font-bold text-text-light sm:text-3xl lg:text-4xl">Infrastruktur, die</h2>
 
                   {/* Rotierender Teil mit Overlay */}
                   <div
-                    className="relative inline-block text-2xl font-bold sm:text-3xl lg:text-4xl"
+                    className="relative inline-block text-center text-xl font-bold sm:text-3xl lg:text-4xl"
                     style={{ minHeight: '1.2em' }}
                   >
                     {/* Invisible spacer - hält Container-Breite konstant */}
@@ -635,7 +652,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
         </div>
 
         <div
-          className="relative h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-[560px] md:h-[600px] lg:h-[640px]"
+          className="relative h-[580px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-[600px] md:h-[640px] lg:h-[680px]"
           style={{ contain: 'layout style paint' }}
         >
           {/* Background effects */}
@@ -667,13 +684,15 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.4 }}
-                style={{ backfaceVisibility: 'hidden' }}
+                style={{
+                  backfaceVisibility: 'hidden',
+                }}
               >
                 {/* Chaotic SaaS Tool Cards */}
                 {saasTools.map((tool, index) => (
                   <motion.div
                     key={tool.id}
-                    className="absolute w-[120px] max-w-[40vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-2.5 py-2 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10"
+                    className="absolute w-[150px] max-w-[45vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-3 py-2.5 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10"
                     style={{
                       left: `${tool.position.x}%`,
                       top: `${tool.position.y}%`,
@@ -704,10 +723,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div>
-                        <p className="text-xs font-semibold text-orange-900 dark:text-orange-100">{tool.name}</p>
-                        <p className="text-[10px] text-orange-800 dark:text-orange-300/70">{tool.cost}</p>
+                        <p className="text-sm font-semibold text-orange-900 dark:text-orange-100">{tool.name}</p>
+                        <p className="text-xs text-orange-800 dark:text-orange-300/70">{tool.cost}</p>
                       </div>
-                      <Zap className="h-4 w-4 text-orange-700 dark:text-orange-400" />
+                      <Zap className="h-5 w-5 text-orange-700 dark:text-orange-400" />
                     </div>
                   </motion.div>
                 ))}
@@ -811,14 +830,16 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.4 }}
-                style={{ backfaceVisibility: 'hidden' }}
+                style={{
+                  backfaceVisibility: 'hidden',
+                }}
               >
-                {/* Central Server Icon - Exakt zentriert */}
+                {/* Central Server Icon - Zentriert */}
                 <motion.div
                   className="group absolute cursor-pointer"
                   style={{
-                    left: '50%',
-                    top: '50%',
+                    left: typeof window !== 'undefined' && window.innerWidth < 640 ? '50.1%' : '49.9%',
+                    top: typeof window !== 'undefined' && window.innerWidth < 640 ? '46%' : '50%',
                     marginLeft: '-60px',
                     marginTop: '-60px',
                     zIndex: 3,
@@ -846,7 +867,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                       willChange: 'transform',
                     }}
                   />
-                  <div className="rounded-[20px] border-[3px] border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 via-vae-turquoise/15 to-vae-turquoise/10 p-4 shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-5 lg:p-6">
+                  <div className="rounded-[20px] border-[3px] border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 via-vae-turquoise/15 to-vae-turquoise/10 p-5 shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-6 lg:p-7">
                     <div className="flex flex-col items-center gap-1.5 sm:gap-2">
                       <Server className="h-10 w-10 text-vae-turquoise drop-shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
                       <div className="text-center">
@@ -861,11 +882,14 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   </div>
                 </motion.div>
 
-                {/* System Clusters - fixe Positionen mit Blur-Glow */}
+                {/* System Clusters - responsive Positionen mit Blur-Glow */}
                 {systemClusters.map(cluster => {
                   const Icon = cluster.icon
-                  const centerX = 50 + cluster.position.x
-                  const centerY = 50 + cluster.position.y
+                  // Use mobilePosition on small screens (<640px), else desktop position
+                  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+                  const activePosition = isMobile && cluster.mobilePosition ? cluster.mobilePosition : cluster.position
+                  const centerX = 50 + activePosition.x
+                  const centerY = 50 + activePosition.y
 
                   // Individuelle Glow-Farben pro Cluster
                   const glowColors = {
@@ -891,11 +915,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                       style={{
                         left: `${centerX}%`,
                         top: `${centerY}%`,
-                        width: 'clamp(95px, 22vw, 130px)',
-                        height: 'clamp(95px, 22vw, 130px)',
-                        padding: 'clamp(6px, 1.4vw, 10px)',
-                        marginLeft: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
-                        marginTop: 'calc(-0.5 * clamp(95px, 22vw, 130px))',
+                        width: 'clamp(90px, 21vw, 130px)',
+                        height: 'clamp(90px, 21vw, 130px)',
+                        padding: 'clamp(6px, 1.3vw, 10px)',
+                        marginLeft: 'calc(-0.5 * clamp(90px, 21vw, 130px))',
+                        marginTop: 'calc(-0.5 * clamp(90px, 21vw, 130px))',
                         zIndex: 2,
                         willChange: 'transform',
                         transform: 'translateZ(0)',
@@ -912,7 +936,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                       }}
                     >
                       {/* Blur-Glow Background per Cluster */}
-                      <div
+                      <motion.div
                         className="absolute inset-0 -z-10 transition-transform duration-[150ms] ease-out group-hover:scale-105"
                         style={{
                           background: `radial-gradient(100% 100%, ${glowColors[cluster.id as keyof typeof glowColors]} 0%, rgba(0,0,0,0) 70%)`,
@@ -920,6 +944,24 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                           transform: 'scale(1.6)',
                           willChange: 'transform',
                         }}
+                        animate={
+                          isAIAgents
+                            ? {
+                                opacity: [0.6, 1, 0.6],
+                                scale: [1.6, 1.75, 1.6],
+                              }
+                            : {}
+                        }
+                        transition={
+                          isAIAgents
+                            ? {
+                                duration: 2.5,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                                delay: baseDelay + 1.5,
+                              }
+                            : {}
+                        }
                       />
                       <div
                         style={{
@@ -1044,6 +1086,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   {systemConnections.map((conn, idx) => {
                     const serverX = 50
                     const serverY = 50
+                    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
 
                     let fromX, fromY, toX, toY
 
@@ -1053,19 +1096,23 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
 
                       fromX = serverX
                       fromY = serverY
-                      // SVG-Koordinaten = CSS-Position (da transform: translate(-50%, -50%))
-                      // Die Bubble steht visuell bei (50 + x%, 50 + y%) NACH der Transformation
-                      toX = 50 + toCluster.position.x
-                      toY = 50 + toCluster.position.y
+                      // Use responsive position
+                      const toPos = isMobile && toCluster.mobilePosition ? toCluster.mobilePosition : toCluster.position
+                      toX = 50 + toPos.x
+                      toY = 50 + toPos.y
                     } else {
                       const fromCluster = systemClusters.find(c => c.id === conn.from)
                       const toCluster = systemClusters.find(c => c.id === conn.to)
                       if (!fromCluster || !toCluster) return null
 
-                      fromX = 50 + fromCluster.position.x
-                      fromY = 50 + fromCluster.position.y
-                      toX = 50 + toCluster.position.x
-                      toY = 50 + toCluster.position.y
+                      // Use responsive positions
+                      const fromPos =
+                        isMobile && fromCluster.mobilePosition ? fromCluster.mobilePosition : fromCluster.position
+                      const toPos = isMobile && toCluster.mobilePosition ? toCluster.mobilePosition : toCluster.position
+                      fromX = 50 + fromPos.x
+                      fromY = 50 + fromPos.y
+                      toX = 50 + toPos.x
+                      toY = 50 + toPos.y
                     }
 
                     const isServerConnection = conn.from === 'server'

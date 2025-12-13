@@ -71,9 +71,9 @@ export const PARTNERS: PartnerProfile[] = [
     expertise: ['UX/UI Design', 'Reaktive Oberflächen', 'Prototyping'],
     location: 'Rhein-Neckar',
     portrait: {
-      src: '/images/optimized/ausgeschnitten-Hände-Programmieren-am-Laptop-bw.webp',
-      fallback: '/images/optimized/ausgeschnitten-Hände-Programmieren-am-Laptop-bw.png',
-      alt: 'Symbolbild (s/w) für UX/UI Design bei VAE Systems',
+      src: '/images/optimized/Tolga-Bippus-mitSchatten.webp',
+      fallback: '/images/optimized/Tolga-Bippus-mitSchatten.png',
+      alt: 'Tolga Bippus – UX/UI Design bei VAE Systems',
     },
     linkedin: {
       text: 'LinkedIn-Profil von Tolga Bippus',

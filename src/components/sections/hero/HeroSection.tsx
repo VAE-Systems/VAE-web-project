@@ -125,8 +125,8 @@ const HeroSection: React.FC = () => {
         </React.Suspense>
       )}
 
-      {/* 🌑 LAYER 1: Dark Overlay (Gradient) */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-transparent dark:from-black/35" />
+      {/* 🌑 LAYER 1: Dark Overlay (Gradient) - im Light Mode viel schwächer */}
+      <div className="via-black/2 pointer-events-none absolute inset-0 bg-gradient-to-b from-black/5 to-transparent dark:from-black/35" />
 
       {/* 🌫️ LAYER 2: Noise & Glow */}
       <div className="pointer-events-none absolute inset-0 opacity-50 mix-blend-screen">
@@ -139,7 +139,9 @@ const HeroSection: React.FC = () => {
           {/* ── MESSAGING BLOCK ── */}
           <div className="space-y-6">
             {/* Eyebrow: Brand Slogan */}
-            <p className="text-xs font-semibold uppercase tracking-[0.45em] text-vae-turquoise/80">{heroEyebrow}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.45em] text-vae-turquoise/90 sm:text-sm">
+              {heroEyebrow}
+            </p>
 
             {/* H1: Zwei Zeilen, zweite in Brand-Color */}
             <h1 className="fluid-h1 text-balance font-bold text-text-light">
@@ -148,7 +150,7 @@ const HeroSection: React.FC = () => {
             </h1>
 
             {/* Typewriter: Rotierende USPs */}
-            <div className="min-h-[2.5rem] text-xl font-semibold text-vae-turquoise md:text-2xl lg:text-3xl">
+            <div className="min-h-[2.5rem] text-xl font-bold text-vae-turquoise md:text-2xl lg:text-4xl">
               <span
                 className="inline-grid justify-center"
                 aria-live="polite"
@@ -165,7 +167,7 @@ const HeroSection: React.FC = () => {
             </div>
 
             {/* Description */}
-            <p className="mx-auto max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
+            <p className="mx-auto max-w-3xl text-base font-medium leading-relaxed text-text-secondary sm:text-lg lg:text-xl">
               {heroDescription}
             </p>
           </div>

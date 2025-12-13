@@ -1,3 +1,4 @@
+import { BOOKING_LINKS } from '@/config/booking'
 /**
  * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃  BERATUNG PAGE                                                            ┃
@@ -27,7 +28,6 @@
  * └── FAQ + Final CTA
  */
 
-import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/content/shared/faqData'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -256,7 +256,7 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: 2–6 Monate (je nach Umfang)',
     investment: 'Investition: Individuell nach Projektumfang',
-    cta: { label: 'Full-Service anfragen', href: '/contact#booking' },
+    cta: { label: 'Full-Service anfragen', href: BOOKING_LINKS.ERSTBERATUNG },
   },
   {
     option: 'Option B',
@@ -271,7 +271,7 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: 1–2 Wochen',
     investment: 'Investition: Individuell nach Projektumfang',
-    cta: { label: 'Strategiegespräch buchen', href: '/contact#booking' },
+    cta: { label: 'Strategiegespräch buchen', href: BOOKING_LINKS.STRATEGIC_ADVISORY },
   },
   {
     option: 'Option C',
@@ -286,7 +286,7 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: Nach Umfang abgestimmt',
     investment: 'Investition: Individuell nach Projektumfang',
-    cta: { label: 'Hybrides Modell besprechen', href: '/contact#booking' },
+    cta: { label: 'Hybrides Modell besprechen', href: BOOKING_LINKS.ERSTBERATUNG },
   },
   {
     option: 'Option D',
@@ -300,7 +300,7 @@ const phases: PhaseCard[] = [
     ],
     duration: 'Dauer: 3–12 Monate (Retainer)',
     investment: 'Investition: Monatlicher Retainer (individuell)',
-    cta: { label: 'Retainer-Details anfragen', href: '/contact#booking' },
+    cta: { label: 'Retainer-Details anfragen', href: BOOKING_LINKS.RETAINER_PLANUNG },
     secondary: { label: 'Zur langfristigen Betreuung', href: '/leistungen/betreuung' },
   },
 ]
@@ -1011,13 +1011,25 @@ const BeratungPage: React.FC = () => {
 
                 {phase.cta && (
                   <MagneticButton intensity={0.08} scaleEffect glowEffect>
-                    <Link
-                      to={phase.cta.href}
-                      className="btn-convert group/cta flex w-full items-center justify-center gap-2 text-sm"
-                    >
-                      {phase.cta.label}
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
-                    </Link>
+                    {/^(https?:\/\/)/.test(phase.cta.href) ? (
+                      <a
+                        href={phase.cta.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="btn-convert group/cta flex w-full items-center justify-center gap-2 text-sm"
+                      >
+                        {phase.cta.label}
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
+                      </a>
+                    ) : (
+                      <Link
+                        to={phase.cta.href}
+                        className="btn-convert group/cta flex w-full items-center justify-center gap-2 text-sm"
+                      >
+                        {phase.cta.label}
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
+                      </Link>
+                    )}
                   </MagneticButton>
                 )}
 

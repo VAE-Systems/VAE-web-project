@@ -17,6 +17,7 @@
  */
 
 import AnimatedSaaSTransformation from '@/components/ui/animations/AnimatedSaaSTransformation'
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
 import { motion } from 'framer-motion'
 import { ArrowRight, Lightbulb } from 'lucide-react'
@@ -34,9 +35,11 @@ const WhyOpenSourceSection: React.FC = () => {
     >
       <div className="container-vae">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Warum Open Source?</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">
+            Infrastruktur neu gedacht
+          </p>
           <h2 className="fluid-h2 mt-3 text-balance font-semibold text-text-light">
-            Warum wechseln Unternehmen von SaaS zu Open Source?
+            Warum Unternehmen auf selbstgehostete Systeme setzen
           </h2>
         </div>
 
@@ -56,11 +59,10 @@ const WhyOpenSourceSection: React.FC = () => {
               <Lightbulb className="h-5 w-5 text-vae-turquoise" />
             </div>
             <div className="space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Vision</p>
-              <p className="text-base leading-relaxed text-text-secondary">
-                Wir wollen eine Zukunft, in der Open-Source-Infrastruktur für jedes Unternehmen zugänglich ist. VAE
-                dokumentiert Standards, sorgt für transparente Prozesse und liefert echte Datensouveränität – damit Ihre
-                Systeme nicht nur günstiger, sondern auch planbar und kontrollierbar bleiben.
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-vae-turquoise">Vision</p>
+              <p className="text-base font-semibold leading-relaxed text-text-light">
+                Open-Source-Infrastruktur für jedes Unternehmen zugänglich machen – mit Standards, Transparenz und
+                echter Datensouveränität.
               </p>
             </div>
           </div>
@@ -68,46 +70,68 @@ const WhyOpenSourceSection: React.FC = () => {
 
         <div className="mt-12 grid gap-10 md:grid-cols-2">
           <article className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-[0_30px_120px_-50px_rgba(5,212,182,0.35)] backdrop-blur-sm">
-            <header className="mb-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-red-400 dark:text-red-300">
+            <header className="mb-8">
+              <p className="text-xs font-bold uppercase tracking-[0.35em] text-red-400 dark:text-red-300">
                 Das Problem
               </p>
-              <h3 className="text-2xl font-semibold text-text-light">Das SaaS-Dilemma</h3>
+              <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Das SaaS-Dilemma</h3>
             </header>
-            <ul className="space-y-5 text-sm leading-relaxed text-text-secondary">
+            <ul className="divide-y divide-white/5">
               {openSourcePainPoints.map(point => (
-                <li key={point.title}>
-                  <p className="font-semibold text-text-light">{point.title}</p>
-                  <p>{point.description}</p>
+                <li key={point.title} className="py-6 first:pt-0 last:pb-0">
+                  <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
+                    {point.title}
+                    <span className="mt-2 block h-[2px] w-10 rounded-full bg-red-400/50" />
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
+                    {point.description}
+                  </p>
                 </li>
               ))}
             </ul>
           </article>
           <article className="rounded-3xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-8 backdrop-blur-sm">
-            <header className="mb-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">Die Lösung</p>
-              <h3 className="text-2xl font-semibold text-text-light">Die Open-Source-Alternative</h3>
+            <header className="mb-8">
+              <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise/90">Die Lösung</p>
+              <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Die VAE-Alternative</h3>
             </header>
-            <ul className="space-y-5 text-sm leading-relaxed text-text-secondary">
+            <ul className="divide-y divide-vae-turquoise/15">
               {openSourceAdvantages.map(point => (
-                <li key={point.title}>
-                  <p className="font-semibold text-text-light">{point.title}</p>
-                  <p>{point.description}</p>
+                <li key={point.title} className="py-6 first:pt-0 last:pb-0">
+                  <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
+                    {point.title}
+                    <span className="mt-2 block h-[2px] w-10 rounded-full bg-vae-turquoise/60" />
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
+                    {point.description}
+                  </p>
                 </li>
               ))}
             </ul>
           </article>
         </div>
 
-        {/* CTA */}
-        <div className="mt-12 text-center">
-          <Link
-            to="/leistungen/strategie"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise/80"
-          >
-            Kostenlose Erstberatung vereinbaren
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+        {/* CTAs */}
+        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+          <MagneticButton className="w-full sm:w-auto">
+            <Link
+              to="/leistungen/strategie"
+              className="btn-primary flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-semibold sm:w-auto"
+            >
+              <span className="sm:hidden">Strategie ansehen</span>
+              <span className="hidden sm:inline">Erfahren Sie mehr über eine Digitalisierungsstrategie</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </MagneticButton>
+          <MagneticButton className="w-full sm:w-auto">
+            <Link
+              to="/leistungen/infrastruktur"
+              className="btn-outline flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-semibold sm:w-auto"
+            >
+              Mehr zu Infrastruktur-Design
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </MagneticButton>
         </div>
       </div>
     </section>

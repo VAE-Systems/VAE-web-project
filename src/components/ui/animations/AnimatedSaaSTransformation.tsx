@@ -13,6 +13,7 @@ type SaaSToolCard = {
   id: string
   name: string
   position: { x: number; y: number }
+  mobilePosition?: { x: number; y: number }
   cost: string
   hasChain?: boolean
   chainTarget?: string
@@ -189,12 +190,13 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     // Alle SaaS Tools - Realistischer Stack-Wachstum (11 Tools total)
     const allSaasTools = useMemo<SaaSToolCard[]>(
       () => [
-        // Phase 1: Start-Stack (6 Tools) - responsive Positionen
+        // Phase 1: Start-Stack (6 Tools) - organischer verteilt
         {
           id: 'slack',
           name: 'Slack',
           cost: '€8/mo',
-          position: { x: 40, y: 25 }, // Mobile: mehr Y-Spread
+          position: { x: 28, y: 22 }, // Cluster links oben
+          mobilePosition: { x: 19, y: 22 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'notion',
         },
@@ -202,7 +204,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'notion',
           name: 'Notion',
           cost: '€10/mo',
-          position: { x: 50, y: 20 }, // Mobile: höher
+          position: { x: 38, y: 18 }, // Nahe bei Slack
+          mobilePosition: { x: 29, y: 18 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'hubspot',
         },
@@ -210,7 +213,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'hubspot',
           name: 'HubSpot',
           cost: '€50/mo',
-          position: { x: 60, y: 25 }, // Mobile: mehr Y-Spread
+          position: { x: 68, y: 28 }, // Rechts oben, isolierter
+          mobilePosition: { x: 59, y: 28 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'asana',
         },
@@ -218,7 +222,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'asana',
           name: 'Asana',
           cost: '€12/mo',
-          position: { x: 58, y: 50 }, // Mobile: mittiger Bereich
+          position: { x: 62, y: 52 }, // Rechts mittig
+          mobilePosition: { x: 53, y: 52 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'figma',
         },
@@ -226,7 +231,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'figma',
           name: 'Figma',
           cost: '€15/mo',
-          position: { x: 42, y: 50 }, // Mobile: mittiger Bereich
+          position: { x: 35, y: 55 }, // Links unten, Cluster mit Drive
+          mobilePosition: { x: 26, y: 55 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'drive',
         },
@@ -234,7 +240,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'drive',
           name: 'G Drive',
           cost: '€6/mo',
-          position: { x: 50, y: 60 }, // Mobile: tiefer
+          position: { x: 45, y: 62 }, // Nahe bei Figma
+          mobilePosition: { x: 36, y: 62 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'slack',
         },
@@ -244,7 +251,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'mailchimp',
           name: 'Mailchimp',
           cost: '€25/mo',
-          position: { x: 36, y: 35 }, // Mobile: vertikal gestreckter
+          position: { x: 25, y: 38 }, // Links mittig, etwas isoliert
+          mobilePosition: { x: 16, y: 38 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'salesforce',
         },
@@ -252,15 +260,17 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'salesforce',
           name: 'Salesforce',
           cost: '€75/mo',
-          position: { x: 60, y: 25 }, // Mobile: höher
+          position: { x: 70, y: 26 }, // Ersetzt HubSpot Position (leicht verschoben)
+          mobilePosition: { x: 61, y: 26 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'zendesk',
-        }, // Ersetzt HubSpot Position
+        },
         {
           id: 'zapier',
           name: 'Zapier',
           cost: '€20/mo',
-          position: { x: 50, y: 37 }, // Mobile: vertikal gestreckter
+          position: { x: 52, y: 42 }, // Zentral, verbindet alles
+          mobilePosition: { x: 43, y: 42 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'mailchimp',
         },
@@ -270,7 +280,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'zendesk',
           name: 'Zendesk',
           cost: '€49/mo',
-          position: { x: 44, y: 45 }, // Mobile: mittiger Bereich
+          position: { x: 48, y: 28 }, // Oben mittig
+          mobilePosition: { x: 39, y: 28 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'dropbox',
         },
@@ -278,7 +289,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'dropbox',
           name: 'Dropbox',
           cost: '€16/mo',
-          position: { x: 56, y: 45 }, // Mobile: mittiger Bereich
+          position: { x: 58, y: 68 }, // Rechts unten
+          mobilePosition: { x: 49, y: 68 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'intercom',
         },
@@ -286,7 +298,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           id: 'intercom',
           name: 'Intercom',
           cost: '€39/mo',
-          position: { x: 50, y: 55 }, // Mobile: tiefer
+          position: { x: 72, y: 58 }, // Rechts, weiter weg
+          mobilePosition: { x: 63, y: 58 }, // Mobile: weiter links
           hasChain: true,
           chainTarget: 'zapier',
         },
@@ -689,47 +702,54 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 }}
               >
                 {/* Chaotic SaaS Tool Cards */}
-                {saasTools.map((tool, index) => (
-                  <motion.div
-                    key={tool.id}
-                    className="absolute w-[150px] max-w-[45vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-3 py-2.5 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10"
-                    style={{
-                      left: `${tool.position.x}%`,
-                      top: `${tool.position.y}%`,
-                      transform: 'translate(-50%, -50%) translateZ(0)',
-                      willChange: 'transform, opacity',
-                      pointerEvents: 'none',
-                    }}
-                    initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-                    animate={{
-                      opacity: 1,
-                      scale: [1, 1.04, 1],
-                      rotate: [index % 2 === 0 ? -5 : 5, index % 2 === 0 ? 5 : -5, index % 2 === 0 ? -5 : 5],
-                      y: [0, -3, 0, 3, 0],
-                    }}
-                    transition={{
-                      opacity: { duration: 0.3, delay: index * 0.08 },
-                      scale: { duration: 2 + index * 0.15, repeat: Infinity, ease: 'easeInOut' },
-                      rotate: { duration: 3 + index * 0.25, repeat: Infinity, ease: 'easeInOut' },
-                      y: { duration: 2.5 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      scale: 0.7,
-                      rotate: index % 2 === 0 ? -45 : 45,
-                      y: 60,
-                      transition: { duration: 0.6, ease: 'easeIn' },
-                    }}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <div>
-                        <p className="text-sm font-semibold text-orange-900 dark:text-orange-100">{tool.name}</p>
-                        <p className="text-xs text-orange-800 dark:text-orange-300/70">{tool.cost}</p>
+                {saasTools.map((tool, index) => {
+                  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+                  const xPos = isMobile && tool.mobilePosition ? tool.mobilePosition.x : tool.position.x
+                  const yPos = isMobile && tool.mobilePosition ? tool.mobilePosition.y : tool.position.y
+                  return (
+                    <motion.div
+                      key={tool.id}
+                      className="absolute w-[160px] max-w-[48vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-4 py-3 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10 sm:w-[180px]"
+                      style={{
+                        left: `${xPos}%`,
+                        top: `${yPos}%`,
+                        transform: 'translate(-50%, -50%) translateZ(0)',
+                        willChange: 'transform, opacity',
+                        pointerEvents: 'none',
+                      }}
+                      initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+                      animate={{
+                        opacity: 1,
+                        scale: [1, 1.04, 1],
+                        rotate: [index % 2 === 0 ? -5 : 5, index % 2 === 0 ? 5 : -5, index % 2 === 0 ? -5 : 5],
+                        y: [0, -3, 0, 3, 0],
+                      }}
+                      transition={{
+                        opacity: { duration: 0.3, delay: index * 0.08 },
+                        scale: { duration: 2 + index * 0.15, repeat: Infinity, ease: 'easeInOut' },
+                        rotate: { duration: 3 + index * 0.25, repeat: Infinity, ease: 'easeInOut' },
+                        y: { duration: 2.5 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.7,
+                        rotate: index % 2 === 0 ? -45 : 45,
+                        y: 60,
+                        transition: { duration: 0.6, ease: 'easeIn' },
+                      }}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div>
+                          <p className="text-base font-semibold text-orange-900 dark:text-orange-100 sm:text-base">
+                            {tool.name}
+                          </p>
+                          <p className="text-sm text-orange-800 dark:text-orange-300/70">{tool.cost}</p>
+                        </div>
+                        <Zap className="h-5 w-5 text-orange-700 dark:text-orange-400" />
                       </div>
-                      <Zap className="h-5 w-5 text-orange-700 dark:text-orange-400" />
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  )
+                })}
 
                 {/* Chain connections - fragmentiert und chaotisch */}
                 {saasTools
@@ -737,6 +757,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   .map(tool => {
                     const target = saasTools.find(t => t.id === tool.chainTarget)
                     if (!target) return null
+                    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+                    const toolX = isMobile && tool.mobilePosition ? tool.mobilePosition.x : tool.position.x
+                    const toolY = isMobile && tool.mobilePosition ? tool.mobilePosition.y : tool.position.y
+                    const targetX = isMobile && target.mobilePosition ? target.mobilePosition.x : target.position.x
+                    const targetY = isMobile && target.mobilePosition ? target.mobilePosition.y : target.position.y
                     return (
                       <motion.svg
                         key={`chain-${tool.id}`}
@@ -749,10 +774,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                       >
                         {/* Fragmentierte Linie - mehrere Segmente */}
                         <motion.line
-                          x1={`${tool.position.x}%`}
-                          y1={`${tool.position.y}%`}
-                          x2={`${target.position.x}%`}
-                          y2={`${target.position.y}%`}
+                          x1={`${toolX}%`}
+                          y1={`${toolY}%`}
+                          x2={`${targetX}%`}
+                          y2={`${targetY}%`}
                           stroke="rgba(234, 88, 12, 0.7)"
                           strokeWidth="2.5"
                           strokeDasharray="8 6 3 6"
@@ -769,10 +794,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                         />
                         {/* Zusätzliche fragmentierte Linie (Chaos-Effekt) */}
                         <motion.line
-                          x1={`${tool.position.x}%`}
-                          y1={`${tool.position.y}%`}
-                          x2={`${target.position.x}%`}
-                          y2={`${target.position.y}%`}
+                          x1={`${toolX}%`}
+                          y1={`${toolY}%`}
+                          x2={`${targetX}%`}
+                          y2={`${targetY}%`}
                           stroke="rgba(234, 88, 12, 0.3)"
                           strokeWidth="1.5"
                           strokeDasharray="4 8"

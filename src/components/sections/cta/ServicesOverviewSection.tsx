@@ -88,18 +88,27 @@ const ServicesOverviewSection: React.FC = () => {
               key={card.id}
               className="border-border-primary/50 bg-bg-primary flex h-full flex-col rounded-3xl border p-6 backdrop-blur-lg transition-all hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_20px_70px_-40px_rgba(var(--vae-turquoise-rgb),0.8)] dark:border-white/10 dark:bg-white/[0.08]"
             >
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
-                    <Icon name={card.icon} size={22} />
+              <div className="mb-4 flex flex-col gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
+                      <Icon name={card.icon} size={22} />
+                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
+                      {card.badge}
+                    </span>
                   </div>
-                  <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
-                    {card.badge}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {card.secondaryBadge && (
+                      <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-emerald-200">
+                        {card.secondaryBadge}
+                      </span>
+                    )}
+                    <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
+                      Etappe {index + 1}
+                    </span>
+                  </div>
                 </div>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
-                  Etappe {index + 1}
-                </span>
               </div>
               <div className="border-b-2 border-vae-turquoise/30 pb-3 dark:border-vae-turquoise/40">
                 <h3 className="text-2xl font-bold text-text-light">{card.title}</h3>
@@ -125,11 +134,11 @@ const ServicesOverviewSection: React.FC = () => {
 
                   <div className="space-y-3">
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-x-3 gap-y-2.5">
                       {card.audience.slice(0, 3).map(item => (
                         <span
                           key={item}
-                          className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[12px] font-medium leading-none text-text-secondary"
+                          className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm font-medium text-text-secondary"
                         >
                           {item}
                         </span>

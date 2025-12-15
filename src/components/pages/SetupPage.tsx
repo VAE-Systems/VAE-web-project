@@ -1834,7 +1834,7 @@ const AnimatedBeforeAfter: React.FC = () => {
         >
           Infrastructure-Design
         </motion.div>
-        <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
+        <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:flex-nowrap sm:gap-3">
           {(['before', 'after'] as const).map(key => {
             const isActive = state === key
             const isBeforeBtn = key === 'before'
@@ -1846,22 +1846,22 @@ const AnimatedBeforeAfter: React.FC = () => {
                   onClick={() => setState(key)}
                   aria-pressed={isActive}
                   className={cn(
-                    'btn-outline flex-1 whitespace-nowrap px-3 py-2 text-[10px] font-semibold uppercase tracking-wider sm:flex-initial sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.2em]',
+                    'btn-outline w-full min-w-0 whitespace-nowrap px-3 py-2 text-[11px] font-bold uppercase tracking-wider sm:w-auto sm:min-w-[120px] sm:px-4 sm:py-2.5 sm:text-xs sm:tracking-[0.2em]',
                     'transition-all duration-300 ease-out',
                     // VORHER-Button (rot)
                     isBeforeBtn &&
                       isActive &&
-                      '!border-2 !border-red-500/60 !bg-gradient-to-br !from-red-500/20 !to-red-500/10 !text-red-400 !shadow-[0_0_20px_rgba(239,68,68,0.4),0_0_0_1px_rgba(239,68,68,0.3)]',
+                      '!border-2 !border-red-500/70 !bg-gradient-to-br !from-red-500/25 !to-red-500/15 !text-red-300 !shadow-[0_0_18px_rgba(239,68,68,0.45),0_0_0_1px_rgba(239,68,68,0.35)]',
                     isBeforeBtn &&
                       !isActive &&
-                      '!border !border-white/10 !bg-white/5 !text-text-secondary hover:!-translate-y-1 hover:!border-red-500/70 hover:!bg-gradient-to-br hover:!from-red-500/25 hover:!to-red-500/15 hover:!text-red-400 hover:!shadow-[0_0_18px_rgba(239,68,68,0.35)]',
+                      '!border !border-red-500/40 !bg-red-500/10 !text-red-400 hover:!-translate-y-1 hover:!border-red-500/70 hover:!bg-gradient-to-br hover:!from-red-500/30 hover:!to-red-500/20 hover:!text-red-300 hover:!shadow-[0_0_18px_rgba(239,68,68,0.35)]',
                     // NACHHER-Button (grün)
                     !isBeforeBtn &&
                       isActive &&
-                      '!border-2 !border-vae-turquoise/60 !bg-gradient-to-br !from-vae-turquoise/20 !to-vae-turquoise/10 !text-vae-turquoise !shadow-[0_0_20px_rgba(8,255,193,0.4),0_0_0_1px_rgba(8,255,193,0.3)]',
+                      '!border-2 !border-vae-turquoise/70 !bg-gradient-to-br !from-vae-turquoise/25 !to-vae-turquoise/15 !text-vae-turquoise !shadow-[0_0_18px_rgba(8,255,193,0.45),0_0_0_1px_rgba(8,255,193,0.35)]',
                     !isBeforeBtn &&
                       !isActive &&
-                      '!border !border-white/10 !bg-white/5 !text-text-secondary hover:!-translate-y-1 hover:!border-vae-turquoise/70 hover:!bg-gradient-to-br hover:!from-vae-turquoise/25 hover:!to-vae-turquoise/15 hover:!text-vae-turquoise hover:!shadow-[0_0_18px_rgba(8,255,193,0.35)]',
+                      '!border !border-vae-turquoise/40 !bg-vae-turquoise/10 !text-vae-turquoise/80 hover:!-translate-y-1 hover:!border-vae-turquoise/70 hover:!bg-gradient-to-br hover:!from-vae-turquoise/30 hover:!to-vae-turquoise/20 hover:!text-vae-turquoise hover:!shadow-[0_0_18px_rgba(8,255,193,0.35)]',
                     // Focus: rot bei Vorher-Button, grün bei Nachher-Button (ohne ring-offset)
                     isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-red-500/60',
                     !isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-vae-turquoise/60'

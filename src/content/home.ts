@@ -205,6 +205,7 @@ export interface ServiceOverviewCard {
   title: string
   subtitle?: string
   badge: string
+  secondaryBadge?: string
   description: string
   inclusions: string[]
   audience: string[]
@@ -226,7 +227,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       '3 realistische Migrations-Optionen (inkl. „Status quo beibehalten")',
       'Schriftlicher Fahrplan mit konkreten nächsten Schritten',
     ],
-    audience: ['Startphase (Open Source / KI)', 'Unsicher über nächste Schritte'],
+    audience: ['KMU, Startups, NGOs', 'Digitalisierungsstrategie ausbauen', 'KI-Potenzial analysieren'],
     cta: { label: 'Mehr erfahren', href: '/services/beratung' },
   },
   {
@@ -243,7 +244,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       'Daten-Migration aus bestehenden Systemen (falls relevant)',
       'Team-Training & Dokumentation für Admins und Key-User',
     ],
-    audience: ['SaaS-Ablösung geplant', 'Professionelles Setup + Doku'],
+    audience: ['Datenfundament neu aufbauen', 'Bestehende Infrastruktur restrukturieren', 'SaaS-Ablösung'],
     cta: { label: 'Setup Details', href: '/services/setup' },
   },
   {
@@ -252,15 +253,16 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     title: 'Langfristige Betreuung',
     subtitle: 'Betrieb & Optimierung',
     badge: 'KONTINUIERLICH',
+    secondaryBadge: 'Monatlich kündbar',
     description:
       'Wir sorgen dafür, dass Ihre Infrastruktur läuft – während Ihr Team sich auf Produkt und Kund:innen konzentriert.',
     inclusions: [
-      'Updates & Security-Patches',
-      'Monitoring, Backups & Wiederherstellung',
-      'KI-Optimierung & Automatisierung',
-      'Prioritäts-Support',
+      'Basis-Monitoring & Security-Patches',
+      'Regelmäßige System-Reviews',
+      'Backup & Disaster Recovery',
+      'Monatlich kündbar inkl. 2h Handover-Call',
     ],
-    audience: ['Keine eigene IT-Abteilung', 'Fokus auf Kernbusiness'],
+    audience: ['Teams ohne eigene IT', 'Infrastruktur auslagern', 'Fokus auf Wachstum statt Betrieb'],
     cta: { label: 'Betreuung Details', href: '/services/betreuung' },
   },
 ] as const

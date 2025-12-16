@@ -7,21 +7,21 @@ import MagneticButton from '../MagneticButton'
 // CSS Keyframes for optimized animations (GPU-accelerated, browser-native)
 const glowAnimationStyles = `
 @keyframes pulse-glow {
-  0%, 100% { 
+  0%, 100% {
     opacity: 0.6;
     transform: scale(1.6) translateZ(0);
   }
-  50% { 
+  50% {
     opacity: 1;
     transform: scale(1.75) translateZ(0);
   }
 }
 
 @keyframes pulse-scale {
-  0%, 100% { 
+  0%, 100% {
     transform: scale(1) translateZ(0);
   }
-  50% { 
+  50% {
     transform: scale(1.015) translateZ(0);
   }
 }

@@ -49,8 +49,7 @@ const BlogPage: React.FC = () => {
               Insights & Knowledge Hub für souveräne Tech-Projekte
             </h1>
             <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
-              Beiträge aus echten Projekten, Workshops und internen Playbooks. Wir erklären, wie wir KI, Open Source und
-              Produktentwicklung kombinieren – transparent, dokumentiert und ohne Buzzword-Overload.
+              Wie wir arbeiten: Methoden, Learnings und Werkzeuge aus echten Projekten.
             </p>
             <div className="flex flex-col items-center gap-4 pt-2 sm:flex-row sm:justify-center lg:justify-start">
               <MagneticButton className="flex-1">

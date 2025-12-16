@@ -7,7 +7,6 @@ import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { PartnerProfile } from '@/content/shared/teamNetworkData'
 import { Linkedin, Mail, UserPlus } from 'lucide-react'
 import React, { useMemo } from 'react'
-import { Link } from 'react-router-dom'
 
 interface PartnerProfileSectionProps {
   partner: PartnerProfile

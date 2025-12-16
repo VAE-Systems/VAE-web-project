@@ -114,7 +114,7 @@ const SocialProofSection: React.FC = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Social Proof</p>
           <h2 className="fluid-h2 mt-3 font-semibold text-gray-900 dark:text-text-light">Projekte & Referenzen</h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-text-secondary">
-            Echte Umsetzungen mit klaren Ergebnissen – ohne Buzzwords.
+            Was wir gebaut haben – und was dabei rauskam.
           </p>
         </header>
         <div className="mt-12 grid gap-8 lg:grid-cols-2">

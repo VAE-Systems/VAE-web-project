@@ -89,6 +89,6 @@ export const NETWORK_CTA = {
   copy: 'Wir suchen Spezialist:innen, die unser Team projektweise ergänzen oder langfristig mitgestalten. — VAE Systems bietet eigenverantwortliches Arbeiten, transparente Kommunikation und Projekte mit Wirkung.',
   button: {
     label: 'Partner werden',
-    href: '/karriere',
+    href: 'https://nc.intern.vae.systems/apps/calendar/appointment/fkYPGJC7342e',
   },
 }

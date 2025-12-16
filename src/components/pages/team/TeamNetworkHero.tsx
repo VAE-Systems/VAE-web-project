@@ -11,15 +11,17 @@ export const TeamNetworkHero: React.FC = () => {
   return (
     <section className="relative z-0 overflow-hidden border-b border-black/5 bg-bg-darker py-24 text-text-light dark:border-white/5 lg:py-28">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <picture className="absolute inset-0">
-          <source srcSet="/images/optimized/Background-für-Team-Hero-bitte-unter-Blurr-legen.webp" type="image/webp" />
-          <img
-            src="/images/optimized/Background-für-Team-Hero-bitte-unter-Blurr-legen.png"
-            alt=""
-            loading="eager"
-            className="h-full w-full scale-[1.02] object-cover opacity-55 blur-[2px]"
-          />
-        </picture>
+        {/* Fixed Wallpaper Effect (no transform/blur to preserve fixed attachment) */}
+        <div
+          className="absolute inset-0 opacity-55"
+          style={{
+            backgroundImage: 'url(/images/optimized/Background-für-Team-Hero-bitte-unter-Blurr-legen.webp)',
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
         <div className="via-white/82 absolute inset-0 bg-gradient-to-br from-white/70 to-white/70 dark:from-bg-darker dark:via-bg-darker/90 dark:to-bg-darker/75" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--color-vae-turquoise-rgb),0.18),transparent_70%)]" />
       </div>

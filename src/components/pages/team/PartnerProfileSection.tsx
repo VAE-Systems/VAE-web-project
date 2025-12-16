@@ -103,13 +103,15 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
               )}
               {partner.isPlaceholder && (
                 <MagneticButton className="flex-1">
-                  <Link
-                    to="/karriere"
+                  <a
+                    href="https://nc.intern.vae.systems/apps/calendar/appointment/fkYPGJC7342e"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn-primary inline-flex items-center justify-center gap-3 px-10 py-4 text-base font-semibold"
                   >
                     <UserPlus className="h-5 w-5" />
                     Partner werden
-                  </Link>
+                  </a>
                 </MagneticButton>
               )}
             </div>

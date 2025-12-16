@@ -53,14 +53,16 @@ export const TeamNetworkCTA: React.FC = () => {
           </div>
           <div className="flex w-full flex-col gap-4 pt-2 sm:flex-row sm:justify-center lg:justify-start">
             <MagneticButton intensity={0.08} className="w-full sm:w-auto">
-              <Link
-                to={NETWORK_CTA.button.href}
+              <a
+                href={NETWORK_CTA.button.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary inline-flex w-full items-center justify-center gap-3 px-10 py-4 text-base font-semibold"
               >
                 <Users className="h-5 w-5" />
                 {buttonLabel}
                 <ArrowUpRight className="h-5 w-5" />
-              </Link>
+              </a>
             </MagneticButton>
             <MagneticButton intensity={0.06} className="w-full sm:w-auto">
               <Link

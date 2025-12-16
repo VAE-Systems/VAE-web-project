@@ -66,7 +66,7 @@ const BlogPage: React.FC = () => {
               </MagneticButton>
               <MagneticButton className="flex-1">
                 <Link
-                  to="/referenzen"
+                  to="/about/referenzen"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white/70 transition-colors hover:border-vae-turquoise/60 hover:text-white"
                 >
                   Case Studies ansehen

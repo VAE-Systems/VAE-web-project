@@ -4,6 +4,29 @@ import { AlertCircle, BookOpen, DollarSign, Lightbulb, MessageSquare, Server, Sh
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import MagneticButton from '../MagneticButton'
 
+// CSS Keyframes for optimized animations (GPU-accelerated, browser-native)
+const glowAnimationStyles = `
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1.6) translateZ(0);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.75) translateZ(0);
+  }
+}
+
+@keyframes pulse-scale {
+  0%, 100% { 
+    transform: scale(1) translateZ(0);
+  }
+  50% { 
+    transform: scale(1.015) translateZ(0);
+  }
+}
+`
+
 interface AnimatedSaaSTransformationProps {
   autoPlayDelay?: number
 }
@@ -54,10 +77,26 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     const [currentProblemIndex, setCurrentProblemIndex] = useState(0)
     const [visibleToolsCount, setVisibleToolsCount] = useState(6)
     const [hasAutoPlayed, setHasAutoPlayed] = useState(false)
+    const [isInViewport, setIsInViewport] = useState(true) // Intersection Observer state
     const particleTimerRef = useRef<number | null>(null)
     const autoPlayTimerRef = useRef<number | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { once: true, amount: 0.5 })
+
+    // Intersection Observer: Pausiere Animationen wenn nicht sichtbar
+    useEffect(() => {
+      if (!containerRef.current) return
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsInViewport(entry.isIntersecting)
+        },
+        { threshold: 0.1 }
+      )
+
+      observer.observe(containerRef.current)
+      return () => observer.disconnect()
+    }, [])
 
     // USPs für rotating text
     const usps = [
@@ -114,23 +153,23 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
       }
     }, [autoPlayDelay, isInView, prefersReducedMotion, hasAutoPlayed])
 
-    // Rotating USP text effect
+    // Rotating USP text effect (pause wenn nicht sichtbar)
     useEffect(() => {
-      if (state !== 'solution') return
+      if (state !== 'solution' || !isInViewport) return
       const interval = setInterval(() => {
         setCurrentUSPIndex(prev => (prev + 1) % usps.length)
       }, 2500)
       return () => clearInterval(interval)
-    }, [state, usps.length])
+    }, [state, usps.length, isInViewport])
 
-    // Rotating Problem text effect
+    // Rotating Problem text effect (pause wenn nicht sichtbar)
     useEffect(() => {
-      if (state !== 'problem') return
+      if (state !== 'problem' || !isInViewport) return
       const interval = setInterval(() => {
         setCurrentProblemIndex(prev => (prev + 1) % problems.length)
       }, 2500)
       return () => clearInterval(interval)
-    }, [state, problems.length])
+    }, [state, problems.length, isInViewport])
 
     // Unkontrolliertes Wachstum - Tools kommen schrittweise hinzu
     useEffect(() => {
@@ -357,7 +396,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           systems: 'Security • Compliance • Audit',
           position: { x: 30, y: 25.8 },
           mobilePosition: { x: 27, y: 18 },
-          color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
+          color: 'bg-emerald-500/20 border-emerald-600/60 text-emerald-900 dark:text-emerald-200',
         },
         {
           id: 'ai-agents',
@@ -859,27 +898,24 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   backfaceVisibility: 'hidden',
                 }}
               >
+                <style>{glowAnimationStyles}</style>
                 {/* Central Server Icon - Zentriert */}
                 <motion.div
-                  className="group absolute cursor-pointer"
+                  className="group absolute cursor-pointer hover:will-change-transform"
                   style={{
                     left: typeof window !== 'undefined' && window.innerWidth < 640 ? '50.1%' : '49.9%',
                     top: typeof window !== 'undefined' && window.innerWidth < 640 ? '46%' : '50%',
                     marginLeft: '-60px',
                     marginTop: '-60px',
                     zIndex: 3,
-                    willChange: 'transform',
                     transform: 'translateZ(0)',
+                    animation: isInViewport ? 'pulse-scale 3.5s ease-in-out infinite' : 'none',
                   }}
                   initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{
-                    opacity: 1,
-                    scale: [1, 1.015, 1],
-                  }}
+                  animate={{ opacity: 1 }}
                   whileHover={{ scale: 1.04, y: -3 }}
                   transition={{
                     opacity: { duration: 0.5, delay: 0.3 },
-                    scale: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
                   }}
                 >
                   {/* Blur-Glow Background */}
@@ -887,9 +923,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                     className="absolute inset-0 -z-10"
                     style={{
                       background: 'radial-gradient(100% 100%, rgba(8, 255, 193, 0.35) 0%, rgba(8, 255, 193, 0) 70%)',
-                      filter: 'blur(40px)',
+                      filter: 'blur(20px)',
                       transform: 'scale(1.8)',
-                      willChange: 'transform',
                     }}
                   />
                   <div className="rounded-[20px] border-[3px] border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 via-vae-turquoise/15 to-vae-turquoise/10 p-5 shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-6 lg:p-7">
@@ -918,10 +953,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
 
                   // Individuelle Glow-Farben pro Cluster
                   const glowColors = {
-                    communication: 'rgba(59, 130, 246, 0.3)', // blue
+                    communication: 'rgba(245, 158, 11, 0.3)', // amber (gelb)
                     crm: 'rgba(168, 85, 247, 0.3)', // purple
-                    knowledge: 'rgba(16, 185, 129, 0.3)', // emerald
-                    governance: 'rgba(245, 158, 11, 0.3)', // amber
+                    knowledge: 'rgba(59, 130, 246, 0.3)', // blue
+                    governance: 'rgba(16, 185, 129, 0.3)', // emerald (grün)
                     'ai-agents': 'rgba(236, 72, 153, 0.4)', // pink - stärker als andere
                   }
 
@@ -946,7 +981,6 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                         marginLeft: 'calc(-0.5 * clamp(90px, 21vw, 130px))',
                         marginTop: 'calc(-0.5 * clamp(90px, 21vw, 130px))',
                         zIndex: 2,
-                        willChange: 'transform',
                         transform: 'translateZ(0)',
                       }}
                       initial={{ opacity: 0, scale: 0.9, y: 8 }}
@@ -961,32 +995,15 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                       }}
                     >
                       {/* Blur-Glow Background per Cluster */}
-                      <motion.div
-                        className="absolute inset-0 -z-10 transition-transform duration-[150ms] ease-out group-hover:scale-105"
+                      <div
+                        className="absolute inset-0 -z-10 transition-transform duration-[150ms] ease-out group-hover:scale-105 group-hover:will-change-transform"
                         style={{
                           background: `radial-gradient(100% 100%, ${glowColors[cluster.id as keyof typeof glowColors]} 0%, rgba(0,0,0,0) 70%)`,
-                          filter: isAIAgents ? 'blur(40px)' : 'blur(30px)',
+                          filter: isAIAgents ? 'blur(20px)' : 'blur(18px)',
                           transform: 'scale(1.6)',
-                          willChange: 'transform',
+                          animation: isAIAgents && isInViewport ? 'pulse-glow 2.5s ease-in-out infinite' : 'none',
+                          animationDelay: isAIAgents ? `${baseDelay + 1.5}s` : '0s',
                         }}
-                        animate={
-                          isAIAgents
-                            ? {
-                                opacity: [0.6, 1, 0.6],
-                                scale: [1.6, 1.75, 1.6],
-                              }
-                            : {}
-                        }
-                        transition={
-                          isAIAgents
-                            ? {
-                                duration: 2.5,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                                delay: baseDelay + 1.5,
-                              }
-                            : {}
-                        }
                       />
                       <div
                         style={{
@@ -1046,7 +1063,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                             <p
                               key={idx}
                               style={{
-                                fontSize: 'clamp(6px, 1.5vw, 8px)',
+                                fontSize: 'clamp(7px, 1.8vw, 10px)',
                                 lineHeight: 1.3,
                                 opacity: 0.75,
                               }}

@@ -134,14 +134,23 @@ const ServicesOverviewSection: React.FC = () => {
 
                   <div className="space-y-3">
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2.5">
+                    <div className="flex flex-col gap-2">
                       {card.audience.slice(0, 3).map(item => (
-                        <span
+                        <div
                           key={item}
-                          className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm font-medium text-text-secondary"
+                          className="flex items-center gap-2 rounded-lg border border-vae-turquoise/20 bg-vae-turquoise/5 px-3 py-2 text-xs font-medium text-text-light transition-all duration-200 hover:border-vae-turquoise/40 hover:bg-vae-turquoise/10"
                         >
-                          {item}
-                        </span>
+                          <svg
+                            className="h-3 w-3 flex-shrink-0 text-vae-turquoise/70"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="flex-1">{item}</span>
+                        </div>
                       ))}
                     </div>
                   </div>

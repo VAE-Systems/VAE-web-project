@@ -227,7 +227,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       '3 realistische Migrations-Optionen (inkl. „Status quo beibehalten")',
       'Schriftlicher Fahrplan mit konkreten nächsten Schritten',
     ],
-    audience: ['KMU, Startups, NGOs', 'Digitalisierungsstrategie ausbauen', 'KI-Potenzial analysieren'],
+    audience: ['Scale-ups & KMU', 'Digital-Strategie aufbauen', 'KI-Potenzial nutzen'],
     cta: { label: 'Mehr erfahren', href: '/services/beratung' },
   },
   {

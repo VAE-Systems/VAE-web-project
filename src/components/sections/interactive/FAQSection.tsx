@@ -22,11 +22,13 @@
  */
 
 import AccordionItem from '@/components/ui/AccordionItem'
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { faqEntries } from '@/content/shared/faqData'
 import { cn } from '@/lib/classNames'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🎛️ CORE — Types
@@ -181,18 +183,16 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                 präzise.
               </p>
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                <a
-                  href="/contact"
-                  className="rounded-lg bg-vae-turquoise px-8 py-3 font-semibold text-bg-darker transition-all duration-300 hover:-translate-y-0.5 hover:bg-vae-turquoise-dark hover:shadow-lg hover:shadow-vae-turquoise/30 dark:text-white"
-                >
-                  Gespräch anfragen
-                </a>
-                <a
-                  href="mailto:info@vae.systems"
-                  className="inline-block rounded-lg border border-vae-turquoise px-8 py-3 font-semibold text-vae-turquoise transition-all duration-300 hover:bg-vae-turquoise/10"
-                >
-                  Direkt per Email
-                </a>
+                <MagneticButton>
+                  <Link to="/contact" className="btn-primary">
+                    Gespräch anfragen
+                  </Link>
+                </MagneticButton>
+                <MagneticButton>
+                  <a href="mailto:info@vae.systems" className="btn-secondary">
+                    Direkt per Email
+                  </a>
+                </MagneticButton>
               </div>
             </div>
           </div>

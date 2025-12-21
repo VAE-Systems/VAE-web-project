@@ -33,7 +33,7 @@ const ProductsSection: React.FC = () => {
       <ParticleField count={18} />
       {/* Background subtle gradient */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,hsla(var(--color-vae-turquoise),0.12),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,hsla(var(--color-vae-turquoise),0.20),transparent_55%)]" />
       </div>
 
       <div className="container-vae relative">

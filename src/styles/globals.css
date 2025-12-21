@@ -238,16 +238,23 @@
     display: block;
   }
 
-  /* Smooth theme transitions */
+  /* Smooth theme transitions - optimized for performance */
   html.theme-transitioning,
-  html.theme-transitioning *,
-  html.theme-transitioning *::before,
-  html.theme-transitioning *::after {
+  html.theme-transitioning * {
     transition:
-      background-color 300ms ease-in-out,
-      border-color 300ms ease-in-out,
-      color 300ms ease-in-out,
-      box-shadow 300ms ease-in-out !important;
+      background-color 200ms ease-out,
+      border-color 200ms ease-out,
+      color 200ms ease-out !important;
+    /* box-shadow entfernt - verursacht Layout-Thrashing */
+  }
+
+  /* Disable transitions on heavy elements during theme switch */
+  html.theme-transitioning img,
+  html.theme-transitioning video,
+  html.theme-transitioning canvas,
+  html.theme-transitioning [class*='gradient'],
+  html.theme-transitioning [style*='background-image'] {
+    transition: none !important;
   }
 }
 

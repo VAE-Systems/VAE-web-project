@@ -849,10 +849,16 @@ const ReferenzenPage: React.FC = () => {
             Konkrete Open-Source-Infrastrukturen und KI-optimierte Workflows, die wir für Kund:innen und unsere eigenen
             Teams umgesetzt haben – ehrlich, transparent, mit messbaren Ergebnissen.
           </p>
-          <p className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/70 px-4 py-2 text-sm text-text-secondary dark:border-white/10 dark:bg-white/5">
-            <ShieldCheck className="h-4 w-4 text-vae-turquoise" /> Alle Projekte: Open-Source-first, DSGVO-konform, Made
-            in Germany
-          </p>
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+            <p className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/70 px-4 py-2 text-sm text-text-secondary dark:border-white/10 dark:bg-white/5">
+              <ShieldCheck className="h-4 w-4 text-vae-turquoise" /> Alle Projekte: Open-Source-first, DSGVO-konform,
+              Made in Germany
+            </p>
+            <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-2 text-sm text-text-secondary dark:border-vae-turquoise/40 dark:bg-vae-turquoise/5">
+              <Shield className="h-4 w-4 text-vae-turquoise" /> Weitere Projekte unter NDA – hier zeigen wir nur
+              Referenzen mit Veröffentlichungsfreigabe
+            </p>
+          </div>
         </div>
       </section>
 
@@ -889,11 +895,14 @@ const ReferenzenPage: React.FC = () => {
       <section className="border-t border-black/5 bg-bg-darker py-20 transition-colors dark:border-white/5">
         <div className="container-vae space-y-10">
           <div className="flex flex-col gap-4 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">In Entwicklung</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">
+              Laufende & Vertrauliche Projekte
+            </p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Momentum für die nächsten Projekte</h2>
-            <p className="text-base text-text-secondary">
-              Aktuelle Projekte werden hier gelistet, sobald Kund:innen der Veröffentlichung zustimmen. Bis dahin nennen
-              wir keine laufenden Engagements.
+            <p className="mx-auto max-w-3xl text-base leading-relaxed text-text-secondary">
+              Aktuelle Projekte werden hier gelistet, sobald Kund:innen der Veröffentlichung zustimmen. Mehrere
+              Enterprise-Kunden und öffentliche Einrichtungen haben uns beauftragt, sind aber aus NDA-Gründen nicht
+              aufgeführt. Diskretion ist Teil unserer DNA – wir nennen keine Namen ohne Zustimmung.
             </p>
           </div>
         </div>

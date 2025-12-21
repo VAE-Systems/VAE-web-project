@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
@@ -18,7 +19,11 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
   }
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 4 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
       aria-live="polite"
       className="dark:to-[#0a0a0a]/98 flex h-full flex-col justify-between rounded-2xl border border-gray-200/80 bg-gradient-to-br
         from-white via-gray-50 to-gray-100/95 p-6 text-gray-900 shadow-xl
@@ -62,6 +67,6 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
           </a>
         </MagneticButton>
       </div>
-    </div>
+    </motion.div>
   )
 }

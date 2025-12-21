@@ -65,7 +65,7 @@ const ProductsHeroSection: React.FC = () => {
         {isLight ? (
           <div className="absolute inset-0 z-0 select-none">
             {/* Soft base gradient already via section; add subtle radial & light grid */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_55%_42%,rgba(var(--vae-turquoise-rgb),0.12),transparent_62%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_55%_42%,rgba(var(--vae-turquoise-rgb),0.20),transparent_62%)]" />
             <div className="absolute inset-0 opacity-[0.06] mix-blend-screen [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.06)_0_1px,transparent_1px_44px),repeating-linear-gradient(90deg,rgba(255,255,255,0.04)_0_1px,transparent_1px_44px)]" />
             <div className="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,rgba(var(--vae-turquoise-rgb),0.22),transparent_60%)] opacity-10" />
           </div>
@@ -89,7 +89,7 @@ const ProductsHeroSection: React.FC = () => {
           </div>
         )}
         <div
-          className={`pointer-events-none absolute inset-0 ${isLight ? 'bg-[radial-gradient(circle_at_25%_20%,rgba(var(--vae-turquoise-rgb),0.08),transparent_55%),radial-gradient(circle_at_80%_75%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]' : 'bg-[radial-gradient(circle_at_75%_35%,rgba(var(--vae-turquoise-rgb),0.12),transparent_62%)]'}`}
+          className={`pointer-events-none absolute inset-0 ${isLight ? 'bg-[radial-gradient(circle_at_25%_20%,rgba(var(--vae-turquoise-rgb),0.15),transparent_55%),radial-gradient(circle_at_80%_75%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%)]' : 'bg-[radial-gradient(circle_at_75%_35%,rgba(var(--vae-turquoise-rgb),0.12),transparent_62%)]'}`}
         />
 
         <div ref={containerRef} className="container-vae relative z-[2]">

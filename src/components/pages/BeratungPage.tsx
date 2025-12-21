@@ -464,10 +464,11 @@ const BeratungPage: React.FC = () => {
       />
 
       {/* ==================== HERO SECTION ==================== */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
-        {/* Hero Background Image - Fixed Wallpaper Effect */}
+      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-gradient-to-br from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
+        {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
+        {/* Desktop version with fixed attachment */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.40] dark:opacity-[0.20]"
+          className="pointer-events-none absolute inset-0 hidden opacity-[0.40] dark:opacity-[0.20] md:block"
           style={{
             backgroundImage: 'url(/images/optimized/Hero_Strategy.JPG.webp)',
             backgroundAttachment: 'fixed',
@@ -477,8 +478,19 @@ const BeratungPage: React.FC = () => {
           }}
           role="presentation"
         />
+        {/* Mobile version without fixed (iOS Safari compatibility) */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.40] dark:opacity-[0.20] md:hidden"
+          style={{
+            backgroundImage: 'url(/images/optimized/Hero_Strategy.JPG.webp)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+          role="presentation"
+        />
         <div className="pointer-events-none absolute inset-0 opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.15),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.25),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(var(--vae-turquoise-rgb),0.15),transparent_60%)]" />
         </div>
         {/* Light Mode: subtiler Glasmorphism-Hintergrund */}
         <div className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[85%] max-w-4xl -translate-y-1/2 rounded-3xl bg-white/30 backdrop-blur-[2px] dark:bg-transparent dark:backdrop-blur-none" />
@@ -549,7 +561,7 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== STUDIEN-SEKTION ==================== */}
-      <section className="animate-section mt-24 border-b border-gray-200 bg-[hsl(165,59%,97%)] py-24 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(165,20%,8%)]">
+      <section className="animate-section border-vae-turquoise/12 mt-24 border-b bg-[hsl(165,59%,97%)] py-24 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(165,20%,8%)]">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -591,7 +603,7 @@ const BeratungPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="animate-section border-b border-gray-200 py-16 dark:border-[hsl(0,0%,12%)]">
+      <section className="animate-section border-b border-vae-turquoise/10 py-16 dark:border-[hsl(0,0%,12%)]">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-lg leading-8 text-gray-700 dark:text-[hsl(0,0%,80%)]">
@@ -736,7 +748,7 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== VISUELLER ÜBERGANG (Must-Fix 1, Stufe 1) ==================== */}
-      <div className="h-12 bg-gradient-to-b from-white to-gray-50 dark:from-bg-darker dark:to-[#0b0e13]" />
+      <div className="h-12 bg-gradient-to-b from-white to-[#f2fff8] dark:from-bg-darker dark:to-[#0b0e13]" />
 
       {/* ==================== WAS IST ENTHALTEN (FEATURES) ==================== */}
       <section className="section-card-container animate-section border-b bg-gray-50/50 pb-24 pt-32 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(0,0%,8%)]">
@@ -1058,7 +1070,7 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== FAQ + FINAL CTA ==================== */}
-      <section className="animate-section bg-gradient-to-b from-white via-gray-50 to-white py-24 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="animate-section bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-24 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">FAQ</p>

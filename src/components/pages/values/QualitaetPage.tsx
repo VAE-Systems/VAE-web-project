@@ -59,9 +59,9 @@ const EXAMPLES = [
       'Unit-, Integration- und E2E-Tests sichern Änderungen ab. So können Teams Features schneller ausliefern, ohne Regressionen zu fürchten.',
   },
   {
-    title: 'Performance-Budgets',
+    title: 'Performance-Monitoring',
     description:
-      'Jede Seite hat ein Ladezeit-Budget (z.B. < 2s). Wenn neue Features das Budget sprengen, optimieren wir, bevor wir releasen.',
+      'Wir messen regelmäßig Ladezeiten und Ressourcenverbrauch. Wenn wir Engpässe erkennen, optimieren wir proaktiv – bevor User frustriert sind.',
   },
 ]
 

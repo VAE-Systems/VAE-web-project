@@ -227,7 +227,11 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       '3 realistische Migrations-Optionen (inkl. „Status quo beibehalten")',
       'Schriftlicher Fahrplan mit konkreten nächsten Schritten',
     ],
-    audience: ['Scale-ups & KMU', 'Digital-Strategie aufbauen', 'KI-Potenzial nutzen'],
+    audience: [
+      'Schnellem Wachstum ohne IT-Strategie',
+      'Geplanter Digital-Transformation',
+      'Evaluierung von Automatisierung',
+    ],
     cta: { label: 'Mehr erfahren', href: '/services/beratung' },
   },
   {
@@ -244,7 +248,11 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       'Daten-Migration aus bestehenden Systemen (falls relevant)',
       'Team-Training & Dokumentation für Admins und Key-User',
     ],
-    audience: ['Datenfundament neu aufbauen', 'Bestehende Infrastruktur restrukturieren', 'SaaS-Ablösung'],
+    audience: [
+      'Neuaufbau des Datenfundaments',
+      'Restrukturierung bestehender Infrastruktur',
+      'Ablösung von SaaS-Tools',
+    ],
     cta: { label: 'Setup Details', href: '/services/setup' },
   },
   {
@@ -262,7 +270,11 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       'Backup & Disaster Recovery',
       'Monatlich kündbar inkl. 2h Handover-Call',
     ],
-    audience: ['Teams ohne eigene IT', 'Infrastruktur auslagern', 'Fokus auf Wachstum statt Betrieb'],
+    audience: [
+      'Teams ohne dedizierte IT-Abteilung',
+      'Auslagerung der Infrastruktur-Verwaltung',
+      'Fokus auf Wachstum statt Betrieb',
+    ],
     cta: { label: 'Betreuung Details', href: '/services/betreuung' },
   },
 ] as const

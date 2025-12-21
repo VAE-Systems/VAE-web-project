@@ -75,13 +75,13 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
             {partner.location && <p className="text-sm text-text-muted">Standort: {partner.location}</p>}
             <div className="flex flex-col gap-2 sm:flex-row">
               {partner.linkedin && !partner.isPlaceholder && (
-                <MagneticButton className="flex-1">
+                <MagneticButton className="flex-1 sm:flex-initial">
                   <a
                     href={partner.linkedin.href}
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={partner.linkedin.text}
-                    className="btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
+                    className="btn-secondary inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
                   >
                     <Linkedin className="h-5 w-5" />
                     LinkedIn
@@ -89,11 +89,11 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
                 </MagneticButton>
               )}
               {partner.email && !partner.isPlaceholder && (
-                <MagneticButton className="flex-1">
+                <MagneticButton className="flex-1 sm:flex-initial">
                   <a
                     href={`mailto:${partner.email}`}
                     aria-label={`E-Mail an ${partner.name} senden`}
-                    className="btn-outline inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
+                    className="btn-outline inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
                   >
                     <Mail className="h-5 w-5" />
                     E-Mail
@@ -101,12 +101,12 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
                 </MagneticButton>
               )}
               {partner.isPlaceholder && (
-                <MagneticButton className="flex-1">
+                <MagneticButton className="flex-1 sm:flex-initial">
                   <a
                     href="https://nc.intern.vae.systems/apps/calendar/appointment/fkYPGJC7342e"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary inline-flex items-center justify-center gap-3 px-10 py-4 text-base font-semibold"
+                    className="btn-primary inline-flex w-full items-center justify-center gap-3 px-10 py-4 text-base font-semibold"
                   >
                     <UserPlus className="h-5 w-5" />
                     Partner werden

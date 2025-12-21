@@ -84,7 +84,7 @@ const ResourcesFaqPage: React.FC = () => {
   const totalFaqs = filteredFaqs.length
 
   return (
-    <div className="relative z-0 bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 bg-[#f2fff8] text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="FAQ & Knowledge Base | VAE Systems"
         description="Klare Antworten auf technische, organisatorische und Karriere-Fragen rund um VAE Systems – filterbar, suchbar, ehrlich."
@@ -92,7 +92,7 @@ const ResourcesFaqPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200/80 bg-gradient-to-b from-white via-[#f2fff8] to-white py-24 text-center dark:border-white/5 dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
+      <section className="relative overflow-hidden border-b border-vae-turquoise/10 bg-gradient-to-b from-[#e8fff7] via-[#f2fff8] to-[#f5fffc] py-24 text-center dark:border-white/5 dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
         <div aria-hidden="true">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.16),transparent_60%)] dark:hidden" />
           <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.25),transparent_60%)] dark:block" />
@@ -102,7 +102,7 @@ const ResourcesFaqPage: React.FC = () => {
             FAQ · Knowledge Base
           </span>
           <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
-            Antworten ohne Fluff – direkt aus Projekten
+            Alles, was Sie wissen müssen – strukturiert, ehrlich, hilfreich
           </h1>
           <p className="max-w-3xl text-base text-gray-700 dark:text-text-secondary">
             Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. {faqEntries.length} Fragen, strukturiert
@@ -110,7 +110,7 @@ const ResourcesFaqPage: React.FC = () => {
           </p>
           <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-2 text-sm text-vae-turquoise/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
             <ShieldCheck className="h-4 w-4 text-vae-turquoise" />
-            Keine Standardpakete · 100% transparente Kommunikation
+            Individuelle Lösungen · Transparente Kommunikation
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
             <MagneticButton>
@@ -200,7 +200,7 @@ const ResourcesFaqPage: React.FC = () => {
       </section>
 
       {/* Categories + FAQ */}
-      <section className="bg-gradient-to-b from-white via-gray-50 to-white py-16 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker">
+      <section className="bg-gradient-to-b from-[#e8fff7] via-[#f2fff8] to-[#f0fff9] py-16 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker">
         <div className="container-vae space-y-10">
           <div className="grid gap-5 md:grid-cols-5">
             {categoriesWithCounts.map(category => (

@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DropdownContent } from './DropdownContent'
@@ -318,11 +319,11 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               id={`${menu.id}-panel`}
               role="menu"
               aria-hidden={!panelVisible}
-              className={`fixed left-1/2 top-[5rem] z-[1040] w-[min(calc(100vw-2rem),48rem)] -translate-x-1/2 overflow-hidden rounded-2xl border shadow-lg backdrop-blur-xl transition-[opacity,transform] duration-300 ease-out xl:w-[56rem] ${
+              className={`absolute left-1/2 top-full z-[1000] mt-3 w-[min(90vw,56rem)] -translate-x-1/2 overflow-hidden rounded-2xl border shadow-lg backdrop-blur-xl transition-[height,opacity,transform] duration-300 ease-out ${
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'
-              } border-gray-200/60 bg-white shadow-gray-900/5 dark:border-white/10 dark:bg-[#050505] dark:shadow-black/40`}
+              } border-gray-200/60 bg-white/95 shadow-gray-900/5 dark:border-white/10 dark:bg-[hsla(0,0%,6%,0.98)] dark:shadow-black/40`}
               style={{ height: panelHeight ? `${panelHeight}px` : undefined }}
             >
               <div ref={getPanelRefHandler(menu.id)}>
@@ -356,7 +357,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   </div>
 
                   <div className="lg:w-[60%]">
-                    <DropdownContent content={menu.content[activeContentId || '']} />
+                    <AnimatePresence mode="wait">
+                      <DropdownContent key={activeContentId} content={menu.content[activeContentId || '']} />
+                    </AnimatePresence>
                   </div>
                 </div>
               </div>

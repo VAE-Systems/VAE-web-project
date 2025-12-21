@@ -104,7 +104,7 @@ export const LEADERS: LeaderProfile[] = [
     ],
     engagement: [
       {
-        text: 'Initiator der Software-Community im Aktiv Kollektiv e.V.',
+        text: 'Initiator und Leiter der IT-Community in Partnerschaft mit dem Aktiv Kollektiv e.V.',
         links: [
           {
             label: 'LinkedIn Post',
@@ -112,8 +112,7 @@ export const LEADERS: LeaderProfile[] = [
           },
         ],
       },
-      { text: 'Leiter der Technik-Community Heidelberg' },
-      { text: 'Ehrenamtlich aktiv in Open-Source-Standardisierung' },
+      { text: 'Verfolgt aktiv Entwicklungen im Bereich Open-Source-Standards und Best Practices' },
     ],
     location: 'Frankfurt — Eppelheim (regional vernetzt, mobil)',
     whyItMatters:

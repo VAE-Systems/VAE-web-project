@@ -529,10 +529,11 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
-        {/* Hero Background Image - Fixed Wallpaper Effect */}
+      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-gradient-to-br from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
+        {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
+        {/* Desktop version with fixed attachment */}
         <div
-          className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.40] dark:opacity-[0.20]"
+          className="pointer-events-none absolute inset-0 hidden overflow-hidden opacity-[0.40] dark:opacity-[0.20] md:block"
           style={{
             backgroundImage: 'url(/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp)',
             backgroundAttachment: 'fixed',
@@ -542,8 +543,19 @@ const SetupPage: React.FC = () => {
           }}
           role="presentation"
         />
+        {/* Mobile version without fixed (iOS Safari compatibility) */}
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.40] dark:opacity-[0.20] md:hidden"
+          style={{
+            backgroundImage: 'url(/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+          role="presentation"
+        />
         <div className="pointer-events-none absolute inset-0 opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.20),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.14),transparent_60%)]" />
         </div>
         {/* Light Mode: subtiler Glasmorphism-Hintergrund */}
         <div className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[85%] max-w-4xl -translate-y-1/2 rounded-3xl bg-white/30 backdrop-blur-[2px] dark:bg-transparent dark:backdrop-blur-none" />
@@ -685,7 +697,7 @@ const SetupPage: React.FC = () => {
       </section>
       {/* Section 2 */}
       <section
-        className="section-card-container border-b bg-gray-50 py-20 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-darker"
         id="definition"
       >
         <div className="section-card-backdrop" />
@@ -854,7 +866,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section: Nach dem Setup */}
-      <section className="section-card-container border-b border-gray-200 bg-gradient-to-b from-white via-gray-50 to-white py-20 dark:border-white/5 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
+      <section className="section-card-container border-b border-gray-200 bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-20 dark:border-white/5 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto mb-12 max-w-3xl text-center">
@@ -926,8 +938,9 @@ const SetupPage: React.FC = () => {
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Setup + Langfristige Betreuung</h3>
               <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
                 Wir implementieren die Infrastruktur und übernehmen anschließend die langfristige Instandhaltung,
-                Weiterentwicklung und das Monitoring. Übergaben und laufende Kommunikation laufen über unsere Kunden-App
-                mit Chat (iOS/Android) und sicherem Cloud-Share – Sie konzentrieren sich voll auf Ihr Kerngeschäft.
+                Weiterentwicklung und das Monitoring. Übergaben und laufende Kommunikation laufen über unsere
+                Kundenplattform mit integriertem Chat und sicherem Cloud-Share – Sie konzentrieren sich voll auf Ihr
+                Kerngeschäft.
               </p>
               <ul className="mt-4 space-y-3">
                 <li className="flex items-start gap-3">
@@ -1007,7 +1020,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 4 - Original Content */}
-      <section className="section-card-container bg-gray-50 py-20 dark:bg-bg-darker">
+      <section className="section-card-container bg-[#f2fff8] py-20 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
@@ -1452,7 +1465,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* ==================== NACH DEM SETUP: LANGFRISTIGE BETREUUNG ==================== */}
-      <section className="border-y border-gray-200 bg-gray-50 py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
+      <section className="border-y border-gray-200 bg-[#f2fff8] py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Nächster Schritt</p>
           <h3 className="text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl">
@@ -1477,7 +1490,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 7 FAQ */}
-      <section className="bg-gradient-to-b from-white via-gray-50 to-white py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">FAQ</p>
@@ -1825,7 +1838,7 @@ const AnimatedBeforeAfter: React.FC = () => {
       )}
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.06),transparent_60%)] dark:bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
-      <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-4">
+      <div className="flex flex-col items-start gap-3">
         <motion.div
           className="whitespace-nowrap rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-text-muted sm:px-3 sm:text-[11px] sm:tracking-[0.3em]"
           initial={{ opacity: 0, x: -20 }}
@@ -1834,7 +1847,7 @@ const AnimatedBeforeAfter: React.FC = () => {
         >
           Infrastructure-Design
         </motion.div>
-        <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:flex-nowrap sm:gap-3">
+        <div className="flex w-full flex-shrink-0 flex-wrap items-center gap-2 sm:w-auto sm:flex-nowrap sm:gap-3">
           {(['before', 'after'] as const).map(key => {
             const isActive = state === key
             const isBeforeBtn = key === 'before'
@@ -1846,7 +1859,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                   onClick={() => setState(key)}
                   aria-pressed={isActive}
                   className={cn(
-                    'btn-outline w-full min-w-0 whitespace-nowrap px-3 py-2 text-[11px] font-bold uppercase tracking-wider sm:w-auto sm:min-w-[120px] sm:px-4 sm:py-2.5 sm:text-xs sm:tracking-[0.2em]',
+                    'btn-outline w-full min-w-0 whitespace-nowrap px-3 py-2 text-[11px] font-bold uppercase tracking-wider sm:w-auto sm:min-w-[100px] sm:px-4 sm:py-2.5 sm:text-xs sm:tracking-wider',
                     'transition-all duration-300 ease-out',
                     // VORHER-Button (rot)
                     isBeforeBtn &&
@@ -1892,7 +1905,7 @@ const AnimatedBeforeAfter: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.32, ease: 'easeOut' }}
-              className="space-y-2"
+              className="min-h-[120px] space-y-2"
             >
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">{card.title}</h3>
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">{card.body}</p>

@@ -64,8 +64,9 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     },
     ref
   ) => {
+    const containerRef = useRef<HTMLDivElement>(null)
     const buttonRef = useRef<HTMLDivElement>(null)
-    useImperativeHandle(ref, () => buttonRef.current as HTMLDivElement, [])
+    useImperativeHandle(ref, () => containerRef.current as HTMLDivElement, [])
 
     const positionRef = useRef({ x: 0, y: 0 })
     const [isHovered, setIsHovered] = useState(false)
@@ -81,20 +82,24 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     const handlePointerMove = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
         // ⛓️ GATE: Disabled oder keine Intensity
-        if (disabled || !buttonRef.current || resolvedIntensity === 0) return
+        if (disabled || !containerRef.current || !buttonRef.current || resolvedIntensity === 0) return
+
+        // Capture event coordinates before RAF (event pooling issue)
+        const clientX = event.clientX
+        const clientY = event.clientY
 
         const computePosition = () => {
-          if (!buttonRef.current) return
-          const rect = buttonRef.current.getBoundingClientRect()
-          const offsetX = event.clientX - rect.left - rect.width / 2
-          const offsetY = event.clientY - rect.top - rect.height / 2
+          if (!containerRef.current || !buttonRef.current) return
+          const rect = containerRef.current.getBoundingClientRect()
+          const offsetX = clientX - rect.left - rect.width / 2
+          const offsetY = clientY - rect.top - rect.height / 2
 
           positionRef.current = {
             x: offsetX * resolvedIntensity,
             y: offsetY * resolvedIntensity,
           }
 
-          // 🔁 SIDE-EFFECT: Direkte DOM-Manipulation (kein Re-Render)
+          // 🔁 SIDE-EFFECT: Direkte DOM-Manipulation (kein Re-Render) - nur auf innerem Element
           const translate = `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0)`
           const scale = scaleEffect && isHovered ? ' scale(1.02)' : ''
           buttonRef.current.style.transform = `${translate}${scale}`
@@ -123,8 +128,8 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
       (event: React.MouseEvent<HTMLDivElement>) => {
         if (disabled) return
 
-        if (rippleEffect && buttonRef.current) {
-          const rect = buttonRef.current.getBoundingClientRect()
+        if (rippleEffect && containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect()
           const rippleId = window.performance.now()
           const ripple: Ripple = {
             id: rippleId,
@@ -176,13 +181,8 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
 
     return (
       <div
-        ref={buttonRef as React.RefObject<HTMLDivElement>}
-        className={cn(
-          'relative inline-block transition-transform duration-300 ease-out',
-          glowEffect && 'hover:drop-shadow-[0_0_16px_rgba(52,211,153,0.4)]',
-          disabled && 'pointer-events-none opacity-60',
-          className
-        )}
+        ref={containerRef as React.RefObject<HTMLDivElement>}
+        className={cn('relative inline-block', disabled && 'pointer-events-none opacity-60', className)}
         style={containerStyle}
         onMouseMove={handlePointerMove}
         onMouseLeave={handlePointerLeave}
@@ -190,7 +190,15 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
         onClick={handleClickInternal}
         {...rest}
       >
-        <div className="relative z-10">{children}</div>
+        <div
+          ref={buttonRef}
+          className={cn(
+            'relative z-10 transition-transform duration-300 ease-out',
+            glowEffect && 'hover:drop-shadow-[0_0_16px_rgba(52,211,153,0.4)]'
+          )}
+        >
+          {children}
+        </div>
 
         {/* 🎨 EFFECT: Ripple Overlay */}
         {rippleEffect && (

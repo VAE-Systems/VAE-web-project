@@ -138,7 +138,9 @@ const KommunikationPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Entscheidungen werden schriftlich bestätigt, damit niemand überrascht wird</span>
+                <span>
+                  Wichtige Entscheidungen dokumentieren wir in Tickets, damit alle auf dem gleichen Stand sind
+                </span>
               </li>
             </ul>
           </div>

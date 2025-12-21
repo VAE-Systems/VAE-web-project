@@ -93,23 +93,23 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
           <div className="space-y-4">
             <p className="text-sm text-text-muted">Standort: {leader.location}</p>
             <div className="flex flex-col gap-2 sm:flex-row">
-              <MagneticButton className="flex-1">
+              <MagneticButton className="flex-1 sm:flex-initial">
                 <a
                   href={leader.linkedin.href}
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={leader.linkedin.text}
-                  className="btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
+                  className="btn-secondary inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
                 >
                   <Linkedin className="h-5 w-5" />
                   LinkedIn
                 </a>
               </MagneticButton>
-              <MagneticButton className="flex-1">
+              <MagneticButton className="flex-1 sm:flex-initial">
                 <a
                   href={`mailto:${leader.email}`}
                   aria-label={`E-Mail an ${leader.name} senden`}
-                  className="btn-outline inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
+                  className="btn-outline inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
                 >
                   <Mail className="h-5 w-5" />
                   E-Mail

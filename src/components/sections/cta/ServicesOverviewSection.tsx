@@ -36,9 +36,8 @@ const ServicesOverviewSection: React.FC = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['-10%', '30%'])
   // Zoom: Startet normal, zoomed beim Scrollen rein, dann wieder raus
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.15, 1])
-  // Blur: Light Mode stark (weniger Ablenkung), Dark Mode subtiler
-  const blurLight = useTransform(scrollYProgress, [0, 0.5, 1], [12, 8, 12])
-  const blurDark = useTransform(scrollYProgress, [0, 0.5, 1], [4, 2.5, 4])
+  // Opacity statt animiertem Blur für bessere Performance
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.5, 0.3])
 
   return (
     <section ref={sectionRef} id="services" className="border-border-primary/30 relative border-t py-20 sm:py-28">
@@ -47,30 +46,32 @@ const ServicesOverviewSection: React.FC = () => {
         {/* Gradient Base: hell VAE-grün oben links → dunkel unten rechts - nur Desktop */}
         <div className="absolute inset-0 hidden bg-gradient-to-br from-vae-turquoise/30 via-vae-turquoise/10 to-bg-darker/80 dark:from-vae-turquoise/20 dark:via-bg-darker/40 dark:to-bg-darker sm:block" />
 
-        {/* Hintergrundbild mit Parallax & Zoom - Light Mode mit starkem Blur */}
+        {/* Hintergrundbild mit Parallax & Zoom - Light Mode mit statischem Blur */}
         <motion.div
-          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat opacity-40 dark:hidden sm:block"
+          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[12px] dark:hidden sm:block"
           style={{
             backgroundImage: "url('/images/raw/Background-3Wege-ausgeschnitten.png')",
             y,
             scale,
-            filter: useTransform(blurLight, val => `blur(${val}px)`),
+            opacity,
+            willChange: 'transform, opacity',
           }}
         />
         {/* Hintergrundbild mit Parallax & Zoom - Dark Mode mit subtilerem Blur */}
         <motion.div
-          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat opacity-50 dark:block sm:hidden sm:dark:block"
+          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[4px] dark:block sm:hidden sm:dark:block"
           style={{
             backgroundImage: "url('/images/raw/Background-3Wege-ausgeschnitten.png')",
             y,
             scale,
-            filter: useTransform(blurDark, val => `blur(${val}px)`),
+            opacity,
+            willChange: 'transform, opacity',
           }}
         />
 
         {/* Overlays für bessere Lesbarkeit */}
         <div className="from-bg-primary/90 via-bg-primary/80 to-bg-primary/90 absolute inset-0 bg-gradient-to-b dark:from-bg-darker/90 dark:via-bg-darker/80 dark:to-bg-darker/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.20),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--vae-turquoise-rgb),0.08),transparent_65%)]" />
       </div>
       <div className="container-vae relative z-10">
@@ -86,7 +87,7 @@ const ServicesOverviewSection: React.FC = () => {
           {servicesOverviewCards.map((card, index) => (
             <article
               key={card.id}
-              className="border-border-primary/50 bg-bg-primary flex h-full flex-col rounded-3xl border p-6 backdrop-blur-lg transition-all hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_20px_70px_-40px_rgba(var(--vae-turquoise-rgb),0.8)] dark:border-white/10 dark:bg-white/[0.08]"
+              className="border-border-primary/50 bg-bg-primary flex h-full flex-col rounded-3xl border p-6 transition-all hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_20px_70px_-40px_rgba(var(--vae-turquoise-rgb),0.8)] dark:border-white/10 dark:bg-white/[0.08]"
             >
               <div className="mb-4 flex flex-col gap-2">
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -117,7 +118,7 @@ const ServicesOverviewSection: React.FC = () => {
                 )}
               </div>
               <div className="mt-4 flex flex-1 flex-col gap-6 text-sm text-text-secondary">
-                <p className="line-clamp-4 text-sm leading-relaxed text-text-secondary">{card.description}</p>
+                <p className="text-sm leading-relaxed text-text-secondary">{card.description}</p>
 
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div className="space-y-3">
@@ -133,7 +134,7 @@ const ServicesOverviewSection: React.FC = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Für wen</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Ideal bei</p>
                     <div className="flex flex-col gap-2">
                       {card.audience.slice(0, 3).map(item => (
                         <div

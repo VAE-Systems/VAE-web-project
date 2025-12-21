@@ -85,7 +85,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
       aria-labelledby="outcomes-heading"
     >
       <div className="pointer-events-none absolute inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(var(--vae-turquoise-rgb),0.14),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(var(--vae-turquoise-rgb),0.10),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(var(--vae-turquoise-rgb),0.22),transparent_55%),radial-gradient(circle_at_75%_70%,rgba(var(--vae-turquoise-rgb),0.16),transparent_60%)]" />
       </div>
       <div className="container-vae relative">
         <header className="mb-16 max-w-4xl">

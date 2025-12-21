@@ -12,7 +12,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Dokumentation als Standard',
-    body: 'Jede Entscheidung wird in Git, eigenen Notiz-Sharing-Systemen oder Tickets festgehalten. So können Sie jederzeit nachvollziehen, warum etwas so gebaut wurde.',
+    body: 'Jede Entscheidung wird in Tickets, Notizen und Versionskontrolle festgehalten. So können Sie jederzeit nachvollziehen, warum etwas so gebaut wurde.',
   },
   {
     title: 'Live-Transparenz',
@@ -24,8 +24,7 @@ const PROCESS_STEPS = [
   {
     label: '01',
     title: 'Zugänge & Ownership',
-    detail:
-      'Sie erhalten Admin-Rechte auf allen Repositories, Cloud-Accounts und Deployment-Pipelines. Keine Black Boxes, keine Abhängigkeiten.',
+    detail: 'Sie erhalten Zugang zu allen Repositories und Cloud-Accounts. Keine Black Boxes, keine Abhängigkeiten.',
   },
   {
     label: '02',
@@ -37,20 +36,20 @@ const PROCESS_STEPS = [
     label: '03',
     title: 'Audits & Reviews',
     detail:
-      'Code, Infrastruktur und Sicherheitskonzepte werden versioniert und sind jederzeit auditierbar – intern oder durch externe Prüfer.',
+      'Code, Infrastruktur und Sicherheitskonzepte können Sie jederzeit prüfen lassen – intern oder durch externe Audits.',
   },
 ]
 
 const EXAMPLES = [
   {
-    title: 'Git als Single Source of Truth',
+    title: 'Zentrale Code-Verwaltung',
     description:
-      'Infrastruktur-Code, Deployment-Skripte und Dokumentation liegen in Ihren Repos. Kein Vendor-Lock-in, keine versteckten Konfigurationen.',
+      'Infrastruktur-Code, Deployment-Skripte und Dokumentation liegen in Ihren Repositories. Kein Vendor-Lock-in, keine versteckten Konfigurationen.',
   },
   {
-    title: 'Pull Requests mit Kontext',
+    title: 'Nachvollziehbare Code-Änderungen',
     description:
-      'Wir kommentieren jeden PR so, dass auch Nicht-Entwickler:innen verstehen, was sich ändert und warum. Transparenz für alle Stakeholder.',
+      'Wir dokumentieren jede Code-Änderung so, dass auch Nicht-Entwickler:innen verstehen, was sich ändert und warum. Transparenz für alle Stakeholder.',
   },
   {
     title: 'Retrospektiven & Learnings',
@@ -90,8 +89,8 @@ const TransparenzPage: React.FC = () => {
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
               Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert
-              wird. Wir kommentieren Pull Requests so, dass Sie sie auch als Nicht-Entwicklerin nachvollziehen können.
-              Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten.
+              wird. Wir dokumentieren Code-Änderungen so, dass Sie sie auch als Nicht-Entwicklerin nachvollziehen
+              können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten.
             </p>
             <div className="flex flex-wrap gap-4">
               <MagneticButton className="inline-flex">
@@ -114,9 +113,7 @@ const TransparenzPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>
-                  Live-Dokumentation in Git, eigenen Notiz-Sharing-Systemen und Tickets statt Präsentationen im Nachgang
-                </span>
+                <span>Live-Dokumentation über unsere Kundenplattform statt Präsentationen im Nachgang</span>
               </li>
               <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
@@ -148,7 +145,7 @@ const TransparenzPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Audits bleiben möglich, weil jedes Artefakt versioniert ist</span>
+                <span>Audits bleiben möglich, weil alle Änderungen nachvollziehbar sind</span>
               </li>
             </ul>
           </div>
@@ -176,9 +173,8 @@ const TransparenzPage: React.FC = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Ablauf</p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Transparenz von Tag 1 an</h2>
             <p className="text-base leading-relaxed text-text-secondary">
-              Wir starten jedes Projekt mit einem Onboarding in Ihre Tools: Git, eigene Notiz-Sharing-Systeme, Tickets,
-              Slack. Sie erhalten Admin-Rechte und sehen jeden Commit, jedes Ticket, jede Entscheidung – live und
-              ungefiltert.
+              Wir starten jedes Projekt mit einem Onboarding in Ihre Tools: Versionskontrolle, Notiz-Systeme, Tickets.
+              Sie erhalten Zugang und sehen jede Änderung, jedes Ticket, jede Entscheidung – live und ungefiltert.
             </p>
           </div>
           <div className="space-y-6">

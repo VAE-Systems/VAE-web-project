@@ -21,14 +21,17 @@
 import FeaturePill from '@/components/ui/FeaturePill'
 import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/content/shared/faqData'
+import { animate, motion, useInView } from 'framer-motion'
 import {
   type LucideIcon,
   Activity,
+  AlertCircle,
   ArrowUpRight,
   Brain,
   Building2,
   Check,
   CheckCircle2,
+  Clock,
   Cloud,
   Layers,
   Lightbulb,
@@ -37,11 +40,12 @@ import {
   Server,
   ShieldCheck,
   Target,
+  TrendingDown,
   TrendingUp,
   Users,
   Zap,
 } from 'lucide-react'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
@@ -230,6 +234,30 @@ const reasonCards: Array<{ icon: LucideIcon; title: string; description: string 
   },
 ]
 
+// ── 🎨 ANIMATED COUNTER COMPONENT ──
+const AnimatedCounter: React.FC<{ value: number; className?: string }> = ({ value, className }) => {
+  const [count, setCount] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, value, {
+        duration: 2,
+        ease: 'easeOut',
+        onUpdate: latest => setCount(Math.round(latest)),
+      })
+      return () => controls.stop()
+    }
+  }, [isInView, value])
+
+  return (
+    <span ref={ref} className={className}>
+      {count}%
+    </span>
+  )
+}
+
 const BetreuungPage: React.FC = () => {
   const faqAccordionItems = useMemo(() => {
     const careFaqs = faqEntries.filter(entry => entry.tags?.includes('betreuung'))
@@ -253,7 +281,7 @@ const BetreuungPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="relative z-0 bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="Langfristige IT-Betreuung Heidelberg | VAE Systems"
         description="Outsourcen Sie Ihr IT-Rückgrat an VAE: Infrastruktur-Managed oder Full-Partnership – mit Fokus auf Ressourcen, KI-Optimierung und langfristige Stabilität."
@@ -281,10 +309,11 @@ const BetreuungPage: React.FC = () => {
         }}
       />
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-gray-200 bg-gradient-to-br from-gray-50 via-white to-gray-50 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
-        {/* Hero Background Image - Fixed Wallpaper Effect */}
+      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-gradient-to-br from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
+        {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
+        {/* Desktop version with fixed attachment */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.40] dark:opacity-[0.20]"
+          className="pointer-events-none absolute inset-0 hidden opacity-[0.40] dark:opacity-[0.20] md:block"
           style={{
             backgroundImage: 'url(/images/optimized/P1010798.JPG.webp)',
             backgroundAttachment: 'fixed',
@@ -294,8 +323,19 @@ const BetreuungPage: React.FC = () => {
           }}
           role="presentation"
         />
+        {/* Mobile version without fixed (iOS Safari compatibility) */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.40] dark:opacity-[0.20] md:hidden"
+          style={{
+            backgroundImage: 'url(/images/optimized/P1010798.JPG.webp)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+          role="presentation"
+        />
         <div className="pointer-events-none absolute inset-0 opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.10),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.06),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.18),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)]" />
         </div>
         {/* Light Mode: subtiler Glasmorphism-Hintergrund */}
         <div className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[85%] max-w-4xl -translate-y-1/2 rounded-3xl bg-white/30 backdrop-blur-[2px] dark:bg-transparent dark:backdrop-blur-none" />
@@ -333,11 +373,11 @@ const BetreuungPage: React.FC = () => {
               </button>
             </MagneticButton>
           </div>
-          <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm font-semibold">
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             {trustBadges.map(badge => (
               <span
                 key={badge}
-                className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary"
+                className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/20 bg-vae-turquoise/5 px-4 py-2 text-sm font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary"
               >
                 <Check className="h-4 w-4 text-vae-turquoise" /> {badge}
               </span>
@@ -346,209 +386,216 @@ const BetreuungPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Ressourcen-Shift: Von Firefighting zu Innovation */}
+      {/* DORA Data Section: Operations-Overhead Problem */}
       <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
-        <div className="container-vae relative">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
+        <div className="container-vae relative space-y-20">
+          {/* Block 1: DORA 2024 Hero */}
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.3em] text-orange-700 dark:border-orange-500/20 dark:bg-orange-950/20 dark:text-orange-300">
+              DORA 2024 Report
+            </div>
+            <div className="mb-6 flex justify-center">
+              <TrendingDown className="h-12 w-12 text-orange-500 dark:text-orange-400" />
+            </div>
             <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
-              Von Firefighting zu Innovation.
+              Operations-Overhead wird zum wachsenden Problem
             </h2>
+            <p className="mt-6 text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+              Laut DORA 2024 Report sank der Anteil von High-Performer Teams von 31% auf 22%. Gleichzeitig wuchs der
+              Anteil der Low-Performer von 17% auf 25%.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-gray-600 dark:text-text-secondary/80">
+              Mehr Teams kämpfen mit Operational Overhead – auch große Tech-Unternehmen mit dedizierten DevOps-Teams.
+            </p>
+            <p className="mt-8 text-sm text-gray-500 dark:text-text-secondary/60">
+              Quelle:{' '}
+              <a
+                href="https://dora.dev/research/2024/dora-report/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-gray-400 underline-offset-2 transition-colors hover:text-vae-turquoise hover:decoration-vae-turquoise dark:decoration-gray-500"
+              >
+                DORA Accelerate State of DevOps Report 2024, Google Cloud
+              </a>
+            </p>
           </div>
 
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Visual: Balkenvergleich */}
-            <div className="space-y-10">
-              {/* Zustand A: Ohne VAE */}
-              <div>
-                <h3 className="mb-6 text-lg font-semibold text-gray-900 dark:text-white">Ohne VAE</h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="mb-2 flex items-baseline justify-between">
-                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
-                        Wartung & Firefighting
-                      </span>
-                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">60–70%</span>
-                    </div>
-                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-red-400 to-orange-400 shadow-sm transition-all duration-700"
-                        style={{ width: '65%' }}
-                      />
-                    </div>
+          {/* Block 2: Animated Comparison */}
+          <div className="grid gap-8 md:grid-cols-2">
+            {/* Left: Typische IT-Abteilung */}
+            <motion.div
+              className="rounded-3xl border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Typische IT-Abteilung</h3>
+              <div className="space-y-6">
+                {/* Unplanned Work */}
+                <div>
+                  <div className="mb-3 flex items-baseline justify-between">
+                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Unplanned Work</span>
+                    <AnimatedCounter
+                      value={27}
+                      className="text-5xl font-bold tabular-nums text-orange-600 dark:text-orange-400"
+                    />
                   </div>
-                  <div>
-                    <div className="mb-2 flex items-baseline justify-between">
-                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
-                        Innovation & Produkt
-                      </span>
-                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">30–40%</span>
-                    </div>
-                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm transition-all duration-700"
-                        style={{ width: '35%' }}
-                      />
-                    </div>
+                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                    <motion.div
+                      className="h-full rounded-full bg-gradient-to-r from-red-400 to-orange-400 shadow-sm"
+                      initial={{ width: '0%' }}
+                      whileInView={{ width: '27%' }}
+                      viewport={{ once: true, margin: '-100px' }}
+                      transition={{ duration: 2, ease: 'easeOut', delay: 0.2 }}
+                    />
+                  </div>
+                </div>
+                {/* Planned Work */}
+                <div>
+                  <div className="mb-3 flex items-baseline justify-between">
+                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Planned Work</span>
+                    <AnimatedCounter
+                      value={73}
+                      className="text-5xl font-bold tabular-nums text-gray-900 dark:text-text-light"
+                    />
+                  </div>
+                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                    <motion.div
+                      className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm"
+                      initial={{ width: '0%' }}
+                      whileInView={{ width: '73%' }}
+                      viewport={{ once: true, margin: '-100px' }}
+                      transition={{ duration: 2, ease: 'easeOut', delay: 0.2 }}
+                    />
                   </div>
                 </div>
               </div>
+              <p className="mt-6 text-base text-gray-600 dark:text-text-secondary/80">
+                27% der Zeit für Firefighting, Bugfixes & technische Schuld
+              </p>
+            </motion.div>
 
-              {/* Zustand B: Mit VAE */}
-              <div>
-                <h3 className="mb-6 text-lg font-semibold text-gray-900 dark:text-white">Mit VAE</h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="mb-2 flex items-baseline justify-between">
-                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
-                        Koordination & Management
-                      </span>
-                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">20–30%</span>
-                    </div>
-                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-gray-400 to-gray-500 shadow-sm transition-all duration-700"
-                        style={{ width: '25%' }}
-                      />
-                    </div>
+            {/* Right: High-Performer Teams */}
+            <motion.div
+              className="rounded-3xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-8 dark:border-vae-turquoise/20 dark:bg-vae-turquoise/10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+            >
+              <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">High-Performer Teams</h3>
+              <div className="space-y-6">
+                {/* Unplanned Work */}
+                <div>
+                  <div className="mb-3 flex items-baseline justify-between">
+                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Unplanned Work</span>
+                    <AnimatedCounter
+                      value={21}
+                      className="text-5xl font-bold tabular-nums text-gray-700 dark:text-gray-300"
+                    />
                   </div>
-                  <div>
-                    <div className="mb-2 flex items-baseline justify-between">
-                      <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">
-                        Innovation & Produkt
-                      </span>
-                      <span className="text-xl font-bold tabular-nums text-gray-900 dark:text-text-light">70–80%</span>
-                    </div>
-                    <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm transition-all duration-700"
-                        style={{ width: '75%' }}
-                      />
-                    </div>
+                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                    <motion.div
+                      className="h-full rounded-full bg-gradient-to-r from-gray-400 to-gray-500 shadow-sm"
+                      initial={{ width: '0%' }}
+                      whileInView={{ width: '21%' }}
+                      viewport={{ once: true, margin: '-100px' }}
+                      transition={{ duration: 2, ease: 'easeOut', delay: 0.4 }}
+                    />
+                  </div>
+                </div>
+                {/* Planned Work */}
+                <div>
+                  <div className="mb-3 flex items-baseline justify-between">
+                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Planned Work</span>
+                    <AnimatedCounter
+                      value={79}
+                      className="text-5xl font-bold tabular-nums text-vae-turquoise dark:text-vae-turquoise"
+                    />
+                  </div>
+                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
+                    <motion.div
+                      className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm"
+                      initial={{ width: '0%' }}
+                      whileInView={{ width: '79%' }}
+                      viewport={{ once: true, margin: '-100px' }}
+                      transition={{ duration: 2, ease: 'easeOut', delay: 0.4 }}
+                    />
                   </div>
                 </div>
               </div>
-            </div>
+              <p className="mt-6 text-base text-gray-700 dark:text-text-secondary">
+                21% Unplanned Work – 6% mehr Kapazität für Innovation
+              </p>
+            </motion.div>
+          </div>
 
-            {/* Erklärender Text */}
-            <div className="space-y-6">
-              <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
-                Wir drehen das Verhältnis um. Routineaufgaben wandern zu uns, Ihr Team gewinnt Kapazität für Produkt,
-                Kund:innen und strategische Projekte.
-              </p>
-              <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
-                Die typische IT-Abteilung verbringt den Großteil ihrer Zeit mit Wartung, Patches und Incident-Response.
-                Wertvolle Ressourcen, die dem Kerngeschäft fehlen. Mit VAE als Managed-Operations-Partner verschieben
-                Sie diese Last und schaffen Raum für das, was wirklich zählt – Innovation, Kundenerfolg und Wachstum.
-              </p>
-              <div className="rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-6">
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Das Ergebnis – Ihr Team fokussiert sich auf Wertschöpfung, nicht auf Firefighting.
+          {/* Differenz-Highlight */}
+          <div className="mx-auto max-w-2xl rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-6 text-center dark:border-vae-turquoise/20 dark:bg-vae-turquoise/5">
+            <p className="text-base font-semibold text-gray-900 dark:text-white">
+              6% mehr Kapazität = ca. 240-260 Stunden/Jahr für Innovation statt Firefighting
+            </p>
+            <p className="mt-2 text-sm text-gray-600 dark:text-text-secondary/70">
+              Quelle:{' '}
+              <a
+                href="https://dora.dev/research/2016/2016-state-of-devops-report.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-gray-400 underline-offset-2 transition-colors hover:text-vae-turquoise hover:decoration-vae-turquoise dark:decoration-gray-500"
+              >
+                DORA State of DevOps Report 2016
+              </a>
+            </p>
+          </div>
+
+          {/* Block 3: TCO Breakdown (Icon-Grid) */}
+          <div className="mx-auto max-w-4xl space-y-8">
+            <h3 className="text-center text-3xl font-semibold text-gray-900 dark:text-white">
+              Die versteckten Kosten von Operational Overhead
+            </h3>
+            <div className="flex flex-wrap justify-center gap-6 text-center">
+              {/* Item 1 */}
+              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                <Clock className="h-7 w-7 text-vae-turquoise" />
+                <p className="text-base text-gray-700 dark:text-text-secondary">
+                  5-10 Stunden/Monat für Wartung & Updates
+                </p>
+              </div>
+              {/* Item 2 */}
+              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                <AlertCircle className="h-7 w-7 text-vae-turquoise" />
+                <p className="text-base text-gray-700 dark:text-text-secondary">
+                  Nächtliche Incidents statt geplanter Wartung
+                </p>
+              </div>
+              {/* Item 3 */}
+              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                <TrendingDown className="h-7 w-7 text-vae-turquoise" />
+                <p className="text-base text-gray-700 dark:text-text-secondary">
+                  Keine Zeit für strategische Optimierung
+                </p>
+              </div>
+              {/* Item 4 */}
+              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                <Zap className="h-7 w-7 text-vae-turquoise" />
+                <p className="text-base text-gray-700 dark:text-text-secondary">
+                  Innovation blockiert durch Operational Overhead
+                </p>
+              </div>
+              {/* Item 5 */}
+              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                <Users className="h-7 w-7 text-vae-turquoise" />
+                <p className="text-base text-gray-700 dark:text-text-secondary">
+                  IT-Expertise fehlt bei Produktentscheidungen
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2: Problem */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
-        <div className="section-card-backdrop" />
-        <div className="container-vae relative grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Das Problem</p>
-            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
-              Warum haben Sie eigentlich einen IT-Admin?
-            </h2>
-            <p className="text-lg text-gray-700 dark:text-text-secondary">
-              Jemand aus Ihrem Team kümmert sich um Updates, Backups und Incidents. Das ist wichtig – aber es kostet
-              Ressourcen. Ressourcen-Based-View bedeutet: Jede Stunde Infrastruktur-Overhead fehlt beim Produkt, beim
-              Kunden oder bei Wachstum.
+            <p className="mx-auto max-w-3xl text-center text-sm text-gray-600 dark:text-text-secondary/70">
+              Ein deutscher IT-Admin kostet durchschnittlich ~67.5k€/Jahr (inkl. Lohnnebenkosten & Infrastruktur).
+              Managed Services können diese Ressource entlasten oder komplett ersetzen.
             </p>
-            <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6 dark:border-white/5 dark:bg-white/5">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise/70">
-                Die versteckten Kosten
-              </p>
-              <ul className="mt-4 space-y-3 text-gray-700 dark:text-text-secondary">
-                {hiddenCosts.map(item => (
-                  <li key={item} className="flex items-start gap-3 text-sm md:text-base">
-                    <CheckCircle2 className="mt-1 h-4 w-4 text-vae-turquoise" /> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p className="text-lg text-gray-700 dark:text-text-secondary">
-              Outsourcing dieser Verantwortung befreit Ressourcen. Ihr Team baut Produkte, betreut Kunden und treibt
-              Business Growth – wir halten das IT-Rückgrat stabil.
-            </p>
-          </div>
-          <div className="dark:via-white/3 relative overflow-hidden rounded-3xl border border-vae-turquoise/30 bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8 shadow-lg backdrop-blur-sm dark:border-vae-turquoise/20 dark:from-white/5 dark:to-transparent">
-            {/* Subtle glow effect at top */}
-            <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_top,rgba(52,211,153,0.12),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(8,255,193,0.15),transparent_60%)]" />
-
-            <div className="relative z-10">
-              <div className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">
-                Ressourcen-Fokus
-              </div>
-              <p className="text-lg text-gray-700 dark:text-text-secondary">
-                Infrastruktur-Aufgaben wirken klein, summieren sich aber zu verlorenen Monaten. Unsere Visualisierung
-                zeigt typischen Ressourcenverbrauch in Tech-Teams.
-              </p>
-              <div className="mt-8 space-y-6">
-                {resourceSplit.map(item => (
-                  <div key={item.label}>
-                    <div className="mb-3 flex items-baseline justify-between gap-4">
-                      <span className="flex-1 text-sm font-medium text-gray-700 dark:text-text-secondary">
-                        {item.label}
-                      </span>
-                      <span className="w-14 text-right text-2xl font-bold tabular-nums text-gray-900 dark:text-text-light">
-                        {item.value}%
-                      </span>
-                    </div>
-                    <div className="h-3 rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm transition-all duration-700 ease-out"
-                        style={{ width: `${item.value}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-8 text-sm text-gray-700 dark:text-text-secondary">
-                Unser Ziel: Wartung auf{' '}
-                <span className="font-semibold text-gray-900 dark:text-text-light">unter 20%</span> drücken und
-                Innovation verdoppeln – mit klarem Fokus auf Wertschöpfung statt Firefighting.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3: Lösung */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
-        <div className="section-card-backdrop" />
-        <div className="container-vae relative space-y-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Die Lösung</p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
-              Outsourcing mit Sinn: Ressourcen-Fokus
-            </h2>
-            <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
-              Statt fragmentierter IT-Verwaltung erhalten Sie ein komplettes Rückgrat. Wir übernehmen Betrieb, Security,
-              KI-Optimierung und Innovation. Sie nutzen Ihre Ressourcen für Kernkompetenzen und wachsen schneller.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {resourcePillars.map(pillar => (
-              <div
-                key={pillar.title}
-                className="rounded-3xl border border-gray-200 bg-gradient-to-b from-gray-50 to-white p-6 transition hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-white/5 dark:from-white/5 dark:to-transparent"
-              >
-                <pillar.icon className="mb-4 h-10 w-10 text-vae-turquoise" />
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{pillar.title}</h3>
-                <p className="mt-3 text-sm text-gray-700 dark:text-text-secondary">{pillar.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -562,7 +609,7 @@ const BetreuungPage: React.FC = () => {
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Direkte Kommunikation, klare Prozesse
             </h2>
-            <p className="mt-4 text-base text-gray-700 dark:text-text-secondary md:text-lg">
+            <p className="mt-4 text-base text-gray-700 dark:text-text-secondary">
               Transparenz und enge Zusammenarbeit sind der Kern unserer Betreuung
             </p>
           </header>
@@ -655,7 +702,7 @@ const BetreuungPage: React.FC = () => {
       {/* Section 4: Service Levels */}
       <section
         id="service-levels"
-        className="section-card-container border-b border-gray-200 bg-white py-24 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b border-gray-200 bg-[#f2fff8] py-24 dark:border-white/5 dark:bg-bg-darker"
       >
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
@@ -773,7 +820,7 @@ const BetreuungPage: React.FC = () => {
                           level.highlighted ? 'btn-convert' : 'btn-outline'
                         }`}
                       >
-                        <span className="relative z-10 flex items-center justify-center gap-2">
+                        <span className="relative flex items-center justify-center gap-2">
                           {level.ctaLabel}
                           {level.highlighted && <span className="opacity-70">→</span>}
                         </span>
@@ -1043,7 +1090,7 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 6: Gründe */}
-      <section className="border-b border-gray-200 bg-gray-50 py-20 dark:border-white/5 dark:bg-transparent">
+      <section className="border-b border-gray-200 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-transparent">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Warum VAE?</p>
@@ -1070,7 +1117,7 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 7: FAQ */}
-      <section className="bg-gradient-to-b from-white via-gray-50 to-white py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">FAQ</p>
@@ -1084,7 +1131,7 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 8: CTA */}
-      <section className="border-t border-gray-200 bg-gray-50 py-16 dark:border-white/5 dark:bg-transparent md:py-20">
+      <section className="border-t border-gray-200 bg-[#f2fff8] py-16 dark:border-white/5 dark:bg-transparent md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">
             Bereit für den nächsten Schritt?

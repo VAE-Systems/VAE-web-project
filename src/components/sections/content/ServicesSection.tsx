@@ -154,7 +154,7 @@ const ServicesSection: React.FC = () => {
     >
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_35%,rgba(var(--vae-turquoise-rgb),0.12),transparent_62%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_35%,rgba(var(--vae-turquoise-rgb),0.20),transparent_62%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_75%,rgba(var(--vae-turquoise-rgb),0.08),transparent_55%)]" />
       </div>
 

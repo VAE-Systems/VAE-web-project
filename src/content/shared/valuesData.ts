@@ -27,10 +27,10 @@ export const VALUES_DATA: Value[] = [
     intro:
       'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir dokumentieren jede Entscheidung so, dass Sie sie auch als Nicht‑Entwicklerin nachvollziehen können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
     benefits: [
-      'Live-Dokumentation in Git und Tickets statt Präsentationen im Nachgang',
+      'Live-Dokumentation über unsere Kundenplattform statt Präsentationen im Nachgang',
       'Risiken und Annahmen werden sofort gekennzeichnet – kein Schönreden',
       'Open-Source-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur',
-      'Audits bleiben möglich, weil jedes Artefakt versioniert ist',
+      'Audits bleiben möglich, weil alle Änderungen nachvollziehbar sind',
     ],
     deepDive:
       'Digitale Partnerschaften scheitern selten an Technik, sondern am Misstrauen. Sobald Informationen gefiltert werden, verlieren Entscheider:innen die Kontrolle. Deshalb legen wir Architektur-Entscheidungen, Budgetstände und Risiken sofort offen – sogar wenn das unbequem ist.\n\nJedes Artefakt landet in Ihren Repositories: Meeting-Notizen, Architektur-Entwürfe, Migrationspläne. Wir kommentieren Tickets so, dass Sie Entscheidungen nachvollziehen können, auch wenn Sie nicht täglich committen. So können Sie prüfen, statt blind zu vertrauen.\n\nTransparenz schützt auch uns. Wenn Erwartungen schriftlich festgehalten sind, merken alle früh, wenn etwas kippt. Das beschleunigt Eskalationen, erhöht Verlässlichkeit und macht Zusammenarbeit messbar.',
@@ -119,8 +119,8 @@ export const VALUES_DATA: Value[] = [
       'Technologie wirkt nur, wenn sie sich richtig anfühlt. Wir verbinden Performance, Accessibility und visuelle Präzision, damit Nutzer:innen intuitiv ins Ziel kommen. Details wie Motion, Microcopy und Error-States sind geplant, nicht zufällig. Design ist keine Dekoration, sondern der sichtbare Teil Ihrer Produktstrategie.',
     benefits: [
       'UX-Flows werden getestet, bevor sie live gehen',
-      'Motion und Microcopy unterstützen Orientierung und Markenwirkung',
-      'Design- und Dev-Teams arbeiten im selben Token- und Komponenten-System',
+      'Animationen und durchdachte Beschriftungen führen Nutzer:innen intuitiv durch die Anwendung (Motion und Microcopy)',
+      'Design macht Qualität sichtbar und erlebbar – wie Sie auf dieser Website sehen',
       'Performance-Budgets und Accessibility-Checks sind verbindlich',
     ],
     deepDive:

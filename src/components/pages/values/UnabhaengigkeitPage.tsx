@@ -130,7 +130,7 @@ const UnabhaengigkeitPage: React.FC = () => {
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Sie besitzen Deployment-Pipelines und Zugänge selbst</span>
+                <span>Sie besitzen alle Zugänge und können jederzeit selbst deployen</span>
               </li>
             </ul>
           </div>

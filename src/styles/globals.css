@@ -724,6 +724,16 @@ body.using-keyboard *:focus {
     will-change: transform, box-shadow, border-color;
     cursor: default; /* Prevent cursor from showing as clickable */
   }
+
+  /* Light mode: stronger shadows and better definition */
+  .theme-light .card-vae {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 4px 16px -4px rgba(0, 0, 0, 0.08),
+      0 2px 8px -2px rgba(0, 0, 0, 0.05);
+  }
+
   .card-vae:hover {
     transform: translateY(-2px); /* Reduced lift for smoother feel */
     border-color: hsla(var(--color-vae-turquoise), 0.3); /* Softer border */
@@ -731,12 +741,14 @@ body.using-keyboard *:focus {
       0 8px 25px -5px hsla(var(--color-vae-turquoise), 0.15),
       0 0 0 1px hsla(var(--color-vae-turquoise), 0.1);
   }
-  /* Light mode: card hover stays neutral (no green borders/shadows) */
+
+  /* Light mode: stronger hover effect with lifted shadow */
   .theme-light .card-vae:hover {
-    border-color: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.12);
     box-shadow:
-      0 6px 20px -5px rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(0, 0, 0, 0.05);
+      0 12px 32px -8px rgba(0, 0, 0, 0.15),
+      0 4px 16px -4px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(0, 0, 0, 0.06);
   }
 
   /* Tech Stack Components */

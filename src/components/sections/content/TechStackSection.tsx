@@ -338,7 +338,7 @@ const TechStackSection: React.FC = () => {
     <section
       id="tech-stack"
       className={
-        'surface-alt overlay-grid overlay-diag edge-glow-top tech-stack-interactive relative overflow-hidden border-t border-vae-turquoise/10 py-24 md:py-32 ' +
+        'surface-alt overlay-grid overlay-diag edge-glow-top tech-stack-interactive via-sage-50/30 to-sage-50/60 relative overflow-hidden border-t border-vae-turquoise/10 bg-gradient-to-b from-white py-24 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker md:py-32 ' +
         (active ? 'tech-stack-active' : '')
       }
       ref={sectionRef}

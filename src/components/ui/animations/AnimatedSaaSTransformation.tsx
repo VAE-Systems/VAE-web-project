@@ -975,11 +975,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                       style={{
                         left: `${centerX}%`,
                         top: `${centerY}%`,
-                        width: 'clamp(90px, 21vw, 130px)',
-                        height: 'clamp(90px, 21vw, 130px)',
+                        width: 'clamp(88px, 20vw, 125px)',
+                        height: 'clamp(88px, 20vw, 125px)',
                         padding: 'clamp(6px, 1.3vw, 10px)',
-                        marginLeft: 'calc(-0.5 * clamp(90px, 21vw, 130px))',
-                        marginTop: 'calc(-0.5 * clamp(90px, 21vw, 130px))',
+                        marginLeft: 'calc(-0.5 * clamp(88px, 20vw, 125px))',
+                        marginTop: 'calc(-0.5 * clamp(88px, 20vw, 125px))',
                         zIndex: 2,
                         transform: 'translateZ(0)',
                       }}
@@ -996,11 +996,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                     >
                       {/* Blur-Glow Background per Cluster */}
                       <div
-                        className="absolute inset-0 -z-10 transition-transform duration-[150ms] ease-out group-hover:scale-105 group-hover:will-change-transform"
+                        className="pointer-events-none absolute inset-0 -z-10 transition-transform duration-[150ms] ease-out group-hover:scale-105 group-hover:will-change-transform"
                         style={{
                           background: `radial-gradient(100% 100%, ${glowColors[cluster.id as keyof typeof glowColors]} 0%, rgba(0,0,0,0) 70%)`,
                           filter: isAIAgents ? 'blur(20px)' : 'blur(18px)',
-                          transform: 'scale(1.6)',
+                          transform: 'scale(1.5)',
                           animation: isAIAgents && isInViewport ? 'pulse-glow 2.5s ease-in-out infinite' : 'none',
                           animationDelay: isAIAgents ? `${baseDelay + 1.5}s` : '0s',
                         }}

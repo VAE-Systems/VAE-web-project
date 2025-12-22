@@ -304,7 +304,7 @@ const ProductVaeCorePage: React.FC = () => {
       {/* PROBLEM SECTION */}
       <section
         id="problem"
-        className="border-border-primary/5 from-bg-primary/20 to-bg-primary/5 border-b bg-gradient-to-b py-24 dark:from-bg-dark/20 dark:to-bg-darker/5"
+        className="border-border-primary/5 via-sage-50/30 border-b bg-gradient-to-b from-white to-white py-24 dark:from-bg-dark/20 dark:to-bg-darker/5"
       >
         <div className="container-vae max-w-6xl">
           <div className="mb-16 text-center">
@@ -343,36 +343,40 @@ const ProductVaeCorePage: React.FC = () => {
       {/* VALUE PROPOSITIONS */}
       <section
         id="value-props"
-        className="from-bg-primary/40 to-bg-primary/10 bg-gradient-to-b py-24 dark:from-bg-dark/40 dark:to-bg-darker/10"
+        className="relative overflow-hidden bg-gradient-to-b from-white to-white py-24 dark:from-bg-dark/40 dark:to-bg-darker/10"
       >
-        <div className="container-vae max-w-6xl">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-3xl font-bold text-text-light drop-shadow-sm md:text-4xl">
-              {safeView.value_props.headline}
-            </h2>
-          </div>
+        {/* Subtle radial gradient overlay for lightmode */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(229,241,232,0.4)_0%,transparent_60%)] dark:bg-transparent" />
+        <div className="relative z-10">
+          <div className="container-vae max-w-6xl">
+            <div className="mb-16 text-center">
+              <h2 className="mb-6 text-3xl font-bold text-text-light drop-shadow-sm md:text-4xl">
+                {safeView.value_props.headline}
+              </h2>
+            </div>
 
-          <div className="grid gap-10 md:grid-cols-2">
-            {safeView.value_props.pillars.map((pillar: any, i: number) => {
-              const IconComponent =
-                pillar.icon === 'Layers'
-                  ? Layers
-                  : pillar.icon === 'Lock'
-                    ? Lock
-                    : pillar.icon === 'RefreshCw'
-                      ? RefreshCw
-                      : pillar.icon === 'ShieldCheck'
-                        ? ShieldCheck
-                        : Layers
-              return (
-                <div key={i} className="card-vae">
-                  <IconComponent className="mx-auto mb-6 h-12 w-12 text-vae-turquoise" />
-                  <h3 className="mb-4 text-xl font-bold text-text-light">{pillar.title}</h3>
-                  <p className="mb-4 text-base leading-relaxed text-text-secondary">{pillar.body}</p>
-                  <p className="text-sm italic text-text-muted">{pillar.detail}</p>
-                </div>
-              )
-            })}
+            <div className="grid gap-10 md:grid-cols-2">
+              {safeView.value_props.pillars.map((pillar: any, i: number) => {
+                const IconComponent =
+                  pillar.icon === 'Layers'
+                    ? Layers
+                    : pillar.icon === 'Lock'
+                      ? Lock
+                      : pillar.icon === 'RefreshCw'
+                        ? RefreshCw
+                        : pillar.icon === 'ShieldCheck'
+                          ? ShieldCheck
+                          : Layers
+                return (
+                  <div key={i} className="card-vae">
+                    <IconComponent className="mx-auto mb-6 h-12 w-12 text-vae-turquoise" />
+                    <h3 className="mb-4 text-xl font-bold text-text-light">{pillar.title}</h3>
+                    <p className="mb-4 text-base leading-relaxed text-text-secondary">{pillar.body}</p>
+                    <p className="text-sm italic text-text-muted">{pillar.detail}</p>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </section>

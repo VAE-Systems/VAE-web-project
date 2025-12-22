@@ -26,6 +26,7 @@ import {
   type LucideIcon,
   Activity,
   AlertCircle,
+  ArrowRight,
   ArrowUpRight,
   Brain,
   Building2,
@@ -38,9 +39,9 @@ import {
   Minus,
   RefreshCcw,
   Server,
+  Shield,
   ShieldCheck,
   Target,
-  TrendingDown,
   TrendingUp,
   Users,
   Zap,
@@ -166,20 +167,21 @@ const detailedServices: Array<{ icon: LucideIcon; title: string; description: st
   },
   {
     icon: Activity,
-    title: '24/7-Monitoring',
+    title: 'Proaktives Monitoring',
     description:
-      'Echtzeit-Überwachung für Uptime, Performance, Error-Logs und Ressourcen. Probleme werden proaktiv behoben.',
+      'Echtzeit-Überwachung für Uptime, Performance, Error-Logs und Ressourcen. Automatisierte Alerts während Geschäftszeiten. Für kritische Systeme: Erweiterte SLAs außerhalb der Geschäftszeiten verfügbar.',
   },
   {
     icon: ShieldCheck,
     title: 'Security & Backup',
     description:
-      'Tägliche, verschlüsselte Backups, Firewall-Management, SSL-Zertifikate und Penetration-Tests. Infrastruktur wird gehärtet.',
+      'Tägliche, verschlüsselte Backups, Firewall-Management, SSL-Zertifikate und regelmäßige Penetration-Tests. Ihre Infrastruktur wird kontinuierlich gehärtet und abgesichert.',
   },
   {
     icon: Zap,
     title: 'Performance-Optimierung',
-    description: 'Datenbank-Tuning, Caching, Ressourcen-Management. Wenn Last steigt, wächst die Infrastruktur mit.',
+    description:
+      'Datenbank-Tuning, Caching und Ressourcen-Management für optimale Performance. Wenn die Last steigt, wächst die Infrastruktur skalierbar mit.',
   },
   {
     icon: Brain,
@@ -191,7 +193,7 @@ const detailedServices: Array<{ icon: LucideIcon; title: string; description: st
     icon: Lightbulb,
     title: 'Potenziale & Trends',
     description:
-      'Monatliche Reviews zu Trends, Open-Source-Neuheiten und Optimierungen. Wir liefern Vorschläge, bevor etwas brennt.',
+      'Monatliche Reviews zu aktuellen Trends, Open-Source-Neuheiten und strategischen Optimierungen. Wir liefern proaktive Vorschläge, bevor etwas brennt.',
   },
   {
     icon: Users,
@@ -386,217 +388,173 @@ const BetreuungPage: React.FC = () => {
         </div>
       </section>
 
-      {/* DORA Data Section: Operations-Overhead Problem */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+      {/* IT-Kapazität Engpass Section */}
+      <section className="section-card-container border-b border-gray-200 bg-white py-16 dark:border-white/5 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
-        <div className="container-vae relative space-y-20">
-          {/* Block 1: DORA 2024 Hero */}
+        <div className="container-vae relative space-y-12">
+          {/* Block 1: Intro */}
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.3em] text-orange-700 dark:border-orange-500/20 dark:bg-orange-950/20 dark:text-orange-300">
-              DORA 2024 Report
-            </div>
-            <div className="mb-6 flex justify-center">
-              <TrendingDown className="h-12 w-12 text-orange-500 dark:text-orange-400" />
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.3em] text-orange-700 dark:border-orange-500/20 dark:bg-orange-950/20 dark:text-orange-300">
+              IT-Kapazität ist der Engpass
             </div>
             <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
-              Operations-Overhead wird zum wachsenden Problem
+              Warum Managed Operations sinnvoll sind
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-gray-700 dark:text-text-secondary">
-              Laut DORA 2024 Report sank der Anteil von High-Performer Teams von 31% auf 22%. Gleichzeitig wuchs der
-              Anteil der Low-Performer von 17% auf 25%.
+            <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+              Interne IT-Teams verlieren oft Kapazität an operative Aufgaben: ungeplante Störungen, Routine-Wartung,
+              Troubleshooting. Was bleibt für strategische Projekte und Innovation? Häufig zu wenig.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-gray-600 dark:text-text-secondary/80">
-              Mehr Teams kämpfen mit Operational Overhead – auch große Tech-Unternehmen mit dedizierten DevOps-Teams.
-            </p>
-            <p className="mt-8 text-sm text-gray-500 dark:text-text-secondary/60">
-              Quelle:{' '}
-              <a
-                href="https://dora.dev/research/2024/dora-report/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline decoration-gray-400 underline-offset-2 transition-colors hover:text-vae-turquoise hover:decoration-vae-turquoise dark:decoration-gray-500"
+          </div>
+
+          {/* Block 3: Problem vs Solution - Visual Split */}
+          <div className="relative mx-auto max-w-6xl">
+            {/* Arrow Connector - Desktop only */}
+            <div className="absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 md:block">
+              <motion.div
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-xl dark:bg-bg-darker"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                animate={{ scale: [1, 1.08, 1] }}
               >
-                DORA Accelerate State of DevOps Report 2024, Google Cloud
-              </a>
-            </p>
-          </div>
+                <ArrowRight className="h-6 w-6 text-vae-turquoise" />
+              </motion.div>
+            </div>
 
-          {/* Block 2: Animated Comparison */}
-          <div className="grid gap-8 md:grid-cols-2">
-            {/* Left: Typische IT-Abteilung */}
-            <motion.div
-              className="rounded-3xl border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-              <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">Typische IT-Abteilung</h3>
-              <div className="space-y-6">
-                {/* Unplanned Work */}
-                <div>
-                  <div className="mb-3 flex items-baseline justify-between">
-                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Unplanned Work</span>
-                    <AnimatedCounter
-                      value={27}
-                      className="text-5xl font-bold tabular-nums text-orange-600 dark:text-orange-400"
-                    />
-                  </div>
-                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-red-400 to-orange-400 shadow-sm"
-                      initial={{ width: '0%' }}
-                      whileInView={{ width: '27%' }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      transition={{ duration: 2, ease: 'easeOut', delay: 0.2 }}
-                    />
-                  </div>
-                </div>
-                {/* Planned Work */}
-                <div>
-                  <div className="mb-3 flex items-baseline justify-between">
-                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Planned Work</span>
-                    <AnimatedCounter
-                      value={73}
-                      className="text-5xl font-bold tabular-nums text-gray-900 dark:text-text-light"
-                    />
-                  </div>
-                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm"
-                      initial={{ width: '0%' }}
-                      whileInView={{ width: '73%' }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      transition={{ duration: 2, ease: 'easeOut', delay: 0.2 }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-6 text-base text-gray-600 dark:text-text-secondary/80">
-                27% der Zeit für Firefighting, Bugfixes & technische Schuld
-              </p>
-            </motion.div>
-
-            {/* Right: High-Performer Teams */}
-            <motion.div
-              className="rounded-3xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-8 dark:border-vae-turquoise/20 dark:bg-vae-turquoise/10"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-            >
-              <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">High-Performer Teams</h3>
-              <div className="space-y-6">
-                {/* Unplanned Work */}
-                <div>
-                  <div className="mb-3 flex items-baseline justify-between">
-                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Unplanned Work</span>
-                    <AnimatedCounter
-                      value={21}
-                      className="text-5xl font-bold tabular-nums text-gray-700 dark:text-gray-300"
-                    />
-                  </div>
-                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-gray-400 to-gray-500 shadow-sm"
-                      initial={{ width: '0%' }}
-                      whileInView={{ width: '21%' }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      transition={{ duration: 2, ease: 'easeOut', delay: 0.4 }}
-                    />
-                  </div>
-                </div>
-                {/* Planned Work */}
-                <div>
-                  <div className="mb-3 flex items-baseline justify-between">
-                    <span className="text-sm font-medium text-gray-700 dark:text-text-secondary">Planned Work</span>
-                    <AnimatedCounter
-                      value={79}
-                      className="text-5xl font-bold tabular-nums text-vae-turquoise dark:text-vae-turquoise"
-                    />
-                  </div>
-                  <div className="h-4 overflow-hidden rounded-full bg-gray-200 shadow-inner dark:bg-white/10">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-vae-turquoise to-[#5fffff] shadow-sm"
-                      initial={{ width: '0%' }}
-                      whileInView={{ width: '79%' }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      transition={{ duration: 2, ease: 'easeOut', delay: 0.4 }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-6 text-base text-gray-700 dark:text-text-secondary">
-                21% Unplanned Work – 6% mehr Kapazität für Innovation
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Differenz-Highlight */}
-          <div className="mx-auto max-w-2xl rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-6 text-center dark:border-vae-turquoise/20 dark:bg-vae-turquoise/5">
-            <p className="text-base font-semibold text-gray-900 dark:text-white">
-              6% mehr Kapazität = ca. 240-260 Stunden/Jahr für Innovation statt Firefighting
-            </p>
-            <p className="mt-2 text-sm text-gray-600 dark:text-text-secondary/70">
-              Quelle:{' '}
-              <a
-                href="https://dora.dev/research/2016/2016-state-of-devops-report.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline decoration-gray-400 underline-offset-2 transition-colors hover:text-vae-turquoise hover:decoration-vae-turquoise dark:decoration-gray-500"
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* Left: Problem (Orange) */}
+              <motion.div
+                className="relative overflow-hidden rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-white p-8 shadow-lg dark:border-orange-500/30 dark:from-orange-950/10 dark:to-bg-darker"
+                initial={{ opacity: 0, x: -30, scale: 0.95 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
               >
-                DORA State of DevOps Report 2016
-              </a>
-            </p>
+                <div className="relative mb-6">
+                  <motion.div
+                    className="mb-2 inline-flex items-center gap-2 rounded-full bg-orange-100 px-3 py-1 dark:bg-orange-900/30"
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span className="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400">
+                      Ohne VAE
+                    </span>
+                  </motion.div>
+                  <div className="mb-3 flex items-center gap-2">
+                    <AlertCircle className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+                    <span className="text-xs font-semibold uppercase tracking-wider text-orange-700 dark:text-orange-300">
+                      Das Problem
+                    </span>
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                    Operational Overhead blockiert Innovation
+                  </h4>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    { icon: AlertCircle, label: 'Ungeplante Incidents', desc: 'statt planbarer Wartung' },
+                    { icon: RefreshCcw, label: 'Manuelle Updates', desc: 'Patches & kleine Fixes' },
+                    { icon: Activity, label: 'Reaktives Troubleshooting', desc: 'keine klare Ursachenarbeit' },
+                    { icon: Clock, label: 'Keine Zeit für Strategie', desc: 'Innovation bleibt liegen' },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="group flex items-start gap-3 rounded-xl border border-orange-200 bg-white/50 p-3 transition-all duration-300 hover:scale-[1.02] hover:border-orange-400 hover:bg-orange-50/50 hover:shadow-lg dark:border-orange-500/20 dark:bg-white/5 dark:hover:border-orange-400/50 dark:hover:bg-orange-950/20"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-100 transition-transform duration-300 group-hover:scale-110 dark:bg-orange-900/30">
+                        <item.icon className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 transition-colors group-hover:text-orange-700 dark:text-white dark:group-hover:text-orange-300">
+                          {item.label}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-text-secondary/80">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Right: Solution (Türkis) */}
+              <motion.div
+                className="relative overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-gradient-to-br from-vae-turquoise/5 to-white p-8 shadow-lg dark:border-vae-turquoise/30 dark:from-vae-turquoise/10 dark:to-bg-darker"
+                initial={{ opacity: 0, x: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              >
+                <div className="relative mb-6">
+                  <motion.div
+                    className="mb-2 inline-flex items-center gap-2 rounded-full bg-vae-turquoise/10 px-3 py-1 dark:bg-vae-turquoise/20"
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span className="text-xs font-bold uppercase tracking-wider text-vae-turquoise">
+                      Mit VAE Managed Ops
+                    </span>
+                  </motion.div>
+                  <div className="mb-3 flex items-center gap-2">
+                    <Check className="h-5 w-5 text-vae-turquoise" />
+                    <span className="text-xs font-semibold uppercase tracking-wider text-vae-turquoise">
+                      Die Lösung
+                    </span>
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white">Managed Operations schaffen Luft</h4>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    { icon: Shield, label: 'Wir übernehmen Operations', desc: 'Monitoring, Updates, Wartung' },
+                    { icon: Target, label: 'Ihr Team fokussiert', desc: 'Produkt, Strategie & Wachstum' },
+                    { icon: Zap, label: 'Planbare Abläufe', desc: 'statt Ad-hoc-Eskalationen' },
+                    { icon: Users, label: 'Expertise on-demand', desc: 'ohne Vollzeit-Hiring' },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="group flex items-start gap-3 rounded-xl border border-vae-turquoise/20 bg-white/50 p-3 transition-all duration-300 hover:scale-[1.02] hover:border-vae-turquoise/60 hover:bg-vae-turquoise/5 hover:shadow-lg dark:border-vae-turquoise/20 dark:bg-white/5 dark:hover:border-vae-turquoise/50 dark:hover:bg-vae-turquoise/10"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110 dark:bg-vae-turquoise/20">
+                        <item.icon className="h-5 w-5 text-vae-turquoise" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 transition-colors group-hover:text-vae-turquoise dark:text-white dark:group-hover:text-vae-turquoise">
+                          {item.label}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-text-secondary/80">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
 
-          {/* Block 3: TCO Breakdown (Icon-Grid) */}
-          <div className="mx-auto max-w-4xl space-y-8">
-            <h3 className="text-center text-3xl font-semibold text-gray-900 dark:text-white">
-              Die versteckten Kosten von Operational Overhead
-            </h3>
-            <div className="flex flex-wrap justify-center gap-6 text-center">
-              {/* Item 1 */}
-              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-                <Clock className="h-7 w-7 text-vae-turquoise" />
-                <p className="text-base text-gray-700 dark:text-text-secondary">
-                  5-10 Stunden/Monat für Wartung & Updates
-                </p>
+          {/* Conclusion */}
+          <motion.div
+            className="mx-auto max-w-3xl overflow-hidden rounded-2xl border-2 border-vae-turquoise/40 bg-gradient-to-r from-vae-turquoise/10 via-vae-turquoise/5 to-transparent p-8 shadow-lg dark:border-vae-turquoise/30 dark:from-vae-turquoise/10 dark:via-vae-turquoise/5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border-2 border-vae-turquoise bg-white shadow-sm dark:bg-bg-darker">
+                <Lightbulb className="h-8 w-8 text-vae-turquoise" />
               </div>
-              {/* Item 2 */}
-              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-                <AlertCircle className="h-7 w-7 text-vae-turquoise" />
-                <p className="text-base text-gray-700 dark:text-text-secondary">
-                  Nächtliche Incidents statt geplanter Wartung
-                </p>
-              </div>
-              {/* Item 3 */}
-              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-                <TrendingDown className="h-7 w-7 text-vae-turquoise" />
-                <p className="text-base text-gray-700 dark:text-text-secondary">
-                  Keine Zeit für strategische Optimierung
-                </p>
-              </div>
-              {/* Item 4 */}
-              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-                <Zap className="h-7 w-7 text-vae-turquoise" />
-                <p className="text-base text-gray-700 dark:text-text-secondary">
-                  Innovation blockiert durch Operational Overhead
-                </p>
-              </div>
-              {/* Item 5 */}
-              <div className="flex w-full max-w-xs flex-col items-center gap-3 md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-                <Users className="h-7 w-7 text-vae-turquoise" />
-                <p className="text-base text-gray-700 dark:text-text-secondary">
-                  IT-Expertise fehlt bei Produktentscheidungen
+              <div className="text-center md:text-left">
+                <p className="text-xs font-semibold uppercase tracking-wider text-vae-turquoise">Das Ergebnis</p>
+                <p className="mt-1 text-xl font-bold text-gray-900 dark:text-white">
+                  Mehr Kapazität für das, was euer Business wirklich voranbringt.
                 </p>
               </div>
             </div>
-            <p className="mx-auto max-w-3xl text-center text-sm text-gray-600 dark:text-text-secondary/70">
-              Ein deutscher IT-Admin kostet durchschnittlich ~67.5k€/Jahr (inkl. Lohnnebenkosten & Infrastruktur).
-              Managed Services können diese Ressource entlasten oder komplett ersetzen.
-            </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -670,20 +628,21 @@ const BetreuungPage: React.FC = () => {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             <div className="text-center">
               <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
-                <Activity className="h-6 w-6 text-vae-turquoise" />
+                <Lightbulb className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Proaktives Monitoring</h4>
-              <p className="text-sm text-gray-700 dark:text-text-secondary">
-                Wir erkennen Probleme, bevor sie auftreten
+              <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Strategische Optimierung</h4>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Monatliche Reviews mit Verbesserungsvorschlägen. Roadmap-Planung und Architektur-Checks für
+                langfristiges Wachstum.
               </p>
             </div>
             <div className="text-center">
               <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
-                <Lightbulb className="h-6 w-6 text-vae-turquoise" />
+                <Activity className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Strategische Optimierung</h4>
-              <p className="text-sm text-gray-700 dark:text-text-secondary">
-                Monatliche Reviews mit Verbesserungsvorschlägen
+              <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Proaktives Monitoring</h4>
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Echtzeit-Überwachung für Uptime, Performance, Error-Logs und Ressourcen.
               </p>
             </div>
             <div className="text-center">
@@ -691,8 +650,9 @@ const BetreuungPage: React.FC = () => {
                 <RefreshCcw className="h-6 w-6 text-vae-turquoise" />
               </div>
               <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Kontinuierliche Updates</h4>
-              <p className="text-sm text-gray-700 dark:text-text-secondary">
-                Immer auf dem neuesten Stand, ohne Ausfälle
+              <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
+                Security-Patches, Software-Updates und Wartung in geplanten Fenstern. Immer auf dem neuesten Stand, ohne
+                Ausfälle.
               </p>
             </div>
           </div>

@@ -246,7 +246,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
       'Kompletter Server-Aufbau (Container, Netzwerk, Security-Basics)',
       'Tool-Installation & Konfiguration der Kernsysteme',
       'Daten-Migration aus bestehenden Systemen (falls relevant)',
-      'Team-Training & Dokumentation für Admins und Key-User',
+      'Team-Training & Dokumentation',
     ],
     audience: [
       'Neuaufbau des Datenfundaments',
@@ -261,14 +261,13 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     title: 'Langfristige Betreuung',
     subtitle: 'Betrieb & Optimierung',
     badge: 'KONTINUIERLICH',
-    secondaryBadge: 'Monatlich kündbar',
     description:
       'Wir sorgen dafür, dass Ihre Infrastruktur läuft – während Ihr Team sich auf Produkt und Kund:innen konzentriert.',
     inclusions: [
       'Basis-Monitoring & Security-Patches',
       'Regelmäßige System-Reviews',
       'Backup & Disaster Recovery',
-      'Monatlich kündbar inkl. 2h Handover-Call',
+      'Optional: monatlich kündbar',
     ],
     audience: [
       'Teams ohne dedizierte IT-Abteilung',

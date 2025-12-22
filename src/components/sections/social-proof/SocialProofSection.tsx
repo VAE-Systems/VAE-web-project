@@ -104,7 +104,7 @@ const SocialProofSection: React.FC = () => {
   return (
     <section
       id="social-proof"
-      className="relative overflow-hidden border-t border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker sm:py-28"
+      className="from-sage-50/70 to-sage-50/50 relative overflow-hidden border-t border-gray-200 bg-gradient-to-b via-white py-20 dark:border-white/5 dark:bg-bg-darker sm:py-28"
     >
       <div className="pointer-events-none absolute inset-0 opacity-70">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.06),transparent_35%)] dark:bg-[radial-gradient(circle_at_25%_25%,rgba(var(--vae-turquoise-rgb),0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(26,54,68,0.25),transparent_35%)]" />

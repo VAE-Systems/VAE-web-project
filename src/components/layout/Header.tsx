@@ -470,6 +470,7 @@ const HeaderModern: React.FC = () => {
                   isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
                 }`}
                 aria-label="Darstellung wechseln"
+                data-theme-toggle
               >
                 {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </button>

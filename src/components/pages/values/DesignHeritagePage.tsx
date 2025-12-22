@@ -64,10 +64,10 @@ const DesignHeritagePage: React.FC = () => {
         <div className="container-vae relative grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
             <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">
-              <Sparkles className="h-4 w-4" /> Design Mehr erfahren
+              <Sparkles className="h-4 w-4" /> Design & UX
             </span>
             <h1 className="text-balance text-4xl font-semibold leading-tight text-text-light md:text-5xl">
-              Design als Werkstatt – nicht als Dekoration
+              Design prägt, wie Software sich anfühlt
             </h1>
             <p className="text-lg leading-relaxed text-text-secondary">
               VAE Systems verbindet künstlerische Herkunft mit technischer Präzision. Julian Goertz wuchs in einer

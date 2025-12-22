@@ -31,7 +31,7 @@ const WhyOpenSourceSection: React.FC = () => {
   return (
     <section
       id="why-open-source"
-      className="border-border-primary from-bg-primary relative border-t bg-gradient-to-b to-bg-secondary py-20 dark:border-white/5 dark:from-bg-darker dark:to-bg-dark/80 sm:py-28"
+      className="border-border-primary from-sage-50/60 via-sage-50/80 to-sage-50/60 relative border-t bg-gradient-to-b py-20 dark:border-white/5 dark:from-bg-darker dark:to-bg-dark/80 sm:py-28"
     >
       <div className="container-vae">
         <div className="mx-auto max-w-4xl text-center">

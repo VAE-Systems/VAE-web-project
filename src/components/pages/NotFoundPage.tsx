@@ -76,12 +76,12 @@ const NotFoundPage: React.FC = () => {
                 <Link
                   key={page.path}
                   to={page.path}
-                  className="group flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-5 py-4 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:border-vae-turquoise/30 dark:hover:bg-white/[0.04]"
+                  className="group flex items-center gap-3 rounded-2xl border border-[#c5ccc8] bg-white px-5 py-4 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:border-vae-turquoise/30 dark:hover:bg-white/[0.04]"
                 >
                   <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/10 text-vae-turquoise transition-colors group-hover:bg-vae-turquoise/20">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{page.label}</span>
+                  <span className="text-sm font-semibold text-[#1a2320] dark:text-white">{page.label}</span>
                 </Link>
               )
             })}

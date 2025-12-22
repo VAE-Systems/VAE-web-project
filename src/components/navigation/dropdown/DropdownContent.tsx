@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { MenuContent } from './menuData'
+import { MenuContent, MenuContentItem } from './menuData'
 
 interface DropdownContentProps {
   content?: MenuContent
@@ -43,15 +43,30 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
 
         {content.items && (
           <ul className="mt-4 space-y-2 text-sm text-gray-700 dark:text-white/80">
-            {content.items.map((item, index) => (
-              <li key={`${content.id}-${index}`} className="flex items-start gap-2">
-                <span
-                  className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise/80 dark:bg-vae-turquoise/70"
-                  aria-hidden
-                />
-                <span>{item}</span>
-              </li>
-            ))}
+            {content.items.map((item, index) => {
+              const isObject = typeof item === 'object' && 'text' in item
+              const text = isObject ? item.text : item
+              const href = isObject ? item.href : undefined
+
+              return (
+                <li key={`${content.id}-${index}`} className="flex items-start gap-2">
+                  <span
+                    className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise/80 dark:bg-vae-turquoise/70"
+                    aria-hidden
+                  />
+                  {href ? (
+                    <a
+                      href={href}
+                      className="transition-colors hover:text-vae-turquoise dark:hover:text-vae-turquoise/90"
+                    >
+                      {text}
+                    </a>
+                  ) : (
+                    <span>{text}</span>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         )}
       </div>

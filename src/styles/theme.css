@@ -2,14 +2,15 @@
 
 /* Base theme variables - will be overridden by JavaScript */
 :root {
-  /* Default light theme */
-  --theme-primary: #00ffa5;
+  /* Default light theme - VAE optimized */
+  --theme-primary: #1db87a;
   --theme-secondary: #00a5ff;
   --theme-accent: #a500ff;
-  --theme-background: #ffffff;
-  --theme-surface: #f8fafc;
-  --theme-text: #1e293b;
-  --theme-muted: #64748b;
+  --theme-background: #f5f7f5; /* Soft sage background */
+  --theme-surface: #ffffff; /* Pure white for cards */
+  --theme-surface-muted: #e8ebe9; /* Muted sage */
+  --theme-text: #1a2320; /* Deep forest text */
+  --theme-muted: #394642; /* Slate gray muted */
 
   /* Spacing and sizing */
   --theme-border-radius: 8px;
@@ -19,6 +20,19 @@
   /* Transitions */
   --theme-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --theme-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light theme explicit overrides */
+[data-theme-mode='light'],
+.theme-light {
+  --theme-primary: #1db87a;
+  --theme-background: #f5f7f5;
+  --theme-surface: #ffffff;
+  --theme-surface-muted: #e8ebe9;
+  --theme-text: #1a2320;
+  --theme-muted: #394642;
+  --theme-shadow: 0 2px 8px rgba(26, 35, 32, 0.12);
+  --theme-shadow-lg: 0 8px 32px rgba(26, 35, 32, 0.18);
 }
 
 /* Dark theme overrides */

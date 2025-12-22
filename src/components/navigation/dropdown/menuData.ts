@@ -5,11 +5,16 @@ export interface MenuItem {
   href: string
 }
 
+export interface MenuContentItem {
+  text: string
+  href?: string
+}
+
 export interface MenuContent {
   id: string
   title: string
   description?: string
-  items?: string[]
+  items?: (string | MenuContentItem)[]
   ctaText: string
   ctaHref: string
 }
@@ -131,15 +136,15 @@ export const MENU_DATA: DropdownMenu[] = [
       werte: {
         id: 'WERTE',
         title: 'Philosophie & Prinzipien',
-        description: 'Transparenz, Ownership und nachhaltige Lösungen – die Werte, die unsere Arbeit prägen.',
+        description: 'Verbindliche Standards für transparente, belastbare Technologieprojekte.',
         items: [
-          'Transparenz — Open Source First',
-          'Ownership — Eigenverantwortung',
-          'Qualität vor Quantität',
-          'Zukunftsfähigkeit — Nachhaltige Lösungen',
-          'Kundenfokus — Individuelle Beratung',
+          { text: 'Transparenz & Ehrlichkeit', href: '/wissen/transparenz-open-source' },
+          { text: 'Klare Kommunikation', href: '/wissen/klare-projektkommunikation' },
+          { text: 'Unabhängigkeit & Freiheit', href: '/wissen/vendor-lock-in-vermeiden' },
+          { text: 'Exzellenz als Standard', href: '/wissen/handwerkskunst-statt-schnellschuss' },
+          { text: 'Liebe fürs Detail & Design', href: '/ueber-uns/design-handwerk' },
         ],
-        ctaText: 'Mehr erfahren',
+        ctaText: 'Alle Werte entdecken',
         ctaHref: '/ueber-uns/werte',
       },
       team: {

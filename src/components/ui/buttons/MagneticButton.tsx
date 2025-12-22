@@ -114,9 +114,19 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     // 🔁 SIDE-EFFECT: Reset bei Leave
     const handlePointerLeave = useCallback(() => {
       setIsHovered(false)
-      if (animationFrame.current) cancelAnimationFrame(animationFrame.current)
+      if (animationFrame.current) {
+        cancelAnimationFrame(animationFrame.current)
+        animationFrame.current = undefined
+      }
       positionRef.current = { x: 0, y: 0 }
-      if (buttonRef.current) buttonRef.current.style.transform = 'translate3d(0, 0, 0)'
+      if (buttonRef.current) {
+        buttonRef.current.style.transform = 'translate3d(0, 0, 0) scale(1)'
+        buttonRef.current.style.transition = 'transform 0.2s ease-out'
+        // Reset transition after animation completes
+        setTimeout(() => {
+          if (buttonRef.current) buttonRef.current.style.transition = ''
+        }, 200)
+      }
     }, [])
 
     const handlePointerEnter = useCallback(() => {
@@ -193,9 +203,12 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
         <div
           ref={buttonRef}
           className={cn(
-            'relative z-10 transition-transform duration-300 ease-out',
-            glowEffect && 'hover:drop-shadow-[0_0_16px_rgba(52,211,153,0.4)]'
+            'relative z-10 transition-all duration-300 ease-out',
+            glowEffect && isHovered && 'drop-shadow-[0_0_16px_rgba(52,211,153,0.4)]'
           )}
+          style={{
+            willChange: isHovered ? 'transform, filter' : 'auto',
+          }}
         >
           {children}
         </div>

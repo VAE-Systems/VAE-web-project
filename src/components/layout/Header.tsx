@@ -146,7 +146,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
     cta-sheen
     relative inline-flex items-center gap-2 px-6 py-3 rounded-xl
     bg-gradient-to-r from-vae-turquoise to-emerald-400
-    text-gray-900 font-bold text-sm
+    text-[#1a2320] font-bold text-sm
     shadow-lg shadow-vae-turquoise/30
     transition-all duration-300 ease-out
     hover:shadow-xl hover:shadow-vae-turquoise/50
@@ -384,10 +384,10 @@ const HeaderModern: React.FC = () => {
           isScrolled
             ? isDark
               ? 'border-b border-white/10 bg-[hsla(0,0%,6%,0.98)] shadow-sm backdrop-blur-xl'
-              : 'border-b border-gray-200/70 bg-white shadow-sm backdrop-blur-sm'
+              : 'border-b border-[#c5ccc8] bg-[#f5f7f5]/95 shadow-sm backdrop-blur-sm'
             : isDark
               ? 'border-white/8 border-b bg-[hsla(0,0%,6%,0.96)] backdrop-blur-lg'
-              : 'bg-white/98 border-b border-gray-100/80 backdrop-blur-sm'
+              : 'bg-[#f5f7f5]/98 border-b border-[#d8ddd9] backdrop-blur-sm'
         }
       `}
       >
@@ -409,7 +409,7 @@ const HeaderModern: React.FC = () => {
               className={`flex h-11 w-11 items-center justify-center rounded-full border text-sm font-semibold transition-all duration-200 ${
                 isDark
                   ? 'border-white/10 bg-white/[0.06] text-white hover:border-vae-turquoise/50 hover:text-vae-turquoise'
-                  : 'border-gray-200/90 bg-white text-gray-800 shadow-sm hover:border-vae-turquoise hover:text-vae-turquoise'
+                  : 'border-[#c5ccc8] bg-white text-[#1a2320] shadow-sm hover:border-vae-turquoise hover:text-vae-turquoise'
               }`}
               aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
             >
@@ -427,14 +427,14 @@ const HeaderModern: React.FC = () => {
                     className="light-invert h-full w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)] transition-all duration-300 dark:drop-shadow-[0_0_20px_rgba(0,255,165,0.25)]"
                   />
                 </div>
-                <div className="hidden flex-col border-l border-vae-turquoise/30 pl-3 md:flex">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/85">
-                    Versatile AI
+                <div className="hidden flex-col border-l border-vae-turquoise/30 pl-3 min-[1148px]:flex">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-vae-turquoise/85 min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.15em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.16em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.17em]">
+                    Versatile <span className="-ml-0.5 inline-block">AI</span>
                   </span>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-vae-turquoise/80 min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.15em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.16em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.17em]">
                     Enhanced
                   </span>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-vae-turquoise/80 min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.15em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.16em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.17em]">
                     Systems
                   </span>
                 </div>

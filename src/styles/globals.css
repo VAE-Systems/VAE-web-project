@@ -152,42 +152,42 @@
     --surface-glass-strong: rgba(255, 255, 255, 0.07);
   }
 
-  /* Light Mode Theme Variables */
+  /* Light Mode Theme Variables - VAE Optimized */
   .theme-light {
-    /* Background Colors - Light Mode (Clean White Base) */
-    --bg-dark: hsl(0, 0%, 98%);
-    --bg-darker: hsl(0, 0%, 100%);
-    --bg-secondary: hsl(160, 8%, 97%);
+    /* Background Colors - Sage-inspired warm neutrals */
+    --bg-dark: #f5f7f5; /* Soft sage background (primary) */
+    --bg-darker: #ffffff; /* Pure white for elevated content */
+    --bg-secondary: #e8ebe9; /* Muted sage for secondary surfaces */
 
-    /* Text Colors - Light Mode (High Contrast) */
-    --vae-white: hsl(0, 0%, 100%);
-    --text-light: hsl(160, 15%, 12%);
-    --text-muted: hsl(160, 8%, 40%);
-    --text-secondary: hsl(160, 10%, 25%);
-    --vae-text-primary: hsl(160, 15%, 12%);
-    --vae-text-secondary: hsl(160, 10%, 25%);
-    --vae-text-muted: hsl(160, 8%, 40%);
+    /* Text Colors - Strong contrast for readability */
+    --vae-white: #ffffff;
+    --text-light: #1a2320; /* Deep forest text (primary) */
+    --text-muted: #394642; /* Slate gray muted text */
+    --text-secondary: #2c3834; /* Medium forest for secondary text */
+    --vae-text-primary: #1a2320; /* Deep forest */
+    --vae-text-secondary: #2c3834; /* Medium forest */
+    --vae-text-muted: #394642; /* Slate gray */
 
-    /* Glow Effects - Light Mode (subdued) */
-    --glow-turquoise: 0 0 20px hsla(var(--color-vae-turquoise), 0.3);
-    --glow-turquoise-strong: 0 0 40px hsla(var(--color-vae-turquoise), 0.5);
-    --glow-turquoise-ultra: 0 0 60px hsla(var(--color-vae-turquoise), 0.7);
-    --shadow-turquoise: 0 8px 32px hsla(var(--color-vae-turquoise), 0.15);
-    --shadow-turquoise-glow: 0 0 40px hsla(var(--color-vae-turquoise), 0.2);
+    /* Glow Effects - Light Mode with VAE Green */
+    --glow-turquoise: 0 0 20px rgba(29, 184, 122, 0.25);
+    --glow-turquoise-strong: 0 0 40px rgba(29, 184, 122, 0.35);
+    --glow-turquoise-ultra: 0 0 60px rgba(29, 184, 122, 0.45);
+    --shadow-turquoise: 0 8px 32px rgba(29, 184, 122, 0.15);
+    --shadow-turquoise-glow: 0 0 40px rgba(29, 184, 122, 0.2);
 
-    /* Modern Tailwind compatibility - Light Mode: Dunkleres, kräftigeres Türkis */
-    --color-vae-turquoise: 157 85% 32%;
-    --color-vae-black: 160 15% 12%;
+    /* Modern Tailwind compatibility - VAE Green */
+    --color-vae-turquoise: 157 75% 40%; /* #1db87a in HSL */
+    --color-vae-black: 147 18% 14%; /* Deep forest (#1a2320) */
 
     /* Background Colors */
-    --color-bg-darker: 0 0% 100%;
-    --color-bg-dark: 0 0% 98%;
-    --color-bg-secondary: 160 8% 97%;
+    --color-bg-darker: 0 0% 100%; /* Pure white */
+    --color-bg-dark: 120 10% 96%; /* Soft sage (#f5f7f5) */
+    --color-bg-secondary: 120 8% 93%; /* Muted sage (#e8ebe9) */
 
     /* Text Colors */
-    --color-text-light: 160 15% 12%;
-    --color-text-secondary: 160 10% 25%;
-    --color-text-muted: 160 8% 40%;
+    --color-text-light: 147 18% 14%; /* Deep forest (#1a2320) */
+    --color-text-secondary: 147 15% 20%; /* Medium forest */
+    --color-text-muted: 147 10% 30%; /* Slate gray (#394642) */
 
     /* Surface Tone Tokens (Theming) - Light Mode */
     --surface-1: linear-gradient(to bottom right, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-dark)) 100%);

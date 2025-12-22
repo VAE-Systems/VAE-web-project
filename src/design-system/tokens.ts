@@ -27,6 +27,16 @@ const shadow: ThemeDefinition['shadow'] = {
   glow: '0 0 24px rgba(0, 255, 165, 0.35)',
 }
 
+// Light mode shadows - stronger, visible on sage background
+const lightShadow: ThemeDefinition['shadow'] = {
+  xs: '0 1px 2px rgba(26, 35, 32, 0.08)',
+  sm: '0 2px 8px rgba(26, 35, 32, 0.12)',
+  md: '0 4px 16px rgba(26, 35, 32, 0.14)',
+  lg: '0 8px 32px rgba(26, 35, 32, 0.18)',
+  inner: 'inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+  glow: '0 0 24px rgba(29, 184, 122, 0.25)', // VAE green glow
+}
+
 const transition: ThemeDefinition['transition'] = {
   default: 'all 0.28s cubic-bezier(0.4, 0, 0.2, 1)',
   fast: 'all 0.18s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -87,23 +97,32 @@ const typography: ThemeDefinition['typography'] = {
 }
 
 const lightPalette: ThemeDefinition['palette'] = {
-  background: 'hsl(0 0% 98%)',
-  surface: 'hsl(210 20% 96%)',
-  surfaceMuted: 'hsl(210 24% 94%)',
-  overlay: 'hsla(210, 24%, 10%, 0.4)',
-  border: 'hsl(210 20% 82%)',
-  divider: 'hsl(210 16% 88%)',
-  text: 'hsl(220 47% 15%)',
-  textMuted: 'hsl(220 15% 45%)',
-  primary: 'hsl(157 95% 45%)',
-  primaryMuted: 'hsl(157 72% 52%)',
-  secondary: 'hsl(212 90% 56%)',
-  accent: 'hsl(278 90% 60%)',
-  success: 'hsl(148 70% 40%)',
-  warning: 'hsl(40 100% 45%)',
-  danger: 'hsl(358 85% 55%)',
-  info: 'hsl(210 80% 50%)',
-  focus: 'hsla(157, 95%, 45%, 0.35)',
+  // Core surfaces - Sage-inspired, warm neutrals
+  background: '#f5f7f5', // Soft sage background (deine Farbe)
+  surface: '#FFFFFF', // Pure white for cards/elevated content
+  surfaceMuted: '#e8ebe9', // Muted sage for secondary surfaces
+  overlay: 'rgba(26, 35, 32, 0.65)', // Deep forest overlay with stronger presence
+
+  // Borders & dividers - subtle but visible
+  border: '#c5ccc8', // Medium sage border
+  divider: '#d8ddd9', // Light sage divider
+
+  // Text hierarchy - strong contrast with your colors
+  text: '#1a2320', // Deep forest text (deine Farbe) - WCAG AAA contrast
+  textMuted: '#394642', // Slate gray muted text (deine Farbe)
+
+  // Brand colors
+  primary: '#1db87a', // VAE Green (deine Farbe)
+  primaryMuted: '#16a068', // Darker variant for hover states
+
+  // Accent colors - adjusted for light mode
+  secondary: 'hsl(212 85% 50%)',
+  accent: 'hsl(278 75% 55%)',
+  success: '#1db87a', // Use primary green for success
+  warning: 'hsl(38 92% 48%)',
+  danger: 'hsl(358 80% 52%)',
+  info: 'hsl(210 85% 48%)',
+  focus: 'rgba(29, 184, 122, 0.35)', // Primary green with alpha
 }
 
 const darkPalette: ThemeDefinition['palette'] = {
@@ -133,7 +152,7 @@ export const themeRegistry: ThemeRegistry = {
     typography,
     radius,
     spacing,
-    shadow,
+    shadow: lightShadow, // Use light-specific shadows
     transition,
   },
   dark: {
@@ -142,7 +161,7 @@ export const themeRegistry: ThemeRegistry = {
     typography,
     radius,
     spacing,
-    shadow,
+    shadow, // Use dark-specific shadows
     transition,
   },
 }

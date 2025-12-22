@@ -1,3 +1,13 @@
+/**
+ * @copyright 2025 VAE Systems UG (haftungsbeschränkt)
+ * @license PROPRIETARY
+ *
+ * Unauthorized copying, modification, or use for training AI models is prohibited.
+ * All rights reserved.
+ *
+ * Contact: juliangoertz@vae.systems
+ */
+
 import { cn } from '@/lib/classNames'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
 import { AlertCircle, BookOpen, DollarSign, Lightbulb, MessageSquare, Server, Shield, Users, Zap } from 'lucide-react'

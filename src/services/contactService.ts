@@ -68,32 +68,17 @@ export const submitContactForm = async (data: ContactFormData): Promise<ContactS
       }
     }
 
-    // TODO: Replace with actual API endpoint when backend is ready
-    // For now, simulate API call
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...data,
-        timestamp: new Date().toISOString(),
-        source: data.source || 'website',
-      }),
-    })
+    // DISABLED: Contact form API is disabled - using mailto link instead
+    // Users should use the mailto: link in the contact section
+    // To re-enable: Uncomment below and provide real API endpoint
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-    }
-
-    const result = await response.json()
-
+    // Fallback: Return success but inform user to use mailto
     return {
       success: true,
       data: {
-        submissionId: result.id || generateSubmissionId(),
-        confirmationSent: true,
-        estimatedResponse: '24-48 Stunden',
+        submissionId: generateSubmissionId(),
+        confirmationSent: false,
+        estimatedResponse: 'Bitte nutzen Sie den mailto-Link',
       },
       timestamp: new Date().toISOString(),
     }

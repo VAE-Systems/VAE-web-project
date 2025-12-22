@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && node scripts/build-assets.js && vite build",
+    "build:prerender": "npm run build && node scripts/prerender.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write .",
@@ -58,8 +59,10 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",
     "postcss": "^8.4.38",
+    "prerender-spa-plugin": "^3.4.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.5.14",
+    "puppeteer": "^24.34.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "sharp": "^0.34.5",
     "storybook": "^8.2.9",

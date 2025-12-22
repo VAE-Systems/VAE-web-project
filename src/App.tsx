@@ -75,6 +75,9 @@ const TeamNetworkPage = React.lazy(() => import('@components/pages/TeamNetworkPa
 const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
 const NotFoundPage = React.lazy(() => import('@components/pages/NotFoundPage'))
 
+// ── ADMIN PAGES (nur in Development) ──
+const AdminDebugPage = import.meta.env.DEV ? React.lazy(() => import('@components/pages/AdminDebugPage')) : null
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🎛️ HELPER COMPONENTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -180,6 +183,9 @@ const App: React.FC = () => {
                     <Route path="/privacy" element={<PrivacyPage />} />
                     <Route path="/datenschutz" element={<Navigate to="/privacy" replace />} />
                     <Route path="/privacy/settings" element={<PrivacySettings />} />
+
+                    {/* Admin Pages (Development only) */}
+                    {AdminDebugPage && <Route path="/admin/debug" element={<AdminDebugPage />} />}
 
                     {/* Catch-all 404 */}
                     <Route path="*" element={<NotFoundPage />} />

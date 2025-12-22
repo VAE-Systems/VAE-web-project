@@ -236,7 +236,9 @@ const Footer: React.FC = () => {
         <div className="border-t border-bg-secondary pt-8">
           <div className="space-y-3 text-center">
             <p className="text-sm text-text-secondary">
-              &copy; {new Date().getFullYear()} VAE Systems UG (haftungsbeschränkt)
+              &copy; {new Date().getFullYear()} VAE Systems UG (haftungsbeschränkt). Alle Inhalte, Designs, Animationen
+              und Technologien sind urheberrechtlich geschützt. Vervielfältigung, Verbreitung oder Nutzung für
+              KI-Training ohne schriftliche Genehmigung untersagt.
             </p>
             <p className="text-xs text-text-muted">Built by VAE Systems – Julian Goertz Dini</p>
             <p className="text-xs text-text-muted md:text-[11px]">

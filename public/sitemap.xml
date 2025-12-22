@@ -13,14 +13,6 @@
     </image:image>
   </url>
 
-  <!-- Testphase Landing Page -->
-  <url>
-    <loc>https://vae.systems/testphase</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
   <!-- Leistungen / Services -->
   <url>
     <loc>https://vae.systems/leistungen/strategie</loc>

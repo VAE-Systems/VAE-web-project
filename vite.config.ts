@@ -1,12 +1,52 @@
+import Renderer from '@prerenderer/renderer-puppeteer'
+import prerender from '@prerenderer/rollup-plugin'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 
+const prerenderRoutes = [
+  '/',
+  '/services/setup',
+  '/services/betreuung',
+  '/services/beratung',
+  '/leistungen/strategie',
+  '/leistungen/infrastruktur',
+  '/leistungen/betreuung',
+  '/ressourcen/faq',
+  '/ressourcen/blog',
+  '/ressourcen/case-studies',
+  '/about/referenzen',
+  '/case-studies',
+  '/ueber-uns/werte',
+  '/ueber-uns/design-handwerk',
+  '/ueber-uns/leitung',
+  '/ueber-uns/team',
+  '/wissen/transparenz-open-source',
+  '/wissen/klare-projektkommunikation',
+  '/wissen/vendor-lock-in-vermeiden',
+  '/wissen/handwerkskunst-statt-schnellschuss',
+  '/wissen/skalierbare-architektur',
+  '/contact',
+  '/impressum',
+  '/privacy',
+  '/privacy/settings',
+]
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
+    mode === 'production'
+      ? prerender({
+          routes: prerenderRoutes,
+          renderer: new Renderer({
+            headless: true,
+            renderAfterTime: 4000,
+            maxConcurrentRoutes: 4,
+          }),
+        })
+      : null,
     // Bundle analyzer (only in build mode with ANALYZE=true)
     process.env.ANALYZE === 'true' &&
       visualizer({

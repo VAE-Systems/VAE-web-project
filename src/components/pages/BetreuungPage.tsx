@@ -21,15 +21,13 @@
 import FeaturePill from '@/components/ui/FeaturePill'
 import { BOOKING_LINKS } from '@/config/booking'
 import { faqEntries } from '@/content/shared/faqData'
-import { animate, motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   type LucideIcon,
   Activity,
   AlertCircle,
   ArrowRight,
-  ArrowUpRight,
   Brain,
-  Building2,
   Check,
   CheckCircle2,
   Clock,
@@ -46,7 +44,7 @@ import {
   Users,
   Zap,
 } from 'lucide-react'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import MagneticButton from '../ui/buttons/MagneticButton'
 import FaqAccordion from '../ui/FaqAccordion'
 import Seo from '../ui/Seo'
@@ -56,6 +54,7 @@ const bookingUrl = BOOKING_LINKS.RETAINER_PLANUNG
 
 const trustBadges = ['Flexible Bindung', 'Zuverlässig', 'Transparent']
 
+/* UNUSED - Legacy data, keeping for potential future features
 const hiddenCosts = [
   '5–10 Stunden/Monat für Wartung, Updates und Patches',
   'Stress bei Incidents – inklusive nächtlicher Anrufe',
@@ -68,7 +67,9 @@ const resourceSplit = [
   { label: 'Wartung & Firefighting', value: 68 },
   { label: 'Innovation & Wachstum', value: 32 },
 ]
+*/
 
+/* UNUSED - resourcePillars (legacy)
 const resourcePillars: Array<{ icon: LucideIcon; title: string; description: string }> = [
   {
     icon: ArrowUpRight,
@@ -89,6 +90,7 @@ const resourcePillars: Array<{ icon: LucideIcon; title: string; description: str
       'Custom Code, maßgeschneiderte Integrationen und (LLM-)Workflows mit Monitoring: Ihre Infrastruktur wird nicht nur betrieben, sondern arbeitet aktiv mit – und bleibt langfristig wartbar',
   },
 ]
+*/
 
 type ServiceLevel = {
   id: string
@@ -236,6 +238,7 @@ const reasonCards: Array<{ icon: LucideIcon; title: string; description: string 
   },
 ]
 
+/* UNUSED - AnimatedCounter component (legacy)
 // ── 🎨 ANIMATED COUNTER COMPONENT ──
 const AnimatedCounter: React.FC<{ value: number; className?: string }> = ({ value, className }) => {
   const [count, setCount] = useState(0)
@@ -259,6 +262,7 @@ const AnimatedCounter: React.FC<{ value: number; className?: string }> = ({ valu
     </span>
   )
 }
+*/
 
 const BetreuungPage: React.FC = () => {
   const faqAccordionItems = useMemo(() => {

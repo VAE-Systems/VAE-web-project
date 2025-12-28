@@ -32,6 +32,9 @@ export class CookieService {
   getConsent(): CookieConsent | null {
     if (this.consent) return this.consent
 
+    // SSR Guard: localStorage is not available during server-side rendering
+    if (typeof window === 'undefined') return null
+
     try {
       const stored = localStorage.getItem(GDPR_CONSTANTS.STORAGE_KEY)
       if (stored) {
@@ -57,6 +60,9 @@ export class CookieService {
    * Save consent to localStorage
    */
   saveConsent(consent: CookieConsent): void {
+    // SSR Guard: localStorage is not available during server-side rendering
+    if (typeof window === 'undefined') return
+
     const settings: PrivacySettings = {
       consent,
       showBanner: false,
@@ -79,6 +85,9 @@ export class CookieService {
    * Clear all consent data
    */
   clearConsent(): void {
+    // SSR Guard: localStorage is not available during server-side rendering
+    if (typeof window === 'undefined') return
+
     try {
       localStorage.removeItem(GDPR_CONSTANTS.STORAGE_KEY)
       this.consent = null

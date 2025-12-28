@@ -320,7 +320,7 @@ export const ThemeModeTutorial: React.FC = () => {
                 )}
               </p>
 
-              <MagneticButton intensity={0.08} scaleEffect glowEffect className="w-full">
+              <MagneticButton intensity={0.08} className="w-full">
                 <button
                   onClick={handleDismiss}
                   className={`w-full rounded-xl px-5 py-3 text-sm font-semibold transition-all hover:shadow-lg hover:shadow-vae-turquoise/30 ${buttonClasses}`}

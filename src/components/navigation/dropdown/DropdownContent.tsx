@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
-import { MenuContent, MenuContentItem } from './menuData'
+import { MenuContent } from './menuData'
 
 interface DropdownContentProps {
   content?: MenuContent

@@ -77,7 +77,7 @@ const WhyOpenSourceSection: React.FC = () => {
               </p>
               <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Das SaaS-Dilemma</h3>
             </header>
-            <ul className="divide-y divide-white/5">
+            <ul className="divide-y divide-black/10 dark:divide-white/5">
               {openSourcePainPoints.map(point => (
                 <li key={point.title} className="py-6 first:pt-0 last:pb-0">
                   <p className="inline-block text-lg font-bold text-text-light lg:text-xl">

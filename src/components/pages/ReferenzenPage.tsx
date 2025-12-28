@@ -758,7 +758,7 @@ const TechBadgeModal: React.FC<TechBadgeModalProps> = ({ badge, onClose }) => {
       aria-modal="true"
       aria-label={`${badge.name} Details`}
     >
-      <div className="relative w-full max-w-md rounded-3xl border border-black/5 bg-white p-6 text-text-light shadow-lg dark:border-white/10 dark:bg-white/10 dark:text-text-light">
+      <div className="relative w-full max-w-md rounded-3xl border border-black/5 bg-white p-6 text-text-light shadow-lg dark:border-white/10 dark:bg-[hsl(0,0%,8%)] dark:text-text-light">
         <button
           type="button"
           onClick={onClose}

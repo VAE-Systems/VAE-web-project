@@ -11,7 +11,7 @@
  */
 
 import { useSelfCrawl } from '@/hooks/useSelfCrawl'
-import { ArrowRight, Download, Loader, AlertCircle } from 'lucide-react'
+import { AlertCircle, ArrowRight, Download, Loader } from 'lucide-react'
 import { useState } from 'react'
 
 interface CrawlStats {
@@ -27,6 +27,16 @@ export const AdminDebugPage = () => {
 
   const handleCrawl = async () => {
     const startTime = Date.now()
+
+    // Crawl gegen die prerenderten Dist-Files oder Preview-Server
+    // localhost:3000 (dev) hat nur React-Skelett, nutze npm run preview für vollen Content
+    const isPreview = window.location.port === '4173' || window.location.hostname !== 'localhost'
+
+    if (!isPreview && window.location.port === '3000') {
+      alert(
+        '⚠️ Dev-Server crawlt nur Skelett-HTML.\n\nFür vollen Content:\n1. npm run build\n2. npm run preview\n3. Öffne http://localhost:4173/admin/debug'
+      )
+    }
 
     startCrawl({
       baseUrl: window.location.origin,

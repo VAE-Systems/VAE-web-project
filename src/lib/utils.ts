@@ -210,6 +210,9 @@ export const parseQueryString = (search: string): Record<string, string> => {
 
 export const storage = {
   get: <T>(key: string, defaultValue?: T): T | null => {
+    // SSR Guard: localStorage is not available during server-side rendering
+    if (typeof window === 'undefined') return defaultValue || null
+
     try {
       const item = localStorage.getItem(key)
       return item ? JSON.parse(item) : defaultValue || null
@@ -219,6 +222,9 @@ export const storage = {
   },
 
   set: <T>(key: string, value: T): void => {
+    // SSR Guard: localStorage is not available during server-side rendering
+    if (typeof window === 'undefined') return
+
     try {
       localStorage.setItem(key, JSON.stringify(value))
     } catch (error) {
@@ -227,6 +233,9 @@ export const storage = {
   },
 
   remove: (key: string): void => {
+    // SSR Guard: localStorage is not available during server-side rendering
+    if (typeof window === 'undefined') return
+
     try {
       localStorage.removeItem(key)
     } catch (error) {
@@ -235,6 +244,9 @@ export const storage = {
   },
 
   clear: (): void => {
+    // SSR Guard: localStorage is not available during server-side rendering
+    if (typeof window === 'undefined') return
+
     try {
       localStorage.clear()
     } catch (error) {

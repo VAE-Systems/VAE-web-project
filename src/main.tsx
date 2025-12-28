@@ -34,3 +34,7 @@ ReactDOM.createRoot(rootElement).render(
     <App />
   </React.StrictMode>
 )
+
+if (typeof window !== 'undefined') {
+  window.dispatchEvent(new Event('render-complete'))
+}

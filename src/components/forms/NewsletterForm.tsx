@@ -86,7 +86,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
                   Newsletter-Anmeldung erfolgreich
                 </h3>
                 <p className="mb-4 text-xs text-text-muted md:text-sm">
-                  Bitte bestätige die Anmeldung über den Link in deiner E‑Mail.
+                  Bitte bestätigen Sie die Anmeldung über den Link in Ihrer E‑Mail.
                 </p>
                 <MagneticButton intensity={0.075}>
                   <button type="button" onClick={() => setShowOverlay(false)} className="btn-primary">

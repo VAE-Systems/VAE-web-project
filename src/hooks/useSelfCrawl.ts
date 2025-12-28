@@ -11,7 +11,7 @@
  * Contact: juliangoertz@vae.systems
  */
 
-import React, { useState } from 'react'
+import React from 'react'
 
 interface CrawlConfig {
   baseUrl: string
@@ -51,6 +51,11 @@ export const crawlWebsite = async (config: CrawlConfig): Promise<PageContent[]> 
       }
 
       const html = await response.text()
+
+      // Wait a bit for client-side rendering (for SPAs like React)
+      // If crawling localhost dev server, we need to wait for React to hydrate
+      await new Promise(resolve => setTimeout(resolve, 500))
+
       const doc = new DOMParser().parseFromString(html, 'text/html')
 
       const pageContent: PageContent = {

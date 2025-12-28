@@ -11,7 +11,7 @@ export const heroTypewriterTexts = [
 ] as const
 
 export const heroDescription =
-  'Self-Hosted Infrastruktur – mit voller Datenkontrolle, ohne Vendor-Lock-in. Wir bauen und betreuen moderne Open-Source-Systeme für dein Unternehmen.'
+  'Self-Hosted Infrastruktur – mit voller Datenkontrolle, ohne Vendor-Lock-in. Wir bauen und betreuen moderne Open-Source-Systeme für Ihr Unternehmen.'
 
 export interface HeroBenefit {
   title: string
@@ -159,13 +159,18 @@ export const openSourcePainPoints: OpenSourcePointWithBullets[] = [
   },
   {
     title: 'Keine Kontrolle über Ihre Daten',
-    description: 'Ihre Infrastruktur bei US-Anbietern. Sie reagieren nur.',
+    description: 'Infrastruktur bei US-Anbietern – Sie reagieren nur auf deren Entscheidungen.',
     bullets: ['Features verschwinden ohne Vorwarnung', 'API-Änderungen zwingen zu Refactoring'],
   },
   {
     title: 'DSGVO-Risiko trägt Ihr Unternehmen',
     description: 'US-Anbieter geben Daten weiter (Cloud Act).',
     bullets: ['Das rechtliche Risiko liegt bei Ihnen', 'Nicht beim SaaS-Anbieter'],
+  },
+  {
+    title: 'Keine echte Anpassbarkeit',
+    description: 'SaaS-Lösungen bieten nur vorgefertigte Features – echte Erweiterungen sind unmöglich.',
+    bullets: ['Spezielle Workflows nicht umsetzbar', 'Individuelle Integrationen? Nur mit teurem Enterprise-Plan'],
   },
 ] as const
 

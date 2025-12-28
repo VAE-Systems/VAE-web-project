@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && node scripts/build-assets.js && vite build",
-    "build:prerender": "npm run build && node scripts/prerender.js",
+    "build:ssg": "npm run build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write .",
@@ -17,6 +17,8 @@
     "prepare": "husky",
     "analyze": "ANALYZE=true npm run build",
     "build-manifest": "node scripts/build-assets.js",
+    "crawl": "node scripts/crawl-to-desktop.js --url=local",
+    "crawl:prod": "node scripts/crawl-to-desktop.js --url=https://vae.systems",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:e2e": "playwright test"
@@ -38,6 +40,8 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.48.2",
+    "@prerenderer/renderer-puppeteer": "^1.2.4",
+    "@prerenderer/rollup-plugin": "^0.3.12",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-viewport": "^8.2.9",
@@ -57,12 +61,15 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.6",
     "husky": "^9.1.7",
+    "jsdom": "^27.3.0",
     "lint-staged": "^15.5.2",
+    "node-fetch": "^3.3.2",
     "postcss": "^8.4.38",
     "prerender-spa-plugin": "^3.4.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "puppeteer": "^24.34.0",
+    "react-snap": "^1.23.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "sharp": "^0.34.5",
     "storybook": "^8.2.9",
@@ -81,5 +88,40 @@
     "modern-website"
   ],
   "author": "VAE Systems",
-  "license": "MIT"
+  "license": "MIT",
+  "react-snap": {
+    "include": [
+      "/",
+      "/services/setup",
+      "/services/betreuung",
+      "/services/beratung",
+      "/leistungen/strategie",
+      "/leistungen/infrastruktur",
+      "/leistungen/betreuung",
+      "/ressourcen/faq",
+      "/ressourcen/blog",
+      "/ressourcen/case-studies",
+      "/about/referenzen",
+      "/case-studies",
+      "/ueber-uns/werte",
+      "/ueber-uns/design-handwerk",
+      "/ueber-uns/leitung",
+      "/ueber-uns/team",
+      "/wissen/transparenz-open-source",
+      "/wissen/klare-projektkommunikation",
+      "/wissen/vendor-lock-in-vermeiden",
+      "/wissen/handwerkskunst-statt-schnellschuss",
+      "/wissen/skalierbare-architektur",
+      "/contact",
+      "/impressum",
+      "/privacy",
+      "/privacy/settings"
+    ],
+    "http2PushManifest": true,
+    "inlineCss": true,
+    "minifyHtml": {
+      "collapseWhitespace": true,
+      "removeComments": true
+    }
+  }
 }

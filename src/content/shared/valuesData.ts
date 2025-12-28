@@ -28,9 +28,8 @@ export const VALUES_DATA: Value[] = [
       'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir dokumentieren jede Entscheidung so, dass Sie sie auch als Nicht‑Entwicklerin nachvollziehen können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
     benefits: [
       'Live-Dokumentation über unsere Kundenplattform statt Präsentationen im Nachgang',
-      'Risiken und Annahmen werden sofort gekennzeichnet – kein Schönreden',
+      'Risiken und Annahmen werden kommunizieren wir offen. ',
       'Open-Source-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur',
-      'Audits bleiben möglich, weil alle Änderungen nachvollziehbar sind',
     ],
     deepDive:
       'Digitale Partnerschaften scheitern selten an Technik, sondern am Misstrauen. Sobald Informationen gefiltert werden, verlieren Entscheider:innen die Kontrolle. Deshalb legen wir Architektur-Entscheidungen, Budgetstände und Risiken sofort offen – sogar wenn das unbequem ist.\n\nJedes Artefakt landet in Ihren Repositories: Meeting-Notizen, Architektur-Entwürfe, Migrationspläne. Wir kommentieren Tickets so, dass Sie Entscheidungen nachvollziehen können, auch wenn Sie nicht täglich committen. So können Sie prüfen, statt blind zu vertrauen.\n\nTransparenz schützt auch uns. Wenn Erwartungen schriftlich festgehalten sind, merken alle früh, wenn etwas kippt. Das beschleunigt Eskalationen, erhöht Verlässlichkeit und macht Zusammenarbeit messbar.',
@@ -49,7 +48,7 @@ export const VALUES_DATA: Value[] = [
     id: 'kommunikation',
     title: 'Klare Kommunikation — Die Grundlage für Erfolg',
     intro:
-      'Sie bekommen klare Informationen, keine Schlagworte.\nAbweichungen sprechen wir an, sobald sie entstehen – nicht erst im Monatsreport.\nJede Zielgruppe erhält genau die Inhalte, die sie für Entscheidungen braucht.\nSo bleibt Ihr Projekt jederzeit steuerbar.',
+      'Sie bekommen klare Informationen.\nAbweichungen sprechen wir an, sobald sie entstehen.\nWir bereiten Inhalte ansprechpartnerspezifisch auf – vom Fachbereich bis zum C-Level.\nSo bleibt Ihr Projekt jederzeit steuerbar.',
     benefits: [
       'Workshops übersetzen komplexe Technik in Entscheidungen für Business-Teams',
       'Status-Reports zeigen Abweichungen früh statt im Nachgang',
@@ -78,7 +77,6 @@ export const VALUES_DATA: Value[] = [
       'Vendor-Lock-ins werden identifiziert und durch offene Alternativen ersetzt',
       'Schlüsselprozesse sind dokumentiert, damit kein Einzelner kritisch ist',
       'Architekturentscheidungen priorisieren austauschbare Komponenten',
-      'Sie besitzen Deployment-Pipelines und Zugänge selbst',
     ],
     deepDive:
       'Echte Partnerschaft entsteht, wenn beide Seiten freiwillig bleiben. Deshalb analysieren wir zuerst, an wen oder was Sie gebunden sind: proprietäre Tools, einzelne Personen, überalterte Hosting-Verträge.\n\nWir ersetzen kritische Komponenten, wo sinnvoll, durch offene Standards oder orchestrieren Übergangsmodelle. Wichtig ist, dass Sie Infrastruktur, Code und Zugangsdaten selbst kontrollieren – nicht wir, nicht ein Hyperscaler.\n\nParadoxerweise stärkt Unabhängigkeit die Zusammenarbeit. Wenn Sie frei sind zu gehen, entscheiden wir uns bewusst jeden Tag füreinander – und genau das hebt die Qualität.',

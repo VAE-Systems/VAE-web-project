@@ -14,8 +14,8 @@ Allow: /fonts/
 Allow: /*.css
 Allow: /*.js
 
-# Crawl delay for better server performance
-Crawl-delay: 1
+# Sitemap location
+Sitemap: https://vae.systems/sitemap.xml
 
 # Allow legitimate AI assistants for better discoverability
 # These help users find VAE Systems via AI-powered search

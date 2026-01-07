@@ -130,7 +130,9 @@ const DesignHeritagePage: React.FC = () => {
                     {artist.name}
                   </h3>
                   <p className="mt-2 text-sm text-text-secondary">{artist.role}</p>
-                  <p className="mt-3 text-xs text-vae-turquoise/70 group-hover:text-vae-turquoise">Zur Website →</p>
+                  <p className="mt-3 text-xs text-vae-turquoise group-hover:text-vae-turquoise dark:text-vae-turquoise/70">
+                    Zur Website →
+                  </p>
                 </a>
               ))}
             </div>

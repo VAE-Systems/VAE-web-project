@@ -427,14 +427,14 @@ const HeaderModern: React.FC = () => {
                     className="light-invert h-full w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)] transition-all duration-300 dark:drop-shadow-[0_0_20px_rgba(0,255,165,0.25)]"
                   />
                 </div>
-                <div className="hidden flex-col border-l border-vae-turquoise/30 pl-3 min-[1148px]:flex">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-vae-turquoise/85 min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.15em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.16em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.17em]">
+                <div className="hidden flex-col border-l border-vae-turquoise/40 pl-3 min-[1148px]:flex">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-vae-turquoise drop-shadow-[0_1px_0_rgba(0,0,0,0.08)] dark:text-vae-turquoise/85 dark:drop-shadow-none min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.19em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.2em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.22em]">
                     Versatile <span className="-ml-0.5 inline-block">AI</span>
                   </span>
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-vae-turquoise/80 min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.15em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.16em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.17em]">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-vae-turquoise drop-shadow-[0_1px_0_rgba(0,0,0,0.08)] dark:text-vae-turquoise/80 dark:drop-shadow-none min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.19em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.2em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.22em]">
                     Enhanced
                   </span>
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-vae-turquoise/80 min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.15em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.16em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.17em]">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-vae-turquoise drop-shadow-[0_1px_0_rgba(0,0,0,0.08)] dark:text-vae-turquoise/80 dark:drop-shadow-none min-[1200px]:text-[9.5px] min-[1200px]:tracking-[0.19em] min-[1280px]:text-[10px] min-[1280px]:tracking-[0.2em] min-[1350px]:text-[11px] min-[1350px]:tracking-[0.22em]">
                     Systems
                   </span>
                 </div>

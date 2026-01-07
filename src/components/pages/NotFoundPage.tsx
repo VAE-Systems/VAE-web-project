@@ -66,7 +66,7 @@ const NotFoundPage: React.FC = () => {
 
         {/* Suggested Links */}
         <div className="mx-auto mt-16 max-w-3xl">
-          <p className="mb-6 text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">
+          <p className="mb-6 text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
             Beliebte Seiten
           </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

@@ -35,7 +35,7 @@ const WhyOpenSourceSection: React.FC = () => {
     >
       <div className="container-vae">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
             Infrastruktur neu gedacht
           </p>
           <h2 className="fluid-h2 mt-3 text-balance font-semibold text-text-light">
@@ -70,7 +70,7 @@ const WhyOpenSourceSection: React.FC = () => {
         </motion.div>
 
         <div className="mt-12 grid gap-10 md:grid-cols-2">
-          <article className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-[0_30px_120px_-50px_rgba(5,212,182,0.35)] backdrop-blur-sm">
+          <article className="rounded-3xl border-2 border-orange-300 bg-orange-50/80 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:border-white/5 dark:bg-white/[0.02] dark:shadow-[0_30px_120px_-50px_rgba(5,212,182,0.35)]">
             <header className="mb-8">
               <p className="text-xs font-bold uppercase tracking-[0.35em] text-red-400 dark:text-red-300">
                 Das Problem
@@ -91,7 +91,7 @@ const WhyOpenSourceSection: React.FC = () => {
               ))}
             </ul>
           </article>
-          <article className="rounded-3xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-8 backdrop-blur-sm">
+          <article className="rounded-3xl border-2 border-vae-turquoise/60 bg-vae-turquoise/10 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:border-vae-turquoise/20 dark:bg-vae-turquoise/5 dark:shadow-none">
             <header className="mb-8">
               <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise/90">Die Lösung</p>
               <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Die VAE-Alternative</h3>

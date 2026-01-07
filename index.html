@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/App_Logo_light.svg" aria-label="VAE Systems Logo" />
+  <link rel="icon" type="image/svg+xml" href="/App_Logo_dark.svg" media="(prefers-color-scheme: light)" aria-label="VAE Systems Logo" />
+  <link rel="icon" type="image/svg+xml" href="/App_Logo_light.svg" media="(prefers-color-scheme: dark)" aria-label="VAE Systems Logo" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -29,53 +30,17 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, noai, noimageai" />
   <meta name="ai-content-rewriting" content="forbidden" />
 
-  <!-- Open Graph Tags für Social Media Sharing (LinkedIn, Facebook, WhatsApp) -->
-  <meta property="og:title" content="VAE Systems - KI-Lösungen für Datensouveränität" />
-  <meta property="og:description"
-    content="Strategische Beratung, Open-Source-Infrastruktur & KI-Workflow-Automatisierung. DSGVO-konform, selbstgehostet." />
-  <meta property="og:image" content="https://vae.systems/App_Logo_light.svg" />
-  <meta property="og:url" content="https://vae.systems" />
-  <meta property="og:type" content="website" />
-
-  <!-- Twitter / X Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VAE Systems - KI & Open Source" />
-  <meta name="twitter:description"
-    content="Pragmatische KI-Lösungen für deutsche Unternehmen. Self-Hosted, DSGVO-konform, ohne Vendor-Lock-in." />
-  <meta name="twitter:image" content="https://vae.systems/App_Logo_light.svg" />
-
   <!-- Canonical URL - prevent duplicate content issues -->
   <link rel="canonical" href="https://vae.systems/" />
 
-  <!-- Schema.org Structured Data for SEO -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "VAE Systems",
-      "description": "Strategische Beratung, KI-Workflow-Optimierung und Open-Source-Infrastruktur für deutsche Unternehmen",
-      "url": "https://vae.systems",
-      "logo": "https://vae.systems/App_Logo_light.svg",
-      "foundingDate": "2025",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Customer Support",
-        "email": "juliangoertz@vae.systems"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/vae-systems",
-        "https://github.com/vae-systems"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "DE",
-        "addressRegion": "Baden-Württemberg"
-      }
-    }
-  </script>
-
-  <!-- Open Graph Tags -->
-  <meta property="og:type" content="website" />
+  <!-- Preconnect to improve performance (if external resources used) -->
+  <link rel="dns-prefetch" href="https://vae.systems" />
+  
+  <!-- Geo-targeting für lokale SEO -->
+  <meta name="geo.region" content="DE-BW" />
+  <meta name="geo.placename" content="Heidelberg" />
+  <meta name="geo.position" content="49.4094;8.6942" />
+  <meta name="ICBM" content="49.4094, 8.6942" />
   <meta property="og:title" content="VAE Systems - Structure is strategy" />
   <meta property="og:description"
     content="Business efficiency through open source. Strategische Beratung, KI-Workflow-Optimierung und Open-Source-Infrastruktur für Unternehmen." />
@@ -99,25 +64,90 @@
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "VAE Systems",
+        "alternateName": "VAE Consulting & Systems",
         "description": "DSGVO-konforme KI-Automatisierung und Workflow-Engines für deutsche Unternehmen",
         "url": "https://vae.systems",
         "logo": "https://vae.systems/App_Logo_light.svg",
         "foundingDate": "2024",
         "address": {
           "@type": "PostalAddress",
-          "addressCountry": "DE"
+          "addressCountry": "DE",
+          "addressRegion": "Baden-Württemberg",
+          "addressLocality": "Heidelberg"
         },
         "sameAs": ["https://github.com/VAE-Systems"],
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
+          "email": "info@vae.systems",
           "availableLanguage": ["German", "English"]
+        },
+        "knowsAbout": [
+          "Künstliche Intelligenz",
+          "Open Source Software",
+          "DSGVO-konforme Lösungen",
+          "Workflow-Automatisierung",
+          "Self-Hosted Infrastruktur",
+          "Docker",
+          "Kubernetes"
+        ],
+        "areaServed": {
+          "@type": "Country",
+          "name": "Deutschland"
         }
       }
     </script>
+  
+  <!-- Service Schema für SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "IT-Beratung & Infrastruktur",
+      "provider": {
+        "@type": "Organization",
+        "name": "VAE Systems"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Deutschland"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "VAE Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Strategieberatung",
+              "description": "Technische Strategieberatung für KI-Integration und Infrastruktur-Architektur"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Infrastruktur-Setup",
+              "description": "Self-Hosted Open-Source-Infrastruktur, DSGVO-konform"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Managed Operations",
+              "description": "Betrieb und Wartung von KI-Systemen und Infrastruktur"
+            }
+          }
+        ]
+      }
+    }
+    </script>
 
   <!-- PWA Meta Tags -->
-  <meta name="theme-color" content="#00ffa5" />
+  <meta name="theme-color" content="#1db87a" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

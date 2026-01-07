@@ -866,7 +866,9 @@ const ReferenzenPage: React.FC = () => {
       <section className="border-t border-black/5 bg-bg-dark py-20 transition-colors dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Live-Projekte</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Live-Projekte
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-text-light md:text-4xl">
               Infrastrukturen, die bereits produktiv laufen
             </h2>
@@ -895,7 +897,7 @@ const ReferenzenPage: React.FC = () => {
       <section className="border-t border-black/5 bg-bg-darker py-20 transition-colors dark:border-white/5">
         <div className="container-vae space-y-10">
           <div className="flex flex-col gap-4 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
               Laufende & Vertrauliche Projekte
             </p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Momentum für die nächsten Projekte</h2>
@@ -912,7 +914,7 @@ const ReferenzenPage: React.FC = () => {
       <section className="border-t border-black/5 bg-bg-dark py-20 transition-colors dark:border-white/5">
         <div className="container-vae space-y-10">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
               Technologie-Expertise
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-text-light md:text-4xl">Was wir beherrschen</h2>
@@ -957,7 +959,9 @@ const ReferenzenPage: React.FC = () => {
       {/* CTA */}
       <section className="border-t border-black/5 bg-bg-darker py-20 transition-colors dark:border-white/5">
         <div className="container-vae flex flex-col items-center gap-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Nächster Schritt</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Nächster Schritt
+          </p>
           <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Ihr Projekt könnte hier stehen</h2>
           <p className="max-w-2xl text-base text-text-secondary">
             Egal ob NGO, Mittelstand oder Startup – wir bauen die Open-Source-Infrastruktur, die zu Ihren Prozessen

@@ -32,7 +32,9 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
     >
       <div className="container-vae grid gap-12 lg:grid-cols-[1.15fr_0.95fr] lg:items-center">
         <div className={`space-y-6 ${infoColumnOrder}`}>
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Founder Story</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Founder Story
+          </p>
           <h2 id={`${leader.id}-title`} className="text-3xl font-semibold text-text-light md:text-4xl lg:text-5xl">
             {leader.name} — {leader.title}
           </h2>
@@ -130,7 +132,8 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
         </div>
 
         <aside className={`flex flex-col gap-6 ${cardColumnOrder}`}>
-          <figure className="border-black/8 group relative overflow-hidden rounded-[32px] border bg-transparent shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition-all duration-500 dark:border-white/10 dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)]">
+          <figure className="border-black/12 group relative overflow-hidden rounded-[32px] border-2 bg-transparent shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition-all duration-500 dark:border-white/15 dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)]">
+            <div className="pointer-events-none absolute inset-3 rounded-[28px] border-2 border-white/85 dark:border-white/20" />
             <picture>
               <source srcSet={leader.portrait.src} type="image/webp" />
               <img

@@ -412,12 +412,12 @@ const ContactPage: React.FC = () => {
             </div>
           </div>
           <div className="flex-1 rounded-[32px] border border-gray-200 bg-white p-8 text-left shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_80px_rgba(0,0,0,0.45)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
               Antwortzeiten
             </p>
             <ul className="mt-6 space-y-5 text-gray-700 dark:text-white/80">
               <li className="rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 dark:border-white/10 dark:bg-white/[0.04]">
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
                   Schnelle Antwort
                 </p>
                 <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
@@ -432,7 +432,7 @@ const ContactPage: React.FC = () => {
       <section className="border-b border-vae-turquoise/10 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
               Warum VAE Systems
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -465,7 +465,7 @@ const ContactPage: React.FC = () => {
         <div className="container-vae">
           <div className="mx-auto max-w-4xl space-y-8">
             <div className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
                 Direkt Termin buchen
               </p>
               <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -677,7 +677,7 @@ const ContactPage: React.FC = () => {
           <div className="space-y-8">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
                   Mail Builder
                 </p>
                 <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
@@ -909,7 +909,7 @@ const ContactPage: React.FC = () => {
             data-tutorial="preview"
             className="space-y-6 rounded-[32px] border border-gray-200 bg-white p-8 shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_90px_rgba(0,0,0,0.55)]"
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
               Vorschau (wird in Ihrem Mailprogramm geöffnet)
             </p>
             <pre className="min-h-[360px] whitespace-pre-wrap rounded-2xl border border-gray-300 bg-gray-50 p-5 text-sm leading-relaxed text-gray-800 dark:border-white/10 dark:bg-black/40 dark:text-white/80">

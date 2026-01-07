@@ -28,7 +28,9 @@ export const HeritageSection: React.FC = () => {
       </div>
       <div className="container-vae relative grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div className="space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Unsere Geschichte</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Unsere Geschichte
+          </p>
           <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Design als Familienhandwerk</h2>
           <p className="text-base leading-relaxed text-text-secondary">
             VAE Systems entstand in einer Werkstatt, in der Kunst genauso präzise geplant wird wie Architektur. Julian
@@ -56,7 +58,9 @@ export const HeritageSection: React.FC = () => {
               key={principle.title}
               className="rounded-3xl border border-white/10 bg-white/5 p-6 text-text-light shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Prinzip</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+                Prinzip
+              </p>
               <h3 className="mt-2 text-lg font-semibold text-text-light">{principle.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">{principle.body}</p>
             </div>

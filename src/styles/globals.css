@@ -68,7 +68,7 @@
     --shadow-turquoise-glow: 0 0 40px hsla(var(--color-vae-turquoise), 0.5);
 
     /* Modern Tailwind compatibility - Dark Mode */
-    --color-vae-turquoise: 157 100% 47%;
+    --color-vae-turquoise: 157 75% 40%;
     --color-vae-turquoise-rgb: 0, 255, 165;
     --color-white-rgb: 255, 255, 255;
     --color-black-rgb: 0, 0, 0;
@@ -175,8 +175,8 @@
     --shadow-turquoise: 0 8px 32px rgba(29, 184, 122, 0.15);
     --shadow-turquoise-glow: 0 0 40px rgba(29, 184, 122, 0.2);
 
-    /* Modern Tailwind compatibility - VAE Green */
-    --color-vae-turquoise: 157 75% 40%; /* #1db87a in HSL */
+    /* Modern Tailwind compatibility - VAE Green (kräftiger im Light Mode) */
+    --color-vae-turquoise: 157 90% 35%;
     --color-vae-black: 147 18% 14%; /* Deep forest (#1a2320) */
 
     /* Background Colors */

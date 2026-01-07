@@ -98,7 +98,9 @@ const UnabhaengigkeitPage: React.FC = () => {
           </div>
 
           <div className="space-y-6 rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Konkreter Nutzen</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Konkreter Nutzen
+            </p>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
@@ -144,7 +146,9 @@ const UnabhaengigkeitPage: React.FC = () => {
               key={principle.title}
               className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)]"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Prinzip</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+                Prinzip
+              </p>
               <h2 className="mt-3 text-xl font-semibold text-text-light">{principle.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">{principle.body}</p>
             </article>
@@ -155,7 +159,9 @@ const UnabhaengigkeitPage: React.FC = () => {
       <section className="border-b border-black/5 bg-gradient-to-b from-bg-dark to-bg-darker py-24 dark:border-white/5">
         <div className="container-vae grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="space-y-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Ablauf</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Ablauf
+            </p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Von Abhängigkeit zu Souveränität</h2>
             <p className="text-base leading-relaxed text-text-secondary">
               Echte Partnerschaft entsteht, wenn beide Seiten freiwillig bleiben. Deshalb analysieren wir zuerst, an wen
@@ -343,7 +349,9 @@ const UnabhaengigkeitPage: React.FC = () => {
       <section className="bg-bg-darker py-24">
         <div className="container-vae">
           <div className="flex flex-col gap-4 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Praxis-Beispiele</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Praxis-Beispiele
+            </p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">So sichern wir Unabhängigkeit</h2>
           </div>
 

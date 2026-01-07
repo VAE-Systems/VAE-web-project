@@ -1,5 +1,3 @@
-import Renderer from '@prerenderer/renderer-puppeteer'
-import prerender from '@prerenderer/rollup-plugin'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -38,15 +36,16 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'production'
-      ? prerender({
-          routes: prerenderRoutes,
+      ? null // TEMPORÄR DEAKTIVIERT - Prerendering hängt
+      : /*prerender({
+          routes: ['/', '/services/beratung', '/contact'],
           renderer: new Renderer({
             headless: true,
-            renderAfterTime: 4000,
-            maxConcurrentRoutes: 4,
+            renderAfterTime: 1500,
+            maxConcurrentRoutes: 2,
           }),
-        })
-      : null,
+        })*/
+        null,
     // Bundle analyzer (only in build mode with ANALYZE=true)
     process.env.ANALYZE === 'true' &&
       visualizer({
@@ -64,13 +63,6 @@ export default defineConfig(({ mode }) => ({
       '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
       '@types': fileURLToPath(new URL('./src/types', import.meta.url)),
       '@design-system': fileURLToPath(new URL('./src/design-system', import.meta.url)),
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      css: {
-        additionalData: '@import "@/styles/globals.css";',
-      },
     },
   },
   server: {

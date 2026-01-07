@@ -50,7 +50,7 @@ const ProductsCardsGrid: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-text-light dark:text-white">{cat.title}</h4>
-                    <p className="mt-1 text-sm uppercase tracking-wide text-vae-turquoise/70 md:text-xs">
+                    <p className="mt-1 text-sm uppercase tracking-wide text-vae-turquoise dark:text-vae-turquoise/70 md:text-xs">
                       {cat.tagline}
                     </p>
                   </div>

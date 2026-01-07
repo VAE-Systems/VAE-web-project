@@ -152,7 +152,7 @@ const SectionNavigation: React.FC = () => {
                   md:hover:-translate-x-1
                   ${
                     isActive
-                      ? 'scale-105 border-vae-turquoise bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark text-bg-darker shadow-lg shadow-vae-turquoise/30 dark:text-white'
+                      ? 'scale-105 border-2 border-vae-turquoise bg-vae-turquoise text-bg-darker shadow-[0_8px_18px_rgba(18,24,20,0.12)] dark:border dark:border-vae-turquoise dark:bg-gradient-to-br dark:from-vae-turquoise dark:to-vae-turquoise-dark dark:text-white dark:shadow-lg dark:shadow-vae-turquoise/30'
                       : 'bg-bg-primary/8 dark:bg-white/8 border-border-primary text-text-light dark:border-white/15 dark:text-white'
                   }
                 `}

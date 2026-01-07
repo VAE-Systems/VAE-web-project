@@ -529,7 +529,13 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     return (
       <div
         ref={containerRef}
-        className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-bg-dark/85 via-bg-darker to-bg-dark p-4 shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)] sm:rounded-3xl sm:p-6"
+        className={cn(
+          'relative overflow-hidden rounded-2xl border-2 p-4 sm:rounded-3xl sm:p-6',
+          isProblem
+            ? 'border-orange-300 bg-orange-50/80 shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
+            : 'border-vae-turquoise/60 bg-vae-turquoise/10 shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
+          'dark:border dark:border-white/10 dark:bg-gradient-to-br dark:from-bg-dark/85 dark:via-bg-darker dark:to-bg-dark dark:shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)]'
+        )}
       >
         <div className="mb-3 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-shrink-0 space-y-0.5">
@@ -714,7 +720,13 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
         </div>
 
         <div
-          className="relative h-[580px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-[600px] md:h-[640px] lg:h-[680px]"
+          className={cn(
+            'relative h-[580px] overflow-hidden rounded-2xl border-2 sm:h-[600px] md:h-[640px] lg:h-[680px]',
+            isProblem
+              ? 'border-orange-300 bg-white shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
+              : 'border-vae-turquoise/60 bg-white shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
+            'dark:border dark:border-white/10 dark:bg-white/5 dark:shadow-none'
+          )}
           style={{ contain: 'layout style paint' }}
         >
           {/* Background effects */}

@@ -89,7 +89,9 @@ const TechShowcaseSection: React.FC = () => {
     >
       <div className="container-vae">
         <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Tech-Showcase</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Tech-Showcase
+          </p>
           <h2 className="fluid-h2 mt-3 font-semibold text-text-light">Technologien, die wir einsetzen</h2>
           <p className="mt-3 text-base text-text-secondary">Bewährte Open-Source-Tools — professionell integriert</p>
         </header>

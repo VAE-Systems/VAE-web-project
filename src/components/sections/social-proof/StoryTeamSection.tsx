@@ -98,7 +98,9 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
                 key={f.label}
                 className="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-center backdrop-blur-sm"
               >
-                <div className="mb-1 text-[11px] uppercase tracking-wider text-vae-turquoise/70">{f.label}</div>
+                <div className="mb-1 text-[11px] uppercase tracking-wider text-vae-turquoise dark:text-vae-turquoise/70">
+                  {f.label}
+                </div>
                 <div className="text-sm font-semibold text-text-light dark:text-white">{f.value}</div>
               </div>
             ))}
@@ -114,7 +116,8 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
             >
               <div className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="relative z-10 mb-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-inner shadow-black/10 sm:h-28 sm:w-28">
+                <div className="relative h-24 w-24 overflow-hidden rounded-2xl border-2 border-black/10 bg-white/5 shadow-inner shadow-black/10 dark:border-white/10 sm:h-28 sm:w-28">
+                  <div className="pointer-events-none absolute inset-2 rounded-xl border-2 border-white/85 dark:border-white/20" />
                   <img
                     src={member.image}
                     alt={`${member.name} – ${member.role}`}
@@ -149,13 +152,13 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
 
               <dl className="relative z-10 mb-6 grid gap-3 text-sm text-text-secondary dark:text-white/70 sm:grid-cols-2">
                 <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-vae-turquoise/70">
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-vae-turquoise dark:text-vae-turquoise/70">
                     Erfahrung
                   </dt>
                   <dd className="mt-1 text-text-light dark:text-white">{member.experience}</dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-vae-turquoise/70">
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-vae-turquoise dark:text-vae-turquoise/70">
                     Ausbildung
                   </dt>
                   <dd className="mt-1 text-text-light dark:text-white">{member.education}</dd>

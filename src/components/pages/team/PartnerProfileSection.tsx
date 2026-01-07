@@ -34,7 +34,7 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
     >
       <div className="container-vae grid gap-12 lg:grid-cols-[1.15fr_0.95fr] lg:items-center">
         <div className={`space-y-6 ${infoColumnOrder}`}>
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
             {partner.badge || 'Partner Story'}
           </p>
           <h2
@@ -131,12 +131,13 @@ export const PartnerProfileSection: React.FC<PartnerProfileSectionProps> = ({ pa
 
         <aside className={`flex flex-col gap-6 ${cardColumnOrder}`}>
           <figure
-            className={`group relative overflow-hidden rounded-[32px] border shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition-all duration-500 dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)] ${
+            className={`group relative overflow-hidden rounded-[32px] border-2 shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition-all duration-500 dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)] ${
               partner.isPlaceholder
-                ? 'border-white/5 bg-white/[0.02]'
-                : 'border-black/8 bg-transparent dark:border-white/10'
+                ? 'border-black/10 bg-white/[0.02] dark:border-white/10'
+                : 'border-black/12 bg-transparent dark:border-white/15'
             }`}
           >
+            <div className="pointer-events-none absolute inset-3 rounded-[28px] border-2 border-white/85 dark:border-white/20" />
             <picture>
               <source srcSet={partner.portrait.src} type="image/webp" />
               <img

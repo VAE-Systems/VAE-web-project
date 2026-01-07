@@ -32,7 +32,9 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
     >
       <div className="container-vae">
         <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Prozess</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Prozess
+          </p>
           <h2 id="process-home-heading" className="fluid-h2 mt-3 font-semibold text-text-light">
             {homeProcessHeading}
           </h2>

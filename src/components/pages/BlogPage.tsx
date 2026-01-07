@@ -79,7 +79,9 @@ const BlogPage: React.FC = () => {
                   key={fact.label}
                   className="rounded-2xl border border-gray-200/80 bg-white px-5 py-3 text-left text-sm text-gray-700 shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75"
                 >
-                  <p className="text-[0.65rem] uppercase tracking-[0.3em] text-vae-turquoise/70">{fact.label}</p>
+                  <p className="text-[0.65rem] uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+                    {fact.label}
+                  </p>
                   <p className="mt-1 font-semibold text-gray-900 dark:text-white">{fact.value}</p>
                 </div>
               ))}
@@ -95,7 +97,7 @@ const BlogPage: React.FC = () => {
               </p>
               <ul className="mt-6 space-y-5 text-base leading-relaxed text-gray-700 dark:text-white/80">
                 <li className="rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">
+                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
                     Deep Dives aus Projekten
                   </p>
                   <p className="mt-2 text-sm text-gray-700 dark:text-white/70">
@@ -103,7 +105,7 @@ const BlogPage: React.FC = () => {
                   </p>
                 </li>
                 <li className="rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">
+                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
                     Übergangsweise auf Outline
                   </p>
                   <p className="mt-2 text-sm text-gray-700 dark:text-white/70">
@@ -124,7 +126,9 @@ const BlogPage: React.FC = () => {
       <section className="border-b border-gray-100 bg-white py-20 dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Themen</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Themen
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Worüber wir schreiben
             </h2>
@@ -152,7 +156,9 @@ const BlogPage: React.FC = () => {
 
       <section className="border-t border-black/5 bg-gradient-to-b from-gray-50 via-white to-gray-50 py-20 dark:border-white/5 dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark">
         <div className="container-vae flex flex-col items-center gap-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">Navigation</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Navigation
+          </p>
           <h3 className="text-3xl font-semibold text-gray-900 dark:text-white">
             Zurück zur Website oder direkt Kontakt aufnehmen
           </h3>

@@ -157,10 +157,10 @@ const ProductVaeCorePage: React.FC = () => {
                     onClick={() => setActiveTab(tab.id)}
                     role="tab"
                     aria-selected={activeTab === tab.id}
-                    className={`rounded-xl px-4 py-2 text-sm font-medium shadow-md ${
+                    className={`rounded-xl border px-4 py-2 text-sm font-medium shadow-md ${
                       activeTab === tab.id
-                        ? 'bg-vae-turquoise text-bg-dark shadow-xl'
-                        : 'text-text-secondary hover:bg-bg-secondary/30 hover:text-text-light hover:shadow-lg'
+                        ? 'border-vae-turquoise bg-vae-turquoise/20 text-text-light shadow-[0_8px_18px_rgba(18,24,20,0.12)] dark:border-transparent dark:bg-vae-turquoise dark:text-bg-dark dark:shadow-xl'
+                        : 'border-transparent text-text-secondary hover:border-vae-turquoise/40 hover:bg-bg-secondary/30 hover:text-text-light hover:shadow-lg dark:border-transparent'
                     }`}
                   >
                     {tab.label}
@@ -203,10 +203,10 @@ const ProductVaeCorePage: React.FC = () => {
                     onClick={() => setActiveTab(tab.id)}
                     role="tab"
                     aria-selected={activeTab === tab.id}
-                    className={`rounded-xl px-4 py-2 text-sm font-medium shadow-md ${
+                    className={`rounded-xl border px-4 py-2 text-sm font-medium shadow-md ${
                       activeTab === tab.id
-                        ? 'bg-vae-turquoise text-bg-dark shadow-xl'
-                        : 'text-text-secondary hover:bg-bg-secondary/30 hover:text-text-light hover:shadow-lg'
+                        ? 'border-vae-turquoise bg-vae-turquoise/20 text-text-light shadow-[0_8px_18px_rgba(18,24,20,0.12)] dark:border-transparent dark:bg-vae-turquoise dark:text-bg-dark dark:shadow-xl'
+                        : 'border-transparent text-text-secondary hover:border-vae-turquoise/40 hover:bg-bg-secondary/30 hover:text-text-light hover:shadow-lg dark:border-transparent'
                     }`}
                   >
                     {tab.label}

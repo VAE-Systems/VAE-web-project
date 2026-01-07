@@ -67,7 +67,9 @@ const ProductsSection: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="text-base font-semibold leading-tight text-text-light">{cat.title}</h3>
-                      <p className="mt-1 text-[10px] uppercase tracking-wide text-vae-turquoise/70">{cat.tagline}</p>
+                      <p className="mt-1 text-[10px] uppercase tracking-wide text-vae-turquoise dark:text-vae-turquoise/70">
+                        {cat.tagline}
+                      </p>
                     </div>
                   </div>
                   {cat.badge && (

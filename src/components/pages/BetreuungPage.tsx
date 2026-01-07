@@ -429,7 +429,7 @@ const BetreuungPage: React.FC = () => {
             <div className="grid gap-6 md:grid-cols-2">
               {/* Left: Problem (Orange) */}
               <motion.div
-                className="relative overflow-hidden rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-white p-8 shadow-lg dark:border-orange-500/30 dark:from-orange-950/10 dark:to-bg-darker"
+                className="relative overflow-hidden rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-white p-8 shadow-[0_4px_24px_rgba(251,146,60,0.15),0_0_20px_rgba(251,146,60,0.25)] dark:border-orange-500/30 dark:from-orange-950/10 dark:to-bg-darker dark:shadow-[0_4px_24px_rgba(251,146,60,0.08),0_0_20px_rgba(251,146,60,0.15)]"
                 initial={{ opacity: 0, x: -30, scale: 0.95 }}
                 whileInView={{ opacity: 1, x: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-100px' }}
@@ -485,7 +485,7 @@ const BetreuungPage: React.FC = () => {
 
               {/* Right: Solution (Türkis) */}
               <motion.div
-                className="relative overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-gradient-to-br from-vae-turquoise/5 to-white p-8 shadow-lg dark:border-vae-turquoise/30 dark:from-vae-turquoise/10 dark:to-bg-darker"
+                className="relative overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-gradient-to-br from-vae-turquoise/5 to-white p-8 shadow-[0_4px_24px_rgba(29,184,122,0.15),0_0_20px_rgba(29,184,122,0.25)] dark:border-vae-turquoise/30 dark:from-vae-turquoise/10 dark:to-bg-darker dark:shadow-[0_4px_24px_rgba(8,255,193,0.08),0_0_20px_rgba(8,255,193,0.15)]"
                 initial={{ opacity: 0, x: 30, scale: 0.95 }}
                 whileInView={{ opacity: 1, x: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-100px' }}
@@ -567,7 +567,9 @@ const BetreuungPage: React.FC = () => {
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <header className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Unser Ansatz</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Unser Ansatz
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Direkte Kommunikation, klare Prozesse
             </h2>
@@ -671,7 +673,9 @@ const BetreuungPage: React.FC = () => {
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Service-Level</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Service-Level
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Wie wir zusammenarbeiten können.
             </h2>
@@ -697,12 +701,14 @@ const BetreuungPage: React.FC = () => {
                   )}
                   <level.icon className="mb-5 h-12 w-12 text-vae-turquoise" />
                   <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">{level.title}</h3>
-                  <p className="mt-1 text-sm uppercase tracking-[0.3em] text-vae-turquoise/70">{level.subtitle}</p>
+                  <p className="mt-1 text-sm uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+                    {level.subtitle}
+                  </p>
                   <p className="mt-4 text-base text-gray-700 dark:text-text-secondary">{level.description}</p>
 
                   <div className="mt-8 space-y-4 text-sm text-gray-700 dark:text-text-secondary">
                     <div>
-                      <p className="font-semibold uppercase tracking-[0.2em] text-vae-turquoise/70">
+                      <p className="font-semibold uppercase tracking-[0.2em] text-vae-turquoise dark:text-vae-turquoise/70">
                         Was enthalten ist
                       </p>
                       <ul className="mt-3 space-y-2">
@@ -743,7 +749,7 @@ const BetreuungPage: React.FC = () => {
                     </div>
                     {level.excluded && (
                       <div>
-                        <p className="font-semibold uppercase tracking-[0.2em] text-vae-turquoise/70">
+                        <p className="font-semibold uppercase tracking-[0.2em] text-vae-turquoise dark:text-vae-turquoise/70">
                           Was nicht enthalten ist
                         </p>
                         <ul className="mt-3 space-y-2">
@@ -756,7 +762,7 @@ const BetreuungPage: React.FC = () => {
                       </div>
                     )}
                     <div>
-                      <p className="font-semibold uppercase tracking-[0.2em] text-vae-turquoise/70">
+                      <p className="font-semibold uppercase tracking-[0.2em] text-vae-turquoise dark:text-vae-turquoise/70">
                         Für wen geeignet?
                       </p>
                       <ul className="mt-3 space-y-2">
@@ -828,7 +834,9 @@ const BetreuungPage: React.FC = () => {
         <div className="section-card-backdrop" />
         <div id="deployment-modelle" className="container-vae relative">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Hosting & Betrieb</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Hosting & Betrieb
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Wie kann Ihr Setup betrieben werden?
             </h2>
@@ -916,7 +924,9 @@ const BetreuungPage: React.FC = () => {
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Was ist enthalten?</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Was ist enthalten?
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Was wir konkret machen
             </h2>
@@ -949,7 +959,9 @@ const BetreuungPage: React.FC = () => {
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Unser Prozess</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Unser Prozess
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               So arbeiten wir zusammen
             </h2>
@@ -1057,7 +1069,9 @@ const BetreuungPage: React.FC = () => {
       <section className="border-b border-gray-200 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-transparent">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/70">Warum VAE?</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+              Warum VAE?
+            </p>
             <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Warum Kunden VAE wählen
             </h2>
@@ -1097,7 +1111,7 @@ const BetreuungPage: React.FC = () => {
       {/* Section 8: CTA */}
       <section className="border-t border-gray-200 bg-[#f2fff8] py-16 dark:border-white/5 dark:bg-transparent md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
             Bereit für den nächsten Schritt?
           </p>
           <h2 className="px-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">

@@ -14,7 +14,9 @@ export const CTASection: React.FC = () => {
 
       <div className="container-vae">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise/70">Nächster Schritt</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Nächster Schritt
+          </p>
           <h2 className="mt-4 text-3xl font-semibold text-text-light md:text-4xl">{CTA.heading}</h2>
           <p className="mt-6 text-base leading-relaxed text-text-secondary sm:text-lg">{CTA.copy}</p>
 

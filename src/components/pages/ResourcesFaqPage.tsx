@@ -187,7 +187,7 @@ const ResourcesFaqPage: React.FC = () => {
                   onClick={() => setActiveCategory(filter.id)}
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                     isActive
-                      ? 'border-vae-turquoise bg-vae-turquoise/15 text-vae-turquoise shadow-[0_10px_30px_rgba(13,148,136,0.18)] dark:text-white dark:shadow-[0_10px_30px_rgba(13,148,136,0.35)]'
+                      ? 'border-2 border-vae-turquoise bg-vae-turquoise/20 text-vae-turquoise shadow-[0_8px_18px_rgba(18,24,20,0.08)] dark:border dark:border-vae-turquoise/80 dark:bg-vae-turquoise/15 dark:text-white dark:shadow-[0_10px_30px_rgba(13,148,136,0.35)]'
                       : 'border-gray-200 bg-white text-gray-700 shadow-sm hover:border-vae-turquoise/50 hover:text-vae-turquoise dark:border-white/10 dark:bg-transparent dark:text-white/70 dark:hover:border-white/40 dark:hover:text-white'
                   }`}
                 >

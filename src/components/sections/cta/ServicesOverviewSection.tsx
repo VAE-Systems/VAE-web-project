@@ -43,7 +43,7 @@ const ServicesOverviewSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="border-border-primary/30 to-sage-50/40 relative border-t bg-gradient-to-b from-white py-20 dark:from-bg-darker dark:to-bg-dark sm:py-28"
+      className="border-border-primary/30 from-vae-turquoise/22 via-vae-turquoise/12 to-vae-turquoise/8 relative border-t bg-gradient-to-b py-20 dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-dark sm:py-28"
     >
       {/* Background Image Layer */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -51,11 +51,11 @@ const ServicesOverviewSection: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(229,241,232,0.9)_0%,rgba(229,241,232,0.3)_50%,transparent_70%)] dark:bg-transparent" />
 
         {/* Gradient Base: hell VAE-grün oben links → dunkel unten rechts - nur Desktop */}
-        <div className="absolute inset-0 hidden bg-gradient-to-br from-vae-turquoise/30 via-vae-turquoise/10 to-bg-darker/80 dark:from-vae-turquoise/20 dark:via-bg-darker/40 dark:to-bg-darker sm:block" />
+        <div className="from-vae-turquoise/24 via-vae-turquoise/12 absolute inset-0 hidden bg-gradient-to-br to-white/80 dark:from-vae-turquoise/20 dark:via-bg-darker/40 dark:to-bg-darker sm:block" />
 
         {/* Hintergrundbild mit Parallax & Zoom - Light Mode mit statischem Blur */}
         <motion.div
-          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[12px] dark:hidden sm:block"
+          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[4px] dark:hidden sm:block"
           style={{
             backgroundImage: "url('/images/raw/Background-3Wege-ausgeschnitten.png')",
             y,
@@ -77,9 +77,9 @@ const ServicesOverviewSection: React.FC = () => {
         />
 
         {/* Overlays für bessere Lesbarkeit */}
-        <div className="from-bg-primary/90 via-bg-primary/80 to-bg-primary/90 absolute inset-0 bg-gradient-to-b dark:from-bg-darker/90 dark:via-bg-darker/80 dark:to-bg-darker/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.20),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--vae-turquoise-rgb),0.08),transparent_65%)]" />
+        <div className="from-bg-primary/70 via-bg-primary/55 to-bg-primary/70 absolute inset-0 bg-gradient-to-b dark:from-bg-darker/90 dark:via-bg-darker/80 dark:to-bg-darker/90" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.20),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--vae-turquoise-rgb),0.04),transparent_65%)] dark:bg-[radial-gradient(circle_at_bottom,rgba(var(--vae-turquoise-rgb),0.08),transparent_65%)]" />
       </div>
       <div className="container-vae relative z-10">
         <div className="mx-auto max-w-3xl text-center">
@@ -142,7 +142,7 @@ const ServicesOverviewSection: React.FC = () => {
                           className="flex items-center gap-2 rounded-lg border border-vae-turquoise/20 bg-vae-turquoise/5 px-3 py-2 text-xs font-medium text-text-light transition-all duration-200 hover:border-vae-turquoise/40 hover:bg-vae-turquoise/10"
                         >
                           <svg
-                            className="h-3 w-3 flex-shrink-0 text-vae-turquoise/70"
+                            className="h-3 w-3 flex-shrink-0 text-vae-turquoise dark:text-vae-turquoise/70"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"

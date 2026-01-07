@@ -113,7 +113,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
                   <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise">
                     <Icon name={item.icon} className="text-vae-turquoise" size={22} />
                   </div>
-                  <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise/70">
+                  <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise dark:text-vae-turquoise/70">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
@@ -131,7 +131,9 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
             aria-label="Kennzahlen"
           >
             <div className="mb-6">
-              <span className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise/70">KPIs</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise dark:text-vae-turquoise/70">
+                KPIs
+              </span>
               <h3 className="mt-2 text-xl font-semibold text-text-light">Was Pilotkund:innen erreichen</h3>
             </div>
             <ul className="space-y-6">

@@ -120,7 +120,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
                         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise transition-transform duration-300 group-hover:scale-110">
                           <Icon name={o.icon} className="text-vae-turquoise" size={22} />
                         </div>
-                        <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise/70">
+                        <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise dark:text-vae-turquoise/70">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                       </div>

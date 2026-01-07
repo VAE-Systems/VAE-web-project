@@ -166,7 +166,7 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
           <div className="relative space-y-8">
             {value.benefits.length > 0 && (
               <div className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/70">
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
                   Konkreter Nutzen
                 </p>
                 <ul className="space-y-4">

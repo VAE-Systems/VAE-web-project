@@ -113,7 +113,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise">
                       <Icon name={s.icon} className="text-vae-turquoise" size={22} />
                     </div>
-                    <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise/70">
+                    <span className="text-xs font-medium uppercase tracking-wider text-vae-turquoise dark:text-vae-turquoise/70">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>

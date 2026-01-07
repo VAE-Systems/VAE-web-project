@@ -111,7 +111,9 @@ const SocialProofSection: React.FC = () => {
       </div>
       <div className="container-vae">
         <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/70">Social Proof</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Social Proof
+          </p>
           <h2 className="fluid-h2 mt-3 font-semibold text-gray-900 dark:text-text-light">Projekte & Referenzen</h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-text-secondary">
             Was wir gebaut haben – und was dabei rauskam.

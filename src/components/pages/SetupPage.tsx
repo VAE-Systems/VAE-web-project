@@ -1433,7 +1433,7 @@ const SetupPage: React.FC = () => {
                   {/* Card-Content */}
                   <div className="flex h-full flex-col gap-4 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/5">
                     {/* Phase-Label */}
-                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-vae-turquoise/70 md:text-center">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-vae-turquoise dark:text-vae-turquoise/70 md:text-center">
                       Phase {phase.number}
                     </p>
 

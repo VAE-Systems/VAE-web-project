@@ -31,7 +31,7 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
     >
       <div className="space-y-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80 dark:text-vae-turquoise/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80 dark:text-vae-turquoise dark:text-vae-turquoise/70">
             {content.id}
           </p>
           <h3 className="text-2xl font-semibold leading-snug text-gray-900 dark:text-white">{content.title}</h3>

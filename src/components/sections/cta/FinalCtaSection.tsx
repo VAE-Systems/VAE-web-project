@@ -38,22 +38,28 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
   return (
     <section
       id={id}
-      className={`from-bg-primary to-bg-primary relative overflow-hidden border-t border-vae-turquoise/10 bg-gradient-to-b via-bg-secondary/80 py-20 dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker sm:py-28 ${className}`.trim()}
+      className={`from-vae-turquoise/22 via-vae-turquoise/14 relative overflow-hidden border-t border-vae-turquoise/25 bg-gradient-to-b to-vae-turquoise/10 py-20 dark:border-vae-turquoise/10 dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker sm:py-28 ${className}`.trim()}
       aria-labelledby="final-cta-heading"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 opacity-80">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <div
-          className="absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.22),transparent_65%)]"
+          className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.7),rgba(255,255,255,0))] opacity-60 dark:hidden"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-[linear-gradient(rgba(var(--vae-turquoise-rgb),0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--vae-turquoise-rgb),0.08)_1px,transparent_1px)] bg-[size:120px_120px] mix-blend-soft-light"
+          className="absolute inset-x-0 top-0 hidden h-72 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.22),transparent_65%)] dark:block"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 hidden bg-[linear-gradient(rgba(var(--vae-turquoise-rgb),0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--vae-turquoise-rgb),0.08)_1px,transparent_1px)] bg-[size:120px_120px] mix-blend-soft-light dark:block"
           aria-hidden
         />
       </div>
       <div className="container-vae">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise/70">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise dark:text-vae-turquoise/70">
+            {eyebrow}
+          </p>
           <h2 id="final-cta-heading" className="fluid-h2 mt-4 text-balance font-bold text-text-light dark:text-white">
             {title}
           </h2>

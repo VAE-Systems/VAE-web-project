@@ -199,7 +199,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* ── TRUST BADGES ── */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold tracking-[0.3em] text-vae-turquoise/70">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
             {trustBadges.map(badge => (
               <span key={badge} className="inline-flex items-center gap-2 uppercase">
                 <CheckCheck className="h-5 w-5 text-vae-turquoise" />

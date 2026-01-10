@@ -464,7 +464,7 @@ const BeratungPage: React.FC = () => {
       />
 
       {/* ==================== HERO SECTION ==================== */}
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-gradient-to-br from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
+      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise/10 py-32 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-40">
         {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
         {/* Desktop version with fixed attachment */}
         <div
@@ -489,11 +489,10 @@ const BeratungPage: React.FC = () => {
           }}
           role="presentation"
         />
-        <div className="pointer-events-none absolute inset-0 opacity-40">
+        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-40">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--vae-turquoise-rgb),0.25),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(var(--vae-turquoise-rgb),0.15),transparent_60%)]" />
         </div>
-        {/* Light Mode: subtiler Glasmorphism-Hintergrund */}
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[85%] max-w-4xl -translate-y-1/2 rounded-3xl bg-white/30 backdrop-blur-[2px] dark:bg-transparent dark:backdrop-blur-none" />
+        {/* Light Mode: no glass blur to keep poster-like clarity */}
 
         <div className="container-vae relative">
           <div ref={heroRef} className="mx-auto max-w-4xl space-y-8 text-center">
@@ -696,7 +695,7 @@ const BeratungPage: React.FC = () => {
             {/* Right Column - Julian Hand + Jakob Tafel mit Hover-Animation */}
             <div className="grid gap-6">
               {/* Julian Hand mit Smartwatch */}
-              <div className="group relative overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 to-transparent shadow-lg transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-xl hover:shadow-vae-turquoise/20">
+              <div className="group relative overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-white shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-500 hover:border-vae-turquoise/50 dark:border-vae-turquoise/20 dark:bg-gradient-to-br dark:from-vae-turquoise/5 dark:to-transparent dark:shadow-lg dark:hover:shadow-vae-turquoise/20">
                 <picture>
                   <source
                     srcSet="/images/optimized/Julian-Hand-Mit-Smartwatch-zeigt-auf-texte-und-so.webp"
@@ -709,13 +708,13 @@ const BeratungPage: React.FC = () => {
                     className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </picture>
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-darker/20 to-transparent transition-opacity duration-500 group-hover:opacity-70" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-70 dark:bg-gradient-to-t dark:from-bg-darker/20 dark:to-transparent dark:opacity-100" />
                 {/* Türkiser Glanz-Effekt beim Hover */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-vae-turquoise/0 via-vae-turquoise/0 to-vae-turquoise/0 opacity-0 transition-all duration-500 group-hover:from-vae-turquoise/10 group-hover:via-vae-turquoise/5 group-hover:to-transparent group-hover:opacity-100" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-500 group-hover:opacity-100 dark:bg-gradient-to-br dark:from-vae-turquoise/0 dark:via-vae-turquoise/0 dark:to-vae-turquoise/0 dark:group-hover:from-vae-turquoise/10 dark:group-hover:via-vae-turquoise/5 dark:group-hover:to-transparent" />
               </div>
 
               {/* Jakob vor Tafel - mit Hover-Übergang zwischen Bild 1 und 2 */}
-              <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 to-transparent shadow-lg transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-xl hover:shadow-vae-turquoise/20">
+              <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-white shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-500 hover:border-vae-turquoise/50 dark:border-vae-turquoise/20 dark:bg-gradient-to-br dark:from-vae-turquoise/5 dark:to-transparent dark:shadow-lg dark:hover:shadow-vae-turquoise/20">
                 {/* Bild 1 - Standard */}
                 <picture className="absolute inset-0 transition-opacity duration-700 ease-in-out group-hover:opacity-0">
                   <source srcSet="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp" type="image/webp" />
@@ -738,9 +737,9 @@ const BeratungPage: React.FC = () => {
                   />
                 </picture>
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-darker/20 to-transparent transition-opacity duration-500 group-hover:opacity-70" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-70 dark:bg-gradient-to-t dark:from-bg-darker/20 dark:to-transparent dark:opacity-100" />
                 {/* Türkiser Glanz-Effekt beim Hover */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-vae-turquoise/0 via-vae-turquoise/0 to-vae-turquoise/0 opacity-0 transition-all duration-500 group-hover:from-vae-turquoise/10 group-hover:via-vae-turquoise/5 group-hover:to-transparent group-hover:opacity-100" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-500 group-hover:opacity-100 dark:bg-gradient-to-br dark:from-vae-turquoise/0 dark:via-vae-turquoise/0 dark:to-vae-turquoise/0 dark:group-hover:from-vae-turquoise/10 dark:group-hover:via-vae-turquoise/5 dark:group-hover:to-transparent" />
               </div>
             </div>
           </div>
@@ -748,7 +747,7 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== VISUELLER ÜBERGANG (Must-Fix 1, Stufe 1) ==================== */}
-      <div className="h-12 bg-gradient-to-b from-white to-[#f2fff8] dark:from-bg-darker dark:to-[#0b0e13]" />
+      <div className="h-12 bg-vae-turquoise/10 dark:bg-gradient-to-b dark:from-bg-darker dark:to-[#0b0e13]" />
 
       {/* ==================== WAS IST ENTHALTEN (FEATURES) ==================== */}
       <section className="section-card-container animate-section border-b bg-gray-50/50 pb-24 pt-32 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(0,0%,8%)]">
@@ -770,13 +769,13 @@ const BeratungPage: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-8 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-white p-8 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
                 >
-                  <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="absolute inset-x-0 top-0 h-[3px] bg-vae-turquoise/50 opacity-80 transition-opacity duration-300 group-hover:opacity-100 dark:bg-gradient-to-r dark:from-vae-turquoise/0 dark:via-vae-turquoise/40 dark:to-vae-turquoise/0" />
                   <div className="flex items-start justify-between gap-4">
-                    <div className="relative inline-flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/30 transition-transform duration-300 group-hover:scale-110">
+                    <div className="relative inline-flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/40 transition-transform duration-300 group-hover:scale-110">
                       <Icon className="relative z-[1] h-7 w-7" />
-                      <div className="absolute inset-0 bg-vae-turquoise/10 blur-[14px]" />
+                      <div className="absolute inset-0 opacity-0 dark:bg-vae-turquoise/10 dark:opacity-100 dark:blur-[14px]" />
                     </div>
                     <span className="inline-flex items-center rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-vae-turquoise dark:border-vae-turquoise/40 dark:bg-vae-turquoise/15">
                       {feature.badge}
@@ -797,8 +796,8 @@ const BeratungPage: React.FC = () => {
                     ))}
                   </ul>
 
-                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="absolute inset-0 bg-gradient-to-br from-vae-turquoise/10 via-transparent to-vae-turquoise/10" />
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:opacity-0">
+                    <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-vae-turquoise/10 dark:via-transparent dark:to-vae-turquoise/10" />
                   </div>
                 </div>
               )
@@ -1059,7 +1058,7 @@ const BeratungPage: React.FC = () => {
           </div>
 
           {/* Info Box */}
-          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-6 text-center">
+          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border-2 border-vae-turquoise/30 bg-white p-6 text-center">
             <p className="text-sm leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
               Im kostenlosen Strategiegespräch erhalten Sie eine erste fundierte Einschätzung. Nach der detaillierten
               Analyse bekommen Sie ein transparentes Angebot — präzise auf Ihre strategischen Ziele zugeschnitten. Keine
@@ -1070,12 +1069,14 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== FAQ + FINAL CTA ==================== */}
-      <section className="animate-section bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-24 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="accent-section animate-section bg-vae-turquoise py-24 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">FAQ</p>
-            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
-            <p className="mt-4 text-base text-text-secondary dark:text-white/70">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/85 dark:text-vae-turquoise/80">
+              FAQ
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-white dark:text-white md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-white/80 dark:text-white/70">
               Strategische Klarheit vor jedem Projekt: Antworten auf die wichtigsten Fragen rund um Umfang, Dauer und
               ROI unserer Beratung.
             </p>
@@ -1084,17 +1085,17 @@ const BeratungPage: React.FC = () => {
           </div>
 
           <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white p-10 text-center shadow-[0_18px_50px_rgba(15,23,42,0.12)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:border-white/15 dark:bg-white/5">
+            <div className="overflow-hidden rounded-3xl border-2 border-white/80 bg-white p-10 text-center text-slate-900 shadow-[0_14px_28px_rgba(18,24,20,0.14)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white dark:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:border-white/15 dark:bg-white/5">
                 Schritt 1
               </div>
-              <h3 className="text-3xl font-semibold text-gray-900 dark:text-white">Bereit für den ersten Schritt?</h3>
-              <p className="mt-4 text-base text-text-secondary dark:text-white/70">
+              <h3 className="text-3xl font-semibold text-slate-900 dark:text-white">Bereit für den ersten Schritt?</h3>
+              <p className="mt-4 text-base text-slate-700 dark:text-white/70">
                 Buchen Sie Ihr kostenloses Strategiegespräch. Wir analysieren Ihre Situation, priorisieren Ziele und
                 zeigen konkrete Optionen – ohne Sales-Pitch.
               </p>
 
-              <ul className="mt-8 space-y-3 text-sm text-text-secondary dark:text-white/70">
+              <ul className="mt-8 space-y-3 text-sm text-slate-700 dark:text-white/70">
                 <li className="flex items-center justify-center gap-3">
                   <CheckCircle2 className="h-5 w-5 text-vae-turquoise" /> 45 Minuten, kostenlos & unverbindlich
                 </li>
@@ -1111,7 +1112,7 @@ const BeratungPage: React.FC = () => {
                   href={bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-convert mt-10 inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
+                  className="btn-convert accent-keep mt-10 inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                 >
                   <Calendar className="h-5 w-5" />
                   Termin buchen
@@ -1126,6 +1127,36 @@ const BeratungPage: React.FC = () => {
                 <div className="h-32 w-32 rounded-full bg-vae-turquoise/20 blur-[80px] dark:bg-vae-turquoise/30" />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-gray-200 bg-white py-16 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:to-bg-darker md:py-20">
+        <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
+            Strategiegespräch
+          </p>
+          <h2 className="px-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
+            Bereit für strategische Klarheit?
+          </h2>
+          <p className="max-w-3xl px-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary md:text-lg">
+            Im kostenlosen Strategiegespräch priorisieren wir Ziele, klären Optionen und geben eine ehrliche
+            Ersteinschätzung zu Aufwand, Timing und Wirkung.
+          </p>
+          <div className="flex flex-col items-center gap-3 md:gap-4">
+            <MagneticButton intensity={0.08} scaleEffect glowEffect>
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-convert inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold md:px-8 md:py-4 md:text-base"
+              >
+                Kostenloses Strategiegespräch buchen
+              </a>
+            </MagneticButton>
+            <p className="px-4 text-xs text-gray-600 dark:text-text-secondary md:text-sm">
+              Binnen 48h Termin verfügbar. Keine Verpflichtung.
+            </p>
           </div>
         </div>
       </section>

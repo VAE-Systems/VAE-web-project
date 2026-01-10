@@ -92,24 +92,23 @@ const ResourcesFaqPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-vae-turquoise/10 bg-gradient-to-b from-white via-[#f5f7f5] to-[#e8ebe9] py-24 text-center dark:border-white/5 dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 text-center dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
         <div aria-hidden="true">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.16),transparent_60%)] dark:hidden" />
           <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.25),transparent_60%)] dark:block" />
         </div>
         <div className="container-vae relative flex flex-col items-center gap-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise">
             FAQ · Knowledge Base
           </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-[#1a2320] dark:text-white md:text-5xl">
+          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
             Alles, was Sie wissen müssen – strukturiert, ehrlich, hilfreich
           </h1>
-          <p className="max-w-3xl text-base text-[#2c3834] dark:text-text-secondary">
+          <p className="max-w-3xl text-base text-white/85 dark:text-text-secondary">
             Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. {faqEntries.length} Fragen, strukturiert
             wie eine echte Knowledge Base. Preise klären wir im Gespräch, weil jedes Projekt anders gebaut wird.
           </p>
-          <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-2 text-sm text-vae-turquoise/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
-            <ShieldCheck className="h-4 w-4 text-vae-turquoise" />
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
+            <ShieldCheck className="h-4 w-4 text-white dark:text-vae-turquoise" />
             Individuelle Lösungen · Transparente Kommunikation
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
@@ -122,7 +121,7 @@ const ResourcesFaqPage: React.FC = () => {
             <MagneticButton>
               <Link to="/contact#booking" className="btn-ghost inline-flex items-center gap-2 text-base">
                 Gespräch buchen
-                <ChevronDown className="h-4 w-4 rotate-180 text-vae-turquoise" />
+                <ChevronDown className="h-4 w-4 rotate-180 text-white dark:text-vae-turquoise" />
               </Link>
             </MagneticButton>
           </div>
@@ -200,17 +199,17 @@ const ResourcesFaqPage: React.FC = () => {
       </section>
 
       {/* Categories + FAQ */}
-      <section className="bg-gradient-to-b from-[#e8fff7] via-[#f2fff8] to-[#f0fff9] py-16 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker">
+      <section className="accent-section bg-vae-turquoise py-16 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker">
         <div className="container-vae space-y-10">
           <div className="grid gap-5 md:grid-cols-5">
             {categoriesWithCounts.map(category => (
               <div
                 key={category.id}
-                className="rounded-3xl border border-gray-100 bg-white p-4 text-left text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.12)] transition hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+                className="rounded-3xl border border-white/55 bg-white p-4 text-left text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.18)] transition hover:-translate-y-1 hover:border-white/80 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">{category.label}</p>
-                <p className="mt-3 text-sm text-slate-600 dark:text-white/70">{category.description}</p>
-                <p className="mt-5 text-xs text-slate-400 dark:text-white/40">{category.actualCount} FAQs</p>
+                <p className="mt-3 text-sm text-slate-700 dark:text-white/70">{category.description}</p>
+                <p className="mt-5 text-xs text-slate-500 dark:text-white/40">{category.actualCount} FAQs</p>
               </div>
             ))}
           </div>

@@ -75,20 +75,20 @@ const QualitaetPage: React.FC = () => {
       />
       <Breadcrumbs items={QUALITAET_BREADCRUMBS} className="mb-4" />
 
-      <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 dark:border-white/5">
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.16),transparent_60%)]" />
+          <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_60%)] dark:block" />
         </div>
 
         <div className="container-vae relative grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise/80">
               <Award className="h-4 w-4" /> Qualität
             </span>
-            <h1 className="text-balance text-4xl font-semibold leading-tight text-text-light md:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold leading-tight text-white dark:text-text-light md:text-5xl">
               Exzellenz als Standard — Handwerkskunst statt Schnellschuss
             </h1>
-            <p className="text-lg leading-relaxed text-text-secondary">
+            <p className="text-lg leading-relaxed text-white/85 dark:text-text-secondary">
               Schnelle Hacks kosten langfristig mehr als sauber geplante Systeme. Wir liefern Architektur, die wächst,
               Code, der lesbar bleibt, und Tests, die Änderungen absichern. Qualität ist kein Luxus, sondern die
               günstigste Art, komplexe Plattformen zu betreiben.
@@ -105,7 +105,7 @@ const QualitaetPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-6 rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+          <div className="space-y-6 rounded-3xl border border-white/30 bg-white/10 p-8 dark:border-white/10 dark:bg-white/[0.03]">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
               Konkreter Nutzen
             </p>

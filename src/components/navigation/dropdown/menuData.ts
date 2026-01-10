@@ -128,7 +128,6 @@ export const MENU_DATA: DropdownMenu[] = [
     subtitle: 'Team & Philosophie',
     menuItems: [
       { id: 'werte', label: 'Werte', href: '/ueber-uns/werte' },
-      { id: 'team', label: 'Team & Netzwerk', href: '/ueber-uns/team' },
       { id: 'leitung', label: 'Leitung', href: '/ueber-uns/leitung' },
       { id: 'kontakt', label: 'Kontakt', href: '/contact' },
     ],
@@ -146,14 +145,6 @@ export const MENU_DATA: DropdownMenu[] = [
         ],
         ctaText: 'Alle Werte entdecken',
         ctaHref: '/ueber-uns/werte',
-      },
-      team: {
-        id: 'TEAM',
-        title: 'Unser Netzwerk',
-        description: 'Freelancer und Partner – kuratierte Expertise für Ihr Projekt.',
-        items: ['Marketing & Sales', 'Software Development', 'Spezialisierte Expertise', 'Flexibles Netzwerk'],
-        ctaText: 'Netzwerk kennenlernen',
-        ctaHref: '/ueber-uns/team',
       },
       leitung: {
         id: 'LEITUNG',

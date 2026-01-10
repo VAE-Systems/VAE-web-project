@@ -20,6 +20,8 @@ const ScrollProgress: React.FC = () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight
       const ratio = docHeight > 0 ? scrollTop / docHeight : 1
       setProgress(Math.min(1, Math.max(0, ratio)))
+
+      void docHeight
     }
 
     let ticking = false
@@ -72,6 +74,14 @@ const ScrollProgress: React.FC = () => {
   }, [isDragging])
 
   const pct = Math.round(progress * 100)
+  const glowClass = 'bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)]'
+  const handleColorClass =
+    'border-vae-turquoise/50 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark shadow-[0_8px_20px_rgba(8,255,193,0.35)]'
+  const fillBackground = `linear-gradient(to bottom,
+        hsl(var(--color-vae-turquoise)) 0%,
+        hsl(var(--color-vae-turquoise) / 0.88) 45%,
+        hsl(var(--color-vae-turquoise) / 0.75) 100%)`
+  const fillShadow = '0_0_8px_-2px rgba(var(--vae-turquoise-rgb),0.6)'
 
   return (
     <div
@@ -97,15 +107,21 @@ const ScrollProgress: React.FC = () => {
         style={{ touchAction: 'none' }}
       >
         {/* Track subtle glow */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)] opacity-40" />
+        <div className={`pointer-events-none absolute inset-0 ${glowClass} opacity-40`} />
         {/* Fill (top -> down) */}
         <div
-          className="absolute left-0 top-0 w-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise/80 to-vae-turquoise-dark shadow-[0_0_8px_-2px_rgba(var(--vae-turquoise-rgb),0.6)] transition-[height] duration-150 ease-out [height:var(--progress)]"
-          style={{ '--progress': `${pct}%` } as React.CSSProperties}
+          className="absolute left-0 top-0 w-full transition-[height] duration-150 ease-out [height:var(--progress)]"
+          style={
+            {
+              '--progress': `${pct}%`,
+              backgroundImage: fillBackground,
+              boxShadow: fillShadow,
+            } as React.CSSProperties
+          }
         />
         {/* Drag handle */}
         <div
-          className={`absolute left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-vae-turquoise/50 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark shadow-[0_8px_20px_rgba(8,255,193,0.35)] transition-transform duration-150 md:h-5 md:w-5 ${
+          className={`absolute left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-transform duration-150 md:h-5 md:w-5 ${handleColorClass} ${
             isActive ? 'scale-110' : ''
           }`}
           style={{ top: `${pct}%` }}

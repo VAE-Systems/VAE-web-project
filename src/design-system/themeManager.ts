@@ -5,6 +5,16 @@ const STORAGE_KEY = 'vae-theme'
 
 const isBrowser = () => typeof window !== 'undefined'
 
+const THEME_COLORS: Record<ThemeMode, string> = {
+  light: '#1db87a',
+  dark: '#0a0a0a',
+}
+
+const THEME_FAVICONS: Record<ThemeMode, string> = {
+  light: '/App_Logo_dark.svg',
+  dark: '/App_Logo_light.svg',
+}
+
 function setDataAttributes(root: HTMLElement, theme: ThemeDefinition) {
   root.dataset.themeMode = theme.mode
   root.dataset.colorScheme = theme.mode
@@ -72,6 +82,21 @@ function setCssVariables(root: HTMLElement, theme: ThemeDefinition) {
   root.style.setProperty('color-scheme', theme.mode)
 }
 
+function updateBrowserMeta(themeMode: ThemeMode) {
+  const themeColor = THEME_COLORS[themeMode]
+  const faviconHref = THEME_FAVICONS[themeMode]
+
+  const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute('content', themeColor)
+  }
+
+  const faviconLink = document.querySelector<HTMLLinkElement>('link[rel="icon"][data-theme-favicon="true"]')
+  if (faviconLink) {
+    faviconLink.setAttribute('href', faviconHref)
+  }
+}
+
 export const resolveTheme = (mode?: ThemeMode | null): ThemeDefinition => {
   if (!mode) {
     return themeRegistry[defaultTheme]
@@ -117,6 +142,7 @@ export const applyTheme = (mode: ThemeMode) => {
 
   setDataAttributes(root, theme)
   setCssVariables(root, theme)
+  updateBrowserMeta(theme.mode)
 
   // Remove transition class after transition completes
   setTimeout(() => {

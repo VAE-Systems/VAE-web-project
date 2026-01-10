@@ -57,15 +57,6 @@ export const LeadershipCTA: React.FC = () => {
                 <ArrowUpRight className="h-5 w-5" />
               </Link>
             </MagneticButton>
-            <MagneticButton intensity={0.06} className="w-full sm:w-auto">
-              <Link
-                to="/ueber-uns/team"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 px-6 py-3 text-sm font-semibold text-text-muted transition-colors duration-200 hover:border-vae-turquoise/60 hover:text-text-light"
-              >
-                Unser Netzwerk kennenlernen
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </MagneticButton>
           </div>
         </div>
 

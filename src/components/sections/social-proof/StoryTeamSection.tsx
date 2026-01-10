@@ -117,7 +117,7 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
               <div className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="relative z-10 mb-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                 <div className="relative h-24 w-24 overflow-hidden rounded-2xl border-2 border-black/10 bg-white/5 shadow-inner shadow-black/10 dark:border-white/10 sm:h-28 sm:w-28">
-                  <div className="pointer-events-none absolute inset-2 rounded-xl border-2 border-white/85 dark:border-white/20" />
+                  <div className="pointer-events-none absolute inset-2 rounded-xl border-2 border-black/10 dark:border-white/20" />
                   <img
                     src={member.image}
                     alt={`${member.name} – ${member.role}`}

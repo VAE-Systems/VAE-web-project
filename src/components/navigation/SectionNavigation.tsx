@@ -33,9 +33,34 @@ const sections: SectionData[] = [
  */
 const SectionNavigation: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>(sections[0].id)
+  const [orderedSections, setOrderedSections] = useState<SectionData[]>(sections)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const hideTimeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    const calculateOrder = () => {
+      const withPositions = sections
+        .map(section => {
+          const element = document.getElementById(section.id)
+          if (!element) return null
+          return { ...section, top: element.offsetTop }
+        })
+        .filter(Boolean) as Array<SectionData & { top: number }>
+
+      if (withPositions.length === 0) {
+        setOrderedSections(sections)
+        return
+      }
+
+      withPositions.sort((a, b) => a.top - b.top)
+      setOrderedSections(withPositions.map(({ top, ...rest }) => rest))
+    }
+
+    calculateOrder()
+    window.addEventListener('resize', calculateOrder)
+    return () => window.removeEventListener('resize', calculateOrder)
+  }, [])
 
   // Kontinuierliche Sektion-Erkennung basierend auf Scroll-Position
   useEffect(() => {
@@ -43,10 +68,11 @@ const SectionNavigation: React.FC = () => {
       const scrollY = window.scrollY
       const headerOffset = 100
 
-      let currentSection = sections[0].id
+      const navSections = orderedSections.length > 0 ? orderedSections : sections
+      let currentSection = navSections[0]?.id ?? sections[0].id
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i]
+      for (let i = navSections.length - 1; i >= 0; i--) {
+        const section = navSections[i]
         const element = document.getElementById(section.id)
 
         if (element) {
@@ -106,7 +132,7 @@ const SectionNavigation: React.FC = () => {
       window.removeEventListener('scroll', handleScroll)
       if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
     }
-  }, [lastScrollY])
+  }, [lastScrollY, orderedSections])
 
   // Smooth scroll zur Sektion
   const scrollToSection = useCallback((id: string) => {
@@ -133,7 +159,7 @@ const SectionNavigation: React.FC = () => {
       aria-label="Section Navigation"
     >
       <div className="flex flex-col gap-2 md:gap-3">
-        {sections.map(section => {
+        {(orderedSections.length > 0 ? orderedSections : sections).map(section => {
           const isActive = activeSection === section.id
 
           return (
@@ -193,7 +219,7 @@ const SectionNavigation: React.FC = () => {
         <div
           className="w-full bg-gradient-to-b from-vae-turquoise to-vae-turquoise-dark transition-all duration-200 ease-out"
           style={{
-            height: `${((sections.findIndex(s => s.id === activeSection) + 1) / sections.length) * 100}%`,
+            height: `${(((orderedSections.length > 0 ? orderedSections : sections).findIndex(s => s.id === activeSection) + 1) / (orderedSections.length > 0 ? orderedSections.length : sections.length)) * 100}%`,
           }}
         />
       </div>

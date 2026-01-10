@@ -101,7 +101,7 @@ export const createHelpAwareHandler = (
 export const getHelpModeClasses = (
   helpMode: boolean,
   baseClasses: string,
-  helpClasses = 'cursor-help ring-2 ring-vae-turquoise/20'
+  helpClasses = 'cursor-help ring-2 ring-white/70 ring-offset-2 ring-offset-vae-turquoise/40 dark:ring-vae-turquoise/20 dark:ring-offset-transparent'
 ) => {
   return helpMode ? `${baseClasses} ${helpClasses}` : baseClasses
 }

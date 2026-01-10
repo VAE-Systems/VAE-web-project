@@ -367,19 +367,19 @@ const ContactPage: React.FC = () => {
         canonicalPath="/contact"
       />
 
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#ecfff8] py-28 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050a0c] dark:to-bg-dark">
-        <div className="pointer-events-none absolute inset-0 opacity-80" aria-hidden="true">
-          <div className="dark:bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.3),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_70%)] absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(5,248,200,0.25),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,248,200,0.15),transparent_70%)]" />
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-28 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050a0c] dark:to-bg-dark">
+        <div className="pointer-events-none absolute inset-0 hidden opacity-80 dark:block" aria-hidden="true">
+          <div className="bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.3),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_70%)] absolute inset-0" />
         </div>
         <div className="container-vae relative flex flex-col gap-10 text-center lg:flex-row lg:items-center lg:text-left">
           <div className="flex-1 space-y-6">
-            <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/80">
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise/80">
               {contactHero.title}
             </p>
-            <h1 className="text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
+            <h1 className="text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
               {contactHero.subtitle}
             </h1>
-            <p className="text-lg leading-relaxed text-gray-600 dark:text-white/70">{contactIntro.body}</p>
+            <p className="text-lg leading-relaxed text-white/85 dark:text-white/70">{contactIntro.body}</p>
             <div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:justify-center lg:justify-start">
               <MagneticButton className="w-full sm:w-auto">
                 <button
@@ -667,23 +667,23 @@ const ContactPage: React.FC = () => {
       <section
         id="mail-builder"
         ref={mailBuilderRef}
-        className="relative overflow-hidden bg-gradient-to-b from-[#e8fff7] via-[#f2fff8] to-[#f5fffc] py-24 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker"
+        className="accent-section relative overflow-hidden bg-vae-turquoise py-24 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker"
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_90%,rgba(var(--vae-turquoise-rgb),0.2),transparent_55%)]"
+          className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(circle_at_90%_90%,rgba(var(--vae-turquoise-rgb),0.2),transparent_55%)] dark:block"
         />
         <div className="container-vae relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div className="space-y-8">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/85 dark:text-vae-turquoise/70">
                   Mail Builder
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+                <h2 className="mt-3 text-3xl font-semibold text-white dark:text-white md:text-4xl">
                   In drei Schritten zur perfekten Mail
                 </h2>
-                <p className="mt-3 text-base leading-relaxed text-gray-600 dark:text-white/70">
+                <p className="mt-3 text-base leading-relaxed text-white/85 dark:text-white/70">
                   Treffen Sie eine Auswahl zu Thema, Setup und Timing. Wir generieren daraus eine vorformulierte E-Mail,
                   die in Ihrem Mailclient geöffnet wird.
                 </p>
@@ -691,7 +691,7 @@ const ContactPage: React.FC = () => {
               <div className="flex gap-2" data-tutorial="buttons">
                 <button
                   onClick={tutorial.startTutorial}
-                  className="rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-3 text-vae-turquoise transition-all hover:bg-vae-turquoise/20 hover:shadow-lg hover:shadow-vae-turquoise/20"
+                  className="rounded-2xl border border-white/70 bg-white p-3 text-vae-turquoise transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.16)] active:translate-y-0 active:scale-[0.98] dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise dark:hover:bg-vae-turquoise/20 dark:hover:shadow-vae-turquoise/20"
                   aria-label="Tutorial starten"
                   title="Tutorial starten"
                 >
@@ -703,7 +703,7 @@ const ContactPage: React.FC = () => {
 
             <div className="space-y-6">
               <div data-tutorial="intents">
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70 dark:text-white/60">
                   1. Themen
                 </p>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
@@ -724,13 +724,19 @@ const ContactPage: React.FC = () => {
                           helpMode,
                           `rounded-2xl border px-4 py-3 text-left transition ${
                             isActive
-                              ? 'border-vae-turquoise/60 bg-vae-turquoise/10 text-gray-900 dark:text-white'
-                              : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400 dark:border-white/10 dark:bg-white/[0.02] dark:text-white/70 dark:hover:border-white/25'
+                              ? 'border-white/80 bg-white text-vae-turquoise dark:border-vae-turquoise/60 dark:bg-vae-turquoise/10 dark:text-white'
+                              : 'border-white/40 bg-white/10 text-white hover:border-white/80 dark:border-white/10 dark:bg-white/[0.02] dark:text-white/70 dark:hover:border-white/25'
                           }`
                         )}
                       >
                         <p className="text-sm font-semibold">{intent.label}</p>
-                        <p className="text-xs text-gray-500 dark:text-white/60">{intent.description}</p>
+                        <p
+                          className={`text-xs ${
+                            isActive ? 'text-vae-turquoise/80 dark:text-white/70' : 'text-white/70 dark:text-white/60'
+                          }`}
+                        >
+                          {intent.description}
+                        </p>
                       </button>
                     )
                   })}
@@ -739,7 +745,7 @@ const ContactPage: React.FC = () => {
 
               <div className="grid gap-6 md:grid-cols-2">
                 <div data-tutorial="timeline">
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
+                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70 dark:text-white/60">
                     2. Zeitpunkt
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -758,8 +764,8 @@ const ContactPage: React.FC = () => {
                           helpMode,
                           `rounded-full border px-4 py-2 text-xs font-medium transition ${
                             timeline === option.id
-                              ? 'border-vae-turquoise/50 bg-vae-turquoise/10 text-gray-900 dark:text-white'
-                              : 'border-gray-300 text-gray-600 hover:border-gray-400 dark:border-white/10 dark:text-white/60 dark:hover:border-white/20'
+                              ? 'border-white/80 bg-white text-vae-turquoise dark:border-vae-turquoise/50 dark:bg-vae-turquoise/10 dark:text-white'
+                              : 'border-white/40 bg-white/10 text-white/90 hover:border-white/80 dark:border-white/10 dark:text-white/60 dark:hover:border-white/20'
                           }`
                         )}
                       >
@@ -769,7 +775,7 @@ const ContactPage: React.FC = () => {
                   </div>
                 </div>
                 <div data-tutorial="setup">
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
+                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70 dark:text-white/60">
                     3. Setup
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -788,8 +794,8 @@ const ContactPage: React.FC = () => {
                           helpMode,
                           `rounded-full border px-4 py-2 text-xs font-medium transition ${
                             companyStage === stage.id
-                              ? 'border-vae-turquoise/50 bg-vae-turquoise/10 text-gray-900 dark:text-white'
-                              : 'border-gray-300 text-gray-600 hover:border-gray-400 dark:border-white/10 dark:text-white/60 dark:hover:border-white/20'
+                              ? 'border-white/80 bg-white text-vae-turquoise dark:border-vae-turquoise/50 dark:bg-vae-turquoise/10 dark:text-white'
+                              : 'border-white/40 bg-white/10 text-white/90 hover:border-white/80 dark:border-white/10 dark:text-white/60 dark:hover:border-white/20'
                           }`
                         )}
                       >
@@ -801,7 +807,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               <div data-tutorial="collaboration">
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70 dark:text-white/60">
                   Zusammenarbeitsmodell
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -820,8 +826,8 @@ const ContactPage: React.FC = () => {
                         helpMode,
                         `rounded-full border px-4 py-2 text-xs font-medium transition ${
                           collabMode === mode.id
-                            ? 'border-vae-turquoise/50 bg-vae-turquoise/10 text-gray-900 dark:text-white'
-                            : 'border-gray-300 text-gray-600 hover:border-gray-400 dark:border-white/10 dark:text-white/60 dark:hover:border-white/20'
+                            ? 'border-white/80 bg-white text-vae-turquoise dark:border-vae-turquoise/50 dark:bg-vae-turquoise/10 dark:text-white'
+                            : 'border-white/40 bg-white/10 text-white/90 hover:border-white/80 dark:border-white/10 dark:text-white/60 dark:hover:border-white/20'
                         }`
                       )}
                     >
@@ -832,7 +838,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <label className="flex flex-col gap-2 text-sm text-gray-600 dark:text-white/70">
+                <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
                   Name <span className="text-vae-turquoise">*</span>
                   <input
                     type="text"
@@ -842,7 +848,7 @@ const ContactPage: React.FC = () => {
                     className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40"
                   />
                 </label>
-                <label className="flex flex-col gap-2 text-sm text-gray-600 dark:text-white/70">
+                <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
                   Position <span className="text-xs text-gray-400 dark:text-white/40">(optional)</span>
                   <input
                     type="text"
@@ -855,7 +861,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <label className="flex flex-col gap-2 text-sm text-gray-600 dark:text-white/70">
+                <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
                   Unternehmen <span className="text-vae-turquoise">*</span>
                   <input
                     type="text"
@@ -865,7 +871,7 @@ const ContactPage: React.FC = () => {
                     className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40"
                   />
                 </label>
-                <label className="flex flex-col gap-2 text-sm text-gray-600 dark:text-white/70">
+                <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
                   Telefon <span className="text-xs text-gray-400 dark:text-white/40">(optional)</span>
                   <input
                     type="tel"
@@ -878,7 +884,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               <label
-                className="flex flex-col gap-2 text-sm text-gray-600 dark:text-white/70"
+                className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70"
                 onClick={() => {
                   if (helpMode) showHelp('notes')
                 }}
@@ -963,7 +969,7 @@ const ContactPage: React.FC = () => {
       <React.Suspense
         fallback={<div className="py-24 text-center text-sm text-gray-500 dark:text-white/60">Lade FAQ …</div>}
       >
-        <FAQSection />
+        <FAQSection className="accent-section bg-vae-turquoise dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker" />
       </React.Suspense>
 
       {/* Help Popups (managed by help system) */}

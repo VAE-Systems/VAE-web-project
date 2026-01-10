@@ -150,13 +150,13 @@ const FAQSection: React.FC<FAQSectionProps> = ({
           {categories.map((category: FAQCategory, categoryIndex: number) => (
             <div key={category.category} className="relative">
               <div className="mb-6 flex items-center">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
-                <div className="mx-4 rounded-full border border-vae-turquoise/25 bg-vae-turquoise/10 px-6 py-2">
+                <div className="faq-divider h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
+                <div className="faq-pill mx-4 rounded-full border border-vae-turquoise/25 bg-vae-turquoise/10 px-6 py-2">
                   <h3 className="text-sm font-semibold uppercase tracking-wider text-vae-turquoise">
                     {category.category}
                   </h3>
                 </div>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
+                <div className="faq-divider h-px flex-1 bg-gradient-to-r from-transparent via-vae-turquoise/30 to-transparent" />
               </div>
               <div className={cn('space-y-3', dense && 'md:space-y-2')}>
                 {category.questions.map((faq: FAQItem, questionIndex: number) => (

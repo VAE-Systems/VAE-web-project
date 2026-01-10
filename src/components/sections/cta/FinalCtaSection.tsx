@@ -38,14 +38,10 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
   return (
     <section
       id={id}
-      className={`from-vae-turquoise/22 via-vae-turquoise/14 relative overflow-hidden border-t border-vae-turquoise/25 bg-gradient-to-b to-vae-turquoise/10 py-20 dark:border-vae-turquoise/10 dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker sm:py-28 ${className}`.trim()}
+      className={`accent-section relative overflow-hidden border-t border-vae-turquoise/25 bg-vae-turquoise py-20 dark:border-vae-turquoise/10 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker sm:py-28 ${className}`.trim()}
       aria-labelledby="final-cta-heading"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.7),rgba(255,255,255,0))] opacity-60 dark:hidden"
-          aria-hidden
-        />
         <div
           className="absolute inset-x-0 top-0 hidden h-72 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.22),transparent_65%)] dark:block"
           aria-hidden
@@ -57,27 +53,29 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
       </div>
       <div className="container-vae">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise dark:text-vae-turquoise/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/85 dark:text-vae-turquoise/70">
             {eyebrow}
           </p>
-          <h2 id="final-cta-heading" className="fluid-h2 mt-4 text-balance font-bold text-text-light dark:text-white">
+          <h2 id="final-cta-heading" className="fluid-h2 mt-4 text-balance font-bold text-white dark:text-white">
             {title}
           </h2>
-          <p className="mt-6 text-base leading-relaxed text-text-secondary sm:text-lg">{description}</p>
+          <p className="mt-6 text-base leading-relaxed text-white/90 dark:text-text-secondary sm:text-lg">
+            {description}
+          </p>
           <div className="mt-10 flex justify-center">
             <MagneticButton className="w-full sm:w-auto">
               <CtaLink
                 ctaId={primary.ctaId}
                 ctx={{ fromPage: 'home', intent: 'final-cta' }}
                 variant="custom"
-                className="btn-primary flex min-w-[260px] items-center justify-center gap-3"
+                className="btn-primary flex min-w-[260px] items-center justify-center gap-3 shadow-[0_16px_32px_-18px_rgba(0,0,0,0.35)] dark:shadow-none"
               >
                 <CalendarClock className="h-5 w-5" />
                 {primary.label}
               </CtaLink>
             </MagneticButton>
           </div>
-          {note && <p className="mt-4 text-xs text-text-muted">{note}</p>}
+          {note && <p className="mt-4 text-xs text-white/70 dark:text-text-muted">{note}</p>}
         </div>
       </div>
     </section>

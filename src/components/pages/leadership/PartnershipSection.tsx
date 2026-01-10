@@ -23,17 +23,21 @@ export const PartnershipSection: React.FC = () => {
     <section
       ref={ref}
       aria-labelledby="partnership-title"
-      className={`relative z-0 border-t border-white/5 bg-bg-dark py-20 transition duration-700 ease-out ${
+      className={`accent-section relative z-0 border-t border-vae-turquoise/25 bg-vae-turquoise py-20 transition duration-700 ease-out dark:border-white/5 dark:bg-bg-dark ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
       }`}
     >
       <div className="container-vae space-y-12">
         <div className="space-y-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/80">Führung</p>
-          <h2 id="partnership-title" className="text-3xl font-semibold text-text-light md:text-4xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/85 dark:text-vae-turquoise/80">
+            Führung
+          </p>
+          <h2 id="partnership-title" className="text-3xl font-semibold text-white dark:text-text-light md:text-4xl">
             {PARTNERSHIP_SECTION.title}
           </h2>
-          <p className="mx-auto max-w-4xl text-base text-text-light/80">{PARTNERSHIP_SECTION.intro}</p>
+          <p className="mx-auto max-w-4xl text-base text-white/85 dark:text-text-light/80">
+            {PARTNERSHIP_SECTION.intro}
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -75,7 +79,7 @@ export const PartnershipSection: React.FC = () => {
           {PARTNERSHIP_SECTION.seoKeywords.map(keyword => (
             <span
               key={keyword}
-              className="border-white/12 rounded-full border bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.32em] text-text-muted shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
+              className="dark:border-white/12 rounded-full border border-white/35 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.32em] text-white/80 shadow-[0_8px_24px_rgba(0,0,0,0.25)] dark:bg-white/[0.03] dark:text-text-muted"
             >
               {keyword}
             </span>

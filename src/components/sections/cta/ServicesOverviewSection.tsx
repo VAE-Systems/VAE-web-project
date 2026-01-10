@@ -43,21 +43,21 @@ const ServicesOverviewSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="border-border-primary/30 from-vae-turquoise/22 via-vae-turquoise/12 to-vae-turquoise/8 relative border-t bg-gradient-to-b py-20 dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-dark sm:py-28"
+      className="accent-section border-border-primary/30 relative border-t bg-vae-turquoise py-20 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-dark sm:py-28"
     >
       {/* Background Image Layer */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Radial gradient overlay for lightmode depth */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(229,241,232,0.9)_0%,rgba(229,241,232,0.3)_50%,transparent_70%)] dark:bg-transparent" />
+        {/* Radial gradient overlay (dark only) */}
+        <div className="absolute inset-0 opacity-0 dark:bg-transparent dark:opacity-100" />
 
         {/* Gradient Base: hell VAE-grün oben links → dunkel unten rechts - nur Desktop */}
-        <div className="from-vae-turquoise/24 via-vae-turquoise/12 absolute inset-0 hidden bg-gradient-to-br to-white/80 dark:from-vae-turquoise/20 dark:via-bg-darker/40 dark:to-bg-darker sm:block" />
+        <div className="absolute inset-0 hidden opacity-0 dark:bg-gradient-to-br dark:from-vae-turquoise/20 dark:via-bg-darker/40 dark:to-bg-darker dark:opacity-100 sm:block" />
 
         {/* Hintergrundbild mit Parallax & Zoom - Light Mode mit statischem Blur */}
         <motion.div
-          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[4px] dark:hidden sm:block"
+          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[6px] dark:hidden sm:block"
           style={{
-            backgroundImage: "url('/images/raw/Background-3Wege-ausgeschnitten.png')",
+            backgroundImage: "url('/images/optimized/Background-3Wege-ausgeschnitten-2.webp')",
             y,
             scale,
             opacity,
@@ -66,9 +66,9 @@ const ServicesOverviewSection: React.FC = () => {
         />
         {/* Hintergrundbild mit Parallax & Zoom - Dark Mode mit subtilerem Blur */}
         <motion.div
-          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[4px] dark:block sm:hidden sm:dark:block"
+          className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat blur-[6px] dark:block sm:hidden sm:dark:block"
           style={{
-            backgroundImage: "url('/images/raw/Background-3Wege-ausgeschnitten.png')",
+            backgroundImage: "url('/images/optimized/Background-3Wege-ausgeschnitten-2.webp')",
             y,
             scale,
             opacity,
@@ -77,13 +77,15 @@ const ServicesOverviewSection: React.FC = () => {
         />
 
         {/* Overlays für bessere Lesbarkeit */}
-        <div className="from-bg-primary/70 via-bg-primary/55 to-bg-primary/70 absolute inset-0 bg-gradient-to-b dark:from-bg-darker/90 dark:via-bg-darker/80 dark:to-bg-darker/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.08),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.20),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--vae-turquoise-rgb),0.04),transparent_65%)] dark:bg-[radial-gradient(circle_at_bottom,rgba(var(--vae-turquoise-rgb),0.08),transparent_65%)]" />
+        <div className="from-bg-primary/70 via-bg-primary/55 to-bg-primary/70 absolute inset-0 bg-gradient-to-b opacity-0 dark:from-bg-darker/90 dark:via-bg-darker/80 dark:to-bg-darker/90 dark:opacity-100" />
+        <div className="absolute inset-0 opacity-0 dark:bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.20),transparent_60%)] dark:opacity-100" />
+        <div className="absolute inset-0 opacity-0 dark:bg-[radial-gradient(circle_at_bottom,rgba(var(--vae-turquoise-rgb),0.08),transparent_65%)] dark:opacity-100" />
       </div>
       <div className="container-vae relative z-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.45em] text-vae-turquoise/80">Unser Ansatz</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.45em] text-white/85 dark:text-vae-turquoise/80">
+            Unser Ansatz
+          </p>
           <h2 className="fluid-h2 mt-3 font-semibold text-text-light">Drei Wege, mit uns zu arbeiten</h2>
           <p className="mt-4 text-base text-text-secondary">Von Beratung bis Langzeit-Partnerschaft</p>
           <p className="mt-2 text-sm text-text-secondary/80">
@@ -94,7 +96,7 @@ const ServicesOverviewSection: React.FC = () => {
           {servicesOverviewCards.map((card, index) => (
             <article
               key={card.id}
-              className="border-border-primary/50 bg-bg-primary flex h-full flex-col rounded-3xl border p-6 transition-all hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_20px_70px_-40px_rgba(var(--vae-turquoise-rgb),0.8)] dark:border-white/10 dark:bg-white/[0.08]"
+              className="flex h-full flex-col rounded-3xl border-2 border-white/70 bg-white p-6 text-slate-900 transition-all hover:-translate-y-1 hover:border-vae-turquoise hover:shadow-[0_10px_22px_rgba(18,24,20,0.12)] dark:border-white/10 dark:bg-white/[0.08] dark:text-text-light dark:hover:border-vae-turquoise/50 dark:hover:shadow-[0_20px_70px_-40px_rgba(var(--vae-turquoise-rgb),0.8)]"
             >
               <div className="mb-4 flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-2">
@@ -102,27 +104,33 @@ const ServicesOverviewSection: React.FC = () => {
                     <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise transition-all duration-300 hover:rotate-6 hover:scale-110 hover:bg-vae-turquoise/25">
                       <Icon name={card.icon} size={22} />
                     </div>
-                    <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
+                    <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:border-white/10 dark:bg-white/[0.03] dark:text-text-secondary/80">
                       {card.badge}
                     </span>
                   </div>
-                  <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
+                  <span className="rounded-full border border-vae-turquoise/20 bg-vae-turquoise/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:border-white/10 dark:bg-white/[0.03] dark:text-text-secondary/80">
                     Etappe {index + 1}
                   </span>
                 </div>
               </div>
               <div className="border-b-2 border-vae-turquoise/30 pb-3 dark:border-vae-turquoise/40">
-                <h3 className="text-2xl font-bold text-text-light">{card.title}</h3>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-text-light">{card.title}</h3>
                 {'subtitle' in card && card.subtitle && (
-                  <p className="mt-1 text-sm font-semibold text-text-secondary/90">{card.subtitle}</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-text-secondary/90">
+                    {card.subtitle}
+                  </p>
                 )}
               </div>
-              <div className="mt-4 flex flex-1 flex-col gap-6 text-sm text-text-secondary">
-                <p className="min-h-[120px] text-sm leading-relaxed text-text-secondary">{card.description}</p>
+              <div className="mt-4 flex flex-1 flex-col gap-6 text-sm text-slate-700 dark:text-text-secondary">
+                <p className="min-h-[120px] text-sm leading-relaxed text-slate-700 dark:text-text-secondary">
+                  {card.description}
+                </p>
 
                 <div className="grid min-h-[280px] gap-6 sm:grid-cols-2">
                   <div className="space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Was enthalten</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 dark:text-text-light">
+                      Was enthalten
+                    </p>
                     <ul className="space-y-1.5">
                       {card.inclusions.map(item => (
                         <li key={item} className="flex items-start gap-2">
@@ -134,12 +142,14 @@ const ServicesOverviewSection: React.FC = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-light">Ideal bei</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 dark:text-text-light">
+                      Ideal bei
+                    </p>
                     <div className="flex flex-col gap-2">
                       {card.audience.map(item => (
                         <div
                           key={item}
-                          className="flex items-center gap-2 rounded-lg border border-vae-turquoise/20 bg-vae-turquoise/5 px-3 py-2 text-xs font-medium text-text-light transition-all duration-200 hover:border-vae-turquoise/40 hover:bg-vae-turquoise/10"
+                          className="flex items-center gap-2 rounded-lg border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-2 text-xs font-medium text-slate-800 transition-all duration-200 hover:border-vae-turquoise/50 hover:bg-vae-turquoise/15 dark:border-vae-turquoise/20 dark:bg-vae-turquoise/5 dark:text-text-light dark:hover:border-vae-turquoise/40 dark:hover:bg-vae-turquoise/10"
                         >
                           <svg
                             className="h-3 w-3 flex-shrink-0 text-vae-turquoise dark:text-vae-turquoise/70"
@@ -170,7 +180,7 @@ const ServicesOverviewSection: React.FC = () => {
               <MagneticButton className="w-full">
                 <Link
                   to={card.cta.href}
-                  className="btn-convert flex w-full items-center justify-center gap-2 text-sm font-semibold"
+                  className="btn-convert accent-keep flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
                   aria-label={`${card.title} – Details ansehen`}
                 >
                   {card.id === 'beratung'
@@ -178,7 +188,7 @@ const ServicesOverviewSection: React.FC = () => {
                     : card.id === 'setup'
                       ? 'Setup-Details'
                       : 'Betreuungs-Details'}
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <svg className="h-5 w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </Link>

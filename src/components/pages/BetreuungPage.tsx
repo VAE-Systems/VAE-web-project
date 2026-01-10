@@ -315,7 +315,7 @@ const BetreuungPage: React.FC = () => {
         }}
       />
       {/* Hero */}
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-gradient-to-br from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
+      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise/10 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
         {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
         {/* Desktop version with fixed attachment */}
         <div
@@ -340,11 +340,10 @@ const BetreuungPage: React.FC = () => {
           }}
           role="presentation"
         />
-        <div className="pointer-events-none absolute inset-0 opacity-40">
+        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-40">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.18),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)]" />
         </div>
-        {/* Light Mode: subtiler Glasmorphism-Hintergrund */}
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[85%] max-w-4xl -translate-y-1/2 rounded-3xl bg-white/30 backdrop-blur-[2px] dark:bg-transparent dark:backdrop-blur-none" />
+        {/* Light Mode: no glass blur to keep poster-like clarity */}
         <div className="container-vae relative flex flex-col items-center justify-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             MANAGED OPERATIONS
@@ -429,7 +428,7 @@ const BetreuungPage: React.FC = () => {
             <div className="grid gap-6 md:grid-cols-2">
               {/* Left: Problem (Orange) */}
               <motion.div
-                className="relative overflow-hidden rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-white p-8 shadow-[0_4px_24px_rgba(251,146,60,0.15),0_0_20px_rgba(251,146,60,0.25)] dark:border-orange-500/30 dark:from-orange-950/10 dark:to-bg-darker dark:shadow-[0_4px_24px_rgba(251,146,60,0.08),0_0_20px_rgba(251,146,60,0.15)]"
+                className="relative overflow-hidden rounded-2xl border-2 border-orange-300 bg-orange-50 p-8 shadow-[0_10px_22px_rgba(18,24,20,0.12)] dark:border-orange-500/30 dark:bg-orange-500/10"
                 initial={{ opacity: 0, x: -30, scale: 0.95 }}
                 whileInView={{ opacity: 1, x: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-100px' }}
@@ -437,13 +436,13 @@ const BetreuungPage: React.FC = () => {
               >
                 <div className="relative mb-6">
                   <motion.div
-                    className="mb-2 inline-flex items-center gap-2 rounded-full bg-orange-100 px-3 py-1 dark:bg-orange-900/30"
+                    className="mb-2 inline-flex items-center gap-2 rounded-full bg-orange-100 px-3 py-1 dark:bg-orange-500/20"
                     initial={{ opacity: 0, y: -10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ delay: 0.2 }}
                   >
-                    <span className="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400">
+                    <span className="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-300">
                       Ohne VAE
                     </span>
                   </motion.div>
@@ -453,7 +452,7 @@ const BetreuungPage: React.FC = () => {
                       Das Problem
                     </span>
                   </div>
-                  <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-orange-200">
                     Operational Overhead blockiert Innovation
                   </h4>
                 </div>
@@ -467,16 +466,16 @@ const BetreuungPage: React.FC = () => {
                   ].map((item, i) => (
                     <div
                       key={i}
-                      className="group flex items-start gap-3 rounded-xl border border-orange-200 bg-white/50 p-3 transition-all duration-300 hover:scale-[1.02] hover:border-orange-400 hover:bg-orange-50/50 hover:shadow-lg dark:border-orange-500/20 dark:bg-white/5 dark:hover:border-orange-400/50 dark:hover:bg-orange-950/20"
+                      className="group flex items-start gap-3 rounded-xl border border-orange-200 bg-white p-3 transition-all duration-300 hover:scale-[1.02] hover:border-orange-400 dark:border-orange-500/30 dark:bg-orange-500/5 dark:hover:border-orange-400/50 dark:hover:bg-orange-500/15"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-100 transition-transform duration-300 group-hover:scale-110 dark:bg-orange-900/30">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-100 transition-transform duration-300 group-hover:scale-110 dark:bg-orange-500/20">
                         <item.icon className="h-5 w-5 text-orange-600 dark:text-orange-400" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900 transition-colors group-hover:text-orange-700 dark:text-white dark:group-hover:text-orange-300">
+                        <p className="font-semibold text-gray-900 transition-colors group-hover:text-orange-700 dark:text-orange-300 dark:group-hover:text-orange-200">
                           {item.label}
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-text-secondary/80">{item.desc}</p>
+                        <p className="text-sm text-gray-600 dark:text-orange-200/80">{item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -485,7 +484,7 @@ const BetreuungPage: React.FC = () => {
 
               {/* Right: Solution (Türkis) */}
               <motion.div
-                className="relative overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-gradient-to-br from-vae-turquoise/5 to-white p-8 shadow-[0_4px_24px_rgba(29,184,122,0.15),0_0_20px_rgba(29,184,122,0.25)] dark:border-vae-turquoise/30 dark:from-vae-turquoise/10 dark:to-bg-darker dark:shadow-[0_4px_24px_rgba(8,255,193,0.08),0_0_20px_rgba(8,255,193,0.15)]"
+                className="relative overflow-hidden rounded-2xl border-2 border-vae-turquoise/40 bg-vae-turquoise/10 p-8 shadow-[0_10px_22px_rgba(18,24,20,0.12)] dark:border-vae-turquoise/30 dark:bg-gradient-to-br dark:from-vae-turquoise/10 dark:via-bg-darker/70 dark:to-bg-darker dark:shadow-[0_4px_24px_rgba(8,255,193,0.08),0_0_20px_rgba(8,255,193,0.15)]"
                 initial={{ opacity: 0, x: 30, scale: 0.95 }}
                 whileInView={{ opacity: 1, x: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-100px' }}
@@ -521,7 +520,7 @@ const BetreuungPage: React.FC = () => {
                   ].map((item, i) => (
                     <div
                       key={i}
-                      className="group flex items-start gap-3 rounded-xl border border-vae-turquoise/20 bg-white/50 p-3 transition-all duration-300 hover:scale-[1.02] hover:border-vae-turquoise/60 hover:bg-vae-turquoise/5 hover:shadow-lg dark:border-vae-turquoise/20 dark:bg-white/5 dark:hover:border-vae-turquoise/50 dark:hover:bg-vae-turquoise/10"
+                      className="group flex items-start gap-3 rounded-xl border border-vae-turquoise/30 bg-white p-3 transition-all duration-300 hover:scale-[1.02] hover:border-vae-turquoise/60 dark:border-vae-turquoise/20 dark:bg-white/5 dark:hover:border-vae-turquoise/50 dark:hover:bg-vae-turquoise/10"
                     >
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110 dark:bg-vae-turquoise/20">
                         <item.icon className="h-5 w-5 text-vae-turquoise" />
@@ -541,7 +540,7 @@ const BetreuungPage: React.FC = () => {
 
           {/* Conclusion */}
           <motion.div
-            className="mx-auto max-w-3xl overflow-hidden rounded-2xl border-2 border-vae-turquoise/40 bg-gradient-to-r from-vae-turquoise/10 via-vae-turquoise/5 to-transparent p-8 shadow-lg dark:border-vae-turquoise/30 dark:from-vae-turquoise/10 dark:via-vae-turquoise/5"
+            className="mx-auto max-w-3xl overflow-hidden rounded-2xl border-2 border-vae-turquoise/40 bg-white p-8 shadow-[0_10px_22px_rgba(18,24,20,0.12)] dark:border-vae-turquoise/30 dark:bg-transparent dark:shadow-none"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
@@ -1083,7 +1082,7 @@ const BetreuungPage: React.FC = () => {
             {reasonCards.map(reason => (
               <div
                 key={reason.title}
-                className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-md dark:border-white/10 dark:bg-white/5"
+                className="rounded-3xl border-2 border-gray-200 bg-white p-6 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/5 dark:shadow-none"
               >
                 <reason.icon className="mb-4 h-10 w-10 text-vae-turquoise" />
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{reason.title}</h3>
@@ -1095,12 +1094,14 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 7: FAQ */}
-      <section className="bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="accent-section bg-vae-turquoise py-20 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">FAQ</p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
-            <p className="mt-4 text-base text-text-secondary dark:text-white/70">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85 dark:text-vae-turquoise/80">
+              FAQ
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold text-white dark:text-white md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-white/80 dark:text-white/70">
               Antworten zur monatlich kündbaren Betreuung – transparent, ohne Buzzword-Schleier.
             </p>
           </div>
@@ -1109,17 +1110,17 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 8: CTA */}
-      <section className="border-t border-gray-200 bg-[#f2fff8] py-16 dark:border-white/5 dark:bg-transparent md:py-20">
+      <section className="border-t border-gray-200 bg-white py-16 dark:border-white/5 dark:bg-transparent md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
-            Bereit für den nächsten Schritt?
+            Managed Operations
           </p>
           <h2 className="px-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
-            Langfristige Betreuung für Ihre Systeme.
+            Ihr Betrieb, dauerhaft stabil.
           </h2>
           <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary md:text-lg">
-            Wir halten Ihr IT-Rückgrat stabil, während Ihr Team sich auf Produkt, Kund:innen und Wachstum konzentriert.
-            Monatlich kündbar, ohne Langzeitbindung.
+            Wir übernehmen Monitoring, Updates und Weiterentwicklung, damit Ihr Team sich auf Produkt und Wachstum
+            konzentriert. Monatlich kündbar, ohne Langzeitbindung.
           </p>
           <div className="flex flex-col items-center gap-3 md:gap-4">
             <MagneticButton intensity={0.1} scaleEffect glowEffect>
@@ -1134,7 +1135,7 @@ const BetreuungPage: React.FC = () => {
               </a>
             </MagneticButton>
             <p className="px-4 text-xs text-gray-600 dark:text-text-secondary md:text-sm">
-              45 Minuten. Klarheit zu Aufwand, Team-Setup und KI-Potenzialen.
+              45 Minuten. Klarheit zu Umfang, SLAs und Team-Setup.
             </p>
           </div>
         </div>

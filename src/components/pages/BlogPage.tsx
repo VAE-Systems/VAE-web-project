@@ -35,20 +35,20 @@ const BlogPage: React.FC = () => {
         canonicalPath="/ressourcen/blog"
       />
 
-      <section className="relative overflow-hidden border-b border-gray-200/80 bg-gradient-to-b from-white via-[#f2fff8] to-white py-28 dark:border-white/5 dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
-        <div className="pointer-events-none absolute inset-0 opacity-90" aria-hidden="true">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.16),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,199,160,0.12),transparent_75%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.28),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_75%)]" />
-          <div className="absolute inset-x-0 top-0 mx-auto h-64 w-[90%] rounded-[40px] border border-gray-100/80 bg-white/60 blur-3xl dark:border-white/10 dark:bg-white/[0.02]" />
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-28 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
+        <div className="pointer-events-none absolute inset-0 hidden opacity-90 dark:block" aria-hidden="true">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.28),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_75%)]" />
+          <div className="absolute inset-x-0 top-0 mx-auto h-64 w-[90%] rounded-[40px] border border-white/10 bg-white/[0.02] blur-3xl" />
         </div>
         <div className="container-vae relative flex flex-col gap-16 lg:flex-row lg:items-center">
           <div className="flex-1 space-y-6 text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/80">
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise/80">
               Unser Blog
             </p>
-            <h1 className="text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
+            <h1 className="text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
               Insights & Knowledge Hub für souveräne Tech-Projekte
             </h1>
-            <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
+            <p className="text-lg leading-relaxed text-white/85 dark:text-text-secondary">
               Wie wir arbeiten: Methoden, Learnings und Werkzeuge aus echten Projekten.
             </p>
             <div className="flex flex-col items-center gap-4 pt-2 sm:flex-row sm:justify-center lg:justify-start">
@@ -66,7 +66,7 @@ const BlogPage: React.FC = () => {
               <MagneticButton className="flex-1">
                 <Link
                   to="/about/referenzen"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 px-6 py-3 text-sm font-semibold text-white/70 transition-colors hover:border-vae-turquoise/60 hover:text-white"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/35 px-6 py-3 text-sm font-semibold text-white/90 transition-colors hover:border-white/70 hover:text-white dark:border-white/15 dark:text-white/70 dark:hover:border-vae-turquoise/60"
                 >
                   Case Studies ansehen
                   <PenSquare className="h-4 w-4" />

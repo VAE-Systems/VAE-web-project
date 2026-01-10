@@ -123,7 +123,7 @@ const SocialProofSection: React.FC = () => {
           {referenceProjects.map(project => (
             <article
               key={project.id}
-              className="group flex flex-col rounded-3xl border border-gray-200 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/60 hover:shadow-[0_18px_60px_-30px_rgba(var(--vae-turquoise-rgb),0.45)] active:scale-[0.995] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-vae-turquoise/20"
+              className="group flex flex-col rounded-3xl border-2 border-vae-turquoise/40 bg-white/95 p-6 text-gray-900 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.14)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/70 hover:shadow-[0_22px_70px_-30px_rgba(13,148,136,0.35)] active:scale-[0.995] dark:border-white/10 dark:bg-white/[0.04] dark:text-text-light dark:shadow-vae-turquoise/20"
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -163,13 +163,13 @@ const SocialProofSection: React.FC = () => {
                     </div>
                   )}
                   <div>
-                    <p className="text-sm font-medium text-gray-700 dark:text-text-secondary">{project.client}</p>
-                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">
+                    <p className="text-sm font-medium text-gray-800 dark:text-text-secondary">{project.client}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/90 dark:text-vae-turquoise/80">
                       {project.status}
                     </p>
                   </div>
                 </div>
-                <span className="rounded-full border border-gray-200 bg-gray-50/95 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-gray-700 shadow-sm dark:border-white/15 dark:bg-white/10 dark:text-white/90">
+                <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-vae-turquoise shadow-sm dark:border-white/15 dark:bg-white/10 dark:text-white/90">
                   {project.badge}
                 </span>
               </div>
@@ -177,7 +177,7 @@ const SocialProofSection: React.FC = () => {
               <p className="mt-3 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 {project.description}
               </p>
-              <ul className="mt-5 space-y-2 rounded-2xl bg-gray-50/80 p-4 text-sm text-gray-700 shadow-inner shadow-gray-200/30 transition-colors duration-200 dark:bg-white/[0.03] dark:text-text-secondary dark:shadow-none">
+              <ul className="mt-5 space-y-2 rounded-2xl bg-vae-turquoise/10 p-4 text-sm text-gray-700 shadow-inner shadow-vae-turquoise/10 transition-colors duration-200 dark:bg-white/[0.03] dark:text-text-secondary dark:shadow-none">
                 {project.highlights.map(highlight => (
                   <li key={highlight} className="flex items-start gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise" aria-hidden />
@@ -191,7 +191,7 @@ const SocialProofSection: React.FC = () => {
                 <MagneticButton>
                   <Link
                     to={caseStudyAnchors[project.id] ?? '/about/referenzen'}
-                    className="btn-ghost inline-flex items-center gap-2 text-sm font-semibold"
+                    className="inline-flex items-center gap-2 rounded-lg border border-vae-turquoise/50 px-4 py-2 text-sm font-semibold text-vae-turquoise transition-colors hover:border-vae-turquoise hover:bg-vae-turquoise/10"
                   >
                     Details ansehen
                     <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -206,9 +206,9 @@ const SocialProofSection: React.FC = () => {
           {referenceInsights.map(insight => (
             <div
               key={insight.id}
-              className="group flex flex-col gap-2 rounded-2xl border border-gray-200 bg-white/80 p-5 text-center shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-[0_18px_40px_-24px_rgba(var(--vae-turquoise-rgb),0.35)] dark:border-white/10 dark:bg-white/[0.05]"
+              className="group flex flex-col gap-2 rounded-2xl border border-vae-turquoise/40 bg-white/90 p-5 text-center text-gray-900 shadow-[0_12px_36px_-24px_rgba(15,23,42,0.16)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/70 hover:shadow-[0_16px_40px_-24px_rgba(13,148,136,0.3)] dark:border-white/10 dark:bg-white/[0.05] dark:text-text-light"
             >
-              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/15 text-vae-turquoise transition-transform duration-300 group-hover:scale-110">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/15 text-vae-turquoise transition-transform duration-300 group-hover:scale-110 dark:bg-vae-turquoise/15 dark:text-vae-turquoise">
                 <Icon name={insight.icon} size={20} />
               </div>
               <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gray-900 dark:text-text-light">

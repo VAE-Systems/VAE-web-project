@@ -51,7 +51,7 @@ export const HelpPopup: React.FC<HelpPopupProps> = ({ className = '', showConfir
       aria-describedby="help-popup-description"
     >
       <div
-        className={`animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-[32px] border border-white/20 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker p-8 shadow-[0_30px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl duration-300 ${className}`}
+        className={`animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-lg rounded-[32px] border border-white/80 bg-white p-8 shadow-[0_30px_80px_rgba(15,23,42,0.18)] duration-300 dark:border-white/20 dark:bg-gradient-to-br dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker dark:shadow-[0_30px_80px_rgba(0,0,0,0.6)] dark:backdrop-blur-xl ${className}`}
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -60,18 +60,18 @@ export const HelpPopup: React.FC<HelpPopupProps> = ({ className = '', showConfir
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/20">
                 <HelpCircle className="h-5 w-5 text-vae-turquoise" />
               </div>
-              <h3 id="help-popup-title" className="text-xl font-semibold text-white">
+              <h3 id="help-popup-title" className="text-xl font-semibold text-[#0f1c17] dark:text-white">
                 {helpText.title}
               </h3>
             </div>
-            <p id="help-popup-description" className="mt-4 text-lg leading-relaxed text-white/80">
+            <p id="help-popup-description" className="mt-4 text-lg leading-relaxed text-[#2c3a33] dark:text-white/80">
               {helpText.description}
             </p>
           </div>
           <button
             type="button"
             onClick={closeHelp}
-            className="flex-shrink-0 text-white/60 transition hover:text-white"
+            className="flex-shrink-0 text-slate-500 transition hover:text-slate-900 dark:text-white/60 dark:hover:text-white"
             aria-label="Schließen"
           >
             <X className="h-5 w-5" />

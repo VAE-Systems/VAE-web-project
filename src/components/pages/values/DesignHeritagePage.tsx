@@ -55,21 +55,21 @@ const DesignHeritagePage: React.FC = () => {
       <Breadcrumbs items={DESIGN_BREADCRUMBS} className="mb-2" />
 
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 dark:border-white/5">
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.16),transparent_60%)]" />
-          <div className="absolute inset-x-0 -bottom-24 h-[420px] bg-gradient-to-t from-bg-darker to-transparent" />
+          <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_60%)] dark:block" />
+          <div className="absolute inset-x-0 -bottom-24 hidden h-[420px] bg-gradient-to-t from-bg-darker to-transparent dark:block" />
         </div>
 
         <div className="container-vae relative grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise/80">
               <Sparkles className="h-4 w-4" /> Design & UX
             </span>
-            <h1 className="text-balance text-4xl font-semibold leading-tight text-text-light md:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold leading-tight text-white dark:text-text-light md:text-5xl">
               Design prägt, wie Software sich anfühlt
             </h1>
-            <p className="text-lg leading-relaxed text-text-secondary">
+            <p className="text-lg leading-relaxed text-white/85 dark:text-text-secondary">
               VAE Systems verbindet künstlerische Herkunft mit technischer Präzision. Julian Goertz wuchs in einer
               Familie auf, in der Skulpturen, Malerei und Design Alltag waren. Diese Perspektive prägt, wie wir Software
               gestalten — mit Fokus auf Wahrnehmung, Gefühl und User Experience.
@@ -86,7 +86,7 @@ const DesignHeritagePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+          <div className="relative overflow-hidden rounded-[36px] border border-white/30 bg-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.45)] dark:border-white/10 dark:bg-white/5">
             <picture>
               <source srcSet="/images/optimized/Julian-steht-vor-VAE-Logo-Werte.webp" type="image/webp" />
               <source srcSet="/images/optimized/Julian-steht-vor-VAE-Logo-Werte.jpg" type="image/jpeg" />

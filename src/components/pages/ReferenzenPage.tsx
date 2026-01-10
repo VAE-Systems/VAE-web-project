@@ -833,30 +833,30 @@ const ReferenzenPage: React.FC = () => {
       <Breadcrumbs items={REFERENZEN_BREADCRUMBS} className="mb-4" />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-black/5 bg-gradient-to-b from-bg-darker to-bg-dark dark:border-white/5">
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:to-bg-dark">
         <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.18),transparent_55%)] dark:bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_55%)]"
+          className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_55%)] dark:block"
           aria-hidden="true"
         />
         <div className="container-vae relative flex min-h-[40vh] flex-col items-center justify-center gap-6 py-24 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/10 dark:text-vae-turquoise">
             Referenzen
           </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-text-light md:text-5xl">
+          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white dark:text-text-light md:text-5xl">
             Projekte, die zeigen, was wir können
           </h1>
-          <p className="max-w-3xl text-lg leading-relaxed text-text-secondary">
+          <p className="max-w-3xl text-lg leading-relaxed text-white/85 dark:text-text-secondary">
             Konkrete Open-Source-Infrastrukturen und KI-optimierte Workflows, die wir für Kund:innen und unsere eigenen
             Teams umgesetzt haben – ehrlich, transparent, mit messbaren Ergebnissen.
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-            <p className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/70 px-4 py-2 text-sm text-text-secondary dark:border-white/10 dark:bg-white/5">
-              <ShieldCheck className="h-4 w-4 text-vae-turquoise" /> Alle Projekte: Open-Source-first, DSGVO-konform,
-              Made in Germany
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
+              <ShieldCheck className="h-4 w-4 text-white dark:text-vae-turquoise" /> Alle Projekte: Open-Source-first,
+              DSGVO-konform, Made in Germany
             </p>
-            <p className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-2 text-sm text-text-secondary dark:border-vae-turquoise/40 dark:bg-vae-turquoise/5">
-              <Shield className="h-4 w-4 text-vae-turquoise" /> Weitere Projekte unter NDA – hier zeigen wir nur
-              Referenzen mit Veröffentlichungsfreigabe
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/5 dark:text-white/80">
+              <Shield className="h-4 w-4 text-white dark:text-vae-turquoise" /> Weitere Projekte unter NDA – hier zeigen
+              wir nur Referenzen mit Veröffentlichungsfreigabe
             </p>
           </div>
         </div>

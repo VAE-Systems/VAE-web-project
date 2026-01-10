@@ -132,8 +132,8 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
         </div>
 
         <aside className={`flex flex-col gap-6 ${cardColumnOrder}`}>
-          <figure className="border-black/12 group relative overflow-hidden rounded-[32px] border-2 bg-transparent shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition-all duration-500 dark:border-white/15 dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)]">
-            <div className="pointer-events-none absolute inset-3 rounded-[28px] border-2 border-white/85 dark:border-white/20" />
+          <figure className="border-black/12 group relative overflow-hidden rounded-[32px] border-2 bg-transparent transition-all duration-500 dark:border-white/15 dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)]">
+            <div className="pointer-events-none absolute inset-3 rounded-[28px] border-2 border-black/10 dark:border-white/20" />
             <picture>
               <source srcSet={leader.portrait.src} type="image/webp" />
               <img

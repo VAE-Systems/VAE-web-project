@@ -529,7 +529,7 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-gradient-to-br from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
+      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise/10 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
         {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
         {/* Desktop version with fixed attachment */}
         <div
@@ -554,11 +554,10 @@ const SetupPage: React.FC = () => {
           }}
           role="presentation"
         />
-        <div className="pointer-events-none absolute inset-0 opacity-40">
+        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-40">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.20),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.14),transparent_60%)]" />
         </div>
-        {/* Light Mode: subtiler Glasmorphism-Hintergrund */}
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[85%] max-w-4xl -translate-y-1/2 rounded-3xl bg-white/30 backdrop-blur-[2px] dark:bg-transparent dark:backdrop-blur-none" />
+        {/* Light Mode: no glass blur to keep poster-like clarity */}
         <div className="container-vae relative flex flex-col items-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             <ServerCog className="h-4 w-4" /> Infrastruktur Design/Setup
@@ -787,7 +786,7 @@ const SetupPage: React.FC = () => {
 
         <div className="container-vae relative">
           <header className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">Ihre Infrastruktur</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">Ihre Infrastruktur</p>
             <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">Produktionsreife Systeme</h2>
             <p className="mt-4 text-base text-text-secondary md:text-lg">
               Vollständig konfiguriert, dokumentiert und unter Ihrer Kontrolle
@@ -866,17 +865,17 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section: Nach dem Setup */}
-      <section className="section-card-container border-b border-gray-200 bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-20 dark:border-white/5 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
+      <section className="accent-section section-card-container border-b border-gray-200 bg-vae-turquoise py-20 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85 dark:text-vae-turquoise">
               Nach dem Setup
             </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold text-white dark:text-white md:text-4xl">
               Welche Optionen haben Sie nach dem Setup?
             </h2>
-            <p className="mt-4 text-base text-gray-700 dark:text-text-secondary md:text-lg">
+            <p className="mt-4 text-base text-white/80 dark:text-text-secondary md:text-lg">
               Nach der Implementierung können Sie Ihre Infrastruktur entweder eigenständig betreiben oder langfristig
               von VAE betreuen lassen.
             </p>
@@ -884,8 +883,8 @@ const SetupPage: React.FC = () => {
 
           <div className="grid gap-6 md:grid-cols-2">
             {/* Option 1: Setup + Übergabe */}
-            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border-2 border-white/80 bg-white p-8 text-slate-900 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/5 dark:text-white">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-vae-turquoise/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-gradient-to-r dark:from-vae-turquoise/0 dark:via-vae-turquoise/40 dark:to-vae-turquoise/0" />
 
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
                 <CheckCircle2 className="h-6 w-6 text-vae-turquoise" />
@@ -931,14 +930,14 @@ const SetupPage: React.FC = () => {
             </div>
 
             {/* Option 2: Setup + Langfristige Betreuung */}
-            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border-2 border-vae-turquoise/40 bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-xl dark:border-vae-turquoise/30 dark:bg-white/5">
-              <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise to-vae-turquoise/0" />
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border-2 border-white/80 bg-white p-8 text-slate-900 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-vae-turquoise/30 dark:bg-white/5 dark:text-white dark:shadow-none">
+              <div className="absolute inset-x-0 top-0 h-[3px] bg-vae-turquoise/50 dark:bg-gradient-to-r dark:from-vae-turquoise/0 dark:via-vae-turquoise dark:to-vae-turquoise/0" />
 
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/15 transition-transform duration-300 group-hover:scale-110">
                 <Users className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Setup + Langfristige Betreuung</h3>
-              <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">Setup + Langfristige Betreuung</h3>
+              <p className="text-base leading-relaxed text-slate-700 dark:text-text-secondary">
                 Wir implementieren die Infrastruktur und übernehmen anschließend die langfristige Instandhaltung,
                 Weiterentwicklung und das Monitoring. Übergaben und laufende Kommunikation laufen über unsere
                 Kundenplattform mit integriertem Chat und sicherem Cloud-Share – Sie konzentrieren sich voll auf Ihr
@@ -947,31 +946,31 @@ const SetupPage: React.FC = () => {
               <ul className="mt-4 space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
-                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                  <span className="text-sm text-slate-700 dark:text-text-secondary">
                     Kontinuierliche Updates & Security-Patches
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
-                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                  <span className="text-sm text-slate-700 dark:text-text-secondary">
                     24/7-Monitoring & proaktive Wartung
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
-                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                  <span className="text-sm text-slate-700 dark:text-text-secondary">
                     Performance-Optimierung & Skalierung
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
-                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                  <span className="text-sm text-slate-700 dark:text-text-secondary">
                     Flexible Betreuungsmodelle (monatlich kündbar)
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
-                  <span className="text-sm text-gray-700 dark:text-text-secondary">
+                  <span className="text-sm text-slate-700 dark:text-text-secondary">
                     Verbindliche SLAs mit klaren Reaktionszeiten; Accounts werden bei Bedarf erweitert
                   </span>
                 </li>
@@ -995,7 +994,7 @@ const SetupPage: React.FC = () => {
                 <MagneticButton intensity={0.05} scaleEffect>
                   <Link
                     to="/leistungen/betreuung#service-levels"
-                    className="btn-primary inline-flex items-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold"
+                    className="btn-primary accent-keep inline-flex items-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold"
                   >
                     <span>Betreuungsmodelle ansehen</span>
                     <ArrowUpRight className="h-4 w-4" />
@@ -1006,13 +1005,13 @@ const SetupPage: React.FC = () => {
           </div>
 
           {/* Hinweis zu Hosting-Optionen */}
-          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-vae-turquoise/30 bg-gradient-to-br from-vae-turquoise/10 via-vae-turquoise/5 to-transparent p-6 backdrop-blur-sm dark:border-vae-turquoise/20 dark:from-vae-turquoise/15 dark:via-vae-turquoise/10">
+          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border-2 border-vae-turquoise/30 bg-white p-6 dark:border-vae-turquoise/20 dark:bg-transparent">
             <p className="text-center text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
               <strong className="text-gray-900 dark:text-white">Hosting-Optionen:</strong> Detaillierte Informationen zu
               den verschiedenen Deployment-Modellen finden Sie{' '}
               <Link
                 to="/leistungen/betreuung#deployment-modelle"
-                className="whitespace-nowrap font-semibold text-vae-turquoise underline decoration-vae-turquoise/30 underline-offset-2 transition-colors hover:decoration-vae-turquoise"
+                className="accent-link whitespace-nowrap font-semibold text-vae-turquoise underline decoration-vae-turquoise/30 underline-offset-2 transition-colors hover:decoration-vae-turquoise"
               >
                 in der Hosting-Sektion →
               </Link>
@@ -1022,7 +1021,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 4 - Original Content */}
-      <section className="section-card-container bg-[#f2fff8] py-20 dark:bg-bg-darker">
+      <section className="section-card-container bg-vae-turquoise/10 py-20 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
@@ -1030,8 +1029,8 @@ const SetupPage: React.FC = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise">
               Was ist enthalten?
             </p>
-            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">Was Sie erhalten</h2>
-            <p className="mt-3 text-lg text-text-secondary">
+            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Was Sie erhalten</h2>
+            <p className="mt-3 text-lg text-gray-700 dark:text-text-secondary">
               Vollständiges Setup, produktionsbereit, ohne versteckte Kosten.
             </p>
           </div>
@@ -1041,20 +1040,20 @@ const SetupPage: React.FC = () => {
               return (
                 <div
                   key={card.title}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-6 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-white p-6 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
                 >
-                  <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="absolute inset-x-0 top-0 h-[3px] bg-vae-turquoise/50 opacity-80 transition-opacity duration-300 group-hover:opacity-100 dark:bg-gradient-to-r dark:from-vae-turquoise/0 dark:via-vae-turquoise/40 dark:to-vae-turquoise/0" />
 
-                  <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/30 transition-transform duration-300 group-hover:scale-110">
+                  <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/40 transition-transform duration-300 group-hover:scale-110">
                     <Icon className="relative z-[1] h-6 w-6" />
-                    <div className="absolute inset-0 bg-vae-turquoise/10 blur-[14px]" />
+                    <div className="absolute inset-0 opacity-0 dark:bg-vae-turquoise/10 dark:opacity-100 dark:blur-[14px]" />
                   </div>
 
                   <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">{card.title}</h3>
                   <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">{card.description}</p>
 
-                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="absolute inset-0 bg-gradient-to-br from-vae-turquoise/10 via-transparent to-vae-turquoise/10" />
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:opacity-0">
+                    <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-vae-turquoise/10 dark:via-transparent dark:to-vae-turquoise/10" />
                   </div>
                 </div>
               )
@@ -1500,14 +1499,14 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 7 FAQ */}
-      <section className="bg-gradient-to-b from-[#e8fff7] via-[#f5fffc] to-[#f0fff9] py-20 text-gray-900 dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="accent-section bg-vae-turquoise py-20 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
         <div className="container-vae">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85 dark:text-vae-turquoise">
               FAQ
             </p>
-            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Häufige Fragen</h2>
-            <p className="mt-4 text-base text-text-secondary dark:text-white/70">
+            <h2 className="mt-4 text-3xl font-semibold text-white dark:text-white md:text-4xl">Häufige Fragen</h2>
+            <p className="mt-4 text-base text-white/80 dark:text-white/70">
               Alles rund um Infrastruktur-Setups – von Migration bis Kosten-Transparenz.
             </p>
           </div>
@@ -1516,15 +1515,15 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 8 CTA */}
-      <section className="border-t border-white/5 bg-gradient-to-br from-bg-dark to-bg-darker py-16 md:py-20">
+      <section className="border-t border-gray-200 bg-white py-16 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:to-bg-darker md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise">
             Bereit loszulegen?
           </p>
-          <h2 className="px-4 text-2xl font-semibold text-white md:text-3xl lg:text-4xl">
+          <h2 className="px-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
             Bereit für digitale Souveränität?
           </h2>
-          <p className="max-w-3xl px-4 text-base leading-relaxed text-text-secondary">
+          <p className="max-w-3xl px-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary">
             Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen Ihnen,
             wie Open Source konkret für Ihre Organisation funktioniert.
           </p>
@@ -1540,7 +1539,7 @@ const SetupPage: React.FC = () => {
                 <span className="sm:hidden">Erstgespräch buchen</span>
               </a>
             </MagneticButton>
-            <p className="px-4 text-xs text-text-secondary md:text-sm">
+            <p className="px-4 text-xs text-gray-600 dark:text-text-secondary md:text-sm">
               45 Minuten, unverbindlich, kein Verkaufs-Pitch. Binnen 48h Termin verfügbar.
             </p>
           </div>

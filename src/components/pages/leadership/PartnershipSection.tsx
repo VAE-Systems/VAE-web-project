@@ -46,7 +46,7 @@ export const PartnershipSection: React.FC = () => {
             return (
               <motion.div
                 key={item.label}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-white/[0.06] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-md"
+                className="group relative overflow-hidden rounded-3xl border border-vae-turquoise/25 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur-none dark:border-white/10 dark:bg-gradient-to-br dark:from-white/[0.04] dark:via-white/[0.02] dark:to-white/[0.06] dark:shadow-[0_18px_50px_rgba(0,0,0,0.35)] dark:backdrop-blur-md"
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
                 animate={
                   prefersReducedMotion
@@ -62,11 +62,13 @@ export const PartnershipSection: React.FC = () => {
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
-                  <h3 className="text-xl font-semibold text-text-light">{item.label}</h3>
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-text-light">{item.label}</h3>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-text-light/75">{item.description}</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-text-light/75">
+                  {item.description}
+                </p>
                 <div
-                  className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                  className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-vae-turquoise/25 to-transparent dark:via-white/10"
                   aria-hidden
                 />
                 <p className="mt-3 text-xs uppercase tracking-[0.3em] text-vae-turquoise/80">Führung • VAE</p>
@@ -79,21 +81,21 @@ export const PartnershipSection: React.FC = () => {
           {PARTNERSHIP_SECTION.seoKeywords.map(keyword => (
             <span
               key={keyword}
-              className="dark:border-white/12 rounded-full border border-white/35 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.32em] text-white/80 shadow-[0_8px_24px_rgba(0,0,0,0.25)] dark:bg-white/[0.03] dark:text-text-muted"
+              className="dark:border-white/12 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-[11px] uppercase tracking-[0.32em] text-vae-turquoise shadow-[0_8px_24px_rgba(15,23,42,0.12)] dark:bg-white/[0.03] dark:text-text-muted dark:shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
             >
               {keyword}
             </span>
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 text-sm font-semibold text-vae-turquoise">
+        <div className="flex flex-wrap justify-center gap-3 text-sm font-semibold text-white dark:text-vae-turquoise">
           {PARTNERSHIP_SECTION.links.map((link, idx) => (
             <MagneticButton key={link.href} intensity={0.08} scaleEffect>
               <motion.a
                 href={link.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="btn-ghost inline-flex items-center gap-2 border border-vae-turquoise/30 px-4 py-2"
+                className="btn-ghost inline-flex items-center gap-2 border border-white/70 px-4 py-2 text-white hover:bg-white/10 dark:border-vae-turquoise/30 dark:text-vae-turquoise"
                 whileHover={
                   prefersReducedMotion ? undefined : { x: 2, transition: { duration: 0.2, delay: idx * 0.02 } }
                 }

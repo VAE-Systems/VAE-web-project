@@ -63,7 +63,7 @@ const projectIntents = [
   {
     id: 'infrastructure',
     label: 'Souveräne Infrastruktur',
-    description: 'Selfhosting, Open Source, Monitoring & Betrieb',
+    description: 'Selfhosting, Open Source als Werkzeug, Monitoring & Betrieb',
   },
   {
     id: 'product',
@@ -105,7 +105,7 @@ const helpTexts = {
   infrastructure: {
     title: 'Souveräne Infrastruktur',
     description:
-      'Für Selfhosting, Open-Source-Lösungen, Monitoring und Betrieb. Wenn Sie Abhängigkeiten von SaaS-Anbietern reduzieren oder eigene Infrastruktur aufbauen wollen.',
+      'Für Selfhosting, Open Source als Werkzeug, Monitoring und Betrieb. Wenn Sie Abhängigkeiten von SaaS-Anbietern reduzieren oder eigene Infrastruktur aufbauen wollen.',
   },
   product: {
     title: 'Produkt- & KI-Strategie',
@@ -154,6 +154,7 @@ const ContactPage: React.FC = () => {
   const [phone, setPhone] = React.useState('')
   const [notes, setNotes] = React.useState('')
   const [validationError, setValidationError] = React.useState('')
+  const validationTimeoutRef = useRef<number | null>(null)
 
   const { helpMode, showHelp } = useHelpMode(helpTexts)
   const tutorial = useMailBuilderTutorial()
@@ -209,18 +210,15 @@ const ContactPage: React.FC = () => {
     [selectedIntents]
   )
 
-  const timelineLabel = React.useMemo(
-    () => timelineOptions.find(option => option.id === timeline)?.label ?? timelineOptions[0].label,
-    [timeline]
-  )
+  const timelineLabel = React.useMemo(() => timelineOptions.find(option => option.id === timeline)?.label, [timeline])
 
   const companyStageLabel = React.useMemo(
-    () => companyStages.find(stage => stage.id === companyStage)?.label ?? companyStages[0].label,
+    () => companyStages.find(stage => stage.id === companyStage)?.label,
     [companyStage]
   )
 
   const collaborationLabel = React.useMemo(
-    () => collaborationModes.find(mode => mode.id === collabMode)?.label ?? collaborationModes[0].label,
+    () => collaborationModes.find(mode => mode.id === collabMode)?.label,
     [collabMode]
   )
 
@@ -302,9 +300,9 @@ const ContactPage: React.FC = () => {
       '',
       ` ${nameLine}`,
       ` ${intentLine}`,
-      ` Geplanter Startzeitraum: ${timelineLabel}.`,
-      ` Team & Setup: ${companyStageLabel}.`,
-      ` Gewünschtes Zusammenarbeitsmodell: ${collaborationLabel}.`,
+      ` Geplanter Startzeitraum: ${timelineLabel ?? 'nicht angegeben'}.`,
+      ` Team & Setup: ${companyStageLabel ?? 'nicht angegeben'}.`,
+      ` Gewünschtes Zusammenarbeitsmodell: ${collaborationLabel ?? 'nicht angegeben'}.`,
       ` Kontext/Notizen: ${formatNotesForEmail}`,
     ]
 
@@ -336,16 +334,31 @@ const ContactPage: React.FC = () => {
     formatNotesForEmail,
   ])
 
+  useEffect(() => {
+    return () => {
+      if (validationTimeoutRef.current) {
+        window.clearTimeout(validationTimeoutRef.current)
+      }
+    }
+  }, [])
+
   const handlePrepareEmail = () => {
     // Validate required fields
     const missingFields: string[] = []
     if (!contactName.trim()) missingFields.push('Name')
     if (!companyName.trim()) missingFields.push('Unternehmen')
+    if (selectedIntents.length === 0) missingFields.push('Thema')
+    if (!timeline) missingFields.push('Zeitpunkt')
+    if (!companyStage) missingFields.push('Setup')
+    if (!collabMode) missingFields.push('Zusammenarbeitsmodell')
 
     if (missingFields.length > 0) {
       setValidationError(`Bitte folgende Pflichtfelder ausfüllen: ${missingFields.join(', ')}`)
       // Auto-clear error after 5 seconds
-      setTimeout(() => setValidationError(''), 5000)
+      if (validationTimeoutRef.current) {
+        window.clearTimeout(validationTimeoutRef.current)
+      }
+      validationTimeoutRef.current = window.setTimeout(() => setValidationError(''), 5000)
       return
     }
 
@@ -353,7 +366,9 @@ const ContactPage: React.FC = () => {
     setValidationError('')
 
     // All required fields are filled, proceed with email
-    const subjectParts = ['Kontakt VAE Systems', intentLabels[0], companyName || undefined].filter(Boolean)
+    const subjectParts = ['Kontakt VAE Systems', intentLabels[0] ?? 'Allgemein', companyName || undefined].filter(
+      Boolean
+    )
     const subject = subjectParts.join(' | ')
     const mailto = `mailto:${MAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailPreview)}`
     window.location.href = mailto
@@ -845,7 +860,7 @@ const ContactPage: React.FC = () => {
                     value={contactName}
                     onChange={event => setContactName(event.target.value)}
                     placeholder="Ihr Name"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40"
+                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
@@ -855,7 +870,7 @@ const ContactPage: React.FC = () => {
                     value={position}
                     onChange={event => setPosition(event.target.value)}
                     placeholder="z.B. CTO, Geschäftsführung, Projektleitung"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40"
+                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
               </div>
@@ -868,7 +883,7 @@ const ContactPage: React.FC = () => {
                     value={companyName}
                     onChange={event => setCompanyName(event.target.value)}
                     placeholder="Firmenname"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40"
+                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
@@ -878,7 +893,7 @@ const ContactPage: React.FC = () => {
                     value={phone}
                     onChange={event => setPhone(event.target.value)}
                     placeholder="+49 151 12345678"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40"
+                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
               </div>
@@ -894,7 +909,7 @@ const ContactPage: React.FC = () => {
                   value={notes}
                   onChange={event => setNotes(event.target.value)}
                   placeholder="Bestehende Systeme, KPIs, gewünschte Deliverables …"
-                  className="max-h-[400px] min-h-[120px] resize-none overflow-y-auto rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40"
+                  className="max-h-[400px] min-h-[120px] resize-none overflow-y-auto rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   rows={5}
                 />
               </label>

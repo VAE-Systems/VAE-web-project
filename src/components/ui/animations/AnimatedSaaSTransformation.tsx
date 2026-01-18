@@ -8,6 +8,7 @@
  * Contact: juliangoertz@vae.systems
  */
 
+import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/classNames'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
 import { AlertCircle, BookOpen, DollarSign, Lightbulb, MessageSquare, Server, Shield, Users, Zap } from 'lucide-react'
@@ -81,6 +82,8 @@ type Particle = {
 const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = React.memo(
   ({ autoPlayDelay = 20000 }) => {
     const prefersReducedMotion = useReducedMotion()
+    const { theme } = useTheme()
+    const isDark = theme === 'dark'
     const [state, setState] = useState<'problem' | 'solution'>('problem')
     const [showParticles, setShowParticles] = useState(false)
     const [currentUSPIndex, setCurrentUSPIndex] = useState(0)
@@ -92,6 +95,17 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     const autoPlayTimerRef = useRef<number | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { once: true, amount: 0.5 })
+
+    const lineGradientStops = isDark
+      ? ['rgba(8, 255, 193, 0.15)', 'rgba(8, 255, 193, 0.6)', 'rgba(8, 255, 193, 0.15)']
+      : ['rgba(8, 255, 193, 0.35)', 'rgba(8, 255, 193, 0.85)', 'rgba(8, 255, 193, 0.35)']
+    const aiLineGradientStops = isDark
+      ? ['rgba(236, 72, 153, 0.4)', 'rgba(236, 72, 153, 0.9)', 'rgba(236, 72, 153, 0.4)']
+      : ['rgba(236, 72, 153, 0.6)', 'rgba(236, 72, 153, 1)', 'rgba(236, 72, 153, 0.6)']
+    const serverLineOpacity = isDark ? 0.7 : 0.9
+    const moduleLineOpacity = isDark ? 0.5 : 0.75
+    const aiPacketOpacity = isDark ? [0, 0.9, 1, 0.9, 0] : [0, 1, 1, 1, 0]
+    const packetOpacity = isDark ? [0, 0.8, 1, 0.8, 0] : [0, 1, 1, 1, 0]
 
     // Intersection Observer: Pausiere Animationen wenn nicht sichtbar
     useEffect(() => {
@@ -112,7 +126,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     const usps = [
       'AI-ready konzipiert ist',
       'unabhängig macht',
-      'Open Source ist',
+      'Self-Hosted-First ist',
       'langfristig konzipiert ist',
       'preiswert bleibt',
       'übersichtlich ist',
@@ -379,7 +393,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           systems: 'Chat • Files • Mail',
           position: { x: -30, y: -26 },
           mobilePosition: { x: -27, y: -30 },
-          color: 'bg-amber-500/20 border-amber-600/60 text-amber-900 dark:text-amber-200',
+          color:
+            'bg-amber-500/[0.98] border-amber-600/[0.98] text-amber-900 dark:bg-amber-500/20 dark:border-amber-600/60 dark:text-amber-200',
         },
         {
           id: 'crm',
@@ -388,7 +403,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           systems: 'Contacts • Deals • Support',
           position: { x: 30.5, y: -25.8 },
           mobilePosition: { x: 27, y: -30 },
-          color: 'bg-purple-500/20 border-purple-600/60 text-purple-900 dark:text-purple-200',
+          color:
+            'bg-purple-500/[0.98] border-purple-600/[0.98] text-purple-900 dark:bg-purple-500/20 dark:border-purple-600/60 dark:text-purple-200',
         },
         {
           id: 'knowledge',
@@ -397,7 +413,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           systems: 'Docs • Wiki • Playbooks',
           position: { x: -29.5, y: 26 },
           mobilePosition: { x: -27, y: 18 },
-          color: 'bg-blue-500/20 border-blue-600/60 text-blue-900 dark:text-blue-200',
+          color:
+            'bg-blue-500/[0.98] border-blue-600/[0.98] text-blue-900 dark:bg-blue-500/20 dark:border-blue-600/60 dark:text-blue-200',
         },
         {
           id: 'governance',
@@ -406,7 +423,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           systems: 'Security • Compliance • Audit',
           position: { x: 30, y: 25.8 },
           mobilePosition: { x: 27, y: 18 },
-          color: 'bg-emerald-500/20 border-emerald-600/60 text-emerald-900 dark:text-emerald-200',
+          color:
+            'bg-emerald-500/[0.98] border-emerald-600/[0.98] text-emerald-900 dark:bg-emerald-500/20 dark:border-emerald-600/60 dark:text-emerald-200',
         },
         {
           id: 'ai-agents',
@@ -415,7 +433,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           systems: 'Automation • Analysis • Support',
           position: { x: 0.5, y: 38 },
           mobilePosition: { x: 0, y: 38 },
-          color: 'bg-pink-500/20 border-pink-600/60 text-pink-900 dark:text-pink-200',
+          color:
+            'bg-pink-500/[0.98] border-pink-600/[0.98] text-pink-900 dark:bg-pink-500/20 dark:border-pink-600/60 dark:text-pink-200',
         },
       ],
       []
@@ -470,7 +489,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
       <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-8">
         <div className="mb-6 flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
-            SaaS vs. Open Source
+            SaaS vs. Self-Hosted
           </span>
           <div className="flex gap-2">
             <button
@@ -542,10 +561,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
             <p className="text-[10px] font-bold uppercase leading-tight tracking-wider sm:text-base sm:tracking-[0.24em]">
               <span className="text-red-400">SaaS</span>
               <span className="mx-1 text-text-secondary/40 sm:mx-2">vs.</span>
-              <span className="text-emerald-400">Open Source</span>
+              <span className="text-emerald-400">Self-Hosted</span>
             </p>
             <p className="text-[9px] font-medium uppercase leading-tight tracking-wide text-text-secondary/70 sm:text-sm">
-              VAE orchestriert
+              VAE orchestriert mit Open Source als Werkzeug
             </p>
           </div>
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-3">
@@ -723,8 +742,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
           className={cn(
             'relative h-[580px] overflow-hidden rounded-2xl border-2 sm:h-[600px] md:h-[640px] lg:h-[680px]',
             isProblem
-              ? 'border-orange-300 bg-white shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
-              : 'border-vae-turquoise/60 bg-white shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
+              ? 'border-orange-300 bg-orange-50 shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
+              : 'border-vae-turquoise/60 bg-vae-turquoise/5 shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
             'dark:border dark:border-white/10 dark:bg-white/5 dark:shadow-none'
           )}
           style={{ contain: 'layout style paint' }}
@@ -942,21 +961,21 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 >
                   {/* Blur-Glow Background */}
                   <div
-                    className="absolute inset-0 -z-10"
+                    className="absolute inset-0 -z-10 hidden dark:block"
                     style={{
                       background: 'radial-gradient(100% 100%, rgba(8, 255, 193, 0.35) 0%, rgba(8, 255, 193, 0) 70%)',
                       filter: 'blur(20px)',
                       transform: 'scale(1.8)',
                     }}
                   />
-                  <div className="rounded-[20px] border-[3px] border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 via-vae-turquoise/15 to-vae-turquoise/10 p-5 shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-6 lg:p-7">
+                  <div className="rounded-[20px] border-[2px] border-vae-turquoise/35 bg-white/95 p-5 shadow-[0_8px_20px_rgba(15,23,42,0.10)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_28px_rgba(15,23,42,0.14)] dark:border-vae-turquoise/60 dark:bg-gradient-to-br dark:from-vae-turquoise/20 dark:via-vae-turquoise/15 dark:to-vae-turquoise/10 dark:shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] dark:group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-6 lg:p-7">
                     <div className="flex flex-col items-center gap-1.5 sm:gap-2">
-                      <Server className="h-10 w-10 text-vae-turquoise drop-shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
+                      <Server className="h-10 w-10 text-slate-900 dark:text-vae-turquoise dark:drop-shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
                       <div className="text-center">
-                        <p className="text-[9px] font-semibold uppercase tracking-wider text-vae-turquoise sm:text-[10px]">
+                        <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-900 dark:text-vae-turquoise sm:text-[10px]">
                           Unified Stack
                         </p>
-                        <p className="text-[7px] uppercase tracking-wide text-vae-turquoise/60 sm:text-[8px]">
+                        <p className="text-[7px] uppercase tracking-wide text-slate-500 dark:text-vae-turquoise/60 sm:text-[8px]">
                           Central System
                         </p>
                       </div>
@@ -1018,7 +1037,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                     >
                       {/* Blur-Glow Background per Cluster */}
                       <div
-                        className="pointer-events-none absolute inset-0 -z-10 transition-transform duration-[150ms] ease-out group-hover:scale-105 group-hover:will-change-transform"
+                        className="pointer-events-none absolute inset-0 -z-10 hidden transition-transform duration-[150ms] ease-out group-hover:scale-105 group-hover:will-change-transform dark:block"
                         style={{
                           background: `radial-gradient(100% 100%, ${glowColors[cluster.id as keyof typeof glowColors]} 0%, rgba(0,0,0,0) 70%)`,
                           filter: isAIAgents ? 'blur(20px)' : 'blur(18px)',
@@ -1122,15 +1141,15 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   <defs>
                     {/* Türkis Gradient für normale Linien */}
                     <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="rgba(8, 255, 193, 0.15)" />
-                      <stop offset="50%" stopColor="rgba(8, 255, 193, 0.6)" />
-                      <stop offset="100%" stopColor="rgba(8, 255, 193, 0.15)" />
+                      <stop offset="0%" stopColor={lineGradientStops[0]} />
+                      <stop offset="50%" stopColor={lineGradientStops[1]} />
+                      <stop offset="100%" stopColor={lineGradientStops[2]} />
                     </linearGradient>
                     {/* Pink Gradient für AI-Linien - VERSTÄRKT */}
                     <linearGradient id="aiLineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="rgba(236, 72, 153, 0.4)" />
-                      <stop offset="50%" stopColor="rgba(236, 72, 153, 0.9)" />
-                      <stop offset="100%" stopColor="rgba(236, 72, 153, 0.4)" />
+                      <stop offset="0%" stopColor={aiLineGradientStops[0]} />
+                      <stop offset="50%" stopColor={aiLineGradientStops[1]} />
+                      <stop offset="100%" stopColor={aiLineGradientStops[2]} />
                     </linearGradient>
                     <filter id="glow">
                       <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -1213,7 +1232,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                           style={{ mixBlendMode: isAIServerConnection ? 'screen' : 'normal' }}
                           initial={{ opacity: 0, pathLength: 0 }}
                           animate={{
-                            opacity: isAIServerConnection ? 1 : isServerConnection ? 0.7 : 0.5,
+                            opacity: isAIServerConnection
+                              ? 1
+                              : isServerConnection
+                                ? serverLineOpacity
+                                : moduleLineOpacity,
                             pathLength: 1,
                           }}
                           transition={{
@@ -1233,7 +1256,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                             animate={{
                               cx: [`${fromX}%`, `${toX}%`],
                               cy: [`${fromY}%`, `${toY}%`],
-                              opacity: [0, 0.9, 1, 0.9, 0],
+                              opacity: aiPacketOpacity,
                             }}
                             transition={{
                               duration: isAIServerConnection ? 2.8 : 3.2,
@@ -1255,7 +1278,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                               animate={{
                                 cx: [`${fromX}%`, `${toX}%`],
                                 cy: [`${fromY}%`, `${toY}%`],
-                                opacity: [0, 0.8, 1, 0.8, 0],
+                                opacity: packetOpacity,
                               }}
                               transition={{
                                 duration: isServerConnection ? 2.2 : 2.8,

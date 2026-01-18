@@ -33,7 +33,7 @@ export const TECH_SECTIONS: TechSection[] = [
   {
     id: 'open-source-ai',
     heading: 'KI-Modelle für vielfältige Anwendungsfälle',
-    subheading: 'Open Source first. Unabhängigkeit durch transparente Technologie.',
+    subheading: 'Self-Hosted-First. Unabhängigkeit durch transparente Technologie.',
     badge: 'Section 01 · Hugging Face',
     groups: [
       { id: 'llms', title: 'Large Language Models (LLMs)' },

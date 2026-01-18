@@ -46,7 +46,7 @@ export const PartnershipSection: React.FC = () => {
             return (
               <motion.div
                 key={item.label}
-                className="group relative overflow-hidden rounded-3xl border border-vae-turquoise/25 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur-none dark:border-white/10 dark:bg-gradient-to-br dark:from-white/[0.04] dark:via-white/[0.02] dark:to-white/[0.06] dark:shadow-[0_18px_50px_rgba(0,0,0,0.35)] dark:backdrop-blur-md"
+                className="group relative overflow-hidden rounded-3xl border border-vae-turquoise/25 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur-none dark:border-white/10 dark:bg-transparent dark:bg-gradient-to-br dark:from-white/[0.04] dark:via-white/[0.02] dark:to-white/[0.06] dark:shadow-[0_18px_50px_rgba(0,0,0,0.35)] dark:backdrop-blur-md"
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
                 animate={
                   prefersReducedMotion

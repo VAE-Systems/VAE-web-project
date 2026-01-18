@@ -14,7 +14,7 @@ export const serviceCategories: ServiceCategory[] = [
     title: 'Strategische Beratung',
     tagline: 'Roadmaps & Governance',
     description:
-      'Wir analysieren Prozesse, definieren Zielbilder und entwickeln klare Roadmaps für Open-Source-Infrastruktur und AI-Automatisierung.',
+      'Wir analysieren Prozesse, definieren Zielbilder und entwickeln klare Roadmaps für Self-Hosted-Infrastruktur und AI-Automatisierung.',
     points: [
       'Business- & IT-Assessment',
       'Kosten- & Effizienzanalysen',
@@ -25,10 +25,10 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     key: 'infrastructure',
-    title: 'Open Source Infrastruktur',
+    title: 'Self-Hosted Infrastruktur',
     tagline: 'Nextcloud & Odoo',
     description:
-      'Planung, Implementierung und Betrieb kompletter Open-Source-Stacks für Kollaboration, CRM und Geschäftsprozesse.',
+      'Planung, Implementierung und Betrieb kompletter Self-Hosted-Stacks für Kollaboration, CRM und Geschäftsprozesse.',
     points: ['Nextcloud Kollaboration', 'Odoo ERP/CRM', 'Security & Backups', 'DSGVO-konforme Hosting-Modelle'],
     cta: 'Infrastruktur planen',
   },

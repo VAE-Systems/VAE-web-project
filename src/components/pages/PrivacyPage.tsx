@@ -6,7 +6,7 @@ import Seo from '../ui/Seo'
 /**
  * Datenschutz / Privacy Policy
  *
- * Abbild der derzeitigen Datenverarbeitung (Stand: August 2025).
+ * Abbild der derzeitigen Datenverarbeitung (Stand: Januar 2026).
  * Hinweise / Platzhalter sind klar markiert und sollten bei Änderungen (Hosting, Fonts Self‑Hosting, neue Tools) angepasst werden.
  */
 const PrivacyPage: React.FC = () => {

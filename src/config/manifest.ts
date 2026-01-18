@@ -7,7 +7,7 @@ export const manifestConfig = {
     name: 'VAE Systems - DSGVO-konforme KI-Automatisierung',
     shortName: 'VAE Systems',
     description:
-      'DSGVO-konforme KI-Automatisierung und Workflow-Engines für deutsche Unternehmen. Open Source, lokal gehostet, ohne Vendor Lock-in.',
+      'DSGVO-konforme KI-Automatisierung und Workflow-Engines für deutsche Unternehmen. Self-Hosted, Open Source als Werkzeug, ohne Vendor Lock-in.',
     lang: 'de',
     startUrl: '/',
     scope: '/',
@@ -35,7 +35,7 @@ export const manifestConfig = {
     {
       name: 'Lösungen',
       shortName: 'Lösungen',
-      description: 'Open Source Infrastruktur & AI Automation',
+      description: 'Self-Hosted Infrastruktur & Open Source AI Automation',
       url: '/solutions',
     },
     {
@@ -95,7 +95,7 @@ export const manifestConfig = {
       sizes: '1280x720',
       type: 'image/png',
       platform: 'wide',
-      label: 'Open Source Infrastruktur & AI Automation Cockpit',
+      label: 'Self-Hosted Infrastruktur & Open Source AI Automation Cockpit',
     },
   ],
 }

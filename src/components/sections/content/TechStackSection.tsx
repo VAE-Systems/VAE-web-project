@@ -430,11 +430,11 @@ const TechStackSection: React.FC = () => {
         {/* Section Header */}
         <div className="mb-14 text-center">
           <h2 ref={headingRef} className="h2 heading-gradient h-space mb-3">
-            Open Source Systeme & KI-Modelle
+            Self-Hosted Systeme & Open-Source-KI-Modelle
           </h2>
           <p ref={subRef} className="mx-auto max-w-2xl text-xl text-text-secondary">
-            Wir arbeiten mit einer breiten Palette von Open-Source-Stacks und KI-Modellen. Die Logos geben nur einen
-            Einblick – der konkrete Stack wird gemeinsam mit Ihnen definiert und laufend an technologische und
+            Wir arbeiten mit einer breiten Palette von Self-Hosted-Stacks und Open-Source-KI-Modellen. Die Logos geben
+            nur einen Einblick – der konkrete Stack wird gemeinsam mit Ihnen definiert und laufend an technologische und
             regulatorische Entwicklungen in Ihrer Branche angepasst.
           </p>
         </div>

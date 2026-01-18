@@ -12,6 +12,7 @@ export interface SaaSToolDefinition {
 export interface SaaSToolCategory {
   id: string
   title: string
+  selectionMode?: 'single' | 'multi'
   tools: SaaSToolDefinition[]
 }
 
@@ -19,6 +20,7 @@ export const saasToolCategories: SaaSToolCategory[] = [
   {
     id: 'office',
     title: 'Office & Zusammenarbeit',
+    selectionMode: 'single',
     tools: [
       {
         id: 'm365',
@@ -44,6 +46,7 @@ export const saasToolCategories: SaaSToolCategory[] = [
   {
     id: 'communication',
     title: 'Kommunikation & Meetings',
+    selectionMode: 'multi',
     tools: [
       {
         id: 'slack-pro',
@@ -69,6 +72,7 @@ export const saasToolCategories: SaaSToolCategory[] = [
   {
     id: 'pm',
     title: 'Projektmanagement',
+    selectionMode: 'single',
     tools: [
       {
         id: 'jira',
@@ -87,6 +91,7 @@ export const saasToolCategories: SaaSToolCategory[] = [
   {
     id: 'crm',
     title: 'CRM & Sales',
+    selectionMode: 'single',
     tools: [
       {
         id: 'salesforce',
@@ -105,6 +110,7 @@ export const saasToolCategories: SaaSToolCategory[] = [
   {
     id: 'storage',
     title: 'Storage & Files',
+    selectionMode: 'single',
     tools: [
       {
         id: 'dropbox',
@@ -123,6 +129,7 @@ export const saasToolCategories: SaaSToolCategory[] = [
   {
     id: 'devops',
     title: 'Entwicklung & DevOps',
+    selectionMode: 'single',
     tools: [
       {
         id: 'github-enterprise',
@@ -141,6 +148,7 @@ export const saasToolCategories: SaaSToolCategory[] = [
   {
     id: 'automation',
     title: 'Automation & Workflows',
+    selectionMode: 'multi',
     tools: [
       {
         id: 'zapier',

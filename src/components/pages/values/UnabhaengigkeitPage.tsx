@@ -15,7 +15,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Ownership bei Ihnen',
-    body: 'Sie besitzen Server-Zugänge, Datenbanken und Backup-Systeme. Kein Vendor-Lock-in, keine versteckten Abhängigkeiten.',
+    body: 'Sie besitzen Server-Zugänge, Datenbanken und Backup-Systeme. Ownership & Hosting-Kontrolle liegen bei Ihnen. Kein Vendor-Lock-in, keine versteckten Abhängigkeiten.',
   },
 ]
 
@@ -82,8 +82,8 @@ const UnabhaengigkeitPage: React.FC = () => {
             </h1>
             <p className="text-lg leading-relaxed text-white/85 dark:text-text-secondary">
               Sie können morgen den Partner wechseln, ohne Ihr System zu verlieren. Wir planen offene Schnittstellen,
-              dokumentieren Schlüsselentscheidungen und vermeiden proprietäre Lizenzfallen. So bleibt Ihre Organisation
-              souverän – unabhängig davon, wer liefert.
+              dokumentieren Schlüsselentscheidungen und setzen auf lizenz- und anbieterunabhängige Lösungen, wo es Sinn
+              ergibt. So bleibt Ihre Organisation souverän – unabhängig davon, wer liefert.
             </p>
             <div className="flex flex-wrap gap-4">
               <MagneticButton className="inline-flex">
@@ -97,12 +97,12 @@ const UnabhaengigkeitPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-6 rounded-3xl border border-white/30 bg-white/10 p-8 dark:border-white/10 dark:bg-white/[0.03]">
+          <div className="space-y-6 rounded-3xl border border-white/50 bg-white/80 p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.35)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.03] dark:shadow-none">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
               Konkreter Nutzen
             </p>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -110,7 +110,7 @@ const UnabhaengigkeitPage: React.FC = () => {
                 </span>
                 <span>Vendor-Lock-ins werden identifiziert und durch offene Alternativen ersetzt</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -118,7 +118,7 @@ const UnabhaengigkeitPage: React.FC = () => {
                 </span>
                 <span>Schlüsselprozesse sind dokumentiert, damit kein Einzelner kritisch ist</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -126,7 +126,7 @@ const UnabhaengigkeitPage: React.FC = () => {
                 </span>
                 <span>Architekturentscheidungen priorisieren austauschbare Komponenten</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />

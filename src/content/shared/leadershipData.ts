@@ -31,7 +31,7 @@ export const HERO_CONTENT = {
   title: 'Die Köpfe hinter VAE Systems',
   subheading: 'Zwei Gründer, eine Vision: Deutschland technologisch unabhängig machen.',
   body: 'VAE Systems wurde von zwei Menschen gegründet, die mehr verbindet als eine gemeinsame Geschäftsidee. Julian Goertz Dini und Jakob Dünnebeil kennen sich aus der Community-Arbeit bei <a href="https://www.linkedin.com/company/aktiv-kollektiv/" target="_blank" rel="noopener noreferrer">Aktiv Kollektiv e.V. Heidelberg</a> — einem gemeinnützigen Verein, in dem sie Initiativen aufbauen, Veranstaltungen organisieren und Menschen zusammenbringen.',
-  seoKeywords: ['Gründer VAE Systems', 'Tech-Beratung Heidelberg', 'Open-Source-Infrastruktur', 'Informatik-Expertise'],
+  seoKeywords: ['Gründer VAE Systems', 'Tech-Beratung Heidelberg', 'Self-Hosted-Infrastruktur', 'Informatik-Expertise'],
 }
 
 export const LEADERS: LeaderProfile[] = [
@@ -94,11 +94,11 @@ export const LEADERS: LeaderProfile[] = [
       alt: 'Jakob Dünnebeil in einem professionellen Porträt.',
     },
     background:
-      'Jakob bringt technischen Tiefgang. Mit Physik-Background und Informatikstudium kombiniert er wissenschaftliches Denken mit praktischer Softwareentwicklung. — Tief in der Open-Source-Community verankert, baut er Systemarchitekturen, die skalieren und langfristig wartbar bleiben.',
+      'Jakob bringt technischen Tiefgang. Mit Physik-Background und Informatikstudium kombiniert er wissenschaftliches Denken mit praktischer Softwareentwicklung. — Tief in der Open-Source-Community verankert, baut er Self-Hosted-Systemarchitekturen, die skalieren und langfristig wartbar bleiben.',
     characterTraits: ['Kritisch, ehrlich und klar', 'Präzise und ausgeglichen', 'Fokus auf technische Exzellenz'],
     expertise: [
       'Softwarekonzeption & Systemarchitektur',
-      'Open Source & Selfhosting-Infrastrukturen',
+      'Self-Hosting mit Open Source als Werkzeug',
       'Multi-Language Development',
       'Wissenstransfer & Lehren',
     ],
@@ -122,7 +122,7 @@ export const LEADERS: LeaderProfile[] = [
       href: 'https://www.linkedin.com/in/jakob-d%C3%BCnnebeil-54b25936b/',
     },
     email: 'jakobduennebeil@vae.systems',
-    seoKeywords: ['Technische Vision', 'Open Source', 'Systemarchitektur', 'Community Leadership'],
+    seoKeywords: ['Technische Vision', 'Self-Hosting', 'Open Source', 'Systemarchitektur'],
   },
 ]
 

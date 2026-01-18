@@ -307,13 +307,12 @@ const phases: PhaseCard[] = [
 
 const transformationStats: TransformationStat[] = [
   {
-    id: 'bcg',
-    highlight: 'Nur 1 von 3',
-    ariaLabel: 'Nur 1 von 3 Transformationen',
-    description: 'Transformationen erreicht ihre Wachstums- und Wertschöpfungsziele.',
-    source: 'BCG, 2025',
-    sourceUrl:
-      'https://www.bcg.com/press/29october2020-companies-can-flip-the-odds-of-success-in-digital-transformations-from-30-to-80',
+    id: 'meltingspot',
+    highlight: '70%',
+    ariaLabel: 'Siebzig Prozent',
+    description: 'der Digital-Transformationen scheitern 2025.',
+    source: 'Meltingspot, 2025',
+    sourceUrl: 'https://blog.meltingspot.io/why-digital-transformation-projects-fail/',
   },
   {
     id: 'bain',
@@ -325,12 +324,12 @@ const transformationStats: TransformationStat[] = [
       'https://www.bain.com/about/media-center/press-releases/2024/88-of-business-transformations-fail-to-achieve-their-original-ambitions-those-that-succeed-avoid-overloading-top-talent/',
   },
   {
-    id: 'zylo',
-    highlight: '$18 Mio.',
-    ariaLabel: 'Achtzehn Millionen US-Dollar',
-    description: 'verschwendet ein durchschnittliches Unternehmen jährlich durch ungenutzte SaaS-Lizenzen.',
-    source: 'Zylo, 2024',
-    sourceUrl: 'https://zylo.com/news/2024-saas-management-index/',
+    id: 'jumpcloud',
+    highlight: '$135K',
+    ariaLabel: 'Einhundertfünfunddreißigtausend US-Dollar',
+    description: 'Waste pro Organisation durch ungenutzte SaaS-Lizenzen.',
+    source: 'JumpCloud, 2025',
+    sourceUrl: 'https://jumpcloud.com/blog/saas-usage-statistics-how-much-is-too-much',
   },
 ]
 
@@ -512,7 +511,8 @@ const BeratungPage: React.FC = () => {
             <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-[hsl(0,0%,75%)] md:text-xl">
               Von der Bestandsaufnahme bis zur Umsetzungs-Roadmap: Wir analysieren Ihre Systeme, identifizieren
               Ineffizienzen und entwickeln einen klaren, umsetzbaren Fahrplan für KI-Integration und Digitalisierung –
-              individuell auf Ihre Organisation zugeschnitten.
+              individuell auf Ihre Organisation zugeschnitten. Wir vergleichen Self-Hosting, Hybrid und SaaS nach ROI,
+              Risiko, Regulatorik.
             </p>
 
             {/* CTA Buttons */}
@@ -656,8 +656,8 @@ const BeratungPage: React.FC = () => {
 
               <div>
                 <p className="mb-4 text-lg leading-relaxed text-gray-900 dark:text-white">
-                  Auf Basis dieser Analyse entwickeln wir keine theoretischen Idealszenarien, sondern 4 konkrete,
-                  umsetzbare Strategieoptionen – jeweils mit Aufwand, Risiko und ROI-Blick:
+                  Aus der Analyse leiten wir vier umsetzbare Strategieoptionen ab, jede mit klarer Einschätzung zu
+                  Aufwand, Risiko und ROI.
                 </p>
 
                 <ol className="space-y-3">
@@ -687,8 +687,8 @@ const BeratungPage: React.FC = () => {
               </div>
 
               <p className="text-base leading-relaxed text-gray-600 dark:text-[hsl(0,0%,75%)]">
-                Sie entscheiden auf Basis fundierter Informationen, welcher strategische Weg für Ihre Organisation
-                optimal ist. Keine Verpflichtung, kein Verkaufsdruck – nur transparente Beratung auf Augenhöhe.
+                Sie treffen Ihre Entscheidung auf Grundlage belastbarer Informationen. Unsere Rolle ist transparente
+                Beratung auf Augenhöhe — ohne Verpflichtung, ohne Verkaufsdruck.
               </p>
             </div>
 
@@ -758,8 +758,8 @@ const BeratungPage: React.FC = () => {
             <h2 className="h2 heading-gradient mb-4">Was Sie erhalten</h2>
             <p className="text-lg text-gray-600 dark:text-[hsl(0,0%,75%)]">Konkret, messbar, transparent</p>
             <p className="mx-auto mb-0 mt-4 max-w-2xl text-center text-base text-gray-600 dark:text-[hsl(0,0%,75%)]">
-              Damit Sie genau wissen, was Sie erhalten: Hier sind die konkreten Deliverables unserer Strategieberatung –
-              von der Erstanalyse bis zur finalen Entscheidungsgrundlage.
+              Im Folgenden finden Sie die konkreten Deliverables unserer Strategieberatung — von der Erstanalyse bis zur
+              finalen Entscheidungsgrundlage.
             </p>
           </div>
 
@@ -1058,7 +1058,7 @@ const BeratungPage: React.FC = () => {
           </div>
 
           {/* Info Box */}
-          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border-2 border-vae-turquoise/30 bg-white p-6 text-center">
+          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border-2 border-vae-turquoise/30 bg-white p-6 text-center dark:border-vae-turquoise/40 dark:bg-white/[0.05] dark:shadow-[0_18px_45px_-28px_rgba(8,255,193,0.35)]">
             <p className="text-sm leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
               Im kostenlosen Strategiegespräch erhalten Sie eine erste fundierte Einschätzung. Nach der detaillierten
               Analyse bekommen Sie ein transparentes Angebot — präzise auf Ihre strategischen Ziele zugeschnitten. Keine

@@ -208,7 +208,11 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="pointer-events-none absolute rounded-[28px] border-4 border-vae-turquoise shadow-[0_0_40px_rgba(5,248,200,0.6),inset_0_0_40px_rgba(5,248,200,0.3)]"
+            className={
+              isDark
+                ? 'pointer-events-none absolute rounded-[28px] border-4 border-vae-turquoise shadow-[0_0_40px_rgba(5,248,200,0.6),inset_0_0_40px_rgba(5,248,200,0.3)]'
+                : 'pointer-events-none absolute rounded-[28px] border-4 border-white shadow-[0_0_40px_rgba(255,255,255,0.55),inset_0_0_40px_rgba(255,255,255,0.25)]'
+            }
             style={{
               top: `${highlightedRect.top - 16}px`,
               left: `${highlightedRect.left - 16}px`,
@@ -227,7 +231,11 @@ export const SpotlightTutorialOverlay: React.FC<SpotlightTutorialOverlayProps> =
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="absolute -inset-2 rounded-[32px] border-2 border-vae-turquoise/40"
+              className={
+                isDark
+                  ? 'absolute -inset-2 rounded-[32px] border-2 border-vae-turquoise/40'
+                  : 'absolute -inset-2 rounded-[32px] border-2 border-white/60'
+              }
             />
           </motion.div>
         )}

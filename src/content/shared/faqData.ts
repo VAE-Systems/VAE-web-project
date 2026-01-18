@@ -73,7 +73,7 @@ export const faqEntries: FaqEntry[] = [
     categoryId: 'technology',
     question: 'Bauen Sie alles selbst oder nutzen Sie bestehende APIs?',
     answer:
-      'Wir nutzen auf Anfrage bestehende APIs (z.B. OpenAI), wenn es Sinn macht. Unser Ziel ist immer die beste Lösung: Manchmal ist das eine externe API, oft aber auch ein selbstgehostetes Modell, das weniger Leistung braucht und günstiger ist. Wir prüfen für jeden Fall, was wirklich nötig ist – viele Anwendungsfälle brauchen keine riesigen Modelle, sondern effiziente Lösungen.',
+      'Unser Default ist Self-Hosting. Externe APIs nutzen wir, wenn sie objektiv besser sind. Wir nutzen auf Anfrage bestehende APIs (z.B. OpenAI), wenn es Sinn macht. Unser Ziel ist immer die beste Lösung: Manchmal ist das eine externe API, oft aber auch ein selbstgehostetes Modell, das weniger Leistung braucht und günstiger ist. Wir prüfen für jeden Fall, was wirklich nötig ist – viele Anwendungsfälle brauchen keine riesigen Modelle, sondern effiziente Lösungen.',
     keywords: ['api', 'openai', 'self-hosted', 'modelle', 'effizienz'],
   },
   {
@@ -89,7 +89,7 @@ export const faqEntries: FaqEntry[] = [
     categoryId: 'technology',
     question: 'Wo werden die Anwendungen gehostet?',
     answer:
-      'Wir prüfen unsere Server-Anbieter immer wieder neu auf Zuverlässigkeit. In der Regel setzen wir auf bewährte Partner (z.B. Hetzner für Self-Hosting), sind aber flexibel. Ob Cloud oder eigener Server hängt davon ab, was für Ihren Anwendungsfall am sichersten und wirtschaftlichsten ist.',
+      'Wir prüfen unsere Server-Anbieter immer wieder neu auf Zuverlässigkeit. In der Regel setzen wir auf bewährte Partner (z.B. Hetzner für Self-Hosting), sind aber flexibel. Self-Hosted-First, Hybrid wenn nötig.',
     keywords: ['hosting', 'server', 'hetzner', 'cloud', 'zuverlässigkeit'],
     tags: ['setup', 'betreuung', 'consulting'],
   },
@@ -143,7 +143,7 @@ export const faqEntries: FaqEntry[] = [
     categoryId: 'projects',
     question: 'Was erhalte ich am Ende des Projekts?',
     answer:
-      'Wir passen unser Angebot stark an Ihren Bedarf an. Für Kunden, die wenig brauchen, reduzieren wir den Umfang (und die Kosten). Aber wenn gewünscht, dokumentieren wir alles ausführlich, damit Sie unabhängig bleiben. Sie erhalten immer das funktionierende System und – auf Wunsch – die passende Dokumentation dazu.',
+      'Wir passen unser Angebot stark an Ihren Bedarf an. Für Kunden, die wenig brauchen, reduzieren wir den Umfang und Kosten. Wenn gewünscht, dokumentieren wir alles ausführlich, damit Sie unabhängig bleiben. Sie erhalten immer das funktionierende System und – auf Wunsch – die passende Dokumentation dazu.',
     keywords: ['ergebnis', 'dokumentation', 'system', 'unabhängigkeit'],
     tags: ['setup', 'consulting'],
   },

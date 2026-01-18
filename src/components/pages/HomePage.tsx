@@ -37,8 +37,8 @@ const HomePage: React.FC = () => {
     <div className="relative z-0 min-h-[100dvh]">
       {/* 🔍 SEO: Meta + Schema.org */}
       <Seo
-        title="VAE Systems Heidelberg | Open-Source-Infrastruktur & KI"
-        description="Open-Source-Arbeitsinfrastruktur aufbauen, KI-optimieren & betreuen. 3 Monate Testphase. Heidelberg & deutschlandweit."
+        title="VAE Systems Heidelberg | Self-Hosted-Infrastruktur & KI"
+        description="Self-Hosted-Arbeitsinfrastruktur aufbauen, KI-optimieren & betreuen – Open-Source-Stacks inklusive. 3 Monate Testphase. Heidelberg & deutschlandweit."
         canonicalPath="/"
         jsonLd={[
           {

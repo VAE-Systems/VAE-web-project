@@ -90,7 +90,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
               <span className="block text-vae-turquoise">für Ihre digitale Arbeitsumgebung.</span>
             </h1>
             <p className="mx-auto max-w-3xl text-lg leading-relaxed text-text-secondary/90 md:text-xl">
-              Wir richten Ihre Open-Source-Infrastruktur ein, erweitern sie mit AI-Workflows und betreuen alle Systeme
+              Wir richten Ihre Self-Hosted-Infrastruktur ein, erweitern sie mit AI-Workflows und betreuen alle Systeme
               langfristig. Transparent, dokumentiert und immer mit Fokus auf messbaren Geschäftsnutzen.
             </p>
           </div>

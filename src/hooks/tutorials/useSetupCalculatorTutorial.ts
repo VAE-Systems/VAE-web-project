@@ -35,9 +35,9 @@ const SETUP_CALCULATOR_TUTORIAL_STEPS: SetupCalculatorTutorialStepConfig[] = [
   {
     step: 3,
     title: 'Netto- und Bruttovergleich',
-    actionHint: 'Lesen Sie Monats- und Jahreswerte – brutto basiert auf 19% gesetzlicher USt.',
+    actionHint: 'Wechseln Sie zwischen Netto und Brutto, um beide Perspektiven zu sehen.',
     description:
-      'Wir zeigen Netto- und Bruttowerte nebeneinander, damit Sie sofort erkennen, wie stark die USt. Ihre SaaS-Gesamtkosten beeinflusst.',
+      'Netto zeigt Ihre reinen Lizenzkosten; Brutto berücksichtigt die gesetzliche USt. und macht den Gesamtaufwand sichtbar.',
     highlightTarget: '[data-calculator-tutorial="results"]',
     position: 'left',
   },

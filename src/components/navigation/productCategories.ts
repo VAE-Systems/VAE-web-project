@@ -13,7 +13,7 @@ export interface ProductCategory {
 export const productCategories: ProductCategory[] = [
   {
     key: 'infrastruktur',
-    title: 'Open Source Infrastruktur Pakete',
+    title: 'Self-Hosted Infrastruktur Pakete',
     badge: 'Kostenersparnis',
     tagline: 'Nextcloud, Odoo & Business-Tools',
     description:

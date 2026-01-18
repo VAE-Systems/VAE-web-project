@@ -171,7 +171,7 @@ const caseStudies: CaseStudy[] = [
     challenge:
       'Aktiv Kollektiv e.V. arbeitet aktuell mit einer fragmentierten digitalen Landschaft — ohne zentrale Plattform, ohne strukturiertes Wissensmanagement, ohne skalierbare Kollaborations-Tools.',
     solutionIntro:
-      'Julian Goertz (Vorstand bei Aktiv Kollektiv e.V.) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur des Vereins — mit Fokus auf Open Source, Self-Hosting und Skalierbarkeit.',
+      'Julian Goertz (Vorstand bei Aktiv Kollektiv e.V.) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur des Vereins — mit Fokus auf Self-Hosting, Open Source als Werkzeug und Skalierbarkeit.',
     implementation: [
       {
         title: 'Infrastruktur-Aufbau',
@@ -282,7 +282,8 @@ const caseStudies: CaseStudy[] = [
     techStack: [
       {
         name: 'OpenAI API',
-        description: 'KI-gestützte E-Mail-Generierung via direkter API-Integration.',
+        description:
+          'KI-gestützte E-Mail-Generierung via direkter API-Integration (wenn extern sinnvoll; alternativ self-hosted Modelle möglich).',
         docsUrl: 'https://platform.openai.com/',
       },
       {
@@ -303,15 +304,15 @@ const caseStudies: CaseStudy[] = [
   {
     id: 'vae-internal',
     icon: Layers,
-    title: 'Eigene Open-Source-Infrastruktur',
+    title: 'Eigene Self-Hosted-Infrastruktur',
     organization: 'VAE Systems',
     industry: 'IT-Consulting',
     status: 'Live & kontinuierlich optimiert',
     statusVariant: 'internal',
     challenge:
-      'Um glaubwürdig Open-Source-Infrastrukturen zu bauen, müssen wir intern vorleben, was wir Kund:innen empfehlen: Keine proprietären SaaS-Tools, volle Datenkontrolle, maximale Automatisierung.',
+      'Um glaubwürdig Self-Hosted-Infrastrukturen zu bauen, müssen wir intern vorleben, was wir Kund:innen empfehlen: Keine proprietären SaaS-Tools, volle Datenkontrolle, maximale Automatisierung.',
     solutionIntro:
-      'Unsere gesamte interne Arbeit läuft auf Open-Source-Stacks – von Files über Automationen bis Monitoring. Das Setup dient als Blueprint für neue Projekte.',
+      'Unsere gesamte interne Arbeit läuft auf Self-Hosted-Stacks – überwiegend Open Source – von Files über Automationen bis Monitoring. Das Setup dient als Blueprint für neue Projekte.',
     implementation: [
       {
         title: 'Stack im Einsatz',
@@ -370,7 +371,7 @@ const caseStudies: CaseStudy[] = [
       { name: 'Docker', description: 'Containerisierung sämtlicher Services.', docsUrl: 'https://www.docker.com/' },
       { name: 'PostgreSQL', description: 'Persistente Datenhaltung.', docsUrl: 'https://www.postgresql.org/' },
     ],
-    role: 'Unsere interne Infrastruktur beweist: Open Source ist produktionsreif und skalierbar.',
+    role: 'Unsere interne Infrastruktur beweist: Self-Hosted-Stacks sind produktionsreif und skalierbar.',
   },
 ]
 
@@ -613,7 +614,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">{study.role}</p>
               <div className="mt-6 flex items-center gap-3 text-xs text-text-muted">
                 <Sparkles className="h-4 w-4 text-vae-turquoise" />
-                Open Source · DSGVO-konform · Transparent dokumentiert
+                Self-Hosted-First · DSGVO-konform · Transparent dokumentiert
               </div>
             </div>
           </div>
@@ -808,7 +809,7 @@ const ReferenzenPage: React.FC = () => {
       genre: study.industry,
       abstract: `${study.challenge} ${study.solutionIntro}`,
       creator: 'VAE Systems',
-      operatingSystem: 'Open Source Stack',
+      operatingSystem: 'Self-Hosted Stack',
       keywords: study.techStack.map(stack => stack.name).join(', '),
     }))
     return {
@@ -816,7 +817,7 @@ const ReferenzenPage: React.FC = () => {
       '@type': 'WebPage',
       name: 'Referenzen & Case Studies | VAE Systems',
       description:
-        'Konkrete Open-Source-Infrastrukturen und KI-Workflows, die wir umgesetzt haben: NGOs, Events, interne Best Practices.',
+        'Konkrete Self-Hosted-Infrastrukturen und KI-Workflows, die wir umgesetzt haben: NGOs, Events, interne Best Practices.',
       url: 'https://vae.systems/ressourcen/case-studies',
       hasPart: caseStudyLd,
     }
@@ -826,7 +827,7 @@ const ReferenzenPage: React.FC = () => {
     <div className="relative z-0 bg-bg-darker text-text-light transition-colors duration-300">
       <Seo
         title="Referenzen & Case Studies | VAE Systems"
-        description="Konkrete Projekte mit Open-Source-Infrastruktur und KI-Workflows: Aktiv Kollektiv, QR-Code-Automationen, interne Blueprints."
+        description="Konkrete Projekte mit Self-Hosted-Infrastruktur, Open-Source-Stacks und KI-Workflows: Aktiv Kollektiv, QR-Code-Automationen, interne Blueprints."
         canonicalPath="/about/referenzen"
         jsonLd={seoJsonLd}
       />
@@ -846,12 +847,12 @@ const ReferenzenPage: React.FC = () => {
             Projekte, die zeigen, was wir können
           </h1>
           <p className="max-w-3xl text-lg leading-relaxed text-white/85 dark:text-text-secondary">
-            Konkrete Open-Source-Infrastrukturen und KI-optimierte Workflows, die wir für Kund:innen und unsere eigenen
+            Konkrete Self-Hosted-Infrastrukturen und KI-optimierte Workflows, die wir für Kund:innen und unsere eigenen
             Teams umgesetzt haben – ehrlich, transparent, mit messbaren Ergebnissen.
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
-              <ShieldCheck className="h-4 w-4 text-white dark:text-vae-turquoise" /> Alle Projekte: Open-Source-first,
+              <ShieldCheck className="h-4 w-4 text-white dark:text-vae-turquoise" /> Alle Projekte: Self-Hosted-First,
               DSGVO-konform, Made in Germany
             </p>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/5 dark:text-white/80">
@@ -873,7 +874,7 @@ const ReferenzenPage: React.FC = () => {
               Infrastrukturen, die bereits produktiv laufen
             </h2>
             <p className="mt-4 text-base text-text-secondary">
-              Jedes Projekt zeigt, wie Open Source + KI reale Probleme löst und Ownership schafft.
+              Jedes Projekt zeigt, wie Self-Hosted + KI reale Probleme löst und Ownership schafft.
             </p>
           </div>
 
@@ -902,9 +903,8 @@ const ReferenzenPage: React.FC = () => {
             </p>
             <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Momentum für die nächsten Projekte</h2>
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-text-secondary">
-              Aktuelle Projekte werden hier gelistet, sobald Kund:innen der Veröffentlichung zustimmen. Mehrere
-              Enterprise-Kunden und öffentliche Einrichtungen haben uns beauftragt, sind aber aus NDA-Gründen nicht
-              aufgeführt. Diskretion ist Teil unserer DNA – wir nennen keine Namen ohne Zustimmung.
+              Aktuelle Projekte werden hier veröffentlicht, sobald Kund:innen ihre Zustimmung geben. Vertrauliche
+              Projekte können wir aus NDA-Gründen nicht zeigen. Wir behandeln alle Engagements mit höchster Diskretion.
             </p>
           </div>
         </div>
@@ -962,9 +962,9 @@ const ReferenzenPage: React.FC = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
             Nächster Schritt
           </p>
-          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Ihr Projekt könnte hier stehen</h2>
+          <h2 className="text-3xl font-semibold text-text-light md:text-4xl">Ein Projekt könnte hier stehen</h2>
           <p className="max-w-2xl text-base text-text-secondary">
-            Egal ob NGO, Mittelstand oder Startup – wir bauen die Open-Source-Infrastruktur, die zu Ihren Prozessen
+            Egal ob NGO, Mittelstand oder Startup – wir bauen die Self-Hosted-Infrastruktur, die zu Ihren Prozessen
             passt. Von Beratung bis Langzeit-Betreuung.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">

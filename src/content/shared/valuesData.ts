@@ -25,17 +25,17 @@ export const VALUES_DATA: Value[] = [
     id: 'transparenz',
     title: 'Transparenz & Ehrlichkeit — Der Anfang von Vertrauen',
     intro:
-      'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir dokumentieren jede Entscheidung so, dass Sie sie auch als Nicht‑Entwicklerin nachvollziehen können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
+      'Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert wird. Wir dokumentieren jede Entscheidung so, dass Sie sie auch als Nicht‑Entwicklerin nachvollziehen können. Self-Hosted-First als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten. Vertrauen entsteht nicht als Versprechen, sondern als prüfbare Spur.',
     benefits: [
       'Live-Dokumentation über unsere Kundenplattform statt Präsentationen im Nachgang',
       'Risiken und Annahmen werden kommunizieren wir offen. ',
-      'Open-Source-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur',
+      'Self-Hosted-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur',
     ],
     deepDive:
       'Digitale Partnerschaften scheitern selten an Technik, sondern am Misstrauen. Sobald Informationen gefiltert werden, verlieren Entscheider:innen die Kontrolle. Deshalb legen wir Architektur-Entscheidungen, Budgetstände und Risiken sofort offen – sogar wenn das unbequem ist.\n\nJedes Artefakt landet in Ihren Repositories: Meeting-Notizen, Architektur-Entwürfe, Migrationspläne. Wir kommentieren Tickets so, dass Sie Entscheidungen nachvollziehen können, auch wenn Sie nicht täglich committen. So können Sie prüfen, statt blind zu vertrauen.\n\nTransparenz schützt auch uns. Wenn Erwartungen schriftlich festgehalten sind, merken alle früh, wenn etwas kippt. Das beschleunigt Eskalationen, erhöht Verlässlichkeit und macht Zusammenarbeit messbar.',
     seoKeywords: [
       'Transparenz in Technologieprojekten',
-      'Open Source als Prinzip',
+      'Self-Hosted-Infrastruktur',
       'nachvollziehbare Architektur',
       'Projekt-Dokumentation in Echtzeit',
     ],
@@ -83,7 +83,7 @@ export const VALUES_DATA: Value[] = [
     seoKeywords: [
       'Vendor-Lock-in vermeiden',
       'technologische Souveränität',
-      'Open-Source-Infrastruktur',
+      'Self-Hosted-Infrastruktur',
       'Lieferantenunabhängigkeit IT',
     ],
     link: {

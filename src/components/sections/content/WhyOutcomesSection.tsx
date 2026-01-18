@@ -104,7 +104,7 @@ const WhyOutcomesSection: React.FC<WhyOutcomesSectionProps> = ({ className = '',
             <div className="heading-accent-bar mb-6 h-[3px] w-40 rounded-full bg-gradient-to-r from-vae-turquoise to-transparent" />
             <p className="text-lg leading-relaxed text-text-secondary md:text-xl">{tagline}</p>
             <p className="text-lg leading-relaxed text-text-secondary md:text-xl">
-              Die Ergebnisse stammen aus unserem eigenen Betrieb und Kundenprojekten: Open-Source-Infrastruktur,
+              Die Ergebnisse stammen aus unserem eigenen Betrieb und Kundenprojekten: Self-Hosted-Infrastruktur,
               Automatisierung und Betreuung greifen ineinander.
             </p>
           </header>

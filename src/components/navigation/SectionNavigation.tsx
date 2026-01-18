@@ -16,7 +16,7 @@ interface SectionData {
 // Flow: Hero → Why → Services → Social Proof → Tech Stack → Prozess → Abschluss
 const sections: SectionData[] = [
   { id: 'hero', iconName: 'home', label: 'Home' },
-  { id: 'why-open-source', iconName: 'lightbulb', label: 'Warum Open Source?' },
+  { id: 'why-open-source', iconName: 'lightbulb', label: 'Warum Self-Hosting?' },
   { id: 'services', iconName: 'settings', label: 'Services' },
   { id: 'social-proof', iconName: 'work', label: 'Projekte' },
   { id: 'tech-stack', iconName: 'deployed_code', label: 'Tech Stack' },

@@ -98,7 +98,7 @@ interface CustomLicenseFormState {
 }
 
 const trustBadges = [
-  '100% Open Source',
+  'Self-Hosted-First',
   'Keine Vendor-Lock-ins',
   'Private AI auf eigener Hardware',
   'Monatliche Fixkosten statt Per-User-Preise',
@@ -114,7 +114,7 @@ const beforeAfterContent = {
   after: {
     label: 'Nachher',
     title: 'Einheitliche Plattform, die Ihnen gehört',
-    body: 'Open Source, DSGVO-konform, vollständig in Ihrer Kontrolle, AI-ready konzipiert, frei skalierbar.',
+    body: 'Eigene Plattform, offene Standards, klare Kosten, AI-ready konzipiert.',
   },
 } as const
 
@@ -206,6 +206,9 @@ const processPhases: ProcessPhase[] = [
 
 const bookingUrl = BOOKING_LINKS.INFRASTRUKTUR_AUDIT
 const DEFAULT_VAT_RATE = 19
+const TEAM_SIZE_MIN = 5
+const TEAM_SIZE_MAX = 200
+const MIN_TOOL_SEATS = 1
 
 const generateCustomLicenseId = () => `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
 
@@ -238,6 +241,9 @@ const useValueIncreaseHighlight = (value: number) => {
   return isHighlighting
 }
 
+const clampTeamSize = (value: number) => Math.min(TEAM_SIZE_MAX, Math.max(TEAM_SIZE_MIN, value))
+const clampToolSeats = (value: number, max: number = TEAM_SIZE_MAX) => Math.min(max, Math.max(MIN_TOOL_SEATS, value))
+
 const SetupPage: React.FC = () => {
   const [teamSize, setTeamSize] = useState(20)
   const isContentLocked = true
@@ -261,6 +267,8 @@ const SetupPage: React.FC = () => {
       return acc
     }, {})
   })
+  const [toolSeatOverrides, setToolSeatOverrides] = useState<Record<string, number>>({})
+  const [priceMode, setPriceMode] = useState<'net' | 'gross'>('net')
 
   // Auto-start the calculator tutorial when the ROI section becomes visible.
   useEffect(() => {
@@ -314,6 +322,20 @@ const SetupPage: React.FC = () => {
     return Boolean(customLicenseForm.name.trim()) && price > 0 && quantity > 0
   }, [customLicenseForm])
 
+  const getToolSeatCount = useCallback(
+    (toolId: string) => clampToolSeats(toolSeatOverrides[toolId] ?? teamSize, teamSize),
+    [teamSize, toolSeatOverrides]
+  )
+
+  const clearToolSeatOverride = useCallback((toolId: string) => {
+    setToolSeatOverrides(prev => {
+      if (!(toolId in prev)) return prev
+      const next = { ...prev }
+      delete next[toolId]
+      return next
+    })
+  }, [])
+
   const addCustomLicense = useCallback(() => {
     const price = parseLocalizedNumber(customLicenseForm.unitPrice)
     const quantityValue = parseLocalizedNumber(customLicenseForm.quantity)
@@ -364,9 +386,9 @@ const SetupPage: React.FC = () => {
       if (tool.pricingModel === 'flat') {
         return sum + (tool.flatMonthlyPrice ?? 0)
       }
-      return sum + teamSize * (tool.pricePerUser ?? 0)
+      return sum + getToolSeatCount(tool.id) * (tool.pricePerUser ?? 0)
     }, 0)
-  }, [teamSize, toolSelection])
+  }, [getToolSeatCount, toolSelection])
 
   const customLicensesMonthlyCost = useMemo(() => {
     return customLicenses.reduce((sum, license) => sum + license.unitPrice * license.quantity, 0)
@@ -405,27 +427,32 @@ const SetupPage: React.FC = () => {
     return Math.round(clamped / 100) * 100
   }, [activeToolCount, teamSize])
 
-  // VAT calculation reserved for future display features
-  // const vatMultiplier = DEFAULT_VAT_RATE / 100
-  // const saasVatYearly = yearlySaaSCost * vatMultiplier
-  // const saasGrossYearly = yearlySaaSCost + saasVatYearly
-  // const saasGrossMonthly = monthlySaaSCost + monthlySaaSCost * vatMultiplier
-  // const openSourceVatYearly = openSourceAnnual * vatMultiplier
-  // const openSourceGrossYearly = openSourceAnnual + openSourceVatYearly
+  const vatMultiplier = DEFAULT_VAT_RATE / 100
+  const isGrossMode = priceMode === 'gross'
+  const displayMonthlySaaSCost = isGrossMode ? monthlySaaSCost * (1 + vatMultiplier) : monthlySaaSCost
+  const displayYearlySaaSCost = isGrossMode ? yearlySaaSCost * (1 + vatMultiplier) : yearlySaaSCost
+  const displayOpenSourceAnnual = isGrossMode ? openSourceAnnual * (1 + vatMultiplier) : openSourceAnnual
+  const displaySetupCost = isGrossMode ? estimatedSetupCost * (1 + vatMultiplier) : estimatedSetupCost
+  const costModeLabel = isGrossMode ? 'brutto' : 'netto'
+  const costModeNote = isGrossMode
+    ? `Alle Beträge inkl. ${DEFAULT_VAT_RATE}% USt.`
+    : `Alle Beträge netto; ${DEFAULT_VAT_RATE}% USt. kämen hinzu.`
 
-  const maxComparisonValue = Math.max(yearlySaaSCost, openSourceAnnual, 1)
-  const yearOneSavings = Math.max(0, yearlySaaSCost - (estimatedSetupCost + openSourceAnnual))
-  const yearTwoSavings = Math.max(0, yearlySaaSCost - openSourceAnnual)
+  const maxComparisonValue = Math.max(displayYearlySaaSCost, displayOpenSourceAnnual, 1)
+  const yearOneSavings = Math.max(0, displayYearlySaaSCost - (displaySetupCost + displayOpenSourceAnnual))
+  const yearTwoSavings = Math.max(0, displayYearlySaaSCost - displayOpenSourceAnnual)
 
   const buildSavingsMailto = useCallback(() => {
     const selectedTools = flattenedSaasTools.filter(tool => toolSelection[tool.id])
 
     const selectedToolLines = selectedTools.map(tool => {
-      const monthly = tool.pricingModel === 'flat' ? (tool.flatMonthlyPrice ?? 0) : (tool.pricePerUser ?? 0) * teamSize
+      const seats = tool.pricingModel === 'perUser' ? getToolSeatCount(tool.id) : undefined
+      const monthly =
+        tool.pricingModel === 'flat' ? (tool.flatMonthlyPrice ?? 0) : (tool.pricePerUser ?? 0) * (seats ?? teamSize)
       const detail =
         tool.pricingModel === 'flat'
           ? `${formatCurrency(tool.flatMonthlyPrice ?? 0)} / Monat`
-          : `${formatCurrency(tool.pricePerUser ?? 0)} pro Nutzer:in → ${formatCurrency(monthly)} / Monat`
+          : `${formatCurrency(tool.pricePerUser ?? 0)} pro Nutzer:in × ${seats ?? teamSize} → ${formatCurrency(monthly)} / Monat`
       return `- ${tool.name}: ${detail}`
     })
 
@@ -447,12 +474,14 @@ const SetupPage: React.FC = () => {
       'Weitere Lizenzen / Spezial-Posten:',
       customLicenseLines.length ? customLicenseLines.join('\n') : '- (keine ergänzt)',
       '',
-      'Aktuelle Kosten (netto):',
-      `- Monatlich: ${formatCurrency(monthlySaaSCost)}`,
-      `- Jährlich: ${formatCurrency(yearlySaaSCost)}`,
+      `Preis-Modus: ${isGrossMode ? `Brutto (inkl. ${DEFAULT_VAT_RATE}% USt.)` : 'Netto'}`,
       '',
-      'Eure Schätzung (netto):',
-      `- Geschätzter Setup-Aufwand: ${formatCurrency(estimatedSetupCost)}`,
+      'Aktuelle Kosten:',
+      `- Monatlich: ${formatCurrency(displayMonthlySaaSCost)}`,
+      `- Jährlich: ${formatCurrency(displayYearlySaaSCost)}`,
+      '',
+      'Eure Schätzung:',
+      `- Geschätzter Setup-Aufwand: ${formatCurrency(displaySetupCost)}`,
       `- Einsparung Jahr 1: ${formatCurrency(yearOneSavings)}`,
       `- Einsparung ab Jahr 2: ${formatCurrency(yearTwoSavings)}`,
       '',
@@ -464,18 +493,20 @@ const SetupPage: React.FC = () => {
     return `mailto:juliangoertz@vae.systems?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`
   }, [
     customLicenses,
-    estimatedSetupCost,
+    displayMonthlySaaSCost,
+    displaySetupCost,
+    displayYearlySaaSCost,
     formatCurrency,
-    monthlySaaSCost,
+    getToolSeatCount,
+    isGrossMode,
     teamSize,
     toolSelection,
     yearOneSavings,
     yearTwoSavings,
-    yearlySaaSCost,
   ])
 
-  const highlightMonthlyNet = useValueIncreaseHighlight(monthlySaaSCost)
-  const highlightYearlyNet = useValueIncreaseHighlight(yearlySaaSCost)
+  const highlightMonthlyNet = useValueIncreaseHighlight(displayMonthlySaaSCost)
+  const highlightYearlyNet = useValueIncreaseHighlight(displayYearlySaaSCost)
 
   const handleUnlockContent = useCallback(() => {
     const mailto = buildSavingsMailto()
@@ -498,11 +529,20 @@ const SetupPage: React.FC = () => {
     []
   )
 
+  const getBarWidth = useCallback(
+    (value: number) => {
+      if (value <= 0 || maxComparisonValue <= 0) return '0%'
+      const percent = (value / maxComparisonValue) * 100
+      return `${Math.max(percent, 5)}%`
+    },
+    [maxComparisonValue]
+  )
+
   return (
     <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
         title="Infrastruktur-Setup Heidelberg | VAE Systems"
-        description="Open-Source-Infrastruktur statt SaaS: Kollaboration, Business-Apps und Automations-Workflows aufbauen. Migration, Security & Dokumentation inklusive. Heidelberg & deutschlandweit."
+        description="Self-Hosted-Infrastruktur statt SaaS: Open-Source-Stacks für Kollaboration, Business-Apps und Automations-Workflows. Migration, Security & Dokumentation inklusive. Heidelberg & deutschlandweit."
         canonicalPath="/leistungen/infrastruktur"
         jsonLd={{
           '@context': 'https://schema.org',
@@ -518,7 +558,7 @@ const SetupPage: React.FC = () => {
             name: 'Deutschland',
           },
           description:
-            'Open-Source-Infrastruktur aufbauen: CRM, Projektmanagement, Kommunikation. Migration & Security inklusive.',
+            'Self-Hosted-Infrastruktur aufbauen: Open-Source-Stacks für CRM, Projektmanagement und Kommunikation. Migration & Security inklusive.',
           offers: {
             '@type': 'Offer',
             url: 'https://vae.systems/leistungen/infrastruktur',
@@ -627,67 +667,67 @@ const SetupPage: React.FC = () => {
           <div className="mb-12 text-center">
             <h2 className="h2 heading-gradient mb-4">Warum Unternehmen auf selbstgehostete Lösungen setzen</h2>
             <p className="mx-auto max-w-2xl text-lg text-gray-700 dark:text-text-secondary">
-              SaaS-Kosten explodieren, Vendor Lock-in wird zum Risiko – Open Source ist die Antwort.
+              SaaS-Kosten explodieren, Vendor Lock-in wird zum Risiko – Self-Hosted-First ist die Antwort.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
             {/* Statistik 1: SaaS-Explosion */}
             <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
-              <div className="mb-4 text-5xl font-bold text-vae-turquoise">300 Mrd. $</div>
-              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">SaaS-Ausgaben 2025</h3>
+              <div className="mb-4 text-5xl font-bold text-vae-turquoise">85%</div>
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">SaaS-Dominanz 2025</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                +20% Wachstum gegenüber 2024 – getrieben durch AI-Tools und Cloud-Migration.
+                85% der Softwarenutzung 2025 ist SaaS – mit massivem Waste.
               </p>
               <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
                 Quelle:{' '}
                 <a
-                  href="https://www.saastr.com/gartner-saas-spend-is-actually-accelerating-will-hit-300-billion-in-2025/"
+                  href="https://jumpcloud.com/blog/saas-usage-statistics-how-much-is-too-much"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-vae-turquoise hover:underline"
                 >
-                  Gartner 2024
+                  JumpCloud 2025
                 </a>
               </p>
             </div>
 
             {/* Statistik 2: Vendor Lock-in */}
             <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
-              <div className="mb-4 text-5xl font-bold text-vae-turquoise">47%</div>
-              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Vendor Lock-in-Sorgen</h3>
+              <div className="mb-4 text-5xl font-bold text-vae-turquoise">80%</div>
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Preisanstieg IBM Software</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Fast die Hälfte aller Unternehmen sieht AWS/Azure/GCP-Abhängigkeit als strategisches Risiko.
+                80% Preisanstieg (2015–2025) – Vendor Lock-in wird zum Kostenfaktor.
               </p>
               <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
                 Quelle:{' '}
                 <a
-                  href="https://www.qovery.com/blog/the-high-cost-of-vendor-lock-in-in-cloud-computing"
+                  href="https://www.metrics.biz/en/blog-post/reducing-risks-from-vendor-lock-in.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-vae-turquoise hover:underline"
                 >
-                  Qovery 2024
+                  Metrics.biz 2025
                 </a>
               </p>
             </div>
 
             {/* Statistik 3: Open Source-Adoption */}
             <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
-              <div className="mb-4 text-5xl font-bold text-vae-turquoise">83%</div>
-              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Open Source-Akzeptanz</h3>
+              <div className="mb-4 text-5xl font-bold text-vae-turquoise">96%</div>
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Open Source-Adoption</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Enterprises sehen Open Source als wertvoll für ihre Zukunft – 86% berichten höhere Produktivität.
+                96% der Enterprises erhöhen Open-Source-Nutzung – trotz Skills-Gaps.
               </p>
               <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
                 Quelle:{' '}
                 <a
-                  href="https://canonical.com/blog/state-of-global-open-source-2025"
+                  href="https://www.developer-tech.com/news/enterprise-open-source-adoption-soars-despite-challenges/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-vae-turquoise hover:underline"
                 >
-                  Canonical 2025
+                  Perforce 2025
                 </a>
               </p>
             </div>
@@ -711,7 +751,7 @@ const SetupPage: React.FC = () => {
             </h2>
             <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
               Wir bauen Informationsinfrastruktur, die Daten, Workflows und Systeme integriert. Vendor-neutral,
-              Open-Source-basiert, wartbar.
+              bevorzugt selbst gehostet, mit offenen Standards, wartbar.
             </p>
 
             <div className="grid gap-4 sm:grid-cols-2 sm:items-stretch">
@@ -720,7 +760,8 @@ const SetupPage: React.FC = () => {
                   Problem
                 </p>
                 <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
-                  Verstreute Daten, Vendor Lock-ins, kein Überblick. Neue Tools verschlimmern das, wenn die Basis fehlt.
+                  Verstreute Daten, Vendor Lock-ins und fehlender Überblick schwächen Organisationen. Neue Tools
+                  verschärfen das Problem, wenn die Grundlage nicht stimmt.
                 </p>
               </div>
 
@@ -729,8 +770,8 @@ const SetupPage: React.FC = () => {
                   Unsere Lösung
                 </p>
                 <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
-                  Wir analysieren Ihre Landschaft, entwerfen eine vendor-neutrale Architektur und setzen sie mit
-                  Open-Source-Systemen um.
+                  Wir analysieren Ihre Landschaft, entwerfen eine vendor-neutrale Architektur und setzen sie bevorzugt
+                  selbst gehostet um (Open Source, wo es den größten Hebel liefert).
                 </p>
                 <ul className="space-y-2 text-sm text-gray-700 dark:text-text-secondary">
                   <li className="flex items-start gap-2">
@@ -1105,21 +1146,21 @@ const SetupPage: React.FC = () => {
                 <div className="mt-4 flex flex-col gap-4">
                   <input
                     type="range"
-                    min={5}
-                    max={100}
+                    min={TEAM_SIZE_MIN}
+                    max={TEAM_SIZE_MAX}
                     value={teamSize}
-                    onChange={event => setTeamSize(Number(event.target.value))}
+                    onChange={event => setTeamSize(clampTeamSize(Number(event.target.value)))}
                     className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/10 accent-vae-turquoise"
                   />
                   <div className="flex items-center gap-3 text-lg font-semibold text-white">
                     {teamSize} Personen
                     <input
                       type="number"
-                      min={5}
-                      max={200}
+                      min={TEAM_SIZE_MIN}
+                      max={TEAM_SIZE_MAX}
                       value={teamSize}
-                      onChange={event => setTeamSize(Math.max(5, Math.min(200, Number(event.target.value) || 0)))}
-                      className="w-24 rounded-xl border border-white/10 bg-bg-darker px-3 py-2 text-right text-base"
+                      onChange={event => setTeamSize(clampTeamSize(Number(event.target.value) || TEAM_SIZE_MIN))}
+                      className="w-24 rounded-xl border border-white/10 bg-bg-darker px-3 py-2 text-right text-base focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                     />
                   </div>
                 </div>
@@ -1134,6 +1175,9 @@ const SetupPage: React.FC = () => {
                     <div key={category.id} className="rounded-2xl border border-white/10 bg-bg-darker/40 p-4">
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
                         {category.title}
+                      </p>
+                      <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-text-secondary/60">
+                        {category.selectionMode === 'multi' ? 'Mehrfachauswahl möglich' : 'Einzelauswahl pro Kategorie'}
                       </p>
                       <div className="mt-3 space-y-3">
                         {category.tools.map(tool => (
@@ -1153,17 +1197,53 @@ const SetupPage: React.FC = () => {
                                   ? `${formatCurrency(tool.pricePerUser ?? 0)} pro Nutzer:in/Monat (netto)`
                                   : `${formatCurrency(tool.flatMonthlyPrice ?? 0)} pro Monat (netto)`}
                               </p>
+                              {tool.pricingModel === 'perUser' && toolSelection[tool.id] && (
+                                <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-text-secondary/80">
+                                  <span>Nutzer:innen</span>
+                                  <input
+                                    type="number"
+                                    min={MIN_TOOL_SEATS}
+                                    max={TEAM_SIZE_MAX}
+                                    value={getToolSeatCount(tool.id)}
+                                    onChange={event => {
+                                      const parsed = Number(event.target.value)
+                                      const safeValue = Number.isNaN(parsed) ? MIN_TOOL_SEATS : parsed
+                                      setToolSeatOverrides(prev => ({
+                                        ...prev,
+                                        [tool.id]: clampToolSeats(safeValue, teamSize),
+                                      }))
+                                    }}
+                                    className="w-20 rounded-lg border border-white/10 bg-bg-darker/70 px-2 py-1 text-xs text-white focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30"
+                                  />
+                                  <span className="text-text-secondary/60">von {teamSize}</span>
+                                  <button
+                                    type="button"
+                                    onClick={() => clearToolSeatOverride(tool.id)}
+                                    className="text-[11px] font-semibold text-vae-turquoise/80 transition hover:text-vae-turquoise"
+                                  >
+                                    Reset
+                                  </button>
+                                </div>
+                              )}
                             </div>
                             <input
                               type="checkbox"
                               checked={toolSelection[tool.id]}
-                              onChange={event =>
-                                setToolSelection(prev => ({
-                                  ...prev,
-                                  [tool.id]: event.target.checked,
-                                }))
-                              }
-                              className="h-5 w-5 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-vae-turquoise/60"
+                              onChange={event => {
+                                const isChecked = event.target.checked
+                                const isSingleSelection = category.selectionMode !== 'multi'
+                                setToolSelection(prev => {
+                                  const next = { ...prev }
+                                  if (isSingleSelection && isChecked) {
+                                    category.tools.forEach(categoryTool => {
+                                      next[categoryTool.id] = false
+                                    })
+                                  }
+                                  next[tool.id] = isChecked
+                                  return next
+                                })
+                              }}
+                              className="h-5 w-5 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                             />
                           </label>
                         ))}
@@ -1178,15 +1258,17 @@ const SetupPage: React.FC = () => {
                   Weitere Lizenzen hinzufügen
                 </p>
                 <p className="mt-1 text-xs text-text-secondary">
-                  Für Spezial-Tools, Agenturleistungen oder Pakete ohne Seat-basierte Abrechnung.
+                  Für Spezial-Tools, parallele Lösungen innerhalb einer Kategorie oder Pakete ohne Seat-basierte
+                  Abrechnung.
                 </p>
+                <p className="mt-1 text-xs text-text-secondary/80">Alle Eingaben netto.</p>
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
                   <input
                     type="text"
                     value={customLicenseForm.name}
                     onChange={event => handleCustomLicenseFormChange('name', event.target.value)}
                     placeholder="Tool-Name"
-                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary"
+                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                   <input
                     type="text"
@@ -1194,7 +1276,7 @@ const SetupPage: React.FC = () => {
                     value={customLicenseForm.unitPrice}
                     onChange={event => handleCustomLicenseFormChange('unitPrice', event.target.value)}
                     placeholder="Preis pro Nutzer"
-                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary"
+                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                   <input
                     type="text"
@@ -1202,7 +1284,7 @@ const SetupPage: React.FC = () => {
                     value={customLicenseForm.quantity}
                     onChange={event => handleCustomLicenseFormChange('quantity', event.target.value)}
                     placeholder="Anzahl Nutzer:innen"
-                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary"
+                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </div>
                 <button
@@ -1258,9 +1340,33 @@ const SetupPage: React.FC = () => {
               data-calculator-tutorial="results"
             >
               <div className="rounded-2xl border border-red-500/40 bg-red-500/5 p-5 backdrop-blur-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-400">
-                  Ihre aktuellen SaaS-Kosten
-                </p>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-400">
+                    Ihre aktuellen SaaS-Kosten
+                  </p>
+                  <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1 text-[11px] font-semibold uppercase tracking-[0.2em]">
+                    <button
+                      type="button"
+                      onClick={() => setPriceMode('net')}
+                      className={cn(
+                        'rounded-full px-3 py-1 transition',
+                        priceMode === 'net' ? 'bg-white text-bg-darker' : 'text-text-secondary hover:text-white'
+                      )}
+                    >
+                      Netto
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPriceMode('gross')}
+                      className={cn(
+                        'rounded-full px-3 py-1 transition',
+                        priceMode === 'gross' ? 'bg-white text-bg-darker' : 'text-text-secondary hover:text-white'
+                      )}
+                    >
+                      Brutto
+                    </button>
+                  </div>
+                </div>
                 <div className="mt-4 space-y-5 text-sm text-slate-600 dark:text-text-secondary">
                   <div className="flex flex-col gap-3 border-b border-white/10 pb-4">
                     <div className="flex items-center justify-between">
@@ -1274,9 +1380,9 @@ const SetupPage: React.FC = () => {
                       </div>
                       <div className="text-right">
                         <p className={getValueClasses(highlightMonthlyNet)}>
-                          {formatCurrency(monthlySaaSCost)}{' '}
+                          {formatCurrency(displayMonthlySaaSCost)}{' '}
                           <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
-                            / Monat netto
+                            / Monat {costModeLabel}
                           </span>
                         </p>
                       </div>
@@ -1291,17 +1397,15 @@ const SetupPage: React.FC = () => {
                     </div>
                     <div className="text-right">
                       <p className={getValueClasses(highlightYearlyNet)}>
-                        {formatCurrency(yearlySaaSCost)}{' '}
+                        {formatCurrency(displayYearlySaaSCost)}{' '}
                         <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
-                          / Jahr netto
+                          / Jahr {costModeLabel}
                         </span>
                       </p>
                     </div>
                   </div>
                 </div>
-                <p className="mt-4 text-xs text-red-800/70 dark:text-red-200/70">
-                  Alle Beträge netto; {DEFAULT_VAT_RATE}% USt. kämen hinzu.
-                </p>
+                <p className="mt-4 text-xs text-red-800/70 dark:text-red-200/70">{costModeNote}</p>
               </div>
 
               <LockedSection
@@ -1317,7 +1421,7 @@ const SetupPage: React.FC = () => {
                   <div className="mb-6 flex items-center justify-between gap-4">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
-                        Einsparungen mit Open Source
+                        Einsparungen mit Self-Hosting
                       </p>
                       <p className="text-sm text-text-secondary">Ihre individuelle Kostenanalyse</p>
                     </div>
@@ -1330,27 +1434,27 @@ const SetupPage: React.FC = () => {
                         <div>
                           <div className="flex items-center justify-between">
                             <span>Ihre SaaS-Kosten ab Jahr 1</span>
-                            <span className="font-semibold">{formatCurrency(yearlySaaSCost)}</span>
+                            <span className="font-semibold">{formatCurrency(displayYearlySaaSCost)}</span>
                           </div>
                           <div className="mt-2 h-2 rounded-full bg-white/10">
                             <div
                               className="h-2 rounded-full bg-red-400"
                               style={{
-                                width: `${maxComparisonValue ? Math.max((yearlySaaSCost / maxComparisonValue) * 100, 5) : 0}%`,
+                                width: getBarWidth(displayYearlySaaSCost),
                               }}
                             />
                           </div>
                         </div>
                         <div>
                           <div className="flex items-center justify-between">
-                            <span>Open Source ab Jahr 2 (nur Hosting)</span>
-                            <span className="font-semibold">{formatCurrency(openSourceAnnual)}</span>
+                            <span>Self-Hosting ab Jahr 2 (nur Hosting)</span>
+                            <span className="font-semibold">{formatCurrency(displayOpenSourceAnnual)}</span>
                           </div>
                           <div className="mt-2 h-2 rounded-full bg-white/10">
                             <div
                               className="h-2 rounded-full bg-vae-turquoise"
                               style={{
-                                width: `${maxComparisonValue ? Math.max((openSourceAnnual / maxComparisonValue) * 100, 5) : 0}%`,
+                                width: getBarWidth(displayOpenSourceAnnual),
                               }}
                             />
                           </div>
@@ -1374,8 +1478,11 @@ const SetupPage: React.FC = () => {
                       <div className="mt-3 border-t border-white/10 pt-3">
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-semibold text-white">Geschätzter Setup-Aufwand</span>
-                          <span className="text-base font-bold text-white">{formatCurrency(estimatedSetupCost)}</span>
+                          <span className="text-base font-bold text-white">{formatCurrency(displaySetupCost)}</span>
                         </div>
+                        <p className="mt-2 text-xs text-white/70">
+                          Setup-Kosten sind bewusst gedeckelt, damit die Kalkulation konservativ bleibt.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -1525,7 +1632,7 @@ const SetupPage: React.FC = () => {
           </h2>
           <p className="max-w-3xl px-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary">
             Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen Ihnen,
-            wie Open Source konkret für Ihre Organisation funktioniert.
+            wie Self-Hosting konkret für Ihre Organisation funktioniert.
           </p>
           <div className="flex flex-col items-center gap-3 md:gap-4">
             <MagneticButton intensity={0.08} scaleEffect glowEffect>

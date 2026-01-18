@@ -3,15 +3,15 @@ export const heroTitle = ['Ihre Infrastruktur. Ihre Daten.', 'Ihre KI.'] as cons
 export const heroEyebrow = 'Structure is strategy' as const
 
 export const heroTypewriterTexts = [
-  '100% Open Source',
-  'Keine Vendor-Lock-ins',
-  'DSGVO ohne Kompromisse',
-  'Self-Hosted in 4 Wochen',
-  'Private AI auf eigener Hardware',
+  'Eigene Infrastruktur',
+  'Kontrolle statt Abos',
+  'DSGVO by design',
+  'KI auf Ihrer Hardware',
+  'Open Source + Standards',
 ] as const
 
 export const heroDescription =
-  'Self-Hosted Infrastruktur – mit voller Datenkontrolle, ohne Vendor-Lock-in. Wir bauen und betreuen moderne Open-Source-Systeme für Ihr Unternehmen.'
+  'Self-Hosted-First Infrastruktur – volle Datenkontrolle, klare Kosten, vendor-neutral geplant. Open Source setzen wir dort ein, wo es den größten Hebel hat. Eigener Kundenaccount ab Vertragsstart: Chat, Files, Doku – kein E-Mail-Chaos.'
 
 export interface HeroBenefit {
   title: string
@@ -96,7 +96,7 @@ export const finalCtaHome = {
   eyebrow: 'Nächster Schritt',
   title: 'Bereit für Ihre eigene Infrastruktur?',
   description:
-    'Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen, wie Open Source und KI Ihr Business effizienter machen.',
+    'Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen, wie Self-Hosted-First und KI Ihr Business effizienter machen.',
   primary: {
     label: 'Kostenlose Beratung buchen (45 Min)',
     ctaId: 'contact.schedule_call',
@@ -159,12 +159,12 @@ export const openSourcePainPoints: OpenSourcePointWithBullets[] = [
   },
   {
     title: 'Keine Kontrolle über Ihre Daten',
-    description: 'Infrastruktur bei US-Anbietern – Sie reagieren nur auf deren Entscheidungen.',
+    description: 'Daten und Systeme liegen bei Drittanbietern – Entscheidungen treffen andere.',
     bullets: ['Features verschwinden ohne Vorwarnung', 'API-Änderungen zwingen zu Refactoring'],
   },
   {
     title: 'DSGVO-Risiko trägt Ihr Unternehmen',
-    description: 'US-Anbieter geben Daten weiter (Cloud Act).',
+    description: 'Datenflüsse liegen außerhalb Ihrer Kontrolle – das rechtliche Risiko bleibt bei Ihnen.',
     bullets: ['Das rechtliche Risiko liegt bei Ihnen', 'Nicht beim SaaS-Anbieter'],
   },
   {
@@ -186,16 +186,16 @@ export const openSourceAdvantages: OpenSourcePointWithBullets[] = [
   },
   {
     title: 'Planbare Kosten statt monatlicher Abos',
-    description: 'Einmalige Setup-Investition, danach planbare Betriebskosten.',
+    description: 'Einmalige Setup-Investition, danach planbare Kosten durch eigenes Hosting.',
     bullets: ['Keine Vendor-Preisspirale', 'Keine SaaS-Überraschungen'],
   },
   {
-    title: 'DSGVO-konform by Design',
+    title: 'DSGVO-konform durch kontrolliertes Hosting',
     description: 'Server in Deutschland. Volle Datenhoheit.',
     bullets: ['Keine US-Cloud-Transfers bei Systemen und KI', 'Rechtssicherheit ohne Kompromisse'],
   },
   {
-    title: 'Erweiterbar durch selfhosted AI',
+    title: 'Erweiterbar durch self-hosted AI',
     description: 'Eigene KI-Modelle statt proprietärer APIs. Fundament für KI-Optimierung.',
     bullets: [
       'Llama, Mistral, oder andere Open-Source-Modelle integrierbar',
@@ -225,7 +225,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     subtitle: 'Analyse & Fahrplan',
     badge: 'ANALYSE',
     description:
-      'Sie wollen Klarheit, bevor Sie Systeme umbauen? Wir analysieren Ihre Situation, bewerten Kosten und Nutzen von SaaS vs. Open Source und entwickeln einen umsetzbaren Fahrplan – inklusive KI-Potenzialen.',
+      'Sie wollen Klarheit, bevor Sie Systeme umbauen? Wir analysieren Ihre Situation, bewerten Kosten und Nutzen von SaaS, Hybrid und Self-Hosted und entwickeln einen umsetzbaren Fahrplan – inklusive KI-Potenzialen.',
     inclusions: [
       'Kostenlose Erstberatung (45 Min)',
       'System-Analyse & Kosten-Nutzen-Rechnung',
@@ -246,7 +246,7 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     subtitle: 'Umsetzung in 3–6 Wochen',
     badge: '3–6 WOCHEN',
     description:
-      'Auf Basis der vorhergehenden Strategie-Phase bauen wir Ihre Open-Source-Infrastruktur produktionsbereit in 3–6 Wochen auf – inklusive Migration relevanter Daten und Training für Ihr Team.',
+      'Auf Basis der vorhergehenden Strategie-Phase bauen wir Ihre eigene Infrastruktur produktionsbereit in 3–6 Wochen auf – mit offenen Standards, dokumentiert, inklusive Migration relevanter Daten und Training für Ihr Team.',
     inclusions: [
       'Kompletter Server-Aufbau (Container, Netzwerk, Security-Basics)',
       'Tool-Installation & Konfiguration der Kernsysteme',
@@ -386,7 +386,7 @@ export const referenceProjects: ReferenceProject[] = [
     client: 'Aktiv Kollektiv e.V.',
     title: 'Infrastruktur-Planung & technische Unterstützung',
     description:
-      'Julian Goertz (Vorstand) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur — mit Fokus auf Open Source, Self-Hosting und Skalierbarkeit.',
+      'Julian Goertz (Vorstand) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur — mit Fokus auf Self-Hosting, Open Source als Werkzeug und Skalierbarkeit.',
     highlights: [
       'Erste Systeme bereits live — Note-Sharing, Kollaboration, Wissensmanagement',
       'Infrastruktur-Roadmap für Mitglieder-Accounts und zentrale Datenverwaltung',

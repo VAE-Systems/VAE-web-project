@@ -63,6 +63,24 @@ Dieses Projekt ist eine moderne React + TypeScript Website (Vite, Tailwind, Fram
    - Prefer adding a small helper in `src/hooks` or `src/lib` rather than duplicating logic in pages.
    - If a change touches theme tokens or global CSS, run a visual check (`npm run dev`) and Storybook (`npm run storybook`).
 
+10. VAE-Machine PDF Generation (separate workspace context)
+
+- **Location:** `VAE-Machine/` folder (separate from main web project, sometimes opened standalone in VS Code)
+- **Purpose:** HTML templates for PDF generation (Runbooks, Proposals, Service Sheets)
+- **Tech Stack:** Paged.js (automatic pagination) + Pure CSS (no build step, browser-printable)
+- **Rules:** Read `VAE-Machine/PDF_GENERATION_RULES.md` BEFORE creating/editing PDFs
+- **Template:** Use `VAE-Machine/_templates/runbook/runbook-template.html` for new runbooks
+- **Shared CSS (V2):** Use `VAE-Machine/_templates/shared/print-components.css` + `preview-wrapper.css`
+- **Validation:** Run HTML in browser → Check Console (F12) for overflow warnings before exporting PDF
+- **Export:** CMD+P (Chrome/Edge) with "Background Graphics" enabled OR Playwright script
+- **Anti-Patterns to AVOID:**
+  - Manual `.runbook-page` divs (Paged.js auto-paginates)
+  - `position: absolute` for footers (use `@page` CSS instead)
+    - Inline styles (use CSS custom properties from V2 shared tokens)
+  - More than 4 sections with callouts per logical unit (overflow risk)
+- **Content Limits:** Max ~217mm content height per page, max 4 callouts per section
+- **Proof of Concept:** See `VAE-Machine/runbooks/sales/lead-process-paged-demo.html` for reference
+
 ---
 
 Bitte Feedback: soll ich noch konkrete PR-Templates oder example-refs (Konstanten für tutorial-selectors) hinzufügen? Ich kann das File iterativ anpassen.

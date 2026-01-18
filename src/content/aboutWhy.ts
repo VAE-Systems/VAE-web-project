@@ -29,7 +29,7 @@ export const tagline =
 export const outcomes: Outcome[] = [
   {
     key: 'experience',
-    headline: 'Erprobte Open-Source Erfahrung',
+    headline: 'Erprobte Self-Hosting-Erfahrung',
     body: 'Unsere eigene Infrastruktur läuft seit über zwei Jahren vollständig auf Nextcloud, Odoo & Co. – wir wissen aus erster Hand, was im Alltag funktioniert.',
     evidence: ['Eigenbetrieb seit 2023', 'Dokumentierte Playbooks', 'Produktiver Einsatz'],
     icon: 'verified',
@@ -69,7 +69,7 @@ export const badges = [
   { key: 'made-de', label: 'Made in Germany', icon: 'flag' },
   { key: 'eu-data', label: 'EU-Datenhoheit', icon: 'public' },
   { key: 'vendor-free', label: 'Vendor-Unabhängigkeit', icon: 'shield' },
-  { key: 'open-source', label: 'Open Source Haltung', icon: 'code' },
+  { key: 'open-source', label: 'Self-Hosted-First', icon: 'code' },
 ]
 
 export const testimonial: TestimonialSnippet = {

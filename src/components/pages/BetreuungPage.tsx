@@ -195,7 +195,7 @@ const detailedServices: Array<{ icon: LucideIcon; title: string; description: st
     icon: Lightbulb,
     title: 'Potenziale & Trends',
     description:
-      'Monatliche Reviews zu aktuellen Trends, Open-Source-Neuheiten und strategischen Optimierungen. Wir liefern proaktive Vorschläge, bevor etwas brennt.',
+      'Monatliche Reviews zu aktuellen Trends, Self-Hosting-Entwicklungen und Open-Source-Neuheiten. Wir liefern proaktive Vorschläge, bevor etwas brennt.',
   },
   {
     icon: Users,
@@ -207,7 +207,7 @@ const detailedServices: Array<{ icon: LucideIcon; title: string; description: st
     icon: Target,
     title: 'Langfristige Perspektive',
     description:
-      'Architektur für die nächsten 3–5 Jahre: modular, skalierbar, future-ready. Keine technische Schuld, sondern Wachstumspfad.',
+      'Architektur, die langfristig trägt: modular, skalierbar und zukunftssicher. Statt technischer Schulden bauen wir einen nachhaltigen Wachstumspfad.',
   },
 ]
 
@@ -234,7 +234,7 @@ const reasonCards: Array<{ icon: LucideIcon; title: string; description: string 
     icon: Lightbulb,
     title: 'Trends & Innovation im Blick',
     description:
-      'Wir beobachten Open Source, KI und Automatisierung täglich. Sie erhalten proaktive Roadmaps statt reaktiver Tickets.',
+      'Wir beobachten Self-Hosting, Open Source, KI und Automatisierung täglich. Sie erhalten proaktive Roadmaps statt reaktiver Tickets.',
   },
 ]
 
@@ -553,7 +553,7 @@ const BetreuungPage: React.FC = () => {
               <div className="text-center md:text-left">
                 <p className="text-xs font-semibold uppercase tracking-wider text-vae-turquoise">Das Ergebnis</p>
                 <p className="mt-1 text-xl font-bold text-gray-900 dark:text-white">
-                  Mehr Kapazität für das, was euer Business wirklich voranbringt.
+                  Mehr Kapazität für das, was ihr Business wirklich voranbringt.
                 </p>
               </div>
             </div>

@@ -3,7 +3,7 @@ export const servicesHero = {
   title: 'Services',
   subtitle: 'Arbeitsinfrastruktur einrichten, mit KI optimieren und langfristig betreuen.',
   description:
-    'Wir kombinieren Open-Source-Business-Tools, intelligente Workflows und kontinuierliche Weiterentwicklung – so entsteht eine digitale Arbeitsumgebung, die mit Ihrem Unternehmen wächst.',
+    'Wir kombinieren Self-Hosted-Stacks, Open-Source-Business-Tools, intelligente Workflows und kontinuierliche Weiterentwicklung – so entsteht eine digitale Arbeitsumgebung, die mit Ihrem Unternehmen wächst.',
 }
 
 export const servicesLifecycle = {
@@ -70,7 +70,7 @@ export const comparisonMatrix = {
     {
       key: 'ziel',
       label: 'Primäres Ziel',
-      infrastructure: 'Produktive Open-Source-Stacks',
+      infrastructure: 'Produktive Self-Hosted-Stacks',
       automation: 'Prozessautomatisierung & KPIs',
       support: 'Stabiler Betrieb & kontinuierlicher Ausbau',
     },
@@ -105,7 +105,7 @@ export const comparisonMatrix = {
     {
       key: 'lockin',
       label: 'Lock-in Risiko',
-      infrastructure: 'Gering (Open Source + Dokumentation)',
+      infrastructure: 'Gering (Self-Hosting + offene Standards)',
       automation: 'Gering (modulare Workflows)',
       support: 'Keine Zusatzbindung',
     },

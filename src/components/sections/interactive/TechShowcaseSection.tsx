@@ -93,7 +93,9 @@ const TechShowcaseSection: React.FC = () => {
             Tech-Showcase
           </p>
           <h2 className="fluid-h2 mt-3 font-semibold text-text-light">Technologien, die wir einsetzen</h2>
-          <p className="mt-3 text-base text-text-secondary">Bewährte Open-Source-Tools — professionell integriert</p>
+          <p className="mt-3 text-base text-text-secondary">
+            Bewährte Self-Hosted-Tools — Open Source professionell integriert
+          </p>
         </header>
 
         <div className="mt-12 overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.02] p-6 shadow-[0_30px_100px_-60px_rgba(5,212,182,0.8)] backdrop-blur-xl">

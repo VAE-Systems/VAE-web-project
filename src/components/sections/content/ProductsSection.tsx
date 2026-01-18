@@ -44,8 +44,8 @@ const ProductsSection: React.FC = () => {
             schnelle Umsetzung ohne Vendor-Lock-in.
           </p>
           <p className="text-sm leading-relaxed text-text-muted">
-            Wir kombinieren bewährte Open-Source-Bausteine mit AI Automationen und koordinieren erfahrene Teams. So
-            entstehen skalierbare Lösungen mit klaren Ergebnissen.
+            Wir kombinieren bewährte Self-Hosted-Bausteine mit Open Source und AI Automationen und koordinieren
+            erfahrene Teams. So entstehen skalierbare Lösungen mit klaren Ergebnissen.
           </p>
         </div>
 

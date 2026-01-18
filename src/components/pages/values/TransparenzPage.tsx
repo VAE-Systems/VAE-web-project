@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 
 const PRINCIPLES = [
   {
-    title: 'Open Source First',
-    body: 'Proprietäre Tools binden Sie langfristig. Open Source gibt Ihnen Kontrolle, Anpassbarkeit und die Freiheit, jederzeit den Partner zu wechseln.',
+    title: 'Self-Hosted-First',
+    body: 'Proprietäre Tools binden Sie langfristig. Self-Hosting gibt Ihnen Kontrolle, Anpassbarkeit und die Freiheit, jederzeit den Partner zu wechseln.',
   },
   {
     title: 'Dokumentation als Standard',
@@ -68,8 +68,8 @@ const TransparenzPage: React.FC = () => {
   return (
     <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
-        title="Transparenz & Open Source | VAE Systems"
-        description="Wie VAE Systems Transparenz lebt: Open Source First, Live-Dokumentation und vollständige Ownership für Ihre Organisation."
+        title="Transparenz & Self-Hosted-First | VAE Systems"
+        description="Wie VAE Systems Transparenz lebt: Self-Hosted-First, Open Source als Werkzeug, Live-Dokumentation und vollständige Ownership für Ihre Organisation."
         canonicalPath="/wissen/transparenz-open-source"
       />
       <Breadcrumbs items={TRANSPARENZ_BREADCRUMBS} className="mb-4" />
@@ -90,7 +90,7 @@ const TransparenzPage: React.FC = () => {
             <p className="text-lg leading-relaxed text-white/85 dark:text-text-secondary">
               Sie sehen jede Entscheidung – Architektur, Budget, Risiken – weil sie direkt in Ihren Tools dokumentiert
               wird. Wir dokumentieren Code-Änderungen so, dass Sie sie auch als Nicht-Entwicklerin nachvollziehen
-              können. Open Source als Prinzip bedeutet, dass Sie Code, Infrastruktur und Daten behalten.
+              können. Self-Hosting als Prinzip heißt: Sie behalten Code, Infrastruktur und Daten.
             </p>
             <div className="flex flex-wrap gap-4">
               <MagneticButton className="inline-flex">
@@ -104,12 +104,12 @@ const TransparenzPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-6 rounded-3xl border border-white/30 bg-white/10 p-8 dark:border-white/10 dark:bg-white/[0.03]">
+          <div className="space-y-6 rounded-3xl border border-white/50 bg-white/80 p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.35)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.03] dark:shadow-none">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
               Konkreter Nutzen
             </p>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -117,7 +117,7 @@ const TransparenzPage: React.FC = () => {
                 </span>
                 <span>Live-Dokumentation über unsere Kundenplattform statt Präsentationen im Nachgang</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -125,7 +125,7 @@ const TransparenzPage: React.FC = () => {
                 </span>
                 <span>Kunden-Accounts in unseren Systemen ermöglichen direkten Austausch und Kollaboration</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -133,15 +133,15 @@ const TransparenzPage: React.FC = () => {
                 </span>
                 <span>Risiken und Annahmen werden sofort gekennzeichnet – kein Schönreden</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
                   </svg>
                 </span>
-                <span>Open-Source-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur</span>
+                <span>Self-Hosted-Stacks geben Ihnen die volle Kontrolle über Code und Infrastruktur</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />

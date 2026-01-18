@@ -105,11 +105,11 @@ const Footer: React.FC = () => {
             <div className="mb-3">
               <p className="text-sm font-semibold tracking-wide text-vae-turquoise">Structure is strategy.</p>
               <p className="text-sm font-medium tracking-wide text-vae-turquoise/80">
-                Business efficiency through open source.
+                Business efficiency through self-hosting.
               </p>
             </div>
             <p className="mb-6 leading-relaxed text-text-muted">
-              Strategische Beratung, Open-Source-Infrastruktur und KI-Workflow-Optimierung für Unternehmen, die
+              Strategische Beratung, Self-Hosted-Infrastruktur und KI-Workflow-Optimierung für Unternehmen, die
               Effizienz steigern und Datenkontrolle behalten wollen. Vom Setup bis zur langfristigen Betreuung –
               dokumentiert und messbar.
             </p>{' '}

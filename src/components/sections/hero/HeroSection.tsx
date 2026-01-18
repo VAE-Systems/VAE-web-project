@@ -31,7 +31,7 @@ const TIMING = {
 }
 
 // 🏷️ Social Proof am unteren Rand
-const trustBadges = ['100% Open Source', 'DSGVO-konform', 'Made in Germany']
+const trustBadges = ['Self-Hosted-First', 'DSGVO-konform', 'Made in Germany']
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🚪 ORCHESTRATOR: HeroSection

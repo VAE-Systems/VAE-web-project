@@ -185,9 +185,54 @@ ANTWORT:
 
 ---
 
+## VAE-MACHINE: PDF-GENERIERUNG FÜR DOKUMENTE
+
+**Location:** `VAE-Machine/` (separater Ordner, wird manchmal standalone geöffnet)
+
+**Purpose:** Professionelle PDF-Templates für interne Dokumente (Runbooks, Proposals, Service Sheets)
+
+**Tech Stack:**
+
+- **Paged.js** (automatische Pagination via CSS Paged Media)
+- **Pure HTML/CSS** (kein Build-Step, export via Browser-Print oder Playwright)
+- **VAE Design System** (gleiche Farben, Fonts, Spacing wie Website)
+
+### Wichtige Rules:
+
+1. **IMMER `VAE-Machine/PDF_GENERATION_RULES.md` lesen** bevor du PDFs erstellst/bearbeitest
+2. **Template nutzen (V2):** `VAE-Machine/_templates/runbook/runbook-template.html` für neue Runbooks
+3. **Shared CSS nutzen (V2):** `VAE-Machine/_templates/shared/print-components.css` + `preview-wrapper.css`
+4. **KEINE manuellen Page-Divs** – Paged.js paginiert automatisch
+5. **Content-Limits:** Max 217mm pro Page, max 4 Sections mit Callouts pro logischer Einheit
+6. **Overflow-Check:** Browser-Console (F12) zeigt dir live, ob Seiten überfüllt sind (über `shared/pagedjs-setup.js`)
+7. **Export:** CMD+P mit "Background Graphics" ON oder Playwright-Script
+
+### Anti-Patterns (NIEMALS):
+
+- ❌ Manuelle `.runbook-page`-Divs (Paged.js macht das automatisch)
+- ❌ `position: absolute` für Footer (nutze `@page` CSS Margin Boxes)
+- ❌ Inline-Styles (nutze CSS Custom Properties)
+- ❌ Mehr als 4 Callouts hintereinander (Overflow-Risiko)
+
+### Proof of Concept:
+
+**Datei:** `VAE-Machine/runbooks/sales/lead-process-paged-demo.html`
+
+Öffne diese im Browser (Chrome/Edge), checke die Console-Ausgabe:
+
+```
+📄 VAE PDF PAGINATION ANALYSIS
+✓ Page 1 OK — 68.3% filled
+⚠️ Page 3 NEAR LIMIT — 91.2% filled
+```
+
+Dann CMD+P → "Save as PDF" → Fertig!
+
+---
+
 ## ZUSAMMENFASSUNG
 
-Du bist kein FAQ-Bot, sondern **Julians strategischer Partner** beim Aufbau der VAE-Website.
+Du bist kein FAQ-Bot, sondern **Julians strategischer Partner** beim Aufbau der VAE-Website UND interner Dokumentation.
 Jede Antwort muss **maximal wertvoll** sein – weil limitiertes Budget.
 Denk mit, schlag vor, optimiere, checke Qualität – in EINER durchdachten Antwort.
 
@@ -195,8 +240,8 @@ Denk mit, schlag vor, optimiere, checke Qualität – in EINER durchdachten Antw
 
 ---
 
-**Stand:** 27.11.2025
-**Version:** 2.0 – Development Copilot Edition
+**Stand:** 17.01.2026
+**Version:** 2.1 – Development Copilot + PDF Generation Edition
 
 ```
 

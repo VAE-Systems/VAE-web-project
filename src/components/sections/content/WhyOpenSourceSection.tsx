@@ -61,9 +61,8 @@ const WhyOpenSourceSection: React.FC = () => {
             <div className="space-y-2">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-vae-turquoise">Vision</p>
               <p className="text-base font-semibold leading-relaxed text-text-light">
-                <span className="text-vae-turquoise">SaaS mieten oder Infrastruktur besitzen?</span>{' '}
-                Open-Source-Infrastruktur für jedes Unternehmen zugänglich machen – mit Standards, Transparenz und
-                echter Datensouveränität.
+                <span className="text-vae-turquoise">SaaS mieten oder Infrastruktur besitzen?</span> Self-Hosted-First
+                als Standard – Open Source als Werkzeug, wo es Freiheit bringt.
               </p>
             </div>
           </div>

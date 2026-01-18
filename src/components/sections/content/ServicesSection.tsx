@@ -9,7 +9,7 @@
  * ├── servicesCategories    → Kategorisierte Gruppierung
  * ├── consultingServices    → Beratungs-Angebote
  * ├── lifecycleBlocks       → Projekt-Phasen
- * └── comparisonMatrix      → SaaS vs. Open Source Vergleich
+ * └── comparisonMatrix      → SaaS vs. Self-Hosted Vergleich
  *
  * ⛓️ GATES
  * └── prefers-reduced-motion → Skip GSAP animations
@@ -163,7 +163,7 @@ const ServicesSection: React.FC = () => {
         <div className="mb-16 text-center" ref={headerRef}>
           <h2 className="h2 heading-gradient mb-4">Ihre komplette digitale Arbeitsumgebung</h2>
           <p className="mx-auto mb-4 max-w-3xl text-xl leading-relaxed text-text-secondary">
-            Wir richten Ihre Open-Source-Business-Suite ein, ergänzen sie mit AI-gestützten Workflows und betreuen sie
+            Wir richten Ihre Self-Hosted-Business-Suite ein, ergänzen sie mit AI-gestützten Workflows und betreuen sie
             langfristig – damit Ihr Team produktiver arbeitet und Sie volle Datenhoheit behalten.
           </p>
           <p className="mx-auto max-w-3xl text-lg leading-relaxed text-text-secondary">
@@ -417,7 +417,7 @@ const ServicesSection: React.FC = () => {
             <span className="text-text-light dark:text-white">Enablement</span>. So entsteht nachhaltige interne
             Kompetenz statt externer Black Box. Fokus auf{' '}
             <strong className="font-semibold text-text-light dark:text-white">
-              Open Source KI, Retrieval Qualität, Workflow Robustheit
+              Self-Hosted KI, Open-Source-Modelle, Retrieval Qualität
             </strong>{' '}
             und <strong className="font-semibold text-text-light dark:text-white">Compliance früh</strong>. Ergebnis:
             verkürzte Iterationen, geringeres Risiko, nachweisbarer ROI.

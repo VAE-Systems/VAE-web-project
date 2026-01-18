@@ -51,7 +51,7 @@ export const MENU_DATA: DropdownMenu[] = [
         id: 'INFRASTRUCTURE',
         title: 'Infrastruktur Design/Setup',
         description:
-          'KI-optimierte, produktionsreife Open-Source-Systeme – vollständig konfiguriert, dokumentiert und unter Ihrer Kontrolle.',
+          'KI-optimierte, produktionsreife Self-Hosted-Systeme – Open Source als Werkzeug, vollständig konfiguriert, dokumentiert und unter Ihrer Kontrolle.',
         items: [
           'CRM-Systeme',
           'HR-Systeme',
@@ -89,7 +89,7 @@ export const MENU_DATA: DropdownMenu[] = [
         id: 'BLOG',
         title: 'Einblicke & Trends',
         description:
-          'KI-Trends, Open-Source-Best-Practices und Digitalisierung – praxisnah erklärt auf unserer Dokumentationsplattform.',
+          'KI-Trends, Self-Hosting- und Open-Source-Best-Practices – praxisnah erklärt auf unserer Dokumentationsplattform.',
         ctaText: 'Alle Beiträge ansehen',
         ctaHref: '/ressourcen/blog',
       },
@@ -109,13 +109,13 @@ export const MENU_DATA: DropdownMenu[] = [
       faq: {
         id: 'FAQ',
         title: 'Häufig gestellte Fragen',
-        description: 'Antworten zu Kosten, Projektabläufen, Open Source und unserer Arbeitsweise.',
+        description: 'Antworten zu Kosten, Projektabläufen, Self-Hosting, Open Source und unserer Arbeitsweise.',
         items: [
           'Was kostet eine Beratung?',
           'Wie lange dauert ein Projekt?',
           'Arbeiten Sie remote?',
           'Welche Branchen bedienen Sie?',
-          'Was bedeutet "Open Source First"?',
+          'Was bedeutet "Self-Hosted-First"?',
         ],
         ctaText: 'Alle FAQs ansehen',
         ctaHref: '/ressourcen/faq',

@@ -11,7 +11,7 @@ const topics = [
     description: 'Operationalisierbare KI-Workflows, Prompt-Standards und Automatisierung in regulierten Umgebungen.',
   },
   {
-    title: 'Open Source & Infrastruktur',
+    title: 'Self-Hosting & Infrastruktur',
     description: 'Selfhosting, Vendor-Souveränität und Observability – mit Playbooks, die sich direkt anwenden lassen.',
   },
   {
@@ -30,8 +30,8 @@ const BlogPage: React.FC = () => {
   return (
     <div className="relative z-0 bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
-        title="Blog – Insights zu KI, Infrastruktur & Open Source | VAE Systems"
-        description="Knowledge Hub für KI, Open-Source-Infrastruktur und produktive Digitalisierung – kuratiert von VAE Systems."
+        title="Blog – Insights zu KI, Infrastruktur & Self-Hosting | VAE Systems"
+        description="Knowledge Hub für KI, Self-Hosted-Infrastruktur und Open Source – kuratiert von VAE Systems."
         canonicalPath="/ressourcen/blog"
       />
 

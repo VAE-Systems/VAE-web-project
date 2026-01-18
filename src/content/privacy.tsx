@@ -197,14 +197,14 @@ export const privacyContent: PrivacyContent = {
             keine personenbezogenen Daten von Website-Besuchern erfasst oder getrackt
           </span>
           . Die Nutzung erfolgt auf Grundlage unseres berechtigten Interesses an der Optimierung und fehlerfreien
-          Darstellung unserer Website (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen finden Sie in der{' '}
+          Darstellung unserer Website (Art. 6 Abs. 1 lit. f DSGVO). Weitere Infos:{' '}
           <a
             href="https://policies.google.com/privacy"
             target="_blank"
             rel="noopener noreferrer"
             className="text-vae-turquoise hover:underline"
           >
-            Datenschutzerklärung von Google
+            https://policies.google.com/privacy
           </a>
           .
           <br />
@@ -212,11 +212,11 @@ export const privacyContent: PrivacyContent = {
           <span className="font-medium text-text-light">Externe Inhalte (CDN und Bildquellen)</span>
           <br />
           Für einzelne Technologie-Logos und Grafiken binden wir statische Inhalte von Drittanbietern ein (z. B.
-          jsDelivr/CDN, Wikimedia Commons, GitHub). Beim Aufruf der entsprechenden Seiten wird Ihre IP-Adresse technisch
-          bedingt an diese Anbieter übertragen, damit die Inhalte ausgeliefert werden können. Die Nutzung erfolgt auf
-          Grundlage unseres berechtigten Interesses an einer performanten und ansprechenden Darstellung der Website
-          (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen zur Datenverarbeitung finden Sie in den
-          Datenschutzerklärungen der jeweiligen Anbieter.
+          jsDelivr/CDN, Wikimedia Commons, GitHub). Beim ersten Aufruf wird Ihre IP-Adresse technisch bedingt an diese
+          Anbieter übertragen, damit die Inhalte ausgeliefert werden können. Die Nutzung erfolgt auf Grundlage unseres
+          berechtigten Interesses an einer performanten und ansprechenden Darstellung der Website (Art. 6 Abs. 1 lit. f
+          DSGVO). Weitere Informationen zur Datenverarbeitung finden Sie in den Datenschutzerklärungen der jeweiligen
+          Anbieter.
         </>
       ),
     },
@@ -276,7 +276,7 @@ export const privacyContent: PrivacyContent = {
       ),
     },
   ],
-  updated: 'November 2025',
+  updated: 'Januar 2026',
 }
 
 export default privacyContent

@@ -12,7 +12,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Asynchrone Transparenz',
-    body: 'Loom-Videos, annotierte Screenshots und schriftliche Status-Updates halten alle auf dem gleichen Stand – ohne endlose Meetings.',
+    body: 'Kurze Screen-Recordings, annotierte Screenshots und schriftliche Status-Updates halten alle auf dem gleichen Stand – ohne endlose Meetings.',
   },
   {
     title: 'Frühwarnsystem',
@@ -105,12 +105,12 @@ const KommunikationPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-6 rounded-3xl border border-white/30 bg-white/10 p-8 dark:border-white/10 dark:bg-white/[0.03]">
+          <div className="space-y-6 rounded-3xl border border-white/50 bg-white/80 p-8 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.35)] backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.03] dark:shadow-none">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
               Konkreter Nutzen
             </p>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -118,7 +118,7 @@ const KommunikationPage: React.FC = () => {
                 </span>
                 <span>Workshops übersetzen komplexe Technik in Entscheidungen für Business-Teams</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -126,7 +126,7 @@ const KommunikationPage: React.FC = () => {
                 </span>
                 <span>Status-Reports zeigen Abweichungen früh statt im Nachgang</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />
@@ -134,7 +134,7 @@ const KommunikationPage: React.FC = () => {
                 </span>
                 <span>Stakeholder erhalten personalisierte Updates – C-Level, Fachbereiche, Betriebsrat</span>
               </li>
-              <li className="flex items-start gap-3 text-base leading-relaxed text-text-secondary">
+              <li className="flex items-start gap-3 text-base leading-relaxed text-gray-800 dark:text-text-secondary">
                 <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-vae-turquoise">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12l4 4L19 6" />

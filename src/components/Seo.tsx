@@ -14,7 +14,7 @@ interface SeoProps {
 const Seo: React.FC<SeoProps> = ({
   title = 'VAE Systems - KI-Architektur & Automatisierung',
   description = 'Professionelle KI-Architektur für skalierbare Lösungen. Multi-Tenancy, Security & Provider-Agnostik.',
-  image = '/App_Logo_light.svg',
+  image = '/og/vae-og.png',
   url,
   type = 'website',
 }) => {

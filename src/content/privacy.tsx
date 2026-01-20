@@ -183,7 +183,7 @@ export const privacyContent: PrivacyContent = {
       body: (
         <>
           Aktuell werden keine externen Analyse‑ oder Marketingplattformen genutzt. Hosting / Infrastruktur:{' '}
-          <span className="text-vae-turquoise">Contabo GmbH (Deutschland)</span>. Mit eingesetzten
+          <span className="text-vae-turquoise">Contabo GmbH (Deutschland)</span> (gemieteter Server). Mit eingesetzten
           Infrastruktur‑/Hosting‑Anbietern besteht bzw. wird – falls erforderlich – ein Vertrag zur Auftragsverarbeitung
           (AVV) gemäß Art. 28 DSGVO abgeschlossen.
           <br />
@@ -211,12 +211,12 @@ export const privacyContent: PrivacyContent = {
           <br />
           <span className="font-medium text-text-light">Externe Inhalte (CDN und Bildquellen)</span>
           <br />
-          Für einzelne Technologie-Logos und Grafiken binden wir statische Inhalte von Drittanbietern ein (z. B.
-          jsDelivr/CDN, Wikimedia Commons, GitHub). Beim ersten Aufruf wird Ihre IP-Adresse technisch bedingt an diese
-          Anbieter übertragen, damit die Inhalte ausgeliefert werden können. Die Nutzung erfolgt auf Grundlage unseres
-          berechtigten Interesses an einer performanten und ansprechenden Darstellung der Website (Art. 6 Abs. 1 lit. f
-          DSGVO). Weitere Informationen zur Datenverarbeitung finden Sie in den Datenschutzerklärungen der jeweiligen
-          Anbieter.
+          Derzeit binden wir keine externen CDNs oder Bildquellen ein; alle Assets werden lokal ausgeliefert. Falls wir
+          zukünftig externe Quellen nutzen (z. B. für Technologie-Logos), wird Ihre IP-Adresse technisch bedingt an
+          diese Anbieter übertragen, damit die Inhalte ausgeliefert werden können. Die Nutzung erfolgt auf Grundlage
+          unseres berechtigten Interesses an einer performanten und ansprechenden Darstellung der Website (Art. 6 Abs. 1
+          lit. f DSGVO). Weitere Informationen zur Datenverarbeitung finden Sie in den Datenschutzerklärungen der
+          jeweiligen Anbieter.
         </>
       ),
     },

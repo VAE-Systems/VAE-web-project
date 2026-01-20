@@ -388,7 +388,7 @@ const SetupPage: React.FC = () => {
       }
       return sum + getToolSeatCount(tool.id) * (tool.pricePerUser ?? 0)
     }, 0)
-  }, [getToolSeatCount, toolSelection])
+  }, [formatCurrency, getToolSeatCount, toolSelection])
 
   const customLicensesMonthlyCost = useMemo(() => {
     return customLicenses.reduce((sum, license) => sum + license.unitPrice * license.quantity, 0)
@@ -417,6 +417,26 @@ const SetupPage: React.FC = () => {
     () => flattenedSaasTools.reduce((count, tool) => (toolSelection[tool.id] ? count + 1 : count), 0),
     [toolSelection]
   )
+
+  const topCategoryInsight = useMemo(() => {
+    const totals = saasToolCategories.map(category => {
+      const total = category.tools.reduce((sum, tool) => {
+        if (!toolSelection[tool.id]) return sum
+        if (tool.pricingModel === 'flat') {
+          return sum + (tool.flatMonthlyPrice ?? 0)
+        }
+        return sum + getToolSeatCount(tool.id) * (tool.pricePerUser ?? 0)
+      }, 0)
+      return { title: category.title, total }
+    })
+
+    const top = totals.reduce((acc, item) => (item.total > acc.total ? item : acc), {
+      title: 'Keine Auswahl',
+      total: 0,
+    })
+
+    return top.total > 0 ? `${top.title} (${formatCurrency(top.total)} / Monat)` : 'Keine Auswahl'
+  }, [getToolSeatCount, toolSelection])
 
   const estimatedSetupCost = useMemo(() => {
     const base = 1500
@@ -480,11 +500,6 @@ const SetupPage: React.FC = () => {
       `- Monatlich: ${formatCurrency(displayMonthlySaaSCost)}`,
       `- Jährlich: ${formatCurrency(displayYearlySaaSCost)}`,
       '',
-      'Eure Schätzung:',
-      `- Geschätzter Setup-Aufwand: ${formatCurrency(displaySetupCost)}`,
-      `- Einsparung Jahr 1: ${formatCurrency(yearOneSavings)}`,
-      `- Einsparung ab Jahr 2: ${formatCurrency(yearTwoSavings)}`,
-      '',
       'Bitte meldet euch für eine kurze Abstimmung.',
       'Vielen Dank!',
     ]
@@ -494,15 +509,12 @@ const SetupPage: React.FC = () => {
   }, [
     customLicenses,
     displayMonthlySaaSCost,
-    displaySetupCost,
     displayYearlySaaSCost,
     formatCurrency,
     getToolSeatCount,
     isGrossMode,
     teamSize,
     toolSelection,
-    yearOneSavings,
-    yearTwoSavings,
   ])
 
   const highlightMonthlyNet = useValueIncreaseHighlight(displayMonthlySaaSCost)
@@ -523,8 +535,10 @@ const SetupPage: React.FC = () => {
   const getValueClasses = useCallback(
     (isHighlighted: boolean) =>
       cn(
-        'text-lg font-semibold text-white',
-        isHighlighted ? 'text-vae-turquoise drop-shadow-[0_0_8px_rgba(8,255,193,0.35)]' : 'text-text-secondary'
+        'text-lg font-semibold text-gray-900 dark:text-white',
+        isHighlighted
+          ? 'text-red-600 drop-shadow-[0_0_8px_rgba(248,113,113,0.35)] dark:text-red-300'
+          : 'text-gray-600 dark:text-text-secondary'
       ),
     []
   )
@@ -1111,16 +1125,20 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 4 ROI */}
-      <section id="roi-calculator" ref={calculatorSectionRef} className="border-y border-white/5 bg-bg-dark py-20">
+      <section
+        id="roi-calculator"
+        ref={calculatorSectionRef}
+        className="border-y border-vae-turquoise/10 bg-[#f6f8f7] py-20 dark:border-white/5 dark:bg-bg-dark"
+      >
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise">
               SaaS-Kosten-Radar
             </p>
-            <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl">
+            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
               Was kostet Ihre SaaS-Landschaft wirklich?
             </h2>
-            <p className="mt-3 text-lg text-text-secondary">
+            <p className="mt-3 text-lg text-gray-600 dark:text-text-secondary">
               Ermitteln Sie Ihr Einsparpotenzial – wir erstellen Ihnen ein Angebot für eine Cloud-Alternative ohne
               Vendor-Lock-in.
             </p>
@@ -1134,13 +1152,15 @@ const SetupPage: React.FC = () => {
                   Guided Tour starten
                 </button>
               </MagneticButton>
-              <span className="text-xs font-medium text-text-secondary">Interaktive Anleitung (2 Min)</span>
+              <span className="text-xs font-medium text-gray-600 dark:text-text-secondary">
+                Interaktive Anleitung (2 Min)
+              </span>
             </div>
           </div>
-          <div className="mt-12 grid gap-8 rounded-3xl border border-white/10 bg-white/5 p-8 lg:grid-cols-2">
+          <div className="mt-12 grid gap-8 rounded-3xl border border-gray-200/80 bg-white p-8 shadow-[0_22px_60px_-40px_rgba(15,23,42,0.35)] dark:border-white/10 dark:bg-white/5 dark:shadow-none lg:grid-cols-2">
             <div className="space-y-8">
               <div data-calculator-tutorial="team-size">
-                <label className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
+                <label className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-700 dark:text-text-secondary">
                   Anzahl Mitarbeitende (lizenzpflichtig)
                 </label>
                 <div className="mt-4 flex flex-col gap-4">
@@ -1150,9 +1170,9 @@ const SetupPage: React.FC = () => {
                     max={TEAM_SIZE_MAX}
                     value={teamSize}
                     onChange={event => setTeamSize(clampTeamSize(Number(event.target.value)))}
-                    className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/10 accent-vae-turquoise"
+                    className="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-200 accent-vae-turquoise dark:bg-white/10"
                   />
-                  <div className="flex items-center gap-3 text-lg font-semibold text-white">
+                  <div className="flex items-center gap-3 text-lg font-semibold text-gray-900 dark:text-white">
                     {teamSize} Personen
                     <input
                       type="number"
@@ -1160,23 +1180,28 @@ const SetupPage: React.FC = () => {
                       max={TEAM_SIZE_MAX}
                       value={teamSize}
                       onChange={event => setTeamSize(clampTeamSize(Number(event.target.value) || TEAM_SIZE_MIN))}
-                      className="w-24 rounded-xl border border-white/10 bg-bg-darker px-3 py-2 text-right text-base focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                      className="w-24 rounded-xl border border-gray-200 bg-white px-3 py-2 text-right text-base text-gray-900 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                     />
                   </div>
                 </div>
               </div>
 
               <div className="space-y-5" data-calculator-tutorial="tools">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-700 dark:text-text-secondary">
                   Ihre aktuellen SaaS-Tools
                 </p>
                 <div className="space-y-4">
                   {saasToolCategories.map(category => (
-                    <div key={category.id} className="rounded-2xl border border-white/10 bg-bg-darker/40 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary/80">
-                        {category.title}
-                      </p>
-                      <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-text-secondary/60">
+                    <div
+                      key={category.id}
+                      className="rounded-2xl border border-vae-turquoise/25 bg-[#f1fbf7] p-4 shadow-[0_12px_26px_-22px_rgba(12,74,52,0.25)] dark:border-white/10 dark:bg-bg-darker/40"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <span className="inline-flex items-center rounded-full border border-vae-turquoise/30 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-gray-700 shadow-[0_8px_20px_-16px_rgba(12,74,52,0.35)] dark:border-white/10 dark:bg-bg-darker/60 dark:text-text-secondary/80 dark:shadow-none">
+                          {category.title}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-gray-500 dark:text-text-secondary/60">
                         {category.selectionMode === 'multi' ? 'Mehrfachauswahl möglich' : 'Einzelauswahl pro Kategorie'}
                       </p>
                       <div className="mt-3 space-y-3">
@@ -1186,19 +1211,19 @@ const SetupPage: React.FC = () => {
                             className={cn(
                               'flex items-start justify-between gap-3 rounded-2xl border px-4 py-3 text-sm transition',
                               toolSelection[tool.id]
-                                ? 'border-vae-turquoise/60 bg-vae-turquoise/10 text-white'
-                                : 'border-white/10 bg-bg-darker text-text-secondary hover:border-white/30'
+                                ? 'border-2 border-vae-turquoise/80 bg-[#ecfbf6] text-gray-900 shadow-[0_14px_30px_-22px_rgba(12,74,52,0.32)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:text-white dark:shadow-none'
+                                : 'border-gray-200 bg-white text-gray-700 shadow-[0_10px_26px_-24px_rgba(15,23,42,0.2)] hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-bg-darker dark:text-text-secondary dark:hover:border-white/30'
                             )}
                           >
                             <div className="flex-1">
-                              <p className="font-semibold text-white">{tool.name}</p>
-                              <p className="text-xs text-text-secondary/80">
+                              <p className="font-semibold text-gray-900 dark:text-white">{tool.name}</p>
+                              <p className="text-xs text-gray-600 dark:text-text-secondary/80">
                                 {tool.pricingModel === 'perUser'
                                   ? `${formatCurrency(tool.pricePerUser ?? 0)} pro Nutzer:in/Monat (netto)`
                                   : `${formatCurrency(tool.flatMonthlyPrice ?? 0)} pro Monat (netto)`}
                               </p>
                               {tool.pricingModel === 'perUser' && toolSelection[tool.id] && (
-                                <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-text-secondary/80">
+                                <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-gray-600 dark:text-text-secondary/80">
                                   <span>Nutzer:innen</span>
                                   <input
                                     type="number"
@@ -1213,9 +1238,9 @@ const SetupPage: React.FC = () => {
                                         [tool.id]: clampToolSeats(safeValue, teamSize),
                                       }))
                                     }}
-                                    className="w-20 rounded-lg border border-white/10 bg-bg-darker/70 px-2 py-1 text-xs text-white focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30"
+                                    className="w-20 rounded-lg border border-gray-200 bg-white px-2 py-1 text-xs text-gray-900 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker/70 dark:text-white dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                                   />
-                                  <span className="text-text-secondary/60">von {teamSize}</span>
+                                  <span className="text-gray-500 dark:text-text-secondary/60">von {teamSize}</span>
                                   <button
                                     type="button"
                                     onClick={() => clearToolSeatOverride(tool.id)}
@@ -1226,25 +1251,32 @@ const SetupPage: React.FC = () => {
                                 </div>
                               )}
                             </div>
-                            <input
-                              type="checkbox"
-                              checked={toolSelection[tool.id]}
-                              onChange={event => {
-                                const isChecked = event.target.checked
-                                const isSingleSelection = category.selectionMode !== 'multi'
-                                setToolSelection(prev => {
-                                  const next = { ...prev }
-                                  if (isSingleSelection && isChecked) {
-                                    category.tools.forEach(categoryTool => {
-                                      next[categoryTool.id] = false
-                                    })
-                                  }
-                                  next[tool.id] = isChecked
-                                  return next
-                                })
-                              }}
-                              className="h-5 w-5 rounded border-white/30 bg-black/30 text-vae-turquoise focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
-                            />
+                            <div className="flex flex-col items-end gap-2">
+                              {toolSelection[tool.id] && (
+                                <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/70">
+                                  Aktiv
+                                </span>
+                              )}
+                              <input
+                                type="checkbox"
+                                checked={toolSelection[tool.id]}
+                                onChange={event => {
+                                  const isChecked = event.target.checked
+                                  const isSingleSelection = category.selectionMode !== 'multi'
+                                  setToolSelection(prev => {
+                                    const next = { ...prev }
+                                    if (isSingleSelection && isChecked) {
+                                      category.tools.forEach(categoryTool => {
+                                        next[categoryTool.id] = false
+                                      })
+                                    }
+                                    next[tool.id] = isChecked
+                                    return next
+                                  })
+                                }}
+                                className="h-5 w-5 rounded border-gray-300 bg-white text-vae-turquoise outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/30 dark:bg-black/30 dark:focus-visible:ring-vae-turquoise/60 dark:focus-visible:ring-offset-bg-darker"
+                              />
+                            </div>
                           </label>
                         ))}
                       </div>
@@ -1253,22 +1285,22 @@ const SetupPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-bg-darker/60 p-5">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-text-secondary">
+              <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-bg-darker/60">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-700 dark:text-text-secondary">
                   Weitere Lizenzen hinzufügen
                 </p>
-                <p className="mt-1 text-xs text-text-secondary">
+                <p className="mt-1 text-xs text-gray-600 dark:text-text-secondary">
                   Für Spezial-Tools, parallele Lösungen innerhalb einer Kategorie oder Pakete ohne Seat-basierte
                   Abrechnung.
                 </p>
-                <p className="mt-1 text-xs text-text-secondary/80">Alle Eingaben netto.</p>
+                <p className="mt-1 text-xs text-gray-500 dark:text-text-secondary/80">Alle Eingaben netto.</p>
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
                   <input
                     type="text"
                     value={customLicenseForm.name}
                     onChange={event => handleCustomLicenseFormChange('name', event.target.value)}
                     placeholder="Tool-Name"
-                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                   <input
                     type="text"
@@ -1276,7 +1308,7 @@ const SetupPage: React.FC = () => {
                     value={customLicenseForm.unitPrice}
                     onChange={event => handleCustomLicenseFormChange('unitPrice', event.target.value)}
                     placeholder="Preis pro Nutzer"
-                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                   <input
                     type="text"
@@ -1284,7 +1316,7 @@ const SetupPage: React.FC = () => {
                     value={customLicenseForm.quantity}
                     onChange={event => handleCustomLicenseFormChange('quantity', event.target.value)}
                     placeholder="Anzahl Nutzer:innen"
-                    className="rounded-2xl border border-white/10 bg-bg-darker px-4 py-3 text-sm text-white placeholder:text-text-secondary focus:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </div>
                 <button
@@ -1294,8 +1326,8 @@ const SetupPage: React.FC = () => {
                   className={cn(
                     'mt-4 inline-flex w-full items-center justify-center rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold transition',
                     canAddCustomLicense
-                      ? 'bg-vae-turquoise/20 text-white hover:border-vae-turquoise/40 hover:bg-vae-turquoise/30'
-                      : 'cursor-not-allowed bg-white/5 text-text-secondary'
+                      ? 'bg-vae-turquoise text-white hover:border-vae-turquoise/70 hover:bg-vae-turquoise/90 dark:bg-vae-turquoise/20 dark:text-white dark:hover:border-vae-turquoise/40 dark:hover:bg-vae-turquoise/30'
+                      : 'cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-text-secondary'
                   )}
                 >
                   Lizenz hinzufügen
@@ -1305,11 +1337,11 @@ const SetupPage: React.FC = () => {
                     {customLicenses.map(license => (
                       <div
                         key={license.id}
-                        className="flex flex-wrap items-center justify-between gap-3 text-sm text-white"
+                        className="flex flex-wrap items-center justify-between gap-3 text-sm text-gray-900 dark:text-white"
                       >
                         <div>
                           <p className="font-semibold">{license.name}</p>
-                          <p className="text-xs text-text-secondary">
+                          <p className="text-xs text-gray-600 dark:text-text-secondary">
                             {license.quantity} × {formatCurrency(license.unitPrice)} pro Monat
                           </p>
                         </div>
@@ -1318,7 +1350,7 @@ const SetupPage: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => removeCustomLicense(license.id)}
-                            className="text-xs font-semibold text-text-secondary transition hover:text-white"
+                            className="text-xs font-semibold text-gray-500 transition hover:text-gray-900 dark:text-text-secondary dark:hover:text-white"
                           >
                             Entfernen
                           </button>
@@ -1329,28 +1361,31 @@ const SetupPage: React.FC = () => {
                 )}
               </div>
 
-              <p className="text-xs text-text-secondary/70">
+              <p className="text-xs text-gray-500 dark:text-text-secondary/70">
                 Hinweis: Die angezeigten Standardpreise beruhen auf öffentlich verfügbaren Quellen und dienen nur als
                 Orientierung. Anbieter können Tarife und Steuersätze jederzeit ändern.
               </p>
             </div>
 
             <div
-              className="space-y-6 rounded-3xl border border-white/10 bg-bg-darker/60 p-6 lg:sticky lg:top-24 lg:self-start"
+              className="space-y-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_18px_55px_-40px_rgba(15,23,42,0.4)] dark:border-white/10 dark:bg-bg-darker/60 dark:shadow-none lg:sticky lg:top-24 lg:self-start"
               data-calculator-tutorial="results"
             >
-              <div className="rounded-2xl border border-red-500/40 bg-red-500/5 p-5 backdrop-blur-sm">
+              <div className="h-1 w-full rounded-full bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 dark:from-vae-turquoise/0 dark:via-vae-turquoise/25 dark:to-vae-turquoise/0" />
+              <div className="rounded-2xl border border-red-200 bg-red-50 p-5 shadow-sm dark:border-red-500/40 dark:bg-red-500/5 dark:shadow-none">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-400">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-600 dark:text-red-400">
                     Ihre aktuellen SaaS-Kosten
                   </p>
-                  <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1 text-[11px] font-semibold uppercase tracking-[0.2em]">
+                  <div className="inline-flex rounded-full border border-gray-200 bg-gray-100 p-1 text-[11px] font-semibold uppercase tracking-[0.2em] dark:border-white/10 dark:bg-white/5">
                     <button
                       type="button"
                       onClick={() => setPriceMode('net')}
                       className={cn(
                         'rounded-full px-3 py-1 transition',
-                        priceMode === 'net' ? 'bg-white text-bg-darker' : 'text-text-secondary hover:text-white'
+                        priceMode === 'net'
+                          ? 'bg-vae-turquoise text-white shadow-[0_8px_18px_-12px_rgba(8,255,193,0.6)]'
+                          : 'text-gray-600 hover:text-gray-900 dark:text-text-secondary dark:hover:text-white'
                       )}
                     >
                       Netto
@@ -1360,28 +1395,30 @@ const SetupPage: React.FC = () => {
                       onClick={() => setPriceMode('gross')}
                       className={cn(
                         'rounded-full px-3 py-1 transition',
-                        priceMode === 'gross' ? 'bg-white text-bg-darker' : 'text-text-secondary hover:text-white'
+                        priceMode === 'gross'
+                          ? 'bg-vae-turquoise text-white shadow-[0_8px_18px_-12px_rgba(8,255,193,0.6)]'
+                          : 'text-gray-600 hover:text-gray-900 dark:text-text-secondary dark:hover:text-white'
                       )}
                     >
                       Brutto
                     </button>
                   </div>
                 </div>
-                <div className="mt-4 space-y-5 text-sm text-slate-600 dark:text-text-secondary">
+                <div className="mt-4 space-y-5 text-sm text-gray-700 dark:text-text-secondary">
                   <div className="flex flex-col gap-3 border-b border-white/10 pb-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-800 dark:text-red-200">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-700 dark:text-red-200">
                           Monatliche Kosten
                         </p>
-                        <p className="text-xs text-slate-500 dark:text-text-secondary/70">
+                        <p className="text-xs text-gray-500 dark:text-text-secondary/70">
                           Ihre aktuellen SaaS-Lizenzen
                         </p>
                       </div>
                       <div className="text-right">
                         <p className={getValueClasses(highlightMonthlyNet)}>
                           {formatCurrency(displayMonthlySaaSCost)}{' '}
-                          <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
+                          <span className="text-xs font-semibold text-gray-500 dark:text-text-secondary/70">
                             / Monat {costModeLabel}
                           </span>
                         </p>
@@ -1390,22 +1427,51 @@ const SetupPage: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-800 dark:text-red-200">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-700 dark:text-red-200">
                         Jährliche Kosten
                       </p>
-                      <p className="text-xs text-slate-500 dark:text-text-secondary/70">12 Monate Nutzung</p>
+                      <p className="text-xs text-gray-500 dark:text-text-secondary/70">12 Monate Nutzung</p>
                     </div>
                     <div className="text-right">
                       <p className={getValueClasses(highlightYearlyNet)}>
                         {formatCurrency(displayYearlySaaSCost)}{' '}
-                        <span className="text-xs font-semibold text-slate-500 dark:text-text-secondary/70">
+                        <span className="text-xs font-semibold text-gray-500 dark:text-text-secondary/70">
                           / Jahr {costModeLabel}
                         </span>
                       </p>
                     </div>
                   </div>
                 </div>
-                <p className="mt-4 text-xs text-red-800/70 dark:text-red-200/70">{costModeNote}</p>
+                <p className="mt-4 text-xs text-red-700/80 dark:text-red-200/70">{costModeNote}</p>
+              </div>
+
+              <div className="rounded-2xl border border-gray-200 bg-white p-5 text-sm text-gray-700 shadow-sm dark:border-white/10 dark:bg-bg-darker/60 dark:text-text-secondary dark:shadow-none">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-text-secondary/70">
+                  Insights
+                </p>
+                <div className="mt-3 divide-y divide-gray-200/70 dark:divide-white/10">
+                  <div className="flex items-center justify-between py-2">
+                    <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-text-secondary/70">
+                      <Layers className="h-3.5 w-3.5 text-vae-turquoise/70" />
+                      Top-Block
+                    </span>
+                    <span className="text-sm font-semibold text-gray-900 dark:text-white">{topCategoryInsight}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2">
+                    <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-text-secondary/70">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-vae-turquoise/70" />
+                      Tools aktiv
+                    </span>
+                    <span className="text-sm font-semibold text-gray-900 dark:text-white">{activeToolCount}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2">
+                    <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-text-secondary/70">
+                      <Repeat className="h-3.5 w-3.5 text-vae-turquoise/70" />
+                      Zusatzlizenzen
+                    </span>
+                    <span className="text-sm font-semibold text-gray-900 dark:text-white">{customLicenses.length}</span>
+                  </div>
+                </div>
               </div>
 
               <LockedSection
@@ -1417,26 +1483,26 @@ const SetupPage: React.FC = () => {
                 ctaDataAttribute="cta"
                 className="rounded-3xl"
               >
-                <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-6 transition-opacity duration-300 hover:opacity-70">
+                <div className="overflow-hidden rounded-3xl border border-gray-200 bg-gradient-to-br from-white via-[#f6f8f7] to-white p-6 shadow-sm transition-opacity duration-300 hover:opacity-80 dark:border-white/10 dark:from-bg-dark/80 dark:via-bg-darker dark:to-bg-dark dark:shadow-none dark:hover:opacity-70">
                   <div className="mb-6 flex items-center justify-between gap-4">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
                         Einsparungen mit Self-Hosting
                       </p>
-                      <p className="text-sm text-text-secondary">Ihre individuelle Kostenanalyse</p>
+                      <p className="text-sm text-gray-600 dark:text-text-secondary">Ihre individuelle Kostenanalyse</p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 p-5">
-                      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/5 bg-gradient-to-br from-white/5 via-transparent to-bg-dark/70" />
-                      <div className="relative space-y-5 text-sm text-white">
+                    <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-black/40 dark:shadow-none">
+                      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/5 bg-gradient-to-br from-white/5 via-transparent to-bg-dark/70 dark:block" />
+                      <div className="relative space-y-5 text-sm text-gray-800 dark:text-white">
                         <div>
                           <div className="flex items-center justify-between">
                             <span>Ihre SaaS-Kosten ab Jahr 1</span>
                             <span className="font-semibold">{formatCurrency(displayYearlySaaSCost)}</span>
                           </div>
-                          <div className="mt-2 h-2 rounded-full bg-white/10">
+                          <div className="mt-2 h-2 rounded-full bg-gray-200 dark:bg-white/10">
                             <div
                               className="h-2 rounded-full bg-red-400"
                               style={{
@@ -1450,7 +1516,7 @@ const SetupPage: React.FC = () => {
                             <span>Self-Hosting ab Jahr 2 (nur Hosting)</span>
                             <span className="font-semibold">{formatCurrency(displayOpenSourceAnnual)}</span>
                           </div>
-                          <div className="mt-2 h-2 rounded-full bg-white/10">
+                          <div className="mt-2 h-2 rounded-full bg-gray-200 dark:bg-white/10">
                             <div
                               className="h-2 rounded-full bg-vae-turquoise"
                               style={{
@@ -1464,36 +1530,42 @@ const SetupPage: React.FC = () => {
 
                     <div className="space-y-3 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-5">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-white/90">Einsparung im ersten Jahr (inkl. Setup)</span>
+                        <span className="text-gray-800 dark:text-white/90">
+                          Einsparung im ersten Jahr (inkl. Setup)
+                        </span>
                         <span className="text-lg font-semibold text-vae-turquoise">
                           {formatCurrency(yearOneSavings)}
                         </span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-white/90">Einsparung ab Jahr 2</span>
+                        <span className="text-gray-800 dark:text-white/90">Einsparung ab Jahr 2</span>
                         <span className="text-lg font-semibold text-vae-turquoise">
                           {formatCurrency(yearTwoSavings)}
                         </span>
                       </div>
-                      <div className="mt-3 border-t border-white/10 pt-3">
+                      <div className="mt-3 border-t border-vae-turquoise/20 pt-3 dark:border-white/10">
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-semibold text-white">Geschätzter Setup-Aufwand</span>
-                          <span className="text-base font-bold text-white">{formatCurrency(displaySetupCost)}</span>
+                          <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                            Geschätzter Setup-Aufwand
+                          </span>
+                          <span className="text-base font-bold text-gray-900 dark:text-white">
+                            {formatCurrency(displaySetupCost)}
+                          </span>
                         </div>
-                        <p className="mt-2 text-xs text-white/70">
+                        <p className="mt-2 text-xs text-gray-700 dark:text-white/70">
                           Setup-Kosten sind bewusst gedeckelt, damit die Kalkulation konservativ bleibt.
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <p className="mt-4 text-xs text-text-secondary">
+                  <p className="mt-4 text-xs text-gray-600 dark:text-text-secondary">
                     Konkrete Einsparungen berechnen wir individuell auf Basis Ihrer Systeme, Lizenzen und Anforderungen.
                   </p>
                 </div>
               </LockedSection>
 
-              <div className="space-y-2 text-xs text-text-secondary">
+              <div className="space-y-2 text-xs text-gray-600 dark:text-text-secondary">
                 <p>
                   Diese Darstellung ersetzt keine individuelle Angebotserstellung. Im Beratungsgespräch berücksichtigen
                   wir Verträge, Rabatte und Ihre Steuersituation.

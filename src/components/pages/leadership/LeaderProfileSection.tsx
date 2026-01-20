@@ -132,11 +132,10 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
         </div>
 
         <aside className={`flex flex-col gap-6 ${cardColumnOrder}`}>
-          <figure className="group relative overflow-hidden rounded-[32px] border-2 border-black/15 bg-[#f7f8fb] p-4 shadow-[0_22px_60px_rgba(15,23,42,0.12)] transition-all duration-500 dark:border-white/15 dark:bg-[#0b1118] dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)] sm:p-5">
-            <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-[radial-gradient(120%_120%_at_15%_0%,rgba(255,255,255,0.95)_0%,rgba(245,247,252,0.95)_45%,rgba(233,238,247,0.92)_75%,rgba(223,228,240,0.9)_100%)] opacity-100 dark:opacity-0" />
-            <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-[linear-gradient(135deg,rgba(15,23,42,0.08)_0%,rgba(15,23,42,0.08)_6%,transparent_6%,transparent_18%)] opacity-70 dark:opacity-0" />
+          <figure className="group relative overflow-hidden rounded-[32px] border-2 border-black/25 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] dark:border-vae-turquoise/20 dark:bg-[#0b1118] dark:shadow-[0_18px_50px_rgba(7,15,25,0.55)] dark:hover:border-vae-turquoise/30 dark:hover:shadow-[0_20px_60px_rgba(0,255,165,0.08)] sm:p-5">
+            <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-br from-white via-gray-50/50 to-gray-100/30 opacity-100 dark:opacity-0" />
             <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-[radial-gradient(120%_120%_at_15%_0%,rgba(16,23,33,0.85)_0%,rgba(9,14,20,0.9)_60%,rgba(6,9,14,0.95)_100%)] opacity-0 dark:opacity-100" />
-            <div className="pointer-events-none absolute inset-3 rounded-[28px] border border-black/20 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.55)] dark:border-white/20 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]" />
+            <div className="pointer-events-none absolute inset-3 rounded-[28px] border border-black/10 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] dark:border-vae-turquoise/10 dark:shadow-[inset_0_0_0_1px_rgba(0,255,165,0.06)]" />
 
             <div className="relative z-10 overflow-hidden rounded-[22px] bg-black/5 shadow-[0_18px_40px_rgba(10,15,25,0.2)] dark:bg-black/20">
               <picture>

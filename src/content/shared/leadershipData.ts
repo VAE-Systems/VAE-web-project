@@ -89,8 +89,8 @@ export const LEADERS: LeaderProfile[] = [
     title: 'CTO & Co-Founder',
     roleTag: 'TECHNISCHE VISION | OPEN SOURCE BEFÜRWORTER | SYSTEMARCHITEKTUR',
     portrait: {
-      src: '/images/optimized/Jakob-Leitungs-Portrait.webp',
-      fallback: '/images/optimized/Jakob-Leitungs-Portrait.png',
+      src: '/images/optimized/Jakob-Leitungs-Portrait-BW.webp',
+      fallback: '/images/optimized/Jakob-Leitungs-Portrait-BW.png',
       alt: 'Jakob Dünnebeil in einem professionellen Porträt.',
     },
     background:

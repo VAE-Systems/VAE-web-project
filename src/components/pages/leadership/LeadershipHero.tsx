@@ -11,7 +11,7 @@ export const LeadershipHero: React.FC = () => {
         <div
           className="absolute inset-0 z-0 opacity-70 dark:opacity-55"
           style={{
-            backgroundImage: 'url(/images/optimized/Background-Für-Hero-Leitung-2.webp)',
+            backgroundImage: 'url(/images/optimized/Background-Für-Hero-Leitung-2-BW.webp)',
             backgroundAttachment: 'fixed',
             backgroundPosition: 'center',
             backgroundSize: 'cover',

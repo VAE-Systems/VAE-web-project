@@ -41,8 +41,8 @@ export const LEADERS: LeaderProfile[] = [
     title: 'CEO & Co-Founder',
     roleTag: 'STRATEGISCHE VISION | DESIGN & UX | KI-STRATEGIE | BUSINESS DEVELOPMENT',
     portrait: {
-      src: '/images/optimized/Julian-Portrait-2025.webp',
-      fallback: '/images/optimized/Julian-Portrait-2025.png',
+      src: '/images/optimized/Julian-Portrait-2025-BW.webp',
+      fallback: '/images/optimized/Julian-Portrait-2025-BW.png',
       alt: 'Julian Goertz Dini in aktuellem Porträt vor dunklem Hintergrund.',
     },
     background:

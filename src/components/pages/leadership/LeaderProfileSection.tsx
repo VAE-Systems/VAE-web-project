@@ -145,7 +145,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                   src={portraitFallback}
                   alt={leader.portrait.alt}
                   loading="lazy"
-                  className={`h-[520px] w-full ${scaleClasses} group-hover:contrast-105 object-cover object-[40%_20%] grayscale transition-all duration-[900ms] ease-out group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[580px]`}
+                  className={`h-[520px] w-full ${scaleClasses} group-hover:contrast-105 object-cover object-[40%_20%] transition-all duration-[900ms] ease-out group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[580px]`}
                 />
               </picture>
               {/* Subtiler Vignette-Effekt für natürlichen Bildrand-Fokus */}

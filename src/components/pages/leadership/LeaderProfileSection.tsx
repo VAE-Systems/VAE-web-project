@@ -31,6 +31,31 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
       }`}
     >
       <div className="container-vae grid gap-12 lg:grid-cols-[1.15fr_0.95fr] lg:items-center">
+        <aside className={`flex flex-col gap-6 ${cardColumnOrder} order-first lg:order-none`}>
+          <figure className="group relative overflow-hidden rounded-[32px] border-2 border-black/25 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] dark:border-vae-turquoise/20 dark:bg-[#0a0a0a] dark:shadow-[0_18px_50px_rgba(0,0,0,0.8)] dark:hover:border-vae-turquoise/30 dark:hover:shadow-[0_20px_60px_rgba(0,255,165,0.08)] sm:p-5">
+            <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-br from-white via-gray-50/50 to-gray-100/30 opacity-100 dark:opacity-0" />
+            <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-[radial-gradient(120%_120%_at_15%_0%,rgba(20,20,20,0.9)_0%,rgba(12,12,12,0.95)_60%,rgba(8,8,8,1)_100%)] opacity-0 dark:opacity-100" />
+            <div className="pointer-events-none absolute inset-3 rounded-[28px] border border-black/10 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] dark:border-vae-turquoise/10 dark:shadow-[inset_0_0_0_1px_rgba(0,255,165,0.06)]" />
+
+            <div className="relative z-10 overflow-hidden rounded-[22px] bg-black/5 shadow-[0_18px_40px_rgba(10,15,25,0.2)] dark:bg-black/20">
+              <picture>
+                <source srcSet={leader.portrait.src} type="image/webp" />
+                <img
+                  src={portraitFallback}
+                  alt={leader.portrait.alt}
+                  loading="lazy"
+                  className={`h-[520px] w-full ${scaleClasses} group-hover:contrast-105 object-cover object-[40%_20%] transition-all duration-[900ms] ease-out group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[580px]`}
+                />
+              </picture>
+              {/* Subtiler Vignette-Effekt für natürlichen Bildrand-Fokus */}
+              <div className="bg-gradient-radial pointer-events-none absolute inset-0 from-transparent via-transparent to-black/20 opacity-60 transition-opacity duration-500 group-hover:opacity-40 dark:to-black/30 dark:opacity-70" />
+              {/* Bottom Fade-Out für abgeschnittenes Bild */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 via-black/10 to-transparent dark:from-black/60 dark:via-black/20" />
+              <figcaption className="sr-only">{leader.portrait.alt}</figcaption>
+            </div>
+          </figure>
+        </aside>
+
         <div className={`space-y-6 ${infoColumnOrder}`}>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
             Founder Story
@@ -130,33 +155,6 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
             </div>
           </div>
         </div>
-
-        <aside className={`flex flex-col gap-6 ${cardColumnOrder}`}>
-          <figure className="group relative overflow-hidden rounded-[32px] border-2 border-black/25 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] dark:border-vae-turquoise/20 dark:bg-[#0a0a0a] dark:shadow-[0_18px_50px_rgba(0,0,0,0.8)] dark:hover:border-vae-turquoise/30 dark:hover:shadow-[0_20px_60px_rgba(0,255,165,0.08)] sm:p-5">
-            <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-br from-white via-gray-50/50 to-gray-100/30 opacity-100 dark:opacity-0" />
-            <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-[radial-gradient(120%_120%_at_15%_0%,rgba(20,20,20,0.9)_0%,rgba(12,12,12,0.95)_60%,rgba(8,8,8,1)_100%)] opacity-0 dark:opacity-100" />
-            <div className="pointer-events-none absolute inset-3 rounded-[28px] border border-black/10 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] dark:border-vae-turquoise/10 dark:shadow-[inset_0_0_0_1px_rgba(0,255,165,0.06)]" />
-
-            <div className="relative z-10 overflow-hidden rounded-[22px] bg-black/5 shadow-[0_18px_40px_rgba(10,15,25,0.2)] dark:bg-black/20">
-              <picture>
-                <source srcSet={leader.portrait.src} type="image/webp" />
-                <img
-                  src={portraitFallback}
-                  alt={leader.portrait.alt}
-                  loading="lazy"
-                  className={`h-[520px] w-full ${scaleClasses} group-hover:contrast-105 object-cover object-[40%_20%] transition-all duration-[900ms] ease-out group-hover:brightness-110 motion-reduce:transition-none dark:group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:h-[580px]`}
-                />
-              </picture>
-              {/* Subtiler Vignette-Effekt für natürlichen Bildrand-Fokus */}
-              <div className="bg-gradient-radial pointer-events-none absolute inset-0 from-transparent via-transparent to-black/20 opacity-60 transition-opacity duration-500 group-hover:opacity-40 dark:to-black/30 dark:opacity-70" />
-              {/* Bottom Fade-Out für abgeschnittenes Bild */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 via-black/10 to-transparent dark:from-black/60 dark:via-black/20" />
-              <figcaption className="sr-only">{leader.portrait.alt}</figcaption>
-            </div>
-          </figure>
-
-          {/* Info-Kachel entfernt laut Vorgabe */}
-        </aside>
       </div>
     </section>
   )

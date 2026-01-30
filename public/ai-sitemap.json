@@ -5,8 +5,8 @@
     {
       "url": "https://vae-systems.com/",
       "title": "VAE Systems | Self-Hosted Infrastruktur & KI",
-      "description": "Self-hosted Arbeitsinfrastruktur aufbauen, KI-ready machen & betreuen — ohne Vendor-Lock-in.",
-      "keywords": ["KI-Beratung", "Open-Source", "Self-Hosting", "Heidelberg", "Infrastruktur", "Nextcloud", "Odoo"],
+      "description": "Self-hosted Infrastruktur und KI-Workflows für Teams, die Kontrolle statt SaaS wollen. Strategie, Setup und Betrieb.",
+      "keywords": ["KI-Beratung", "Open-Source", "Self-Hosting", "Deutschland", "Infrastruktur", "Nextcloud", "Odoo"],
       "last_updated": "2026-01-30",
       "importance": "high",
       "type": "homepage"
@@ -22,9 +22,9 @@
     },
     {
       "url": "https://vae-systems.com/leistungen/strategie",
-      "title": "Strategieberatung für Self-Hosted Infrastruktur | VAE Systems",
-      "description": "Strategieberatung für digitale Transformation: KI-Strategie, Digitalisierung, Prozessautomatisierung. Kostenlose Erstanalyse.",
-      "keywords": ["KI-Strategie", "Beratung", "Digitalisierung", "Transformation", "Heidelberg"],
+      "title": "Strategieberatung für Self-Hosted Infrastruktur, KI & Digitalisierung | VAE Systems",
+      "description": "Roadmap, Architektur und Prozessdesign: Self-Hosted Stack, KI-Integration und Automatisierung — pragmatisch, DSGVO-konform.",
+      "keywords": ["KI-Strategie", "Beratung", "Digitalisierung", "Transformation", "bundesweit"],
       "last_updated": "2026-01-30",
       "importance": "high",
       "type": "service"
@@ -33,7 +33,16 @@
       "url": "https://vae-systems.com/leistungen/infrastruktur",
       "title": "Self-Hosted Infrastruktur Setup | VAE Systems",
       "description": "Open-Source-Infrastruktur statt SaaS: Nextcloud, Odoo, n8n aufbauen. Migration, Security & Dokumentation inklusive.",
-      "keywords": ["Infrastruktur", "Setup", "Open-Source", "Nextcloud", "Odoo", "n8n", "SaaS-Alternative"],
+      "keywords": [
+        "Infrastruktur",
+        "Setup",
+        "Open-Source",
+        "Nextcloud",
+        "Odoo",
+        "n8n",
+        "SaaS-Alternative",
+        "Deutschland"
+      ],
       "last_updated": "2026-01-30",
       "importance": "high",
       "type": "service"
@@ -42,7 +51,7 @@
       "url": "https://vae-systems.com/leistungen/betreuung",
       "title": "IT-Betreuung & Managed Services | VAE Systems",
       "description": "Managed Operations: Betrieb, Wartung und Weiterentwicklung Ihrer IT-Systeme. Full-Service oder Infrastruktur-Support.",
-      "keywords": ["IT-Betreuung", "Managed Services", "Wartung", "Support", "Heidelberg"],
+      "keywords": ["IT-Betreuung", "Managed Services", "Wartung", "Support", "Deutschland"],
       "last_updated": "2026-01-30",
       "importance": "high",
       "type": "service"

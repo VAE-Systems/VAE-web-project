@@ -20,7 +20,15 @@
       }
     ]
   },
-  "ignorePatterns": ["dist", "node_modules", "*.config.js", "public/sw.js", "archive/**/*"],
+  "ignorePatterns": [
+    "dist",
+    "node_modules",
+    "*.config.js",
+    "public/sw.js",
+    "archive/**/*",
+    "src/archive/**/*",
+    "src/**/archive/**/*"
+  ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],

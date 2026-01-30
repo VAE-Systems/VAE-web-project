@@ -7,6 +7,7 @@
 
 import fs from 'fs/promises'
 import path from 'path'
+import sharp from 'sharp'
 
 // Direct manifest configuration (instead of importing from TypeScript)
 const manifestConfig = {
@@ -136,6 +137,59 @@ function generateManifest() {
 const PUBLIC_DIR = path.join(process.cwd(), 'public')
 const MANIFEST_PATH = path.join(PUBLIC_DIR, 'manifest.json')
 
+async function fileExists(absolutePath) {
+  try {
+    await fs.access(absolutePath)
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function ensurePwaScreenshots() {
+  const sourceOgImage = path.join(PUBLIC_DIR, 'og', 'vae-og.png')
+
+  if (!(await fileExists(sourceOgImage))) {
+    console.log('⚠️  Could not generate screenshots: public/og/vae-og.png not found')
+    return
+  }
+
+  const targets = [
+    {
+      src: '/screenshots/desktop-hero.png',
+      width: 1280,
+      height: 720,
+    },
+    {
+      src: '/screenshots/mobile-services.png',
+      width: 390,
+      height: 844,
+    },
+    {
+      src: '/screenshots/vae-core-dashboard.png',
+      width: 1280,
+      height: 720,
+    },
+  ]
+
+  for (const target of targets) {
+    const absoluteTargetPath = path.join(PUBLIC_DIR, target.src)
+    if (await fileExists(absoluteTargetPath)) continue
+
+    await fs.mkdir(path.dirname(absoluteTargetPath), { recursive: true })
+    await sharp(sourceOgImage)
+      .resize(target.width, target.height, {
+        fit: 'cover',
+        position: 'centre',
+        background: '#0a0a0a',
+      })
+      .png({ compressionLevel: 9 })
+      .toFile(absoluteTargetPath)
+
+    console.log(`🖼️  Generated ${target.src} (${target.width}x${target.height}) from og/vae-og.png`)
+  }
+}
+
 async function buildManifest() {
   try {
     console.log('🔧 Generating manifest.json...')
@@ -169,6 +223,9 @@ async function buildManifest() {
 async function validateScreenshots() {
   try {
     console.log('\n📸 Validating screenshots...')
+
+    // Best-effort: auto-generate placeholders so the PWA manifest stays consistent
+    await ensurePwaScreenshots()
 
     const manifest = JSON.parse(await fs.readFile(MANIFEST_PATH, 'utf8'))
     const screenshots = manifest.screenshots || []

@@ -134,3 +134,7 @@ Thumbs.db
 
 # VAE Machine (internal files)
 VAE-Machine/
+
+# Legacy archives (kept for reference)
+archive/
+src/archive/

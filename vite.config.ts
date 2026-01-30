@@ -99,7 +99,7 @@ export default defineConfig(({ mode }) => {
           chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js',
           assetFileNames: ({ name }) => {
-            if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+            if (/\.(gif|jpe?g|png|svg|webp|avif)$/.test(name ?? '')) {
               return 'assets/images/[name]-[hash][extname]'
             }
             if (/\.css$/.test(name ?? '')) {
@@ -112,8 +112,10 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-      chunkSizeWarningLimit: 400, // Optimiert für bessere Performance
-      assetsInlineLimit: 2048, // Reduziert: nur sehr kleine Assets inline (2KB statt 4KB)
+      // Target modern browsers for smaller bundles
+      target: 'es2020',
+      chunkSizeWarningLimit: 400,
+      assetsInlineLimit: 2048,
     },
   }
 })

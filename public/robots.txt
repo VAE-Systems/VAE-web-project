@@ -14,8 +14,9 @@ Allow: /fonts/
 Allow: /*.css
 Allow: /*.js
 
-# Sitemap location
+## Sitemap locations
 Sitemap: https://vae-systems.com/sitemap.xml
+Sitemap: https://vae-systems.com/ai-sitemap.json
 
 # Allow legitimate AI assistants for better discoverability
 # These help users find VAE Systems via AI-powered search
@@ -50,10 +51,6 @@ Disallow: /
 
 User-agent: DotBot
 Disallow: /
-
-# Sitemap locations
-Sitemap: https://vae.systems/sitemap.xml
-Sitemap: https://vae.systems/ai-sitemap.json
 
 # Additional search engine directives
 User-agent: Googlebot

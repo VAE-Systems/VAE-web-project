@@ -436,7 +436,7 @@ const BeratungPage: React.FC = () => {
   return (
     <div className="relative z-0 min-h-screen bg-white text-gray-900 dark:bg-[hsl(0,0%,4%)] dark:text-[hsl(0,0%,95%)]">
       <Seo
-        title="KI-Strategieberatung Heidelberg | VAE Systems"
+        title="Strategieberatung für Self-Hosted Infrastruktur | VAE Systems"
         description="Strategieberatung für digitale Transformation: KI-Strategie, Digitalisierung, Prozessautomatisierung. Kostenlose Erstanalyse zur digitalen Souveränität."
         canonicalPath="/leistungen/strategie"
         jsonLd={{
@@ -446,7 +446,7 @@ const BeratungPage: React.FC = () => {
           provider: {
             '@type': 'Organization',
             name: 'VAE Systems UG',
-            url: 'https://vae.systems',
+            url: 'https://vae-systems.com',
           },
           areaServed: {
             '@type': 'Place',
@@ -455,7 +455,7 @@ const BeratungPage: React.FC = () => {
           description: 'Individuelle KI-Roadmaps und Digitalisierungsstrategien für Unternehmen',
           offers: {
             '@type': 'Offer',
-            url: 'https://vae.systems/leistungen/strategie',
+            url: 'https://vae-systems.com/leistungen/strategie',
             priceCurrency: 'EUR',
             price: 'auf Anfrage',
           },

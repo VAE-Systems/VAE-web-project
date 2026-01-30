@@ -18,7 +18,7 @@
     "analyze": "ANALYZE=true npm run build",
     "build-manifest": "node scripts/build-assets.js",
     "crawl": "node scripts/crawl-to-desktop.js --url=local",
-    "crawl:prod": "node scripts/crawl-to-desktop.js --url=https://vae.systems",
+    "crawl:prod": "node scripts/crawl-to-desktop.js --url=https://vae-systems.com",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:e2e": "playwright test"

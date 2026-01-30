@@ -9,7 +9,7 @@ interface SeoProps {
   openGraph?: Partial<{ type: string; image: string; locale: string }>
 }
 
-const BASE_URL = 'https://vae.systems'
+const BASE_URL = 'https://vae-systems.com'
 
 const Seo: React.FC<SeoProps> = ({ title, description, canonicalPath, jsonLd, noIndex, openGraph }) => {
   useEffect(() => {

@@ -555,7 +555,7 @@ const SetupPage: React.FC = () => {
   return (
     <div className="relative z-0 bg-bg-darker text-text-light">
       <Seo
-        title="Infrastruktur-Setup Heidelberg | VAE Systems"
+        title="Self-Hosted Infrastruktur Setup | VAE Systems"
         description="Self-Hosted-Infrastruktur statt SaaS: Open-Source-Stacks für Kollaboration, Business-Apps und Automations-Workflows. Migration, Security & Dokumentation inklusive. Heidelberg & deutschlandweit."
         canonicalPath="/leistungen/infrastruktur"
         jsonLd={{
@@ -565,7 +565,7 @@ const SetupPage: React.FC = () => {
           provider: {
             '@type': 'Organization',
             name: 'VAE Systems UG',
-            url: 'https://vae.systems',
+            url: 'https://vae-systems.com',
           },
           areaServed: {
             '@type': 'Place',
@@ -575,7 +575,7 @@ const SetupPage: React.FC = () => {
             'Self-Hosted-Infrastruktur aufbauen: Open-Source-Stacks für CRM, Projektmanagement und Kommunikation. Migration & Security inklusive.',
           offers: {
             '@type': 'Offer',
-            url: 'https://vae.systems/leistungen/infrastruktur',
+            url: 'https://vae-systems.com/leistungen/infrastruktur',
             priceCurrency: 'EUR',
             price: 'auf Anfrage',
           },

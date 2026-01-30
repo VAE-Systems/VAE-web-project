@@ -6,7 +6,7 @@
 
 export const BUSINESS_INFO = {
   EMAIL: 'info@vae.systems',
-  DOMAIN: 'vae.systems',
+  DOMAIN: 'vae-systems.com',
   NAME: 'VAE Systems',
 } as const
 

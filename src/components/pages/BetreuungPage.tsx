@@ -289,7 +289,7 @@ const BetreuungPage: React.FC = () => {
   return (
     <div className="relative bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
-        title="Langfristige IT-Betreuung Heidelberg | VAE Systems"
+        title="IT-Betreuung & Managed Services | VAE Systems"
         description="Outsourcen Sie Ihr IT-Rückgrat an VAE: Infrastruktur-Managed oder Full-Partnership – mit Fokus auf Ressourcen, KI-Optimierung und langfristige Stabilität."
         canonicalPath="/leistungen/betreuung"
         jsonLd={{
@@ -299,7 +299,7 @@ const BetreuungPage: React.FC = () => {
           provider: {
             '@type': 'Organization',
             name: 'VAE Systems UG',
-            url: 'https://vae.systems',
+            url: 'https://vae-systems.com',
           },
           areaServed: {
             '@type': 'Place',
@@ -308,7 +308,7 @@ const BetreuungPage: React.FC = () => {
           description: 'Managed Operations: Betrieb, Wartung und Weiterentwicklung Ihrer IT-Systeme',
           offers: {
             '@type': 'Offer',
-            url: 'https://vae.systems/leistungen/betreuung',
+            url: 'https://vae-systems.com/leistungen/betreuung',
             priceCurrency: 'EUR',
             price: 'auf Anfrage',
           },

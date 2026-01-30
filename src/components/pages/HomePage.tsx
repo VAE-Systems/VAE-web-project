@@ -37,8 +37,8 @@ const HomePage: React.FC = () => {
     <div className="relative z-0 min-h-[100dvh]">
       {/* 🔍 SEO: Meta + Schema.org */}
       <Seo
-        title="VAE Systems Heidelberg | Self-Hosted-Infrastruktur & KI"
-        description="Self-Hosted-Arbeitsinfrastruktur aufbauen, KI-optimieren & betreuen – Open-Source-Stacks inklusive. 3 Monate Testphase. Heidelberg & deutschlandweit."
+        title="VAE Systems | Self-Hosted Infrastruktur & AI-Ready Architektur"
+        description="Self-Hosted Infrastruktur für volle Datenkontrolle. Open Source, DSGVO-konform, AI-ready. Strategie, Setup & Betreuung aus einer Hand. Heidelberg & deutschlandweit."
         canonicalPath="/"
         jsonLd={[
           {
@@ -46,8 +46,8 @@ const HomePage: React.FC = () => {
             '@type': 'Organization',
             name: 'VAE Systems UG',
             alternateName: 'Versatile AI Enhanced Systems',
-            url: 'https://vae.systems',
-            logo: 'https://vae.systems/App_Logo_light.svg',
+            url: 'https://vae-systems.com',
+            logo: 'https://vae-systems.com/App_Logo_light.svg',
             sameAs: ['https://linkedin.com/company/vae-systems', 'https://github.com/vae-systems'],
             contactPoint: {
               '@type': 'ContactPoint',
@@ -66,7 +66,7 @@ const HomePage: React.FC = () => {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'VAE Systems UG',
-            image: 'https://vae.systems/App_Logo_light.svg',
+            image: 'https://vae-systems.com/App_Logo_light.svg',
             address: {
               '@type': 'PostalAddress',
               addressLocality: 'Heidelberg',
@@ -79,7 +79,7 @@ const HomePage: React.FC = () => {
               latitude: '49.3988',
               longitude: '8.6724',
             },
-            url: 'https://vae.systems',
+            url: 'https://vae-systems.com',
             priceRange: '€€€',
           },
         ]}

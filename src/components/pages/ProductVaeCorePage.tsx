@@ -110,12 +110,12 @@ const ProductVaeCorePage: React.FC = () => {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Produkte', item: 'https://vae.systems/products' },
+              { '@type': 'ListItem', position: 1, name: 'Produkte', item: 'https://vae-systems.com/products' },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'VAE CORE',
-                item: 'https://vae.systems/products/vae-core',
+                item: 'https://vae-systems.com/products/vae-core',
               },
             ],
           },

@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://vae-systems.com/</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -15,58 +15,40 @@
 
   <!-- Leistungen / Services -->
   <url>
-    <loc>https://vae-systems.com/services/beratung</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/services/setup</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/services/betreuung</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://vae-systems.com/leistungen/strategie</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/leistungen/infrastruktur</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/leistungen/betreuung</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
   </url>
 
   <!-- Ressourcen -->
   <url>
     <loc>https://vae-systems.com/ressourcen/blog</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/ressourcen/case-studies</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/ressourcen/faq</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -74,37 +56,37 @@
   <!-- Über uns -->
   <url>
     <loc>https://vae-systems.com/about/referenzen</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/case-studies</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/ueber-uns/werte</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/ueber-uns/team</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/ueber-uns/leitung</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/ueber-uns/design-handwerk</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -112,31 +94,31 @@
   <!-- Wissen (Sub-Pages von Werte) -->
   <url>
     <loc>https://vae-systems.com/wissen/transparenz-open-source</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/wissen/klare-projektkommunikation</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/wissen/vendor-lock-in-vermeiden</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/wissen/handwerkskunst-statt-schnellschuss</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/wissen/skalierbare-architektur</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -144,13 +126,13 @@
   <!-- Contact -->
   <url>
     <loc>https://vae-systems.com/contact</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/privacy/settings</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -158,13 +140,13 @@
   <!-- Legal -->
   <url>
     <loc>https://vae-systems.com/impressum</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://vae-systems.com/privacy</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

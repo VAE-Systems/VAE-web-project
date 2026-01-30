@@ -43,8 +43,8 @@ const Seo: React.FC<SeoProps> = ({
 
     updateMetaTag('og:title', title)
     updateMetaTag('og:description', description)
-    updateMetaTag('og:image', image.startsWith('http') ? image : `https://vae.systems${image}`)
-    updateMetaTag('og:url', url ? `https://vae.systems${url}` : 'https://vae.systems')
+    updateMetaTag('og:image', image.startsWith('http') ? image : `https://vae-systems.com${image}`)
+    updateMetaTag('og:url', url ? `https://vae-systems.com${url}` : 'https://vae-systems.com')
     updateMetaTag('og:type', type)
   }, [title, description, image, url, type])
 

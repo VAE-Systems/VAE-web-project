@@ -818,7 +818,7 @@ const ReferenzenPage: React.FC = () => {
       name: 'Referenzen & Case Studies | VAE Systems',
       description:
         'Konkrete Self-Hosted-Infrastrukturen und KI-Workflows, die wir umgesetzt haben: NGOs, Events, interne Best Practices.',
-      url: 'https://vae.systems/ressourcen/case-studies',
+      url: 'https://vae-systems.com/ressourcen/case-studies',
       hasPart: caseStudyLd,
     }
   }, [])

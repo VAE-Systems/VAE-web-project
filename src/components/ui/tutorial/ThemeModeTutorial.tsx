@@ -3,7 +3,6 @@ import { Lightbulb, Moon, Sun, X } from 'lucide-react'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { useTheme } from '@/contexts/ThemeContext'
-import MagneticButton from '@/components/ui/MagneticButton'
 
 const THEME_TUTORIAL_KEY = 'vae-theme-tutorial-shown'
 
@@ -186,9 +185,6 @@ export const ThemeModeTutorial: React.FC = () => {
     : 'border-black/5 bg-gradient-to-br from-white/95 via-white to-white/95 text-slate-900 shadow-[0_30px_60px_rgba(15,23,42,0.12)]'
   const titleClass = isDark ? 'text-white' : 'text-slate-900'
   const descriptionClass = isDark ? 'text-white/80' : 'text-slate-600'
-  const buttonClasses = isDark
-    ? 'bg-vae-turquoise text-bg-darker hover:bg-vae-turquoise-dark'
-    : 'bg-vae-turquoise text-slate-900 hover:bg-vae-turquoise-dark'
 
   return (
     <AnimatePresence mode="wait">
@@ -320,14 +316,9 @@ export const ThemeModeTutorial: React.FC = () => {
                 )}
               </p>
 
-              <MagneticButton intensity={0.08} className="w-full">
-                <button
-                  onClick={handleDismiss}
-                  className={`w-full rounded-xl px-5 py-3 text-sm font-semibold transition-all hover:shadow-lg hover:shadow-vae-turquoise/30 ${buttonClasses}`}
-                >
-                  Verstanden
-                </button>
-              </MagneticButton>
+              <button onClick={handleDismiss} className="btn-primary w-full">
+                Verstanden
+              </button>
             </div>
           </div>
         </motion.div>

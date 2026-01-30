@@ -82,7 +82,7 @@ export const IconDebugger = {
 
 // Make debugging tools available globally in development
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  ;(window as any).VaeIconDebug = IconDebugger
+  ;(window as unknown as Record<string, unknown>).VaeIconDebug = IconDebugger
 }
 
 export default IconDebugger

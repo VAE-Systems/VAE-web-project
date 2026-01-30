@@ -102,6 +102,7 @@ const TechShowcaseSection: React.FC = () => {
           <div className="overflow-hidden">
             <div ref={trackRef} className="flex gap-6" style={{ willChange: reducedMotion ? undefined : 'transform' }}>
               {duplicatedTools.map((tool, index) => (
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- Focusable for keyboard navigation
                 <div
                   key={`${tool.id}-${index}`}
                   className="to-white/2 group relative w-[220px] shrink-0 cursor-pointer rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 p-5 text-left text-white transition-transform hover:-translate-y-1"

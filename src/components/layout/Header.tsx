@@ -481,13 +481,27 @@ const HeaderModern: React.FC = () => {
 
       {/* Mobile bottom-sheet menu is rendered outside the transforming header so it correctly fills the viewport */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[9999] lg:hidden">
-          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={closeMenu} aria-hidden="true" />
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- Modal dialog wrapper
+        <div
+          className="fixed inset-0 z-[9999] lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          onKeyDown={e => e.key === 'Escape' && closeMenu()}
+        >
+          {}
+          <div
+            className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+            onClick={closeMenu}
+            onKeyDown={e => e.key === 'Escape' && closeMenu()}
+            role="button"
+            tabIndex={0}
+            aria-label="Menü schließen"
+          />
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- Modal document container */}
           <div
             ref={sheetRef}
             className={`absolute bottom-0 left-0 right-0 top-0 flex flex-col overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.55)] ${isDark ? 'bg-bg-darker text-white' : 'bg-white text-gray-900'}`}
-            role="dialog"
-            aria-modal="true"
+            role="document"
             aria-label="Hauptmenü"
             onClick={event => event.stopPropagation()}
           >

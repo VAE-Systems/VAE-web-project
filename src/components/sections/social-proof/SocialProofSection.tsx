@@ -53,6 +53,7 @@ const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
   }, [onClose])
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- Modal dialog with keyboard handler via useEffect
     <div
       className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/80 px-4 py-10 backdrop-blur-sm"
       role="dialog"
@@ -60,6 +61,7 @@ const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
       aria-label={`${logo.alt} - Vergrößert`}
       onClick={onClose}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- Inner container for click prevention */}
       <div className="relative max-h-[90vh] max-w-4xl" onClick={e => e.stopPropagation()}>
         <button
           type="button"

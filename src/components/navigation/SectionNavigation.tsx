@@ -54,7 +54,7 @@ const SectionNavigation: React.FC = () => {
       }
 
       withPositions.sort((a, b) => a.top - b.top)
-      setOrderedSections(withPositions.map(({ top, ...rest }) => rest))
+      setOrderedSections(withPositions.map(({ top: _top, ...rest }) => rest))
     }
 
     calculateOrder()

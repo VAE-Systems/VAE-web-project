@@ -241,13 +241,14 @@ const TechStackSection: React.FC = () => {
         // Re-Enter während Ausfaden: direkt wieder hochfahren (Keyboard-Trail Effekt)
         const handleEnter = () => {
           // Kill Ausblendung, Glow hochfahren über Variable
-          ;(el as any)._fadeOutTween?.kill?.()
+          const elWithTween = el as HTMLElement & { _fadeOutTween?: gsap.core.Tween }
+          elWithTween._fadeOutTween?.kill?.()
           gsap.to(el, { '--glow-alpha': 0.78, scale: 1.085, duration: 0.25, ease: 'power2.out' })
-          const img = el.querySelector('img') as HTMLElement | null
+          const img = el.querySelector('img') as (HTMLElement & { _spinTween?: gsap.core.Tween }) | null
           if (img) {
             // Laufender Spin nur während Hover
-            ;(img as any)._spinTween?.kill?.()
-            ;(img as any)._spinTween = gsap.to(img, {
+            img._spinTween?.kill?.()
+            img._spinTween = gsap.to(img, {
               rotationY: '+=360',
               duration: 1.4,
               ease: 'power1.inOut',
@@ -257,17 +258,18 @@ const TechStackSection: React.FC = () => {
         }
         const handleLeave = () => {
           // Spin auslaufen lassen (sanft abbremsen)
-          const img = el.querySelector('img') as HTMLElement | null
+          const img = el.querySelector('img') as (HTMLElement & { _spinTween?: gsap.core.Tween }) | null
           if (img) {
             const currentRot = gsap.getProperty(img, 'rotationY') as number
-            ;(img as any)._spinTween?.kill?.()
+            img._spinTween?.kill?.()
             // Zur nächsten vollen 360 Grad einrasten
             const target = Math.ceil(currentRot / 360) * 360
             gsap.to(img, { rotationY: target, duration: 0.8, ease: 'power2.out' })
           }
           // Sehr langsames Ausblenden des Glows (Trail Effekt)
+          const elWithTween = el as HTMLElement & { _fadeOutTween?: gsap.core.Tween }
           const fade = gsap.to(el, { '--glow-alpha': 0, scale: 1, duration: 3.2, ease: 'power2.out' })
-          ;(el as any)._fadeOutTween = fade
+          elWithTween._fadeOutTween = fade
         }
         el.addEventListener('pointerenter', handleEnter)
         el.addEventListener('pointerleave', handleLeave)

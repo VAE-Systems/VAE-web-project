@@ -173,9 +173,9 @@ export const AdminDebugPage = () => {
           {/* Instructions */}
           {!crawlData && (
             <div className="space-y-4 text-sm text-text-secondary">
-              <h3 className="font-medium text-text-light">So funktioniert's:</h3>
+              <h3 className="font-medium text-text-light">So funktioniert&apos;s:</h3>
               <ol className="list-inside list-decimal space-y-2">
-                <li>Klicke auf "Crawl meine Website"</li>
+                <li>Klicke auf &quot;Crawl meine Website&quot;</li>
                 <li>Warte, bis der Crawl abgeschlossen ist</li>
                 <li>Downloade die Daten als JSON oder Markdown</li>
                 <li>Paste die Markdown in Claude/ChatGPT</li>

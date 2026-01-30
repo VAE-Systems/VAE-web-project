@@ -68,6 +68,16 @@ const TouchCard: React.FC<TouchCardProps> = ({
     <div
       className={`${baseClasses} ${paddingClasses[padding]} ${interactiveClasses} ${disabledClass} ${minHeightClass} touch-manipulation ${className}`}
       onClick={interactive ? handleClick : undefined}
+      onKeyDown={
+        interactive
+          ? (e: React.KeyboardEvent) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                handleClick()
+              }
+            }
+          : undefined
+      }
       style={{
         WebkitTapHighlightColor: 'transparent',
       }}

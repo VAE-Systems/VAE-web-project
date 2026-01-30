@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAE CORE – Dashboard Screenshot</title>
+  <link rel="stylesheet" href="../../VAE-Machine/_templates/shared/digital-base.css">
+  <style>
+    :root {
+      --bg-deep: #050806;
+      --bg-card: rgba(20, 30, 25, 0.6);
+      --vae-turquoise: #00ffa5;
+      --text-dim: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-deep);
+      color: white;
+      width: 1280px;
+      height: 720px;
+      overflow: hidden;
+    }
+    
+    .screenshot {
+      width: 1280px;
+      height: 720px;
+      display: flex;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: rgba(10, 15, 12, 0.9);
+      border-right: 1px solid var(--glass-border);
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    
+    .sidebar-logo img {
+      height: 32px;
+    }
+    
+    .sidebar-logo span {
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    .nav-section {
+      margin-bottom: 32px;
+    }
+    
+    .nav-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    
+    .nav-item.active {
+      background: rgba(0,255,165,0.1);
+      color: var(--vae-turquoise);
+    }
+    
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .page-title {
+      font-size: 26px;
+      font-weight: 600;
+    }
+    
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 100px;
+    }
+    
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--vae-turquoise), #00b87a);
+    }
+    
+    .user-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    /* Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    
+    .stat-value {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    
+    .stat-value.highlight {
+      color: var(--vae-turquoise);
+    }
+    
+    .stat-change {
+      font-size: 12px;
+      color: var(--vae-turquoise);
+      margin-top: 6px;
+    }
+    
+    /* Content Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      flex: 1;
+    }
+    
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    
+    .card-action {
+      font-size: 13px;
+      color: var(--vae-turquoise);
+    }
+    
+    /* Chart Placeholder */
+    .chart-area {
+      height: 180px;
+      background: linear-gradient(180deg, rgba(0,255,165,0.08) 0%, transparent 100%);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chart-line {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--vae-turquoise), transparent);
+    }
+    
+    .chart-points {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      padding: 0 20px 18px;
+    }
+    
+    .chart-bar {
+      width: 24px;
+      background: linear-gradient(180deg, var(--vae-turquoise), rgba(0,255,165,0.3));
+      border-radius: 4px 4px 0 0;
+    }
+    
+    /* Activity List */
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    
+    .activity-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--vae-turquoise);
+      box-shadow: 0 0 10px var(--vae-turquoise);
+    }
+    
+    .activity-text {
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+    
+    .activity-time {
+      margin-left: auto;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Geist Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="screenshot">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../../public/App_Logo_light.svg" alt="VAE">
+        <span>VAE CORE</span>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-label">Platform</div>
+        <div class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          Dashboard
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+          Workflows
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path>
+          </svg>
+          Settings
+        </div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-label">Re: Suite</div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path>
+          </svg>
+          Re:spond
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Re:search
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main">
+      <div class="topbar">
+        <h1 class="page-title">Dashboard</h1>
+        <div class="user-badge">
+          <div class="user-avatar"></div>
+          <span class="user-name">Julian Goertz Dini</span>
+        </div>
+      </div>
+      
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Aktive Workflows</div>
+          <div class="stat-value highlight">24</div>
+          <div class="stat-change">+3 diese Woche</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Token-Nutzung</div>
+          <div class="stat-value">2.4M</div>
+          <div class="stat-change">von 5M inkl.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Uptime</div>
+          <div class="stat-value highlight">99.9%</div>
+          <div class="stat-change">Letzter Monat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Team-Mitglieder</div>
+          <div class="stat-value">8</div>
+          <div class="stat-change">3 Seats frei</div>
+        </div>
+      </div>
+      
+      <div class="content-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Workflow-Aktivität</span>
+            <span class="card-action">Alle anzeigen →</span>
+          </div>
+          <div class="chart-area">
+            <div class="chart-line"></div>
+            <div class="chart-points">
+              <div class="chart-bar" style="height: 40%"></div>
+              <div class="chart-bar" style="height: 65%"></div>
+              <div class="chart-bar" style="height: 50%"></div>
+              <div class="chart-bar" style="height: 80%"></div>
+              <div class="chart-bar" style="height: 70%"></div>
+              <div class="chart-bar" style="height: 90%"></div>
+              <div class="chart-bar" style="height: 75%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Letzte Aktivitäten</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <span class="activity-text">Re:spond Workflow deployed</span>
+            <span class="activity-time">vor 5m</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <span class="activity-text">Nextcloud-Sync abgeschlossen</span>
+            <span class="activity-time">vor 23m</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <span class="activity-text">Neuer Team-Zugang: J. Dünnebeil</span>
+            <span class="activity-time">vor 1h</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <span class="activity-text">API-Limit angepasst</span>
+            <span class="activity-time">vor 2h</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -160,7 +160,7 @@ export const privacyContent: PrivacyContent = {
           <ul className="ml-6 list-disc space-y-1">
             <li>
               <span className="font-medium text-text-light">Geist (Primary Font):</span> Unsere primäre Schriftart
-              „Geist" wird vollständig lokal von unserem Server ausgeliefert. Hierbei findet{' '}
+              &bdquo;Geist&ldquo; wird vollständig lokal von unserem Server ausgeliefert. Hierbei findet{' '}
               <span className="text-text-light">keine Datenübertragung an Dritte</span> statt.
             </li>
             <li>
@@ -190,9 +190,10 @@ export const privacyContent: PrivacyContent = {
           <br />
           <span className="font-medium text-text-light">Google Search Console</span>
           <br />
-          Wir nutzen die Google Search Console, ein Webmaster-Tool von Google Ireland Limited („Google"), Gordon House,
-          Barrow Street, Dublin 4, Irland. Die Search Console dient ausschließlich der technischen Analyse unserer
-          Website aus Sicht der Google-Suche (z. B. Indexierungsstatus, Suchanfragen, technische Fehler). Es werden{' '}
+          Wir nutzen die Google Search Console, ein Webmaster-Tool von Google Ireland Limited (&bdquo;Google&ldquo;),
+          Gordon House, Barrow Street, Dublin 4, Irland. Die Search Console dient ausschließlich der technischen Analyse
+          unserer Website aus Sicht der Google-Suche (z. B. Indexierungsstatus, Suchanfragen, technische Fehler). Es
+          werden{' '}
           <span className="text-text-light">
             keine personenbezogenen Daten von Website-Besuchern erfasst oder getrackt
           </span>

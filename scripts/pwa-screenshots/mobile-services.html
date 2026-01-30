@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390, initial-scale=1.0">
+  <title>VAE Systems – Mobile Services Screenshot</title>
+  <link rel="stylesheet" href="../../VAE-Machine/_templates/shared/digital-base.css">
+  <style>
+    :root {
+      --bg-deep: #050806;
+      --vae-turquoise: #00ffa5;
+      --text-dim: rgba(255, 255, 255, 0.75);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(ellipse at 50% 0%, #0d1f16 0%, var(--bg-deep) 60%);
+      color: white;
+      width: 390px;
+      height: 844px;
+      overflow: hidden;
+    }
+    
+    .screenshot {
+      width: 390px;
+      height: 844px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 48px 24px;
+    }
+    
+    .glow-orb {
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0,255,165,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+    
+    .menu-icon {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+    
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--vae-turquoise);
+      margin-bottom: 12px;
+    }
+    
+    .headline {
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+    
+    .service-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+    
+    .service-card {
+      background: rgba(20, 30, 25, 0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0,255,165,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .service-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--vae-turquoise);
+    }
+    
+    .service-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    
+    .service-content p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.45;
+    }
+    
+    .cta-btn {
+      width: 100%;
+      padding: 18px;
+      background: var(--vae-turquoise);
+      color: #050806;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: auto;
+      box-shadow: 0 0 30px rgba(0,255,165,0.25);
+    }
+    
+    .footer-domain {
+      text-align: center;
+      margin-top: 20px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <div class="screenshot">
+    <div class="glow-orb"></div>
+    
+    <div class="header">
+      <img src="../../public/App_Logo_light.svg" alt="VAE" class="logo">
+      <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </div>
+    
+    <span class="section-label">Leistungen</span>
+    <h1 class="headline">Drei Bausteine für Ihre Infrastruktur</h1>
+    
+    <div class="service-cards">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4M12 8h.01"></path>
+          </svg>
+        </div>
+        <div class="service-content">
+          <h3>Strategieberatung</h3>
+          <p>Roadmap, Architektur und Prozessdesign für Ihre Self-Hosted-Lösung.</p>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <div class="service-content">
+          <h3>Infrastruktur-Setup</h3>
+          <p>Open-Source-Stacks statt SaaS: Nextcloud, Odoo, n8n und mehr.</p>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <div class="service-content">
+          <h3>Managed Services</h3>
+          <p>Betrieb, Wartung und Weiterentwicklung — Full-Service oder flexibel.</p>
+        </div>
+      </div>
+    </div>
+    
+    <button class="cta-btn">Erstgespräch buchen</button>
+    <div class="footer-domain">vae-systems.com</div>
+  </div>
+</body>
+</html>

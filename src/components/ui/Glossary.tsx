@@ -148,6 +148,7 @@ export const TermHint: React.FC<TermHintProps> = ({ term, className, variant = '
     <span
       ref={ref}
       className={`relative cursor-help ${base} ${className || ''}`}
+      role="button"
       onMouseEnter={() => {
         if (ref.current) {
           const r = ref.current.getBoundingClientRect()

@@ -17,6 +17,7 @@
     "prepare": "husky",
     "analyze": "ANALYZE=true npm run build",
     "build-manifest": "node scripts/build-assets.js",
+    "export:pwa-screens": "node scripts/export-pwa-screenshots.js",
     "crawl": "node scripts/crawl-to-desktop.js --url=local",
     "crawl:prod": "node scripts/crawl-to-desktop.js --url=https://vae-systems.com",
     "storybook": "storybook dev -p 6006",

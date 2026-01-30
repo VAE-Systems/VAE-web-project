@@ -451,7 +451,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
       <article
         id={anchorId || study.id}
         className="group relative rounded-3xl border border-black/5 bg-white/90 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.2)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.25)]"
-        aria-expanded={isExpanded}
+        data-expanded={isExpanded}
       >
         <div className="flex flex-col gap-6 lg:flex-row">
           <div className="flex w-full flex-col gap-4 lg:max-w-xs">
@@ -699,6 +699,7 @@ const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
   }, [onClose])
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- Modal dialog with keyboard handler via useEffect
     <div
       className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/80 px-4 py-10 backdrop-blur-sm"
       role="dialog"
@@ -706,6 +707,7 @@ const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
       aria-label={`${logo.alt} - Vergrößert`}
       onClick={onClose}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- Inner container for click prevention */}
       <div className="relative max-h-[90vh] max-w-4xl" onClick={e => e.stopPropagation()}>
         <button
           type="button"

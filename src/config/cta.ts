@@ -281,8 +281,10 @@ export const CTA_REGISTRY: Record<string, CtaDef> = {
 export const buildCta = (id: string, ctx: CtaContext = {}): BuiltCta => {
   const def = CTA_REGISTRY[id]
   if (!def) {
-    if (typeof import.meta !== 'undefined' && (import.meta as any).env && (import.meta as any).env.DEV) {
-      // eslint-disable-next-line no-console
+    if (
+      typeof import.meta !== 'undefined' &&
+      (import.meta as unknown as Record<string, Record<string, unknown>>).env?.DEV
+    ) {
       console.warn(`[CTA] Unknown id '${id}' – fallback zu /contact`)
     }
     // Fallback to general contact route

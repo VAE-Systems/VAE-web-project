@@ -898,11 +898,20 @@ const ContactPage: React.FC = () => {
                 </label>
               </div>
 
+              {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- Help mode tooltip trigger */}
               <label
                 className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70"
                 onClick={() => {
                   if (helpMode) showHelp('notes')
                 }}
+                onKeyDown={e => {
+                  if ((e.key === 'Enter' || e.key === ' ') && helpMode) {
+                    e.preventDefault()
+                    showHelp('notes')
+                  }
+                }}
+                tabIndex={helpMode ? 0 : undefined}
+                role={helpMode ? 'button' : undefined}
               >
                 Kontext oder Notizen
                 <textarea

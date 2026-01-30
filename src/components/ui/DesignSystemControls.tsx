@@ -88,7 +88,7 @@ const DesignSystemControls: React.FC<DesignSystemControlsProps> = ({ className =
 
         {/* Quick Scale Buttons */}
         <div>
-          <label className="mb-2 block text-sm text-gray-300">Quick Scale:</label>
+          <span className="mb-2 block text-sm text-gray-300">Quick Scale:</span>
           <div className="flex gap-2">
             <button
               onClick={() => handleQuickScale(0.9)}

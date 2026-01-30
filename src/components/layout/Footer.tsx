@@ -260,6 +260,7 @@ const Footer: React.FC = () => {
       </div>
 
       {isNewsletterNoticeOpen && (
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- Modal dialog backdrop
         <div
           className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/60 px-4 backdrop-blur-sm"
           role="dialog"
@@ -267,10 +268,14 @@ const Footer: React.FC = () => {
           aria-labelledby="newsletter-locked-title"
           aria-describedby="newsletter-locked-description"
           onClick={closeNewsletterNotice}
+          onKeyDown={e => e.key === 'Escape' && closeNewsletterNotice()}
         >
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- Modal content container */}
           <div
             className="w-full max-w-md rounded-2xl border border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
+            role="document"
             onClick={event => event.stopPropagation()}
+            onKeyDown={e => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-4">
               <h3 id="newsletter-locked-title" className="text-lg font-semibold text-text-light">

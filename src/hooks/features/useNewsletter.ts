@@ -103,7 +103,10 @@ export const useNewsletter = (
       if (field === 'preferences' && typeof value === 'boolean') {
         return
       } else if (typeof value === 'string') {
-        ;(newFormData as any)[field] = value
+        // Type-safe assignment for string fields
+        if (field === 'email' || field === 'name' || field === 'source') {
+          newFormData[field] = value
+        }
       }
 
       setFormData(newFormData)

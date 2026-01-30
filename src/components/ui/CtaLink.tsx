@@ -62,4 +62,6 @@ const CtaLink = React.forwardRef<HTMLAnchorElement, CtaLinkProps>(
   }
 )
 
+CtaLink.displayName = 'CtaLink'
+
 export default CtaLink

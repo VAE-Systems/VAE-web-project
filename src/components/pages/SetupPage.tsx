@@ -1160,11 +1160,15 @@ const SetupPage: React.FC = () => {
           <div className="mt-12 grid gap-8 rounded-3xl border border-gray-200/80 bg-white p-8 shadow-[0_22px_60px_-40px_rgba(15,23,42,0.35)] dark:border-white/10 dark:bg-white/5 dark:shadow-none lg:grid-cols-2">
             <div className="space-y-8">
               <div data-calculator-tutorial="team-size">
-                <label className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-700 dark:text-text-secondary">
+                <label
+                  htmlFor="team-size-slider"
+                  className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-700 dark:text-text-secondary"
+                >
                   Anzahl Mitarbeitende (lizenzpflichtig)
                 </label>
                 <div className="mt-4 flex flex-col gap-4">
                   <input
+                    id="team-size-slider"
                     type="range"
                     min={TEAM_SIZE_MIN}
                     max={TEAM_SIZE_MAX}

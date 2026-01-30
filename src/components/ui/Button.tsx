@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 
 type Variant = 'primary' | 'secondary' | 'convert' | 'ghost'
 
-interface ButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
+// Use union of common HTML attributes to support both anchor and button
+type CommonProps = Omit<React.HTMLAttributes<HTMLElement>, 'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'>
+
+interface ButtonProps extends CommonProps {
   to?: string
   href?: string
   variant?: Variant
@@ -38,7 +41,6 @@ const Button: React.FC<ButtonProps> = ({ to, href, variant = 'primary', children
 
   if (href) {
     return (
-      // eslint-disable-next-line jsx-a11y/anchor-has-content
       <a href={href} className={classes} {...rest}>
         {children}
       </a>
@@ -46,10 +48,9 @@ const Button: React.FC<ButtonProps> = ({ to, href, variant = 'primary', children
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a role="button" className={classes} {...rest}>
+    <button type="button" className={classes} {...rest}>
       {children}
-    </a>
+    </button>
   )
 }
 

@@ -133,12 +133,16 @@ const PrivacySettings: React.FC = () => {
                       </div>
 
                       {!category.required && (
-                        <label className="relative inline-flex cursor-pointer items-center">
+                        <label
+                          className="relative inline-flex cursor-pointer items-center"
+                          aria-label={`${category.title} ${consent[category.id as keyof typeof consent] ? 'aktiviert' : 'deaktiviert'}`}
+                        >
                           <input
                             type="checkbox"
                             checked={Boolean(consent[category.id as keyof typeof consent])}
                             onChange={e => handleCategoryToggle(category.id, e.target.checked)}
                             className="peer sr-only"
+                            aria-describedby={`category-${category.id}-desc`}
                           />
                           <div className="peer h-6 w-11 rounded-full bg-gray-600 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-vae-turquoise peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-vae-turquoise/25"></div>
                         </label>

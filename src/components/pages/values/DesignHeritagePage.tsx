@@ -114,7 +114,7 @@ const DesignHeritagePage: React.FC = () => {
                 Wenn man zwischen Ateliers, Galerien und Werkstätten aufwächst, lernt man früh: Jedes Detail zählt. Jede
                 Proportion, jede Farbwahl, jede Komposition ist eine bewusste Entscheidung.
               </p>
-              <p className="text-lg leading-relaxed text-text-secondary">Julian Goertz' familiärer Hintergrund:</p>
+              <p className="text-lg leading-relaxed text-text-secondary">Julian Goertz&apos; familiärer Hintergrund:</p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">

@@ -55,7 +55,7 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
       glowEffect = false,
       rippleEffect = false,
       scaleEffect = true,
-      textStyle = 'label',
+      textStyle: _textStyle = 'label',
       enableHardwareAcceleration = true,
       disabled = false,
       onClick,
@@ -190,6 +190,7 @@ export const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
     return (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- Wrapper delegates to inner button
       <div
         ref={containerRef as React.RefObject<HTMLDivElement>}
         className={cn('relative inline-block', disabled && 'pointer-events-none opacity-60', className)}

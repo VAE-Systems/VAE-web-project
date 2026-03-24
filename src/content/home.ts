@@ -1,17 +1,9 @@
-export const heroTitle = ['Gehören Ihre Daten', 'wirklich Ihnen?'] as const
+export const heroTitle = ['Self-Hosted Infrastruktur,', 'die Ihnen wirklich gehört'] as const
 
-export const heroEyebrow = 'Structure is strategy' as const
-
-export const heroTypewriterTexts = [
-  'Keine Öffnungszeiten, kein Einblick',
-  'Zahlen Sie nur, was Sie nutzen',
-  'Ihre Daten. Ihre Regeln. 24/7',
-  'Kein Vendor-Lock-in. Nie wieder',
-  'Software wie ein maßgeschneiderter Anzug',
-] as const
+export const heroEyebrow = 'Open Source, Self-Hosted, pragmatisch umgesetzt' as const
 
 export const heroDescription =
-  'Die Bank hat Öffnungszeiten. Sie sieht, was ein und ausgeht. Sie kann die Konditionen ändern. — Oder Sie starten Self-Hosted: Infrastruktur, die Ihnen gehört. Software, für die Sie nur zahlen, was Sie wirklich brauchen.'
+  'Wir planen, bauen und betreuen digitale Arbeitsinfrastruktur ohne Vendor-Lock-in: Dateien, CRM, Automationen und KI auf einer Architektur, die zu Ihrem Team passt und in drei bis sechs Wochen produktiv werden kann.'
 
 export interface HeroBenefit {
   title: string
@@ -21,19 +13,19 @@ export interface HeroBenefit {
 
 export const heroBenefits: HeroBenefit[] = [
   {
-    title: 'Komplett-Setup',
-    description: 'Nextcloud, CRM, Automationen – produktionsbereit in 3–6 Wochen.',
-    icon: 'settings_suggest',
+    title: 'Produktiv statt Pilot',
+    description: 'Setup, Migration und Übergabe in 3 bis 6 Wochen statt endloser Tool-Evaluation.',
+    icon: 'rocket_launch',
   },
   {
-    title: 'KI-Optimierung',
-    description: 'Workflows werden intelligenter, schneller, effizienter – kontinuierlich.',
-    icon: 'bolt',
+    title: 'Volle Datenhoheit',
+    description: 'Hosting in Deutschland, klare Datenflüsse und keine Preismacht eines SaaS-Anbieters.',
+    icon: 'verified_user',
   },
   {
-    title: 'Langzeit-Partnerschaft',
-    description: 'Updates, Security, neue Features – wir bleiben an Ihrer Seite.',
-    icon: 'support_agent',
+    title: 'Ein Partner statt Tool-Zoo',
+    description: 'Strategie, Infrastruktur und laufende Betreuung aus einer Hand.',
+    icon: 'handshake',
   },
 ]
 
@@ -93,10 +85,10 @@ export const outcomeMetrics = [
 ] as const
 
 export const finalCtaHome = {
-  eyebrow: 'Bereit?',
-  title: 'Wann hört Ihre Cloud-Rechnung auf zu wachsen?',
+  eyebrow: 'Nächster Schritt',
+  title: 'In 45 Minuten sehen Sie, ob Self-Hosted für Sie Sinn ergibt.',
   description:
-    '45 Minuten. Kostenlos. Wir schauen gemeinsam auf Ihre Situation — ohne Agenda, ohne Sales-Druck. Sie entscheiden danach, ob es passt.',
+    'Wir schauen auf Ihre Tools, Kosten, Datenlage und Zielbild. Danach wissen Sie, ob Migration, Hybrid-Modell oder bewusstes Nichtstun die beste Entscheidung ist.',
   primary: {
     label: 'Jetzt Erstgespräch buchen',
     ctaId: 'contact.schedule_call',

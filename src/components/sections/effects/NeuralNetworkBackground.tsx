@@ -27,9 +27,9 @@ import * as THREE from 'three'
 // ⚙️ Tuning-Knobs: Hier drehen für visuelle Anpassungen
 const CONFIG = {
   // Neuron-Anzahl (skaliert mit Device-Power)
-  neurons: { reduced: 60, lowPower: 90, full: 120 },
+  neurons: { reduced: 40, lowPower: 60, full: 65 },
   // Partikel-Anzahl
-  particles: { reduced: 0, lowPower: 50, full: 80 },
+  particles: { reduced: 0, lowPower: 0, full: 0 },
   // Verbindungs-Wahrscheinlichkeit (höher = weniger Connections)
   connectionThreshold: { reduced: 0.985, full: 0.96 },
   // Max-Distanz für Verbindungen
@@ -50,18 +50,14 @@ const CONFIG = {
   // ═══════════════════════════════════════════════════════════════════════════
   multiWave: {
     enabled: true,
-    waves: [
-      { speed: 1.0, frequency: 0.3, amplitude: 0.35, direction: { x: 1, y: 0.2 } },
-      { speed: 0.7, frequency: 0.25, amplitude: 0.25, direction: { x: -0.5, y: 1 } },
-      { speed: 1.3, frequency: 0.4, amplitude: 0.2, direction: { x: 0.3, y: -0.8 } },
-    ],
+    waves: [{ speed: 0.6, frequency: 0.25, amplitude: 0.25, direction: { x: 1, y: 0.2 } }],
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ⚡ BURST EVENTS: Zufällige Aktivitäts-Explosionen
   // ═══════════════════════════════════════════════════════════════════════════
   burst: {
-    enabled: true,
+    enabled: false,
     minInterval: 5000,
     maxInterval: 10000,
     duration: 2000,
@@ -74,9 +70,9 @@ const CONFIG = {
   // ═══════════════════════════════════════════════════════════════════════════
   mouse: {
     enabled: true,
-    radius: 3.5,
-    intensity: 2.5,
-    smoothing: 0.08,
+    radius: 2.0,
+    intensity: 1.5,
+    smoothing: 0.05,
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -106,10 +102,10 @@ const CONFIG = {
   // FPS-IMPACT: ~1-2 FPS bei 15 aktiven Lifecycle-Nodes (Object Pooling minimiert GC)
   nodeLifecycle: {
     enabled: true,
-    poolSize: 30, // Vorab erstellte Nodes (recycelbar)
-    spawnRate: 0.5, // Nodes pro Sekunde (0.5 = alle 2 Sekunden)
-    maxActiveNodes: 15, // Max gleichzeitig "lebende" Nodes
-    maxConcurrentTransitions: 2, // Max gleichzeitig fadende Nodes (Performance)
+    poolSize: 15,
+    spawnRate: 0.5,
+    maxActiveNodes: 8,
+    maxConcurrentTransitions: 1,
     fadeInDuration: 1500, // ms für Einblenden (ease-in-out)
     lifespan: { min: 8000, max: 15000 }, // Lebensdauer in ms (random)
     fadeOutDuration: 2000, // ms für Ausblenden (ease-in-out)
@@ -122,8 +118,8 @@ const CONFIG = {
   // FPS-IMPACT: ~0.5-1 FPS (nur Material-Opacity-Updates, keine Geometry-Änderungen)
   dynamicConnections: {
     enabled: true,
-    poolSize: 50, // Vorab erstellte Lines (recycelbar)
-    maxConnectionsPerNode: 3, // Max Verbindungen pro Lifecycle-Node
+    poolSize: 20,
+    maxConnectionsPerNode: 2,
     searchRadius: 5.0, // Radius für Nearest-Neighbor-Suche
     fadeInDuration: 800, // ms für Connection-Einblenden
     fadeOutDuration: 600, // ms für Connection-Ausblenden
@@ -181,7 +177,7 @@ const CONFIG = {
   // 🎨 COMMUNITY COLORING: leichte Farb-Shifts für Subnetze
   // ═══════════════════════════════════════════════════════════════════════════
   communityColor: {
-    enabled: true,
+    enabled: false,
     groups: 3,
     hueShift: 0.06, // ±Hue-Shift je nach Gruppe
     saturationMult: 1.0,
@@ -192,7 +188,7 @@ const CONFIG = {
   // ⚡ MICRO BURST: kurzer Glow beim Spawn
   // ═══════════════════════════════════════════════════════════════════════════
   microBurst: {
-    enabled: true,
+    enabled: false,
     duration: 600,
     radius: 4,
     intensity: 1.5,

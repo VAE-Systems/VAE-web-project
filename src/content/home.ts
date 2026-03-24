@@ -1,17 +1,17 @@
-export const heroTitle = ['Ihre Infrastruktur. Ihre Daten.', 'Ihre KI.'] as const
+export const heroTitle = ['Gehören Ihre Daten', 'wirklich Ihnen?'] as const
 
 export const heroEyebrow = 'Structure is strategy' as const
 
 export const heroTypewriterTexts = [
-  'Eigene Infrastruktur',
-  'Kontrolle statt Abos',
-  'DSGVO by design',
-  'KI auf Ihrer Hardware',
-  'Open Source + Standards',
+  'Keine Öffnungszeiten, kein Einblick',
+  'Zahlen Sie nur, was Sie nutzen',
+  'Ihre Daten. Ihre Regeln. 24/7',
+  'Kein Vendor-Lock-in. Nie wieder',
+  'Software wie ein maßgeschneiderter Anzug',
 ] as const
 
 export const heroDescription =
-  'Self-Hosted-First Infrastruktur – volle Datenkontrolle, klare Kosten, vendor-neutral geplant. Open Source setzen wir dort ein, wo es den größten Hebel hat. Eigener Kundenaccount ab Vertragsstart: Chat, Files, Doku – kein E-Mail-Chaos.'
+  'Die Bank hat Öffnungszeiten. Sie sieht, was ein und ausgeht. Sie kann die Konditionen ändern. — Oder Sie starten Self-Hosted: Infrastruktur, die Ihnen gehört. Software, für die Sie nur zahlen, was Sie wirklich brauchen.'
 
 export interface HeroBenefit {
   title: string
@@ -39,29 +39,29 @@ export const heroBenefits: HeroBenefit[] = [
 
 export const whyVaeHighlights = [
   {
-    title: 'Doppelte Expertise',
+    title: 'Systeme und KI aus einer Hand',
     description:
-      'Arbeitssysteme (Nextcloud, CRM, Automationen) UND KI-Implementationen – mit Kompetenz in Open-Source-KI-Modellen sowie großen Anbietern (OpenAI, Anthropic).',
-    proof: 'Systeme + KI aus einer Hand',
+      'Wir bauen nicht nur Infrastruktur – wir integrieren KI dort, wo sie echten Hebel hat. Nextcloud, CRM, Automationen und selbstgehostete KI-Modelle aus einem Guss.',
+    proof: 'Kein Tool-Zoo. Eine Architektur.',
     icon: 'task_alt',
   },
   {
-    title: 'AI-Workflows mit Wirkung',
+    title: 'Ergebnisse, keine Demos',
     description:
-      'Konkrete Automationen, KPI-Dashboards und Auswertungen aus echten Pilotprojekten, nicht nur Labs oder Demos.',
-    proof: 'Messbare Inkremente alle 3–6 Wochen',
+      'Keine Proof-of-Concepts die in der Schublade landen. Wir liefern produktive Systeme – in 3 bis 6 Wochen, messbar, übergeben.',
+    proof: 'Deliverable alle 3–6 Wochen',
     icon: 'insights',
   },
   {
-    title: 'Enterprise Support',
+    title: 'Wir bleiben dabei',
     description:
-      'Monitoring, Security-Checks und Feature-Releases sind Teil der Betreuung – ohne Vendor-Lock-in, aber mit klaren SLAs.',
-    proof: 'Monatliche Reviews & Roadmap-Fortschritt',
+      'Nach dem Setup verschwindet niemand. Monitoring, Security, Optimierung – wir betreuen was wir bauen. Monatlich kündbar, keine Abhängigkeit.',
+    proof: 'Monatliche Reviews, klare SLAs',
     icon: 'security',
   },
 ] as const
 
-export const homeOutcomesHeading = 'Resultate & Referenzen'
+export const homeOutcomesHeading = 'Was wirklich zählt'
 
 export interface LinkText {
   before: string
@@ -69,45 +69,45 @@ export interface LinkText {
 }
 
 export const homeOutcomesDescription: LinkText = {
-  before: 'Vier Kennzahlen, an denen wir uns messen – ausführlich erläutert in den ',
+  before: 'Zahlen aus echten Projekten – kein Marketing, keine Hochrechnungen. Details in den ',
   after: ' Referenzen.',
 }
 
 export const outcomeMetrics = [
   {
     value: '68 %',
-    label: 'Durchschnittliche Zeiteinsparung bei Dokumenten-Workflows',
+    label: 'Weniger Zeit für Dokumenten-Workflows nach Automatisierung',
   },
   {
     value: '4 Wochen',
-    label: 'Bis zur produktiven Übergabe des Infrastruktur-Setups',
+    label: 'Bis zur produktiven Übergabe — nicht Monaten',
   },
   {
     value: '€2.400',
-    label: 'Monatliche SaaS-Ersparnis bei typischer Pilotgröße',
+    label: 'Monatliche SaaS-Kosten die wegfallen — bei typischer Pilotgröße',
   },
   {
     value: '9,6 / 10',
-    label: 'Zufriedenheit der Teams nach Onboarding-Sessions',
+    label: 'Zufriedenheit nach Onboarding — Teams arbeiten lieber damit',
   },
 ] as const
 
 export const finalCtaHome = {
-  eyebrow: 'Nächster Schritt',
-  title: 'Bereit für Ihre eigene Infrastruktur?',
+  eyebrow: 'Bereit?',
+  title: 'Wann hört Ihre Cloud-Rechnung auf zu wachsen?',
   description:
-    'Der erste Schritt ist ein kostenloses Beratungsgespräch. Wir analysieren Ihre Situation und zeigen, wie Self-Hosted-First und KI Ihr Business effizienter machen.',
+    '45 Minuten. Kostenlos. Wir schauen gemeinsam auf Ihre Situation — ohne Agenda, ohne Sales-Druck. Sie entscheiden danach, ob es passt.',
   primary: {
-    label: 'Kostenlose Beratung buchen (45 Min)',
+    label: 'Jetzt Erstgespräch buchen',
     ctaId: 'contact.schedule_call',
   },
-  note: 'Binnen 48h Termin verfügbar. Keine Verpflichtung, kein Sales-Pitch.',
+  note: 'Binnen 48h Termin. Kein Pitch. Keine Verpflichtung.',
 } as const
 
-export const homeProcessHeading = 'Wie wir arbeiten'
+export const homeProcessHeading = 'Kein Blackbox-Projekt'
 
 export const homeProcessDescription =
-  'Klare Schritte, transparente Ergebnisse. Wir liefern Analyse, Setup und Betreuung ohne Überraschungen.'
+  'Sie wissen immer, wo wir stehen und was als nächstes kommt. Drei Phasen, klare Deliverables, keine Überraschungen.'
 
 export const homeProcessNote = 'Kompletten Prozess ansehen →'
 
@@ -121,21 +121,24 @@ export interface HomeProcessTeaserStep {
 export const homeProcessTeaserSteps: HomeProcessTeaserStep[] = [
   {
     number: '01',
-    title: 'Analyse & Strategie',
+    title: 'Verstehen, bevor wir bauen',
     duration: '1–2 Wochen',
-    description: 'Wir verstehen Ihre Situation, analysieren Systeme und entwickeln drei realistische Optionen.',
+    description:
+      'Wir analysieren Ihre aktuelle Situation – Tools, Kosten, Datenlage. Dann bekommen Sie drei realistische Optionen: inklusive "Status quo beibehalten".',
   },
   {
     number: '02',
-    title: 'Setup & Migration',
+    title: 'Aufbauen, nicht versprechen',
     duration: '3–5 Wochen',
-    description: 'Wir bauen Ihre Infrastruktur auf, migrieren Daten und schulen Ihr Team.',
+    description:
+      'Server, Systeme, Migration, Team-Training. Am Ende übergeben wir produktiv – nicht irgendwann, sondern in einem vereinbarten Zeitfenster.',
   },
   {
     number: '03',
-    title: 'Betreuung & Optimierung',
-    duration: 'laufend',
-    description: 'Optional betreuen wir Ihre Systeme langfristig und optimieren kontinuierlich.',
+    title: 'Dabei bleiben, solange es passt',
+    duration: 'Optional, monatlich kündbar',
+    description:
+      'Monitoring, Security, Weiterentwicklung. Wir betreuen was wir gebaut haben – und sind weg, wenn Sie uns nicht mehr brauchen.',
   },
 ] as const
 
@@ -153,53 +156,60 @@ export interface OpenSourcePointWithBullets {
 
 export const openSourcePainPoints: OpenSourcePointWithBullets[] = [
   {
-    title: 'Steigende Kosten bei Wachstum',
-    description: 'Mehr Nutzer = höhere Rechnung. Jeden Monat.',
-    bullets: ['API-Calls skalieren linear mit Kosten', 'Preiserhöhung? Sie zahlen oder kündigen'],
+    title: 'Mehr Leute = höhere Rechnung',
+    description:
+      'Ihr Team wächst. Ihre SaaS-Rechnung auch. Nicht weil die Software besser wurde — sondern weil der Anbieter es so will.',
+    bullets: ['Per-User-Pricing skaliert gegen Sie', 'Preiserhöhung: zahlen oder alles verlieren'],
   },
   {
-    title: 'Keine Kontrolle über Ihre Daten',
-    description: 'Daten und Systeme liegen bei Drittanbietern – Entscheidungen treffen andere.',
-    bullets: ['Features verschwinden ohne Vorwarnung', 'API-Änderungen zwingen zu Refactoring'],
+    title: 'Ihre Daten. Fremde Server.',
+    description:
+      'Sie wissen nicht, wer Ihre Kundendaten sieht. Features verschwinden. APIs ändern sich. Sie haben keine Wahl.',
+    bullets: ['Vendor-Entscheidungen zwingen Sie zur Anpassung', 'Lock-in wird sichtbar, wenn es zu spät ist'],
   },
   {
-    title: 'DSGVO-Risiko trägt Ihr Unternehmen',
-    description: 'Datenflüsse liegen außerhalb Ihrer Kontrolle – das rechtliche Risiko bleibt bei Ihnen.',
-    bullets: ['Das rechtliche Risiko liegt bei Ihnen', 'Nicht beim SaaS-Anbieter'],
+    title: 'DSGVO-Risiko bleibt bei Ihnen',
+    description:
+      'Der SaaS-Anbieter haftet nicht für Ihre Kundendaten. Das tun Sie — egal wo die Daten physisch liegen.',
+    bullets: ['Datenflüsse außerhalb Ihrer Kontrolle', 'Bußgeld-Risiko liegt bei Ihnen, nicht beim Anbieter'],
   },
   {
-    title: 'Keine echte Anpassbarkeit',
-    description: 'SaaS-Lösungen bieten nur vorgefertigte Features – echte Erweiterungen sind unmöglich.',
-    bullets: ['Spezielle Workflows nicht umsetzbar', 'Individuelle Integrationen? Nur mit teurem Enterprise-Plan'],
+    title: 'Konfektionsware statt Maßanzug',
+    description:
+      'Sie zahlen für 80 Features. Sie nutzen 12. Der Rest ist Ballast — und bleibt trotzdem auf der Rechnung.',
+    bullets: ['Spezial-Workflows nicht abbildbar', 'Individuelle Anpassung: nur im teuren Enterprise-Plan'],
   },
 ] as const
 
 export const openSourceAdvantages: OpenSourcePointWithBullets[] = [
   {
-    title: 'Einheitliche Plattform – AI-ready konzipiert',
+    title: 'Eine Plattform, keine Tool-Hölle',
     description:
-      'Alle Systeme integriert und einheitlich dokumentiert. Mit der richtigen Anfangsinvestition senken Sie Folgekosten für KI-Optimierung – und bleiben langfristig wettbewerbsfähig.',
+      'CRM, Dokumentenverwaltung, Kommunikation, KI — alles integriert, alles dokumentiert. Nicht zehn verschiedene Logins, sondern ein System das funktioniert.',
     bullets: [
-      'CRM, Dokumentenverwaltung, KI-Workflows aus einer Hand',
-      'Einheitliches System reduziert Folgekosten für KI-Optimierung dramatisch',
+      'Weniger Reibung zwischen Tools = weniger Fehler',
+      'KI-Integration kostet Bruchteile, wenn alles verbunden ist',
     ],
   },
   {
-    title: 'Planbare Kosten statt monatlicher Abos',
-    description: 'Einmalige Setup-Investition, danach planbare Kosten durch eigenes Hosting.',
-    bullets: ['Keine Vendor-Preisspirale', 'Keine SaaS-Überraschungen'],
+    title: 'Sie wissen, was Sie nächsten Monat zahlen',
+    description:
+      'Setup-Investition einmalig. Hosting-Kosten planbar. Keine Preiserhöhungen, kein Vendor-Druck, kein Erwachen am Monatsende.',
+    bullets: ['Fixe Kosten statt wachsender Abos', 'Kein Lock-in, kein Abhängigkeitsproblem'],
   },
   {
-    title: 'DSGVO-konform durch kontrolliertes Hosting',
-    description: 'Server in Deutschland. Volle Datenhoheit.',
-    bullets: ['Keine US-Cloud-Transfers bei Systemen und KI', 'Rechtssicherheit ohne Kompromisse'],
+    title: 'Ihre Daten bleiben in Deutschland',
+    description:
+      'Server bei Hetzner in Deutschland. Keine US-Cloud-Transfers. Kein Datenfluss den Sie nicht kennen. DSGVO-Risiko fällt weg.',
+    bullets: ['Volle Datenhoheit — keine Interpretationsspielräume', 'Rechtssicher ohne Kompromisse'],
   },
   {
-    title: 'Erweiterbar durch self-hosted AI',
-    description: 'Eigene KI-Modelle statt proprietärer APIs. Fundament für KI-Optimierung.',
+    title: 'KI ohne monatliche API-Rechnung',
+    description:
+      'Selbstgehostete Modelle laufen auf Ihrer Infrastruktur. Keine OpenAI-Rechnung die mit jedem Prompt wächst.',
     bullets: [
-      'Llama, Mistral, oder andere Open-Source-Modelle integrierbar',
-      'Mit Startinvestition meiste aus KI rausholen – ohne API-Kosten',
+      'Llama, Mistral und andere Modelle integrierbar',
+      'Einmalige Setup-Investition statt laufende API-Kosten',
     ],
   },
 ] as const
@@ -222,64 +232,64 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     id: 'beratung',
     icon: 'compass_calibration',
     title: 'Strategieberatung',
-    subtitle: 'Analyse & Fahrplan',
+    subtitle: 'Klarheit, bevor Sie bauen',
     badge: 'ANALYSE',
     description:
-      'Sie wollen Klarheit, bevor Sie Systeme umbauen? Wir analysieren Ihre Situation, bewerten Kosten und Nutzen von SaaS, Hybrid und Self-Hosted und entwickeln einen umsetzbaren Fahrplan – inklusive KI-Potenzialen.',
+      'Bevor wir eine Zeile Code schreiben: wir verstehen Ihre Situation. Tools, Kosten, Datenflüsse, Wachstum. Sie bekommen drei realistische Optionen — eine davon ist immer: alles so lassen wie es ist.',
     inclusions: [
-      'Kostenlose Erstberatung (45 Min)',
-      'System-Analyse & Kosten-Nutzen-Rechnung',
-      '3 realistische Migrations-Optionen (inkl. „Status quo beibehalten")',
-      'Schriftlicher Fahrplan mit konkreten nächsten Schritten',
+      'Kostenlose Erstberatung (45 Min) ohne Agenda',
+      'Analyse Ihrer aktuellen Tools & echten Kosten',
+      '3 Optionen: Migration, Hybrid, Status quo',
+      'Schriftlicher Fahrplan — kein Präsentation-PDF, sondern etwas Umsetzbares',
     ],
     audience: [
-      'Schnellem Wachstum ohne IT-Strategie',
-      'Geplanter Digital-Transformation',
-      'Evaluierung von Automatisierung',
+      'Sie wachsen schnell und die IT hält nicht mit',
+      'Sie planen eine Digital-Transformation und wollen keine Fehlentscheidung',
+      'Sie wollen wissen, was Automatisierung für Sie konkret bedeutet',
     ],
-    cta: { label: 'Mehr erfahren', href: '/services/beratung' },
+    cta: { label: 'Beratung ansehen', href: '/services/beratung' },
   },
   {
     id: 'setup',
     icon: 'storage',
-    title: 'Infrastruktur Design/Setup',
-    subtitle: 'Umsetzung in 3–6 Wochen',
+    title: 'Infrastruktur aufbauen',
+    subtitle: 'Produktiv in 3–6 Wochen',
     badge: '3–6 WOCHEN',
     description:
-      'Auf Basis der vorhergehenden Strategie-Phase bauen wir Ihre eigene Infrastruktur produktionsbereit in 3–6 Wochen auf – mit offenen Standards, dokumentiert, inklusive Migration relevanter Daten und Training für Ihr Team.',
+      'Wir bauen Ihre Infrastruktur — Server, Systeme, Migration, Team-Training. Am Ende übergeben wir produktiv. Nicht "fast fertig", nicht "noch ein Sprint". Fertig.',
     inclusions: [
-      'Kompletter Server-Aufbau (Container, Netzwerk, Security-Basics)',
-      'Tool-Installation & Konfiguration der Kernsysteme',
-      'Daten-Migration aus bestehenden Systemen (falls relevant)',
-      'Team-Training & Dokumentation',
+      'Server-Aufbau mit Container, Netzwerk, Security',
+      'Installation & Konfiguration aller Kernsysteme',
+      'Daten-Migration aus Ihren bestehenden Tools',
+      'Team-Training & vollständige Dokumentation',
     ],
     audience: [
-      'Neuaufbau des Datenfundaments',
-      'Restrukturierung bestehender Infrastruktur',
-      'Ablösung von SaaS-Tools',
+      'Sie bauen Ihr Datenfundament neu auf',
+      'Sie lösen SaaS-Tools ab die zu teuer oder zu starr sind',
+      'Sie wollen Infrastruktur, die in 5 Jahren noch trägt',
     ],
-    cta: { label: 'Setup Details', href: '/services/setup' },
+    cta: { label: 'Setup ansehen', href: '/services/setup' },
   },
   {
     id: 'betreuung',
     icon: 'support_agent',
-    title: 'Langfristige Betreuung',
-    subtitle: 'Betrieb & Optimierung',
-    badge: 'KONTINUIERLICH',
+    title: 'Laufende Betreuung',
+    subtitle: 'Ihr System läuft. Immer.',
+    badge: 'MONATLICH KÜNDBAR',
     description:
-      'Wir sorgen dafür, dass Ihre Infrastruktur läuft – während Ihr Team sich auf Produkt und Kund:innen konzentriert.',
+      'Nach dem Setup verschwinden wir nicht. Monitoring, Security-Patches, Updates, Weiterentwicklung — wir betreuen was wir gebaut haben. Solange Sie uns brauchen.',
     inclusions: [
-      'Basis-Monitoring & Security-Patches',
-      'Regelmäßige System-Reviews',
+      'Proaktives Monitoring & Security-Patches',
+      'Monatliche System-Reviews und Roadmap-Gespräch',
       'Backup & Disaster Recovery',
-      'Optional: monatlich kündbar',
+      'Monatlich kündbar — keine Abhängigkeit, kein Lock-in',
     ],
     audience: [
-      'Teams ohne dedizierte IT-Abteilung',
-      'Auslagerung der Infrastruktur-Verwaltung',
-      'Fokus auf Wachstum statt Betrieb',
+      'Ihr Team hat keine dedizierte IT — und will auch keine einstellen',
+      'Sie wollen sich auf Ihr Produkt konzentrieren, nicht auf Server',
+      'Sie wollen einen Partner, der Verantwortung übernimmt',
     ],
-    cta: { label: 'Betreuung Details', href: '/services/betreuung' },
+    cta: { label: 'Betreuung ansehen', href: '/services/betreuung' },
   },
 ] as const
 

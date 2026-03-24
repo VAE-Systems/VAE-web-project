@@ -14,8 +14,11 @@
  * └── Footer link              → zur /services/beratung#prozess
  */
 
+import { AnalyseIcon, BuildIcon, SupportIcon } from '@/components/ui/icons/VaeIllustrations'
 import { homeProcessDescription, homeProcessHeading, homeProcessNote, homeProcessTeaserSteps } from '@/content/home'
 import React from 'react'
+
+const STEP_ICONS = [AnalyseIcon, BuildIcon, SupportIcon]
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🚪 ORCHESTRATOR — HomeProcessTeaserSection
@@ -47,9 +50,16 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
               key={step.number}
               className="border-border-primary/40 rounded-3xl border bg-white/[0.02] p-6 shadow-[0_30px_90px_-60px_rgba(5,212,182,0.8)] backdrop-blur"
             >
-              <div className="grid gap-4 md:grid-cols-[auto,1fr] md:items-center">
+              <div className="grid gap-4 md:grid-cols-[auto,1fr] md:items-start">
                 <div className="flex items-center gap-4">
-                  <span className="text-3xl font-bold text-vae-turquoise">{step.number}</span>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="text-3xl font-bold text-vae-turquoise">{step.number}</span>
+                    {STEP_ICONS[homeProcessTeaserSteps.indexOf(step)] && (
+                      <div className="text-vae-turquoise">
+                        {React.createElement(STEP_ICONS[homeProcessTeaserSteps.indexOf(step)], { size: 48 })}
+                      </div>
+                    )}
+                  </div>
                   <span className="text-xs font-semibold uppercase tracking-[0.35em] text-text-secondary">
                     {step.duration}
                   </span>

@@ -16,7 +16,7 @@
  * 📍 SEO: Schema.org Organization + LocalBusiness für Heidelberg
  */
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import {
   FinalCtaSection,
   HeroSection,
@@ -27,6 +27,8 @@ import {
   WhyOpenSourceSection,
 } from '../sections'
 import Seo from '../ui/Seo'
+
+const StorySection = React.lazy(() => import('../sections/story/StorySection'))
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🚪 ORCHESTRATOR: HomePage
@@ -87,6 +89,9 @@ const HomePage: React.FC = () => {
 
       {/* ── SECTION FLOW ── */}
       <HeroSection />
+      <Suspense fallback={<div className="h-32" />}>
+        <StorySection />
+      </Suspense>
       <WhyOpenSourceSection />
       <ServicesOverviewSection />
       <SocialProofSection />

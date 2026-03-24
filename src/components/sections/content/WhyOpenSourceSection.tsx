@@ -18,11 +18,24 @@
 
 import AnimatedSaaSTransformation from '@/components/ui/animations/AnimatedSaaSTransformation'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
+import {
+  BillGrowIcon,
+  BrokenShieldIcon,
+  ConnectedPlatformIcon,
+  EyeServerIcon,
+  FixedCostIcon,
+  GermanyServerIcon,
+  LocalAIIcon,
+  OverpaidBoxIcon,
+} from '@/components/ui/icons/VaeIllustrations'
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
 import { motion } from 'framer-motion'
 import { ArrowRight, Lightbulb } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+
+const PAIN_ICONS = [BillGrowIcon, EyeServerIcon, BrokenShieldIcon, OverpaidBoxIcon]
+const ADV_ICONS = [ConnectedPlatformIcon, FixedCostIcon, GermanyServerIcon, LocalAIIcon]
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🚪 ORCHESTRATOR — WhyOpenSourceSection
@@ -77,17 +90,29 @@ const WhyOpenSourceSection: React.FC = () => {
               <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Das SaaS-Dilemma</h3>
             </header>
             <ul className="divide-y divide-black/10 dark:divide-white/5">
-              {openSourcePainPoints.map(point => (
-                <li key={point.title} className="py-6 first:pt-0 last:pb-0">
-                  <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
-                    {point.title}
-                    <span className="mt-2 block h-[2px] w-10 rounded-full bg-red-400/50" />
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
-                    {point.description}
-                  </p>
-                </li>
-              ))}
+              {openSourcePainPoints.map((point, i) => {
+                const Icon = PAIN_ICONS[i]
+                return (
+                  <li key={point.title} className="py-6 first:pt-0 last:pb-0">
+                    <div className="flex flex-col gap-3">
+                      {Icon && (
+                        <div className="text-red-400">
+                          <Icon size={80} />
+                        </div>
+                      )}
+                      <div>
+                        <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
+                          {point.title}
+                          <span className="mt-2 block h-[2px] w-10 rounded-full bg-red-400/50" />
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
+                          {point.description}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </article>
           <article className="rounded-3xl border-2 border-vae-turquoise/60 bg-vae-turquoise/10 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:border-vae-turquoise/20 dark:bg-vae-turquoise/5 dark:shadow-none">
@@ -96,17 +121,29 @@ const WhyOpenSourceSection: React.FC = () => {
               <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Die VAE-Alternative</h3>
             </header>
             <ul className="divide-y divide-vae-turquoise/15">
-              {openSourceAdvantages.map(point => (
-                <li key={point.title} className="py-6 first:pt-0 last:pb-0">
-                  <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
-                    {point.title}
-                    <span className="mt-2 block h-[2px] w-10 rounded-full bg-vae-turquoise/60" />
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
-                    {point.description}
-                  </p>
-                </li>
-              ))}
+              {openSourceAdvantages.map((point, i) => {
+                const Icon = ADV_ICONS[i]
+                return (
+                  <li key={point.title} className="py-6 first:pt-0 last:pb-0">
+                    <div className="flex flex-col gap-3">
+                      {Icon && (
+                        <div className="text-vae-turquoise">
+                          <Icon size={80} />
+                        </div>
+                      )}
+                      <div>
+                        <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
+                          {point.title}
+                          <span className="mt-2 block h-[2px] w-10 rounded-full bg-vae-turquoise/60" />
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
+                          {point.description}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </article>
         </div>

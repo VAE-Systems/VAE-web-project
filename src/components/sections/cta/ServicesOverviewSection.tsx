@@ -17,10 +17,17 @@
 
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Icon from '@/components/ui/Icon'
+import { BeratungIllustration, BetreuungIllustration, SetupIllustration } from '@/components/ui/icons/VaeIllustrations'
 import { servicesOverviewCards } from '@/content/home'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
+
+const SERVICE_ILLUSTRATIONS: Record<string, React.FC<{ size?: number }>> = {
+  beratung: BeratungIllustration,
+  setup: SetupIllustration,
+  betreuung: BetreuungIllustration,
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🚪 ORCHESTRATOR — ServicesOverviewSection
@@ -98,19 +105,27 @@ const ServicesOverviewSection: React.FC = () => {
               key={card.id}
               className="flex h-full flex-col rounded-3xl border-2 border-white/70 bg-white p-6 text-slate-900 transition-all hover:-translate-y-1 hover:border-vae-turquoise hover:shadow-[0_10px_22px_rgba(18,24,20,0.12)] dark:border-white/10 dark:bg-white/[0.08] dark:text-text-light dark:hover:border-vae-turquoise/50 dark:hover:shadow-[0_20px_70px_-40px_rgba(var(--vae-turquoise-rgb),0.8)]"
             >
+              {/* Illustration — groß, oben, visueller Anker */}
+              {SERVICE_ILLUSTRATIONS[card.id] && (
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="text-vae-turquoise">
+                    {React.createElement(SERVICE_ILLUSTRATIONS[card.id], { size: 96 })}
+                  </div>
+                  <span className="rounded-full border border-vae-turquoise/20 bg-vae-turquoise/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:border-white/10 dark:bg-white/[0.03] dark:text-text-secondary/80">
+                    Etappe {index + 1}
+                  </span>
+                </div>
+              )}
               <div className="mb-4 flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise transition-all duration-300 hover:rotate-6 hover:scale-110 hover:bg-vae-turquoise/25">
-                      <Icon name={card.icon} size={22} />
+                    <div className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise transition-all duration-300 hover:rotate-6 hover:scale-110 hover:bg-vae-turquoise/25">
+                      <Icon name={card.icon} size={20} />
                     </div>
                     <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:border-white/10 dark:bg-white/[0.03] dark:text-text-secondary/80">
                       {card.badge}
                     </span>
                   </div>
-                  <span className="rounded-full border border-vae-turquoise/20 bg-vae-turquoise/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:border-white/10 dark:bg-white/[0.03] dark:text-text-secondary/80">
-                    Etappe {index + 1}
-                  </span>
                 </div>
               </div>
               <div className="border-b-2 border-vae-turquoise/30 pb-3 dark:border-vae-turquoise/40">

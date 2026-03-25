@@ -1,0 +1,83 @@
+# VAE Systems — Directus CMS
+# Deploy auf Hetzner: docker compose -f deploy/directus/compose.yaml up -d
+#
+# Vorher .env anlegen (siehe .env.example)
+# Traefik muss laufen + reverse_proxy Netzwerk existieren
+
+services:
+
+  directus-db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - directus_db:/var/lib/postgresql/data
+    networks:
+      - directus_internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_DATABASE}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  directus:
+    image: directus/directus:11
+    restart: unless-stopped
+    depends_on:
+      directus-db:
+        condition: service_healthy
+    environment:
+      # DB
+      DB_CLIENT: pg
+      DB_HOST: directus-db
+      DB_PORT: 5432
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      # Security
+      SECRET: ${DIRECTUS_SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      # Public URL (für Asset-Links)
+      PUBLIC_URL: https://${CMS_DOMAIN}
+      # CORS — erlaubt Requests von der VAE Website
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "https://vae-systems.com,https://www.vae-systems.com"
+      # Rate Limiting
+      RATE_LIMITER_ENABLED: "true"
+      RATE_LIMITER_POINTS: 50
+      RATE_LIMITER_DURATION: 1
+      # Uploads
+      STORAGE_LOCATIONS: local
+      STORAGE_LOCAL_ROOT: /directus/uploads
+      # Email (optional, für Passwort-Reset)
+      EMAIL_FROM: info@vae-systems.com
+      # Cache (Performance)
+      CACHE_ENABLED: "true"
+      CACHE_TTL: 5m
+    volumes:
+      - directus_uploads:/directus/uploads
+      - directus_extensions:/directus/extensions
+    networks:
+      - directus_internal
+      - reverse_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.directus.rule=Host(`${CMS_DOMAIN}`)"
+      - "traefik.http.routers.directus.entrypoints=websecure"
+      - "traefik.http.routers.directus.tls.certresolver=letsencrypt"
+      - "traefik.http.services.directus.loadbalancer.server.port=8055"
+
+volumes:
+  directus_db:
+  directus_uploads:
+  directus_extensions:
+
+networks:
+  directus_internal:
+    internal: true
+  reverse_proxy:
+    external: true

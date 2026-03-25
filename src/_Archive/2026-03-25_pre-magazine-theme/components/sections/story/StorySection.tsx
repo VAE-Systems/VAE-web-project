@@ -406,25 +406,6 @@ const TailoredSuitSVG: React.FC<{ triggered: boolean }> = ({ triggered }) => {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// AKT-HEADER — cinematic chapter bar
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-const ActHeader: React.FC<{ kapitel: string; title: string }> = ({ kapitel, title }) => (
-  <div
-    style={{
-      background: 'rgba(0,212,170,0.06)',
-      borderTop: '1px solid rgba(0,212,170,0.2)',
-      borderBottom: '1px solid rgba(0,212,170,0.08)',
-      padding: '10px 0',
-    }}
-    className="mb-8 flex items-center justify-between"
-  >
-    <span className="font-mono text-[11px] font-bold uppercase tracking-[0.35em] text-vae-turquoise/60">{kapitel}</span>
-    <span className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-white/30">{title}</span>
-  </div>
-)
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // AKT-CONTAINER — mit Intersection Observer für Trigger
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -435,8 +416,7 @@ const Act: React.FC<{
   subtitle: string
   visual: React.ReactNode
   side?: 'left' | 'right'
-  kapitel: string
-}> = ({ number, eyebrow, title, subtitle, visual, side = 'left', kapitel }) => {
+}> = ({ number, eyebrow, title, subtitle, visual, side = 'left' }) => {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -464,7 +444,7 @@ const Act: React.FC<{
         <span className="text-xs font-bold uppercase tracking-[0.4em] text-vae-turquoise/50">{eyebrow}</span>
         <span className="select-none text-6xl font-black leading-none text-white/5">{number}</span>
       </div>
-      <h2 className="text-4xl font-black leading-tight text-text-light md:text-5xl">{title}</h2>
+      <h2 className="text-2xl font-bold leading-tight text-text-light sm:text-3xl">{title}</h2>
       <p className="max-w-md text-base leading-relaxed text-text-secondary">{subtitle}</p>
     </div>
   )
@@ -478,21 +458,21 @@ const Act: React.FC<{
   )
 
   return (
-    <div ref={ref} className="py-16 md:py-24">
-      <ActHeader kapitel={kapitel} title={eyebrow} />
-      <div className="grid grid-cols-1 items-center gap-12 border-b border-white/5 pb-8 lg:grid-cols-2 lg:gap-20">
-        {side === 'left' ? (
-          <>
-            {textBlock}
-            {visualBlock}
-          </>
-        ) : (
-          <>
-            {visualBlock}
-            {textBlock}
-          </>
-        )}
-      </div>
+    <div
+      ref={ref}
+      className="grid grid-cols-1 items-center gap-12 border-b border-white/5 py-20 lg:grid-cols-2 lg:gap-20 lg:py-28"
+    >
+      {side === 'left' ? (
+        <>
+          {textBlock}
+          {visualBlock}
+        </>
+      ) : (
+        <>
+          {visualBlock}
+          {textBlock}
+        </>
+      )}
     </div>
   )
 }
@@ -579,7 +559,6 @@ const StorySection: React.FC = () => {
           <Act
             number="01"
             eyebrow="Der Schmerz"
-            kapitel="KAPITEL 01"
             title="Warum wird Ihre Cloud-Rechnung jeden Monat teurer?"
             subtitle="Per-User-Pricing. Per-GB-Pricing. Feature-Pakete, die Sie zwingen, für Dinge zu zahlen, die Sie nie nutzen. Jedes Wachstum Ihres Teams bedeutet automatisch mehr Kosten — ohne dass Sie etwas entschieden haben."
             visual={
@@ -592,31 +571,20 @@ const StorySection: React.FC = () => {
         </div>
 
         {/* ── AKT 2: BANK VS SERVER ── */}
-        <div
-          style={{
-            background: '#080e0c',
-            border: '1px solid rgba(0,212,170,0.1)',
-            borderRadius: 0,
-            padding: '0 32px 32px',
-          }}
-        >
-          <Act
-            number="02"
-            eyebrow="Die Erkenntnis"
-            kapitel="KAPITEL 02"
-            title="Gehören Ihre Daten wirklich Ihnen?"
-            subtitle="Stellen Sie sich vor: Sie kaufen einen Tresor. Aber der Tresor steht bei der Bank. Die Bank hat Öffnungszeiten. Sie sieht, was rein- und rausgeht. Sie kann die Konditionen ändern. — Oder: der Tresor steht bei Ihnen."
-            visual={<BankVsServerInteractive />}
-            side="left"
-          />
-        </div>
+        <Act
+          number="02"
+          eyebrow="Die Erkenntnis"
+          title="Gehören Ihre Daten wirklich Ihnen?"
+          subtitle="Stellen Sie sich vor: Sie kaufen einen Tresor. Aber der Tresor steht bei der Bank. Die Bank hat Öffnungszeiten. Sie sieht, was rein- und rausgeht. Sie kann die Konditionen ändern. — Oder: der Tresor steht bei Ihnen."
+          visual={<BankVsServerInteractive />}
+          side="left"
+        />
 
         {/* ── AKT 3: DER ANZUG ── */}
         <div ref={act3Ref}>
           <Act
             number="03"
             eyebrow="Die Lösung"
-            kapitel="KAPITEL 03"
             title="Software wie ein maßgeschneiderter Anzug."
             subtitle="Stellen Sie sich vor: Sie zahlen nicht für Ärmel, die Sie nie tragen. Keine Pauschalpakete, keine versteckten Features. Infrastruktur, die exakt zu Ihren Prozessen passt — und mit Ihnen wächst."
             visual={

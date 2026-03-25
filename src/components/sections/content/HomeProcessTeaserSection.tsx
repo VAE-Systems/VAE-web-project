@@ -10,15 +10,12 @@
  *
  * 🎨 LAYERS
  * ├── Gradient bg              → subtle dark-to-light
- * ├── Step cards (ol)          → nummerierte Liste
+ * ├── Step cards (grid)        → horizontales 3-Spalten-Grid auf Desktop
  * └── Footer link              → zur /services/beratung#prozess
  */
 
-import { AnalyseIcon, BuildIcon, SupportIcon } from '@/components/ui/icons/VaeIllustrations'
 import { homeProcessDescription, homeProcessHeading, homeProcessNote, homeProcessTeaserSteps } from '@/content/home'
 import React from 'react'
-
-const STEP_ICONS = [AnalyseIcon, BuildIcon, SupportIcon]
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🚪 ORCHESTRATOR — HomeProcessTeaserSection
@@ -44,34 +41,35 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
           <p className="mt-4 text-base text-text-secondary">{homeProcessDescription}</p>
         </header>
 
-        <ol className="mt-12 space-y-8">
+        <div className="relative mt-12 grid grid-cols-1 gap-0 md:grid-cols-3">
+          {/* Connecting line across top */}
+          <div className="absolute left-0 right-0 top-0 hidden h-px bg-vae-turquoise/20 md:block" />
+
           {homeProcessTeaserSteps.map(step => (
-            <li
-              key={step.number}
-              className="border-border-primary/40 rounded-3xl border bg-white/[0.02] p-6 shadow-[0_30px_90px_-60px_rgba(5,212,182,0.8)] backdrop-blur"
-            >
-              <div className="grid gap-4 md:grid-cols-[auto,1fr] md:items-start">
-                <div className="flex items-center gap-4">
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-3xl font-bold text-vae-turquoise">{step.number}</span>
-                    {STEP_ICONS[homeProcessTeaserSteps.indexOf(step)] && (
-                      <div className="text-vae-turquoise">
-                        {React.createElement(STEP_ICONS[homeProcessTeaserSteps.indexOf(step)], { size: 48 })}
-                      </div>
-                    )}
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-[0.35em] text-text-secondary">
-                    {step.duration}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-text-light">{step.title}</h3>
-                  <p className="mt-2 text-sm text-text-secondary">{step.description}</p>
-                </div>
+            <div key={step.number} className="relative border-t-2 border-vae-turquoise bg-transparent px-8 pb-12 pt-8">
+              {/* Giant decorative number */}
+              <div className="pointer-events-none absolute right-6 top-4 select-none text-8xl font-black leading-none text-vae-turquoise/10 md:text-[120px]">
+                {step.number}
               </div>
-            </li>
+
+              {/* Small step number label */}
+              <span className="text-sm font-bold uppercase tracking-widest text-vae-turquoise">{step.number}</span>
+
+              {/* Duration badge */}
+              <div className="mt-4">
+                <span className="inline-flex items-center rounded-full border border-vae-turquoise/25 bg-vae-turquoise/10 px-3 py-1 text-xs text-vae-turquoise">
+                  {step.duration}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h3 className="mt-4 text-2xl font-bold text-text-light">{step.title}</h3>
+
+              {/* Description */}
+              <p className="mt-2 text-sm text-text-secondary">{step.description}</p>
+            </div>
           ))}
-        </ol>
+        </div>
 
         <div className="mt-10 text-center">
           <a

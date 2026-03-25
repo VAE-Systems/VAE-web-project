@@ -21,6 +21,7 @@
  * └── LogoModal overlay    → Fullscreen mit backdrop-blur
  */
 
+import Icon from '@/components/ui/Icon'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { referenceInsights, referenceProjects } from '@/content/home'
 import { ArrowRight, Briefcase, X } from 'lucide-react'
@@ -115,9 +116,7 @@ const SocialProofSection: React.FC = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
             Social Proof
           </p>
-          <h2 className="mt-3 text-4xl font-black text-gray-900 dark:text-text-light md:text-5xl">
-            Projekte & Referenzen
-          </h2>
+          <h2 className="fluid-h2 mt-3 font-semibold text-gray-900 dark:text-text-light">Projekte & Referenzen</h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-text-secondary">
             Was wir gebaut haben – und was dabei rauskam.
           </p>
@@ -126,7 +125,7 @@ const SocialProofSection: React.FC = () => {
           {referenceProjects.map(project => (
             <article
               key={project.id}
-              className="group flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-gray-900 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.14)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/30 hover:shadow-[0_22px_70px_-30px_rgba(13,148,136,0.35)] active:scale-[0.995] dark:bg-white/[0.03] dark:text-text-light dark:shadow-vae-turquoise/20"
+              className="group flex flex-col rounded-3xl border-2 border-vae-turquoise/40 bg-white/95 p-6 text-gray-900 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.14)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/70 hover:shadow-[0_22px_70px_-30px_rgba(13,148,136,0.35)] active:scale-[0.995] dark:border-white/10 dark:bg-white/[0.04] dark:text-text-light dark:shadow-vae-turquoise/20"
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -144,27 +143,25 @@ const SocialProofSection: React.FC = () => {
                       className="group/logo cursor-pointer transition-opacity hover:opacity-80"
                       aria-label={`${project.client} Logo vergrößern`}
                     >
-                      <div className="flex min-h-[80px] items-center justify-center rounded-2xl bg-white/5 p-4">
-                        <img
-                          src={project.logo}
-                          alt={`${project.client} Logo`}
-                          className={[
-                            'h-14 w-auto max-w-[180px] transition-transform duration-300 group-hover/logo:scale-110',
-                            (project.invertOnDark || project.invertOnLight) && 'filter',
-                            project.invertOnDark && 'dark:invert',
-                            project.invertOnLight && 'invert',
-                            project.invertOnLight && 'dark:invert-0',
-                          ]
-                            .filter(Boolean)
-                            .join(' ')}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
+                      <img
+                        src={project.logo}
+                        alt={`${project.client} Logo`}
+                        className={[
+                          'h-14 w-auto max-w-[180px] transition-transform duration-300 group-hover/logo:scale-110',
+                          (project.invertOnDark || project.invertOnLight) && 'filter',
+                          project.invertOnDark && 'dark:invert',
+                          project.invertOnLight && 'invert',
+                          project.invertOnLight && 'dark:invert-0',
+                        ]
+                          .filter(Boolean)
+                          .join(' ')}
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </button>
                   ) : (
-                    <div className="flex min-h-[80px] min-w-[80px] items-center justify-center rounded-2xl bg-white/5 p-4 text-vae-turquoise">
-                      <Briefcase className="h-8 w-8" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-vae-turquoise/15 text-vae-turquoise">
+                      <Briefcase className="h-6 w-6" />
                     </div>
                   )}
                   <div>
@@ -174,7 +171,7 @@ const SocialProofSection: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/15 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-vae-turquoise shadow-sm">
+                <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-vae-turquoise shadow-sm dark:border-white/15 dark:bg-white/10 dark:text-white/90">
                   {project.badge}
                 </span>
               </div>
@@ -207,21 +204,19 @@ const SocialProofSection: React.FC = () => {
           ))}
         </div>
 
-        <hr className="border-white/8 mb-16 mt-12" />
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {referenceInsights.map(insight => (
             <div
               key={insight.id}
-              className="border-white/8 group flex flex-col items-center gap-3 rounded-2xl border bg-white/90 p-6 text-center text-gray-900 shadow-[0_12px_36px_-24px_rgba(15,23,42,0.16)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-[0_16px_40px_-24px_rgba(13,148,136,0.3)] dark:bg-white/[0.05] dark:text-text-light"
+              className="group flex flex-col gap-2 rounded-2xl border border-vae-turquoise/40 bg-white/90 p-5 text-center text-gray-900 shadow-[0_12px_36px_-24px_rgba(15,23,42,0.16)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/70 hover:shadow-[0_16px_40px_-24px_rgba(13,148,136,0.3)] dark:border-white/10 dark:bg-white/[0.05] dark:text-text-light"
             >
-              {insight.value && <p className="text-4xl font-black leading-none text-vae-turquoise">{insight.value}</p>}
-              <div className="flex flex-col items-center gap-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-900 dark:text-text-light">
-                  {insight.title}
-                </p>
-                <p className="text-xs text-gray-600 dark:text-text-secondary">{insight.description}</p>
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/15 text-vae-turquoise transition-transform duration-300 group-hover:scale-110 dark:bg-vae-turquoise/15 dark:text-vae-turquoise">
+                <Icon name={insight.icon} size={20} />
               </div>
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gray-900 dark:text-text-light">
+                {insight.title}
+              </p>
+              <p className="text-sm text-gray-700 dark:text-text-secondary">{insight.description}</p>
             </div>
           ))}
         </div>

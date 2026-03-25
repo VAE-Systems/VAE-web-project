@@ -423,7 +423,6 @@ export interface ReferenceInsight {
   title: string
   description: string
   icon: string
-  value?: string
 }
 
 export const referenceInsights: ReferenceInsight[] = [
@@ -432,27 +431,23 @@ export const referenceInsights: ReferenceInsight[] = [
     title: 'Effizienzsteigerung',
     description: 'Workflows werden durch KI-Optimierung messbar effizienter.',
     icon: 'trending_up',
-    value: '40%+',
   },
   {
     id: 'setup',
     title: 'Setup-Dauer',
     description: '3–6 Wochen bis produktive Übergabe.',
     icon: 'schedule',
-    value: '3–6 W',
   },
   {
     id: 'compliance',
     title: 'DSGVO-Compliance',
     description: '100% rechtssichere Daten-Speicherung in Deutschland.',
     icon: 'shield',
-    value: '100%',
   },
   {
     id: 'zufriedenheit',
     title: 'Zufriedenheit',
     description: 'Kunden schätzen die Transparenz & langfristige Perspektive.',
     icon: 'grade',
-    value: '★★★★★',
   },
 ] as const

@@ -34,7 +34,7 @@ import {
 } from '@/content/services'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -161,7 +161,9 @@ const ServicesSection: React.FC = () => {
       <div className="container-vae relative">
         {/* Section Header */}
         <div className="mb-16 text-center" ref={headerRef}>
-          <h2 className="h2 heading-gradient mb-4">Ihre komplette digitale Arbeitsumgebung</h2>
+          <h2 className="heading-gradient mb-4 text-4xl font-black md:text-5xl">
+            Ihre komplette digitale Arbeitsumgebung
+          </h2>
           <p className="mx-auto mb-4 max-w-3xl text-xl leading-relaxed text-text-secondary">
             Wir richten Ihre Self-Hosted-Business-Suite ein, ergänzen sie mit AI-gestützten Workflows und betreuen sie
             langfristig – damit Ihr Team produktiver arbeitet und Sie volle Datenhoheit behalten.
@@ -179,12 +181,12 @@ const ServicesSection: React.FC = () => {
           {serviceItems.map(service => (
             <article
               key={service.key}
-              className="border-border-primary bg-bg-primary/5 group relative flex h-full flex-col overflow-hidden rounded-2xl border p-8 backdrop-blur-sm transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_14px_48px_-12px_rgba(var(--vae-turquoise-rgb),0.45)] dark:border-white/10 dark:bg-white/5"
+              className="border-border-primary bg-bg-primary/5 border-white/8 dark:border-white/8 group relative flex h-full flex-col overflow-hidden rounded-2xl border p-8 backdrop-blur-sm transition-all duration-500 hover:border-vae-turquoise/30 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_14px_48px_-12px_rgba(var(--vae-turquoise-rgb),0.45)] dark:bg-white/5"
             >
               <div className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="relative z-10 mb-6 flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/20 text-vae-turquoise">
+                  <div className="bg-vae-turquoise/12 flex h-14 w-14 items-center justify-center rounded-none text-vae-turquoise">
                     <Icon name={service.iconName} className="text-vae-turquoise" size={20} />
                   </div>
                   <div className="space-y-1">
@@ -250,10 +252,9 @@ const ServicesSection: React.FC = () => {
                     <ul className="space-y-2">
                       {service.deliverables.map(item => (
                         <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-text-secondary">
-                          <CheckCircle2
-                            className="mt-0.5 h-4 w-4 flex-shrink-0 text-vae-turquoise"
-                            aria-hidden="true"
-                          />
+                          <span className="mt-0.5 flex-shrink-0 text-vae-turquoise" aria-hidden="true">
+                            ▸
+                          </span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -264,7 +265,7 @@ const ServicesSection: React.FC = () => {
 
               <div className="relative z-10 mt-auto space-y-4">
                 {(service.timeline || service.investment) && (
-                  <div className="grid gap-3 rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/10 p-4 text-sm text-text-secondary">
+                  <div className="grid gap-3 rounded-none border border-vae-turquoise/20 bg-vae-turquoise/10 p-4 text-sm text-text-secondary">
                     <div className="flex items-center justify-between gap-3">
                       <span className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/90">
                         Timeline
@@ -276,7 +277,7 @@ const ServicesSection: React.FC = () => {
                         <span className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/90">
                           Invest
                         </span>
-                        <span className="text-right text-sm text-text-secondary">{service.investment}</span>
+                        <span className="text-right text-2xl font-black text-vae-turquoise">{service.investment}</span>
                       </div>
                     )}
                   </div>
@@ -364,7 +365,7 @@ const ServicesSection: React.FC = () => {
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.2),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="relative z-10 flex items-start justify-between gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
+                <div className="bg-vae-turquoise/12 flex h-14 w-14 items-center justify-center rounded-none text-vae-turquoise">
                   <Icon name={category.icon} size={20} />
                 </div>
                 <Link
@@ -381,7 +382,9 @@ const ServicesSection: React.FC = () => {
                 <ul className="space-y-2 text-sm text-text-secondary">
                   {category.examples.map(example => (
                     <li key={example} className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-vae-turquoise" aria-hidden="true" />
+                      <span className="mt-0.5 flex-shrink-0 text-vae-turquoise" aria-hidden="true">
+                        ▸
+                      </span>
                       <span>{example}</span>
                     </li>
                   ))}
@@ -392,7 +395,7 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* KPI / Studien Panel */}
-        <div className="to-vae-turquoise/2 relative overflow-hidden rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 p-10">
+        <div className="to-vae-turquoise/2 relative overflow-hidden rounded-none border-2 border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 p-10">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)] opacity-40" />
           <div className="relative mb-10 grid gap-8 md:grid-cols-4">
             {[
@@ -402,7 +405,7 @@ const ServicesSection: React.FC = () => {
               { k: '65%', l: 'Reduzierte Vendor-/Lizenzkosten', note: '1' },
             ].map(x => (
               <div key={x.l} className="text-center md:text-left">
-                <div className="mb-1 text-2xl font-bold text-vae-turquoise">{x.k}</div>
+                <div className="mb-1 text-5xl font-black text-vae-turquoise">{x.k}</div>
                 <div className="text-[11px] uppercase tracking-wide text-text-muted">
                   {x.l}
                   {x.note && <sup className="ml-1 text-[10px] text-vae-turquoise/60">{superscripts[x.note]}</sup>}

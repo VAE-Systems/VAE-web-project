@@ -51,7 +51,7 @@ const WhyOpenSourceSection: React.FC = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
             Infrastruktur neu gedacht
           </p>
-          <h2 className="mt-3 text-balance text-4xl font-black text-text-light md:text-5xl">
+          <h2 className="fluid-h2 mt-3 text-balance font-semibold text-text-light">
             Warum Unternehmen auf selbstgehostete Systeme setzen
           </h2>
         </div>
@@ -82,11 +82,10 @@ const WhyOpenSourceSection: React.FC = () => {
         </motion.div>
 
         <div className="mt-12 grid gap-10 md:grid-cols-2">
-          {/* LEFT: SaaS/Problem — heavy, constrained, sharp */}
-          <article className="rounded-none border border-red-500/20 bg-red-950/20 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:bg-red-950/30">
+          <article className="rounded-3xl border-2 border-orange-300 bg-orange-50/80 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:border-white/5 dark:bg-white/[0.02] dark:shadow-[0_30px_120px_-50px_rgba(5,212,182,0.35)]">
             <header className="mb-8">
               <p className="text-xs font-bold uppercase tracking-[0.35em] text-red-400 dark:text-red-300">
-                <span className="mr-1 text-red-500">●</span>Das Problem
+                Das Problem
               </p>
               <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Das SaaS-Dilemma</h3>
             </header>
@@ -97,7 +96,7 @@ const WhyOpenSourceSection: React.FC = () => {
                   <li key={point.title} className="py-6 first:pt-0 last:pb-0">
                     <div className="flex flex-col gap-3">
                       {Icon && (
-                        <div className="inline-block rounded-md bg-red-500/10 p-3 text-red-400">
+                        <div className="text-red-400">
                           <Icon size={80} />
                         </div>
                       )}
@@ -116,13 +115,9 @@ const WhyOpenSourceSection: React.FC = () => {
               })}
             </ul>
           </article>
-
-          {/* RIGHT: VAE/Solution — alive, open, rounded */}
-          <article className="rounded-2xl border border-vae-turquoise/25 bg-vae-turquoise/5 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:bg-vae-turquoise/[0.08] md:border-l-2">
+          <article className="rounded-3xl border-2 border-vae-turquoise/60 bg-vae-turquoise/10 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:border-vae-turquoise/20 dark:bg-vae-turquoise/5 dark:shadow-none">
             <header className="mb-8">
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise/90">
-                <span className="mr-1 text-vae-turquoise">●</span>Die Lösung
-              </p>
+              <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise/90">Die Lösung</p>
               <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Die VAE-Alternative</h3>
             </header>
             <ul className="divide-y divide-vae-turquoise/15">
@@ -132,7 +127,7 @@ const WhyOpenSourceSection: React.FC = () => {
                   <li key={point.title} className="py-6 first:pt-0 last:pb-0">
                     <div className="flex flex-col gap-3">
                       {Icon && (
-                        <div className="bg-vae-turquoise/12 inline-block rounded-md p-3 text-vae-turquoise">
+                        <div className="text-vae-turquoise">
                           <Icon size={80} />
                         </div>
                       )}

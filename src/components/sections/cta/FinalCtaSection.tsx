@@ -13,75 +13,75 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
   const { eyebrow, title, description, primary, note } = finalCtaHome
 
   return (
-    <section
-      id={id}
-      className={`accent-section relative overflow-hidden border-t border-vae-turquoise/25 bg-vae-turquoise py-20 dark:border-vae-turquoise/10 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark/80 dark:to-bg-darker sm:py-28 ${className}`.trim()}
-      aria-labelledby="final-cta-heading"
-    >
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute inset-x-0 top-0 hidden h-72 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.22),transparent_65%)] dark:block"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 hidden bg-[linear-gradient(rgba(var(--vae-turquoise-rgb),0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--vae-turquoise-rgb),0.08)_1px,transparent_1px)] bg-[size:120px_120px] mix-blend-soft-light dark:block"
-          aria-hidden
-        />
-      </div>
+    <>
+      <div className="h-px w-full bg-vae-turquoise/30" />
+      <section
+        id={id}
+        className={`relative overflow-hidden border-t-2 border-black py-20 text-black dark:border-white dark:text-white sm:py-28 ${className}`.trim()}
+        style={{ background: '#060a08' }}
+        aria-labelledby="final-cta-heading"
+      >
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
 
-      <div className="container-vae">
-        <div className="mx-auto grid max-w-5xl gap-10 rounded-[2rem] border border-white/10 bg-black/20 p-8 shadow-[0_24px_80px_-32px_rgba(0,0,0,0.55)] backdrop-blur-sm lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:p-10">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/85 dark:text-vae-turquoise/70">
-              {eyebrow}
-            </p>
-            <h2
-              id="final-cta-heading"
-              className="fluid-h2 mt-4 max-w-3xl text-balance font-bold text-white dark:text-white"
-            >
-              {title}
-            </h2>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/90 dark:text-text-secondary sm:text-lg">
-              {description}
-            </p>
-            {note && <p className="mt-4 text-sm text-white/70 dark:text-text-muted">{note}</p>}
-          </div>
-
-          <div className="flex flex-col gap-4 rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/70">
-              Ihre zwei nächsten Schritte
-            </p>
-            <MagneticButton className="w-full">
-              <CtaLink
-                ctaId={primary.ctaId}
-                ctx={{ fromPage: 'home', intent: 'final-cta' }}
-                variant="custom"
-                className="btn-primary flex w-full items-center justify-center gap-3 shadow-[0_16px_32px_-18px_rgba(0,0,0,0.35)] dark:shadow-none"
+        <div className="container-vae relative z-10">
+          <div className="grid gap-0 border-2 border-black dark:border-white lg:grid-cols-[minmax(0,1.15fr)_360px]">
+            <div className="p-8 sm:p-10" style={{ background: '#060a08' }}>
+              <p className="text-xs font-bold uppercase tracking-[0.32em] text-vae-turquoise">{eyebrow}</p>
+              <h2
+                id="final-cta-heading"
+                className="mt-4 max-w-4xl text-balance text-5xl font-black uppercase leading-none tracking-tight md:text-6xl lg:text-7xl"
               >
-                <CalendarClock className="h-5 w-5" />
-                {primary.label}
-              </CtaLink>
-            </MagneticButton>
-            <CtaLink
-              ctaId="contact.quick_email"
-              ctx={{ fromPage: 'home', intent: 'final-cta-email' }}
-              variant="custom"
-              className="btn-outline flex w-full items-center justify-center gap-3 px-6 py-3 text-sm font-semibold text-white"
-            >
-              Direkte Frage per Mail
-            </CtaLink>
-            <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65">Im Gespräch klären wir</p>
-              <ul className="text-white/82 mt-3 space-y-2 text-sm">
-                <li>Ihre aktuellen Tools und laufenden Kosten</li>
-                <li>Ob Migration, Hybrid-Modell oder Status quo sinnvoller ist</li>
-                <li>Welche nächsten Schritte realistisch und wirtschaftlich sind</li>
-              </ul>
+                {title}
+              </h2>
+              <div className="text-white/74 mt-6 max-w-2xl border-l-4 border-vae-turquoise pl-4 text-base leading-relaxed sm:text-lg">
+                {description}
+              </div>
+              {note && <p className="text-white/58 mt-4 text-sm font-medium">{note}</p>}
+            </div>
+
+            <div className="rounded-none border-t-2 border-black bg-black p-6 text-white dark:border-white lg:border-l-2 lg:border-t-0">
+              <div className="bg-vae-turquoise p-5 text-black">
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-black/55">Format</p>
+                <p className="mt-2 text-6xl font-black leading-none tracking-[-0.08em]">45</p>
+                <p className="mt-1 text-base font-black uppercase tracking-[0.14em]">Minuten</p>
+              </div>
+
+              <div className="mt-4 space-y-3 border border-white/10 p-4">
+                <p className="text-white/48 text-[10px] font-bold uppercase tracking-[0.28em]">Wir klären</p>
+                <ul className="text-white/82 space-y-2 text-sm leading-relaxed">
+                  <li>Ihre aktuellen Tools und laufenden Kosten</li>
+                  <li>Ob Migration, Hybrid-Modell oder Status quo sinnvoller ist</li>
+                  <li>Welche nächsten Schritte wirtschaftlich Sinn ergeben</li>
+                </ul>
+              </div>
+
+              <div className="mt-5 space-y-3">
+                <MagneticButton className="w-full">
+                  <CtaLink
+                    ctaId={primary.ctaId}
+                    ctx={{ fromPage: 'home', intent: 'final-cta' }}
+                    variant="custom"
+                    className="flex w-full items-center justify-center gap-3 bg-white px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-black transition-colors hover:bg-vae-turquoise"
+                  >
+                    <CalendarClock className="h-5 w-5" />
+                    {primary.label}
+                  </CtaLink>
+                </MagneticButton>
+
+                <CtaLink
+                  ctaId="contact.quick_email"
+                  ctx={{ fromPage: 'home', intent: 'final-cta-email' }}
+                  variant="custom"
+                  className="border-white/18 flex w-full items-center justify-center border px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5"
+                >
+                  Direkte Frage per Mail
+                </CtaLink>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 

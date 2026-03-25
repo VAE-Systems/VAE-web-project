@@ -39,7 +39,7 @@
     "src/components/layout/Header.tsx",
     "archive/layout/HeaderModern.tsx"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/_Archive"],
   "references": [
     {
       "path": "./tsconfig.node.json"

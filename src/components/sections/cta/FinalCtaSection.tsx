@@ -17,15 +17,15 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
       <div className="h-px w-full bg-vae-turquoise/30" />
       <section
         id={id}
-        className={`relative overflow-hidden border-t-2 border-black py-20 text-black dark:border-white dark:text-white sm:py-28 ${className}`.trim()}
-        style={{ background: '#060a08' }}
+        className={`relative overflow-hidden border-t-2 border-black py-20 text-text-light dark:border-white dark:text-white sm:py-28 ${className}`.trim()}
+        style={{ background: 'var(--bg-darker)' }}
         aria-labelledby="final-cta-heading"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
 
         <div className="container-vae relative z-10">
           <div className="grid gap-0 border-2 border-black dark:border-white lg:grid-cols-[minmax(0,1.15fr)_360px]">
-            <div className="p-8 sm:p-10" style={{ background: '#060a08' }}>
+            <div className="p-8 sm:p-10" style={{ background: 'var(--bg-darker)' }}>
               <p className="text-xs font-bold uppercase tracking-[0.32em] text-vae-turquoise">{eyebrow}</p>
               <h2
                 id="final-cta-heading"

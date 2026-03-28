@@ -538,9 +538,9 @@ const StorySection: React.FC = () => {
   return (
     <section
       id="story"
-      className="dark relative overflow-hidden"
+      className="relative overflow-hidden"
       style={{
-        background: '#060d0b',
+        background: 'var(--bg-darker)',
         clipPath: 'polygon(0 0, 100% 0, 100% 96%, 0 100%)',
         marginBottom: '-4vw',
         paddingBottom: 'calc(var(--section-pad, 5rem) + 4vw)',
@@ -549,7 +549,7 @@ const StorySection: React.FC = () => {
       }}
     >
       {/* Subtiler Hintergrund-Gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,212,170,0.03),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(var(--vae-turquoise-rgb),0.03),transparent_60%)]" />
 
       <div className="container-vae relative z-10">
         {/* Section-Header */}
@@ -563,11 +563,11 @@ const StorySection: React.FC = () => {
         </div>
 
         {/* ── INTRO VISUAL: Cloud vs. Self-Hosted placeholder ── */}
-        <div className="border-b border-white/5 pb-8">
+        <div className="border-b border-text-light/5 pb-8 dark:border-white/5">
           <div
             style={{
-              background: '#060d0b',
-              border: '1px solid rgba(0,212,170,0.15)',
+              background: 'var(--bg-darker)',
+              border: '1px solid rgba(var(--vae-turquoise-rgb),0.15)',
               borderRadius: 0,
               padding: '32px 24px',
               maxWidth: '420px',
@@ -579,7 +579,7 @@ const StorySection: React.FC = () => {
               style={{
                 fontSize: '18px',
                 fontWeight: 700,
-                color: '#00d4aa',
+                color: 'hsl(var(--color-vae-turquoise))',
                 margin: 0,
                 letterSpacing: '0.04em',
               }}
@@ -597,7 +597,7 @@ const StorySection: React.FC = () => {
             title="Warum wird Ihre Cloud-Rechnung jeden Monat teurer?"
             subtitle="Per-User-Pricing. Per-GB-Pricing. Feature-Pakete, die Sie zwingen, für Dinge zu zahlen, die Sie nie nutzen. Jedes Wachstum Ihres Teams bedeutet automatisch mehr Kosten — ohne dass Sie etwas entschieden haben."
             visual={
-              <div className="aspect-[2/1] overflow-hidden rounded-none border border-white/5 bg-black/30 p-4">
+              <div className="aspect-[2/1] overflow-hidden rounded-none border border-text-light/5 bg-bg-darker/30 p-4 dark:border-white/5 dark:bg-black/30">
                 <PriceEscalationSVG triggered={act1Triggered} />
               </div>
             }
@@ -608,8 +608,8 @@ const StorySection: React.FC = () => {
         {/* ── AKT 2: BANK VS SERVER ── */}
         <div
           style={{
-            background: '#080e0c',
-            border: '1px solid rgba(0,212,170,0.1)',
+            background: 'var(--bg-dark)',
+            border: '1px solid rgba(var(--vae-turquoise-rgb),0.1)',
             borderRadius: 0,
             padding: '0 32px 32px',
           }}
@@ -633,7 +633,7 @@ const StorySection: React.FC = () => {
             subtitle="Kein Unternehmen ist wie das andere. Warum sollte Ihre Infrastruktur von der Stange sein? Wir bauen genau das, was Sie brauchen — nicht mehr, nicht weniger."
             visual={
               <div className="space-y-3">
-                <div className="aspect-[2/1] overflow-hidden rounded-none border border-white/5 bg-black/30 p-4">
+                <div className="aspect-[2/1] overflow-hidden rounded-none border border-text-light/5 bg-bg-darker/30 p-4 dark:border-white/5 dark:bg-black/30">
                   <TailoredSuitSVG triggered={act3Triggered} />
                 </div>
                 <div className="grid grid-cols-3 gap-3">
@@ -642,9 +642,12 @@ const StorySection: React.FC = () => {
                     { label: 'KI auf Ihrem Server', sub: 'Statt OpenAI-Abo' },
                     { label: 'Automatisierte Abläufe', sub: 'Statt manuelle Prozesse' },
                   ].map(({ label, sub }) => (
-                    <div key={label} className="border-white/8 rounded-md border bg-white/[0.03] p-3 text-center">
+                    <div
+                      key={label}
+                      className="border-text-light/8 dark:border-white/8 rounded-md border bg-text-light/[0.03] p-3 text-center dark:bg-white/[0.03]"
+                    >
                       <p className="text-xs font-bold text-vae-turquoise">{label}</p>
-                      <p className="mt-1 text-[10px] leading-tight text-white/40">{sub}</p>
+                      <p className="mt-1 text-[10px] leading-tight text-text-muted dark:text-white/40">{sub}</p>
                     </div>
                   ))}
                 </div>

@@ -14,9 +14,9 @@ const SocialProofSection: React.FC = () => {
   return (
     <section
       id="social-proof"
-      className="relative overflow-hidden border-t-2 border-black bg-[#060a08] py-20 text-white dark:border-white sm:py-28"
+      className="relative overflow-hidden border-t-2 border-black bg-bg-darker py-20 text-text-light dark:border-white dark:bg-[#060a08] dark:text-white sm:py-28"
     >
-      <div className="pointer-events-none absolute left-[-2vw] top-6 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.04] lg:block">
+      <div className="pointer-events-none absolute left-[-2vw] top-6 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.04] dark:text-white/[0.04] lg:block">
         05
       </div>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
@@ -31,13 +31,13 @@ const SocialProofSection: React.FC = () => {
             <br />
             Gebaute Systeme.
           </h2>
-          <p className="text-white/72 mt-6 max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed sm:text-lg">
+          <p className="dark:text-white/72 mt-6 max-w-2xl border-l-4 border-text-light pl-4 text-base leading-relaxed text-text-secondary dark:border-white sm:text-lg">
             Vertrauen entsteht nicht durch Versprechen, sondern durch konkrete Projekte, echte Kundenkontexte und
             sichtbare Ergebnisse.
           </p>
         </header>
 
-        <div className="mt-10 grid gap-0 border-2 border-white/20 lg:grid-cols-4">
+        <div className="mt-10 grid gap-0 border-2 border-text-light/20 dark:border-white/20 lg:grid-cols-4">
           {referenceInsights.map((insight, index) => (
             <article
               key={insight.id}
@@ -56,14 +56,16 @@ const SocialProofSection: React.FC = () => {
           {referenceProjects.map((project, index) => (
             <article
               key={project.id}
-              className="border-white/14 flex h-full flex-col border-2 bg-white/[0.04] p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 sm:p-7"
+              className="border-text-light/14 dark:border-white/14 flex h-full flex-col border-2 bg-text-light/[0.04] p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 dark:bg-white/[0.04] sm:p-7"
             >
-              <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
+              <div className="flex items-start justify-between gap-4 border-b border-text-light/10 pb-4 dark:border-white/10">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">
                     Projekt {String(index + 1).padStart(2, '0')}
                   </p>
-                  <p className="text-white/54 mt-3 text-sm font-bold uppercase tracking-[0.18em]">{project.client}</p>
+                  <p className="dark:text-white/54 mt-3 text-sm font-bold uppercase tracking-[0.18em] text-text-muted">
+                    {project.client}
+                  </p>
                 </div>
                 <span className="bg-vae-turquoise px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em] text-black">
                   {project.badge}
@@ -74,10 +76,14 @@ const SocialProofSection: React.FC = () => {
                 <h3 className="max-w-[18rem] text-3xl font-black uppercase leading-[0.94] tracking-[-0.05em]">
                   {project.title}
                 </h3>
-                <span className="text-5xl font-black leading-none tracking-[-0.08em] text-white/10">0{index + 1}</span>
+                <span className="text-5xl font-black leading-none tracking-[-0.08em] text-text-light/10 dark:text-white/10">
+                  0{index + 1}
+                </span>
               </div>
 
-              <p className="text-white/74 mt-4 text-sm leading-relaxed sm:text-base">{project.description}</p>
+              <p className="dark:text-white/74 mt-4 text-sm leading-relaxed text-text-secondary sm:text-base">
+                {project.description}
+              </p>
 
               {project.logo ? (
                 <div className="border-white/12 mt-5 flex min-h-[90px] items-center justify-center border bg-white p-4">

@@ -49,7 +49,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
   return (
     <section
       id={id}
-      className={`relative border-t border-white/5 bg-[#030806] py-20 sm:py-28 ${className}`.trim()}
+      className={`relative border-t border-text-light/5 bg-bg-darker py-20 dark:border-white/5 sm:py-28 ${className}`.trim()}
       aria-labelledby="process-home-heading"
       style={{
         clipPath: 'polygon(0 4%, 100% 0, 100% 100%, 0 96%)',
@@ -67,7 +67,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
           <h2
             ref={headingRef}
             id="process-home-heading"
-            className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-white md:text-5xl"
+            className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-text-light dark:text-white md:text-5xl"
           >
             {homeProcessHeading}
           </h2>
@@ -96,12 +96,12 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
               </div>
 
               {/* Title */}
-              <h3 className="mt-4 text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-white">
+              <h3 className="mt-4 text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-text-light dark:text-white">
                 {step.title}
               </h3>
 
               {/* Description */}
-              <p className="mt-2 text-sm leading-relaxed text-white/65">{step.description}</p>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary dark:text-white/65">{step.description}</p>
             </div>
           ))}
         </div>

@@ -31,10 +31,10 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
         onKeyDown={onKeyDown}
         onClick={onClick}
         aria-current={isActive ? 'true' : undefined}
-        className={`group flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold tracking-tight transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-darker ${
+        className={`group flex w-full items-center justify-between border-l-4 px-4 py-3 text-[11px] font-black uppercase tracking-[0.18em] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#030806] ${
           isActive
-            ? 'border-2 border-vae-turquoise bg-vae-turquoise/10 text-gray-900 shadow-[0_8px_18px_rgba(18,24,20,0.08)] dark:border-vae-turquoise/70 dark:bg-white/10 dark:text-white dark:shadow-none'
-            : 'border-gray-200/80 bg-white/90 text-gray-700 hover:border-gray-300 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:border-white/20 dark:hover:bg-white/10 dark:hover:text-white'
+            ? 'dark:bg-white/8 border-vae-turquoise bg-vae-turquoise/10 text-gray-900 dark:text-white'
+            : 'border-transparent bg-transparent text-gray-600 hover:border-vae-turquoise/40 hover:bg-vae-turquoise/5 hover:text-gray-900 dark:text-white/60 dark:hover:border-vae-turquoise/40 dark:hover:bg-white/5 dark:hover:text-white'
         }`}
       >
         <span className="flex items-center gap-2">{item.label}</span>

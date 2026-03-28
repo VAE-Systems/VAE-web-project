@@ -143,12 +143,16 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
   }, [canUseMagnet, buttonRef])
 
   const baseClasses = `
-    relative inline-flex items-center gap-2 px-5 py-2.5
-    bg-vae-turquoise
-    text-black font-black text-[11px] uppercase tracking-[0.14em]
-    transition-all duration-200 ease-out
-    hover:bg-vae-turquoise/85
-    active:scale-[0.98]
+    cta-sheen
+    relative inline-flex items-center gap-2 px-6 py-3 rounded-xl
+    bg-gradient-to-r from-vae-turquoise to-emerald-400
+    text-[#1a2320] font-bold text-sm
+    shadow-lg shadow-vae-turquoise/30
+    transition-all duration-300 ease-out
+    hover:shadow-xl hover:shadow-vae-turquoise/50
+    active:scale-95
+    overflow-hidden
+    group
     ${shouldWiggle && !isHovered ? 'animate-wiggle-attention' : ''}
     ${className}
   `
@@ -380,10 +384,10 @@ const HeaderModern: React.FC = () => {
           isScrolled
             ? isDark
               ? 'border-b border-white/10 bg-[hsla(0,0%,6%,0.98)] shadow-sm backdrop-blur-xl'
-              : 'bg-[#faf8f4]/97 border-b border-[#c5c9c6] shadow-sm backdrop-blur-sm'
+              : 'border-b border-[#c5ccc8] bg-[#f5f7f5]/95 shadow-sm backdrop-blur-sm'
             : isDark
               ? 'border-white/8 border-b bg-[hsla(0,0%,6%,0.96)] backdrop-blur-lg'
-              : 'bg-[#faf8f4]/98 border-b border-[#d5d2ce] backdrop-blur-sm'
+              : 'bg-[#f5f7f5]/98 border-b border-[#d8ddd9] backdrop-blur-sm'
         }
       `}
       >
@@ -402,10 +406,10 @@ const HeaderModern: React.FC = () => {
 
             <button
               onClick={() => setIsMobileMenuOpen(prev => !prev)}
-              className={`flex h-10 w-10 items-center justify-center border text-sm font-bold transition-all duration-200 ${
+              className={`flex h-11 w-11 items-center justify-center rounded-full border text-sm font-semibold transition-all duration-200 ${
                 isDark
-                  ? 'border-white/15 bg-transparent text-white hover:border-vae-turquoise/60 hover:text-vae-turquoise'
-                  : 'border-black/20 bg-transparent text-[#1a2320] hover:border-vae-turquoise hover:text-vae-turquoise'
+                  ? 'border-white/10 bg-white/[0.06] text-white hover:border-vae-turquoise/50 hover:text-vae-turquoise'
+                  : 'border-[#c5ccc8] bg-white text-[#1a2320] shadow-sm hover:border-vae-turquoise hover:text-vae-turquoise'
               }`}
               aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
             >
@@ -441,19 +445,18 @@ const HeaderModern: React.FC = () => {
               <DropdownMenu className="w-full" isHeaderScrolled={isScrolled} />
             </div>
 
-            <div className="hidden items-center gap-3 lg:flex">
+            <div className="hidden items-center gap-6 lg:flex">
               <a
                 href={LOGIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 border px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-all duration-200 ${
+                className={`rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ${
                   isDark
-                    ? 'border-white/20 text-white/60 hover:border-vae-turquoise/60 hover:text-vae-turquoise'
-                    : 'border-gray-300 text-gray-600 hover:border-vae-turquoise hover:text-vae-turquoise'
+                    ? 'text-gray-400 hover:bg-white/5 hover:text-vae-turquoise'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-vae-turquoise'
                 }`}
               >
-                <LogIn className="h-3.5 w-3.5" />
-                <span>Kundenlogin</span>
+                Kundenlogin
               </a>
 
               <MagneticButton href={CTA_URL} forwardRef={ctaRef as React.RefObject<HTMLAnchorElement>}>
@@ -497,16 +500,16 @@ const HeaderModern: React.FC = () => {
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- Modal document container */}
           <div
             ref={sheetRef}
-            className={`absolute bottom-0 left-0 right-0 top-0 flex flex-col overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.55)] ${isDark ? 'bg-[#030806] text-white' : 'bg-[#faf8f4] text-gray-900'}`}
+            className={`absolute bottom-0 left-0 right-0 top-0 flex flex-col overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.55)] ${isDark ? 'bg-bg-darker text-white' : 'bg-white text-gray-900'}`}
             role="document"
             aria-label="Hauptmenü"
             onClick={event => event.stopPropagation()}
           >
             <div className="flex flex-shrink-0 items-center justify-between px-5 pb-2 pt-5">
-              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Menü</span>
+              <span className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise">Menü</span>
               <button
                 onClick={closeMenu}
-                className={`flex h-10 w-10 items-center justify-center border transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 bg-white/5 text-white' : 'border-gray-200/90 bg-transparent text-gray-800'}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 bg-white/5 text-white' : 'border-gray-200/90 bg-white text-gray-800'}`}
                 aria-label="Menü schließen"
               >
                 <X className="h-5 w-5" />
@@ -519,7 +522,7 @@ const HeaderModern: React.FC = () => {
                   {navSections.map(section => (
                     <div
                       key={section.id}
-                      className={`border p-4 ${isDark ? 'border-white/8 bg-white/[0.02]' : 'border-gray-200/80 bg-white/95'}`}
+                      className={`rounded-2xl border p-4 ${isDark ? 'border-white/5 bg-white/[0.03]' : 'border-gray-200/80 bg-white/95'}`}
                     >
                       <div className="flex items-center justify-between gap-2">
                         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">
@@ -537,7 +540,7 @@ const HeaderModern: React.FC = () => {
                             key={item.id}
                             to={item.href}
                             onClick={closeMenu}
-                            className={`border px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/8 bg-transparent text-white/80' : 'border-gray-200 bg-transparent text-gray-700'}`}
+                            className={`rounded-xl border px-3 py-2 text-sm font-semibold transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/5 bg-white/[0.02] text-white' : 'border-gray-200/80 bg-white/95 text-gray-800'}`}
                           >
                             {item.label}
                           </Link>
@@ -551,7 +554,7 @@ const HeaderModern: React.FC = () => {
                   <a
                     href={CTA_URL}
                     onClick={closeMenu}
-                    className="flex w-full items-center justify-center gap-2 bg-vae-turquoise px-4 py-3 text-xs font-black uppercase tracking-[0.14em] text-black transition hover:bg-vae-turquoise/85"
+                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-vae-turquoise to-emerald-400 px-4 py-3 text-sm font-semibold text-gray-900 shadow-lg shadow-vae-turquoise/30 transition hover:shadow-vae-turquoise/50"
                   >
                     <Calendar className="h-4 w-4" />
                     Beratung buchen
@@ -559,7 +562,7 @@ const HeaderModern: React.FC = () => {
                   <a
                     href={LOGIN_URL}
                     onClick={closeMenu}
-                    className={`flex w-full items-center justify-center gap-2 border px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/15 text-white/70' : 'border-gray-200 text-gray-700'}`}
+                    className={`flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 text-white' : 'border-gray-200/80 text-gray-800'}`}
                   >
                     <LogIn className="h-4 w-4" />
                     Kundenlogin
@@ -568,7 +571,7 @@ const HeaderModern: React.FC = () => {
                     onClick={() => {
                       toggleTheme()
                     }}
-                    className={`flex w-full items-center justify-center gap-2 border px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/15 bg-transparent text-white/70' : 'border-gray-200 bg-transparent text-gray-700'}`}
+                    className={`flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 bg-white/5 text-white' : 'border-gray-200/80 bg-white/95 text-gray-800'}`}
                   >
                     {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                     {isDark ? 'Light Mode' : 'Dark Mode'}

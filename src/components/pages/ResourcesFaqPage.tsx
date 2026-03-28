@@ -17,7 +17,7 @@
  * └── CTA Footer
  */
 
-import { CalendarDays, ChevronDown, Search as SearchIcon, ShieldCheck } from 'lucide-react'
+import { CalendarDays, Search as SearchIcon, ShieldCheck } from 'lucide-react'
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -92,62 +92,71 @@ const ResourcesFaqPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 text-center dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
-        <div aria-hidden="true">
-          <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.25),transparent_60%)] dark:block" />
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] py-20 text-white sm:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.12),transparent_35%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+          VAE
         </div>
-        <div className="container-vae relative flex flex-col items-center gap-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise">
-            FAQ · Knowledge Base
-          </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
-            Alles, was Sie wissen müssen – strukturiert, ehrlich, hilfreich
-          </h1>
-          <p className="max-w-3xl text-base text-white/85 dark:text-text-secondary">
-            Technologie, Prozesse, Karriere, Use Cases und alles dazwischen. {faqEntries.length} Fragen, strukturiert
-            wie eine echte Knowledge Base. Preise klären wir im Gespräch, weil jedes Projekt anders gebaut wird.
-          </p>
-          <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
-            <ShieldCheck className="h-4 w-4 text-white dark:text-vae-turquoise" />
-            Individuelle Lösungen · Transparente Kommunikation
-          </p>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <MagneticButton>
-              <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
-                Kontakt aufnehmen
-                <CalendarDays className="h-5 w-5" />
-              </Link>
-            </MagneticButton>
-            <MagneticButton>
-              <Link to="/contact#booking" className="btn-ghost inline-flex items-center gap-2 text-base">
-                Gespräch buchen
-                <ChevronDown className="h-4 w-4 rotate-180 text-white dark:text-vae-turquoise" />
-              </Link>
-            </MagneticButton>
-          </div>
-          <div className="mt-10 grid w-full gap-4 md:grid-cols-3">
-            <div className="rounded-3xl border border-[#c5ccc8] bg-white p-5 text-left shadow-[0_18px_40px_rgba(26,35,32,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#394642] dark:text-white/60">Kategorien</p>
-              <p className="mt-2 text-2xl font-semibold text-[#1a2320] dark:text-white">
-                {categoriesWithCounts.length} Bereiche
-              </p>
-              <p className="text-sm text-[#2c3834] dark:text-text-secondary">
-                Technologie, Business, Karriere, Use Cases, Sonstiges.
-              </p>
+
+        <div className="container-vae relative z-10">
+          <div className="flex flex-col items-start gap-8">
+            <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise">
+              <ShieldCheck className="h-3.5 w-3.5" /> FAQ · Knowledge Base
             </div>
-            <div className="rounded-3xl border border-[#c5ccc8] bg-white p-5 text-left shadow-[0_18px_40px_rgba(26,35,32,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#394642] dark:text-white/60">Einträge</p>
-              <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">{faqEntries.length} Fragen</p>
-              <p className="text-sm text-gray-600 dark:text-text-secondary">
-                Kuratiert, keine generischen SEO-Antworten.
-              </p>
+
+            <h1 className="max-w-4xl">
+              <span className="block text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-5xl lg:text-[4.8rem]">
+                Fragen &amp;
+              </span>
+              <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[9vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-4xl lg:text-[4rem]">
+                Antworten.
+              </span>
+            </h1>
+
+            <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+              {faqEntries.length} Fragen zu Technologie, Prozessen und Projekten — ehrlich, strukturiert, ohne
+              Buzzwords.
             </div>
-            <div className="rounded-3xl border border-gray-100/80 bg-white p-5 text-left shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-              <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-white/60">Philosophie</p>
-              <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">Lösungsorientiert</p>
-              <p className="text-sm text-gray-600 dark:text-text-secondary">
-                Preisfragen führen direkt zu einem CTA statt zu Ratespielen.
-              </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
+                <Link
+                  to="/contact"
+                  className="flex w-full items-center justify-center gap-2 bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] text-black transition-transform hover:-translate-y-0.5 sm:w-auto"
+                >
+                  Kontakt aufnehmen
+                  <CalendarDays className="h-4 w-4" />
+                </Link>
+              </MagneticButton>
+              <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
+                <Link
+                  to="/contact#booking"
+                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                >
+                  Gespräch buchen
+                </Link>
+              </MagneticButton>
+            </div>
+
+            <div className="grid w-full gap-4 md:grid-cols-3">
+              <div className="border border-white/10 bg-white/[0.03] p-5 text-left">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Kategorien</p>
+                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-white">
+                  {categoriesWithCounts.length} Bereiche
+                </p>
+                <p className="mt-1 text-sm text-white/55">Technologie, Business, Karriere, Use Cases, Sonstiges.</p>
+              </div>
+              <div className="border border-white/10 bg-white/[0.03] p-5 text-left">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Einträge</p>
+                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-white">{faqEntries.length} Fragen</p>
+                <p className="mt-1 text-sm text-white/55">Kuratiert, keine generischen SEO-Antworten.</p>
+              </div>
+              <div className="border border-white/10 bg-white/[0.03] p-5 text-left">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Philosophie</p>
+                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-white">Lösungs-orientiert</p>
+                <p className="mt-1 text-sm text-white/55">Preisfragen führen direkt zu einem Gespräch.</p>
+              </div>
             </div>
           </div>
         </div>

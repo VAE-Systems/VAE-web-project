@@ -1,30 +1,7 @@
-/**
- * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
- * ┃  SOCIAL PROOF SECTION                                                     ┃
- * ┃  Projekte & Referenzen → Vertrauensaufbau durch echte Beispiele.          ┃
- * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
- *
- * 🗺️ KOMPONENTEN
- * ├── LogoModal            → Vergrößerungsansicht für Projekt-Logos
- * └── SocialProofSection   → Grid mit Projekten + Insights
- *
- * 🎛️ CORE
- * ├── referenceProjects[]  → Projekt-Daten aus content/home
- * └── referenceInsights[]  → Statistiken/Highlights
- *
- * 🔁 SIDE-EFFECTS
- * └── Keyboard listener    → ESC schließt Modal
- *
- * 🎨 LAYERS
- * ├── Project Cards        → 2-spaltig, hover-animiert
- * ├── Insights Grid        → 4-spaltig, Icon + Text
- * └── LogoModal overlay    → Fullscreen mit backdrop-blur
- */
-
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import { referenceInsights, referenceProjects } from '@/content/home'
-import { ArrowRight, Briefcase, X } from 'lucide-react'
-import React, { useState } from 'react'
+import { ArrowRight, Briefcase } from 'lucide-react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 const caseStudyAnchors: Record<string, string> = {
@@ -33,173 +10,118 @@ const caseStudyAnchors: Record<string, string> = {
   'qr-mail': '/about/referenzen#art-affair-qr',
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
-// 🎛️ CORE — LogoModal (Vergrößerungsansicht)
-// ═══════════════════════════════════════════════════════════════════════════
-interface LogoModalProps {
-  logo: { src: string; alt: string; invertOnDark?: boolean; invertOnLight?: boolean }
-  onClose: () => void
-}
-
-const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
-  // 🔁 SIDE-EFFECT — ESC Key Handler
-  React.useEffect(() => {
-    const handler = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', handler)
-    return () => document.removeEventListener('keydown', handler)
-  }, [onClose])
-
-  return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- Modal dialog with keyboard handler via useEffect
-    <div
-      className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/80 px-4 py-10 backdrop-blur-sm"
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${logo.alt} - Vergrößert`}
-      onClick={onClose}
-    >
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- Inner container for click prevention */}
-      <div className="relative max-h-[90vh] max-w-4xl" onClick={e => e.stopPropagation()}>
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute -right-4 -top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-gray-900 shadow-lg transition-all hover:scale-110 hover:bg-white dark:bg-bg-darker/90 dark:text-white dark:hover:bg-bg-darker"
-          aria-label="Schließen"
-        >
-          <X className="h-5 w-5" />
-        </button>
-        <div className="rounded-2xl border border-white/20 bg-white/95 p-8 shadow-2xl dark:bg-bg-dark/95">
-          <img
-            src={logo.src}
-            alt={logo.alt}
-            className={[
-              'max-h-[75vh] w-full object-contain',
-              (logo.invertOnDark || logo.invertOnLight) && 'filter',
-              logo.invertOnDark && 'dark:invert',
-              logo.invertOnLight && 'invert',
-              logo.invertOnLight && 'dark:invert-0',
-            ]
-              .filter(Boolean)
-              .join(' ')}
-          />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 🚪 ORCHESTRATOR — SocialProofSection
-// ═══════════════════════════════════════════════════════════════════════════
 const SocialProofSection: React.FC = () => {
-  // 🎛️ CORE — Modal State
-  const [selectedLogo, setSelectedLogo] = useState<{
-    src: string
-    alt: string
-    invertOnDark?: boolean
-    invertOnLight?: boolean
-  } | null>(null)
-
   return (
     <section
       id="social-proof"
-      className="from-sage-50/70 to-sage-50/50 relative overflow-hidden border-t border-gray-200 bg-gradient-to-b via-white py-20 dark:border-white/5 dark:bg-bg-darker sm:py-28"
+      className="relative overflow-hidden border-t-2 border-black bg-[#060a08] py-20 text-white dark:border-white sm:py-28"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-70">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.06),transparent_35%)] dark:bg-[radial-gradient(circle_at_25%_25%,rgba(var(--vae-turquoise-rgb),0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(26,54,68,0.25),transparent_35%)]" />
+      <div className="pointer-events-none absolute left-[-2vw] top-6 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.04] lg:block">
+        05
       </div>
-      <div className="container-vae">
-        <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
-            Social Proof
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
+
+      <div className="container-vae relative z-10">
+        <header className="max-w-4xl">
+          <p className="text-[11px] font-black uppercase tracking-[0.34em] text-vae-turquoise">
+            Beweise statt Behauptungen
           </p>
-          <h2 className="mt-3 text-4xl font-black text-gray-900 dark:text-text-light md:text-5xl">
-            Projekte & Referenzen
+          <h2 className="mt-4 text-balance text-5xl font-black uppercase leading-[0.88] tracking-[-0.07em] sm:text-6xl lg:text-7xl">
+            Nicht Theorie.
+            <br />
+            Gebaute Systeme.
           </h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-text-secondary">
-            Was wir gebaut haben – und was dabei rauskam.
+          <p className="text-white/72 mt-6 max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed sm:text-lg">
+            Vertrauen entsteht nicht durch Versprechen, sondern durch konkrete Projekte, echte Kundenkontexte und
+            sichtbare Ergebnisse.
           </p>
         </header>
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          {referenceProjects.map(project => (
+
+        <div className="mt-10 grid gap-0 border-2 border-white/20 lg:grid-cols-4">
+          {referenceInsights.map((insight, index) => (
+            <article
+              key={insight.id}
+              className={`${index % 2 === 0 ? 'bg-white text-black' : 'bg-vae-turquoise text-black'} border-b-2 border-black p-6 lg:border-b-0 lg:border-r-2 lg:last:border-r-0`}
+            >
+              <p className="text-[10px] font-black uppercase tracking-[0.28em] text-black/50">{insight.title}</p>
+              {insight.value && (
+                <p className="mt-3 text-5xl font-black leading-none tracking-[-0.07em] sm:text-6xl">{insight.value}</p>
+              )}
+              <p className="text-black/72 mt-4 text-sm leading-relaxed">{insight.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-10 grid gap-8 xl:grid-cols-3">
+          {referenceProjects.map((project, index) => (
             <article
               key={project.id}
-              className="group flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-gray-900 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.14)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/30 hover:shadow-[0_22px_70px_-30px_rgba(13,148,136,0.35)] active:scale-[0.995] dark:bg-white/[0.03] dark:text-text-light dark:shadow-vae-turquoise/20"
+              className="border-white/14 flex h-full flex-col border-2 bg-white/[0.04] p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 sm:p-7"
             >
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  {project.logo ? (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setSelectedLogo({
-                          src: project.logo!,
-                          alt: `${project.client} Logo`,
-                          invertOnDark: project.invertOnDark,
-                          invertOnLight: project.invertOnLight,
-                        })
-                      }
-                      className="group/logo cursor-pointer transition-opacity hover:opacity-80"
-                      aria-label={`${project.client} Logo vergrößern`}
-                    >
-                      <div className="flex min-h-[80px] items-center justify-center rounded-2xl bg-white/5 p-4">
-                        <img
-                          src={project.logo}
-                          alt={`${project.client} Logo`}
-                          className={[
-                            'h-14 w-auto max-w-[180px] transition-transform duration-300 group-hover/logo:scale-110',
-                            (project.invertOnDark || project.invertOnLight) && 'filter',
-                            project.invertOnDark && 'dark:invert',
-                            project.invertOnLight && 'invert',
-                            project.invertOnLight && 'dark:invert-0',
-                          ]
-                            .filter(Boolean)
-                            .join(' ')}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                    </button>
-                  ) : (
-                    <div className="flex min-h-[80px] min-w-[80px] items-center justify-center rounded-2xl bg-white/5 p-4 text-vae-turquoise">
-                      <Briefcase className="h-8 w-8" />
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-sm font-medium text-gray-800 dark:text-text-secondary">{project.client}</p>
-                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise/90 dark:text-vae-turquoise/80">
-                      {project.status}
-                    </p>
-                  </div>
+              <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">
+                    Projekt {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <p className="text-white/54 mt-3 text-sm font-bold uppercase tracking-[0.18em]">{project.client}</p>
                 </div>
-                <span className="rounded-full border border-vae-turquoise/30 bg-vae-turquoise/15 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-vae-turquoise shadow-sm">
+                <span className="bg-vae-turquoise px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em] text-black">
                   {project.badge}
                 </span>
               </div>
-              <h3 className="mt-6 text-2xl font-semibold text-gray-900 dark:text-text-light">{project.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
-                {project.description}
-              </p>
-              <ul className="mt-5 space-y-2 rounded-2xl bg-vae-turquoise/10 p-4 text-sm text-gray-700 shadow-inner shadow-vae-turquoise/10 transition-colors duration-200 dark:bg-white/[0.03] dark:text-text-secondary dark:shadow-none">
+
+              <div className="mt-5 flex items-start justify-between gap-4">
+                <h3 className="max-w-[18rem] text-3xl font-black uppercase leading-[0.94] tracking-[-0.05em]">
+                  {project.title}
+                </h3>
+                <span className="text-5xl font-black leading-none tracking-[-0.08em] text-white/10">0{index + 1}</span>
+              </div>
+
+              <p className="text-white/74 mt-4 text-sm leading-relaxed sm:text-base">{project.description}</p>
+
+              {project.logo ? (
+                <div className="border-white/12 mt-5 flex min-h-[90px] items-center justify-center border bg-white p-4">
+                  <img
+                    src={project.logo}
+                    alt={`${project.client} Logo`}
+                    className={[
+                      'max-h-12 w-auto max-w-[180px] object-contain',
+                      (project.invertOnDark || project.invertOnLight) && 'filter',
+                      project.invertOnDark && 'dark:invert',
+                      project.invertOnLight && 'invert',
+                      project.invertOnLight && 'dark:invert-0',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ) : (
+                <div className="border-white/12 mt-5 flex min-h-[90px] items-center justify-center border bg-white/5 text-vae-turquoise">
+                  <Briefcase className="h-8 w-8" />
+                </div>
+              )}
+
+              <ul className="text-white/78 mt-5 space-y-2 border-t border-white/10 pt-5 text-sm leading-relaxed">
                 {project.highlights.map(highlight => (
                   <li key={highlight} className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise" aria-hidden />
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-vae-turquoise" aria-hidden />
                     <span>{highlight}</span>
                   </li>
                 ))}
               </ul>
-              {project.role && <p className="mt-4 text-xs text-gray-500 dark:text-text-muted">{project.role}</p>}
 
-              <div className="mt-6">
-                <MagneticButton>
+              {project.role && <p className="text-white/48 mt-4 text-xs leading-relaxed">{project.role}</p>}
+
+              <div className="mt-auto pt-6">
+                <MagneticButton className="w-full">
                   <Link
                     to={caseStudyAnchors[project.id] ?? '/about/referenzen'}
-                    className="inline-flex items-center gap-2 rounded-lg border border-vae-turquoise/50 px-4 py-2 text-sm font-semibold text-vae-turquoise transition-colors hover:border-vae-turquoise hover:bg-vae-turquoise/10"
+                    className="flex w-full items-center justify-between bg-white px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-black transition-colors hover:bg-vae-turquoise"
                   >
-                    Details ansehen
-                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    <span>Case ansehen</span>
+                    <ArrowRight className="h-4 w-4 shrink-0" />
                   </Link>
                 </MagneticButton>
               </div>
@@ -207,27 +129,24 @@ const SocialProofSection: React.FC = () => {
           ))}
         </div>
 
-        <hr className="border-white/8 mb-16 mt-12" />
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {referenceInsights.map(insight => (
-            <div
-              key={insight.id}
-              className="border-white/8 group flex flex-col items-center gap-3 rounded-2xl border bg-white/90 p-6 text-center text-gray-900 shadow-[0_12px_36px_-24px_rgba(15,23,42,0.16)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-[0_16px_40px_-24px_rgba(13,148,136,0.3)] dark:bg-white/[0.05] dark:text-text-light"
+        <div className="mt-10 grid gap-4 border-2 border-white/20 bg-black/40 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_240px]">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Kurz gesagt</p>
+            <p className="mt-3 max-w-2xl text-2xl font-black uppercase leading-[0.95] tracking-[-0.05em] sm:text-3xl">
+              Wir verkaufen keine Vision ohne Substanz. Wir bauen Systeme, die im Alltag benutzt werden.
+            </p>
+          </div>
+          <MagneticButton className="w-full">
+            <Link
+              to="/about/referenzen"
+              className="border-white/16 flex w-full items-center justify-between border px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-vae-turquoise hover:text-black"
             >
-              {insight.value && <p className="text-4xl font-black leading-none text-vae-turquoise">{insight.value}</p>}
-              <div className="flex flex-col items-center gap-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-900 dark:text-text-light">
-                  {insight.title}
-                </p>
-                <p className="text-xs text-gray-600 dark:text-text-secondary">{insight.description}</p>
-              </div>
-            </div>
-          ))}
+              <span>Alle Referenzen</span>
+              <ArrowRight className="h-4 w-4 shrink-0" />
+            </Link>
+          </MagneticButton>
         </div>
       </div>
-
-      {selectedLogo && <LogoModal logo={selectedLogo} onClose={() => setSelectedLogo(null)} />}
     </section>
   )
 }

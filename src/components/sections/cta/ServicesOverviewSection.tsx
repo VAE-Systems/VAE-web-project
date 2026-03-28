@@ -1,42 +1,52 @@
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import Icon from '@/components/ui/Icon'
-import { BeratungIllustration, BetreuungIllustration, SetupIllustration } from '@/components/ui/icons/VaeIllustrations'
+import {
+  BetreuungIllustration,
+  GermanyServerIcon,
+  LocalAIIcon,
+  SetupIllustration,
+} from '@/components/ui/icons/VaeIllustrations'
 import { servicesOverviewCards } from '@/content/home'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 const SERVICE_ILLUSTRATIONS: Record<string, React.FC<{ size?: number }>> = {
-  beratung: BeratungIllustration,
-  setup: SetupIllustration,
+  hosting: GermanyServerIcon,
   betreuung: BetreuungIllustration,
+  infrastruktur: SetupIllustration,
+  custom: LocalAIIcon,
 }
 
 const ServicesOverviewSection: React.FC = () => {
   return (
     <section
       id="services"
-      className="relative overflow-hidden border-t border-white/10 bg-[#f2f5f1] py-20 text-black dark:bg-[#08110d] dark:text-white sm:py-28"
+      className="relative overflow-hidden bg-[#f4f1ec] py-20 text-black dark:bg-[#030806] dark:text-white sm:py-28"
+      style={{
+        clipPath: 'polygon(0 3vw, 100% 0, 100% 97%, 0 100%)',
+        paddingTop: 'calc(5rem + 3vw)',
+        paddingBottom: 'calc(5rem + 3vw)',
+      }}
     >
       <div className="pointer-events-none absolute left-0 top-0 hidden select-none text-[20vw] font-black uppercase leading-none tracking-[-0.08em] text-black/[0.04] dark:text-white/[0.04] lg:block">
         03
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(var(--vae-turquoise-rgb),0.14),transparent_30%),linear-gradient(to_bottom,transparent,rgba(0,0,0,0.04))] dark:bg-[radial-gradient(circle_at_top_right,rgba(var(--vae-turquoise-rgb),0.16),transparent_30%)]" />
 
       <div className="container-vae relative z-10">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-bold uppercase tracking-[0.38em] text-vae-turquoise">Leistungsmodell</p>
           <h2 className="mt-3 text-balance text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black dark:text-white sm:text-6xl lg:text-7xl">
-            Drei Wege.
+            Vier Einstiege.
             <br />
-            Ein klares System.
+            Ein System.
           </h2>
           <p className="dark:text-white/72 mx-auto mt-5 max-w-2xl text-base leading-relaxed text-black/70 sm:text-lg">
-            Nicht zehn Optionen, nicht Beratungsnebel. Drei klare Einstiege, die sich einzeln buchen oder als Abfolge
-            aufbauen lassen.
+            Vom ersten Hosting bis zum maßgeschneiderten KI-Tool. Einzeln buchbar, natürlich aufbauend — jede Stufe ist
+            der Einstieg in die nächste.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-3">
+        <div className="mt-14 grid gap-8 lg:grid-cols-2 xl:grid-cols-4">
           {servicesOverviewCards.map((card, index) => (
             <article
               key={card.id}
@@ -82,7 +92,7 @@ const ServicesOverviewSection: React.FC = () => {
               </div>
 
               <div className="grid gap-0 border-t-2 border-black dark:border-white sm:grid-cols-1">
-                <div className="border-b-2 border-black bg-[#eef5f0] p-5 dark:border-white dark:bg-[#0d1813]">
+                <div className="border-b-2 border-black bg-[#f4f1ec] p-5 dark:border-white dark:bg-[#0d1813]">
                   <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-black/50 dark:text-white/45">
                     Was Sie bekommen
                   </p>
@@ -122,13 +132,7 @@ const ServicesOverviewSection: React.FC = () => {
                     className="flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors hover:bg-vae-turquoise hover:text-black dark:bg-white dark:text-black dark:hover:bg-vae-turquoise"
                     aria-label={`${card.title} – Details ansehen`}
                   >
-                    <span>
-                      {card.id === 'beratung'
-                        ? 'Strategie ansehen'
-                        : card.id === 'setup'
-                          ? 'Setup ansehen'
-                          : 'Betreuung ansehen'}
-                    </span>
+                    <span>{card.cta.label}</span>
                     <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
                       <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>

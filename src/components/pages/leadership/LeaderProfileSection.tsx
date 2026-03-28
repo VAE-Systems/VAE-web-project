@@ -60,10 +60,13 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
             Founder Story
           </p>
-          <h2 id={`${leader.id}-title`} className="text-3xl font-semibold text-text-light md:text-4xl lg:text-5xl">
-            {leader.name} — {leader.title}
+          <h2
+            id={`${leader.id}-title`}
+            className="text-3xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-white md:text-4xl lg:text-5xl"
+          >
+            {leader.name}
           </h2>
-          <span className="inline-flex items-center rounded-full border border-white/10 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-text-muted">
+          <span className="inline-flex items-center border border-vae-turquoise/35 bg-black px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] text-vae-turquoise">
             {leader.roleTag}
           </span>
           <div className="space-y-4 text-base leading-relaxed text-text-light/80">
@@ -78,7 +81,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
               <ul className="mt-3 space-y-2 text-sm text-text-light/75">
                 {leader.expertise.map(item => (
                   <li key={item} className="flex items-start gap-2">
-                    <span aria-hidden="true" className="mt-[0.4rem] h-1.5 w-1.5 rounded-full bg-vae-turquoise" />
+                    <span aria-hidden="true" className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 bg-vae-turquoise" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -90,10 +93,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                 {leader.engagement.map(item => (
                   <li key={item.text} className="flex flex-col gap-1.5">
                     <div className="flex items-start gap-2">
-                      <span
-                        aria-hidden="true"
-                        className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-vae-turquoise"
-                      />
+                      <span aria-hidden="true" className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 bg-vae-turquoise" />
                       <span>{item.text}</span>
                     </div>
                     {item.links && item.links.length > 0 && (
@@ -104,7 +104,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[11px] font-medium text-text-light/70 transition-all duration-200 hover:border-vae-turquoise/50 hover:bg-vae-turquoise/10 hover:text-vae-turquoise"
+                            className="inline-flex items-center gap-1 border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.1em] text-text-light/70 transition-all duration-200 hover:border-vae-turquoise/50 hover:text-vae-turquoise"
                           >
                             <ExternalLink className="h-2.5 w-2.5" />
                             {link.label}
@@ -126,7 +126,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={leader.linkedin.text}
-                  className="btn-secondary inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
+                  className="inline-flex w-full items-center justify-center gap-2 bg-vae-turquoise px-6 py-3 text-sm font-black uppercase tracking-[0.12em] text-black transition-transform hover:-translate-y-0.5"
                 >
                   <Linkedin className="h-5 w-5" />
                   LinkedIn
@@ -136,7 +136,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                 <a
                   href={`mailto:${leader.email}`}
                   aria-label={`E-Mail an ${leader.name} senden`}
-                  className="btn-outline inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-base font-semibold"
+                  className="inline-flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:text-vae-turquoise"
                 >
                   <Mail className="h-5 w-5" />
                   E-Mail
@@ -147,7 +147,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
               {leader.seoKeywords.map(keyword => (
                 <span
                   key={keyword}
-                  className="rounded-full border border-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-text-muted transition duration-300 hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:text-text-light"
+                  className="border border-white/15 bg-white/[0.03] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 transition duration-200 hover:border-vae-turquoise/50 hover:text-vae-turquoise"
                 >
                   {keyword}
                 </span>

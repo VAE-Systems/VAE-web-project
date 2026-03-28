@@ -1,21 +1,3 @@
-/**
- * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
- * ┃  WHY OPEN SOURCE SECTION                                                  ┃
- * ┃  Problem/Lösung-Gegenüberstellung: SaaS-Dilemma vs. Open-Source.          ┃
- * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
- *
- * 🎛️ CORE
- * ├── openSourcePainPoints[] → Probleme mit SaaS (content/home)
- * └── openSourceAdvantages[] → Vorteile von Open Source
- *
- * 🎨 LAYERS
- * ├── Left Card (rose tint)  → "Das Problem" / SaaS-Dilemma
- * └── Right Card (turquoise) → "Die Lösung" / Open-Source-Alternative
- *
- * 📐 LAYOUT
- * └── 2-spaltig auf Desktop, gestackt auf Mobile
- */
-
 import AnimatedSaaSTransformation from '@/components/ui/animations/AnimatedSaaSTransformation'
 import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import {
@@ -29,149 +11,191 @@ import {
   OverpaidBoxIcon,
 } from '@/components/ui/icons/VaeIllustrations'
 import { openSourceAdvantages, openSourcePainPoints } from '@/content/home'
-import { motion } from 'framer-motion'
-import { ArrowRight, Lightbulb } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 const PAIN_ICONS = [BillGrowIcon, EyeServerIcon, BrokenShieldIcon, OverpaidBoxIcon]
 const ADV_ICONS = [ConnectedPlatformIcon, FixedCostIcon, GermanyServerIcon, LocalAIIcon]
 
-// ═══════════════════════════════════════════════════════════════════════════
-// 🚪 ORCHESTRATOR — WhyOpenSourceSection
-// ═══════════════════════════════════════════════════════════════════════════
 const WhyOpenSourceSection: React.FC = () => {
   return (
     <section
       id="why-open-source"
-      className="border-border-primary from-sage-50/60 via-sage-50/80 to-sage-50/60 relative border-t bg-gradient-to-b py-20 dark:border-white/5 dark:from-bg-darker dark:to-bg-dark/80 sm:py-28"
+      className="relative overflow-hidden bg-[#f4f1ec] py-20 text-black dark:bg-[#030806] dark:text-white sm:py-28"
+      style={{
+        clipPath: 'polygon(0 3vw, 100% 0, 100% 97%, 0 100%)',
+        paddingTop: 'calc(5rem + 3vw)',
+        paddingBottom: 'calc(5rem + 3vw)',
+      }}
     >
-      <div className="container-vae">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
-            Infrastruktur neu gedacht
-          </p>
-          <h2 className="mt-3 text-balance text-4xl font-black text-text-light md:text-5xl">
-            Warum Unternehmen auf selbstgehostete Systeme setzen
-          </h2>
+      <div className="pointer-events-none absolute right-[-3vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-black/[0.05] dark:text-white/[0.04] lg:block">
+        04
+      </div>
+
+      <div className="container-vae relative z-10">
+        <div className="grid gap-8 border-2 border-black bg-white text-black dark:border-white dark:bg-[#050b08] dark:text-white lg:grid-cols-[minmax(0,1.15fr)_320px]">
+          <div className="p-8 sm:p-10">
+            <p className="text-[11px] font-black uppercase tracking-[0.34em] text-vae-turquoise">Das Tresor-Prinzip</p>
+            <h2 className="mt-4 max-w-4xl text-balance text-5xl font-black uppercase leading-[0.88] tracking-[-0.07em] sm:text-6xl lg:text-7xl">
+              Fremde Bank oder eigenes Haus?
+            </h2>
+            <div className="text-black/72 dark:text-white/74 mt-6 max-w-3xl border-l-4 border-black pl-4 text-base leading-relaxed dark:border-white sm:text-lg">
+              Bei einer Cloud-Lösung mieten Sie einen Tresor in einem fremden Bankgebäude. Self-Hosting bedeutet: Ihr
+              Tresor steht in Ihrem Gebäude. Sie haben die Schlüssel. Niemand sonst kommt rein.
+            </div>
+          </div>
+
+          <div className="border-t-2 border-black bg-black p-8 text-white dark:border-white lg:border-l-2 lg:border-t-0">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Der Unterschied</p>
+            <div className="mt-5 space-y-4">
+              <div className="border border-white/15 p-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-white/45">Fremde Bank</p>
+                <p className="mt-2 text-lg font-black uppercase leading-tight">
+                  Die Bank sieht alles. Bestimmt die Regeln. Ändert die Preise.
+                </p>
+              </div>
+              <div className="bg-vae-turquoise p-4 text-black">
+                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-black/55">Eigenes Haus</p>
+                <p className="mt-2 text-lg font-black uppercase leading-tight">
+                  Sie haben die Schlüssel. Niemand sonst kommt rein.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="mt-10">
           <AnimatedSaaSTransformation autoPlayDelay={3600} />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-8 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-6 backdrop-blur-sm"
-        >
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-vae-turquoise/15">
-              <Lightbulb className="h-5 w-5 text-vae-turquoise" />
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-vae-turquoise">Vision</p>
-              <p className="text-base font-semibold leading-relaxed text-text-light">
-                <span className="text-vae-turquoise">SaaS mieten oder Infrastruktur besitzen?</span> Self-Hosted-First
-                als Standard – Open Source als Werkzeug, wo es Freiheit bringt.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="mt-12 grid gap-10 md:grid-cols-2">
-          {/* LEFT: SaaS/Problem — heavy, constrained, sharp */}
-          <article className="rounded-none border border-red-500/20 bg-red-950/20 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:bg-red-950/30">
-            <header className="mb-8">
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-red-400 dark:text-red-300">
-                <span className="mr-1 text-red-500">●</span>Das Problem
-              </p>
-              <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Das SaaS-Dilemma</h3>
+        <div className="mt-10 grid gap-8 xl:grid-cols-2">
+          <article className="border-2 border-black bg-black p-6 text-white dark:border-white sm:p-8">
+            <header className="border-white/12 mb-8 flex items-end justify-between gap-4 border-b pb-4">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-red-400">Das Problem</p>
+                <h3 className="mt-2 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] sm:text-4xl">
+                  Der Tresor in fremder Hand
+                </h3>
+              </div>
+              <span className="text-white/12 text-6xl font-black leading-none tracking-[-0.08em]">A</span>
             </header>
-            <ul className="divide-y divide-black/10 dark:divide-white/5">
-              {openSourcePainPoints.map((point, i) => {
-                const Icon = PAIN_ICONS[i]
+
+            <div className="grid gap-4">
+              {openSourcePainPoints.map((point, index) => {
+                const PainIcon = PAIN_ICONS[index]
                 return (
-                  <li key={point.title} className="py-6 first:pt-0 last:pb-0">
-                    <div className="flex flex-col gap-3">
-                      {Icon && (
-                        <div className="inline-block rounded-md bg-red-500/10 p-3 text-red-400">
-                          <Icon size={80} />
+                  <article key={point.title} className="border border-white/10 bg-white/[0.03] p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-center gap-4">
+                        <div className="shrink-0 text-red-400">
+                          <PainIcon size={52} />
                         </div>
-                      )}
-                      <div>
-                        <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
-                          {point.title}
-                          <span className="mt-2 block h-[2px] w-10 rounded-full bg-red-400/50" />
-                        </p>
-                        <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
-                          {point.description}
-                        </p>
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-[0.28em] text-red-400/90">
+                            Risiko {String(index + 1).padStart(2, '0')}
+                          </p>
+                          <h4 className="mt-2 text-2xl font-black uppercase leading-[0.94] tracking-[-0.04em]">
+                            {point.title}
+                          </h4>
+                        </div>
                       </div>
+                      <span className="shrink-0 text-4xl font-black leading-none tracking-[-0.08em] text-red-400/25">
+                        0{index + 1}
+                      </span>
                     </div>
-                  </li>
+                    <p className="text-white/72 mt-3 text-sm leading-relaxed sm:text-base">{point.description}</p>
+                    {point.bullets && (
+                      <ul className="text-white/78 mt-4 space-y-2 border-t border-white/10 pt-4 text-sm leading-relaxed">
+                        {point.bullets.map(bullet => (
+                          <li key={bullet} className="flex items-start gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-red-400" aria-hidden />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </article>
                 )
               })}
-            </ul>
+            </div>
           </article>
 
-          {/* RIGHT: VAE/Solution — alive, open, rounded */}
-          <article className="rounded-2xl border border-vae-turquoise/25 bg-vae-turquoise/5 p-8 shadow-[0_10px_24px_rgba(18,24,20,0.08)] backdrop-blur-sm dark:bg-vae-turquoise/[0.08] md:border-l-2">
-            <header className="mb-8">
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise/90">
-                <span className="mr-1 text-vae-turquoise">●</span>Die Lösung
-              </p>
-              <h3 className="text-3xl font-bold text-text-light lg:text-4xl">Die VAE-Alternative</h3>
+          <article className="border-2 border-black bg-vae-turquoise p-6 text-black dark:border-white sm:p-8">
+            <header className="border-black/12 mb-8 flex items-end justify-between gap-4 border-b pb-4">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-black/55">Die Alternative</p>
+                <h3 className="mt-2 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] sm:text-4xl">
+                  Der Tresor im eigenen Haus
+                </h3>
+              </div>
+              <span className="text-6xl font-black leading-none tracking-[-0.08em] text-black/10">B</span>
             </header>
-            <ul className="divide-y divide-vae-turquoise/15">
-              {openSourceAdvantages.map((point, i) => {
-                const Icon = ADV_ICONS[i]
+
+            <div className="grid gap-4">
+              {openSourceAdvantages.map((point, index) => {
+                const AdvIcon = ADV_ICONS[index]
                 return (
-                  <li key={point.title} className="py-6 first:pt-0 last:pb-0">
-                    <div className="flex flex-col gap-3">
-                      {Icon && (
-                        <div className="bg-vae-turquoise/12 inline-block rounded-md p-3 text-vae-turquoise">
-                          <Icon size={80} />
+                  <article key={point.title} className="border border-black/15 bg-white/35 p-5 backdrop-blur-sm">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-center gap-4">
+                        <div className="shrink-0 text-black/70">
+                          <AdvIcon size={52} />
                         </div>
-                      )}
-                      <div>
-                        <p className="inline-block text-lg font-bold text-text-light lg:text-xl">
-                          {point.title}
-                          <span className="mt-2 block h-[2px] w-10 rounded-full bg-vae-turquoise/60" />
-                        </p>
-                        <p className="mt-2 text-sm leading-relaxed text-text-secondary/70 lg:text-base">
-                          {point.description}
-                        </p>
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-[0.28em] text-black/45">
+                            Vorteil {String(index + 1).padStart(2, '0')}
+                          </p>
+                          <h4 className="mt-2 text-2xl font-black uppercase leading-[0.94] tracking-[-0.04em]">
+                            {point.title}
+                          </h4>
+                        </div>
                       </div>
+                      <span className="text-black/18 shrink-0 text-4xl font-black leading-none tracking-[-0.08em]">
+                        0{index + 1}
+                      </span>
                     </div>
-                  </li>
+                    <p className="text-black/76 mt-3 text-sm leading-relaxed sm:text-base">{point.description}</p>
+                    {point.bullets && (
+                      <ul className="mt-4 space-y-2 border-t border-black/10 pt-4 text-sm leading-relaxed text-black/80">
+                        {point.bullets.map(bullet => (
+                          <li key={bullet} className="flex items-start gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-black" aria-hidden />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </article>
                 )
               })}
-            </ul>
+            </div>
           </article>
         </div>
 
-        {/* CTAs */}
-        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-          <MagneticButton className="w-full sm:w-auto">
+        <div className="mt-10 grid gap-4 border-2 border-black bg-white p-6 dark:border-white dark:bg-[#050b08] sm:p-8 lg:grid-cols-[minmax(0,1fr)_220px_220px]">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Entscheidungsfrage</p>
+            <p className="mt-3 max-w-2xl text-2xl font-black uppercase leading-[0.95] tracking-[-0.05em] sm:text-3xl">
+              Wo soll Ihr Tresor stehen — in Ihrem Haus oder bei der Bank?
+            </p>
+          </div>
+          <MagneticButton className="w-full">
             <Link
               to="/leistungen/strategie"
-              className="btn-primary flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-semibold sm:w-auto"
+              className="flex w-full items-center justify-between bg-black px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors hover:bg-vae-turquoise hover:text-black"
             >
-              <span className="sm:hidden">Strategie ansehen</span>
-              <span className="hidden sm:inline">Erfahren Sie mehr über eine Digitalisierungsstrategie</span>
-              <ArrowRight className="h-4 w-4" />
+              <span>Strategie ansehen</span>
+              <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
           </MagneticButton>
-          <MagneticButton className="w-full sm:w-auto">
+          <MagneticButton className="w-full">
             <Link
               to="/leistungen/infrastruktur"
-              className="btn-outline flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-semibold sm:w-auto"
+              className="flex w-full items-center justify-between border-2 border-black px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-black transition-colors hover:border-vae-turquoise hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:border-vae-turquoise dark:hover:bg-vae-turquoise dark:hover:text-black"
             >
-              Mehr zu Infrastruktur-Design
-              <ArrowRight className="h-4 w-4" />
+              <span>Setup verstehen</span>
+              <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
           </MagneticButton>
         </div>

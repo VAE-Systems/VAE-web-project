@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = ({
   const baseClass = useMemo(
     () =>
       cn(
-        'group relative rounded-2xl border backdrop-blur-md p-7 flex flex-col h-full overflow-hidden transition-all duration-400',
+        'group relative rounded-none border backdrop-blur-md p-7 flex flex-col h-full overflow-hidden transition-all duration-400',
         isLight ? 'border-2 border-[#b7c1bc] bg-white' : 'border-vae-turquoise/20 bg-vae-turquoise/5',
         isLight
           ? 'hover:border-vae-turquoise hover:shadow-[0_10px_22px_rgba(18,24,20,0.10)]'

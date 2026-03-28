@@ -287,7 +287,7 @@ const BetreuungPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="relative bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative bg-[#faf8f4] text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="IT-Betreuung & Managed Services | VAE Systems"
         description="Outsourcen Sie Ihr IT-Rückgrat an VAE: Infrastruktur-Managed oder Full-Partnership – mit Fokus auf Ressourcen, KI-Optimierung und langfristige Stabilität."
@@ -315,92 +315,118 @@ const BetreuungPage: React.FC = () => {
         }}
       />
       {/* Hero */}
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise/10 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
-        {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
-        {/* Desktop version with fixed attachment */}
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] text-white">
+        {/* Hero Background Image */}
         <div
-          className="pointer-events-none absolute inset-0 hidden opacity-[0.40] dark:opacity-[0.20] md:block"
+          className="pointer-events-none absolute inset-0 hidden opacity-[0.22] md:block"
           style={{
             backgroundImage: 'url(/images/optimized/P1010798.JPG.webp)',
             backgroundAttachment: 'fixed',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            filter: 'grayscale(1)',
           }}
           role="presentation"
         />
-        {/* Mobile version without fixed (iOS Safari compatibility) */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.40] dark:opacity-[0.20] md:hidden"
+          className="pointer-events-none absolute inset-0 opacity-[0.22] md:hidden"
           style={{
             backgroundImage: 'url(/images/optimized/P1010798.JPG.webp)',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            filter: 'grayscale(1)',
           }}
           role="presentation"
         />
-        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.18),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.14),transparent_35%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+          VAE
         </div>
-        {/* Light Mode: no glass blur to keep poster-like clarity */}
-        <div className="container-vae relative flex flex-col items-center justify-center text-center">
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
-            MANAGED OPERATIONS
-          </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
-            Weniger IT-Overhead. Mehr Zeit für Ihr Business.
-          </h1>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-700 dark:text-text-secondary md:text-lg">
-            Wir übernehmen Betrieb, Wartung und Weiterentwicklung Ihrer Informationsinfrastruktur – damit Ihr Team sich
-            auf Produkt, Kund:innen und Wachstum konzentrieren kann.
-          </p>
-          <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-6 lg:gap-8">
-            <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-convert flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
-              >
-                Service-Level besprechen
-              </a>
-            </MagneticButton>
-            <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
-              <button
-                onClick={e => {
-                  e.preventDefault()
-                  scrollToServiceLevels(e)
-                }}
-                className="btn-outline flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
-              >
-                Service-Optionen ansehen ↓
-              </button>
-            </MagneticButton>
-          </div>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            {trustBadges.map(badge => (
-              <span
-                key={badge}
-                className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/20 bg-vae-turquoise/5 px-4 py-2 text-sm font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary"
-              >
-                <Check className="h-4 w-4 text-vae-turquoise" /> {badge}
-              </span>
-            ))}
+
+        <div className="container-vae relative z-10 py-20 sm:py-24 lg:py-28">
+          <div className="flex flex-col gap-8">
+            {/* Eyebrow */}
+            <div className="inline-flex w-fit items-center border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.35)]">
+              Managed Operations
+            </div>
+
+            {/* Main Heading */}
+            <div className="space-y-3">
+              <h1 className="max-w-4xl">
+                <span className="block text-[13vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-6xl lg:text-[5.2rem] xl:text-[5.8rem]">
+                  Wer kümmert sich,
+                </span>
+                <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-5xl lg:text-[4.4rem] xl:text-[5rem]">
+                  wenn Sie schlafen?
+                </span>
+              </h1>
+              <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+                Wir übernehmen Betrieb, Monitoring und Weiterentwicklung Ihrer Infrastruktur — damit Ihr Team sich aufs
+                Kerngeschäft konzentriert. Monatlich kündbar.
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
+                <a
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 bg-white px-8 py-5 text-base font-black uppercase tracking-[0.12em] text-black shadow-[0_18px_50px_-24px_rgba(255,255,255,0.45)] transition-transform hover:-translate-y-0.5 sm:w-auto"
+                >
+                  Service-Level besprechen
+                </a>
+              </MagneticButton>
+              <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
+                <button
+                  onClick={e => {
+                    e.preventDefault()
+                    scrollToServiceLevels(e)
+                  }}
+                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                >
+                  Service-Optionen ansehen ↓
+                </button>
+              </MagneticButton>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap gap-3">
+              {trustBadges.map(badge => (
+                <div
+                  key={badge}
+                  className="flex items-center gap-2 border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/70"
+                >
+                  <Check className="h-4 w-4 flex-shrink-0 text-vae-turquoise" /> {badge}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* IT-Kapazität Engpass Section */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-16 dark:border-white/5 dark:bg-bg-darker">
+      <section
+        className="section-card-container border-b border-gray-200 bg-[#faf8f4] dark:border-white/5 dark:bg-bg-darker"
+        style={{
+          clipPath: 'polygon(0 3vw, 100% 0, 100% 100%, 0 100%)',
+          marginTop: '-3vw',
+          paddingTop: 'calc(4rem + 3vw)',
+          paddingBottom: '4rem',
+        }}
+      >
         <div className="section-card-backdrop" />
         <div className="container-vae relative space-y-12">
           {/* Block 1: Intro */}
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.3em] text-orange-700 dark:border-orange-500/20 dark:bg-orange-950/20 dark:text-orange-300">
+            <div className="mb-4 inline-flex items-center gap-2 border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.3em] text-orange-700 dark:border-orange-500/20 dark:bg-orange-950/20 dark:text-orange-300">
               IT-Kapazität ist der Engpass
             </div>
-            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <h2 className="text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
               Warum Managed Operations sinnvoll sind
             </h2>
             <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary">
@@ -466,9 +492,9 @@ const BetreuungPage: React.FC = () => {
                   ].map((item, i) => (
                     <div
                       key={i}
-                      className="group flex items-start gap-3 rounded-xl border border-orange-200 bg-white p-3 transition-all duration-300 hover:scale-[1.02] hover:border-orange-400 dark:border-orange-500/30 dark:bg-orange-500/5 dark:hover:border-orange-400/50 dark:hover:bg-orange-500/15"
+                      className="group flex items-start gap-3 border border-orange-200 bg-white p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-400 dark:border-orange-500/30 dark:bg-orange-500/5"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-100 transition-transform duration-300 group-hover:scale-110 dark:bg-orange-500/20">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-orange-100 dark:bg-orange-500/20">
                         <item.icon className="h-5 w-5 text-orange-600 dark:text-orange-400" />
                       </div>
                       <div>
@@ -484,7 +510,7 @@ const BetreuungPage: React.FC = () => {
 
               {/* Right: Solution (Türkis) */}
               <motion.div
-                className="relative overflow-hidden rounded-2xl border-2 border-vae-turquoise/40 bg-vae-turquoise/10 p-8 shadow-[0_10px_22px_rgba(18,24,20,0.12)] dark:border-vae-turquoise/30 dark:bg-gradient-to-br dark:from-vae-turquoise/10 dark:via-bg-darker/70 dark:to-bg-darker dark:shadow-[0_4px_24px_rgba(8,255,193,0.08),0_0_20px_rgba(8,255,193,0.15)]"
+                className="relative overflow-hidden border-2 border-vae-turquoise/40 bg-vae-turquoise/10 p-8 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/[0.08]"
                 initial={{ opacity: 0, x: 30, scale: 0.95 }}
                 whileInView={{ opacity: 1, x: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-100px' }}
@@ -492,7 +518,7 @@ const BetreuungPage: React.FC = () => {
               >
                 <div className="relative mb-6">
                   <motion.div
-                    className="mb-2 inline-flex items-center gap-2 rounded-full bg-vae-turquoise/10 px-3 py-1 dark:bg-vae-turquoise/20"
+                    className="mb-2 inline-flex items-center gap-2 border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 dark:bg-vae-turquoise/20"
                     initial={{ opacity: 0, y: -10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
@@ -520,9 +546,9 @@ const BetreuungPage: React.FC = () => {
                   ].map((item, i) => (
                     <div
                       key={i}
-                      className="group flex items-start gap-3 rounded-xl border border-vae-turquoise/30 bg-white p-3 transition-all duration-300 hover:scale-[1.02] hover:border-vae-turquoise/60 dark:border-vae-turquoise/20 dark:bg-white/5 dark:hover:border-vae-turquoise/50 dark:hover:bg-vae-turquoise/10"
+                      className="group flex items-start gap-3 border border-vae-turquoise/30 bg-white p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-vae-turquoise/60 dark:border-vae-turquoise/20 dark:bg-white/5"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110 dark:bg-vae-turquoise/20">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-vae-turquoise/10 dark:bg-vae-turquoise/20">
                         <item.icon className="h-5 w-5 text-vae-turquoise" />
                       </div>
                       <div>
@@ -540,14 +566,14 @@ const BetreuungPage: React.FC = () => {
 
           {/* Conclusion */}
           <motion.div
-            className="mx-auto max-w-3xl overflow-hidden rounded-2xl border-2 border-vae-turquoise/40 bg-white p-8 shadow-[0_10px_22px_rgba(18,24,20,0.12)] dark:border-vae-turquoise/30 dark:bg-transparent dark:shadow-none"
+            className="mx-auto max-w-3xl border-2 border-vae-turquoise/40 bg-white p-8 dark:border-vae-turquoise/30 dark:bg-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border-2 border-vae-turquoise bg-white shadow-sm dark:bg-bg-darker">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center border-2 border-vae-turquoise bg-white dark:bg-bg-darker">
                 <Lightbulb className="h-8 w-8 text-vae-turquoise" />
               </div>
               <div className="text-center md:text-left">
@@ -562,14 +588,14 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Visual Section: Team in Action */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+      <section className="section-card-container border-b border-gray-200 bg-[#faf8f4] py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <header className="mx-auto mb-14 max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
               Unser Ansatz
             </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <h2 className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
               Direkte Kommunikation, klare Prozesse
             </h2>
             <p className="mt-4 text-base text-gray-700 dark:text-text-secondary">
@@ -579,9 +605,9 @@ const BetreuungPage: React.FC = () => {
 
           <div className="grid gap-8 md:grid-cols-2">
             {/* Jakob erklärt an Leinwand */}
-            <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-vae-turquoise/60 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+            <div className="group relative overflow-hidden border border-gray-200 bg-white p-4 transition-all hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/5">
               <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <div className="flex h-10 w-10 items-center justify-center bg-vae-turquoise/15">
                   <Users className="h-5 w-5 text-vae-turquoise" />
                 </div>
                 <div>
@@ -604,9 +630,9 @@ const BetreuungPage: React.FC = () => {
             </div>
 
             {/* Hand zeigt Details */}
-            <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-vae-turquoise/60 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
+            <div className="group relative overflow-hidden border border-gray-200 bg-white p-4 transition-all hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/5">
               <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-vae-turquoise/15">
+                <div className="flex h-10 w-10 items-center justify-center bg-vae-turquoise/15">
                   <Target className="h-5 w-5 text-vae-turquoise" />
                 </div>
                 <div>
@@ -632,7 +658,7 @@ const BetreuungPage: React.FC = () => {
           {/* Benefits unter den Bildern */}
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             <div className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center bg-vae-turquoise/15">
                 <Lightbulb className="h-6 w-6 text-vae-turquoise" />
               </div>
               <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Strategische Optimierung</h4>
@@ -642,7 +668,7 @@ const BetreuungPage: React.FC = () => {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center bg-vae-turquoise/15">
                 <Activity className="h-6 w-6 text-vae-turquoise" />
               </div>
               <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Proaktives Monitoring</h4>
@@ -651,7 +677,7 @@ const BetreuungPage: React.FC = () => {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center bg-vae-turquoise/15">
                 <RefreshCcw className="h-6 w-6 text-vae-turquoise" />
               </div>
               <h4 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">Kontinuierliche Updates</h4>
@@ -667,7 +693,7 @@ const BetreuungPage: React.FC = () => {
       {/* Section 4: Service Levels */}
       <section
         id="service-levels"
-        className="section-card-container border-b border-gray-200 bg-[#f2fff8] py-24 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b border-gray-200 bg-[#f4f1ec] py-24 dark:border-white/5 dark:bg-bg-darker"
       >
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
@@ -675,7 +701,7 @@ const BetreuungPage: React.FC = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
               Service-Level
             </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <h2 className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
               Wie wir zusammenarbeiten können.
             </h2>
             <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
@@ -687,19 +713,21 @@ const BetreuungPage: React.FC = () => {
               return (
                 <div
                   key={level.id}
-                  className={`relative flex h-full flex-col rounded-3xl bg-white p-8 shadow-md transition hover:-translate-y-1 dark:bg-white/5 ${
+                  className={`relative flex h-full flex-col bg-white/90 p-8 shadow-sm transition hover:-translate-y-1 dark:bg-white/5 ${
                     level.highlighted
                       ? 'border-2 border-vae-turquoise/70 shadow-lg shadow-vae-turquoise/10 dark:shadow-vae-turquoise/20'
                       : 'border border-gray-200 dark:border-white/10'
                   }`}
                 >
                   {level.badge && (
-                    <span className="absolute right-6 top-6 rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-vae-turquoise">
+                    <span className="absolute right-6 top-6 border border-vae-turquoise/50 bg-vae-turquoise px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-black">
                       {level.badge}
                     </span>
                   )}
                   <level.icon className="mb-5 h-12 w-12 text-vae-turquoise" />
-                  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">{level.title}</h3>
+                  <h3 className="text-2xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                    {level.title}
+                  </h3>
                   <p className="mt-1 text-sm uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
                     {level.subtitle}
                   </p>
@@ -774,7 +802,7 @@ const BetreuungPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary">
+                  <div className="mt-6 border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary">
                     <p className="font-semibold text-gray-900 dark:text-text-light">{level.binding}</p>
                     <p className="mt-2">{level.footnote}</p>
                   </div>
@@ -785,7 +813,7 @@ const BetreuungPage: React.FC = () => {
                         href={bookingUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`group relative w-full overflow-hidden rounded-xl px-6 py-3.5 text-sm font-bold transition-all duration-300 ${
+                        className={`group relative w-full overflow-hidden px-6 py-3.5 text-sm font-bold transition-all duration-300 ${
                           level.highlighted ? 'btn-convert' : 'btn-outline'
                         }`}
                       >
@@ -811,7 +839,7 @@ const BetreuungPage: React.FC = () => {
           </div>
 
           {/* SLA-Hinweis */}
-          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/5">
+          <div className="mx-auto mt-12 max-w-3xl border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/5">
             <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
               Service-Level-Agreements & Premium-Support
             </h3>
@@ -829,14 +857,14 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section: Deployment-Modelle / Hosting-Optionen */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+      <section className="section-card-container border-b border-gray-200 bg-[#faf8f4] py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
         <div id="deployment-modelle" className="container-vae relative">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
               Hosting & Betrieb
             </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <h2 className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-4xl">
               Wie kann Ihr Setup betrieben werden?
             </h2>
             <p className="mt-4 text-base text-gray-700 dark:text-text-secondary md:text-lg">
@@ -848,13 +876,15 @@ const BetreuungPage: React.FC = () => {
           {/* Haupt-Modelle Grid */}
           <div className="grid gap-6 md:grid-cols-3">
             {/* Modell 1: On-Premise auf Ihrer Hardware */}
-            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/30 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-vae-turquoise/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-vae-turquoise/30 bg-vae-turquoise/10">
                 <Server className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">On-Premise auf Ihrer Hardware</h3>
+              <h3 className="text-lg font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                On-Premise auf Ihrer Hardware
+              </h3>
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 Setup auf Ihrer bestehenden Hardware. Dokumentiert, betreibbar – Betrieb bleibt bei Ihrem Team oder geht
                 später an VAE über.
@@ -862,13 +892,15 @@ const BetreuungPage: React.FC = () => {
             </div>
 
             {/* Modell 2: Managed auf Ihrer Infrastruktur */}
-            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/30 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-vae-turquoise/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-vae-turquoise/30 bg-vae-turquoise/10">
                 <ShieldCheck className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Managed auf Ihrer Infrastruktur</h3>
+              <h3 className="text-lg font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                Managed auf Ihrer Infrastruktur
+              </h3>
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 Setup bei deutschen Anbietern (dedizierte Server auf Ihren Accounts). VAE übernimmt Betrieb, Monitoring,
                 Updates und Security.
@@ -876,13 +908,15 @@ const BetreuungPage: React.FC = () => {
             </div>
 
             {/* Modell 3: VAE-Managed Plattform */}
-            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/30 to-vae-turquoise/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/5">
+              <div className="absolute inset-x-0 top-0 h-[2px] bg-vae-turquoise/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-vae-turquoise/30 bg-vae-turquoise/10">
                 <Cloud className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">VAE-Managed Plattform</h3>
+              <h3 className="text-lg font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                VAE-Managed Plattform
+              </h3>
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 Komplett von VAE betriebene Umgebung in deutschen Rechenzentren. Betrieb, Security, Monitoring –
                 minimaler Footprint, maximale Entlastung.
@@ -892,13 +926,13 @@ const BetreuungPage: React.FC = () => {
 
           {/* Coming Soon Banner */}
           <div className="mx-auto mt-8 max-w-3xl">
-            <div className="relative overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 via-white to-vae-turquoise/5 p-6 dark:from-vae-turquoise/10 dark:via-bg-dark dark:to-vae-turquoise/10">
+            <div className="border border-vae-turquoise/20 bg-vae-turquoise/5 p-6 dark:bg-vae-turquoise/10">
               <div className="flex flex-col gap-3 text-center md:flex-row md:items-center md:gap-4 md:text-left">
-                <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-vae-turquoise/30 bg-vae-turquoise/10 md:mx-0 md:self-start">
+                <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center border border-vae-turquoise/30 bg-vae-turquoise/10 md:mx-0 md:self-start">
                   <Server className="h-5 w-5 text-vae-turquoise" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="mb-1 text-base font-semibold text-gray-900 dark:text-white">
+                  <h4 className="mb-1 text-base font-bold text-gray-900 dark:text-white">
                     Coming Soon: Hardware-Management
                   </h4>
                   <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
@@ -908,7 +942,7 @@ const BetreuungPage: React.FC = () => {
                   </p>
                 </div>
                 <div className="flex-shrink-0">
-                  <span className="inline-block rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-vae-turquoise">
+                  <span className="inline-block border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-vae-turquoise">
                     In Vorbereitung
                   </span>
                 </div>
@@ -919,14 +953,12 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 5: Leistungen */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+      <section className="section-card-container border-b border-gray-200 bg-[#faf8f4] py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
-              Was ist enthalten?
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-vae-turquoise">Was ist enthalten?</p>
+            <h2 className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-4xl">
               Was wir konkret machen
             </h2>
             <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
@@ -937,13 +969,15 @@ const BetreuungPage: React.FC = () => {
             {detailedServices.map(service => (
               <div
                 key={service.title}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-6 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
+                className="group relative flex h-full flex-col overflow-hidden border border-vae-turquoise/25 bg-white/90 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 dark:border-vae-turquoise/20 dark:bg-white/5 dark:hover:bg-white/10"
               >
                 <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/10 shadow-[0_0_20px_-5px_rgba(8,255,193,0.3)] transition-all duration-300 group-hover:bg-vae-turquoise/15 group-hover:shadow-[0_0_30px_-5px_rgba(8,255,193,0.5)] dark:bg-vae-turquoise/15 dark:shadow-[0_0_30px_-8px_rgba(8,255,193,0.4)] dark:group-hover:shadow-[0_0_40px_-8px_rgba(8,255,193,0.6)]">
+                <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center bg-vae-turquoise/10 transition-all duration-300 group-hover:bg-vae-turquoise/15 dark:bg-vae-turquoise/15">
                   <service.icon className="h-6 w-6 text-vae-turquoise" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{service.title}</h3>
+                <h3 className="text-base font-black uppercase leading-[0.92] tracking-[-0.03em] text-gray-900 dark:text-white">
+                  {service.title}
+                </h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                   {service.description}
                 </p>
@@ -954,14 +988,12 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Prozess-Sektion */}
-      <section className="section-card-container border-b border-gray-200 bg-white py-20 dark:border-white/5 dark:bg-bg-darker">
+      <section className="section-card-container border-b border-gray-200 bg-[#f4f1ec] py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
-              Unser Prozess
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-vae-turquoise">Unser Prozess</p>
+            <h2 className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-4xl">
               So arbeiten wir zusammen
             </h2>
             <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
@@ -973,10 +1005,12 @@ const BetreuungPage: React.FC = () => {
           <div className="hidden gap-4 md:grid md:grid-cols-3">
             {/* Phase 1: Onboarding */}
             <div className="relative">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/15">
-                <span className="text-2xl font-bold text-vae-turquoise">1</span>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center bg-vae-turquoise/15">
+                <span className="text-2xl font-black text-vae-turquoise">1</span>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">Onboarding</h3>
+              <h3 className="mb-3 text-lg font-black uppercase tracking-[-0.03em] text-gray-900 dark:text-white">
+                Onboarding
+              </h3>
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 Übergabe, Review der bestehenden Systeme, Definition von Scope & Prioritäten. Wir verschaffen uns einen
                 klaren Überblick über Ihre Infrastruktur und legen gemeinsam die Ziele fest.
@@ -985,10 +1019,12 @@ const BetreuungPage: React.FC = () => {
 
             {/* Phase 2: Stabilisierung */}
             <div className="relative">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/15">
-                <span className="text-2xl font-bold text-vae-turquoise">2</span>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center bg-vae-turquoise/15">
+                <span className="text-2xl font-black text-vae-turquoise">2</span>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">Stabilisierung</h3>
+              <h3 className="mb-3 text-lg font-black uppercase tracking-[-0.03em] text-gray-900 dark:text-white">
+                Stabilisierung
+              </h3>
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 Aufräumen, Monitoring einrichten, erste Verbesserungen umsetzen. In dieser Phase schaffen wir eine
                 stabile Basis für den laufenden Betrieb.
@@ -997,11 +1033,11 @@ const BetreuungPage: React.FC = () => {
 
             {/* Phase 3: Laufende Betreuung */}
             <div className="relative">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/15">
-                <span className="text-2xl font-bold text-vae-turquoise">3</span>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center bg-vae-turquoise/15">
+                <span className="text-2xl font-black text-vae-turquoise">3</span>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
-                Laufende Betreuung & Optimierung
+              <h3 className="mb-3 text-lg font-black uppercase tracking-[-0.03em] text-gray-900 dark:text-white">
+                Laufende Betreuung &amp; Optimierung
               </h3>
               <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                 Regelmäßige Checks, Roadmaps und kleine Projekte. Wir halten die Systeme aktuell, optimieren
@@ -1015,13 +1051,15 @@ const BetreuungPage: React.FC = () => {
             {/* Phase 1: Onboarding */}
             <div className="relative flex gap-6">
               <div className="flex flex-col items-center">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/15">
-                  <span className="text-xl font-bold text-vae-turquoise">1</span>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center bg-vae-turquoise/15">
+                  <span className="text-xl font-black text-vae-turquoise">1</span>
                 </div>
                 <div className="mt-2 w-0.5 flex-1 bg-vae-turquoise/30" />
               </div>
               <div className="pb-8">
-                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Onboarding</h3>
+                <h3 className="mb-2 text-base font-black uppercase tracking-[-0.03em] text-gray-900 dark:text-white">
+                  Onboarding
+                </h3>
                 <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                   Übergabe, Review der bestehenden Systeme, Definition von Scope & Prioritäten.
                 </p>
@@ -1031,13 +1069,15 @@ const BetreuungPage: React.FC = () => {
             {/* Phase 2: Stabilisierung */}
             <div className="relative flex gap-6">
               <div className="flex flex-col items-center">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/15">
-                  <span className="text-xl font-bold text-vae-turquoise">2</span>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center bg-vae-turquoise/15">
+                  <span className="text-xl font-black text-vae-turquoise">2</span>
                 </div>
                 <div className="mt-2 w-0.5 flex-1 bg-vae-turquoise/30" />
               </div>
               <div className="pb-8">
-                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Stabilisierung</h3>
+                <h3 className="mb-2 text-base font-black uppercase tracking-[-0.03em] text-gray-900 dark:text-white">
+                  Stabilisierung
+                </h3>
                 <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
                   Aufräumen, Monitoring einrichten, erste Verbesserungen umsetzen.
                 </p>
@@ -1047,12 +1087,12 @@ const BetreuungPage: React.FC = () => {
             {/* Phase 3: Laufende Betreuung */}
             <div className="relative flex gap-6">
               <div className="flex flex-col items-center">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/15">
-                  <span className="text-xl font-bold text-vae-turquoise">3</span>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center bg-vae-turquoise/15">
+                  <span className="text-xl font-black text-vae-turquoise">3</span>
                 </div>
               </div>
               <div>
-                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+                <h3 className="mb-2 text-base font-black uppercase tracking-[-0.03em] text-gray-900 dark:text-white">
                   Laufende Betreuung & Optimierung
                 </h3>
                 <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
@@ -1065,13 +1105,13 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 6: Gründe */}
-      <section className="border-b border-gray-200 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-transparent">
+      <section className="border-b border-gray-200 bg-[#faf8f4] py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
               Warum VAE?
             </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <h2 className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-4xl">
               Warum Kunden VAE wählen
             </h2>
             <p className="mt-4 text-lg text-gray-700 dark:text-text-secondary">
@@ -1082,10 +1122,12 @@ const BetreuungPage: React.FC = () => {
             {reasonCards.map(reason => (
               <div
                 key={reason.title}
-                className="rounded-3xl border-2 border-gray-200 bg-white p-6 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/5 dark:shadow-none"
+                className="border-2 border-gray-200 bg-white p-6 transition hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/5"
               >
                 <reason.icon className="mb-4 h-10 w-10 text-vae-turquoise" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{reason.title}</h3>
+                <h3 className="text-base font-black uppercase leading-[0.92] tracking-[-0.03em] text-gray-900 dark:text-white">
+                  {reason.title}
+                </h3>
                 <p className="mt-3 text-sm text-gray-700 dark:text-text-secondary">{reason.description}</p>
               </div>
             ))}
@@ -1094,14 +1136,14 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 7: FAQ */}
-      <section className="accent-section bg-vae-turquoise py-20 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="bg-[#030806] py-20 text-white">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85 dark:text-vae-turquoise/80">
-              FAQ
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-white dark:text-white md:text-4xl">Häufige Fragen</h2>
-            <p className="mt-4 text-base text-white/80 dark:text-white/70">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-vae-turquoise">FAQ</p>
+            <h2 className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-white md:text-4xl">
+              Häufige Fragen
+            </h2>
+            <p className="mt-4 text-base text-white/65">
               Antworten zur monatlich kündbaren Betreuung – transparent, ohne Buzzword-Schleier.
             </p>
           </div>
@@ -1110,12 +1152,12 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 8: CTA */}
-      <section className="border-t border-gray-200 bg-white py-16 dark:border-white/5 dark:bg-transparent md:py-20">
+      <section className="border-t border-gray-200 bg-[#faf8f4] py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
             Managed Operations
           </p>
-          <h2 className="px-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl lg:text-4xl">
+          <h2 className="px-4 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-4xl">
             Ihr Betrieb, dauerhaft stabil.
           </h2>
           <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-gray-700 dark:text-text-secondary md:text-lg">

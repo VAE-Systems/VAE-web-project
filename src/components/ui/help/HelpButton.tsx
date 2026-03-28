@@ -70,7 +70,7 @@ export const HelpModeIndicator: React.FC<{ className?: string }> = ({ className 
 
   return (
     <div
-      className={`animate-in fade-in slide-in-from-top-2 rounded-2xl border border-white/70 bg-white/85 px-5 py-3 shadow-[0_12px_32px_rgba(15,23,42,0.12)] duration-300 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/5 dark:shadow-none ${className}`}
+      className={`animate-in fade-in slide-in-from-top-2 rounded-none border border-white/70 bg-white/85 px-5 py-3 shadow-[0_12px_32px_rgba(15,23,42,0.12)] duration-300 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/5 dark:shadow-none ${className}`}
     >
       <p className="text-sm text-vae-turquoise">
         <strong>Hilfe-Modus aktiv:</strong> Klicken Sie auf ein Feld, um eine Erklärung zu erhalten.

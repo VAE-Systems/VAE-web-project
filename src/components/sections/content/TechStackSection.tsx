@@ -340,7 +340,7 @@ const TechStackSection: React.FC = () => {
     <section
       id="tech-stack"
       className={
-        'surface-alt overlay-grid overlay-diag edge-glow-top tech-stack-interactive via-sage-50/30 to-sage-50/60 relative overflow-hidden border-t border-vae-turquoise/10 bg-gradient-to-b from-white py-24 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker md:py-32 ' +
+        'tech-stack-interactive relative overflow-hidden border-t border-vae-turquoise/10 bg-[#f4f1ec] py-24 dark:bg-[#030806] md:py-32 ' +
         (active ? 'tech-stack-active' : '')
       }
       ref={sectionRef}
@@ -431,10 +431,14 @@ const TechStackSection: React.FC = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-14 text-center">
-          <h2 ref={headingRef} className="h2 heading-gradient h-space mb-3">
-            Self-Hosted Systeme & Open-Source-KI-Modelle
+          <p className="text-[11px] font-black uppercase tracking-[0.34em] text-vae-turquoise">Unser Werkzeugkasten</p>
+          <h2
+            ref={headingRef}
+            className="mt-4 text-4xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-gray-900 dark:text-white md:text-5xl"
+          >
+            Tools, die wir einsetzen
           </h2>
-          <p ref={subRef} className="mx-auto max-w-2xl text-xl text-text-secondary">
+          <p ref={subRef} className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-700 dark:text-white/70">
             Wir arbeiten mit einer breiten Palette von Self-Hosted-Stacks und Open-Source-KI-Modellen. Die Logos geben
             nur einen Einblick – der konkrete Stack wird gemeinsam mit Ihnen definiert und laufend an technologische und
             regulatorische Entwicklungen in Ihrer Branche angepasst.
@@ -467,7 +471,9 @@ const TechStackSection: React.FC = () => {
                   loading="lazy"
                   decoding="async"
                 />
-                <span className="text-sm font-medium text-text-light">{tech.name}</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.18em] text-gray-700 dark:text-white/70">
+                  {tech.name}
+                </span>
               </a>
             ))}
           </div>

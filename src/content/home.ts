@@ -1,9 +1,9 @@
-export const heroTitle = ['Ihre Daten. Ihre Regeln.', 'Self-Hosted statt SaaS-Miete'] as const
+export const heroTitle = ['Wissen Sie, wo Ihre', 'Firmendaten landen?'] as const
 
-export const heroEyebrow = 'VAE Systems / Infrastruktur, Automatisierung, KI' as const
+export const heroEyebrow = 'VAE Systems · Self-Hosting für Unternehmen' as const
 
 export const heroDescription =
-  'Wir bauen digitale Arbeitsinfrastruktur, die Ihnen wirklich gehört: Dateien, CRM, Automationen und KI auf einer Architektur ohne Vendor-Lock-in. Klar geplant, produktiv umgesetzt und auf Wunsch dauerhaft betreut.'
+  'Bei der Konkurrenz, beim Finanzamt, bei Hackern — oder auf Ihren eigenen Servern. Wir bauen Ihnen den Tresor im eigenen Haus: Ihre Daten, Ihre Regeln, volle Kontrolle. Verständlich erklärt, schnell umgesetzt.'
 
 export interface HeroBenefit {
   title: string
@@ -13,18 +13,20 @@ export interface HeroBenefit {
 
 export const heroBenefits: HeroBenefit[] = [
   {
-    title: '3-6 Wochen bis produktiv',
-    description: 'Kein endloser Proof of Concept, sondern Setup, Migration und echte Übergabe.',
-    icon: 'rocket_launch',
-  },
-  {
-    title: 'Hosting in Deutschland',
-    description: 'Klare Datenflüsse, volle Kontrolle und keine Preismacht eines SaaS-Anbieters.',
+    title: 'Keine fremde Bank',
+    description:
+      'Ihre Daten liegen nicht bei Microsoft, Google oder Salesforce — sondern auf Ihrem eigenen Server in Deutschland.',
     icon: 'verified_user',
   },
   {
-    title: 'Ein Partner, ein System',
-    description: 'Strategie, Infrastruktur und laufende Betreuung aus einer Hand statt Tool-Zoo.',
+    title: 'Kein Stromausfall-Risiko',
+    description:
+      'Wenn SaaS-Dienste ausfallen, steht Ihr Betrieb. Mit Self-Hosting bestimmen Sie, wann Updates passieren.',
+    icon: 'security',
+  },
+  {
+    title: 'Kein Preisdiktat',
+    description: 'Kein Anbieter kann Ihnen morgen die Preise verdoppeln. Einmal aufgebaut — für immer Ihres.',
     icon: 'handshake',
   },
 ]
@@ -148,61 +150,55 @@ export interface OpenSourcePointWithBullets {
 
 export const openSourcePainPoints: OpenSourcePointWithBullets[] = [
   {
-    title: 'Mehr Leute = höhere Rechnung',
+    title: 'Wissen Sie, wer Ihre Daten sieht?',
     description:
-      'Ihr Team wächst. Ihre SaaS-Rechnung auch. Nicht weil die Software besser wurde — sondern weil der Anbieter es so will.',
-    bullets: ['Per-User-Pricing skaliert gegen Sie', 'Preiserhöhung: zahlen oder alles verlieren'],
+      'Internet, Microsoft Word, Excel, externe Datenbanken — jedes dieser Tools öffnet Ihre Firmendaten nach außen. Tor und Tür für Konkurrenz, Finanzamt und Hacker.',
+    bullets: ['Kundendaten liegen auf fremden Servern', 'Sie haften — nicht der Anbieter'],
   },
   {
-    title: 'Ihre Daten. Fremde Server.',
+    title: 'Was passiert beim nächsten Stromausfall?',
     description:
-      'Sie wissen nicht, wer Ihre Kundendaten sieht. Features verschwinden. APIs ändern sich. Sie haben keine Wahl.',
-    bullets: ['Vendor-Entscheidungen zwingen Sie zur Anpassung', 'Lock-in wird sichtbar, wenn es zu spät ist'],
+      'Ihre Firma ist gelähmt und handlungsunfähig, wenn diese Dienste wegen Krisen oder Stromausfällen nicht mehr funktionieren. Sie haben keine Kontrolle darüber.',
+    bullets: ['Ausfall trifft Sie, nicht den Anbieter', 'Updates passieren ohne Ihre Zustimmung'],
   },
   {
-    title: 'DSGVO-Risiko bleibt bei Ihnen',
+    title: 'Die Bank bestimmt die Hausregeln',
     description:
-      'Der SaaS-Anbieter haftet nicht für Ihre Kundendaten. Das tun Sie — egal wo die Daten physisch liegen.',
-    bullets: ['Datenflüsse außerhalb Ihrer Kontrolle', 'Bußgeld-Risiko liegt bei Ihnen, nicht beim Anbieter'],
+      'Bei einer Cloud-Lösung mieten Sie einen Tresor in einem fremden Bankgebäude. Die Bank sieht, wer ein- und ausgeht — und kann die Konditionen jederzeit ändern.',
+    bullets: ['Preiserhöhungen: zahlen oder alles verlieren', 'Funktionen verschwinden ohne Vorwarnung'],
   },
   {
-    title: 'Konfektionsware statt Maßanzug',
+    title: 'Sie zahlen für 80 Features, nutzen 12',
     description:
-      'Sie zahlen für 80 Features. Sie nutzen 12. Der Rest ist Ballast — und bleibt trotzdem auf der Rechnung.',
-    bullets: ['Spezial-Workflows nicht abbildbar', 'Individuelle Anpassung: nur im teuren Enterprise-Plan'],
+      'Konfektionsware statt Maßanzug. Der Rest ist Ballast — und bleibt trotzdem auf der Rechnung. Spezielle Abläufe Ihres Unternehmens? Nur im teuren Enterprise-Plan.',
+    bullets: ['Ihre Prozesse passen sich der Software an', 'Nicht umgekehrt'],
   },
 ] as const
 
 export const openSourceAdvantages: OpenSourcePointWithBullets[] = [
   {
-    title: 'Eine Plattform, keine Tool-Hölle',
+    title: 'Das Hausherr-Prinzip',
     description:
-      'CRM, Dokumentenverwaltung, Kommunikation, KI — alles integriert, alles dokumentiert. Nicht zehn verschiedene Logins, sondern ein System das funktioniert.',
-    bullets: [
-      'Weniger Reibung zwischen Tools = weniger Fehler',
-      'KI-Integration kostet Bruchteile, wenn alles verbunden ist',
-    ],
+      'Stellen Sie sich vor, Ihre Unternehmensdaten wären wertvolle Akten. Self-Hosting bedeutet: Sie stellen den Tresor in Ihr eigenes Gebäude. Sie haben die Schlüssel. Niemand sonst.',
+    bullets: ['Volle Kontrolle über Zugriff und Datenflüsse', 'Keine Abhängigkeit von US-Konzernen'],
   },
   {
-    title: 'Sie wissen, was Sie nächsten Monat zahlen',
+    title: 'Der Tresor-Faktor: DSGVO ohne Kompromisse',
     description:
-      'Setup-Investition einmalig. Hosting-Kosten planbar. Keine Preiserhöhungen, kein Vendor-Druck, kein Erwachen am Monatsende.',
-    bullets: ['Fixe Kosten statt wachsender Abos', 'Kein Lock-in, kein Abhängigkeitsproblem'],
+      'In Deutschland ist DSGVO kein Buzzword — es ist Haftungsrisiko. Bei Self-Hosted-Lösungen verlassen sensible Kunden- und Personaldaten niemals Ihren kontrollierten Bereich.',
+    bullets: ['Server in Deutschland, DSGVO-konform', 'Sie haften nicht für fremde Fehler'],
   },
   {
-    title: 'Ihre Daten bleiben in Deutschland',
+    title: 'Kein Preisdiktat — für immer',
     description:
-      'Server bei Hetzner in Deutschland. Keine US-Cloud-Transfers. Kein Datenfluss den Sie nicht kennen. DSGVO-Risiko fällt weg.',
-    bullets: ['Volle Datenhoheit — keine Interpretationsspielräume', 'Rechtssicher ohne Kompromisse'],
+      'Einmal aufgebaut gehört die Infrastruktur Ihnen. Kein Anbieter kann Ihnen morgen die Preise verdoppeln, eine Funktion streichen oder den Vertrag kündigen.',
+    bullets: ['Einmalige Investition statt ewige Abos', 'Ihr Team wächst — Ihre IT-Kosten nicht'],
   },
   {
-    title: 'KI ohne monatliche API-Rechnung',
+    title: 'KI intern — ohne Datenleck',
     description:
-      'Selbstgehostete Modelle laufen auf Ihrer Infrastruktur. Keine OpenAI-Rechnung die mit jedem Prompt wächst.',
-    bullets: [
-      'Llama, Mistral und andere Modelle integrierbar',
-      'Einmalige Setup-Investition statt laufende API-Kosten',
-    ],
+      'KI kann Ihre Firmendaten analysieren, ohne dass diese das Haus verlassen. Llama, Mistral, DeepSeek — aktuelle Modelle laufen auf Ihrem Server, nicht auf fremden.',
+    bullets: ['Keine Firmendaten zu OpenAI oder Google', 'KI-Assistent der Ihre Prozesse kennt'],
   },
 ] as const
 
@@ -221,67 +217,95 @@ export interface ServiceOverviewCard {
 
 export const servicesOverviewCards: ServiceOverviewCard[] = [
   {
-    id: 'beratung',
-    icon: 'compass_calibration',
-    title: 'Strategieberatung',
-    subtitle: 'Klarheit, bevor Sie bauen',
-    badge: 'ANALYSE',
+    id: 'hosting',
+    icon: 'dns',
+    title: 'WEBHOSTING & NETZWERKE',
+    subtitle: 'DER EINSTIEG. SAUBER. SICHER. DEUTSCH.',
+    badge: 'AB SOFORT',
+    secondaryBadge: 'MONATLICH KÜNDBAR',
     description:
-      'Bevor wir eine Zeile Code schreiben: wir verstehen Ihre Situation. Tools, Kosten, Datenflüsse, Wachstum. Sie bekommen drei realistische Optionen — eine davon ist immer: alles so lassen wie es ist.',
+      'Ihre Website, Ihre App, Ihre Domains — auf Servern in Deutschland, die wir aufsetzen, absichern und betreuen. Kein Shared-Hosting-Einheitsbrei. Dedizierter Stack, den Sie verstehen und kontrollieren.',
     inclusions: [
-      'Kostenlose Erstberatung (45 Min) ohne Agenda',
-      'Analyse Ihrer aktuellen Tools & echten Kosten',
-      '3 Optionen: Migration, Hybrid, Status quo',
-      'Schriftlicher Fahrplan — kein Präsentation-PDF, sondern etwas Umsetzbares',
+      'MANAGED HOSTING AUF HETZNER DEUTSCHLAND',
+      'SSL, FIREWALL, BACKUPS — ALLES INKLUSIVE',
+      'DOMAINS, DNS, E-MAIL-ROUTING SAUBER KONFIGURIERT',
+      'MONATLICHES MONITORING & SECURITY-PATCHES',
+      'DIREKTER ANSPRECHPARTNER — KEIN TICKET-SYSTEM',
     ],
     audience: [
-      'Sie wachsen schnell und die IT hält nicht mit',
-      'Sie planen eine Digital-Transformation und wollen keine Fehlentscheidung',
-      'Sie wollen wissen, was Automatisierung für Sie konkret bedeutet',
+      'SIE WOLLEN RAUS AUS BILLIG-HOSTING MIT NULL KONTROLLE',
+      'SIE BRAUCHEN EINE VERLÄSSLICHE BASIS FÜR IHR BUSINESS',
+      'SIE WOLLEN WISSEN WO IHRE DATEN PHYSISCH LIEGEN',
     ],
-    cta: { label: 'Beratung ansehen', href: '/services/beratung' },
-  },
-  {
-    id: 'setup',
-    icon: 'storage',
-    title: 'Infrastruktur aufbauen',
-    subtitle: 'Produktiv in 3–6 Wochen',
-    badge: '3–6 WOCHEN',
-    description:
-      'Wir bauen Ihre Infrastruktur — Server, Systeme, Migration, Team-Training. Am Ende übergeben wir produktiv. Nicht "fast fertig", nicht "noch ein Sprint". Fertig.',
-    inclusions: [
-      'Server-Aufbau mit Container, Netzwerk, Security',
-      'Installation & Konfiguration aller Kernsysteme',
-      'Daten-Migration aus Ihren bestehenden Tools',
-      'Team-Training & vollständige Dokumentation',
-    ],
-    audience: [
-      'Sie bauen Ihr Datenfundament neu auf',
-      'Sie lösen SaaS-Tools ab die zu teuer oder zu starr sind',
-      'Sie wollen Infrastruktur, die in 5 Jahren noch trägt',
-    ],
-    cta: { label: 'Setup ansehen', href: '/services/setup' },
+    cta: { label: 'Hosting anfragen', href: '/services/hosting' },
   },
   {
     id: 'betreuung',
     icon: 'support_agent',
-    title: 'Laufende Betreuung',
-    subtitle: 'Ihr System läuft. Immer.',
-    badge: 'MONATLICH KÜNDBAR',
+    title: 'LANGFRISTIGE BETREUUNG',
+    subtitle: 'IHR SYSTEM LÄUFT. IMMER. WIR SORGEN DAFÜR.',
+    badge: 'MANAGED SERVICE',
+    secondaryBadge: 'MONATLICH KÜNDBAR',
     description:
-      'Nach dem Setup verschwinden wir nicht. Monitoring, Security-Patches, Updates, Weiterentwicklung — wir betreuen was wir gebaut haben. Solange Sie uns brauchen.',
+      'Wir verschwinden nicht nach dem Setup. Server, Updates, Security, Monitoring — wir übernehmen Verantwortung für das was wir gebaut haben. Ihr habt kein eigenes IT-Team? Dann sind wir es.',
     inclusions: [
-      'Proaktives Monitoring & Security-Patches',
-      'Monatliche System-Reviews und Roadmap-Gespräch',
-      'Backup & Disaster Recovery',
-      'Monatlich kündbar — keine Abhängigkeit, kein Lock-in',
+      'PROAKTIVES MONITORING — WIR MERKEN ES VOR IHNEN',
+      'SECURITY-PATCHES & UPDATES OHNE IHR ZUTUN',
+      'MONATLICHER SYSTEM-REVIEW & ROADMAP-GESPRÄCH',
+      'BACKUP & DISASTER RECOVERY — DOKUMENTIERT',
+      'ERWEITERBAR: NEUE SYSTEME JEDERZEIT DAZUBUCHBAR',
     ],
     audience: [
-      'Ihr Team hat keine dedizierte IT — und will auch keine einstellen',
-      'Sie wollen sich auf Ihr Produkt konzentrieren, nicht auf Server',
-      'Sie wollen einen Partner, der Verantwortung übernimmt',
+      'SIE WOLLEN SICH AUF IHR PRODUKT KONZENTRIEREN',
+      'SIE HABEN KEIN DEDIZIERTES IT-TEAM',
+      'SIE WOLLEN EINEN PARTNER DER VERANTWORTUNG ÜBERNIMMT',
     ],
     cta: { label: 'Betreuung ansehen', href: '/services/betreuung' },
+  },
+  {
+    id: 'infrastruktur',
+    icon: 'storage',
+    title: 'INFRASTRUKTUR & OPEN-SOURCE-STACK',
+    subtitle: 'PRODUKTIV IN 3–6 WOCHEN. NICHT FAST FERTIG. FERTIG.',
+    badge: '3–6 WOCHEN',
+    description:
+      'Nextcloud statt Google Drive. Odoo statt Salesforce. n8n statt Zapier. Wir bauen Ihren Stack — selbstgehostet, DSGVO-sauber, mit Migration aus Ihren alten Tools und Team-Training. Einmalig bezahlt. Für immer Ihres.',
+    inclusions: [
+      'SERVER-AUFBAU: CONTAINER, NETZWERK, SECURITY',
+      'NEXTCLOUD, ODOO, N8N, ONLYOFFICE — KONFIGURIERT',
+      'DATEN-MIGRATION AUS BESTEHENDEN TOOLS',
+      'TEAM-TRAINING & VOLLSTÄNDIGE DOKUMENTATION',
+      'ÜBERGABE: PRODUKTIV — NICHT "FAST FERTIG"',
+    ],
+    audience: [
+      'SIE LÖSEN SAAS-TOOLS AB DIE ZU TEUER ODER ZU STARR SIND',
+      'SIE BAUEN IHR DATENFUNDAMENT NEU AUF',
+      'SIE WOLLEN INFRASTRUKTUR DIE IN 5 JAHREN NOCH TRÄGT',
+    ],
+    cta: { label: 'Setup ansehen', href: '/services/setup' },
+  },
+  {
+    id: 'custom',
+    icon: 'build',
+    title: 'CUSTOM TOOLS & AUTOMATISIERUNG',
+    subtitle: 'WENN STANDARD NICHT REICHT. MASSANZUG STATT KONFEKTIONSWARE.',
+    badge: 'CUSTOM',
+    secondaryBadge: 'INKL. KI-INTEGRATION',
+    description:
+      'Workflows die kein SaaS-Tool abbilden kann. KI-Agenten die auf Ihren Daten laufen. Schnittstellen zwischen Systemen die nie für einander gedacht waren. Wir bauen was Sie brauchen — nicht was es schon gibt.',
+    inclusions: [
+      'CUSTOM AUTOMATIONEN MIT N8N & EIGENEM CODE',
+      'KI-AGENTEN AUF IHRER INFRASTRUKTUR (KEINE API-KOSTEN)',
+      'SCHNITTSTELLEN & INTEGRATIONEN NACH MASS',
+      'DASHBOARDS, REPORTING, INTERNE TOOLS',
+      'VOLLSTÄNDIG IN IHRE BESTEHENDE INFRASTRUKTUR INTEGRIERT',
+    ],
+    audience: [
+      'SIE HABEN PROZESSE DIE KEIN STANDARD-TOOL ABBILDET',
+      'SIE WOLLEN KI OHNE MONATLICHE OPENAI-RECHNUNG',
+      'SIE WOLLEN WETTBEWERBSVORTEIL DURCH TECHNOLOGIE',
+    ],
+    cta: { label: 'Custom anfragen', href: '/services/custom' },
   },
 ] as const
 

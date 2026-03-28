@@ -34,6 +34,7 @@ import SectionNavigation from '@components/navigation/SectionNavigation'
 
 // ── UI ──
 import ScrollProgressBar from '@components/ui/ScrollProgressBar'
+import ScrollProgressLine from '@components/ui/ScrollProgressLine'
 import SkipToContent from '@components/ui/SkipToContent'
 
 // ── PRIVACY ──
@@ -130,6 +131,7 @@ const App: React.FC = () => {
           >
             <ScrollToTop />
             <div className="relative min-h-[100dvh] bg-bg-darker text-text-light">
+              <ScrollProgressLine />
               <SkipToContent />
               <ScrollProgressBar />
               <Header />

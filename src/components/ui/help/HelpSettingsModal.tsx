@@ -38,7 +38,7 @@ export const HelpSettingsModal: React.FC<HelpSettingsModalProps> = ({ isOpen, on
       aria-labelledby="help-settings-title"
     >
       <div
-        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-sm rounded-2xl border border-[#c5ccc8] bg-white p-6 shadow-xl duration-300 dark:border-white/10 dark:bg-bg-darker"
+        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-sm rounded-xl border border-[#c5ccc8] bg-white p-6 shadow-xl duration-300 dark:border-white/10 dark:bg-bg-darker"
         onClick={e => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">

@@ -602,7 +602,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
                     type="button"
                     onClick={() => onBadgeClick(badge)}
                     title={badge.description}
-                    className="rounded-full border border-black/10 bg-white/80 px-4 py-1.5 text-sm text-text-light transition-all duration-200 hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:text-vae-turquoise dark:border-white/10 dark:bg-white/10 dark:text-white"
+                    className="border border-black/10 bg-white/80 px-4 py-1.5 text-sm text-text-light transition-all duration-200 hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:text-vae-turquoise dark:border-white/10 dark:bg-white/10 dark:text-white"
                   >
                     {badge.name}
                   </button>
@@ -836,31 +836,40 @@ const ReferenzenPage: React.FC = () => {
       <Breadcrumbs items={REFERENZEN_BREADCRUMBS} className="mb-4" />
 
       {/* Hero */}
-      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:to-bg-dark">
-        <div
-          className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_55%)] dark:block"
-          aria-hidden="true"
-        />
-        <div className="container-vae relative flex min-h-[40vh] flex-col items-center justify-center gap-6 py-24 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/10 dark:text-vae-turquoise">
-            Referenzen
-          </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white dark:text-text-light md:text-5xl">
-            Projekte, die zeigen, was wir können
-          </h1>
-          <p className="max-w-3xl text-lg leading-relaxed text-white/85 dark:text-text-secondary">
-            Konkrete Self-Hosted-Infrastrukturen und KI-optimierte Workflows, die wir für Kund:innen und unsere eigenen
-            Teams umgesetzt haben – ehrlich, transparent, mit messbaren Ergebnissen.
-          </p>
-          <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
-              <ShieldCheck className="h-4 w-4 text-white dark:text-vae-turquoise" /> Alle Projekte: Self-Hosted-First,
-              DSGVO-konform, Made in Germany
-            </p>
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/5 dark:text-white/80">
-              <Shield className="h-4 w-4 text-white dark:text-vae-turquoise" /> Weitere Projekte unter NDA – hier zeigen
-              wir nur Referenzen mit Veröffentlichungsfreigabe
-            </p>
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] py-20 text-white sm:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.12),transparent_35%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+          VAE
+        </div>
+
+        <div className="container-vae relative z-10">
+          <div className="flex flex-col gap-8">
+            <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise">
+              <BadgeCheck className="h-3.5 w-3.5" /> Referenzen &amp; Case Studies
+            </div>
+
+            <h1 className="max-w-4xl">
+              <span className="block text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-5xl lg:text-[4.8rem]">
+                Projekte,
+              </span>
+              <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[9vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-4xl lg:text-[4rem]">
+                die zeigen was wir können.
+              </span>
+            </h1>
+
+            <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+              Konkrete Self-Hosted-Infrastrukturen und KI-Workflows — ehrlich, transparent, mit messbaren Ergebnissen.
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70">
+                <ShieldCheck className="h-3.5 w-3.5 text-vae-turquoise" /> Self-Hosted-First, DSGVO-konform
+              </div>
+              <div className="flex items-center gap-2 border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70">
+                <Shield className="h-3.5 w-3.5 text-vae-turquoise" /> Weitere Projekte unter NDA
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -869,10 +878,8 @@ const ReferenzenPage: React.FC = () => {
       <section className="border-t border-black/5 bg-bg-dark py-20 transition-colors dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
-              Live-Projekte
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-text-light md:text-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.4em] text-vae-turquoise">Live-Projekte</p>
+            <h2 className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
               Infrastrukturen, die bereits produktiv laufen
             </h2>
             <p className="mt-4 text-base text-text-secondary">

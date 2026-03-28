@@ -15,7 +15,11 @@
  */
 
 import { homeProcessDescription, homeProcessHeading, homeProcessNote, homeProcessTeaserSteps } from '@/content/home'
-import React from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useEffect, useRef } from 'react'
+
+gsap.registerPlugin(ScrollTrigger)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🚪 ORCHESTRATOR — HomeProcessTeaserSection
@@ -24,18 +28,47 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
   id = 'process',
   className = '',
 }) => {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    const el = headingRef.current
+    if (!el) return
+    gsap.from(el, {
+      y: 32,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    })
+  }, [])
+
   return (
     <section
       id={id}
-      className={`border-border-primary/40 to-bg-primary/80 relative border-t bg-gradient-to-b from-bg-secondary/40 py-20 dark:border-white/5 dark:from-bg-dark/70 dark:to-bg-darker sm:py-28 ${className}`.trim()}
+      className={`relative border-t border-white/5 bg-[#030806] py-20 sm:py-28 ${className}`.trim()}
       aria-labelledby="process-home-heading"
+      style={{
+        clipPath: 'polygon(0 4%, 100% 0, 100% 100%, 0 96%)',
+        marginTop: '-4vw',
+        marginBottom: '-4vw',
+        paddingTop: 'calc(var(--section-pad, 5rem) + 4vw)',
+        paddingBottom: 'calc(var(--section-pad, 5rem) + 4vw)',
+        position: 'relative',
+        zIndex: 2,
+      }}
     >
       <div className="container-vae">
         <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise dark:text-vae-turquoise/70">
-            Prozess
-          </p>
-          <h2 id="process-home-heading" className="fluid-h2 mt-3 font-semibold text-text-light">
+          <p className="text-xs font-black uppercase tracking-[0.4em] text-vae-turquoise">Prozess</p>
+          <h2
+            ref={headingRef}
+            id="process-home-heading"
+            className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-white md:text-5xl"
+          >
             {homeProcessHeading}
           </h2>
           <p className="mt-4 text-base text-text-secondary">{homeProcessDescription}</p>
@@ -57,16 +90,18 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
 
               {/* Duration badge */}
               <div className="mt-4">
-                <span className="inline-flex items-center rounded-full border border-vae-turquoise/25 bg-vae-turquoise/10 px-3 py-1 text-xs text-vae-turquoise">
+                <span className="inline-flex items-center border border-vae-turquoise/25 bg-vae-turquoise/10 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-vae-turquoise">
                   {step.duration}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="mt-4 text-2xl font-bold text-text-light">{step.title}</h3>
+              <h3 className="mt-4 text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-white">
+                {step.title}
+              </h3>
 
               {/* Description */}
-              <p className="mt-2 text-sm text-text-secondary">{step.description}</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/65">{step.description}</p>
             </div>
           ))}
         </div>
@@ -74,7 +109,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
         <div className="mt-10 text-center">
           <a
             href="/services/beratung#prozess"
-            className="text-sm font-semibold text-vae-turquoise underline-offset-4 hover:underline"
+            className="text-xs font-black uppercase tracking-[0.2em] text-vae-turquoise underline-offset-4 hover:underline"
           >
             {homeProcessNote}
           </a>

@@ -150,29 +150,20 @@ const ServicesSection: React.FC = () => {
     <section
       id="services"
       ref={sectionRef}
-      className="from-bg-primary to-bg-primary relative overflow-hidden border-t border-vae-turquoise/10 bg-gradient-to-br via-bg-secondary py-24 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker md:py-36"
+      className="relative overflow-hidden border-t border-vae-turquoise/10 bg-[#faf8f4] py-24 dark:bg-[#030806] md:py-36"
     >
       {/* Background Effects */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_35%,rgba(var(--vae-turquoise-rgb),0.20),transparent_62%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_75%,rgba(var(--vae-turquoise-rgb),0.08),transparent_55%)]" />
-      </div>
 
       <div className="container-vae relative">
         {/* Section Header */}
         <div className="mb-16 text-center" ref={headerRef}>
-          <h2 className="heading-gradient mb-4 text-4xl font-black md:text-5xl">
-            Ihre komplette digitale Arbeitsumgebung
+          <p className="text-[11px] font-black uppercase tracking-[0.34em] text-vae-turquoise">Drei Leistungen</p>
+          <h2 className="mt-4 text-4xl font-black uppercase leading-[0.92] tracking-[-0.06em] text-gray-900 dark:text-white md:text-5xl">
+            Wir bauen. Wir optimieren. Wir betreiben.
           </h2>
-          <p className="mx-auto mb-4 max-w-3xl text-xl leading-relaxed text-text-secondary">
-            Wir richten Ihre Self-Hosted-Business-Suite ein, ergänzen sie mit AI-gestützten Workflows und betreuen sie
-            langfristig – damit Ihr Team produktiver arbeitet und Sie volle Datenhoheit behalten.
-          </p>
-          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-text-secondary">
-            Drei aufeinander aufbauende Servicebereiche sorgen dafür, dass Ihre Systeme nicht nur starten, sondern jeden
-            Monat besser werden: <span className="font-medium text-text-light">Infrastruktur-Setup</span>,{' '}
-            <span className="font-medium text-text-light">AI-Optimierung</span> und{' '}
-            <span className="font-medium text-text-light">Langzeit-Betreuung</span>.
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-700 dark:text-white/70 sm:text-lg">
+            Drei klare Leistungen — aufeinander aufbauend. Strategie zuerst, dann Setup, dann Betrieb. Kein Chaos, kein
+            Vendor-Lock-in.
           </p>
         </div>
 
@@ -181,32 +172,32 @@ const ServicesSection: React.FC = () => {
           {serviceItems.map(service => (
             <article
               key={service.key}
-              className="border-border-primary bg-bg-primary/5 border-white/8 dark:border-white/8 group relative flex h-full flex-col overflow-hidden rounded-2xl border p-8 backdrop-blur-sm transition-all duration-500 hover:border-vae-turquoise/30 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_14px_48px_-12px_rgba(var(--vae-turquoise-rgb),0.45)] dark:bg-white/5"
+              className="group relative flex h-full flex-col overflow-hidden border border-gray-200/80 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 dark:border-white/10 dark:bg-white/5"
             >
-              <div className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-vae-turquoise/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative z-10 mb-6 flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3">
                   <div className="bg-vae-turquoise/12 flex h-14 w-14 items-center justify-center rounded-none text-vae-turquoise">
                     <Icon name={service.iconName} className="text-vae-turquoise" size={20} />
                   </div>
                   <div className="space-y-1">
-                    <span className="bg-vae-turquoise/12 inline-flex items-center rounded-md px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-vae-turquoise">
+                    <span className="inline-flex items-center border border-vae-turquoise/30 bg-vae-turquoise/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.35em] text-vae-turquoise">
                       {service.badge}
                     </span>
                     {service.phaseBadge && (
-                      <span className="inline-flex items-center rounded-full bg-vae-turquoise/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.32em] text-vae-turquoise/80">
+                      <span className="inline-flex items-center border border-vae-turquoise/20 bg-vae-turquoise/5 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.32em] text-vae-turquoise/80">
                         {service.phaseBadge}
                       </span>
                     )}
                   </div>
                 </div>
-                <span className="rounded-full border border-vae-turquoise/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80">
+                <span className="border border-vae-turquoise/30 px-3 py-1 text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise/80">
                   {service.serviceTypeLabel}
                 </span>
               </div>
 
               <div className="relative z-10 flex-1">
-                <h3 className="mb-3 text-xl font-semibold leading-tight text-text-light dark:text-white">
+                <h3 className="mb-3 text-lg font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
                   {service.title}
                 </h3>
                 <p className="mb-6 text-sm leading-relaxed text-text-secondary">{service.description}</p>
@@ -215,9 +206,9 @@ const ServicesSection: React.FC = () => {
                   {service.stats.map((stat, idx) => (
                     <div
                       key={`${service.key}-stat-${idx}`}
-                      className="rounded-xl border border-vae-turquoise/15 bg-vae-turquoise/5 px-3 py-3 text-center shadow-[0_10px_24px_-18px_rgba(var(--vae-turquoise-rgb),0.45)]"
+                      className="border border-vae-turquoise/15 bg-vae-turquoise/5 px-3 py-3 text-center"
                     >
-                      <div className="mb-1 text-lg font-bold text-vae-turquoise">{stat.value}</div>
+                      <div className="mb-1 text-lg font-black text-vae-turquoise">{stat.value}</div>
                       <div className="text-[11px] leading-tight text-text-muted">
                         {stat.desc}
                         {stat.note && (
@@ -236,7 +227,7 @@ const ServicesSection: React.FC = () => {
                     {service.features.map(feature => (
                       <span
                         key={feature}
-                        className="bg-vae-turquoise/12 rounded-md px-2 py-1 text-[10px] font-medium uppercase tracking-[0.28em] text-vae-turquoise"
+                        className="bg-vae-turquoise/8 border border-vae-turquoise/20 px-2 py-1 text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise"
                       >
                         {feature}
                       </span>
@@ -305,17 +296,18 @@ const ServicesSection: React.FC = () => {
                   </Link>
                 </MagneticButton>
               </div>
-              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_22%,rgba(var(--vae-turquoise-rgb),0.10),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </article>
           ))}
         </div>
 
         {/* Service Journey */}
         <div className="mb-24 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-          <div className="rounded-3xl border border-vae-turquoise/20 bg-white/60 p-8 shadow-[0_24px_65px_-40px_rgba(15,23,42,0.65)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.05]">
+          <div className="border border-vae-turquoise/20 bg-white p-8 dark:border-white/10 dark:bg-white/5">
             <div className="mb-6">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-vae-turquoise/80">Service Journey</p>
-              <h3 className="mt-3 text-2xl font-semibold text-text-light">Von Setup bis Betriebssicherheit</h3>
+              <p className="text-[11px] font-black uppercase tracking-[0.35em] text-vae-turquoise">Service Journey</p>
+              <h3 className="mt-3 text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                Von Setup bis Betriebssicherheit
+              </h3>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">{servicesLifecycle.description1}</p>
               <p className="mt-2 text-sm leading-relaxed text-text-secondary">{servicesLifecycle.description2}</p>
             </div>
@@ -324,15 +316,17 @@ const ServicesSection: React.FC = () => {
               {lifecycleBlocks.map((stage, index) => (
                 <li key={stage.title} className="group relative flex gap-4">
                   <div className="flex flex-col items-center">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-vae-turquoise/15 text-sm font-semibold text-vae-turquoise shadow-[0_10px_24px_-18px_rgba(var(--vae-turquoise-rgb),0.45)]">
+                    <span className="flex h-9 w-9 items-center justify-center bg-vae-turquoise/15 text-sm font-black text-vae-turquoise">
                       {index + 1}
                     </span>
                     {index < lifecycleBlocks.length - 1 && (
                       <span className="mt-3 h-full w-px bg-gradient-to-b from-vae-turquoise/40 via-vae-turquoise/15 to-transparent" />
                     )}
                   </div>
-                  <div className="flex-1 rounded-2xl border border-transparent bg-white/70 p-5 transition-colors duration-300 group-hover:border-vae-turquoise/40 dark:bg-white/[0.06]">
-                    <h4 className="mb-1 text-base font-semibold text-text-light">{stage.title}</h4>
+                  <div className="flex-1 border border-transparent bg-white/70 p-5 transition-colors duration-300 group-hover:border-vae-turquoise/40 dark:bg-white/[0.06]">
+                    <h4 className="mb-1 text-sm font-black uppercase tracking-[-0.02em] text-gray-900 dark:text-white">
+                      {stage.title}
+                    </h4>
                     <p className="text-sm leading-relaxed text-text-secondary">{stage.description}</p>
                   </div>
                 </li>
@@ -340,14 +334,16 @@ const ServicesSection: React.FC = () => {
             </ol>
           </div>
 
-          <div className="flex flex-col justify-between gap-6 rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/10 via-transparent to-transparent p-8 dark:border-vae-turquoise/30 dark:bg-bg-darker/80">
+          <div className="flex flex-col justify-between gap-6 border border-vae-turquoise/20 bg-[#f4f1ec] p-8 dark:border-vae-turquoise/30 dark:bg-white/5">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.35em] text-vae-turquoise/80">Priorisierung</p>
-              <h3 className="mt-3 text-xl font-semibold text-text-light">{servicesLifecycle.title}</h3>
+              <p className="text-[11px] font-black uppercase tracking-[0.35em] text-vae-turquoise">Priorisierung</p>
+              <h3 className="mt-3 text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                {servicesLifecycle.title}
+              </h3>
               <p className="mt-4 text-sm leading-relaxed text-text-secondary">{servicesLifecycle.description1}</p>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">{servicesLifecycle.description2}</p>
             </div>
-            <div className="rounded-2xl border border-vae-turquoise/25 bg-vae-turquoise/10 p-5 text-sm text-text-secondary dark:border-vae-turquoise/30 dark:bg-vae-turquoise/5">
+            <div className="border border-vae-turquoise/25 bg-vae-turquoise/10 p-5 text-sm text-text-secondary dark:border-vae-turquoise/30 dark:bg-vae-turquoise/5">
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-vae-turquoise/90">
                 Empfohlene Reihenfolge
               </p>
@@ -361,9 +357,9 @@ const ServicesSection: React.FC = () => {
           {servicesCategories.map(category => (
             <div
               key={category.key}
-              className="group relative overflow-hidden rounded-2xl border border-vae-turquoise/20 bg-white/65 p-6 shadow-[0_22px_60px_-40px_rgba(15,23,42,0.55)] backdrop-blur-2xl transition-all duration-500 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/[0.05]"
+              className="group relative overflow-hidden border border-vae-turquoise/20 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/5"
             >
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.2),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-vae-turquoise/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative z-10 flex items-start justify-between gap-4">
                 <div className="bg-vae-turquoise/12 flex h-14 w-14 items-center justify-center rounded-none text-vae-turquoise">
                   <Icon name={category.icon} size={20} />
@@ -377,7 +373,9 @@ const ServicesSection: React.FC = () => {
                 </Link>
               </div>
               <div className="relative z-10 mt-5">
-                <h4 className="mb-2 text-lg font-semibold text-text-light">{category.title}</h4>
+                <h4 className="mb-2 text-base font-black uppercase leading-[0.92] tracking-[-0.03em] text-gray-900 dark:text-white">
+                  {category.title}
+                </h4>
                 <p className="mb-4 text-sm leading-relaxed text-text-secondary">{category.focus}</p>
                 <ul className="space-y-2 text-sm text-text-secondary">
                   {category.examples.map(example => (

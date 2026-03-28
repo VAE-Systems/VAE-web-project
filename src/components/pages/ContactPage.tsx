@@ -382,75 +382,88 @@ const ContactPage: React.FC = () => {
         canonicalPath="/contact"
       />
 
-      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-28 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050a0c] dark:to-bg-dark">
-        <div className="pointer-events-none absolute inset-0 hidden opacity-80 dark:block" aria-hidden="true">
-          <div className="bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.3),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_70%)] absolute inset-0" />
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] py-20 text-white sm:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.12),transparent_35%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+          VAE
         </div>
-        <div className="container-vae relative flex flex-col gap-10 text-center lg:flex-row lg:items-center lg:text-left">
-          <div className="flex-1 space-y-6">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise/80">
-              {contactHero.title}
-            </p>
-            <h1 className="text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
-              {contactHero.subtitle}
-            </h1>
-            <p className="text-lg leading-relaxed text-white/85 dark:text-white/70">{contactIntro.body}</p>
-            <div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:justify-center lg:justify-start">
-              <MagneticButton className="w-full sm:w-auto">
-                <button
-                  type="button"
-                  className="btn-primary flex w-full items-center justify-center gap-3 px-8 py-3.5 text-base"
-                  onClick={() => {
-                    const booking = document.getElementById('booking')
-                    booking?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                  }}
-                >
-                  Termin anfragen
-                  <ArrowUpRight className="h-5 w-5" />
-                </button>
-              </MagneticButton>
-              <MagneticButton className="w-full sm:w-auto">
-                <button
-                  type="button"
-                  className="btn-secondary flex w-full items-center justify-center gap-3 px-8 py-3.5 text-base"
-                  onClick={() => {
-                    const mailBuilder = document.getElementById('mail-builder')
-                    mailBuilder?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    // Start tutorial after scroll animation completes
-                    setTimeout(() => startTutorial(), 800)
-                  }}
-                >
-                  Mail Builder öffnen
-                  <ArrowUpRight className="h-5 w-5" />
-                </button>
-              </MagneticButton>
+
+        <div className="container-vae relative z-10">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
+            <div className="flex-1 space-y-6">
+              <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise">
+                <Mail className="h-3.5 w-3.5" /> {contactHero.title}
+              </div>
+
+              <h1 className="max-w-3xl">
+                <span className="block text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-5xl lg:text-[4.8rem]">
+                  Sprechen wir.
+                </span>
+                <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[9vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-4xl lg:text-[4rem]">
+                  Konkret.
+                </span>
+              </h1>
+
+              <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+                {contactIntro.body}
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-center gap-2 bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] text-black transition-transform hover:-translate-y-0.5 sm:w-auto"
+                    onClick={() => {
+                      const booking = document.getElementById('booking')
+                      booking?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }}
+                  >
+                    Termin anfragen
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </MagneticButton>
+                <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                    onClick={() => {
+                      const mailBuilder = document.getElementById('mail-builder')
+                      mailBuilder?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      setTimeout(() => startTutorial(), 800)
+                    }}
+                  >
+                    Mail Builder öffnen
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </MagneticButton>
+              </div>
             </div>
-          </div>
-          <div className="flex-1 rounded-[32px] border border-gray-200 bg-white p-8 text-left shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_80px_rgba(0,0,0,0.45)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
-              Antwortzeiten
-            </p>
-            <ul className="mt-6 space-y-5 text-gray-700 dark:text-white/80">
-              <li className="rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 dark:border-white/10 dark:bg-white/[0.04]">
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
-                  Schnelle Antwort
-                </p>
-                <p className="mt-2 text-sm text-gray-600 dark:text-white/70">
-                  Wir reagieren werktags innerhalb von 24 Stunden mit einem persönlichen Vorschlag.
-                </p>
-              </li>
-            </ul>
+
+            <div className="flex-1 lg:max-w-md">
+              <div className="border-2 border-white/15 bg-white/[0.03] p-8 text-left">
+                <p className="text-[10px] font-black uppercase tracking-[0.32em] text-vae-turquoise">Antwortzeiten</p>
+                <ul className="mt-6 space-y-4">
+                  <li className="border border-white/10 bg-white/[0.02] px-5 py-4">
+                    <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">
+                      Schnelle Antwort
+                    </p>
+                    <p className="mt-2 text-sm text-white/70">
+                      Wir reagieren werktags innerhalb von 24 Stunden mit einem persönlichen Vorschlag.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-vae-turquoise/10 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-dark">
+      <section className="border-black/8 border-b bg-[#f4f1ec] py-20 dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
-              Warum VAE Systems
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise">Warum VAE Systems</p>
+            <h2 className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
               {contactIntro.title}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-gray-600 dark:text-white/70">{contactIntro.body}</p>
@@ -459,12 +472,14 @@ const ContactPage: React.FC = () => {
             {contactUsps.map(usp => (
               <div
                 key={usp.key}
-                className="group rounded-[28px] border border-gray-200 bg-white p-6 text-center shadow-md transition hover:-translate-y-1 hover:border-vae-turquoise/30 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:shadow-[0_25px_60px_rgba(0,0,0,0.35)]"
+                className="group border border-vae-turquoise/25 bg-white/90 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-vae-turquoise/50 dark:border-vae-turquoise/20 dark:bg-white/[0.03]"
               >
-                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-vae-turquoise/10 text-vae-turquoise">
+                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center bg-vae-turquoise/15 text-vae-turquoise">
                   <Icon name={usp.icon} size={28} />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{usp.title}</h3>
+                <h3 className="text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                  {usp.title}
+                </h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-white/70">{usp.body}</p>
               </div>
             ))}
@@ -480,10 +495,10 @@ const ContactPage: React.FC = () => {
         <div className="container-vae">
           <div className="mx-auto max-w-4xl space-y-8">
             <div className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
+              <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
                 Direkt Termin buchen
               </p>
-              <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-6xl">
                 Wählen Sie den passenden Termin-Typ
               </h2>
               <p className="mt-4 text-base leading-relaxed text-gray-600 dark:text-white/70">

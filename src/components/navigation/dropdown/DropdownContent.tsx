@@ -25,16 +25,16 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
       exit={{ opacity: 0, y: 4 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
       aria-live="polite"
-      className="dark:to-[#0a0a0a]/98 flex h-full flex-col justify-between rounded-2xl border border-gray-200/80 bg-gradient-to-br
-        from-white via-gray-50 to-gray-100/95 p-6 text-gray-900 shadow-xl
-        shadow-gray-900/10 dark:border-white/10 dark:from-[#0a0a0a] dark:via-[#0d0d0d] dark:text-white dark:shadow-black/50"
+      className="flex h-full flex-col justify-between border border-gray-200/80 bg-white p-6 text-gray-900 shadow-sm dark:border-white/10 dark:bg-[#0a0a0a] dark:text-white"
     >
       <div className="space-y-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/80 dark:text-vae-turquoise dark:text-vae-turquoise/70">
             {content.id}
           </p>
-          <h3 className="text-2xl font-semibold leading-snug text-gray-900 dark:text-white">{content.title}</h3>
+          <h3 className="text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+            {content.title}
+          </h3>
         </div>
 
         {content.description && (
@@ -50,10 +50,7 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
 
               return (
                 <li key={`${content.id}-${index}`} className="flex items-start gap-2">
-                  <span
-                    className="mt-1 h-1.5 w-1.5 rounded-full bg-vae-turquoise/80 dark:bg-vae-turquoise/70"
-                    aria-hidden
-                  />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-vae-turquoise" aria-hidden />
                   {href ? (
                     <a
                       href={href}

@@ -11,6 +11,20 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import {
+  Building2,
+  Server,
+  Clock,
+  Eye,
+  TrendingUp,
+  Lock,
+  Package,
+  CheckCircle2,
+  Key,
+  TrendingDown,
+  Infinity,
+  Scissors,
+} from 'lucide-react'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // AKT 1: PREIS-ESKALATION — animierter Graph
@@ -158,28 +172,30 @@ const BankVsServerInteractive: React.FC = () => {
         onMouseLeave={() => setHover(null)}
       >
         <div className={`transition-all duration-500 ${hover === 'server' ? 'opacity-20' : 'opacity-100'}`}>
-          {/* Ikone */}
-          <div className="mb-4 text-4xl">🏦</div>
+          <div className="mb-4">
+            <Building2 className="h-9 w-9" style={{ color: hover === 'bank' ? '#ff6666' : '#555' }} />
+          </div>
           <h3 className="mb-3 text-lg font-bold" style={{ color: hover === 'bank' ? '#ff6666' : '#888' }}>
             Cloud / SaaS
           </h3>
           <ul className="space-y-2 text-sm">
             {[
-              '⏰ Öffnungszeiten & Ausfälle',
-              '👁️ Anbieter sieht Ihre Daten',
-              '📈 Preis steigt mit Nutzern',
-              '🔒 Kündigung = Datenverlust',
-              '📦 Features die Sie nicht brauchen',
-            ].map((item, i) => (
+              { icon: Clock, label: 'Öffnungszeiten & Ausfälle' },
+              { icon: Eye, label: 'Anbieter sieht Ihre Daten' },
+              { icon: TrendingUp, label: 'Preis steigt mit Nutzern' },
+              { icon: Lock, label: 'Kündigung = Datenverlust' },
+              { icon: Package, label: 'Features die Sie nicht brauchen' },
+            ].map(({ icon: Icon, label }, i) => (
               <li
                 key={i}
-                className="flex items-start gap-2 transition-all duration-300"
+                className="flex items-center gap-2 transition-all duration-300"
                 style={{
                   color: hover === 'bank' ? '#ff6666cc' : '#55555588',
                   transform: hover === 'bank' ? 'translateX(4px)' : 'none',
                 }}
               >
-                <span>{item}</span>
+                <Icon className="h-3.5 w-3.5 shrink-0" />
+                <span>{label}</span>
               </li>
             ))}
           </ul>
@@ -210,28 +226,30 @@ const BankVsServerInteractive: React.FC = () => {
         onMouseLeave={() => setHover(null)}
       >
         <div className={`transition-all duration-500 ${hover === 'bank' ? 'opacity-20' : 'opacity-100'}`}>
-          {/* Ikone */}
-          <div className="mb-4 text-4xl">🖥️</div>
+          <div className="mb-4">
+            <Server className="h-9 w-9" style={{ color: hover === 'server' ? '#00d4aa' : '#444' }} />
+          </div>
           <h3 className="mb-3 text-lg font-bold" style={{ color: hover === 'server' ? '#00d4aa' : '#666' }}>
             Self-Hosted
           </h3>
           <ul className="space-y-2 text-sm">
             {[
-              '✅ 24/7 verfügbar, kein Einblick',
-              '🔑 Nur Sie haben den Schlüssel',
-              '📉 Fixe Kosten, keine Überraschungen',
-              '♾️ Ihre Daten bleiben bei Ihnen',
-              '✂️ Nur zahlen was Sie nutzen',
-            ].map((item, i) => (
+              { icon: CheckCircle2, label: '24/7 verfügbar, kein Einblick' },
+              { icon: Key, label: 'Nur Sie haben den Schlüssel' },
+              { icon: TrendingDown, label: 'Fixe Kosten, keine Überraschungen' },
+              { icon: Infinity, label: 'Ihre Daten bleiben bei Ihnen' },
+              { icon: Scissors, label: 'Nur zahlen was Sie nutzen' },
+            ].map(({ icon: Icon, label }, i) => (
               <li
                 key={i}
-                className="flex items-start gap-2 transition-all duration-300"
+                className="flex items-center gap-2 transition-all duration-300"
                 style={{
                   color: hover === 'server' ? '#00d4aacc' : '#44444488',
                   transform: hover === 'server' ? 'translateX(4px)' : 'none',
                 }}
               >
-                <span>{item}</span>
+                <Icon className="h-3.5 w-3.5 shrink-0" />
+                <span>{label}</span>
               </li>
             ))}
           </ul>
@@ -406,23 +424,10 @@ const TailoredSuitSVG: React.FC<{ triggered: boolean }> = ({ triggered }) => {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// AKT-HEADER — cinematic chapter bar
+// AKT-DIVIDER — satter teal Akzentbalken
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const ActHeader: React.FC<{ kapitel: string; title: string }> = ({ kapitel, title }) => (
-  <div
-    style={{
-      background: 'rgba(0,212,170,0.06)',
-      borderTop: '1px solid rgba(0,212,170,0.2)',
-      borderBottom: '1px solid rgba(0,212,170,0.08)',
-      padding: '10px 0',
-    }}
-    className="mb-8 flex items-center justify-between"
-  >
-    <span className="font-mono text-[11px] font-bold uppercase tracking-[0.35em] text-vae-turquoise/60">{kapitel}</span>
-    <span className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-white/30">{title}</span>
-  </div>
-)
+const ActDivider: React.FC = () => <div className="mb-10 h-[3px] w-full bg-vae-turquoise" />
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // AKT-CONTAINER — mit Intersection Observer für Trigger
@@ -435,8 +440,7 @@ const Act: React.FC<{
   subtitle: string
   visual: React.ReactNode
   side?: 'left' | 'right'
-  kapitel: string
-}> = ({ number, eyebrow, title, subtitle, visual, side = 'left', kapitel }) => {
+}> = ({ number, eyebrow, title, subtitle, visual, side = 'left' }) => {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -479,7 +483,7 @@ const Act: React.FC<{
 
   return (
     <div ref={ref} className="py-16 md:py-24">
-      <ActHeader kapitel={kapitel} title={eyebrow} />
+      <ActDivider />
       <div className="grid grid-cols-1 items-center gap-12 border-b border-white/5 pb-8 lg:grid-cols-2 lg:gap-20">
         {side === 'left' ? (
           <>
@@ -532,7 +536,18 @@ const StorySection: React.FC = () => {
   }, [])
 
   return (
-    <section id="story" className="relative overflow-hidden bg-bg-darker">
+    <section
+      id="story"
+      className="dark relative overflow-hidden"
+      style={{
+        background: '#060d0b',
+        clipPath: 'polygon(0 0, 100% 0, 100% 96%, 0 100%)',
+        marginBottom: '-4vw',
+        paddingBottom: 'calc(var(--section-pad, 5rem) + 4vw)',
+        position: 'relative',
+        zIndex: 1,
+      }}
+    >
       {/* Subtiler Hintergrund-Gradient */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,212,170,0.03),transparent_60%)]" />
 
@@ -551,7 +566,7 @@ const StorySection: React.FC = () => {
         <div className="border-b border-white/5 pb-8">
           <div
             style={{
-              background: '#080e0c',
+              background: '#060d0b',
               border: '1px solid rgba(0,212,170,0.15)',
               borderRadius: '16px',
               padding: '32px 24px',
@@ -579,7 +594,6 @@ const StorySection: React.FC = () => {
           <Act
             number="01"
             eyebrow="Der Schmerz"
-            kapitel="KAPITEL 01"
             title="Warum wird Ihre Cloud-Rechnung jeden Monat teurer?"
             subtitle="Per-User-Pricing. Per-GB-Pricing. Feature-Pakete, die Sie zwingen, für Dinge zu zahlen, die Sie nie nutzen. Jedes Wachstum Ihres Teams bedeutet automatisch mehr Kosten — ohne dass Sie etwas entschieden haben."
             visual={
@@ -603,7 +617,6 @@ const StorySection: React.FC = () => {
           <Act
             number="02"
             eyebrow="Die Erkenntnis"
-            kapitel="KAPITEL 02"
             title="Gehören Ihre Daten wirklich Ihnen?"
             subtitle="Stellen Sie sich vor: Sie kaufen einen Tresor. Aber der Tresor steht bei der Bank. Die Bank hat Öffnungszeiten. Sie sieht, was rein- und rausgeht. Sie kann die Konditionen ändern. — Oder: der Tresor steht bei Ihnen."
             visual={<BankVsServerInteractive />}
@@ -616,12 +629,25 @@ const StorySection: React.FC = () => {
           <Act
             number="03"
             eyebrow="Die Lösung"
-            kapitel="KAPITEL 03"
             title="Software wie ein maßgeschneiderter Anzug."
-            subtitle="Stellen Sie sich vor: Sie zahlen nicht für Ärmel, die Sie nie tragen. Keine Pauschalpakete, keine versteckten Features. Infrastruktur, die exakt zu Ihren Prozessen passt — und mit Ihnen wächst."
+            subtitle="Kein Unternehmen ist wie das andere. Warum sollte Ihre Infrastruktur von der Stange sein? Wir bauen genau das, was Sie brauchen — nicht mehr, nicht weniger."
             visual={
-              <div className="aspect-[2/1] overflow-hidden rounded-xl border border-white/5 bg-black/30 p-4">
-                <TailoredSuitSVG triggered={act3Triggered} />
+              <div className="space-y-3">
+                <div className="aspect-[2/1] overflow-hidden rounded-xl border border-white/5 bg-black/30 p-4">
+                  <TailoredSuitSVG triggered={act3Triggered} />
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { label: 'CRM & Dokumentation', sub: 'Statt Salesforce & SharePoint' },
+                    { label: 'KI auf Ihrem Server', sub: 'Statt OpenAI-Abo' },
+                    { label: 'Automatisierte Abläufe', sub: 'Statt manuelle Prozesse' },
+                  ].map(({ label, sub }) => (
+                    <div key={label} className="border-white/8 rounded-lg border bg-white/[0.03] p-3 text-center">
+                      <p className="text-xs font-bold text-vae-turquoise">{label}</p>
+                      <p className="mt-1 text-[10px] leading-tight text-white/40">{sub}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             }
             side="right"

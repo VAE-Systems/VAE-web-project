@@ -583,88 +583,94 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise/10 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
-        {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
-        {/* Desktop version with fixed attachment */}
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] text-white">
+        {/* Hero Background Image */}
         <div
-          className="pointer-events-none absolute inset-0 hidden overflow-hidden opacity-[0.40] dark:opacity-[0.20] md:block"
+          className="pointer-events-none absolute inset-0 hidden overflow-hidden opacity-[0.22] md:block"
           style={{
             backgroundImage: 'url(/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp)',
             backgroundAttachment: 'fixed',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            filter: 'grayscale(1)',
           }}
           role="presentation"
         />
-        {/* Mobile version without fixed (iOS Safari compatibility) */}
         <div
-          className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.40] dark:opacity-[0.20] md:hidden"
+          className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.22] md:hidden"
           style={{
             backgroundImage: 'url(/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp)',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            filter: 'grayscale(1)',
           }}
           role="presentation"
         />
-        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.20),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.14),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.14),transparent_35%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+          VAE
         </div>
-        {/* Light Mode: no glass blur to keep poster-like clarity */}
-        <div className="container-vae relative flex flex-col items-center text-center">
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
-            <ServerCog className="h-4 w-4" /> Infrastruktur Design/Setup
-          </span>
-          <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
-            Eine KI-geprägte Arbeitswelt, in der Sie die Kontrolle behalten.
-          </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-300 md:text-xl">
-            Wir entwerfen Ihre Informationsinfrastruktur – das Betriebssystem Ihres Unternehmens. Selbstgehostet, offen
-            und so gebaut, dass Sie auch morgen noch flexibel entscheiden können.
-          </p>
-          <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-6 lg:gap-8">
-            <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-convert flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
-              >
-                Kostenloses Erstgespräch buchen
-              </a>
-            </MagneticButton>
-            <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
-              <button
-                onClick={() => {
-                  scrollToROI()
-                  setTimeout(() => startTutorial(), 600)
-                }}
-                className="btn-outline flex w-full items-center justify-center gap-2 px-8 py-4 text-base font-semibold"
-              >
-                ROI-Rechner ansehen ↓
-              </button>
-            </MagneticButton>
-          </div>
-          <div className="mt-10 flex flex-col items-center gap-3 text-sm font-semibold text-text-secondary">
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              {trustBadges.slice(0, 3).map(badge => (
-                <span
-                  key={badge}
-                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary sm:px-4"
-                >
-                  <Check className="h-4 w-4 flex-shrink-0 text-vae-turquoise" /> {badge}
-                </span>
-              ))}
+
+        <div className="container-vae relative z-10 py-20 sm:py-24 lg:py-28">
+          <div className="flex flex-col gap-8">
+            {/* Eyebrow */}
+            <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.35)]">
+              <ServerCog className="h-3.5 w-3.5" /> Infrastruktur Design / Setup
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              {trustBadges.slice(3).map(badge => (
-                <span
+
+            {/* Main Heading */}
+            <div className="space-y-3">
+              <h1 className="max-w-4xl">
+                <span className="block text-[13vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-6xl lg:text-[5.2rem] xl:text-[5.8rem]">
+                  Raus aus
+                </span>
+                <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-5xl lg:text-[4.4rem] xl:text-[5rem]">
+                  dem SaaS-Stapel.
+                </span>
+              </h1>
+              <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+                Wir ersetzen fragmentierte Cloud-Tools durch eine einheitliche Plattform auf Ihrem Server — in 3–6
+                Wochen, produktiv, dokumentiert.
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
+                <a
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 bg-white px-8 py-5 text-base font-black uppercase tracking-[0.12em] text-black shadow-[0_18px_50px_-24px_rgba(255,255,255,0.45)] transition-transform hover:-translate-y-0.5 sm:w-auto"
+                >
+                  Kostenloses Erstgespräch buchen
+                </a>
+              </MagneticButton>
+              <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
+                <button
+                  onClick={() => {
+                    scrollToROI()
+                    setTimeout(() => startTutorial(), 600)
+                  }}
+                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                >
+                  ROI-Rechner ansehen ↓
+                </button>
+              </MagneticButton>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap gap-3">
+              {trustBadges.map(badge => (
+                <div
                   key={badge}
-                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-text-secondary sm:px-4"
+                  className="flex items-center gap-2 border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/70"
                 >
                   <Check className="h-4 w-4 flex-shrink-0 text-vae-turquoise" /> {badge}
-                </span>
+                </div>
               ))}
             </div>
           </div>
@@ -672,8 +678,14 @@ const SetupPage: React.FC = () => {
       </section>
 
       <section
-        className="section-card-container border-b bg-gray-50 py-20 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b bg-[#f4f1ec] dark:border-white/5 dark:bg-bg-darker"
         id="study"
+        style={{
+          clipPath: 'polygon(0 3vw, 100% 0, 100% 100%, 0 100%)',
+          marginTop: '-3vw',
+          paddingTop: 'calc(5rem + 3vw)',
+          paddingBottom: '5rem',
+        }}
       >
         <div className="section-card-backdrop" />
 
@@ -750,7 +762,7 @@ const SetupPage: React.FC = () => {
       </section>
       {/* Section 2 */}
       <section
-        className="section-card-container border-b bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b bg-[#faf8f4] py-20 dark:border-white/5 dark:bg-bg-darker"
         id="definition"
       >
         <div className="section-card-backdrop" />
@@ -760,8 +772,8 @@ const SetupPage: React.FC = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise/60">
               Infrastructure-Design
             </p>
-            <h2 className="text-3xl font-semibold text-white md:text-4xl">
-              Systeme, die zusammenarbeiten – nicht gegeneinander
+            <h2 className="text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-4xl">
+              Systeme, die zusammenarbeiten. Nicht gegeneinander.
             </h2>
             <p className="text-lg leading-relaxed text-gray-700 dark:text-text-secondary">
               Wir bauen Informationsinfrastruktur, die Daten, Workflows und Systeme integriert. Vendor-neutral,
@@ -769,7 +781,7 @@ const SetupPage: React.FC = () => {
             </p>
 
             <div className="grid gap-4 sm:grid-cols-2 sm:items-stretch">
-              <div className="flex h-full flex-col gap-3 rounded-2xl border border-red-200/60 bg-white/75 p-5 shadow-sm dark:border-red-500/20 dark:bg-white/5">
+              <div className="flex h-full flex-col gap-3 border border-red-200/60 bg-white/75 p-5 dark:border-red-500/20 dark:bg-white/5">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-red-500 dark:text-red-300/90">
                   Problem
                 </p>
@@ -779,7 +791,7 @@ const SetupPage: React.FC = () => {
                 </p>
               </div>
 
-              <div className="flex h-full flex-col gap-3 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/5 p-5 shadow-sm dark:border-vae-turquoise/25 dark:bg-vae-turquoise/15">
+              <div className="flex h-full flex-col gap-3 border border-vae-turquoise/30 bg-vae-turquoise/5 p-5 dark:border-vae-turquoise/25 dark:bg-vae-turquoise/15">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-vae-turquoise">
                   Unsere Lösung
                 </p>
@@ -800,7 +812,7 @@ const SetupPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="rounded-xl border border-gray-300/70 bg-gray-50/70 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+            <div className="border border-gray-300/70 bg-gray-50/70 p-5 dark:border-white/10 dark:bg-white/5">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-text-secondary/80">
@@ -836,14 +848,16 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 3 - Produktionsreife Systeme */}
-      <section className="section-card-container bg-white py-20 dark:bg-bg-dark">
+      <section className="section-card-container bg-[#f4f1ec] py-20 dark:bg-bg-dark">
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
           <header className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">Ihre Infrastruktur</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">Produktionsreife Systeme</h2>
-            <p className="mt-4 text-base text-text-secondary md:text-lg">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-vae-turquoise">Ihre Infrastruktur</p>
+            <h2 className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
+              Produktionsreife Systeme
+            </h2>
+            <p className="mt-4 text-base text-gray-700 dark:text-text-secondary md:text-lg">
               Vollständig konfiguriert, dokumentiert und unter Ihrer Kontrolle
             </p>
           </header>
@@ -851,24 +865,32 @@ const SetupPage: React.FC = () => {
           {/* Feature Highlights */}
           <div className="grid gap-6 md:grid-cols-3">
             <div className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center bg-vae-turquoise/15">
                 <Server className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h4 className="mb-2 text-base font-semibold text-white">Auf Ihren Servern</h4>
-              <p className="text-sm text-text-secondary">Volle Datenkontrolle, keine Cloud-Abhängigkeit</p>
+              <h4 className="mb-2 text-sm font-black uppercase tracking-[0.1em] text-gray-900 dark:text-white">
+                Auf Ihren Servern
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-text-secondary">
+                Volle Datenkontrolle, keine Cloud-Abhängigkeit
+              </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center bg-vae-turquoise/15">
                 <Users className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h4 className="mb-2 text-base font-semibold text-white">Intuitiv bedienbar</h4>
-              <p className="text-sm text-text-secondary">Moderne UI/UX, schnelle Einarbeitung</p>
+              <h4 className="mb-2 text-sm font-black uppercase tracking-[0.1em] text-gray-900 dark:text-white">
+                Intuitiv bedienbar
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-text-secondary">Moderne UI/UX, schnelle Einarbeitung</p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/15">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center bg-vae-turquoise/15">
                 <ShieldCheck className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h4 className="mb-2 text-base font-semibold text-white">Enterprise-Ready</h4>
+              <h4 className="mb-2 text-sm font-black uppercase tracking-[0.1em] text-gray-900 dark:text-white">
+                Enterprise-Ready
+              </h4>
               <p className="text-sm text-text-secondary">Security, Backups, Monitoring inklusive</p>
             </div>
           </div>
@@ -876,7 +898,7 @@ const SetupPage: React.FC = () => {
           {/* Infrastructure Images */}
           <div className="mx-auto mt-16 max-w-5xl">
             <div className="grid gap-6 md:grid-cols-2">
-              <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
+              <div className="relative overflow-hidden border border-gray-200/60 bg-white/80 dark:border-white/10 dark:bg-white/5">
                 <picture>
                   <source
                     srcSet="/images/optimized/Bild-von-Login-Screen-in-die-VAE-Cloud-als-Beispiel-für-Infrastruktur.webp"
@@ -894,7 +916,7 @@ const SetupPage: React.FC = () => {
                 </picture>
               </div>
 
-              <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
+              <div className="relative overflow-hidden border border-gray-200/60 bg-white/80 dark:border-white/10 dark:bg-white/5">
                 <picture>
                   <source
                     srcSet="/images/optimized/Bild-von-OpenProject-Ticketing-Software-2-bester-blick.jpg"
@@ -920,31 +942,30 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section: Nach dem Setup */}
-      <section className="accent-section section-card-container border-b border-gray-200 bg-vae-turquoise py-20 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker">
+      <section className="section-card-container border-b border-white/10 bg-[#030806] py-20 text-white">
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85 dark:text-vae-turquoise">
-              Nach dem Setup
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-white dark:text-white md:text-4xl">
-              Welche Optionen haben Sie nach dem Setup?
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-vae-turquoise">Nach dem Setup</p>
+            <h2 className="mt-3 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-white md:text-5xl">
+              Ihre Infrastruktur. Ihre Entscheidung.
             </h2>
-            <p className="mt-4 text-base text-white/80 dark:text-text-secondary md:text-lg">
-              Nach der Implementierung können Sie Ihre Infrastruktur entweder eigenständig betreiben oder langfristig
-              von VAE betreuen lassen.
+            <p className="mt-4 text-base text-white/65 md:text-lg">
+              Eigenständiger Betrieb oder langfristige VAE-Betreuung — Sie wählen das Modell, das zu Ihrem Team passt.
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             {/* Option 1: Setup + Übergabe */}
-            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border-2 border-white/80 bg-white p-8 text-slate-900 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/5 dark:text-white">
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden border-2 border-white/15 bg-white/[0.04] p-8 text-white transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/40">
               <div className="absolute inset-x-0 top-0 h-[2px] bg-vae-turquoise/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-gradient-to-r dark:from-vae-turquoise/0 dark:via-vae-turquoise/40 dark:to-vae-turquoise/0" />
 
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-vae-turquoise/30 bg-vae-turquoise/10 transition-transform duration-300 group-hover:scale-110">
                 <CheckCircle2 className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Setup + Übergabe</h3>
+              <h3 className="text-2xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-white">
+                Setup + Übergabe
+              </h3>
               <p className="text-base leading-relaxed text-gray-700 dark:text-text-secondary">
                 Wir implementieren die Infrastruktur, dokumentieren alles detailliert und schulen Ihr Team. Übergabe der
                 Artefakte und Aufzeichnungen erfolgt über unsere sichere Kunden-App (Chat & Files), damit Ihr Team
@@ -985,13 +1006,15 @@ const SetupPage: React.FC = () => {
             </div>
 
             {/* Option 2: Setup + Langfristige Betreuung */}
-            <div className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border-2 border-white/80 bg-white p-8 text-slate-900 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-vae-turquoise/30 dark:bg-white/5 dark:text-white dark:shadow-none">
+            <div className="group relative flex h-full flex-col gap-4 overflow-hidden border-2 border-vae-turquoise/40 bg-vae-turquoise/[0.06] p-8 text-white transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/70">
               <div className="absolute inset-x-0 top-0 h-[3px] bg-vae-turquoise/50 dark:bg-gradient-to-r dark:from-vae-turquoise/0 dark:via-vae-turquoise dark:to-vae-turquoise/0" />
 
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-vae-turquoise/40 bg-vae-turquoise/15 transition-transform duration-300 group-hover:scale-110">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-vae-turquoise/40 bg-vae-turquoise/15 transition-transform duration-300 group-hover:scale-110">
                 <Users className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">Setup + Langfristige Betreuung</h3>
+              <h3 className="text-2xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-white">
+                Setup + Langfristige Betreuung
+              </h3>
               <p className="text-base leading-relaxed text-slate-700 dark:text-text-secondary">
                 Wir implementieren die Infrastruktur und übernehmen anschließend die langfristige Instandhaltung,
                 Weiterentwicklung und das Monitoring. Übergaben und laufende Kommunikation laufen über unsere
@@ -1049,7 +1072,7 @@ const SetupPage: React.FC = () => {
                 <MagneticButton intensity={0.05} scaleEffect>
                   <Link
                     to="/leistungen/betreuung#service-levels"
-                    className="btn-primary accent-keep inline-flex items-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold"
+                    className="inline-flex items-center gap-2 bg-vae-turquoise px-7 py-3 text-sm font-black uppercase tracking-[0.12em] text-black transition-transform hover:-translate-y-0.5"
                   >
                     <span>Betreuungsmodelle ansehen</span>
                     <ArrowUpRight className="h-4 w-4" />
@@ -1060,7 +1083,7 @@ const SetupPage: React.FC = () => {
           </div>
 
           {/* Hinweis zu Hosting-Optionen */}
-          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border-2 border-vae-turquoise/30 bg-white p-6 dark:border-vae-turquoise/20 dark:bg-transparent">
+          <div className="mx-auto mt-10 max-w-3xl border-2 border-vae-turquoise/30 bg-vae-turquoise/5 p-6">
             <p className="text-center text-sm leading-relaxed text-gray-700 dark:text-text-secondary">
               <strong className="text-gray-900 dark:text-white">Hosting-Optionen:</strong> Detaillierte Informationen zu
               den verschiedenen Deployment-Modellen finden Sie{' '}
@@ -1076,15 +1099,15 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 4 - Original Content */}
-      <section className="section-card-container bg-vae-turquoise/10 py-20 dark:bg-bg-darker">
+      <section className="section-card-container bg-[#faf8f4] py-20 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise">
-              Was ist enthalten?
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">Was Sie erhalten</h2>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-vae-turquoise">Was ist enthalten?</p>
+            <h2 className="mt-4 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
+              Was Sie erhalten
+            </h2>
             <p className="mt-3 text-lg text-gray-700 dark:text-text-secondary">
               Vollständiges Setup, produktionsbereit, ohne versteckte Kosten.
             </p>
@@ -1095,16 +1118,18 @@ const SetupPage: React.FC = () => {
               return (
                 <div
                   key={card.title}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-white p-6 shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
+                  className="group relative flex h-full flex-col overflow-hidden border border-vae-turquoise/30 bg-white/90 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 hover:shadow-md dark:border-vae-turquoise/20 dark:bg-white/5 dark:hover:bg-white/10"
                 >
                   <div className="absolute inset-x-0 top-0 h-[3px] bg-vae-turquoise/50 opacity-80 transition-opacity duration-300 group-hover:opacity-100 dark:bg-gradient-to-r dark:from-vae-turquoise/0 dark:via-vae-turquoise/40 dark:to-vae-turquoise/0" />
 
-                  <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/40 transition-transform duration-300 group-hover:scale-110">
+                  <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center overflow-hidden bg-vae-turquoise/15 text-vae-turquoise ring-1 ring-vae-turquoise/40 transition-transform duration-300 group-hover:scale-110">
                     <Icon className="relative z-[1] h-6 w-6" />
                     <div className="absolute inset-0 opacity-0 dark:bg-vae-turquoise/10 dark:opacity-100 dark:blur-[14px]" />
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">{card.title}</h3>
+                  <h3 className="mb-3 text-lg font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">
+                    {card.title}
+                  </h3>
                   <p className="text-sm leading-relaxed text-gray-700 dark:text-text-secondary">{card.description}</p>
 
                   <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:opacity-0">
@@ -1128,14 +1153,12 @@ const SetupPage: React.FC = () => {
       <section
         id="roi-calculator"
         ref={calculatorSectionRef}
-        className="border-y border-vae-turquoise/10 bg-[#f6f8f7] py-20 dark:border-white/5 dark:bg-bg-dark"
+        className="border-y border-vae-turquoise/10 bg-[#f4f1ec] py-20 dark:border-white/5 dark:bg-bg-dark"
       >
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise">
-              SaaS-Kosten-Radar
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-vae-turquoise">SaaS-Kosten-Radar</p>
+            <h2 className="mt-4 text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
               Was kostet Ihre SaaS-Landschaft wirklich?
             </h2>
             <p className="mt-3 text-lg text-gray-600 dark:text-text-secondary">
@@ -1157,7 +1180,7 @@ const SetupPage: React.FC = () => {
               </span>
             </div>
           </div>
-          <div className="mt-12 grid gap-8 rounded-3xl border border-gray-200/80 bg-white p-8 shadow-[0_22px_60px_-40px_rgba(15,23,42,0.35)] dark:border-white/10 dark:bg-white/5 dark:shadow-none lg:grid-cols-2">
+          <div className="mt-12 grid gap-8 border border-gray-200/80 bg-white p-8 dark:border-white/10 dark:bg-white/5 lg:grid-cols-2">
             <div className="space-y-8">
               <div data-calculator-tutorial="team-size">
                 <label
@@ -1198,7 +1221,7 @@ const SetupPage: React.FC = () => {
                   {saasToolCategories.map(category => (
                     <div
                       key={category.id}
-                      className="rounded-2xl border border-vae-turquoise/25 bg-[#f1fbf7] p-4 shadow-[0_12px_26px_-22px_rgba(12,74,52,0.25)] dark:border-white/10 dark:bg-bg-darker/40"
+                      className="border border-vae-turquoise/25 bg-[#f4f1ec] p-4 dark:border-white/10 dark:bg-bg-darker/40"
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <span className="inline-flex items-center rounded-full border border-vae-turquoise/30 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-gray-700 shadow-[0_8px_20px_-16px_rgba(12,74,52,0.35)] dark:border-white/10 dark:bg-bg-darker/60 dark:text-text-secondary/80 dark:shadow-none">
@@ -1289,7 +1312,7 @@ const SetupPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-bg-darker/60">
+              <div className="border border-gray-200 bg-white p-5 dark:border-white/10 dark:bg-bg-darker/60">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-700 dark:text-text-secondary">
                   Weitere Lizenzen hinzufügen
                 </p>
@@ -1372,11 +1395,11 @@ const SetupPage: React.FC = () => {
             </div>
 
             <div
-              className="space-y-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_18px_55px_-40px_rgba(15,23,42,0.4)] dark:border-white/10 dark:bg-bg-darker/60 dark:shadow-none lg:sticky lg:top-24 lg:self-start"
+              className="space-y-6 border border-gray-200 bg-white p-6 dark:border-white/10 dark:bg-bg-darker/60 lg:sticky lg:top-24 lg:self-start"
               data-calculator-tutorial="results"
             >
               <div className="h-1 w-full rounded-full bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 dark:from-vae-turquoise/0 dark:via-vae-turquoise/25 dark:to-vae-turquoise/0" />
-              <div className="rounded-2xl border border-red-200 bg-red-50 p-5 shadow-sm dark:border-red-500/40 dark:bg-red-500/5 dark:shadow-none">
+              <div className="border border-red-200 bg-red-50 p-5 dark:border-red-500/40 dark:bg-red-500/5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-red-600 dark:text-red-400">
                     Ihre aktuellen SaaS-Kosten

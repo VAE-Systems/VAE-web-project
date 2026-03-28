@@ -74,7 +74,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-2xl border transition duration-200 ${
+      className={`group relative overflow-hidden rounded-none border transition duration-200 ${
         isOpen
           ? 'border-[#c5ccc8] bg-white/90 shadow-[0_18px_45px_rgba(26,35,32,0.12)] dark:border-white/10 dark:bg-white/[0.05]'
           : 'border-[#d8ddd9] bg-white/80 shadow-[0_10px_28px_rgba(26,35,32,0.08)] hover:border-[#c5ccc8] dark:border-white/5 dark:bg-white/[0.03] dark:hover:border-white/10'

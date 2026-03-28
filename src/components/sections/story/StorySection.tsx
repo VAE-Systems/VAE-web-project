@@ -568,7 +568,7 @@ const StorySection: React.FC = () => {
             style={{
               background: '#060d0b',
               border: '1px solid rgba(0,212,170,0.15)',
-              borderRadius: '16px',
+              borderRadius: 0,
               padding: '32px 24px',
               maxWidth: '420px',
               margin: '0 auto',
@@ -597,7 +597,7 @@ const StorySection: React.FC = () => {
             title="Warum wird Ihre Cloud-Rechnung jeden Monat teurer?"
             subtitle="Per-User-Pricing. Per-GB-Pricing. Feature-Pakete, die Sie zwingen, für Dinge zu zahlen, die Sie nie nutzen. Jedes Wachstum Ihres Teams bedeutet automatisch mehr Kosten — ohne dass Sie etwas entschieden haben."
             visual={
-              <div className="aspect-[2/1] overflow-hidden rounded-xl border border-white/5 bg-black/30 p-4">
+              <div className="aspect-[2/1] overflow-hidden rounded-none border border-white/5 bg-black/30 p-4">
                 <PriceEscalationSVG triggered={act1Triggered} />
               </div>
             }
@@ -633,7 +633,7 @@ const StorySection: React.FC = () => {
             subtitle="Kein Unternehmen ist wie das andere. Warum sollte Ihre Infrastruktur von der Stange sein? Wir bauen genau das, was Sie brauchen — nicht mehr, nicht weniger."
             visual={
               <div className="space-y-3">
-                <div className="aspect-[2/1] overflow-hidden rounded-xl border border-white/5 bg-black/30 p-4">
+                <div className="aspect-[2/1] overflow-hidden rounded-none border border-white/5 bg-black/30 p-4">
                   <TailoredSuitSVG triggered={act3Triggered} />
                 </div>
                 <div className="grid grid-cols-3 gap-3">
@@ -642,7 +642,7 @@ const StorySection: React.FC = () => {
                     { label: 'KI auf Ihrem Server', sub: 'Statt OpenAI-Abo' },
                     { label: 'Automatisierte Abläufe', sub: 'Statt manuelle Prozesse' },
                   ].map(({ label, sub }) => (
-                    <div key={label} className="border-white/8 rounded-lg border bg-white/[0.03] p-3 text-center">
+                    <div key={label} className="border-white/8 rounded-md border bg-white/[0.03] p-3 text-center">
                       <p className="text-xs font-bold text-vae-turquoise">{label}</p>
                       <p className="mt-1 text-[10px] leading-tight text-white/40">{sub}</p>
                     </div>

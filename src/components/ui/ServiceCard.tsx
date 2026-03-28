@@ -12,7 +12,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = React.memo(({ service, servicePath, superscripts }) => {
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-none border-2 border-[#b7c1bc] bg-white p-8 backdrop-blur-sm transition-all duration-500 hover:border-vae-turquoise hover:shadow-[0_10px_22px_rgba(18,24,20,0.10)] dark:border dark:border-white/10 dark:bg-white/5 dark:hover:border-vae-turquoise/40 dark:hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-none border border-[#d8ddd9] bg-[#faf8f4] p-8 backdrop-blur-sm transition-all duration-500 hover:border-vae-turquoise/40 hover:shadow-[0_10px_22px_rgba(18,24,20,0.08)] dark:border dark:border-white/10 dark:bg-white/5 dark:hover:border-vae-turquoise/40 dark:hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]">
       <div className="pointer-events-none absolute -inset-px hidden bg-[radial-gradient(circle_at_30%_25%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:block" />
       <div className="relative z-10 mb-6 flex items-start justify-between">
         <div className="flex items-center gap-3">

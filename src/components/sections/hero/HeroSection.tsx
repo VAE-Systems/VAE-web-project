@@ -130,7 +130,7 @@ const HeroSection: React.FC = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] text-white"
+      className="relative isolate overflow-hidden border-b border-white/10 bg-bg-darker text-text-light dark:bg-[#030806] dark:text-white"
     >
       {/* Film-split cover panels */}
       <div
@@ -156,7 +156,7 @@ const HeroSection: React.FC = () => {
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.06),transparent_30%)]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
-      <div className="pointer-events-none absolute right-[-6vw] top-10 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.04] xl:block">
+      <div className="pointer-events-none absolute right-[-6vw] top-10 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.04] dark:text-white/[0.04] xl:block">
         VAE
       </div>
 
@@ -165,14 +165,14 @@ const HeroSection: React.FC = () => {
           <div className="flex flex-col gap-8">
             <div
               ref={eyebrowRef}
-              className="inline-flex w-fit items-center border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.35)]"
+              className="inline-flex w-fit items-center border border-vae-turquoise/35 bg-bg-darker px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.35)] dark:bg-black"
             >
               {heroEyebrow}
             </div>
 
             <div ref={titleRef} className="space-y-5">
               <h1 className="max-w-5xl text-balance">
-                <span className="block text-[15vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-7xl lg:text-[5.8rem] xl:text-[6.7rem]">
+                <span className="block text-[15vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-text-light dark:text-white sm:text-7xl lg:text-[5.8rem] xl:text-[6.7rem]">
                   {heroTitle[0]}
                 </span>
                 <span className="mt-3 inline-block bg-vae-turquoise px-3 py-2 text-[12vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-6xl lg:text-[5.1rem] xl:text-[5.8rem]">
@@ -182,7 +182,7 @@ const HeroSection: React.FC = () => {
 
               <div
                 ref={descRef}
-                className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/80 sm:text-lg lg:text-[1.12rem]"
+                className="max-w-2xl border-l-4 border-text-light pl-4 text-base leading-relaxed text-text-secondary dark:border-white dark:text-white/80 sm:text-lg lg:text-[1.12rem]"
               >
                 {heroDescription}
               </div>
@@ -205,7 +205,7 @@ const HeroSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={scrollToServices}
-                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5"
+                  className="flex w-full items-center justify-center gap-2 border border-text-light/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-text-light transition-colors hover:border-vae-turquoise hover:bg-text-light/5 dark:border-white/20 dark:text-white dark:hover:bg-white/5"
                 >
                   Leistungen
                   <ChevronDown className="h-5 w-5" />
@@ -217,7 +217,7 @@ const HeroSection: React.FC = () => {
               {heroBenefits.map((benefit, index) => (
                 <div
                   key={benefit.title}
-                  className={`${index === 1 ? 'bg-vae-turquoise text-black' : 'border border-white/10 bg-white/[0.04] text-white'} p-4`}
+                  className={`${index === 1 ? 'bg-vae-turquoise text-black' : 'border border-text-light/10 bg-text-light/[0.04] text-text-light dark:border-white/10 dark:bg-white/[0.04] dark:text-white'} p-4`}
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <span className="text-[10px] font-bold uppercase tracking-[0.28em]">
@@ -230,7 +230,9 @@ const HeroSection: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-2xl font-black uppercase leading-tight tracking-[-0.04em]">{benefit.title}</p>
-                  <p className={`${index === 1 ? 'text-black/75' : 'text-white/70'} mt-2 text-sm leading-relaxed`}>
+                  <p
+                    className={`${index === 1 ? 'text-black/75' : 'text-text-muted dark:text-white/70'} mt-2 text-sm leading-relaxed`}
+                  >
                     {benefit.description}
                   </p>
                 </div>
@@ -239,7 +241,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           <div ref={cardRef} className="grid gap-4 self-end">
-            <div className="border border-white/10 bg-white text-black">
+            <div className="border border-text-light/10 bg-white text-black dark:border-white/10">
               <div className="border-b border-black/10 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.3em] text-black/65">
                 Magazin-Ansicht
               </div>
@@ -255,7 +257,7 @@ const HeroSection: React.FC = () => {
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="bg-black p-4 text-white">
+                  <div className="bg-bg-darker p-4 text-text-light dark:bg-black dark:text-white">
                     <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/55">Problem</p>
                     <p className="mt-2 text-lg font-black uppercase leading-tight">
                       Zu viele Tools. Zu wenig Kontrolle.

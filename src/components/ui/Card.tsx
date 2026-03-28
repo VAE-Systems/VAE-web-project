@@ -49,9 +49,9 @@ const Card: React.FC<CardProps> = ({
     () =>
       cn(
         'group relative rounded-none border backdrop-blur-md p-7 flex flex-col h-full overflow-hidden transition-all duration-400',
-        isLight ? 'border-2 border-[#b7c1bc] bg-white' : 'border-vae-turquoise/20 bg-vae-turquoise/5',
+        isLight ? 'border border-[#d8ddd9] bg-[#faf8f4]' : 'border-vae-turquoise/20 bg-vae-turquoise/5',
         isLight
-          ? 'hover:border-vae-turquoise hover:shadow-[0_10px_22px_rgba(18,24,20,0.10)]'
+          ? 'hover:border-vae-turquoise/40 hover:shadow-[0_10px_22px_rgba(18,24,20,0.08)]'
           : 'hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_8px_36px_-8px_rgba(var(--vae-turquoise-rgb),0.35)]',
         className
       ),

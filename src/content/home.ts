@@ -390,6 +390,7 @@ export interface ReferenceProject {
   role?: string
   invertOnDark?: boolean
   invertOnLight?: boolean
+  wide?: boolean
 }
 
 export const referenceProjects: ReferenceProject[] = [
@@ -397,8 +398,7 @@ export const referenceProjects: ReferenceProject[] = [
     id: 'lukas-sosnowski',
     client: 'Lukas Sosnowski Consulting',
     title: 'CRM-Migration & KI-Strategie',
-    description:
-      'Von Google Sheets zu Twenty CRM – inklusive strategischer Beratung für Finance Automation und AI Controlling.',
+    description: 'Migration von Google Sheets zu Twenty CRM plus Strategie für Finance-Automation und AI-Controlling.',
     highlights: [
       'Daten-Konsolidierung im CRM',
       'KI-Readiness für Finance-Automation',
@@ -412,33 +412,33 @@ export const referenceProjects: ReferenceProject[] = [
     client: 'Aktiv Kollektiv e.V.',
     title: 'Infrastruktur-Planung & technische Unterstützung',
     description:
-      'Julian Goertz (Vorstand) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur — mit Fokus auf Self-Hosting, Open Source als Werkzeug und Skalierbarkeit.',
+      'Planung einer skalierbaren Vereinsinfrastruktur für Kollaboration, Wissensmanagement und zentrale Datenverwaltung.',
     highlights: [
-      'Erste Systeme bereits live — Note-Sharing, Kollaboration, Wissensmanagement',
-      'Infrastruktur-Roadmap für Mitglieder-Accounts und zentrale Datenverwaltung',
+      'Erste Systeme bereits live: Kollaboration, Wissensmanagement, Note-Sharing',
+      'Roadmap für Mitglieder-Accounts und zentrale Datenverwaltung',
       'Blueprint für gemeinnützige Initiativen',
     ],
     status: 'Live',
     badge: 'Live seit 2025',
     logo: '/Kollektiv-Logo.svg',
     role: 'Julian Goertz ist Vorstand bei Aktiv Kollektiv e.V.',
-    invertOnDark: true,
+    invertOnLight: true,
   },
   {
     id: 'qr-mail',
     client: 'Art Affair GmbH & Co. KG',
     title: 'Pilot-Projekt: QR-Code-Automation für art KARLSRUHE',
-    description:
-      'Automatisierte Lead-Erfassung per QR-Code für den Stand auf der art KARLSRUHE. Galerie für moderne Kunst aus Regensburg (Neue-Waag-Gasse 2) – Lösung mit ActivePieces und Custom-Automationen, nahtlos in die bestehende Infrastruktur integriert.',
+    description: 'QR-Lead-System für die art KARLSRUHE mit ActivePieces, APIs und automatisiertem Follow-up.',
     highlights: [
       'ActivePieces + Custom-Code-Automationen',
       'Integration in bestehende Infrastruktur',
-      'Galerie-Setup in Regensburg (Neue-Waag-Gasse 2)',
+      'Event-Setup für Art Affair aus Regensburg',
     ],
     status: 'Produktiv im Einsatz',
     badge: 'Pilot 2025',
     logo: '/art-affair-logo.svg',
     invertOnLight: true,
+    wide: true,
   },
 ] as const
 

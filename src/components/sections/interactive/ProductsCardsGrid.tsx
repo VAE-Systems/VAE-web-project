@@ -83,14 +83,14 @@ const ProductsCardsGrid: React.FC = () => {
               </ul>
 
               <div className="mt-auto flex items-center gap-3">
-                <Link to={`/solutions#${cat.key}`} className="btn-primary btn-compact whitespace-nowrap">
+                <Link to={`/solutions#${cat.key}`} className="btn-primary whitespace-nowrap px-4 py-2 text-sm">
                   Ansehen
                 </Link>
                 <CtaLink
                   ctaId="products.contact_email"
                   ctx={{ product: cat.title, fromPage: 'products-grid' }}
                   variant="secondary"
-                  className="btn-compact whitespace-nowrap"
+                  className="whitespace-nowrap px-4 py-2 text-sm"
                 />
               </div>
             </article>

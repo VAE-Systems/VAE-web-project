@@ -43,7 +43,7 @@ const ProductsHeroSection: React.FC = () => {
       {/* Negative top margin zieht das Hero unter den fixen Header (h-20=5rem).
         Viewport based Mindesthöhe + responsive Innenabstände sorgen für bessere Responsivität. */}
       <section
-        className={`border-border-primary hero-surface relative -mt-20 flex min-h-[calc(100vh-5rem)] items-center overflow-hidden border-b pb-16 pt-32 dark:border-white/5 sm:pb-20 sm:pt-40 md:pb-24 md:pt-52 ${isLight ? 'bg-gradient-to-b from-white to-white/95' : 'from-bg-primary to-bg-primary bg-gradient-to-br via-bg-secondary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker'}`}
+        className={`border-border-primary hero-surface relative -mt-20 flex min-h-[calc(100vh-5rem)] items-center overflow-hidden border-b pb-16 pt-32 dark:border-white/5 sm:pb-20 sm:pt-40 md:pb-24 md:pt-52 ${isLight ? 'from-bg-primary bg-gradient-to-b to-white' : 'from-bg-primary to-bg-primary bg-gradient-to-br via-bg-secondary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker'}`}
       >
         {/* Overlay for improved text contrast; use muted/light variants when in light mode */}
         <div className="pointer-events-none absolute inset-0 z-[1]">
@@ -66,7 +66,7 @@ const ProductsHeroSection: React.FC = () => {
           <div className="absolute inset-0 z-0 select-none">
             {/* Soft base gradient already via section; add subtle radial & light grid */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_55%_42%,rgba(var(--vae-turquoise-rgb),0.20),transparent_62%)]" />
-            <div className="absolute inset-0 opacity-[0.06] mix-blend-screen [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.06)_0_1px,transparent_1px_44px),repeating-linear-gradient(90deg,rgba(255,255,255,0.04)_0_1px,transparent_1px_44px)]" />
+            <div className="absolute inset-0 opacity-[0.08] [background:repeating-linear-gradient(0deg,rgba(17,17,16,0.06)_0_1px,transparent_1px_44px),repeating-linear-gradient(90deg,rgba(17,17,16,0.04)_0_1px,transparent_1px_44px)]" />
             <div className="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,rgba(var(--vae-turquoise-rgb),0.22),transparent_60%)] opacity-10" />
           </div>
         ) : (
@@ -97,7 +97,7 @@ const ProductsHeroSection: React.FC = () => {
             <div className="relative max-w-4xl space-y-8">
               {/* Panel now mirrors Services hero style */}
               <div
-                className={`inline-block rounded-[2rem] px-8 py-6 backdrop-blur-md ${isLight ? 'border border-black/10 bg-white/85 shadow-[0_8px_40px_-18px_rgba(0,0,0,0.25)] ring-1 ring-black/10' : 'border border-vae-turquoise/30 bg-[linear-gradient(160deg,rgba(0,15,12,0.92),rgba(0,32,26,0.78))] shadow-[0_0_60px_-18px_rgba(var(--vae-turquoise-rgb),0.5)] ring-1 ring-vae-turquoise/25'} w-full space-y-4 text-center`}
+                className={`inline-block w-full space-y-4 px-8 py-6 text-center backdrop-blur-md ${isLight ? 'bg-white/88 border-2 border-black/10 shadow-[0_8px_40px_-18px_rgba(0,0,0,0.18)]' : 'border-2 border-vae-turquoise/30 bg-[linear-gradient(160deg,rgba(0,15,12,0.92),rgba(0,32,26,0.78))] shadow-[0_0_60px_-18px_rgba(var(--vae-turquoise-rgb),0.5)]'}`}
               >
                 <h1 className="h1 fluid-h1 mb-4">
                   <span className="block text-text-light">{productsHeroContent.title.main}</span>
@@ -122,15 +122,12 @@ const ProductsHeroSection: React.FC = () => {
                   </CtaLink>
                   <Link
                     to="/leistungen/infrastruktur"
-                    className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
+                    className="btn-secondary flex flex-1 items-center justify-center text-center"
                   >
                     <Icon name="handshake" className="mr-2" />
                     Services & Expertise
                   </Link>
-                  <a
-                    href="#solutions"
-                    className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
-                  >
+                  <a href="#solutions" className="btn-ghost flex flex-1 items-center justify-center text-center">
                     <Icon name="category" className="mr-2" />
                     Produkte entdecken
                   </a>

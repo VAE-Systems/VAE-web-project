@@ -291,7 +291,6 @@ Fügt Hilfe-Mode CSS-Klassen hinzu (z.B. `cursor-help`, `ring-2`).
 
 ```tsx
 import { getHelpModeClasses } from '@/components/ui/help'
-
 ;<button className={getHelpModeClasses(helpMode, 'btn-primary')}>Button</button>
 ```
 

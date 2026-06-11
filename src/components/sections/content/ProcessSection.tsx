@@ -92,7 +92,10 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
       <div className="about-surface-bg" aria-hidden="true" />
       <div className="container-vae relative mx-auto max-w-6xl">
         <header className="mb-14 max-w-3xl" data-heading-accent>
-          <h2 id="process-heading" className="heading-fix mb-6 text-4xl font-bold text-white md:text-5xl">
+          <h2
+            id="process-heading"
+            className="heading-fix mb-6 text-4xl font-bold text-text-light dark:text-white md:text-5xl"
+          >
             Wie wir starten & liefern
           </h2>
           <div className="heading-accent-bar mb-6 h-[3px] w-36 rounded-full bg-gradient-to-r from-vae-turquoise to-transparent" />
@@ -104,10 +107,10 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
           {processSteps.map((s, i) => (
             <li key={s.key} data-step className="group relative">
               <div
-                className="absolute -inset-px rounded-2xl bg-gradient-to-br from-vae-turquoise/25 to-transparent opacity-0 blur-md transition group-hover:opacity-100"
+                className="absolute -inset-px rounded-xl bg-gradient-to-br from-vae-turquoise/25 to-transparent opacity-0 blur-md transition group-hover:opacity-100"
                 aria-hidden="true"
               />
-              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm md:p-7">
+              <div className="flex h-full flex-col rounded-xl border border-text-light/10 bg-text-light/[0.04] p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] md:p-7">
                 <div className="mb-4 flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise">
@@ -118,7 +121,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
                     </span>
                   </div>
                   {s.durationHint && (
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-text-secondary dark:text-white/60">
+                    <span className="rounded-md border border-text-light/10 bg-text-light/5 px-2 py-1 text-[11px] text-text-secondary dark:border-white/10 dark:bg-white/5 dark:text-white/60">
                       {s.durationHint}
                     </span>
                   )}

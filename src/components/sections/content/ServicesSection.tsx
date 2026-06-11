@@ -150,7 +150,7 @@ const ServicesSection: React.FC = () => {
     <section
       id="services"
       ref={sectionRef}
-      className="relative overflow-hidden border-t border-vae-turquoise/10 bg-[#faf8f4] py-24 dark:bg-[#030806] md:py-36"
+      className="relative overflow-hidden border-t border-vae-turquoise/10 bg-bg-darker py-24 dark:bg-[#030806] md:py-36"
     >
       {/* Background Effects */}
 
@@ -172,7 +172,7 @@ const ServicesSection: React.FC = () => {
           {serviceItems.map(service => (
             <article
               key={service.key}
-              className="group relative flex h-full flex-col overflow-hidden border border-gray-200/80 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 dark:border-white/10 dark:bg-white/5"
+              className="group relative flex h-full flex-col overflow-hidden border border-text-light/20 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 dark:border-white/10 dark:bg-white/5"
             >
               <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-vae-turquoise/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative z-10 mb-6 flex items-start justify-between gap-4">
@@ -334,7 +334,7 @@ const ServicesSection: React.FC = () => {
             </ol>
           </div>
 
-          <div className="flex flex-col justify-between gap-6 border border-vae-turquoise/20 bg-[#f4f1ec] p-8 dark:border-vae-turquoise/30 dark:bg-white/5">
+          <div className="flex flex-col justify-between gap-6 border border-vae-turquoise/20 bg-bg-darker p-8 dark:border-vae-turquoise/30 dark:bg-white/5">
             <div>
               <p className="text-[11px] font-black uppercase tracking-[0.35em] text-vae-turquoise">Priorisierung</p>
               <h3 className="mt-3 text-xl font-black uppercase leading-[0.92] tracking-[-0.04em] text-gray-900 dark:text-white">

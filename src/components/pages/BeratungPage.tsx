@@ -522,7 +522,7 @@ const BeratungPage: React.FC = () => {
                   href={bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 bg-white px-8 py-5 text-base font-black uppercase tracking-[0.12em] text-black shadow-[0_18px_50px_-24px_rgba(255,255,255,0.45)] transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="btn-primary flex w-full items-center justify-center gap-2 px-8 py-5 text-base font-black uppercase tracking-[0.12em] sm:w-auto"
                 >
                   <Calendar className="h-5 w-5 flex-shrink-0" />
                   Kostenloses Erstgespräch buchen
@@ -531,7 +531,7 @@ const BeratungPage: React.FC = () => {
               <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
                 <button
                   onClick={scrollToProcess}
-                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                  className="btn-secondary flex w-full items-center justify-center gap-2 px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] sm:w-auto"
                 >
                   Prozess ansehen
                   <ChevronDown className="h-5 w-5" />
@@ -626,25 +626,33 @@ const BeratungPage: React.FC = () => {
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
-          <h2 className="mb-16 text-center text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
-            Was bedeutet Strategische Beratung bei VAE?
-          </h2>
-
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
-            {/* Left Column - Text Content */}
-            <div className="space-y-6">
-              <div>
-                <p className="mb-4 text-lg leading-relaxed text-gray-900 dark:text-white">
-                  Strategische Beratung bedeutet bei VAE Systems mehr als nur eine technische Bestandsaufnahme. Wir
-                  entwickeln mit Ihnen gemeinsam eine fundierte Digitalisierungsstrategie – unabhängig davon, ob es um
-                  KI-Integration, Prozessautomatisierung oder die komplette digitale Transformation geht.
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(300px,0.85fr)] lg:gap-14">
+            <div className="space-y-8">
+              <div className="space-y-5 border-l-4 border-vae-turquoise pl-5">
+                <p className="text-xs font-bold uppercase tracking-[0.34em] text-vae-turquoise">Editorial Split</p>
+                <h2 className="max-w-4xl text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white md:text-5xl">
+                  Was bedeutet Strategische Beratung bei VAE?
+                </h2>
+                <p className="max-w-3xl text-lg leading-relaxed text-gray-900 dark:text-white">
+                  Mehr als Bestandsaufnahme: Wir ordnen Tools, Kosten, Risiken und Zielbild so, dass daraus eine
+                  belastbare Entscheidung entsteht.
                 </p>
-
-                <p className="mb-4 text-base leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
-                  Unsere Analyse umfasst:
+                <p className="max-w-3xl text-base leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
+                  Statt einer netten Analyse bekommen Sie eine handhabbare Entscheidungsgrundlage für KI-Integration,
+                  Prozessautomatisierung und digitale Transformation.
                 </p>
+              </div>
 
-                <ul className="space-y-3">
+              <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+                <article className="border-2 border-black/10 bg-white p-6 text-text-light shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/[0.03] dark:text-white dark:shadow-none">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Die Analyse</p>
+                  <p className="mt-3 text-sm leading-relaxed text-text-secondary dark:text-text-secondary">
+                    Wir schauen nicht nur auf Technik. Wir zerlegen Ihre Situation in klar benennbare
+                    Entscheidungsfelder.
+                  </p>
+                </article>
+
+                <div className="grid gap-3">
                   {[
                     'Welche Systeme und Tools nutzen Sie aktuell? (Microsoft 365, Salesforce, Legacy-Systeme, etc.)',
                     'Welche direkten und indirekten Kosten entstehen dadurch pro Jahr?',
@@ -652,56 +660,66 @@ const BeratungPage: React.FC = () => {
                     'Welche Prozesse sind ineffizient oder fehleranfällig?',
                     'Wo besteht strategisches Optimierungspotenzial?',
                   ].map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-vae-turquoise" />
-                      <span className="text-base text-gray-700 dark:text-[hsl(0,0%,80%)]">{item}</span>
-                    </li>
+                    <div
+                      key={idx}
+                      className="grid gap-3 border-b border-black/10 pb-3 last:border-b-0 last:pb-0 dark:border-white/10 sm:grid-cols-[auto_1fr]"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 text-vae-turquoise" />
+                      <p className="text-sm leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">{item}</p>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
 
-              <div>
-                <p className="mb-4 text-lg leading-relaxed text-gray-900 dark:text-white">
-                  Aus der Analyse leiten wir vier umsetzbare Strategieoptionen ab, jede mit klarer Einschätzung zu
-                  Aufwand, Risiko und ROI.
-                </p>
-
-                <ol className="space-y-3">
-                  {[
-                    { label: 'Option A', text: 'Full-Service-Begleitung – wir übernehmen die komplette Umsetzung' },
-                    {
-                      label: 'Option B',
-                      text: 'Strategische Anleitung – Sie setzen intern um, wir begleiten beratend',
-                    },
-                    { label: 'Option C', text: 'Hybrides Modell – gemeinsame Umsetzung in definierten Teilbereichen' },
-                    {
-                      label: 'Option D',
-                      text: 'Langfristige Beratung (Retainer) – Steering, KPI-Monitoring und Entscheidungs-Support',
-                    },
-                  ].map((option, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center border border-vae-turquoise/40 bg-vae-turquoise/15 text-sm font-bold text-vae-turquoise">
-                        {idx + 1}
-                      </span>
-                      <span className="mt-0.5 text-base text-gray-700 dark:text-[hsl(0,0%,80%)]">
-                        <span className="font-semibold text-gray-900 dark:text-white">{option.label}:</span>{' '}
-                        {option.text}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
+              <div className="bg-bg-primary border-2 border-black/10 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/[0.03] dark:shadow-none">
+                <div className="grid gap-5 lg:grid-cols-[180px_1fr]">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Vier Pfade</p>
+                    <p className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-gray-900 dark:text-white">
+                      Aufwand, Risiko, ROI.
+                    </p>
+                  </div>
+                  <ol className="grid gap-4">
+                    {[
+                      { label: 'Option A', text: 'Full-Service-Begleitung – wir übernehmen die komplette Umsetzung' },
+                      {
+                        label: 'Option B',
+                        text: 'Strategische Anleitung – Sie setzen intern um, wir begleiten beratend',
+                      },
+                      {
+                        label: 'Option C',
+                        text: 'Hybrides Modell – gemeinsame Umsetzung in definierten Teilbereichen',
+                      },
+                      {
+                        label: 'Option D',
+                        text: 'Langfristige Beratung (Retainer) – Steering, KPI-Monitoring und Entscheidungs-Support',
+                      },
+                    ].map((option, idx) => (
+                      <li
+                        key={idx}
+                        className="grid gap-2 border-b border-black/10 pb-4 last:border-b-0 last:pb-0 dark:border-white/10 md:grid-cols-[auto_1fr]"
+                      >
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-vae-turquoise/40 bg-vae-turquoise/10 text-sm font-black text-vae-turquoise">
+                          {idx + 1}
+                        </span>
+                        <p className="text-base leading-relaxed text-gray-700 dark:text-[hsl(0,0%,80%)]">
+                          <span className="font-semibold text-gray-900 dark:text-white">{option.label}:</span>{' '}
+                          {option.text}
+                        </p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               </div>
 
-              <p className="text-base leading-relaxed text-gray-600 dark:text-[hsl(0,0%,75%)]">
-                Sie treffen Ihre Entscheidung auf Grundlage belastbarer Informationen. Unsere Rolle ist transparente
-                Beratung auf Augenhöhe — ohne Verpflichtung, ohne Verkaufsdruck.
-              </p>
+              <blockquote className="max-w-3xl border-l-4 border-black/20 pl-5 text-base leading-relaxed text-gray-600 dark:border-white/20 dark:text-[hsl(0,0%,75%)]">
+                Sie entscheiden auf Basis belastbarer Informationen. Unsere Rolle ist transparente Beratung auf
+                Augenhöhe — ohne Verpflichtung, ohne Verkaufsdruck.
+              </blockquote>
             </div>
 
-            {/* Right Column - Julian Hand + Jakob Tafel mit Hover-Animation */}
-            <div className="grid gap-6">
-              {/* Julian Hand mit Smartwatch */}
-              <div className="group relative overflow-hidden border-2 border-vae-turquoise/30 bg-white transition-all duration-500 hover:border-vae-turquoise/50 dark:border-vae-turquoise/20 dark:bg-white/5">
+            <aside className="space-y-5 lg:pt-12">
+              <div className="relative overflow-hidden border-2 border-vae-turquoise/30 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.12)] dark:border-white/10 dark:bg-white/[0.03] dark:shadow-none">
                 <picture>
                   <source
                     srcSet="/images/optimized/Julian-Hand-Mit-Smartwatch-zeigt-auf-texte-und-so.webp"
@@ -711,43 +729,26 @@ const BeratungPage: React.FC = () => {
                     src="/images/optimized/Julian-Hand-Mit-Smartwatch-zeigt-auf-texte-und-so.jpg"
                     alt="Präzise Analyse und strategische Planung"
                     loading="lazy"
-                    className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-auto w-full object-cover"
                   />
                 </picture>
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-70 dark:bg-gradient-to-t dark:from-bg-darker/20 dark:to-transparent dark:opacity-100" />
-                {/* Türkiser Glanz-Effekt beim Hover */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-500 group-hover:opacity-100 dark:bg-gradient-to-br dark:from-vae-turquoise/0 dark:via-vae-turquoise/0 dark:to-vae-turquoise/0 dark:group-hover:from-vae-turquoise/10 dark:group-hover:via-vae-turquoise/5 dark:group-hover:to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/70 to-transparent p-5 dark:from-bg-darker dark:via-bg-darker/70">
+                  <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Bildnotiz</p>
+                  <p className="mt-2 max-w-[18rem] text-sm leading-relaxed text-text-light dark:text-white">
+                    Strategische Beratung beginnt mit präziser Beobachtung: Was läuft wirklich, was kostet unnötig, wo
+                    fehlt Kontrolle?
+                  </p>
+                </div>
               </div>
 
-              {/* Jakob vor Tafel - mit Hover-Übergang zwischen Bild 1 und 2 */}
-              <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl border-2 border-vae-turquoise/30 bg-white shadow-[0_10px_22px_rgba(18,24,20,0.12)] transition-all duration-500 hover:border-vae-turquoise/50 dark:border-vae-turquoise/20 dark:bg-gradient-to-br dark:from-vae-turquoise/5 dark:to-transparent dark:shadow-lg dark:hover:shadow-vae-turquoise/20">
-                {/* Bild 1 - Standard */}
-                <picture className="absolute inset-0 transition-opacity duration-700 ease-in-out group-hover:opacity-0">
-                  <source srcSet="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp" type="image/webp" />
-                  <img
-                    src="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.jpg"
-                    alt="Strategieentwicklung an der Tafel"
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
-                </picture>
-
-                {/* Bild 2 - Bei Hover */}
-                <picture className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100">
-                  <source srcSet="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie-2.webp" type="image/webp" />
-                  <img
-                    src="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie-2.jpg"
-                    alt="Strategieentwicklung an der Tafel - Details"
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
-                </picture>
-
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-70 dark:bg-gradient-to-t dark:from-bg-darker/20 dark:to-transparent dark:opacity-100" />
-                {/* Türkiser Glanz-Effekt beim Hover */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-all duration-500 group-hover:opacity-100 dark:bg-gradient-to-br dark:from-vae-turquoise/0 dark:via-vae-turquoise/0 dark:to-vae-turquoise/0 dark:group-hover:from-vae-turquoise/10 dark:group-hover:via-vae-turquoise/5 dark:group-hover:to-transparent" />
+              <div className="ml-auto max-w-sm border border-black/10 bg-white p-5 text-sm leading-relaxed text-text-secondary shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-secondary dark:shadow-none">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Klartext</p>
+                <p className="mt-3">
+                  Keine Folien mit Wohlfühl-Strategie. Wir übersetzen die Analyse in einen Pfad, der für Ihr Team
+                  wirtschaftlich und operativ Sinn ergibt.
+                </p>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -1036,7 +1037,7 @@ const BeratungPage: React.FC = () => {
                 </div>
 
                 {phase.cta && (
-                  <MagneticButton intensity={0.08} scaleEffect glowEffect>
+                  <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full">
                     {/^(https?:\/\/)/.test(phase.cta.href) ? (
                       <a
                         href={phase.cta.href}
@@ -1124,7 +1125,7 @@ const BeratungPage: React.FC = () => {
                 </li>
               </ul>
 
-              <MagneticButton intensity={0.1} scaleEffect glowEffect>
+              <MagneticButton intensity={0.1} scaleEffect glowEffect className="isolate w-full">
                 <a
                   href={bookingUrl}
                   target="_blank"
@@ -1161,7 +1162,7 @@ const BeratungPage: React.FC = () => {
             Ersteinschätzung zu Aufwand, Timing und Wirkung.
           </p>
           <div className="flex flex-col items-center gap-3 md:gap-4">
-            <MagneticButton intensity={0.08} scaleEffect glowEffect>
+            <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
               <a
                 href={bookingUrl}
                 target="_blank"

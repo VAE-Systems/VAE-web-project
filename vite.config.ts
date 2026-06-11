@@ -1,6 +1,5 @@
 import react from '@vitejs/plugin-react'
 import prerender from '@prerenderer/rollup-plugin'
-import Renderer from '@prerenderer/renderer-puppeteer'
 import { fileURLToPath, URL } from 'node:url'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
@@ -39,7 +38,7 @@ export default defineConfig(({ mode }) => {
       shouldPrerender
         ? prerender({
             routes: prerenderRoutes,
-            renderer: new Renderer({
+            renderer: new (require('@prerenderer/renderer-puppeteer'))({
               headless: true,
               renderAfterTime: 2500,
               maxConcurrentRoutes: 1,

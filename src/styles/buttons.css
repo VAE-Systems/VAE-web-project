@@ -57,7 +57,7 @@
 }
 
 .btn-ghost {
-  @apply inline-flex items-center justify-center rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-text-light transition-transform duration-300 hover:border-vae-turquoise/40 hover:bg-vae-turquoise/10 hover:text-vae-turquoise focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker md:px-6 md:py-3 md:text-base;
+  @apply inline-flex items-center justify-center rounded-xl border border-white/20 px-4 py-2 text-sm font-medium text-text-light transition-transform duration-300 hover:border-vae-turquoise/40 hover:bg-vae-turquoise/10 hover:text-vae-turquoise focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker md:px-6 md:py-3 md:text-base;
   transition-timing-function: var(--ease-spring-out);
 }
 .theme-light .btn-ghost {
@@ -70,7 +70,7 @@
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-lg border border-white/15 bg-transparent px-4 py-2 text-sm font-medium text-text-secondary transition-transform duration-300 hover:border-vae-turquoise/60 hover:bg-white/5 hover:text-vae-turquoise focus:outline-none focus:ring-2 focus:ring-vae-turquoise md:px-6 md:py-3 md:text-base;
+  @apply inline-flex items-center justify-center rounded-xl border border-white/15 bg-transparent px-4 py-2 text-sm font-medium text-text-secondary transition-transform duration-300 hover:border-vae-turquoise/60 hover:bg-white/5 hover:text-vae-turquoise focus:outline-none focus:ring-2 focus:ring-vae-turquoise md:px-6 md:py-3 md:text-base;
   transition-timing-function: var(--ease-spring-out);
 }
 .theme-light .btn-outline {
@@ -89,7 +89,7 @@
 
 /* Primary CTA Button - Light mode default (türkiser Hintergrund) */
 .btn-convert {
-  @apply relative inline-flex items-center justify-center overflow-hidden rounded-lg px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-500 focus:outline-none md:px-4 md:py-3 md:text-[11px];
+  @apply relative inline-flex items-center justify-center overflow-hidden rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-500 focus:outline-none md:px-4 md:py-3 md:text-[11px];
   background: linear-gradient(135deg, hsl(var(--color-vae-turquoise)), hsl(var(--color-vae-turquoise) / 0.9));
   border: 1px solid hsl(var(--color-vae-turquoise));
   color: white;

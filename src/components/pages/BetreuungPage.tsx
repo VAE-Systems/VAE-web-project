@@ -376,7 +376,7 @@ const BetreuungPage: React.FC = () => {
                   href={bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 bg-white px-8 py-5 text-base font-black uppercase tracking-[0.12em] text-black shadow-[0_18px_50px_-24px_rgba(255,255,255,0.45)] transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="btn-primary flex w-full items-center justify-center gap-2 px-8 py-5 text-base font-black uppercase tracking-[0.12em] sm:w-auto"
                 >
                   Service-Level besprechen
                 </a>
@@ -387,7 +387,7 @@ const BetreuungPage: React.FC = () => {
                     e.preventDefault()
                     scrollToServiceLevels(e)
                   }}
-                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                  className="btn-secondary flex w-full items-center justify-center gap-2 px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] sm:w-auto"
                 >
                   Service-Optionen ansehen ↓
                 </button>
@@ -814,7 +814,7 @@ const BetreuungPage: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`group relative w-full overflow-hidden px-6 py-3.5 text-sm font-bold transition-all duration-300 ${
-                          level.highlighted ? 'btn-convert' : 'btn-outline'
+                          level.highlighted ? 'btn-convert' : 'btn-secondary'
                         }`}
                       >
                         <span className="relative flex items-center justify-center gap-2">

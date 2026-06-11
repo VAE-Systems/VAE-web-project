@@ -103,7 +103,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
               <article
                 key={item.title}
                 data-outcome-card
-                className="border-border-primary bg-bg-primary/[0.04] relative overflow-hidden rounded-2xl border p-6 backdrop-blur-sm transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.2),0_16px_52px_-20px_rgba(var(--vae-turquoise-rgb),0.4)] dark:border-white/10 dark:bg-white/[0.03]"
+                className="border-border-primary bg-bg-primary/[0.04] relative overflow-hidden rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.2),0_16px_52px_-20px_rgba(var(--vae-turquoise-rgb),0.4)] dark:border-white/10 dark:bg-white/[0.03]"
               >
                 <div
                   className="absolute -top-10 right-4 h-24 w-24 rounded-full bg-vae-turquoise/10 blur-3xl"
@@ -126,7 +126,7 @@ const HomeOutcomesSection: React.FC<{ id?: string; className?: string }> = ({ id
             ))}
           </div>
           <aside
-            className="border-border-primary bg-bg-primary/[0.05] sticky top-28 rounded-2xl border p-6 backdrop-blur-md dark:border-white/10 dark:bg-white/[0.04] lg:p-8"
+            className="border-border-primary bg-bg-primary/[0.05] sticky top-28 rounded-xl border p-6 backdrop-blur-md dark:border-white/10 dark:bg-white/[0.04] lg:p-8"
             data-outcome-card
             aria-label="Kennzahlen"
           >

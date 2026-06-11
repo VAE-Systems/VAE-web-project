@@ -13,7 +13,7 @@ import { cn } from '@/lib/classNames'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
 import { AlertCircle, BookOpen, DollarSign, Lightbulb, MessageSquare, Server, Shield, Users, Zap } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import MagneticButton from '../MagneticButton'
+import MagneticButton from '../buttons/MagneticButton'
 
 // CSS Keyframes for optimized animations (GPU-accelerated, browser-native)
 const glowAnimationStyles = `
@@ -486,7 +486,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     )
 
     const renderFallbackGrid = () => (
-      <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-8">
+      <div className="border border-text-light/10 bg-bg-darker p-8 dark:border-white/10 dark:bg-bg-dark">
         <div className="mb-6 flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
             SaaS vs. Self-Hosted
@@ -496,10 +496,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
               type="button"
               onClick={() => setState('problem')}
               className={cn(
-                'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                'rounded-xl px-4 py-2 text-xs font-semibold transition',
                 state === 'problem'
-                  ? 'border border-red-400/50 bg-red-500/15 text-red-200'
-                  : 'border border-white/10 bg-white/5 text-text-secondary'
+                  ? 'border border-orange-500/40 bg-orange-500/10 text-orange-700 dark:text-orange-200'
+                  : 'border border-text-light/10 bg-text-light/[0.03] text-text-secondary dark:border-white/10 dark:bg-white/5'
               )}
             >
               Problem
@@ -508,10 +508,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
               type="button"
               onClick={() => setState('solution')}
               className={cn(
-                'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                'rounded-xl px-4 py-2 text-xs font-semibold transition',
                 state === 'solution'
                   ? 'border border-vae-turquoise/40 bg-vae-turquoise/15 text-vae-turquoise'
-                  : 'border border-white/10 bg-white/5 text-text-secondary'
+                  : 'border border-text-light/10 bg-text-light/[0.03] text-text-secondary dark:border-white/10 dark:bg-white/5'
               )}
             >
               Infrastruktur
@@ -522,7 +522,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {state === 'problem'
             ? saasTools.map(tool => (
-                <div key={tool.id} className="rounded-2xl border border-orange-400/40 bg-orange-500/10 p-4">
+                <div
+                  key={tool.id}
+                  className="rounded-none border border-orange-500/30 bg-orange-500/5 p-4 dark:border-orange-400/30 dark:bg-orange-500/10"
+                >
                   <p className="font-semibold text-text-light">{tool.name}</p>
                   <p className="text-xs text-text-secondary">{tool.cost}</p>
                 </div>
@@ -530,7 +533,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
             : systemClusters.map(cluster => {
                 const Icon = cluster.icon
                 return (
-                  <div key={cluster.id} className={cn('rounded-2xl border p-4', cluster.color)}>
+                  <div key={cluster.id} className={cn('rounded-none border p-4', cluster.color)}>
                     <Icon className="mb-2 h-6 w-6" />
                     <p className="font-semibold text-text-light">{cluster.title}</p>
                     <p className="text-xs text-text-secondary">{cluster.systems}</p>
@@ -549,11 +552,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
       <div
         ref={containerRef}
         className={cn(
-          'relative overflow-hidden rounded-2xl border-2 p-4 sm:rounded-3xl sm:p-6',
+          'relative overflow-hidden border p-4 sm:p-6',
           isProblem
-            ? 'border-orange-300 bg-orange-50/80 shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
-            : 'border-vae-turquoise/60 bg-vae-turquoise/10 shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
-          'dark:border dark:border-white/10 dark:bg-gradient-to-br dark:from-bg-dark/85 dark:via-bg-darker dark:to-bg-dark dark:shadow-[0_30px_120px_-60px_rgba(8,255,193,0.35)]'
+            ? 'border-orange-500/25 bg-bg-darker shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
+            : 'border-vae-turquoise/30 bg-bg-darker shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
+          'dark:border-white/10 dark:bg-bg-dark dark:shadow-[0_30px_120px_-60px_rgba(8,255,193,0.18)]'
         )}
       >
         <div className="mb-3 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
@@ -573,10 +576,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 type="button"
                 onClick={handleProblemClick}
                 className={cn(
-                  'group flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-bold transition-all duration-300 ease-out hover:scale-105 sm:gap-2 sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-sm',
+                  'group flex w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition-all duration-300 ease-out hover:scale-105 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm',
                   isProblem
-                    ? 'border-2 border-orange-600/80 bg-gradient-to-br from-orange-600/40 to-red-600/30 text-orange-950 shadow-[0_0_20px_rgba(251,146,60,0.4),0_0_0_1px_rgba(251,146,60,0.3)] dark:border-orange-400/60 dark:from-orange-500/20 dark:to-red-500/10 dark:text-orange-200'
-                    : 'border border-white/10 bg-white/5 text-text-secondary hover:border-orange-400/40 hover:bg-orange-500/5 hover:text-orange-300 hover:shadow-[0_0_15px_rgba(251,146,60,0.2)]'
+                    ? 'bg-orange-500/12 border border-orange-500/50 text-orange-700 shadow-[0_0_20px_rgba(251,146,60,0.16)] dark:text-orange-200'
+                    : 'border border-text-light/10 bg-text-light/[0.03] text-text-secondary hover:border-orange-400/40 hover:bg-orange-500/5 hover:text-orange-600 dark:border-white/10 dark:bg-white/5 dark:hover:text-orange-300'
                 )}
               >
                 <AlertCircle
@@ -593,10 +596,10 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 type="button"
                 onClick={handleSolutionClick}
                 className={cn(
-                  'group flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-bold transition-all duration-300 ease-out hover:scale-105 sm:gap-2 sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-sm',
+                  'group flex w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition-all duration-300 ease-out hover:scale-105 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm',
                   !isProblem
-                    ? 'border-2 border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.4),0_0_0_1px_rgba(8,255,193,0.3)]'
-                    : 'border border-white/10 bg-white/5 text-text-secondary hover:border-vae-turquoise/40 hover:bg-vae-turquoise/5 hover:text-vae-turquoise hover:shadow-[0_0_15px_rgba(8,255,193,0.2)]'
+                    ? 'bg-vae-turquoise/12 border border-vae-turquoise/50 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.18)]'
+                    : 'border border-text-light/10 bg-text-light/[0.03] text-text-secondary hover:border-vae-turquoise/40 hover:bg-vae-turquoise/5 hover:text-vae-turquoise dark:border-white/10 dark:bg-white/5'
                 )}
               >
                 <Lightbulb
@@ -740,11 +743,11 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
 
         <div
           className={cn(
-            'relative h-[580px] overflow-hidden rounded-2xl border-2 sm:h-[600px] md:h-[640px] lg:h-[680px]',
+            'relative h-[580px] overflow-hidden border sm:h-[600px] md:h-[640px] lg:h-[680px]',
             isProblem
-              ? 'border-orange-300 bg-orange-50 shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
-              : 'border-vae-turquoise/60 bg-vae-turquoise/5 shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
-            'dark:border dark:border-white/10 dark:bg-white/5 dark:shadow-none'
+              ? 'bg-bg-primary border-orange-500/30 shadow-[0_10px_24px_rgba(18,24,20,0.08)]'
+              : 'bg-bg-primary border-vae-turquoise/30 shadow-[0_10px_24px_rgba(18,24,20,0.08)]',
+            'dark:border-white/10 dark:bg-white/5 dark:shadow-none'
           )}
           style={{ contain: 'layout style paint' }}
         >
@@ -789,7 +792,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   return (
                     <motion.div
                       key={tool.id}
-                      className="absolute w-[160px] max-w-[48vw] rounded-xl border border-orange-600/60 bg-orange-600/25 px-4 py-3 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10 sm:w-[180px]"
+                      className="bg-white/82 absolute w-[160px] max-w-[48vw] rounded-md border border-orange-500/35 px-4 py-3 shadow-lg backdrop-blur-md dark:border-orange-400/40 dark:bg-orange-500/10 sm:w-[180px]"
                       style={{
                         left: `${xPos}%`,
                         top: `${yPos}%`,

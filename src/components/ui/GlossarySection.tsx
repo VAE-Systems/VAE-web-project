@@ -22,7 +22,7 @@ const GlossarySection: React.FC<GlossarySectionProps> = ({ id = 'glossar', title
           {list.map(t => (
             <div
               key={t.term}
-              className="group relative rounded-none border border-[#c5ccc8] bg-white/90 p-5 transition-colors hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/5"
+              className="group relative rounded-none border border-text-light/20 bg-white/90 p-5 transition-colors hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-white/5"
             >
               <h3 className="mb-1 text-sm font-semibold leading-snug text-text-light dark:text-white">{t.term}</h3>
               {t.short && <p className="mb-2 text-[10px] uppercase tracking-wide text-vae-turquoise">{t.short}</p>}

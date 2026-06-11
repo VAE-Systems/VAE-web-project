@@ -143,7 +143,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
   }, [canUseMagnet, buttonRef])
 
   const baseClasses = `
-    relative inline-flex items-center gap-2 px-5 py-2.5
+    relative inline-flex items-center gap-2 rounded-xl px-5 py-2.5
     bg-vae-turquoise
     text-black font-black text-[11px] uppercase tracking-[0.14em]
     transition-all duration-200 ease-out
@@ -156,7 +156,6 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, onClick
   const content = (
     <>
       <span className="relative z-10 flex items-center gap-2">{children}</span>
-      <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
     </>
   )
 
@@ -402,7 +401,7 @@ const HeaderModern: React.FC = () => {
 
             <button
               onClick={() => setIsMobileMenuOpen(prev => !prev)}
-              className={`flex h-10 w-10 items-center justify-center border text-sm font-bold transition-all duration-200 ${
+              className={`flex h-10 w-10 items-center justify-center rounded-xl border text-sm font-bold transition-all duration-200 ${
                 isDark
                   ? 'border-white/15 bg-transparent text-white hover:border-vae-turquoise/60 hover:text-vae-turquoise'
                   : 'border-black/20 bg-transparent text-[#1a2320] hover:border-vae-turquoise hover:text-vae-turquoise'
@@ -446,10 +445,8 @@ const HeaderModern: React.FC = () => {
                 href={LOGIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 border px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-all duration-200 ${
-                  isDark
-                    ? 'border-white/20 text-white/60 hover:border-vae-turquoise/60 hover:text-vae-turquoise'
-                    : 'border-gray-300 text-gray-600 hover:border-vae-turquoise hover:text-vae-turquoise'
+                className={`inline-flex items-center gap-2 bg-transparent px-1 py-2 text-[11px] font-black uppercase tracking-[0.18em] shadow-none transition-all duration-200 ${
+                  isDark ? 'text-white/60 hover:text-vae-turquoise' : 'text-gray-600 hover:text-vae-turquoise'
                 }`}
               >
                 <LogIn className="h-3.5 w-3.5" />
@@ -463,7 +460,7 @@ const HeaderModern: React.FC = () => {
 
               <button
                 onClick={toggleTheme}
-                className={`p-2 transition-all duration-200 ${
+                className={`rounded-xl p-2 transition-all duration-200 ${
                   isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
                 }`}
                 aria-label="Darstellung wechseln"
@@ -506,7 +503,7 @@ const HeaderModern: React.FC = () => {
               <span className="text-[11px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Menü</span>
               <button
                 onClick={closeMenu}
-                className={`flex h-10 w-10 items-center justify-center border transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 bg-white/5 text-white' : 'border-gray-200/90 bg-transparent text-gray-800'}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl border transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/10 bg-white/5 text-white' : 'border-gray-200/90 bg-transparent text-gray-800'}`}
                 aria-label="Menü schließen"
               >
                 <X className="h-5 w-5" />
@@ -537,7 +534,7 @@ const HeaderModern: React.FC = () => {
                             key={item.id}
                             to={item.href}
                             onClick={closeMenu}
-                            className={`border px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/8 bg-transparent text-white/80' : 'border-gray-200 bg-transparent text-gray-700'}`}
+                            className={`rounded-xl border px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/8 bg-transparent text-white/80' : 'border-gray-200 bg-transparent text-gray-700'}`}
                           >
                             {item.label}
                           </Link>
@@ -551,7 +548,7 @@ const HeaderModern: React.FC = () => {
                   <a
                     href={CTA_URL}
                     onClick={closeMenu}
-                    className="flex w-full items-center justify-center gap-2 bg-vae-turquoise px-4 py-3 text-xs font-black uppercase tracking-[0.14em] text-black transition hover:bg-vae-turquoise/85"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-vae-turquoise px-4 py-3 text-xs font-black uppercase tracking-[0.14em] text-black transition hover:bg-vae-turquoise/85"
                   >
                     <Calendar className="h-4 w-4" />
                     Beratung buchen
@@ -559,7 +556,7 @@ const HeaderModern: React.FC = () => {
                   <a
                     href={LOGIN_URL}
                     onClick={closeMenu}
-                    className={`flex w-full items-center justify-center gap-2 border px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/15 text-white/70' : 'border-gray-200 text-gray-700'}`}
+                    className={`flex w-full items-center justify-center gap-2 bg-transparent px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] shadow-none transition hover:text-vae-turquoise ${isDark ? 'text-white/70' : 'text-gray-700'}`}
                   >
                     <LogIn className="h-4 w-4" />
                     Kundenlogin
@@ -568,7 +565,7 @@ const HeaderModern: React.FC = () => {
                     onClick={() => {
                       toggleTheme()
                     }}
-                    className={`flex w-full items-center justify-center gap-2 border px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/15 bg-transparent text-white/70' : 'border-gray-200 bg-transparent text-gray-700'}`}
+                    className={`flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] transition hover:border-vae-turquoise/40 hover:text-vae-turquoise ${isDark ? 'border-white/15 bg-transparent text-white/70' : 'border-gray-200 bg-transparent text-gray-700'}`}
                   >
                     {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                     {isDark ? 'Light Mode' : 'Dark Mode'}

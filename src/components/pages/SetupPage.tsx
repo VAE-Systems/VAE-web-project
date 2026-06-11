@@ -583,7 +583,7 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] text-white">
+      <section className="bg-bg-primary relative isolate overflow-hidden border-b border-text-light/10 text-text-light dark:border-white/10 dark:bg-bg-darker dark:text-white">
         {/* Hero Background Image */}
         <div
           className="pointer-events-none absolute inset-0 hidden overflow-hidden opacity-[0.22] md:block"
@@ -610,28 +610,28 @@ const SetupPage: React.FC = () => {
         />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.14),transparent_35%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
-        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.04] dark:text-white/[0.03] xl:block">
           VAE
         </div>
 
         <div className="container-vae relative z-10 py-20 sm:py-24 lg:py-28">
           <div className="flex flex-col gap-8">
             {/* Eyebrow */}
-            <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.35)]">
+            <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-vae-turquoise/35 bg-white/90 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.08)] dark:bg-bg-dark dark:shadow-[0_0_0_1px_rgba(0,0,0,0.35)]">
               <ServerCog className="h-3.5 w-3.5" /> Infrastruktur Design / Setup
             </div>
 
             {/* Main Heading */}
             <div className="space-y-3">
               <h1 className="max-w-4xl">
-                <span className="block text-[13vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-6xl lg:text-[5.2rem] xl:text-[5.8rem]">
+                <span className="block text-[13vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-text-light dark:text-white sm:text-6xl lg:text-[5.2rem] xl:text-[5.8rem]">
                   Raus aus
                 </span>
                 <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-5xl lg:text-[4.4rem] xl:text-[5rem]">
                   dem SaaS-Stapel.
                 </span>
               </h1>
-              <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+              <div className="max-w-2xl border-l-4 border-text-light pl-4 text-base leading-relaxed text-text-secondary dark:border-white dark:text-white/75 sm:text-lg">
                 Wir ersetzen fragmentierte Cloud-Tools durch eine einheitliche Plattform auf Ihrem Server — in 3–6
                 Wochen, produktiv, dokumentiert.
               </div>
@@ -644,7 +644,7 @@ const SetupPage: React.FC = () => {
                   href={bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 bg-white px-8 py-5 text-base font-black uppercase tracking-[0.12em] text-black shadow-[0_18px_50px_-24px_rgba(255,255,255,0.45)] transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="btn-primary flex w-full items-center justify-center gap-2 px-8 py-5 text-base font-black uppercase tracking-[0.12em] shadow-[0_18px_50px_-24px_rgba(8,255,193,0.25)] transition-transform hover:-translate-y-0.5 sm:w-auto"
                 >
                   Kostenloses Erstgespräch buchen
                 </a>
@@ -655,7 +655,7 @@ const SetupPage: React.FC = () => {
                     scrollToROI()
                     setTimeout(() => startTutorial(), 600)
                   }}
-                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                  className="btn-secondary flex w-full items-center justify-center gap-2 px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] sm:w-auto"
                 >
                   ROI-Rechner ansehen ↓
                 </button>
@@ -667,7 +667,7 @@ const SetupPage: React.FC = () => {
               {trustBadges.map(badge => (
                 <div
                   key={badge}
-                  className="flex items-center gap-2 border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/70"
+                  className="flex items-center gap-2 rounded-full border border-text-light/10 bg-white/70 px-4 py-2 text-sm text-text-secondary dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70"
                 >
                   <Check className="h-4 w-4 flex-shrink-0 text-vae-turquoise" /> {badge}
                 </div>
@@ -678,7 +678,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       <section
-        className="section-card-container border-b bg-[#f4f1ec] dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b bg-bg-darker dark:border-white/5 dark:bg-bg-darker"
         id="study"
         style={{
           clipPath: 'polygon(0 3vw, 100% 0, 100% 100%, 0 100%)',
@@ -699,7 +699,7 @@ const SetupPage: React.FC = () => {
 
           <div className="grid gap-8 md:grid-cols-3">
             {/* Statistik 1: SaaS-Explosion */}
-            <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
+            <div className="rounded-none border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
               <div className="mb-4 text-5xl font-bold text-vae-turquoise">85%</div>
               <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">SaaS-Dominanz 2025</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -719,7 +719,7 @@ const SetupPage: React.FC = () => {
             </div>
 
             {/* Statistik 2: Vendor Lock-in */}
-            <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
+            <div className="rounded-none border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
               <div className="mb-4 text-5xl font-bold text-vae-turquoise">80%</div>
               <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Preisanstieg IBM Software</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -739,7 +739,7 @@ const SetupPage: React.FC = () => {
             </div>
 
             {/* Statistik 3: Open Source-Adoption */}
-            <div className="rounded-2xl border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
+            <div className="rounded-none border border-vae-turquoise/30 bg-white/80 p-8 dark:border-vae-turquoise/20 dark:bg-white/5">
               <div className="mb-4 text-5xl font-bold text-vae-turquoise">96%</div>
               <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Open Source-Adoption</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -762,7 +762,7 @@ const SetupPage: React.FC = () => {
       </section>
       {/* Section 2 */}
       <section
-        className="section-card-container border-b bg-[#faf8f4] py-20 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b bg-bg-darker py-20 dark:border-white/5 dark:bg-bg-darker"
         id="definition"
       >
         <div className="section-card-backdrop" />
@@ -834,7 +834,7 @@ const SetupPage: React.FC = () => {
                   <MagneticButton intensity={0.06}>
                     <a
                       href="/leistungen/strategie"
-                      className="btn-outline inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
+                      className="btn-secondary inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
                     >
                       <span>Strategieberatung</span>
                     </a>
@@ -848,7 +848,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 3 - Produktionsreife Systeme */}
-      <section className="section-card-container bg-[#f4f1ec] py-20 dark:bg-bg-dark">
+      <section className="section-card-container bg-bg-darker py-20 dark:bg-bg-dark">
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
@@ -942,7 +942,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section: Nach dem Setup */}
-      <section className="section-card-container border-b border-white/10 bg-[#030806] py-20 text-white">
+      <section className="section-card-container border-b border-white/10 bg-bg-darker py-20 text-text-light dark:text-white">
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
           <div className="mx-auto mb-12 max-w-3xl text-center">
@@ -1099,7 +1099,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 4 - Original Content */}
-      <section className="section-card-container bg-[#faf8f4] py-20 dark:bg-bg-darker">
+      <section className="section-card-container bg-bg-darker py-20 dark:bg-bg-darker">
         <div className="section-card-backdrop" />
 
         <div className="container-vae relative">
@@ -1153,7 +1153,7 @@ const SetupPage: React.FC = () => {
       <section
         id="roi-calculator"
         ref={calculatorSectionRef}
-        className="border-y border-vae-turquoise/10 bg-[#f4f1ec] py-20 dark:border-white/5 dark:bg-bg-dark"
+        className="border-y border-vae-turquoise/10 bg-bg-darker py-20 dark:border-white/5 dark:bg-bg-dark"
       >
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
@@ -1169,7 +1169,7 @@ const SetupPage: React.FC = () => {
               <MagneticButton intensity={0.05}>
                 <button
                   onClick={startTutorial}
-                  className="btn-outline inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-[0.35em]"
+                  className="btn-secondary inline-flex items-center gap-2 px-5 py-2 text-xs font-semibold uppercase tracking-[0.35em]"
                 >
                   <GraduationCap className="h-4 w-4" />
                   Guided Tour starten
@@ -1221,7 +1221,7 @@ const SetupPage: React.FC = () => {
                   {saasToolCategories.map(category => (
                     <div
                       key={category.id}
-                      className="border border-vae-turquoise/25 bg-[#f4f1ec] p-4 dark:border-white/10 dark:bg-bg-darker/40"
+                      className="border border-vae-turquoise/25 bg-bg-darker p-4 dark:border-white/10 dark:bg-bg-darker/40"
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <span className="inline-flex items-center rounded-full border border-vae-turquoise/30 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-gray-700 shadow-[0_8px_20px_-16px_rgba(12,74,52,0.35)] dark:border-white/10 dark:bg-bg-darker/60 dark:text-text-secondary/80 dark:shadow-none">
@@ -1236,9 +1236,9 @@ const SetupPage: React.FC = () => {
                           <label
                             key={tool.id}
                             className={cn(
-                              'flex items-start justify-between gap-3 rounded-2xl border px-4 py-3 text-sm transition',
+                              'flex items-start justify-between gap-3 rounded-xl border px-4 py-3 text-sm transition',
                               toolSelection[tool.id]
-                                ? 'border-2 border-vae-turquoise/80 bg-[#ecfbf6] text-gray-900 shadow-[0_14px_30px_-22px_rgba(12,74,52,0.32)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:text-white dark:shadow-none'
+                                ? 'border-2 border-vae-turquoise/80 bg-vae-turquoise/10 text-gray-900 shadow-[0_14px_30px_-22px_rgba(12,74,52,0.32)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:text-white dark:shadow-none'
                                 : 'border-gray-200 bg-white text-gray-700 shadow-[0_10px_26px_-24px_rgba(15,23,42,0.2)] hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-bg-darker dark:text-text-secondary dark:hover:border-white/30'
                             )}
                           >
@@ -1301,7 +1301,7 @@ const SetupPage: React.FC = () => {
                                     return next
                                   })
                                 }}
-                                className="h-5 w-5 rounded border-gray-300 bg-white text-vae-turquoise outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/30 dark:bg-black/30 dark:focus-visible:ring-vae-turquoise/60 dark:focus-visible:ring-offset-bg-darker"
+                                className="h-5 w-5 rounded border-gray-300 bg-white text-vae-turquoise outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/30 dark:bg-bg-dark/70 dark:focus-visible:ring-vae-turquoise/60 dark:focus-visible:ring-offset-bg-darker"
                               />
                             </div>
                           </label>
@@ -1327,7 +1327,7 @@ const SetupPage: React.FC = () => {
                     value={customLicenseForm.name}
                     onChange={event => handleCustomLicenseFormChange('name', event.target.value)}
                     placeholder="Tool-Name"
-                    className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                   <input
                     type="text"
@@ -1335,7 +1335,7 @@ const SetupPage: React.FC = () => {
                     value={customLicenseForm.unitPrice}
                     onChange={event => handleCustomLicenseFormChange('unitPrice', event.target.value)}
                     placeholder="Preis pro Nutzer"
-                    className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                   <input
                     type="text"
@@ -1343,7 +1343,7 @@ const SetupPage: React.FC = () => {
                     value={customLicenseForm.quantity}
                     onChange={event => handleCustomLicenseFormChange('quantity', event.target.value)}
                     placeholder="Anzahl Nutzer:innen"
-                    className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-vae-turquoise/60 focus:outline-none focus:ring-2 focus:ring-vae-turquoise/40 focus:ring-offset-2 focus:ring-offset-white dark:border-white/10 dark:bg-bg-darker dark:text-white dark:placeholder:text-text-secondary dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </div>
                 <button
@@ -1351,7 +1351,7 @@ const SetupPage: React.FC = () => {
                   onClick={addCustomLicense}
                   disabled={!canAddCustomLicense}
                   className={cn(
-                    'mt-4 inline-flex w-full items-center justify-center rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold transition',
+                    'mt-4 inline-flex w-full items-center justify-center rounded-xl border border-white/10 px-4 py-3 text-sm font-semibold transition',
                     canAddCustomLicense
                       ? 'bg-vae-turquoise text-white hover:border-vae-turquoise/70 hover:bg-vae-turquoise/90 dark:bg-vae-turquoise/20 dark:text-white dark:hover:border-vae-turquoise/40 dark:hover:bg-vae-turquoise/30'
                       : 'cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-text-secondary'
@@ -1472,7 +1472,7 @@ const SetupPage: React.FC = () => {
                 <p className="mt-4 text-xs text-red-700/80 dark:text-red-200/70">{costModeNote}</p>
               </div>
 
-              <div className="rounded-2xl border border-gray-200 bg-white p-5 text-sm text-gray-700 shadow-sm dark:border-white/10 dark:bg-bg-darker/60 dark:text-text-secondary dark:shadow-none">
+              <div className="rounded-none border border-gray-200 bg-white p-5 text-sm text-gray-700 shadow-sm dark:border-white/10 dark:bg-bg-darker/60 dark:text-text-secondary dark:shadow-none">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-text-secondary/70">
                   Insights
                 </p>
@@ -1508,9 +1508,9 @@ const SetupPage: React.FC = () => {
                 overlayDescription="Senden Sie Ihre Kalkulation – wir berechnen Ihr Sparpotenzial und schicken einen Stack-Vorschlag."
                 ctaText="Sparpotenzial per E-Mail anfordern"
                 ctaDataAttribute="cta"
-                className="rounded-3xl"
+                className="rounded-none"
               >
-                <div className="overflow-hidden rounded-3xl border border-gray-200 bg-gradient-to-br from-white via-[#f6f8f7] to-white p-6 shadow-sm transition-opacity duration-300 hover:opacity-80 dark:border-white/10 dark:from-bg-dark/80 dark:via-bg-darker dark:to-bg-dark dark:shadow-none dark:hover:opacity-70">
+                <div className="via-bg-primary overflow-hidden rounded-none border border-gray-200 bg-gradient-to-br from-white to-white p-6 shadow-sm transition-opacity duration-300 hover:opacity-80 dark:border-white/10 dark:from-bg-dark/80 dark:via-bg-darker dark:to-bg-dark dark:shadow-none dark:hover:opacity-70">
                   <div className="mb-6 flex items-center justify-between gap-4">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
@@ -1521,8 +1521,8 @@ const SetupPage: React.FC = () => {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-black/40 dark:shadow-none">
-                      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/5 bg-gradient-to-br from-white/5 via-transparent to-bg-dark/70 dark:block" />
+                    <div className="relative overflow-hidden rounded-none border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-bg-dark/60 dark:shadow-none">
+                      <div className="pointer-events-none absolute inset-0 rounded-none border border-white/5 bg-gradient-to-br from-white/5 via-transparent to-bg-dark/70 dark:block" />
                       <div className="relative space-y-5 text-sm text-gray-800 dark:text-white">
                         <div>
                           <div className="flex items-center justify-between">
@@ -1555,7 +1555,7 @@ const SetupPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-3 rounded-2xl border border-vae-turquoise/30 bg-vae-turquoise/10 p-5">
+                    <div className="space-y-3 rounded-none border border-vae-turquoise/30 bg-vae-turquoise/10 p-5">
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-gray-800 dark:text-white/90">
                           Einsparung im ersten Jahr (inkl. Setup)
@@ -1636,7 +1636,7 @@ const SetupPage: React.FC = () => {
                   </div>
 
                   {/* Card-Content */}
-                  <div className="flex h-full flex-col gap-4 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/5">
+                  <div className="flex h-full flex-col gap-4 rounded-none border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/5">
                     {/* Phase-Label */}
                     <p className="text-xs font-semibold uppercase tracking-[0.25em] text-vae-turquoise dark:text-vae-turquoise/70 md:text-center">
                       Phase {phase.number}
@@ -1678,7 +1678,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* ==================== NACH DEM SETUP: LANGFRISTIGE BETREUUNG ==================== */}
-      <section className="border-y border-gray-200 bg-[#f2fff8] py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
+      <section className="border-y border-gray-200 bg-vae-turquoise/5 py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise">
             Nächster Schritt
@@ -1773,7 +1773,7 @@ const SetupPage: React.FC = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="w-full max-w-md rounded-2xl border border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
+              className="w-full max-w-md rounded-xl border border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
               onClick={event => event.stopPropagation()}
             >
               <div className="mb-3 flex items-center justify-between gap-4">
@@ -1979,13 +1979,13 @@ const AnimatedBeforeAfter: React.FC = () => {
 
   if (prefersReducedMotion) {
     return (
-      <div className="relative min-h-[340px] overflow-hidden rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-white via-vae-turquoise/5 to-white p-6 shadow-lg dark:from-bg-dark/70 dark:via-vae-turquoise/10 dark:to-bg-dark">
+      <div className="relative min-h-[340px] overflow-hidden rounded-none border border-vae-turquoise/20 bg-gradient-to-br from-white via-vae-turquoise/5 to-white p-6 shadow-lg dark:from-bg-dark/70 dark:via-vae-turquoise/10 dark:to-bg-dark">
         <div className="flex items-center justify-between gap-4">
           <div className="rounded-full border-2 border-vae-turquoise/60 bg-vae-turquoise/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise shadow-[0_0_12px_rgba(29,184,122,0.25)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:shadow-[0_0_12px_rgba(8,255,193,0.2)]">
             Infrastructure-Design
           </div>
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-text-secondary">
-            Vorher / Nachher
+            Cloud / Self-Hosted
           </span>
         </div>
 
@@ -1995,7 +1995,7 @@ const AnimatedBeforeAfter: React.FC = () => {
             return (
               <div
                 key={key}
-                className="rounded-2xl border border-white/10 bg-white/80 p-4 shadow-md dark:border-white/10 dark:bg-white/5"
+                className="rounded-xl border border-white/10 bg-white/80 p-4 shadow-md dark:border-white/10 dark:bg-white/5"
               >
                 <p
                   className={cn(
@@ -2012,7 +2012,7 @@ const AnimatedBeforeAfter: React.FC = () => {
           })}
         </div>
 
-        <div className="mt-6 rounded-2xl border border-white/10 bg-white/70 p-5 shadow-md dark:border-white/10 dark:bg-white/5">
+        <div className="mt-6 rounded-xl border border-white/10 bg-white/70 p-5 shadow-md dark:border-white/10 dark:bg-white/5">
           <div className="mb-4 flex items-center justify-between gap-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-vae-turquoise">
               <Layers className="h-4 w-4" /> Unified Stack
@@ -2027,7 +2027,7 @@ const AnimatedBeforeAfter: React.FC = () => {
               return (
                 <div
                   key={layer.title}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-bg-darker/50 px-4 py-3 text-white shadow-sm"
+                  className="flex items-start gap-3 rounded-xl border border-white/10 bg-bg-darker/50 px-4 py-3 text-white shadow-sm"
                 >
                   <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
                     <Icon className="h-4 w-4" />
@@ -2050,7 +2050,7 @@ const AnimatedBeforeAfter: React.FC = () => {
       id="before-after-visual"
       ref={containerRef}
       className={cn(
-        'relative min-h-[380px] overflow-hidden rounded-2xl border p-4 shadow-xl backdrop-blur-sm sm:rounded-3xl sm:border-2 sm:p-7 md:p-8',
+        'relative min-h-[380px] overflow-hidden rounded-xl border p-4 shadow-xl backdrop-blur-sm sm:rounded-xl sm:border-2 sm:p-7 md:p-8',
         isBefore
           ? 'border-red-500/40 bg-gradient-to-br from-red-50 via-white to-gray-50 dark:bg-gradient-to-br dark:from-red-500/10 dark:via-white/10 dark:to-bg-dark'
           : 'border-vae-turquoise/40 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:bg-gradient-to-br dark:from-vae-turquoise/10 dark:via-white/10 dark:to-bg-dark'
@@ -2078,7 +2078,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                   onClick={() => setState(key)}
                   aria-pressed={isActive}
                   className={cn(
-                    'btn-outline w-full min-w-0 whitespace-nowrap px-3 py-2 text-[11px] font-bold uppercase tracking-wider sm:w-auto sm:min-w-[100px] sm:px-4 sm:py-2.5 sm:text-xs sm:tracking-wider',
+                    'btn-secondary w-full min-w-0 whitespace-nowrap px-3 py-2 text-[11px] font-bold uppercase tracking-wider sm:w-auto sm:min-w-[100px] sm:px-4 sm:py-2.5 sm:text-xs sm:tracking-wider',
                     'transition-all duration-300 ease-out',
                     // VORHER-Button (rot) - ACTIVE
                     isBeforeBtn &&
@@ -2091,11 +2091,11 @@ const AnimatedBeforeAfter: React.FC = () => {
                     // NACHHER-Button (grün) - ACTIVE
                     !isBeforeBtn &&
                       isActive &&
-                      '!border-2 !border-vae-turquoise !bg-gradient-to-br !from-vae-turquoise !to-emerald-500 !text-[#1a2320] !shadow-[0_0_24px_rgba(29,184,122,0.6),0_0_0_1px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/70 dark:!from-vae-turquoise/25 dark:!to-vae-turquoise/15 dark:!text-vae-turquoise dark:!shadow-[0_0_18px_rgba(8,255,193,0.45),0_0_0_1px_rgba(8,255,193,0.35)]',
+                      '!border-2 !border-vae-turquoise !bg-gradient-to-br !from-vae-turquoise !to-emerald-500 !text-bg-darker !shadow-[0_0_24px_rgba(29,184,122,0.6),0_0_0_1px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/70 dark:!from-vae-turquoise/25 dark:!to-vae-turquoise/15 dark:!text-vae-turquoise dark:!shadow-[0_0_18px_rgba(8,255,193,0.45),0_0_0_1px_rgba(8,255,193,0.35)]',
                     // NACHHER-Button (grün) - INACTIVE
                     !isBeforeBtn &&
                       !isActive &&
-                      '!border-2 !border-vae-turquoise/70 !bg-vae-turquoise/15 !text-vae-turquoise hover:!-translate-y-1 hover:!border-vae-turquoise hover:!bg-gradient-to-br hover:!from-vae-turquoise hover:!to-emerald-500 hover:!text-[#1a2320] hover:!shadow-[0_0_24px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/40 dark:!bg-vae-turquoise/10 dark:!text-vae-turquoise/80 dark:hover:!border-vae-turquoise/70 dark:hover:!bg-gradient-to-br dark:hover:!from-vae-turquoise/30 dark:hover:!to-vae-turquoise/20 dark:hover:!text-vae-turquoise dark:hover:!shadow-[0_0_18px_rgba(8,255,193,0.35)]',
+                      '!border-2 !border-vae-turquoise/70 !bg-vae-turquoise/15 !text-vae-turquoise hover:!-translate-y-1 hover:!border-vae-turquoise hover:!bg-gradient-to-br hover:!from-vae-turquoise hover:!to-emerald-500 hover:!text-bg-darker hover:!shadow-[0_0_24px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/40 dark:!bg-vae-turquoise/10 dark:!text-vae-turquoise/80 dark:hover:!border-vae-turquoise/70 dark:hover:!bg-gradient-to-br dark:hover:!from-vae-turquoise/30 dark:hover:!to-vae-turquoise/20 dark:hover:!text-vae-turquoise dark:hover:!shadow-[0_0_18px_rgba(8,255,193,0.35)]',
                     // Focus: rot bei Vorher-Button, grün bei Nachher-Button (ohne ring-offset)
                     isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-red-500/60',
                     !isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-vae-turquoise/60'
@@ -2155,7 +2155,7 @@ const AnimatedBeforeAfter: React.FC = () => {
         </div>
 
         <motion.div
-          className="relative h-[600px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 sm:h-[620px] sm:p-4 md:h-[660px] lg:h-[700px]"
+          className="relative h-[600px] overflow-hidden rounded-none border border-white/10 bg-white/10 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 sm:h-[620px] sm:p-4 md:h-[660px] lg:h-[700px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -2304,7 +2304,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                   })}
 
                   <motion.div
-                    className="absolute inset-6 rounded-[24px] border border-white/10 bg-white/5"
+                    className="absolute inset-6 rounded-xl border border-white/10 bg-white/5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.12 }}
                     exit={{
@@ -2337,10 +2337,10 @@ const AnimatedBeforeAfter: React.FC = () => {
                       duration: 0.6,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="relative w-full max-w-[92%] rounded-2xl border border-vae-turquoise/30 bg-gradient-to-b from-white/95 via-white/90 to-white/85 p-4 shadow-[0_12px_32px_rgba(26,35,32,0.10)] backdrop-blur dark:from-bg-darker/60 dark:via-bg-darker/70 dark:to-bg-dark/80 dark:shadow-[0_24px_70px_rgba(0,0,0,0.45)] sm:max-w-[400px] sm:rounded-3xl sm:p-6"
+                    className="relative w-full max-w-[92%] rounded-xl border border-vae-turquoise/30 bg-gradient-to-b from-white/95 via-white/90 to-white/85 p-4 shadow-[0_12px_32px_rgba(26,35,32,0.10)] backdrop-blur dark:from-bg-darker/60 dark:via-bg-darker/70 dark:to-bg-dark/80 dark:shadow-[0_24px_70px_rgba(0,0,0,0.45)] sm:max-w-[400px] sm:rounded-xl sm:p-6"
                   >
                     <motion.div
-                      className="absolute inset-0 rounded-3xl border border-[#c5ccc8]/30 dark:border-white/10"
+                      className="absolute inset-0 rounded-xl border border-text-light/20 dark:border-white/10"
                       aria-hidden
                       animate={{
                         opacity: [0.15, 0.25, 0.15],
@@ -2353,7 +2353,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                     />
                     <div className="relative space-y-4">
                       <motion.div
-                        className="flex items-center justify-between gap-3 rounded-2xl border-2 border-vae-turquoise/40 bg-gradient-to-r from-vae-turquoise/15 to-vae-turquoise/5 px-4 py-3 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.3)]"
+                        className="flex items-center justify-between gap-3 rounded-xl border-2 border-vae-turquoise/40 bg-gradient-to-r from-vae-turquoise/15 to-vae-turquoise/5 px-4 py-3 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.3)]"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.2 }}
@@ -2396,7 +2396,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                                   transition: { duration: 0.2 },
                                 }}
                                 className={cn(
-                                  'relative cursor-pointer overflow-hidden rounded-2xl border px-4 py-3 text-white shadow-[0_4px_12px_rgba(26,35,32,0.08)] dark:shadow-[0_14px_40px_rgba(0,0,0,0.35)]',
+                                  'relative cursor-pointer overflow-hidden rounded-xl border px-4 py-3 text-white shadow-[0_4px_12px_rgba(26,35,32,0.08)] dark:shadow-[0_14px_40px_rgba(0,0,0,0.35)]',
                                   layer.color
                                 )}
                               >
@@ -2457,7 +2457,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                         })}
                       </motion.div>
                       <motion.div
-                        className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-text-secondary"
+                        className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-text-secondary"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.6 }}

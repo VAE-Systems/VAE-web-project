@@ -30,9 +30,14 @@ const contactEmail = 'info@vae.systems'
 
 const Footer: React.FC = () => {
   const [isNewsletterNoticeOpen, setIsNewsletterNoticeOpen] = useState(false)
+  const [newsletterEmail, setNewsletterEmail] = useState('')
 
   const openNewsletterNotice = () => setIsNewsletterNoticeOpen(true)
   const closeNewsletterNotice = () => setIsNewsletterNoticeOpen(false)
+  const handleNewsletterSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    openNewsletterNotice()
+  }
 
   useEffect(() => {
     if (!isNewsletterNoticeOpen || typeof window === 'undefined') return
@@ -47,7 +52,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer
-      className="relative overflow-hidden border-t-2 border-black bg-white text-black dark:border-white dark:bg-[#020704] dark:text-white"
+      className="relative overflow-hidden border-t-2 border-text-light bg-bg-darker text-text-light dark:border-white dark:bg-bg-dark dark:text-white"
       role="contentinfo"
     >
       <div className="editorial-rule" />
@@ -56,13 +61,13 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="container-vae relative z-10 py-14 md:py-20">
-        <div className="grid gap-0 border-2 border-black dark:border-white lg:grid-cols-[1.2fr_0.9fr_0.9fr_0.9fr]">
-          <div className="border-b-2 border-black bg-black p-8 text-white dark:border-white lg:border-b-0 lg:border-r-2">
+        <div className="grid gap-0 border-2 border-text-light dark:border-white lg:grid-cols-[1.2fr_0.9fr_0.9fr_0.9fr]">
+          <div className="bg-bg-primary border-b-2 border-text-light p-8 text-text-light dark:border-white dark:bg-bg-dark dark:text-white lg:border-b-0 lg:border-r-2">
             <p className="text-[10px] font-black uppercase tracking-[0.32em] text-vae-turquoise">VAE Systems</p>
             <h2 className="mt-3 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em]">
               Infrastruktur, die bleibt.
             </h2>
-            <p className="text-white/74 mt-5 max-w-md text-sm leading-relaxed">
+            <p className="dark:text-white/74 mt-5 max-w-md text-sm leading-relaxed text-text-secondary">
               Strategische Beratung, Self-Hosted-Infrastruktur und KI-Workflow-Optimierung für Unternehmen, die
               Effizienz steigern und Datenkontrolle behalten wollen.
             </p>
@@ -70,17 +75,17 @@ const Footer: React.FC = () => {
             <div className="mt-6 grid gap-3">
               <a
                 href={`mailto:${contactEmail}`}
-                className="inline-flex w-fit items-center bg-vae-turquoise px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-black"
+                className="btn-primary inline-flex w-fit px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em]"
               >
                 {contactEmail}
               </a>
-              <div className="border-white/18 text-white/72 inline-flex w-fit items-center border px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em]">
+              <div className="dark:border-white/18 dark:text-white/72 inline-flex w-fit items-center rounded-xl border border-text-light/15 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-text-secondary">
                 Made in Germany / DSGVO-konform
               </div>
             </div>
           </div>
 
-          <div className="border-b-2 border-black bg-[#f3f5f2] p-8 dark:border-white dark:bg-[#0a120e] lg:border-b-0 lg:border-r-2">
+          <div className="bg-bg-primary border-b-2 border-text-light p-8 text-text-light dark:border-white dark:bg-bg-dark lg:border-b-0 lg:border-r-2">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Services</p>
             <ul className="mt-5 space-y-3">
               {footerNavigation.services.map(link => (
@@ -96,7 +101,7 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          <div className="border-b-2 border-black bg-white p-8 dark:border-white dark:bg-[#020704] lg:border-b-0 lg:border-r-2">
+          <div className="bg-bg-primary border-b-2 border-text-light p-8 text-text-light dark:border-white dark:bg-bg-dark dark:text-white lg:border-b-0 lg:border-r-2">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Ressourcen</p>
             <ul className="mt-5 space-y-3">
               {footerNavigation.resources.map(link => (
@@ -112,14 +117,14 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          <div className="bg-vae-turquoise p-8 text-black">
-            <p className="text-black/58 text-[10px] font-black uppercase tracking-[0.3em]">Unternehmen</p>
+          <div className="bg-bg-primary p-8 text-text-light dark:bg-bg-dark dark:text-white">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">Unternehmen</p>
             <ul className="mt-5 space-y-3">
               {footerNavigation.company.map(link => (
                 <li key={link.to}>
                   <Link
                     to={link.to}
-                    className="text-sm font-black uppercase tracking-[0.12em] transition-opacity hover:opacity-70"
+                    className="text-sm font-black uppercase tracking-[0.12em] transition-colors hover:text-vae-turquoise"
                   >
                     {link.label}
                   </Link>
@@ -127,20 +132,34 @@ const Footer: React.FC = () => {
               ))}
             </ul>
 
-            <button
-              type="button"
-              onClick={openNewsletterNotice}
-              className="mt-8 w-full border-2 border-black bg-black px-4 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-black"
-            >
-              VAE News / Beta
-            </button>
+            <form className="mt-8 grid gap-3" onSubmit={handleNewsletterSubmit}>
+              <label className="text-[10px] font-black uppercase tracking-[0.24em] text-text-secondary dark:text-white/60">
+                VAE News / Beta
+              </label>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={event => setNewsletterEmail(event.target.value)}
+                  placeholder="Ihre E-Mail-Adresse"
+                  className="w-full rounded-xl border border-text-light/15 bg-white px-4 py-3 text-sm text-text-light placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-vae-turquoise/60 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/35"
+                  aria-label="E-Mail-Adresse für VAE News"
+                />
+                <button
+                  type="submit"
+                  className="btn-primary inline-flex items-center justify-center px-5 py-3 text-sm font-black uppercase tracking-[0.14em]"
+                >
+                  Eintragen
+                </button>
+              </div>
+            </form>
           </div>
         </div>
 
-        <div className="mt-8 border-t-2 border-black pt-6 text-center dark:border-white">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-black/55 dark:text-white/55">
-            © {new Date().getFullYear()} VAE Systems UG (haftungsbeschränkt) / Built by VAE Systems / Last updated{' '}
-            {new Date().toLocaleDateString('de-DE')}
+        <div className="mt-8 border-t-2 border-text-light pt-6 text-center dark:border-white">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-text-muted dark:text-white/55">
+            © {new Date().getFullYear()} VAE Systems UG (haftungsbeschränkt) / Designed by AION Projects | Julian Goertz
+            Dini / Last updated {new Date().toLocaleDateString('de-DE')}
           </p>
         </div>
       </div>
@@ -155,7 +174,7 @@ const Footer: React.FC = () => {
           onClick={closeNewsletterNotice}
         >
           <div
-            className="w-full max-w-md border-2 border-white bg-black p-6 text-left text-white"
+            className="bg-bg-primary w-full max-w-md border-2 border-text-light p-6 text-left text-text-light dark:border-white dark:bg-bg-dark dark:text-white"
             role="document"
             onClick={event => event.stopPropagation()}
           >
@@ -166,13 +185,16 @@ const Footer: React.FC = () => {
               <button
                 type="button"
                 onClick={closeNewsletterNotice}
-                className="text-white/72 border border-white/20 px-3 py-2 text-[10px] font-black uppercase tracking-[0.22em] transition-colors hover:border-vae-turquoise hover:text-vae-turquoise"
+                className="btn-ghost px-3 py-2 text-[10px] font-black uppercase tracking-[0.22em]"
                 aria-label="Hinweis schließen"
               >
                 Schließen
               </button>
             </div>
-            <p id="newsletter-locked-description" className="text-white/74 text-sm leading-relaxed">
+            <p
+              id="newsletter-locked-description"
+              className="dark:text-white/74 text-sm leading-relaxed text-text-secondary"
+            >
               Unser Newsletter befindet sich gerade in einer geschlossenen Beta. Folge uns auf LinkedIn oder stöbere im
               Blog, bis neue Plätze frei werden.
             </p>
@@ -181,14 +203,14 @@ const Footer: React.FC = () => {
                 href="https://www.linkedin.com/company/vae-systems"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center bg-vae-turquoise px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-black"
+                className="btn-primary flex items-center justify-center px-4 py-3 text-sm font-black uppercase tracking-[0.14em]"
               >
                 Auf LinkedIn folgen
               </a>
               <Link
                 to="/ressourcen/blog"
                 onClick={closeNewsletterNotice}
-                className="border-white/18 flex items-center justify-center border px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:text-vae-turquoise"
+                className="btn-secondary flex items-center justify-center px-4 py-3 text-sm font-black uppercase tracking-[0.14em]"
               >
                 Blog besuchen
               </Link>

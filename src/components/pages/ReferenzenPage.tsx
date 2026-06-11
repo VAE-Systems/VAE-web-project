@@ -161,7 +161,7 @@ const caseStudies: CaseStudy[] = [
   },
   {
     id: 'aktiv-kollektiv',
-    logo: { src: '/Kollektiv-Logo.svg', alt: 'Aktiv Kollektiv e.V. Logo', invertOnDark: true },
+    logo: { src: '/Kollektiv-Logo.svg', alt: 'Aktiv Kollektiv e.V. Logo', invertOnLight: true },
     icon: Users,
     title: 'Infrastruktur-Planung & technische Unterstützung',
     organization: 'Aktiv Kollektiv e.V.',
@@ -169,9 +169,9 @@ const caseStudies: CaseStudy[] = [
     status: 'Live seit 2025',
     statusVariant: 'live',
     challenge:
-      'Aktiv Kollektiv e.V. arbeitet aktuell mit einer fragmentierten digitalen Landschaft — ohne zentrale Plattform, ohne strukturiertes Wissensmanagement, ohne skalierbare Kollaborations-Tools.',
+      'Der Verein brauchte eine belastbare digitale Grundlage statt vieler Einzellösungen ohne zentrales Wissensmanagement und ohne skalierbare Kollaboration.',
     solutionIntro:
-      'Julian Goertz (Vorstand bei Aktiv Kollektiv e.V.) und Jakob Dünnebeil (Mitglied) übernehmen die gesamte Planung der digitalen Infrastruktur des Vereins — mit Fokus auf Self-Hosting, Open Source als Werkzeug und Skalierbarkeit.',
+      'Geplant wird eine skalierbare Vereinsinfrastruktur mit Fokus auf Self-Hosting, Open Source als Werkzeug und klare Zuständigkeiten für Wissen, Accounts und Zusammenarbeit.',
     implementation: [
       {
         title: 'Infrastruktur-Aufbau',
@@ -241,9 +241,9 @@ const caseStudies: CaseStudy[] = [
     status: 'Produktiv im Einsatz',
     statusVariant: 'live',
     challenge:
-      'Für Event-Leads benötigte Art Affair ein System, das QR-Codes generiert, Leads speichert und automatisch personalisierte Follow-up-E-Mails versendet – proprietäre Tools waren zu teuer und unflexibel.',
+      'Für Messe- und Event-Leads brauchte Art Affair ein System, das QR-Codes generiert, Leads speichert und Follow-up automatisiert — ohne teure Standard-SaaS.',
     solutionIntro:
-      'Wir haben ein maßgeschneidertes System gebaut, das Leads erfasst, KI-basiert kommuniziert und durch Automation in bestehende Systeme integriert wurde. Daten werden sicher in Containern gespeichert.',
+      'Entstanden ist ein kompaktes QR-Lead-System mit API-Automation, KI-gestütztem Follow-up und sicherer containerbasierter Datenhaltung.',
     implementation: [
       {
         title: 'API-basierte Automation',
@@ -427,6 +427,28 @@ const statusStyles: Record<CaseStudy['statusVariant'], string> = {
     'border-slate-400/40 bg-slate-400/10 text-slate-700 dark:border-slate-400/30 dark:bg-slate-400/10 dark:text-slate-200',
 }
 
+const getLogoFrameClassName = (logo?: CaseStudy['logo']) =>
+  [
+    'group/logo flex cursor-pointer items-center justify-center border p-5 transition-all duration-300',
+    'border-black/8 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.08)] hover:border-vae-turquoise/40 hover:shadow-[0_18px_42px_rgba(13,148,136,0.15)]',
+    'dark:border-white/10 dark:bg-black/20 dark:shadow-none',
+    logo?.wide ? 'h-24 w-44 px-6 py-5' : 'h-28 w-28',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+const getLogoImageClassName = (logo?: CaseStudy['logo']) =>
+  [
+    'w-full object-contain transition-all duration-300 group-hover/logo:scale-[1.04]',
+    logo?.wide ? 'max-h-11' : 'max-h-16',
+    (logo?.invertOnDark || logo?.invertOnLight) && 'filter',
+    logo?.invertOnDark && 'dark:invert',
+    logo?.invertOnLight && 'brightness-0',
+    logo?.invertOnLight && 'dark:brightness-100',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
 interface CaseStudyCardProps {
   anchorId?: string
   study: CaseStudy
@@ -450,7 +472,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
     <>
       <article
         id={anchorId || study.id}
-        className="group relative rounded-3xl border border-black/5 bg-white/90 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.2)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.25)]"
+        className="border-black/6 bg-white/92 group relative border-2 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.16)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.18)]"
         data-expanded={isExpanded}
       >
         <div className="flex flex-col gap-6 lg:flex-row">
@@ -470,28 +492,18 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowLogoModal(true)}
-                  className={`group/logo flex cursor-pointer items-center justify-center rounded-xl border border-black/5 bg-white/50 p-4 transition-all duration-300 hover:border-vae-turquoise/40 hover:shadow-lg dark:border-white/10 dark:bg-white/5 ${
-                    study.logo.wide ? 'h-20 w-40' : 'h-28 w-28'
-                  }`}
+                  className={getLogoFrameClassName(study.logo)}
                   aria-label={`${study.logo.alt} vergrößern`}
                 >
                   <img
                     src={study.logo.src}
                     alt={study.logo.alt}
-                    className={[
-                      'h-full w-full object-contain transition-all duration-300 group-hover/logo:scale-110',
-                      (study.logo.invertOnDark || study.logo.invertOnLight) && 'filter',
-                      study.logo.invertOnDark && 'dark:invert',
-                      study.logo.invertOnLight && 'invert',
-                      study.logo.invertOnLight && 'dark:invert-0',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
+                    className={getLogoImageClassName(study.logo)}
                     loading="lazy"
                   />
                 </button>
               ) : (
-                <div className="flex h-28 w-28 items-center justify-center rounded-xl border border-black/5 bg-white/50 text-vae-turquoise dark:border-white/10 dark:bg-white/5">
+                <div className="border-black/8 flex h-28 w-28 items-center justify-center border bg-white text-vae-turquoise shadow-[0_14px_36px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-black/20 dark:shadow-none">
                   <Icon className="h-14 w-14" />
                 </div>
               )}
@@ -504,7 +516,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
               <h3 className="text-2xl font-semibold text-text-light">{study.title}</h3>
               <p className="mt-3 text-base text-text-secondary">{study.challenge}</p>
             </div>
-            <div className="rounded-2xl border border-black/5 bg-white/80 p-4 text-sm text-text-secondary dark:border-white/5 dark:bg-white/5">
+            <div className="border-black/6 bg-bg-primary/78 border p-4 text-sm text-text-secondary dark:border-white/5 dark:bg-white/5">
               <p className="font-semibold text-text-light">Unsere Antwort</p>
               <p className="mt-2 leading-relaxed">{study.solutionIntro}</p>
             </div>
@@ -514,7 +526,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
             {study.implementation.map(block => (
               <div
                 key={block.title}
-                className="rounded-2xl border border-black/5 bg-white/80 p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]"
+                className="border-black/6 bg-bg-primary/78 border p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]"
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-vae-turquoise">{block.title}</p>
                 <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-text-secondary">
@@ -563,7 +575,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
         <ExpandableContent isOpen={isExpanded} animationsEnabled={animationsEnabled}>
           {study.testimonialImage && (
             <div className="mb-8 mt-8 flex justify-center">
-              <figure className="max-w-full overflow-hidden rounded-2xl border border-black/5 bg-white/90 p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+              <figure className="border-black/6 bg-white/92 max-w-full overflow-hidden border p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
                 <img
                   src={study.testimonialImage.src}
                   alt={study.testimonialImage.alt}
@@ -571,8 +583,8 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
                     'max-h-96 w-full max-w-2xl object-contain transition-all duration-300',
                     (study.testimonialImage.invertOnDark || study.testimonialImage.invertOnLight) && 'filter',
                     study.testimonialImage.invertOnDark && 'dark:invert',
-                    study.testimonialImage.invertOnLight && 'invert',
-                    study.testimonialImage.invertOnLight && 'dark:invert-0',
+                    study.testimonialImage.invertOnLight && 'brightness-0',
+                    study.testimonialImage.invertOnLight && 'dark:brightness-100',
                   ]
                     .filter(Boolean)
                     .join(' ')}
@@ -582,7 +594,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
             </div>
           )}
           <div className="mt-8 grid gap-6 pb-6 lg:grid-cols-3">
-            <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+            <div className="border-black/6 bg-white/92 border p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Messbare Ergebnisse</p>
               <ul className="mt-4 space-y-4 text-sm text-text-secondary">
                 {study.results.map(metric => (
@@ -593,7 +605,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+            <div className="border-black/6 bg-white/92 border p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Tech Stack</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {study.techStack.map(badge => (
@@ -609,7 +621,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-black/5 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
+            <div className="border-black/6 bg-white/92 border p-5 shadow-sm dark:border-white/5 dark:bg-white/[0.04]">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise">Rolle & Ownership</p>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">{study.role}</p>
               <div className="mt-6 flex items-center gap-3 text-xs text-text-muted">
@@ -619,7 +631,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
             </div>
           </div>
           {study.note && (
-            <div className="mt-4 rounded-2xl border border-vae-turquoise/20 bg-vae-turquoise/5 p-4 text-center">
+            <div className="mt-4 border border-vae-turquoise/20 bg-vae-turquoise/5 p-4 text-center">
               <p className="text-sm italic text-text-secondary">{study.note}</p>
             </div>
           )}
@@ -722,11 +734,8 @@ const LogoModal: React.FC<LogoModalProps> = ({ logo, onClose }) => {
             src={logo.src}
             alt={logo.alt}
             className={[
-              'max-h-[75vh] w-full object-contain',
-              (logo.invertOnDark || logo.invertOnLight) && 'filter',
-              logo.invertOnDark && 'dark:invert',
-              logo.invertOnLight && 'invert',
-              logo.invertOnLight && 'dark:invert-0',
+              `max-h-[75vh] w-full object-contain ${logo.wide ? 'max-w-[820px]' : 'max-w-[560px]'}`,
+              getLogoImageClassName(logo),
             ]
               .filter(Boolean)
               .join(' ')}

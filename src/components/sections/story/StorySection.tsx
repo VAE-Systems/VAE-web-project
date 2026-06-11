@@ -161,21 +161,32 @@ const PriceEscalationSVG: React.FC<{ triggered: boolean }> = ({ triggered }) => 
 
 const BankVsServerInteractive: React.FC = () => {
   const [hover, setHover] = useState<'bank' | 'server' | null>(null)
+  const bankActive = hover === 'bank'
+  const serverActive = hover === 'server'
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl items-stretch gap-0 overflow-hidden rounded-2xl border border-white/10">
+    <div className="mx-auto flex w-full max-w-2xl items-stretch gap-0 overflow-hidden rounded-none bg-transparent">
       {/* BANK SEITE */}
       <div
-        className="relative flex-1 cursor-pointer select-none p-6 transition-all duration-500"
-        style={{ background: hover === 'server' ? '#0a0a0a' : hover === 'bank' ? '#1a0a0a' : '#0f0a0a' }}
+        className={`relative flex-1 cursor-pointer select-none p-6 transition-all duration-500 ${
+          bankActive ? 'bg-orange-500/8' : 'bg-transparent'
+        }`}
         onMouseEnter={() => setHover('bank')}
         onMouseLeave={() => setHover(null)}
       >
-        <div className={`transition-all duration-500 ${hover === 'server' ? 'opacity-20' : 'opacity-100'}`}>
+        <div className={`transition-all duration-500 ${serverActive ? 'opacity-25' : 'opacity-100'}`}>
           <div className="mb-4">
-            <Building2 className="h-9 w-9" style={{ color: hover === 'bank' ? '#ff6666' : '#555' }} />
+            <Building2
+              className={`h-9 w-9 transition-colors duration-500 ${
+                bankActive ? 'text-orange-500 dark:text-orange-300' : 'text-text-secondary dark:text-white/45'
+              }`}
+            />
           </div>
-          <h3 className="mb-3 text-lg font-bold" style={{ color: hover === 'bank' ? '#ff6666' : '#888' }}>
+          <h3
+            className={`mb-3 text-lg font-bold transition-colors duration-500 ${
+              bankActive ? 'text-orange-600 dark:text-orange-200' : 'text-text-secondary dark:text-white/65'
+            }`}
+          >
             Cloud / SaaS
           </h3>
           <ul className="space-y-2 text-sm">
@@ -188,11 +199,11 @@ const BankVsServerInteractive: React.FC = () => {
             ].map(({ icon: Icon, label }, i) => (
               <li
                 key={i}
-                className="flex items-center gap-2 transition-all duration-300"
-                style={{
-                  color: hover === 'bank' ? '#ff6666cc' : '#55555588',
-                  transform: hover === 'bank' ? 'translateX(4px)' : 'none',
-                }}
+                className={`flex items-center gap-2 transition-all duration-300 ${
+                  bankActive
+                    ? 'translate-x-1 text-orange-600/85 dark:text-orange-200/85'
+                    : 'text-text-secondary/75 dark:text-white/45'
+                }`}
               >
                 <Icon className="h-3.5 w-3.5 shrink-0" />
                 <span>{label}</span>
@@ -209,9 +220,9 @@ const BankVsServerInteractive: React.FC = () => {
       </div>
 
       {/* DIVIDER */}
-      <div className="z-10 flex flex-col items-center justify-center gap-2 bg-black/40 px-3">
+      <div className="z-10 flex flex-col items-center justify-center gap-2 bg-transparent px-3">
         <span
-          className="text-xs font-bold uppercase tracking-widest text-white/20"
+          className="text-xs font-bold uppercase tracking-widest text-text-secondary/50 dark:text-white/20"
           style={{ writingMode: 'vertical-rl' }}
         >
           oder
@@ -220,16 +231,25 @@ const BankVsServerInteractive: React.FC = () => {
 
       {/* SERVER SEITE */}
       <div
-        className="relative flex-1 cursor-pointer select-none p-6 transition-all duration-500"
-        style={{ background: hover === 'bank' ? '#0a0a0a' : hover === 'server' ? '#001a14' : '#0a0f0d' }}
+        className={`relative flex-1 cursor-pointer select-none p-6 transition-all duration-500 ${
+          serverActive ? 'bg-vae-turquoise/10' : 'bg-transparent'
+        }`}
         onMouseEnter={() => setHover('server')}
         onMouseLeave={() => setHover(null)}
       >
-        <div className={`transition-all duration-500 ${hover === 'bank' ? 'opacity-20' : 'opacity-100'}`}>
+        <div className={`transition-all duration-500 ${bankActive ? 'opacity-25' : 'opacity-100'}`}>
           <div className="mb-4">
-            <Server className="h-9 w-9" style={{ color: hover === 'server' ? '#00d4aa' : '#444' }} />
+            <Server
+              className={`h-9 w-9 transition-colors duration-500 ${
+                serverActive ? 'text-vae-turquoise' : 'text-text-secondary dark:text-white/45'
+              }`}
+            />
           </div>
-          <h3 className="mb-3 text-lg font-bold" style={{ color: hover === 'server' ? '#00d4aa' : '#666' }}>
+          <h3
+            className={`mb-3 text-lg font-bold transition-colors duration-500 ${
+              serverActive ? 'text-vae-turquoise' : 'text-text-secondary dark:text-white/65'
+            }`}
+          >
             Self-Hosted
           </h3>
           <ul className="space-y-2 text-sm">
@@ -242,11 +262,9 @@ const BankVsServerInteractive: React.FC = () => {
             ].map(({ icon: Icon, label }, i) => (
               <li
                 key={i}
-                className="flex items-center gap-2 transition-all duration-300"
-                style={{
-                  color: hover === 'server' ? '#00d4aacc' : '#44444488',
-                  transform: hover === 'server' ? 'translateX(4px)' : 'none',
-                }}
+                className={`flex items-center gap-2 transition-all duration-300 ${
+                  serverActive ? 'translate-x-1 text-vae-turquoise/90' : 'text-text-secondary/75 dark:text-white/45'
+                }`}
               >
                 <Icon className="h-3.5 w-3.5 shrink-0" />
                 <span>{label}</span>
@@ -466,7 +484,9 @@ const Act: React.FC<{
     >
       <div className="flex items-center gap-3">
         <span className="text-xs font-bold uppercase tracking-[0.4em] text-vae-turquoise/50">{eyebrow}</span>
-        <span className="select-none text-6xl font-black leading-none text-white/5">{number}</span>
+        <span className="select-none text-6xl font-black leading-none text-text-light/5 dark:text-white/5">
+          {number}
+        </span>
       </div>
       <h2 className="text-4xl font-black leading-tight text-text-light md:text-5xl">{title}</h2>
       <p className="max-w-md text-base leading-relaxed text-text-secondary">{subtitle}</p>
@@ -484,7 +504,7 @@ const Act: React.FC<{
   return (
     <div ref={ref} className="py-16 md:py-24">
       <ActDivider />
-      <div className="grid grid-cols-1 items-center gap-12 border-b border-white/5 pb-8 lg:grid-cols-2 lg:gap-20">
+      <div className="grid grid-cols-1 items-center gap-12 border-b border-text-light/5 pb-8 dark:border-white/5 lg:grid-cols-2 lg:gap-20">
         {side === 'left' ? (
           <>
             {textBlock}
@@ -606,14 +626,7 @@ const StorySection: React.FC = () => {
         </div>
 
         {/* ── AKT 2: BANK VS SERVER ── */}
-        <div
-          style={{
-            background: 'var(--bg-dark)',
-            border: '1px solid rgba(var(--vae-turquoise-rgb),0.1)',
-            borderRadius: 0,
-            padding: '0 32px 32px',
-          }}
-        >
+        <div className="px-8 pb-8">
           <Act
             number="02"
             eyebrow="Die Erkenntnis"

@@ -14,7 +14,7 @@ const SocialProofSection: React.FC = () => {
   return (
     <section
       id="social-proof"
-      className="relative overflow-hidden border-t-2 border-black bg-bg-darker py-20 text-text-light dark:border-white dark:bg-[#060a08] dark:text-white sm:py-28"
+      className="relative overflow-hidden border-t-2 border-black bg-bg-darker py-20 text-text-light dark:border-white dark:bg-bg-dark dark:text-white sm:py-28"
     >
       <div className="pointer-events-none absolute left-[-2vw] top-6 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.04] dark:text-white/[0.04] lg:block">
         05
@@ -86,16 +86,20 @@ const SocialProofSection: React.FC = () => {
               </p>
 
               {project.logo ? (
-                <div className="border-white/12 mt-5 flex min-h-[90px] items-center justify-center border bg-white p-4">
+                <div
+                  className={`mt-5 flex min-h-[104px] items-center justify-center border border-black/10 bg-white p-5 shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-black/20 dark:shadow-none ${
+                    project.wide ? 'px-6' : ''
+                  }`}
+                >
                   <img
                     src={project.logo}
                     alt={`${project.client} Logo`}
                     className={[
-                      'max-h-12 w-auto max-w-[180px] object-contain',
+                      `w-auto object-contain ${project.wide ? 'max-h-10 max-w-[220px]' : 'max-h-14 max-w-[160px]'}`,
                       (project.invertOnDark || project.invertOnLight) && 'filter',
                       project.invertOnDark && 'dark:invert',
-                      project.invertOnLight && 'invert',
-                      project.invertOnLight && 'dark:invert-0',
+                      project.invertOnLight && 'brightness-0',
+                      project.invertOnLight && 'dark:brightness-100',
                     ]
                       .filter(Boolean)
                       .join(' ')}
@@ -104,12 +108,12 @@ const SocialProofSection: React.FC = () => {
                   />
                 </div>
               ) : (
-                <div className="border-white/12 mt-5 flex min-h-[90px] items-center justify-center border bg-white/5 text-vae-turquoise">
+                <div className="mt-5 flex min-h-[104px] items-center justify-center border border-black/10 bg-white text-vae-turquoise shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-black/20 dark:shadow-none">
                   <Briefcase className="h-8 w-8" />
                 </div>
               )}
 
-              <ul className="text-white/78 mt-5 space-y-2 border-t border-white/10 pt-5 text-sm leading-relaxed">
+              <ul className="dark:text-white/78 mt-5 space-y-2 border-t border-text-light/10 pt-5 text-sm leading-relaxed text-text-secondary dark:border-white/10">
                 {project.highlights.map(highlight => (
                   <li key={highlight} className="flex items-start gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-vae-turquoise" aria-hidden />
@@ -118,13 +122,15 @@ const SocialProofSection: React.FC = () => {
                 ))}
               </ul>
 
-              {project.role && <p className="text-white/48 mt-4 text-xs leading-relaxed">{project.role}</p>}
+              {project.role && (
+                <p className="dark:text-white/48 mt-4 text-xs leading-relaxed text-text-muted">{project.role}</p>
+              )}
 
               <div className="mt-auto pt-6">
                 <MagneticButton className="w-full">
                   <Link
                     to={caseStudyAnchors[project.id] ?? '/about/referenzen'}
-                    className="flex w-full items-center justify-between bg-white px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-black transition-colors hover:bg-vae-turquoise"
+                    className="btn-primary flex w-full items-center justify-between px-5 py-4 text-sm font-black uppercase tracking-[0.14em]"
                   >
                     <span>Case ansehen</span>
                     <ArrowRight className="h-4 w-4 shrink-0" />
@@ -135,7 +141,7 @@ const SocialProofSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-4 border-2 border-white/20 bg-black/40 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_240px]">
+        <div className="mt-10 grid gap-4 border-2 border-text-light/15 bg-text-light/[0.04] p-6 dark:border-white/20 dark:bg-black/40 sm:p-8 lg:grid-cols-[minmax(0,1fr)_240px]">
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Kurz gesagt</p>
             <p className="mt-3 max-w-2xl text-2xl font-black uppercase leading-[0.95] tracking-[-0.05em] sm:text-3xl">
@@ -145,7 +151,7 @@ const SocialProofSection: React.FC = () => {
           <MagneticButton className="w-full">
             <Link
               to="/about/referenzen"
-              className="border-white/16 flex w-full items-center justify-between border px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-vae-turquoise hover:text-black"
+              className="btn-secondary flex w-full items-center justify-between px-5 py-4 text-sm font-black uppercase tracking-[0.14em]"
             >
               <span>Alle Referenzen</span>
               <ArrowRight className="h-4 w-4 shrink-0" />

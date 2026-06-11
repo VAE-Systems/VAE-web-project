@@ -82,14 +82,11 @@ const PrivacySettings: React.FC = () => {
                   Alle aktivieren
                 </button>
 
-                <button onClick={rejectAll} className="btn-outline">
+                <button onClick={rejectAll} className="btn-secondary">
                   Alle deaktivieren
                 </button>
 
-                <button
-                  onClick={resetConsent}
-                  className="border-border-primary rounded-lg border px-4 py-2 text-text-muted transition-colors hover:text-red-400"
-                >
+                <button onClick={resetConsent} className="btn-ghost">
                   Zurücksetzen
                 </button>
               </div>
@@ -194,13 +191,13 @@ const PrivacySettings: React.FC = () => {
               <div className="flex flex-wrap gap-3">
                 <a
                   href="mailto:info@vae.systems?subject=DSGVO%20Anfrage%3A%20Datenexport&body=Sehr%20geehrtes%20VAE%20Systems%20Team%2C%0A%0Ahiermit%20m%C3%B6chte%20ich%20gem%C3%A4%C3%9F%20Art.%2015%20DSGVO%20eine%20Kopie%20aller%20zu%20meiner%20Person%20gespeicherten%20Daten%20anfordern.%0A%0AMeine%20Kontaktdaten%3A%0AName%3A%20%0AE-Mail%3A%20%0A%0AVielen%20Dank%20f%C3%BCr%20die%20Bearbeitung.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen"
-                  className="btn-outline"
+                  className="btn-secondary"
                 >
                   Daten exportieren
                 </a>
                 <a
                   href="mailto:info@vae.systems?subject=DSGVO%20Anfrage%3A%20Datenl%C3%B6schung&body=Sehr%20geehrtes%20VAE%20Systems%20Team%2C%0A%0Ahiermit%20beantrage%20ich%20gem%C3%A4%C3%9F%20Art.%2017%20DSGVO%20die%20L%C3%B6schung%20aller%20zu%20meiner%20Person%20gespeicherten%20Daten.%0A%0AMeine%20Kontaktdaten%3A%0AName%3A%20%0AE-Mail%3A%20%0A%0AVielen%20Dank%20f%C3%BCr%20die%20Bearbeitung.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen"
-                  className="border-border-primary rounded-lg border px-4 py-2 text-text-muted transition-colors hover:text-red-400"
+                  className="btn-ghost"
                 >
                   Alle Daten löschen
                 </a>

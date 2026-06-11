@@ -1,5 +1,5 @@
 import React from 'react'
-import MagneticButton from './MagneticButton'
+import MagneticButton from './buttons/MagneticButton'
 import { Body, ButtonText, Heading1, Heading2, Text } from './Text'
 
 /**

@@ -41,7 +41,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
 
   return (
     <section
-      className={`border-border-primary hero-surface relative flex min-h-[calc(100vh-5rem)] items-center overflow-hidden border-b pb-16 pt-24 dark:border-white/5 sm:pb-24 sm:pt-32 md:pb-28 ${isLight ? 'bg-gradient-to-b from-white to-white/95' : 'from-bg-primary to-bg-primary bg-gradient-to-br via-bg-secondary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker'}`}
+      className={`border-border-primary hero-surface relative flex min-h-[calc(100vh-5rem)] items-center overflow-hidden border-b pb-16 pt-24 dark:border-white/5 sm:pb-24 sm:pt-32 md:pb-28 ${isLight ? 'from-bg-primary bg-gradient-to-b to-white' : 'from-bg-primary to-bg-primary bg-gradient-to-br via-bg-secondary dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker'}`}
     >
       {/* Conditional overlay: light mode gets subtle vignette, dark mode gets strong contrast */}
       <div className="pointer-events-none absolute inset-0 z-[1]">
@@ -63,7 +63,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
         <div className="absolute inset-0 z-0 select-none">
           {/* Light mode: soft radial + light grid patterns */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_55%_42%,rgba(var(--vae-turquoise-rgb),0.20),transparent_62%)]" />
-          <div className="absolute inset-0 opacity-[0.06] mix-blend-screen [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.06)_0_1px,transparent_1px_44px),repeating-linear-gradient(90deg,rgba(255,255,255,0.04)_0_1px,transparent_1px_44px)]" />
+          <div className="absolute inset-0 opacity-[0.08] [background:repeating-linear-gradient(0deg,rgba(17,17,16,0.06)_0_1px,transparent_1px_44px),repeating-linear-gradient(90deg,rgba(17,17,16,0.04)_0_1px,transparent_1px_44px)]" />
           <div className="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,rgba(var(--vae-turquoise-rgb),0.22),transparent_60%)] opacity-10" />
         </div>
       ) : (
@@ -83,7 +83,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
       <div className="container-vae relative z-[2]" ref={innerRef}>
         <div className="mx-auto max-w-5xl space-y-8 text-center sm:space-y-10">
           <div
-            className={`inline-block rounded-[2rem] px-8 py-6 backdrop-blur-md ${isLight ? 'border border-black/10 bg-white/85 shadow-[0_8px_40px_-18px_rgba(0,0,0,0.25)] ring-1 ring-black/10' : 'border border-vae-turquoise/30 bg-[linear-gradient(160deg,rgba(0,15,12,0.92),rgba(0,32,26,0.78))] shadow-[0_0_60px_-18px_rgba(var(--vae-turquoise-rgb),0.5)] ring-1 ring-vae-turquoise/25'}`}
+            className={`inline-block px-8 py-6 backdrop-blur-md ${isLight ? 'bg-white/88 border-2 border-black/10 shadow-[0_8px_40px_-18px_rgba(0,0,0,0.18)]' : 'border-2 border-vae-turquoise/30 bg-[linear-gradient(160deg,rgba(0,15,12,0.92),rgba(0,32,26,0.78))] shadow-[0_0_60px_-18px_rgba(var(--vae-turquoise-rgb),0.5)]'}`}
           >
             <h1 className="h1 fluid-h1 mb-4">
               <span className="block text-text-light">Services & Betreuung</span>
@@ -121,20 +121,13 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
               <CtaLink
                 ctaId="contact.schedule_call"
                 ctx={{ fromPage: 'services', intent: 'strategy-call' }}
-                variant="custom"
-                className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${
-                  isLight
-                    ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80'
-                    : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'
-                }`}
+                variant="secondary"
+                className="flex flex-1 items-center justify-center text-center"
               >
                 <Icon name="schedule" className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
                 Strategiegespräch vereinbaren
               </CtaLink>
-              <a
-                href="#categories"
-                className={`flex flex-1 items-center justify-center rounded-xl text-center transition-colors ${isLight ? 'border border-black/10 bg-white/60 text-text-secondary hover:border-black/20 hover:bg-white/80' : 'border border-white/20 bg-white/10 text-text-secondary backdrop-blur-sm hover:bg-white/20 hover:text-text-light'}`}
-              >
+              <a href="#categories" className="btn-ghost flex flex-1 items-center justify-center text-center">
                 <Icon name="travel_explore" className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
                 Services erkunden
               </a>

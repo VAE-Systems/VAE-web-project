@@ -2,11 +2,9 @@ import MagneticButton from '@/components/ui/buttons/MagneticButton'
 import CtaLink from '@/components/ui/CtaLink'
 import Icon from '@/components/ui/Icon'
 import { heroBenefits, heroDescription, heroEyebrow, heroTitle } from '@/content/home'
-import { useTheme } from '@/contexts/ThemeContext'
 import { gsap } from 'gsap'
 import { ArrowRight, CalendarClock, ChevronDown } from 'lucide-react'
 import React from 'react'
-import GeometricBackground from '../effects/GeometricBackground'
 
 const NeuralNetworkBackground = React.lazy(() => import('../effects/NeuralNetworkBackground'))
 
@@ -17,8 +15,6 @@ const TIMING = {
 
 const HeroSection: React.FC = () => {
   const sectionRef = React.useRef<HTMLElement | null>(null)
-  const { theme } = useTheme()
-  const isLight = theme === 'light'
 
   const reducedMotion = React.useMemo(
     () =>
@@ -130,7 +126,7 @@ const HeroSection: React.FC = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative isolate overflow-hidden border-b border-white/10 bg-bg-darker text-text-light dark:bg-[#030806] dark:text-white"
+      className="relative isolate overflow-hidden border-b border-text-light/10 bg-bg-darker text-text-light dark:border-white/10 dark:text-white"
     >
       {/* Film-split cover panels */}
       <div
@@ -144,18 +140,9 @@ const HeroSection: React.FC = () => {
         style={{ transform: 'translateX(-100%)' }}
       />
 
-      {!reducedMotion &&
-        enableBg &&
-        (isLight ? (
-          <GeometricBackground />
-        ) : (
-          <React.Suspense fallback={null}>
-            <NeuralNetworkBackground />
-          </React.Suspense>
-        ))}
+      {!reducedMotion && enableBg && <NeuralNetworkBackground />}
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.06),transparent_30%)]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(var(--vae-turquoise-rgb),0.06),transparent_30%)]" />
       <div className="pointer-events-none absolute right-[-6vw] top-10 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.04] dark:text-white/[0.04] xl:block">
         VAE
       </div>
@@ -165,7 +152,7 @@ const HeroSection: React.FC = () => {
           <div className="flex flex-col gap-8">
             <div
               ref={eyebrowRef}
-              className="inline-flex w-fit items-center border border-vae-turquoise/35 bg-bg-darker px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.35)] dark:bg-black"
+              className="bg-bg-primary inline-flex w-fit items-center border border-vae-turquoise/35 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise shadow-[0_0_0_1px_rgba(0,0,0,0.08)] dark:bg-bg-dark dark:shadow-[0_0_0_1px_rgba(0,0,0,0.35)]"
             >
               {heroEyebrow}
             </div>
@@ -193,8 +180,8 @@ const HeroSection: React.FC = () => {
                 <CtaLink
                   ctaId="contact.schedule_call"
                   ctx={{ fromPage: 'home', intent: 'calendly-hero' }}
-                  variant="custom"
-                  className="flex w-full items-center justify-center gap-3 bg-white px-8 py-5 text-base font-black uppercase tracking-[0.12em] text-black shadow-[0_18px_50px_-24px_rgba(255,255,255,0.45)] transition-transform hover:-translate-y-0.5"
+                  variant="primary"
+                  className="w-full gap-3 px-8 py-5 text-base font-black uppercase tracking-[0.12em]"
                 >
                   <CalendarClock className="h-5 w-5" />
                   Erstgespräch buchen
@@ -205,7 +192,7 @@ const HeroSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={scrollToServices}
-                  className="flex w-full items-center justify-center gap-2 border border-text-light/20 bg-transparent px-6 py-5 text-sm font-bold uppercase tracking-[0.14em] text-text-light transition-colors hover:border-vae-turquoise hover:bg-text-light/5 dark:border-white/20 dark:text-white dark:hover:bg-white/5"
+                  className="btn-secondary flex w-full items-center justify-center gap-2 px-6 py-5 text-sm font-bold uppercase tracking-[0.14em]"
                 >
                   Leistungen
                   <ChevronDown className="h-5 w-5" />
@@ -242,9 +229,6 @@ const HeroSection: React.FC = () => {
 
           <div ref={cardRef} className="grid gap-4 self-end">
             <div className="border border-text-light/10 bg-white text-black dark:border-white/10">
-              <div className="border-b border-black/10 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.3em] text-black/65">
-                Magazin-Ansicht
-              </div>
               <div className="grid gap-4 p-5">
                 <div className="flex items-end justify-between gap-4 border-b border-black/10 pb-4">
                   <div>
@@ -257,7 +241,7 @@ const HeroSection: React.FC = () => {
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="bg-bg-darker p-4 text-text-light dark:bg-black dark:text-white">
+                  <div className="bg-text-light p-4 text-white dark:bg-bg-dark dark:text-white">
                     <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/55">Problem</p>
                     <p className="mt-2 text-lg font-black uppercase leading-tight">
                       Zu viele Tools. Zu wenig Kontrolle.
@@ -269,7 +253,7 @@ const HeroSection: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="border border-black/10 bg-[#f1f5f3] p-4">
+                <div className="bg-bg-primary border border-black/10 p-4">
                   <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-black/55">
                     Was wir konkret ersetzen
                   </p>

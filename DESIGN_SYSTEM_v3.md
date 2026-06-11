@@ -8,16 +8,16 @@ Dieses Dokument definiert die einzigen gültigen Design-Entscheidungen für vae-
 
 Nur diese 4 Werte sind erlaubt:
 
-| Token          | Wert   | Verwendung                                       | Beispiele                             |
-| -------------- | ------ | ------------------------------------------------ | ------------------------------------- |
-| `rounded-full` | 9999px | Navigation, Actions, Badges, Filter              | `.nav-link`, `.badge`, Status-Chips   |
-| `rounded-xl`   | 12px   | Cards, Panels, Buttons, Form-Container           | `.card-vae`, `.btn-primary`, Modals   |
-| `rounded-lg`   | 8px    | Icons in Cards, kleine Elemente                  | `.dropdown-card__icon`, Feature-Icons |
-| `rounded-none` | 0      | Editorial-Bilder, Artikel-Container, Trennlinien | Hero-Bilder, Case-Study-Photos        |
+| Token          | Wert   | Verwendung                                       | Beispiele                              |
+| -------------- | ------ | ------------------------------------------------ | -------------------------------------- |
+| `rounded-full` | 9999px | Navigation, Actions, Badges, Filter              | `.nav-link`, `.badge`, Status-Chips    |
+| `rounded-xl`   | 12px   | Buttons, Modals, Dropdowns, interaktive Flächen  | `.btn-primary`, Form-Container, Modals |
+| `rounded-md`   | 6px    | Icons in Cards, kleine UI-Elemente               | `.dropdown-card__icon`, Feature-Icons  |
+| `rounded-none` | 0      | Editorial-Bilder, Artikel-Container, Trennlinien | Hero-Bilder, Case-Study-Photos         |
 
 **Anti-Patterns (verboten):**
 
-- `rounded-md` (10px) – weder Token noch konsistent
+- `rounded-lg` (8px) – nicht mehr Teil des Systems
 - `rounded-2xl` (16px) – zu nah an xl, verwirrt
 - `rounded-sm` (4px) – zu subtil, nicht im System
 - Hardcoded `border-radius` in px/rem – immer Tokens verwenden
@@ -71,6 +71,19 @@ Nur diese 4 Werte sind erlaubt:
 - Keine reinen Schwarz/Weiß-Werte (`#000`, `#fff`)
 - Keine Graustufen ohne Wärme/Kühle-Definition
 - Brand-Color nur für Actions, nie für große Flächen
+
+### Hero-Regel
+
+- Light Mode Heroes nutzen helle Flächen (`bg-bg-primary`, `bg-white`, `bg-bg-darker`) mit dunkler Typografie.
+- Dramatische Schwarzflächen gehören nur in den Dark Mode.
+- Hero-Badges, KPI-Pills und Nebeninfos dürfen im Light Mode nie weiß auf fast weiß oder schwarz auf schwarz stehen.
+- Bild-Heros bekommen im Light Mode neutrale Overlays statt Dark-Only-Kontrastlogik.
+
+### Footer-Newsletter (Übergangsmodus)
+
+- Im Footer wird ein E-Mail-Eingabefeld mit runder UI gezeigt.
+- Das Feld wirkt live, öffnet bis zum Launch aber nur einen Hinweisdialog.
+- Kein echter Submit, keine Persistenz, kein versteckter Sonderstil außerhalb der Haupt-Buttonfamilien.
 
 ---
 
@@ -173,21 +186,41 @@ xl: 1280px  /* Wide Desktop */
 
 ### Button-System
 
+Aktive Quelle im Projekt: `src/styles/globals.css`
+
+Erlaubte Live-Familien im Projekt:
+
+- `btn-primary`
+- `btn-secondary`
+- `btn-ghost`
+- `btn-convert`
+
+`btn-outline` und `btn-compact` sind nur Legacy-/Aliasvarianten. Neue Seiten sollen sie nicht neu einführen.
+
+Für neue CTAs gilt:
+
+- Routen-/Link-CTAs über `src/components/ui/CtaLink.tsx`
+- generische Actions über `src/components/ui/Button.tsx`
+- keine lokal gebauten Hover-Farbkombinationen in einzelnen Pages
+
 ```
 PRIMARY (CTA)
 ├── Radius: rounded-xl (12px)
 ├── Padding: space-3 x space-6 (12px 24px)
 ├── Font: Geist 600, 1rem
+├── Text: dunkle Schrift auf Brand-Fläche
 └── Shadow: shadow-card (default), shadow-elevated (hover)
 
 SECONDARY (Outline)
 ├── Radius: rounded-xl (12px)
 ├── Border: 2px solid brand
+├── Text: dunkle Schrift im Light Mode, Brand-Text im Dark Mode
 └── Background: transparent (default), brand/10 (hover)
 
 GHOST (Subtle)
-├── Radius: rounded-lg (8px)
+├── Radius: rounded-xl (12px)
 ├── Border: 1px solid text-secondary/20
+├── Text: text-primary
 └── Kein Shadow
 ```
 

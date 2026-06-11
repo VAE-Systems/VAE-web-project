@@ -375,29 +375,29 @@ const ContactPage: React.FC = () => {
   }
 
   return (
-    <div className="relative z-0 bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 bg-bg-darker text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="Kontakt aufnehmen – Erstgespräch buchen | VAE Systems"
         description="Sprechen Sie mit VAE Systems über KI-Automatisierungen, souveräne Infrastruktur oder strategisches Sparring."
         canonicalPath="/contact"
       />
 
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] py-20 text-white sm:py-28">
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-bg-darker py-20 text-text-light dark:text-white sm:py-28">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.12),transparent_35%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
-        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.03] dark:text-white/[0.03] xl:block">
           VAE
         </div>
 
         <div className="container-vae relative z-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
             <div className="flex-1 space-y-6">
-              <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise">
+              <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-text-light px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise dark:bg-bg-dark">
                 <Mail className="h-3.5 w-3.5" /> {contactHero.title}
               </div>
 
               <h1 className="max-w-3xl">
-                <span className="block text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-5xl lg:text-[4.8rem]">
+                <span className="block text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-text-light dark:text-white sm:text-5xl lg:text-[4.8rem]">
                   Sprechen wir.
                 </span>
                 <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[9vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-4xl lg:text-[4rem]">
@@ -405,7 +405,7 @@ const ContactPage: React.FC = () => {
                 </span>
               </h1>
 
-              <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+              <div className="max-w-2xl border-l-4 border-text-light pl-4 text-base leading-relaxed text-text-secondary dark:border-white dark:text-white/75 sm:text-lg">
                 {contactIntro.body}
               </div>
 
@@ -413,7 +413,7 @@ const ContactPage: React.FC = () => {
                 <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
                   <button
                     type="button"
-                    className="flex w-full items-center justify-center gap-2 bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] text-black transition-transform hover:-translate-y-0.5 sm:w-auto"
+                    className="flex w-full items-center justify-center gap-2 bg-text-light px-8 py-4 text-sm font-black uppercase tracking-[0.12em] text-bg-darker transition-transform hover:-translate-y-0.5 hover:bg-vae-turquoise dark:bg-white dark:text-black sm:w-auto"
                     onClick={() => {
                       const booking = document.getElementById('booking')
                       booking?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -426,7 +426,7 @@ const ContactPage: React.FC = () => {
                 <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
                   <button
                     type="button"
-                    className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                    className="flex w-full items-center justify-center gap-2 border border-text-light/20 bg-transparent px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-text-light transition-colors hover:border-vae-turquoise hover:bg-text-light/5 dark:border-white/20 dark:text-white dark:hover:bg-white/5 sm:w-auto"
                     onClick={() => {
                       const mailBuilder = document.getElementById('mail-builder')
                       mailBuilder?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -441,14 +441,14 @@ const ContactPage: React.FC = () => {
             </div>
 
             <div className="flex-1 lg:max-w-md">
-              <div className="border-2 border-white/15 bg-white/[0.03] p-8 text-left">
+              <div className="border-2 border-text-light/15 bg-text-light/[0.03] p-8 text-left dark:border-white/15 dark:bg-white/[0.03]">
                 <p className="text-[10px] font-black uppercase tracking-[0.32em] text-vae-turquoise">Antwortzeiten</p>
                 <ul className="mt-6 space-y-4">
-                  <li className="border border-white/10 bg-white/[0.02] px-5 py-4">
+                  <li className="border border-text-light/10 bg-text-light/[0.02] px-5 py-4 dark:border-white/10 dark:bg-white/[0.02]">
                     <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">
                       Schnelle Antwort
                     </p>
-                    <p className="mt-2 text-sm text-white/70">
+                    <p className="mt-2 text-sm text-text-secondary dark:text-white/70">
                       Wir reagieren werktags innerhalb von 24 Stunden mit einem persönlichen Vorschlag.
                     </p>
                   </li>
@@ -459,7 +459,7 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-black/8 border-b bg-[#f4f1ec] py-20 dark:border-white/5 dark:bg-bg-dark">
+      <section className="border-black/8 border-b bg-bg-darker py-20 dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-bold uppercase tracking-[0.35em] text-vae-turquoise">Warum VAE Systems</p>
@@ -512,7 +512,7 @@ const ContactPage: React.FC = () => {
                 href={BOOKING_LINKS.ERSTBERATUNG}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                className="group rounded-xl border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -523,7 +523,7 @@ const ContactPage: React.FC = () => {
                       Für Scale-ups & Mittelstand: KI-Roadmap, Quick Wins & Priorisierung.
                     </p>
                   </div>
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
                     <CalendarDays className="h-5 w-5" />
                   </div>
                 </div>
@@ -533,7 +533,7 @@ const ContactPage: React.FC = () => {
                 href={BOOKING_LINKS.INFRASTRUKTUR_AUDIT}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                className="group rounded-xl border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -544,7 +544,7 @@ const ContactPage: React.FC = () => {
                       Self-Hosting, Cloud-Migration, Security & Compliance-Check.
                     </p>
                   </div>
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
                     <CalendarDays className="h-5 w-5" />
                   </div>
                 </div>
@@ -554,7 +554,7 @@ const ContactPage: React.FC = () => {
                 href={BOOKING_LINKS.STRATEGIC_ADVISORY}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                className="group rounded-xl border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -563,7 +563,7 @@ const ContactPage: React.FC = () => {
                       Für CTOs & Führungskräfte: Langfristige Architektur & Team-Setup.
                     </p>
                   </div>
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
                     <CalendarDays className="h-5 w-5" />
                   </div>
                 </div>
@@ -573,7 +573,7 @@ const ContactPage: React.FC = () => {
                 href={BOOKING_LINKS.PARTNERSHIP}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                className="group rounded-xl border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -584,7 +584,7 @@ const ContactPage: React.FC = () => {
                       Für Freelancer, Agenturen & Partner: Co-Delivery & Kooperationen.
                     </p>
                   </div>
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
                     <CalendarDays className="h-5 w-5" />
                   </div>
                 </div>
@@ -594,7 +594,7 @@ const ContactPage: React.FC = () => {
                 href={BOOKING_LINKS.RETAINER_PLANUNG}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                className="group rounded-xl border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -603,7 +603,7 @@ const ContactPage: React.FC = () => {
                       Kontinuierliche Begleitung: Sparring, Support & operative Projekte.
                     </p>
                   </div>
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
                     <CalendarDays className="h-5 w-5" />
                   </div>
                 </div>
@@ -613,7 +613,7 @@ const ContactPage: React.FC = () => {
                 href={BOOKING_LINKS.WORKSHOP}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group rounded-[24px] border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                className="group rounded-xl border border-gray-200 bg-gray-50 p-6 text-left transition-all hover:-translate-y-1 hover:border-vae-turquoise/40 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -622,7 +622,7 @@ const ContactPage: React.FC = () => {
                       Team-Workshops, Trainings & Knowledge-Transfer zu KI & Infrastruktur.
                     </p>
                   </div>
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white text-vae-turquoise transition-colors group-hover:border-vae-turquoise/60 dark:border-white/15 dark:bg-white/5">
                     <CalendarDays className="h-5 w-5" />
                   </div>
                 </div>
@@ -630,7 +630,7 @@ const ContactPage: React.FC = () => {
             </div>
 
             {/* Call-Vorbereitung Resources */}
-            <div className="rounded-[28px] border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/[0.02]">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-8 dark:border-white/10 dark:bg-white/[0.02]">
               <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
                 Call-Vorbereitung & Ressourcen
               </h3>
@@ -639,7 +639,7 @@ const ContactPage: React.FC = () => {
                   href="https://docs.vae.systems/s/erstberatung-ablauf"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
+                  className="group flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
                 >
                   <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/10 text-vae-turquoise">
                     <Compass className="h-5 w-5" />
@@ -657,7 +657,7 @@ const ContactPage: React.FC = () => {
                   href="https://docs.vae.systems/s/vorbereitung-erstberatung"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
+                  className="group flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
                 >
                   <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/10 text-vae-turquoise">
                     <BookOpen className="h-5 w-5" />
@@ -675,7 +675,7 @@ const ContactPage: React.FC = () => {
                   href="https://docs.vae.systems/s/erstberatung-faq"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
+                  className="group flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-vae-turquoise/40 hover:shadow-md dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
                 >
                   <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-vae-turquoise/10 text-vae-turquoise">
                     <HelpCircle className="h-5 w-5" />
@@ -721,7 +721,7 @@ const ContactPage: React.FC = () => {
               <div className="flex gap-2" data-tutorial="buttons">
                 <button
                   onClick={tutorial.startTutorial}
-                  className="rounded-2xl border border-white/70 bg-white p-3 text-vae-turquoise transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.16)] active:translate-y-0 active:scale-[0.98] dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise dark:hover:bg-vae-turquoise/20 dark:hover:shadow-vae-turquoise/20"
+                  className="rounded-xl border border-white/70 bg-white p-3 text-vae-turquoise transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.16)] active:translate-y-0 active:scale-[0.98] dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise dark:hover:bg-vae-turquoise/20 dark:hover:shadow-vae-turquoise/20"
                   aria-label="Tutorial starten"
                   title="Tutorial starten"
                 >
@@ -752,7 +752,7 @@ const ContactPage: React.FC = () => {
                         }}
                         className={getHelpModeClasses(
                           helpMode,
-                          `rounded-2xl border px-4 py-3 text-left transition ${
+                          `rounded-xl border px-4 py-3 text-left transition ${
                             isActive
                               ? 'border-white/80 bg-white text-vae-turquoise dark:border-vae-turquoise/60 dark:bg-vae-turquoise/10 dark:text-white'
                               : 'border-white/40 bg-white/10 text-white hover:border-white/80 dark:border-white/10 dark:bg-white/[0.02] dark:text-white/70 dark:hover:border-white/25'
@@ -875,7 +875,7 @@ const ContactPage: React.FC = () => {
                     value={contactName}
                     onChange={event => setContactName(event.target.value)}
                     placeholder="Ihr Name"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
@@ -885,7 +885,7 @@ const ContactPage: React.FC = () => {
                     value={position}
                     onChange={event => setPosition(event.target.value)}
                     placeholder="z.B. CTO, Geschäftsführung, Projektleitung"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
               </div>
@@ -898,7 +898,7 @@ const ContactPage: React.FC = () => {
                     value={companyName}
                     onChange={event => setCompanyName(event.target.value)}
                     placeholder="Firmenname"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm text-white/80 dark:text-white/70">
@@ -908,7 +908,7 @@ const ContactPage: React.FC = () => {
                     value={phone}
                     onChange={event => setPhone(event.target.value)}
                     placeholder="+49 151 12345678"
-                    className="rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                    className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   />
                 </label>
               </div>
@@ -933,7 +933,7 @@ const ContactPage: React.FC = () => {
                   value={notes}
                   onChange={event => setNotes(event.target.value)}
                   placeholder="Bestehende Systeme, KPIs, gewünschte Deliverables …"
-                  className="max-h-[400px] min-h-[120px] resize-none overflow-y-auto rounded-2xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
+                  className="max-h-[400px] min-h-[120px] resize-none overflow-y-auto rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-white/80 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-vae-turquoise/30 dark:border-white/10 dark:bg-white/[0.02] dark:text-white dark:placeholder:text-white/40 dark:focus:border-vae-turquoise/60 dark:focus:ring-vae-turquoise/60 dark:focus:ring-offset-bg-darker"
                   rows={5}
                 />
               </label>
@@ -952,15 +952,15 @@ const ContactPage: React.FC = () => {
           </div>
           <div
             data-tutorial="preview"
-            className="space-y-6 rounded-[32px] border border-gray-200 bg-white p-8 shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_90px_rgba(0,0,0,0.55)]"
+            className="space-y-6 rounded-xl border border-gray-200 bg-white p-8 shadow-lg dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_35px_90px_rgba(0,0,0,0.55)]"
           >
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
               Vorschau (wird in Ihrem Mailprogramm geöffnet)
             </p>
-            <pre className="min-h-[360px] whitespace-pre-wrap rounded-2xl border border-gray-300 bg-gray-50 p-5 text-sm leading-relaxed text-gray-800 dark:border-white/10 dark:bg-black/40 dark:text-white/80">
+            <pre className="min-h-[360px] whitespace-pre-wrap rounded-xl border border-gray-300 bg-gray-50 p-5 text-sm leading-relaxed text-gray-800 dark:border-white/10 dark:bg-bg-dark/60 dark:text-white/80">
               {mailPreview}
             </pre>
-            <div className="rounded-2xl border border-dashed border-gray-300 px-4 py-3 text-xs text-gray-500 dark:border-white/20 dark:text-white/60">
+            <div className="rounded-xl border border-dashed border-gray-300 px-4 py-3 text-xs text-gray-500 dark:border-white/20 dark:text-white/60">
               Tipp: Ergänzen Sie im Mailprogramm Ihre Signatur oder weitere Anhänge. Wir antworten mit einem konkreten
               Vorschlag für das Erstgespräch.
             </div>
@@ -968,10 +968,10 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-y border-vae-turquoise/10 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-darker">
+      <section className="border-y border-vae-turquoise/10 bg-vae-turquoise/5 py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="container-vae grid gap-6 md:grid-cols-2">
-          <div className="rounded-[28px] border border-gray-200 bg-white p-6 text-center shadow-md dark:border-white/10 dark:bg-white/[0.02] dark:shadow-none">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-vae-turquoise/10 text-vae-turquoise">
+          <div className="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md dark:border-white/10 dark:bg-white/[0.02] dark:shadow-none">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-md bg-vae-turquoise/10 text-vae-turquoise">
               <Mail className="h-5 w-5" />
             </div>
             <p className="mt-4 text-sm font-semibold uppercase tracking-[0.35em] text-gray-500 dark:text-white/60">
@@ -985,8 +985,8 @@ const ContactPage: React.FC = () => {
             </a>
             <p className="mt-2 text-sm text-gray-600 dark:text-white/60">Direkt schreiben – immer willkommen.</p>
           </div>
-          <div className="rounded-[28px] border border-gray-200 bg-white p-6 text-center shadow-md dark:border-white/10 dark:bg-white/[0.02] dark:shadow-none">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-vae-turquoise/10 text-vae-turquoise">
+          <div className="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md dark:border-white/10 dark:bg-white/[0.02] dark:shadow-none">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-md bg-vae-turquoise/10 text-vae-turquoise">
               <MessageSquare className="h-5 w-5" />
             </div>
             <p className="mt-4 text-sm font-semibold uppercase tracking-[0.35em] text-gray-500 dark:text-white/60">

@@ -290,7 +290,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               className={`group inline-flex items-center gap-2 px-1 py-2 text-[11px] font-black uppercase tracking-[0.28em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#030806] ${
                 panelVisible
                   ? 'text-vae-turquoise'
-                  : 'text-gray-700 hover:text-gray-900 dark:text-white/80 dark:hover:text-white'
+                  : 'text-text-secondary hover:text-text-light dark:text-white/80 dark:hover:text-white'
               }`}
               aria-haspopup="true"
               aria-expanded={panelVisible}
@@ -310,7 +310,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 className={`h-3.5 w-3.5 transition-transform duration-200 ${
                   panelVisible
                     ? 'rotate-180 text-vae-turquoise'
-                    : 'text-gray-500 group-hover:text-gray-700 dark:text-white/50 dark:group-hover:text-white/80'
+                    : 'text-text-secondary group-hover:text-text-light dark:text-white/50 dark:group-hover:text-white/80'
                 }`}
               />
             </button>
@@ -327,13 +327,12 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'
-              } border-[#c5c9c6] bg-[#faf8f4] dark:border-white/10 dark:bg-[hsla(0,0%,6%,0.98)]`}
+              } border-black/10 bg-white dark:border-white/10 dark:bg-[hsla(160,14%,6%,0.98)]`}
               style={{ height: panelHeight ? `${panelHeight}px` : undefined }}
             >
               <div ref={getPanelRefHandler(menu.id)}>
-                {/* Subtitle Header - elegant am Anfang des Dropdowns */}
                 {menu.subtitle && (
-                  <div className="border-b border-[#d5d2ce] bg-[#f4f1ec] px-6 py-3 dark:border-white/10 dark:bg-[#050505]">
+                  <div className="bg-bg-primary border-b border-black/10 px-6 py-3 dark:border-white/10 dark:bg-black/40">
                     <p className="text-[10px] font-black uppercase tracking-[0.3em] text-vae-turquoise">
                       {menu.subtitle}
                     </p>
@@ -380,14 +379,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         type="button"
         onClick={toggleMobileMenu}
         aria-expanded={isMobileMenuOpen}
-        className="flex w-full items-center justify-between border border-[#c5c9c6] bg-[#faf8f4] px-4 py-3 text-[11px] font-black uppercase tracking-[0.3em] text-[#1a2320] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:focus-visible:ring-offset-[#030806]"
+        className="flex w-full items-center justify-between rounded-xl border border-black/10 bg-white px-4 py-3 text-[11px] font-black uppercase tracking-[0.3em] text-text-light transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:focus-visible:ring-offset-[#030806]"
       >
         <span>Menü</span>
         {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
 
       {isMobileMenuOpen && (
-        <div className="mt-2 space-y-2 border border-[#c5c9c6] bg-[#faf8f4] p-4 text-[#1a2320] shadow-[0_8px_32px_-8px_rgba(0,0,0,0.12)] dark:border-white/10 dark:bg-[#0a0a0a] dark:text-white">
+        <div className="bg-bg-primary mt-2 space-y-2 border border-black/10 p-4 text-text-light shadow-[0_8px_32px_-8px_rgba(0,0,0,0.12)] dark:border-white/10 dark:bg-bg-dark dark:text-white">
           {menus.map(menu => {
             const isExpanded = expandedMobileMenus[menu.id]
             const activeContentId = activeContentCache[menu.id] || menu.menuItems[0]?.id
@@ -395,11 +394,11 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             return (
               <div
                 key={menu.id}
-                className="overflow-hidden border border-[#d5d2ce] bg-white dark:border-white/10 dark:bg-white/5"
+                className="overflow-hidden border border-black/10 bg-white dark:border-white/10 dark:bg-white/5"
               >
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between border-l-4 border-transparent px-4 py-3 text-left text-[11px] font-black uppercase tracking-[0.2em] text-[#1a2320] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white aria-expanded:border-vae-turquoise aria-expanded:bg-vae-turquoise/5 dark:text-white dark:focus-visible:ring-offset-[#030806]"
+                  className="flex w-full items-center justify-between rounded-xl border border-transparent px-4 py-3 text-left text-[11px] font-black uppercase tracking-[0.2em] text-text-light transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white aria-expanded:border-vae-turquoise/25 aria-expanded:bg-vae-turquoise/5 dark:text-white dark:focus-visible:ring-offset-[#030806]"
                   aria-expanded={isExpanded}
                   aria-controls={`${menu.id}-mobile-panel`}
                   onClick={() => toggleMobileSection(menu.id)}
@@ -407,7 +406,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   {menu.label}
                   <ChevronDown
                     className={`h-4 w-4 transition-transform duration-200 ${
-                      isExpanded ? 'rotate-180 text-vae-turquoise' : 'text-[#394642] dark:text-white/60'
+                      isExpanded ? 'rotate-180 text-vae-turquoise' : 'text-text-secondary dark:text-white/60'
                     }`}
                   />
                 </button>
@@ -416,7 +415,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   id={`${menu.id}-mobile-panel`}
                   className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                 >
-                  <div className="min-h-0 space-y-4 px-4 pb-4 text-[#2c3834] dark:text-white/80">
+                  <div className="min-h-0 space-y-4 px-4 pb-4 text-text-secondary dark:text-white/80">
                     <ul className="space-y-2">
                       {menu.menuItems.map(item => (
                         <li key={item.id}>
@@ -424,7 +423,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                             href={item.href}
                             onFocus={() => setMenuActiveItem(menu.id, item.id)}
                             onMouseEnter={() => setMenuActiveItem(menu.id, item.id)}
-                            className="block border-l-4 border-transparent px-4 py-2.5 text-[11px] font-black uppercase tracking-[0.16em] text-[#1a2320] transition-all duration-150 hover:border-vae-turquoise/50 hover:bg-vae-turquoise/5 hover:text-vae-turquoise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-white/70 dark:hover:border-vae-turquoise/50 dark:hover:text-white dark:focus-visible:ring-offset-[#030806]"
+                            className="block rounded-xl border border-transparent px-4 py-2.5 text-[11px] font-black uppercase tracking-[0.16em] text-text-light transition-all duration-150 hover:border-vae-turquoise/30 hover:bg-vae-turquoise/5 hover:text-vae-turquoise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-white/70 dark:hover:border-vae-turquoise/30 dark:hover:text-white dark:focus-visible:ring-offset-[#030806]"
                           >
                             {item.label}
                           </a>

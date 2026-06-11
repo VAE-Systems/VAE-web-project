@@ -1,5 +1,6 @@
 import CtaLink from '@/components/ui/CtaLink'
-import MagneticButton from '@/components/ui/MagneticButton'
+import MagneticButton from '@/components/ui/buttons/MagneticButton'
+import { useTheme } from '@/contexts/ThemeContext'
 import { CalendarClock, ChevronDown } from 'lucide-react'
 import React from 'react'
 
@@ -10,12 +11,16 @@ const PROBLEMS = [
 ]
 
 const MinimalHeroSection: React.FC = () => {
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
   const scrollToProof = React.useCallback(() => {
     document.getElementById('social-proof')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [])
 
   return (
-    <section className="relative flex min-h-[100dvh] flex-col bg-[#030806] text-white">
+    <section
+      className={`relative flex min-h-[100dvh] flex-col ${isLight ? 'bg-bg-primary text-text-light' : 'bg-[#030806] text-white'}`}
+    >
       {/* Turquoise top rule */}
       <div className="h-[3px] w-full bg-vae-turquoise" />
 
@@ -27,20 +32,29 @@ const MinimalHeroSection: React.FC = () => {
           </p>
 
           {/* Headline — direkt, kein Slogan */}
-          <h1 className="mb-10 max-w-4xl text-[clamp(2.8rem,7vw,5.5rem)] font-black uppercase leading-[0.9] tracking-[-0.07em] text-white">
+          <h1
+            className={`mb-10 max-w-4xl text-[clamp(2.8rem,7vw,5.5rem)] font-black uppercase leading-[0.9] tracking-[-0.07em] ${isLight ? 'text-text-light' : 'text-white'}`}
+          >
             Wir bauen Infrastruktur,
             <br />
             <span className="bg-vae-turquoise px-3 py-1 text-black">die Ihnen gehört.</span>
           </h1>
 
           {/* Problem-Liste — konkret, keine Marketingsprache */}
-          <div className="mb-10 max-w-xl space-y-3 border-l-2 border-white/20 pl-5">
+          <div
+            className={`mb-10 max-w-xl space-y-3 border-l-2 pl-5 ${isLight ? 'border-text-light/15' : 'border-white/20'}`}
+          >
             {PROBLEMS.map(p => (
-              <p key={p} className="text-base leading-snug text-white/65 sm:text-lg">
+              <p
+                key={p}
+                className={`text-base leading-snug sm:text-lg ${isLight ? 'text-text-secondary' : 'text-white/65'}`}
+              >
                 {p}
               </p>
             ))}
-            <p className="pt-2 text-base font-bold text-white sm:text-lg">Das muss nicht so sein.</p>
+            <p className={`pt-2 text-base font-bold sm:text-lg ${isLight ? 'text-text-light' : 'text-white'}`}>
+              Das muss nicht so sein.
+            </p>
           </div>
 
           {/* CTAs */}
@@ -49,7 +63,8 @@ const MinimalHeroSection: React.FC = () => {
               <CtaLink
                 ctaId="contact.schedule_call"
                 ctx={{ fromPage: 'home', intent: 'minimal-hero' }}
-                className="inline-flex items-center gap-3 bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] text-black transition-colors hover:bg-vae-turquoise"
+                variant="primary"
+                className="inline-flex items-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-[0.12em]"
               >
                 <CalendarClock className="h-5 w-5 shrink-0" />
                 Kostenloses Erstgespräch
@@ -59,7 +74,7 @@ const MinimalHeroSection: React.FC = () => {
             <button
               type="button"
               onClick={scrollToProof}
-              className="inline-flex items-center gap-2 border border-white/20 px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white/70 transition-colors hover:border-vae-turquoise hover:text-vae-turquoise"
+              className="btn-secondary inline-flex items-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-[0.14em]"
             >
               Referenzen ansehen
               <ChevronDown className="h-4 w-4" />
@@ -67,14 +82,16 @@ const MinimalHeroSection: React.FC = () => {
           </div>
 
           {/* Trust-note */}
-          <p className="mt-6 text-xs uppercase tracking-[0.2em] text-white/35">
+          <p className={`mt-6 text-xs uppercase tracking-[0.2em] ${isLight ? 'text-text-secondary' : 'text-white/35'}`}>
             Binnen 48h Termin · Kein Pitch · Keine Verpflichtung · Heidelberg & deutschlandweit
           </p>
         </div>
       </div>
 
       {/* Bottom: was Sie am Ende haben — 3 Ergebnisse, eine Zeile */}
-      <div className="grid grid-cols-1 border-t border-white/10 sm:grid-cols-3">
+      <div
+        className={`grid grid-cols-1 border-t sm:grid-cols-3 ${isLight ? 'border-text-light/10 bg-white/50' : 'border-white/10'}`}
+      >
         {[
           { num: '3–6W', text: 'bis produktiv — nicht Monate' },
           { num: '100%', text: 'Ihre Daten, Ihre Server' },
@@ -82,10 +99,10 @@ const MinimalHeroSection: React.FC = () => {
         ].map(({ num, text }) => (
           <div
             key={num}
-            className="flex items-center gap-4 border-b border-white/10 px-6 py-5 last:border-r-0 sm:border-b-0 sm:border-r"
+            className={`flex items-center gap-4 border-b px-6 py-5 last:border-r-0 sm:border-b-0 sm:border-r ${isLight ? 'border-text-light/10' : 'border-white/10'}`}
           >
             <span className="text-2xl font-black tracking-[-0.05em] text-vae-turquoise">{num}</span>
-            <span className="text-sm leading-snug text-white/55">{text}</span>
+            <span className={`text-sm leading-snug ${isLight ? 'text-text-secondary' : 'text-white/55'}`}>{text}</span>
           </div>
         ))}
       </div>

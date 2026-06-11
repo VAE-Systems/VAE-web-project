@@ -112,8 +112,8 @@
     --radius-pill: 9999px; /* Navigation, Tags, Badges */
 
     /* Legacy Tokens (deprecated, für Migration) */
-    --radius-sm: 0.25rem; /* 4px — Nur für kleine Icons */
-    --radius-base: 0.5rem; /* 8px — Input-Felder */
+    --radius-sm: 0.375rem; /* 6px — = rounded-md, nur kleine Icons */
+    --radius-base: 0.75rem; /* 12px — Inputs als interaktive Flächen */
     --radius-lg: 0.75rem; /* 12px — = --radius-interactive */
     --radius-xl: 1rem; /* 16px — Zu groß, vermeiden */
     --radius-2xl: 1.5rem; /* 24px — Nicht verwenden */
@@ -417,12 +417,22 @@ body.using-keyboard *:focus {
   }
 
   /* VAE Button Components */
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost,
+  .btn-outline,
+  .btn-convert {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-xl bg-vae-turquoise px-6 py-2 text-sm font-semibold text-bg-darker transition-transform duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-vae-turquoise focus:ring-offset-2 focus:ring-offset-bg-darker md:px-8 md:py-3 md:text-base;
     transition-timing-function: var(--ease-spring-out);
     box-shadow: 0 6px 18px -6px rgba(var(--vae-turquoise-rgb), 0.35);
   }
   .btn-primary:hover {
+    color: hsl(var(--color-bg-darker));
+    background: hsl(var(--color-vae-turquoise) / 0.9);
     box-shadow:
       0 10px 28px -10px rgba(var(--vae-turquoise-rgb), 0.45),
       0 0 0 1px rgba(var(--vae-turquoise-rgb), 0.35);
@@ -433,12 +443,14 @@ body.using-keyboard *:focus {
   }
   /* Light mode: refined green primary (cleaner contrast, neutral shadow) */
   .theme-light .btn-primary {
-    color: white;
-    background: linear-gradient(135deg, hsl(var(--color-vae-turquoise) / 0.96), hsl(var(--color-vae-turquoise) / 0.88));
+    color: hsl(var(--color-bg-darker));
+    background: hsl(var(--color-vae-turquoise));
     border: 1px solid hsla(var(--color-vae-turquoise), 0.55);
     box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.22);
   }
   .theme-light .btn-primary:hover {
+    color: hsl(var(--color-bg-darker));
+    background: hsl(var(--color-vae-turquoise) / 0.9);
     box-shadow:
       0 12px 22px -12px rgba(0, 0, 0, 0.26),
       0 0 0 1px rgba(0, 0, 0, 0.12);
@@ -469,7 +481,7 @@ body.using-keyboard *:focus {
   }
   .theme-light .btn-secondary:hover {
     background: hsla(var(--color-vae-turquoise), 0.1);
-    color: hsl(var(--color-vae-turquoise));
+    color: hsl(var(--color-text-light));
     border-color: hsl(var(--color-vae-turquoise));
     box-shadow:
       0 8px 20px -8px rgba(0, 0, 0, 0.25),
@@ -482,16 +494,18 @@ body.using-keyboard *:focus {
   }
   .theme-light .btn-ghost {
     border-color: rgba(0, 0, 0, 0.12);
+    color: hsl(var(--color-text-light));
+    background: rgba(0, 0, 0, 0.02);
   }
   .theme-light .btn-ghost:hover {
-    background: rgba(0, 0, 0, 0.04);
+    background: hsla(var(--color-vae-turquoise), 0.08);
     color: hsl(var(--color-text-light));
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: hsla(var(--color-vae-turquoise), 0.28);
   }
 
-  /* Strong outline button — Magazin-Stil, SHARP/Editorial edges (ECKIG) */
+  /* Outline button */
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-none border border-white/25 bg-transparent px-6 py-2 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 focus:outline-none md:px-8 md:py-3 md:text-sm;
+    @apply inline-flex items-center justify-center rounded-xl border border-white/25 bg-transparent px-6 py-2 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors duration-200 focus:outline-none md:px-8 md:py-3 md:text-sm;
   }
   .btn-outline:hover {
     border-color: hsl(var(--color-vae-turquoise));
@@ -506,7 +520,7 @@ body.using-keyboard *:focus {
   }
   .theme-light .btn-outline:hover {
     border-color: hsl(var(--color-vae-turquoise));
-    color: hsl(var(--color-vae-turquoise));
+    color: hsl(var(--color-text-light));
     background: hsla(var(--color-vae-turquoise), 0.08);
   }
 
@@ -564,11 +578,12 @@ body.using-keyboard *:focus {
     @apply relative inline-flex items-center justify-center overflow-hidden px-4 py-2.5 text-xs font-black uppercase tracking-[0.12em] transition-all duration-200 focus:outline-none md:px-5 md:py-3 md:text-[11px];
     background: hsl(var(--color-vae-turquoise));
     border: 1px solid hsl(var(--color-vae-turquoise));
-    color: #000;
+    color: hsl(var(--color-bg-darker));
     letter-spacing: 0.1em;
   }
   .btn-convert:hover {
     background: hsl(var(--color-vae-turquoise) / 0.88);
+    color: hsl(var(--color-bg-darker));
     transform: translateY(-1px);
     box-shadow: 0 8px 24px -8px rgba(var(--vae-turquoise-rgb), 0.55);
   }
@@ -1297,6 +1312,7 @@ body.using-keyboard *:focus {
   }
   .theme-light .accent-section .btn-primary:hover {
     background: rgba(255, 255, 255, 0.92);
+    color: hsl(var(--color-vae-turquoise));
     box-shadow: none;
   }
   .theme-light .accent-section .btn-primary.accent-keep {
@@ -1309,6 +1325,11 @@ body.using-keyboard *:focus {
     background: white;
     color: hsl(var(--color-vae-turquoise));
     border: 2px solid white;
+    box-shadow: none;
+  }
+  .theme-light .accent-section .btn-convert:hover {
+    background: rgba(255, 255, 255, 0.92);
+    color: hsl(var(--color-vae-turquoise));
     box-shadow: none;
   }
   .theme-light .accent-section .btn-convert.accent-keep {
@@ -1506,7 +1527,7 @@ body.using-keyboard *:focus {
 
   /* Soft card variations */
   .card-soft {
-    @apply relative rounded-2xl border border-white/10 bg-white/[0.035] p-6 backdrop-blur-md transition-all duration-300 md:p-7;
+    @apply relative rounded-none border border-white/10 bg-white/[0.035] p-6 backdrop-blur-md transition-all duration-300 md:p-7;
   }
   .card-soft::before {
     content: '';
@@ -2201,7 +2222,7 @@ body.using-keyboard *:focus {
 }
 /* Size modifier for compact CTAs inside cards */
 .btn-compact {
-  @apply rounded-lg px-3 py-2 text-xs md:text-[13px];
+  @apply rounded-xl px-3 py-2 text-xs md:text-[13px];
 }
 
 /* ==================== BACKDROP-BLUR PATTERN FÜR CARD-SEKTIONEN ==================== */
@@ -2224,7 +2245,7 @@ body.using-keyboard *:focus {
 
 .section-card-backdrop::after {
   content: '';
-  @apply absolute inset-8 rounded-[24px] border border-white/5 bg-white/5;
+  @apply absolute inset-8 rounded-none border border-white/5 bg-white/5;
 }
 
 /* ========================================
@@ -2382,15 +2403,15 @@ body.using-keyboard *:focus {
   }
 
   .editorial-panel-dark {
-    @apply border-2 border-black bg-black text-white dark:border-white dark:bg-black;
+    @apply border-2 border-text-light bg-text-light text-white dark:border-white dark:bg-bg-dark;
   }
 
   .editorial-panel-light {
-    @apply border-2 border-black bg-white text-black dark:border-white dark:bg-white dark:text-black;
+    @apply border-2 border-text-light bg-white text-black dark:border-white dark:bg-white dark:text-black;
   }
 
   .editorial-card {
-    @apply border-2 border-black bg-white text-black shadow-[0_18px_50px_-26px_rgba(0,0,0,0.22)] dark:border-white dark:bg-[#050905] dark:text-white dark:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.5)];
+    @apply border-2 border-text-light bg-white text-black shadow-[0_18px_50px_-26px_rgba(0,0,0,0.22)] dark:border-white dark:bg-bg-dark dark:text-white dark:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.5)];
   }
 
   .editorial-grid-bg {
@@ -2429,7 +2450,7 @@ body.using-keyboard *:focus {
   }
 
   .editorial-chip-dark {
-    @apply inline-flex items-center bg-black px-3 py-1 text-[10px] font-black uppercase tracking-[0.28em] text-white dark:bg-white dark:text-black;
+    @apply inline-flex items-center bg-text-light px-3 py-1 text-[10px] font-black uppercase tracking-[0.28em] text-white dark:bg-white dark:text-black;
   }
 
   .editorial-chip-accent {

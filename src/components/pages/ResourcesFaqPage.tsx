@@ -92,21 +92,21 @@ const ResourcesFaqPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] py-20 text-white sm:py-28">
+      <section className="bg-bg-primary relative isolate overflow-hidden border-b border-text-light/10 py-20 text-text-light dark:border-white/10 dark:bg-[#030806] dark:text-white sm:py-28">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.12),transparent_35%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
-        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.04] dark:text-white/[0.03] xl:block">
           VAE
         </div>
 
         <div className="container-vae relative z-10">
           <div className="flex flex-col items-start gap-8">
-            <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise">
+            <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-vae-turquoise/35 bg-white/85 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise dark:bg-black">
               <ShieldCheck className="h-3.5 w-3.5" /> FAQ · Knowledge Base
             </div>
 
             <h1 className="max-w-4xl">
-              <span className="block text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-5xl lg:text-[4.8rem]">
+              <span className="block text-[11vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-text-light dark:text-white sm:text-5xl lg:text-[4.8rem]">
                 Fragen &amp;
               </span>
               <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[9vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-4xl lg:text-[4rem]">
@@ -114,7 +114,7 @@ const ResourcesFaqPage: React.FC = () => {
               </span>
             </h1>
 
-            <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+            <div className="max-w-2xl border-l-4 border-text-light pl-4 text-base leading-relaxed text-text-secondary dark:border-white dark:text-white/75 sm:text-lg">
               {faqEntries.length} Fragen zu Technologie, Prozessen und Projekten — ehrlich, strukturiert, ohne
               Buzzwords.
             </div>
@@ -123,7 +123,7 @@ const ResourcesFaqPage: React.FC = () => {
               <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
                 <Link
                   to="/contact"
-                  className="flex w-full items-center justify-center gap-2 bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] text-black transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="btn-primary flex w-full items-center justify-center gap-2 px-8 py-4 text-sm font-black uppercase tracking-[0.12em] sm:w-auto"
                 >
                   Kontakt aufnehmen
                   <CalendarDays className="h-4 w-4" />
@@ -132,7 +132,7 @@ const ResourcesFaqPage: React.FC = () => {
               <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
                 <Link
                   to="/contact#booking"
-                  className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                  className="btn-secondary flex w-full items-center justify-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] sm:w-auto"
                 >
                   Gespräch buchen
                 </Link>
@@ -140,22 +140,32 @@ const ResourcesFaqPage: React.FC = () => {
             </div>
 
             <div className="grid w-full gap-4 md:grid-cols-3">
-              <div className="border border-white/10 bg-white/[0.03] p-5 text-left">
+              <div className="border border-text-light/10 bg-white/70 p-5 text-left dark:border-white/10 dark:bg-white/[0.03]">
                 <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Kategorien</p>
-                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-white">
+                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-text-light dark:text-white">
                   {categoriesWithCounts.length} Bereiche
                 </p>
-                <p className="mt-1 text-sm text-white/55">Technologie, Business, Karriere, Use Cases, Sonstiges.</p>
+                <p className="mt-1 text-sm text-text-secondary dark:text-white/55">
+                  Technologie, Business, Karriere, Use Cases, Sonstiges.
+                </p>
               </div>
-              <div className="border border-white/10 bg-white/[0.03] p-5 text-left">
+              <div className="border border-text-light/10 bg-white/70 p-5 text-left dark:border-white/10 dark:bg-white/[0.03]">
                 <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Einträge</p>
-                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-white">{faqEntries.length} Fragen</p>
-                <p className="mt-1 text-sm text-white/55">Kuratiert, keine generischen SEO-Antworten.</p>
+                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-text-light dark:text-white">
+                  {faqEntries.length} Fragen
+                </p>
+                <p className="mt-1 text-sm text-text-secondary dark:text-white/55">
+                  Kuratiert, keine generischen SEO-Antworten.
+                </p>
               </div>
-              <div className="border border-white/10 bg-white/[0.03] p-5 text-left">
+              <div className="border border-text-light/10 bg-white/70 p-5 text-left dark:border-white/10 dark:bg-white/[0.03]">
                 <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Philosophie</p>
-                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-white">Lösungs-orientiert</p>
-                <p className="mt-1 text-sm text-white/55">Preisfragen führen direkt zu einem Gespräch.</p>
+                <p className="mt-2 text-3xl font-black tracking-[-0.06em] text-text-light dark:text-white">
+                  Lösungs-orientiert
+                </p>
+                <p className="mt-1 text-sm text-text-secondary dark:text-white/55">
+                  Preisfragen führen direkt zu einem Gespräch.
+                </p>
               </div>
             </div>
           </div>
@@ -172,7 +182,7 @@ const ResourcesFaqPage: React.FC = () => {
                 {totalFaqs} von {faqEntries.length} Antworten sichtbar
               </p>
             </div>
-            <label className="flex w-full items-center gap-3 rounded-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-[0_12px_30px_rgba(15,23,42,0.12)] focus-within:border-vae-turquoise/60 focus-within:ring-1 focus-within:ring-vae-turquoise/60 dark:border-white/10 dark:bg-bg-darker dark:text-text-secondary dark:shadow-[0_15px_35px_rgba(3,7,18,0.45)] md:max-w-xl">
+            <label className="flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-[0_12px_30px_rgba(15,23,42,0.12)] focus-within:border-vae-turquoise/60 focus-within:ring-1 focus-within:ring-vae-turquoise/60 dark:border-white/10 dark:bg-bg-darker dark:text-text-secondary dark:shadow-[0_15px_35px_rgba(3,7,18,0.45)] md:max-w-xl">
               <SearchIcon className="h-4 w-4 text-gray-500 dark:text-white/60" />
               <span className="sr-only">FAQ durchsuchen</span>
               <input

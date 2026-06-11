@@ -95,7 +95,7 @@ export const PartnershipSection: React.FC = () => {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="btn-ghost inline-flex items-center gap-2 border border-white/70 px-4 py-2 text-white hover:bg-white/10 dark:border-vae-turquoise/30 dark:text-vae-turquoise"
+                className="btn-ghost inline-flex items-center gap-2 px-4 py-2"
                 whileHover={
                   prefersReducedMotion ? undefined : { x: 2, transition: { duration: 0.2, delay: idx * 0.02 } }
                 }

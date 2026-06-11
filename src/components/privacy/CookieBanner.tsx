@@ -66,7 +66,7 @@ const CookieBanner: React.FC = () => {
 
                 <button
                   onClick={() => setShowDetails(true)}
-                  className="btn-outline px-6 py-2 text-sm"
+                  className="btn-secondary px-6 py-2 text-sm"
                   aria-label="Detaillierte Cookie-Einstellungen anzeigen"
                 >
                   Einstellungen
@@ -145,7 +145,7 @@ const CookieBanner: React.FC = () => {
 
                 <button
                   onClick={rejectAll}
-                  className="btn-outline px-6 py-2 text-sm"
+                  className="btn-secondary px-6 py-2 text-sm"
                   aria-label="Alle optionalen Cookies ablehnen"
                 >
                   Nur notwendig

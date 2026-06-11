@@ -31,7 +31,7 @@ const optimisationCycle = [
 
 const KiOptimierungPage: React.FC = () => {
   return (
-    <div className="relative z-0 bg-bg-darker text-text-light">
+    <div className="bg-bg-primary relative z-0 text-text-light dark:bg-bg-darker">
       <Seo
         title="AI-Workflow Optimierung – Prozesse automatisieren | VAE Systems"
         description="Wir entwickeln AI-gestützte Workflows für Ihre Arbeitsinfrastruktur: Dokumentenverarbeitung, Service-Automation, Analytics und kontinuierliche Optimierung."
@@ -39,28 +39,28 @@ const KiOptimierungPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#030806] py-20 text-white sm:py-28">
+      <section className="bg-bg-primary relative isolate overflow-hidden border-b border-text-light/10 py-20 text-text-light dark:border-white/10 dark:bg-[#030806] dark:text-white sm:py-28">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--vae-turquoise-rgb),0.12),transparent_35%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-vae-turquoise" />
-        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-white/[0.03] xl:block">
+        <div className="pointer-events-none absolute right-[-4vw] top-8 hidden select-none text-[18vw] font-black uppercase leading-none tracking-[-0.08em] text-text-light/[0.04] dark:text-white/[0.03] xl:block">
           VAE
         </div>
 
         <div className="container-vae relative z-10 py-4">
           <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div className="space-y-6">
-              <div className="inline-flex w-fit items-center gap-2 border border-vae-turquoise/35 bg-black px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise">
+              <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-vae-turquoise/35 bg-white/85 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.34em] text-vae-turquoise dark:bg-black">
                 <BrainCircuit className="h-3.5 w-3.5" /> AI Workflow Optimierung
               </div>
               <h1 className="max-w-3xl">
-                <span className="block text-[12vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-5xl lg:text-[4.8rem]">
+                <span className="block text-[12vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-text-light dark:text-white sm:text-5xl lg:text-[4.8rem]">
                   KI-Automation.
                 </span>
                 <span className="mt-2 inline-block bg-vae-turquoise px-3 py-2 text-[9vw] font-black uppercase leading-[0.88] tracking-[-0.08em] text-black sm:px-5 sm:py-3 sm:text-4xl lg:text-[3.8rem]">
                   Messbar. Kontrolliert.
                 </span>
               </h1>
-              <div className="max-w-2xl border-l-4 border-white pl-4 text-base leading-relaxed text-white/75 sm:text-lg">
+              <div className="max-w-2xl border-l-4 border-text-light pl-4 text-base leading-relaxed text-text-secondary dark:border-white dark:text-white/75 sm:text-lg">
                 Wir automatisieren wiederkehrende Aufgaben, verknüpfen Systeme und messen die Wirkung. Jede Iteration
                 bringt neue Effizienzgewinne – ohne Kontrollverlust.
               </div>
@@ -68,7 +68,7 @@ const KiOptimierungPage: React.FC = () => {
                 <MagneticButton intensity={0.08} scaleEffect glowEffect className="isolate w-full sm:w-auto">
                   <Link
                     to="/contact"
-                    className="flex w-full items-center justify-center gap-2 bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] text-black transition-transform hover:-translate-y-0.5 sm:w-auto"
+                    className="btn-primary flex w-full items-center justify-center gap-2 px-8 py-4 text-sm font-black uppercase tracking-[0.12em] sm:w-auto"
                   >
                     Potenzialanalyse buchen
                   </Link>
@@ -76,25 +76,25 @@ const KiOptimierungPage: React.FC = () => {
                 <MagneticButton intensity={0.05} scaleEffect className="isolate w-full sm:w-auto">
                   <Link
                     to="/testphase"
-                    className="flex w-full items-center justify-center gap-2 border border-white/20 bg-transparent px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-vae-turquoise hover:bg-white/5 sm:w-auto"
+                    className="btn-secondary flex w-full items-center justify-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-[0.14em] sm:w-auto"
                   >
                     In Testphase ausprobieren
                   </Link>
                 </MagneticButton>
               </div>
               <div className="flex flex-wrap gap-3">
-                <div className="border border-white/10 bg-white/[0.04] px-4 py-2">
+                <div className="border border-text-light/10 bg-white/70 px-4 py-2 dark:border-white/10 dark:bg-white/[0.04]">
                   <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Ergebnis</p>
-                  <p className="mt-0.5 text-sm font-bold text-white">2–3h Zeitgewinn / Woche</p>
+                  <p className="mt-0.5 text-sm font-bold text-text-light dark:text-white">2–3h Zeitgewinn / Woche</p>
                 </div>
-                <div className="border border-white/10 bg-white/[0.04] px-4 py-2">
+                <div className="border border-text-light/10 bg-white/70 px-4 py-2 dark:border-white/10 dark:bg-white/[0.04]">
                   <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">Ansatz</p>
-                  <p className="mt-0.5 text-sm font-bold text-white">Iterativ, messbar</p>
+                  <p className="mt-0.5 text-sm font-bold text-text-light dark:text-white">Iterativ, messbar</p>
                 </div>
               </div>
             </div>
 
-            <aside className="border border-vae-turquoise/25 bg-white/[0.03] p-8 text-sm">
+            <aside className="border border-vae-turquoise/25 bg-white p-8 text-sm shadow-[0_18px_50px_rgba(15,23,42,0.08)] dark:bg-white/[0.03] dark:shadow-none">
               <p className="text-[10px] font-black uppercase tracking-[0.28em] text-vae-turquoise">
                 Häufige AI-Anwendungsfälle
               </p>
@@ -103,8 +103,12 @@ const KiOptimierungPage: React.FC = () => {
                   <li key={item.title} className="flex items-start gap-3">
                     <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-vae-turquoise" />
                     <div>
-                      <span className="block font-bold uppercase tracking-[0.1em] text-white">{item.title}</span>
-                      <span className="block text-sm leading-relaxed text-white/60">{item.description}</span>
+                      <span className="block font-bold uppercase tracking-[0.1em] text-text-light dark:text-white">
+                        {item.title}
+                      </span>
+                      <span className="block text-sm leading-relaxed text-text-secondary dark:text-white/60">
+                        {item.description}
+                      </span>
                     </div>
                   </li>
                 ))}

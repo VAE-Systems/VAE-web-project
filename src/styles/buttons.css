@@ -19,7 +19,7 @@
 .theme-light .btn-primary {
   color: white;
   background: linear-gradient(135deg, hsl(var(--color-vae-turquoise) / 0.96), hsl(var(--color-vae-turquoise) / 0.88));
-  border: 1px solid hsla(var(--color-vae-turquoise), 0.55);
+  border: 1px solid hsl(var(--color-vae-turquoise) / 0.55);
   box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.22);
 }
 .theme-light .btn-primary:hover {
@@ -33,7 +33,7 @@
   transition-timing-function: var(--ease-spring-out);
 }
 .btn-secondary:hover {
-  background: hsla(var(--color-vae-turquoise), 0.1);
+  background: hsl(var(--color-vae-turquoise) / 0.1);
   color: hsl(var(--color-vae-turquoise));
   box-shadow: 0 10px 24px -12px rgba(var(--vae-turquoise-rgb), 0.35);
 }
@@ -48,12 +48,12 @@
   color: hsl(var(--color-text-light));
 }
 .theme-light .btn-secondary:hover {
-  background: hsla(var(--color-vae-turquoise), 0.08);
+  background: hsl(var(--color-vae-turquoise) / 0.08);
   color: hsl(var(--color-vae-turquoise));
-  border-color: hsla(var(--color-vae-turquoise), 0.45);
+  border-color: hsl(var(--color-vae-turquoise) / 0.45);
   box-shadow:
     0 8px 18px -10px rgba(0, 0, 0, 0.2),
-    0 0 0 1px hsla(var(--color-vae-turquoise), 0.35);
+    0 0 0 1px hsl(var(--color-vae-turquoise) / 0.35);
 }
 
 .btn-ghost {
@@ -81,10 +81,10 @@
   transform: translateY(-2px);
 }
 .theme-light .btn-outline:hover {
-  border-color: hsla(var(--color-vae-turquoise), 0.45);
+  border-color: hsl(var(--color-vae-turquoise) / 0.45);
   color: hsl(var(--color-vae-turquoise));
   background: rgba(0, 0, 0, 0.02);
-  box-shadow: 0 0 0 1px hsla(var(--color-vae-turquoise), 0.35);
+  box-shadow: 0 0 0 1px hsl(var(--color-vae-turquoise) / 0.35);
 }
 
 /* Primary CTA Button - Light mode default (türkiser Hintergrund) */

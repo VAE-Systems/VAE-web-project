@@ -126,16 +126,19 @@ const lightPalette: ThemeDefinition['palette'] = {
 }
 
 const darkPalette: ThemeDefinition['palette'] = {
-  background: 'hsl(222 47% 6%)',
-  surface: 'hsl(222 47% 8%)',
-  surfaceMuted: 'hsl(222 36% 12%)',
-  overlay: 'hsla(222, 63%, 5%, 0.6)',
-  border: 'hsl(220 30% 20%)',
-  divider: 'hsl(220 27% 18%)',
-  text: 'hsl(215 25% 92%)',
-  textMuted: 'hsl(216 12% 64%)',
-  primary: 'hsl(157 100% 47%)',
-  primaryMuted: 'hsl(157 80% 38%)',
+  // Neutral black scale per VAE styleguide (#0A0A0A / #141414 / #1F1F1F).
+  // Was a blue-slate (hsl 222) palette that clashed with the neutral-black used by
+  // --color-* (globals.css) and theme.css — corrected to kill the "two different darks" conflict.
+  background: 'hsl(0 0% 4%)',
+  surface: 'hsl(0 0% 8%)',
+  surfaceMuted: 'hsl(0 0% 12%)',
+  overlay: 'hsla(0, 0%, 3%, 0.6)',
+  border: 'hsl(0 0% 18%)',
+  divider: 'hsl(0 0% 15%)',
+  text: 'hsl(0 0% 95%)',
+  textMuted: 'hsl(0 0% 75%)',
+  primary: 'hsl(157 100% 50%)',
+  primaryMuted: 'hsl(157 80% 40%)',
   secondary: 'hsl(212 88% 56%)',
   accent: 'hsl(278 96% 62%)',
   success: 'hsl(155 85% 45%)',

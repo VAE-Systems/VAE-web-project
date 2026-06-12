@@ -40,7 +40,7 @@
     --vae-black-lighter: hsl(0, 0%, 10%);
 
     /* VAE Türkis Palette - Original */
-    --vae-turquoise: hsl(157, 100%, 47%);
+    --vae-turquoise: hsl(157, 100%, 50%);
     --vae-turquoise-dark: hsl(157, 100%, 35%);
     --vae-turquoise-light: hsl(157, 100%, 60%);
     --vae-turquoise-neon: hsl(157, 100%, 50%);
@@ -61,14 +61,15 @@
     --vae-text-muted: hsla(0, 0%, 75%, 0.9);
 
     /* Glow Effects - Dark Mode */
-    --glow-turquoise: 0 0 20px hsla(var(--color-vae-turquoise), 0.6);
-    --glow-turquoise-strong: 0 0 40px hsla(var(--color-vae-turquoise), 0.8);
-    --glow-turquoise-ultra: 0 0 60px hsla(var(--color-vae-turquoise), 1);
-    --shadow-turquoise: 0 8px 32px hsla(var(--color-vae-turquoise), 0.3);
-    --shadow-turquoise-glow: 0 0 40px hsla(var(--color-vae-turquoise), 0.5);
+    --glow-turquoise: 0 0 20px hsl(var(--color-vae-turquoise) / 0.6);
+    --glow-turquoise-strong: 0 0 40px hsl(var(--color-vae-turquoise) / 0.8);
+    --glow-turquoise-ultra: 0 0 60px hsl(var(--color-vae-turquoise) / 1);
+    --shadow-turquoise: 0 8px 32px hsl(var(--color-vae-turquoise) / 0.3);
+    --shadow-turquoise-glow: 0 0 40px hsl(var(--color-vae-turquoise) / 0.5);
 
     /* Modern Tailwind compatibility - Dark Mode */
-    --color-vae-turquoise: 157 75% 40%;
+    /* Brand turquoise #00FFA5 = hsl(157 100% 50%). Was 157 75% 40% (dull/grey) — corrected to match styleguide. */
+    --color-vae-turquoise: 157 100% 50%;
     --color-vae-turquoise-rgb: 0, 255, 165;
     --color-white-rgb: 255, 255, 255;
     --color-black-rgb: 0, 0, 0;
@@ -113,8 +114,8 @@
     --radius-2xl: 1.5rem;
 
     /* Effects */
-    --shadow-glow: 0 0 20px hsla(var(--color-vae-turquoise), 0.3);
-    --shadow-glow-strong: 0 0 30px hsla(var(--color-vae-turquoise), 0.5);
+    --shadow-glow: 0 0 20px hsl(var(--color-vae-turquoise) / 0.3);
+    --shadow-glow-strong: 0 0 30px hsl(var(--color-vae-turquoise) / 0.5);
     --blur-glass: 16px;
 
     /* Z-Index Scale */
@@ -135,7 +136,7 @@
     --surface-1: linear-gradient(to bottom right, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-dark)) 100%);
     --surface-2: linear-gradient(135deg, hsl(var(--color-bg-dark)) 0%, hsl(var(--color-bg-secondary)) 100%);
     --surface-3:
-      radial-gradient(circle at 25% 30%, hsla(var(--color-vae-turquoise), 0.1), transparent 65%),
+      radial-gradient(circle at 25% 30%, hsl(var(--color-vae-turquoise) / 0.1), transparent 65%),
       linear-gradient(160deg, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-dark)) 100%);
     --surface-4: linear-gradient(
       120deg,
@@ -144,7 +145,7 @@
       hsl(var(--color-bg-secondary)) 100%
     );
     --surface-5:
-      radial-gradient(circle at 70% 60%, hsla(var(--color-vae-turquoise), 0.18), transparent 70%),
+      radial-gradient(circle at 70% 60%, hsl(var(--color-vae-turquoise) / 0.18), transparent 70%),
       linear-gradient(145deg, hsl(var(--color-bg-dark)) 0%, hsl(var(--color-bg-secondary)) 100%);
     --surface-border: 1px solid rgba(255, 255, 255, 0.1);
     --surface-border-strong: 1px solid rgba(255, 255, 255, 0.18);
@@ -193,7 +194,7 @@
     --surface-1: linear-gradient(to bottom right, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-dark)) 100%);
     --surface-2: linear-gradient(135deg, hsl(var(--color-bg-dark)) 0%, hsl(var(--color-bg-secondary)) 100%);
     --surface-3:
-      radial-gradient(circle at 25% 30%, hsla(var(--color-vae-turquoise), 0.04), transparent 65%),
+      radial-gradient(circle at 25% 30%, hsl(var(--color-vae-turquoise) / 0.04), transparent 65%),
       linear-gradient(160deg, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-dark)) 100%);
     --surface-4: linear-gradient(
       120deg,
@@ -202,7 +203,7 @@
       hsl(var(--color-bg-secondary)) 100%
     );
     --surface-5:
-      radial-gradient(circle at 70% 60%, hsla(var(--color-vae-turquoise), 0.06), transparent 70%),
+      radial-gradient(circle at 70% 60%, hsl(var(--color-vae-turquoise) / 0.06), transparent 70%),
       linear-gradient(145deg, hsl(var(--color-bg-dark)) 0%, hsl(var(--color-bg-secondary)) 100%);
     --surface-border: 1px solid rgba(0, 0, 0, 0.08);
     --surface-border-strong: 1px solid rgba(0, 0, 0, 0.15);
@@ -427,7 +428,7 @@ body.using-keyboard *:focus {
   .theme-light .btn-primary {
     color: white;
     background: linear-gradient(135deg, hsl(var(--color-vae-turquoise) / 0.96), hsl(var(--color-vae-turquoise) / 0.88));
-    border: 1px solid hsla(var(--color-vae-turquoise), 0.55);
+    border: 1px solid hsl(var(--color-vae-turquoise) / 0.55);
     box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.22);
   }
   .theme-light .btn-primary:hover {
@@ -441,12 +442,12 @@ body.using-keyboard *:focus {
     transition-timing-function: var(--ease-spring-out);
   }
   .btn-secondary:hover {
-    background: hsla(var(--color-vae-turquoise), 0.12);
+    background: hsl(var(--color-vae-turquoise) / 0.12);
     color: hsl(var(--color-vae-turquoise));
     border-color: hsl(var(--color-vae-turquoise));
     box-shadow:
       0 8px 20px -8px rgba(var(--vae-turquoise-rgb), 0.4),
-      0 0 0 1px hsla(var(--color-vae-turquoise), 0.3);
+      0 0 0 1px hsl(var(--color-vae-turquoise) / 0.3);
     transform: translateY(-2px);
   }
   .btn-secondary:active {
@@ -460,12 +461,12 @@ body.using-keyboard *:focus {
     background: rgba(0, 0, 0, 0.02);
   }
   .theme-light .btn-secondary:hover {
-    background: hsla(var(--color-vae-turquoise), 0.1);
+    background: hsl(var(--color-vae-turquoise) / 0.1);
     color: hsl(var(--color-vae-turquoise));
     border-color: hsl(var(--color-vae-turquoise));
     box-shadow:
       0 8px 20px -8px rgba(0, 0, 0, 0.25),
-      0 0 0 1px hsla(var(--color-vae-turquoise), 0.4);
+      0 0 0 1px hsl(var(--color-vae-turquoise) / 0.4);
   }
 
   .btn-ghost {
@@ -494,19 +495,19 @@ body.using-keyboard *:focus {
   .btn-outline:hover {
     border-color: hsl(var(--color-vae-turquoise));
     color: hsl(var(--color-vae-turquoise));
-    background: hsla(var(--color-vae-turquoise), 0.08);
+    background: hsl(var(--color-vae-turquoise) / 0.08);
     box-shadow:
       0 8px 20px -8px rgba(var(--vae-turquoise-rgb), 0.3),
-      0 0 0 1px hsla(var(--color-vae-turquoise), 0.25);
+      0 0 0 1px hsl(var(--color-vae-turquoise) / 0.25);
     transform: translateY(-2px);
   }
   .theme-light .btn-outline:hover {
     border-color: hsl(var(--color-vae-turquoise));
     color: hsl(var(--color-vae-turquoise));
-    background: hsla(var(--color-vae-turquoise), 0.08);
+    background: hsl(var(--color-vae-turquoise) / 0.08);
     box-shadow:
       0 8px 20px -8px rgba(0, 0, 0, 0.2),
-      0 0 0 1px hsla(var(--color-vae-turquoise), 0.35);
+      0 0 0 1px hsl(var(--color-vae-turquoise) / 0.35);
   }
 
   /* Triggered CTA signal (JS-controlled) */
@@ -736,10 +737,10 @@ body.using-keyboard *:focus {
 
   .card-vae:hover {
     transform: translateY(-2px); /* Reduced lift for smoother feel */
-    border-color: hsla(var(--color-vae-turquoise), 0.3); /* Softer border */
+    border-color: hsl(var(--color-vae-turquoise) / 0.3); /* Softer border */
     box-shadow:
-      0 8px 25px -5px hsla(var(--color-vae-turquoise), 0.15),
-      0 0 0 1px hsla(var(--color-vae-turquoise), 0.1);
+      0 8px 25px -5px hsl(var(--color-vae-turquoise) / 0.15),
+      0 0 0 1px hsl(var(--color-vae-turquoise) / 0.1);
   }
 
   /* Light mode: stronger hover effect with lifted shadow */
@@ -811,7 +812,7 @@ body.using-keyboard *:focus {
     }
 
     /* Fix light mode contrast gradients */
-    --glow-turquoise: 0 0 20px hsla(var(--color-vae-turquoise), 0.15);
+    --glow-turquoise: 0 0 20px hsl(var(--color-vae-turquoise) / 0.15);
   }
 
   .theme-light .text-gradient {
@@ -1088,10 +1089,10 @@ body.using-keyboard *:focus {
   @keyframes pulse-dot {
     0%,
     100% {
-      box-shadow: 0 0 0 0 hsla(var(--color-vae-turquoise), 0.7);
+      box-shadow: 0 0 0 0 hsl(var(--color-vae-turquoise) / 0.7);
     }
     50% {
-      box-shadow: 0 0 0 10px hsla(var(--color-vae-turquoise), 0);
+      box-shadow: 0 0 0 10px hsl(var(--color-vae-turquoise) / 0);
     }
   }
 
@@ -1255,8 +1256,8 @@ body.using-keyboard *:focus {
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 18% 32%, hsla(var(--color-vae-turquoise), 0.1) 0%, transparent 60%),
-      radial-gradient(circle at 82% 68%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 62%);
+      radial-gradient(circle at 18% 32%, hsl(var(--color-vae-turquoise) / 0.1) 0%, transparent 60%),
+      radial-gradient(circle at 82% 68%, hsl(var(--color-vae-turquoise) / 0.08) 0%, transparent 62%);
     opacity: 0.9;
     mix-blend-mode: normal;
   }
@@ -1271,8 +1272,8 @@ body.using-keyboard *:focus {
   }
   .section-surface-alt::before {
     background:
-      radial-gradient(circle at 25% 40%, hsla(var(--color-vae-turquoise), 0.12) 0%, transparent 58%),
-      radial-gradient(circle at 78% 55%, hsla(var(--color-vae-turquoise), 0.1) 0%, transparent 60%),
+      radial-gradient(circle at 25% 40%, hsl(var(--color-vae-turquoise) / 0.12) 0%, transparent 58%),
+      radial-gradient(circle at 78% 55%, hsl(var(--color-vae-turquoise) / 0.1) 0%, transparent 60%),
       linear-gradient(to bottom right, hsla(var(--color-bg-darker)), hsla(var(--color-bg-dark)));
   }
   .section-divider {
@@ -1285,7 +1286,7 @@ body.using-keyboard *:focus {
     bottom: -3rem;
     width: 1px;
     height: 6rem;
-    background: linear-gradient(to bottom, hsla(var(--color-vae-turquoise), 0.35), transparent);
+    background: linear-gradient(to bottom, hsl(var(--color-vae-turquoise) / 0.35), transparent);
     transform: translateX(-50%);
   }
   /* VAE Effect Utilities */
@@ -1366,7 +1367,7 @@ body.using-keyboard *:focus {
   .theme-light .accent-section .btn-primary.accent-keep {
     background: linear-gradient(135deg, hsl(var(--color-vae-turquoise) / 0.96), hsl(var(--color-vae-turquoise) / 0.88));
     color: white;
-    border: 1px solid hsla(var(--color-vae-turquoise), 0.55);
+    border: 1px solid hsl(var(--color-vae-turquoise) / 0.55);
     box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.22);
   }
   .theme-light .accent-section .btn-convert {
@@ -1378,12 +1379,12 @@ body.using-keyboard *:focus {
   .theme-light .accent-section .btn-convert.accent-keep {
     background: linear-gradient(135deg, hsl(var(--color-vae-turquoise) / 0.96), hsl(var(--color-vae-turquoise) / 0.88));
     color: white;
-    border: 1px solid hsla(var(--color-vae-turquoise), 0.55);
+    border: 1px solid hsl(var(--color-vae-turquoise) / 0.55);
     box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.22);
   }
   .theme-light .accent-section .accent-link {
     color: hsl(var(--color-vae-turquoise));
-    text-decoration-color: hsla(var(--color-vae-turquoise), 0.3);
+    text-decoration-color: hsl(var(--color-vae-turquoise) / 0.3);
   }
   .theme-light .accent-section .accent-link:hover {
     text-decoration-color: hsl(var(--color-vae-turquoise));
@@ -1480,7 +1481,7 @@ body.using-keyboard *:focus {
   }
   .surface-glow {
     background:
-      radial-gradient(circle at 20% 30%, hsla(var(--color-vae-turquoise), 0.1), transparent 55%),
+      radial-gradient(circle at 20% 30%, hsl(var(--color-vae-turquoise) / 0.1), transparent 55%),
       linear-gradient(to bottom right, hsl(var(--color-bg-darker)), hsl(var(--color-bg-dark)));
   }
   /* Horizontal section divider line with subtle glow */
@@ -1496,9 +1497,9 @@ body.using-keyboard *:focus {
     top: 50%;
     width: 68%;
     height: 1px;
-    background: linear-gradient(to right, transparent, hsla(var(--color-vae-turquoise), 0.5), transparent);
+    background: linear-gradient(to right, transparent, hsl(var(--color-vae-turquoise) / 0.5), transparent);
     transform: translate(-50%, -50%);
-    filter: drop-shadow(0 0 6px hsla(var(--color-vae-turquoise), 0.4));
+    filter: drop-shadow(0 0 6px hsl(var(--color-vae-turquoise) / 0.4));
     opacity: 0.55;
   }
   .section-divider-horizontal::after {
@@ -1509,7 +1510,7 @@ body.using-keyboard *:focus {
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: radial-gradient(circle, hsla(var(--color-vae-turquoise), 0.25), transparent 70%);
+    background: radial-gradient(circle, hsl(var(--color-vae-turquoise) / 0.25), transparent 70%);
     transform: translate(-50%, -50%);
     opacity: 0.25;
     pointer-events: none;
@@ -1525,8 +1526,8 @@ body.using-keyboard *:focus {
     pointer-events: none;
     opacity: 0.9;
     background:
-      radial-gradient(circle at 18% 32%, hsla(var(--color-vae-turquoise), 0.1) 0%, transparent 60%),
-      radial-gradient(circle at 82% 68%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 62%),
+      radial-gradient(circle at 18% 32%, hsl(var(--color-vae-turquoise) / 0.1) 0%, transparent 60%),
+      radial-gradient(circle at 82% 68%, hsl(var(--color-vae-turquoise) / 0.08) 0%, transparent 62%),
       repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 8px);
     mix-blend-mode: normal;
     mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 8%, #000 92%, rgba(0, 0, 0, 0) 100%);
@@ -1534,19 +1535,19 @@ body.using-keyboard *:focus {
   /* Section variants (subtle variance in gradient & accent) */
   .about-surface.variant-a .about-surface-bg {
     background:
-      radial-gradient(circle at 12% 30%, hsla(var(--color-vae-turquoise), 0.14), transparent 58%),
-      radial-gradient(circle at 80% 70%, hsla(var(--color-vae-turquoise), 0.07), transparent 62%),
+      radial-gradient(circle at 12% 30%, hsl(var(--color-vae-turquoise) / 0.14), transparent 58%),
+      radial-gradient(circle at 80% 70%, hsl(var(--color-vae-turquoise) / 0.07), transparent 62%),
       linear-gradient(140deg, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-dark)) 100%);
   }
   .about-surface.variant-b .about-surface-bg {
     background:
-      radial-gradient(circle at 78% 32%, hsla(var(--color-vae-turquoise), 0.15), transparent 60%),
-      radial-gradient(circle at 20% 72%, hsla(var(--color-vae-turquoise), 0.07), transparent 65%),
+      radial-gradient(circle at 78% 32%, hsl(var(--color-vae-turquoise) / 0.15), transparent 60%),
+      radial-gradient(circle at 20% 72%, hsl(var(--color-vae-turquoise) / 0.07), transparent 65%),
       linear-gradient(125deg, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-secondary)) 100%);
   }
   .about-surface.variant-c .about-surface-bg {
     background:
-      radial-gradient(circle at 50% 15%, hsla(var(--color-vae-turquoise), 0.18), transparent 65%),
+      radial-gradient(circle at 50% 15%, hsl(var(--color-vae-turquoise) / 0.18), transparent 65%),
       linear-gradient(
         160deg,
         hsl(var(--color-bg-darker)) 0%,
@@ -1556,14 +1557,14 @@ body.using-keyboard *:focus {
   }
   .about-surface.variant-d .about-surface-bg {
     background:
-      radial-gradient(circle at 30% 65%, hsla(var(--color-vae-turquoise), 0.16), transparent 60%),
-      radial-gradient(circle at 85% 25%, hsla(var(--color-vae-turquoise), 0.1), transparent 60%),
+      radial-gradient(circle at 30% 65%, hsl(var(--color-vae-turquoise) / 0.16), transparent 60%),
+      radial-gradient(circle at 85% 25%, hsl(var(--color-vae-turquoise) / 0.1), transparent 60%),
       linear-gradient(145deg, hsl(var(--color-bg-darker)), hsl(var(--color-bg-dark)));
   }
   .about-surface.variant-e .about-surface-bg {
     background:
-      radial-gradient(circle at 10% 50%, hsla(var(--color-vae-turquoise), 0.14), transparent 55%),
-      radial-gradient(circle at 90% 50%, hsla(var(--color-vae-turquoise), 0.09), transparent 55%),
+      radial-gradient(circle at 10% 50%, hsl(var(--color-vae-turquoise) / 0.14), transparent 55%),
+      radial-gradient(circle at 90% 50%, hsl(var(--color-vae-turquoise) / 0.09), transparent 55%),
       repeating-linear-gradient(60deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 10px),
       linear-gradient(150deg, hsl(var(--color-bg-darker)), hsl(var(--color-bg-dark)));
   }
@@ -1577,7 +1578,7 @@ body.using-keyboard *:focus {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(130deg, hsla(var(--color-vae-turquoise), 0.35), transparent 60%);
+    background: linear-gradient(130deg, hsl(var(--color-vae-turquoise) / 0.35), transparent 60%);
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
@@ -1586,13 +1587,13 @@ body.using-keyboard *:focus {
     opacity: 0.5;
   }
   .card-soft:hover {
-    border-color: hsla(var(--color-vae-turquoise), 0.45);
+    border-color: hsl(var(--color-vae-turquoise) / 0.45);
     box-shadow:
-      0 4px 28px -8px hsla(var(--color-vae-turquoise), 0.35),
-      0 0 0 1px hsla(var(--color-vae-turquoise), 0.25);
+      0 4px 28px -8px hsl(var(--color-vae-turquoise) / 0.35),
+      0 0 0 1px hsl(var(--color-vae-turquoise) / 0.25);
   }
   .card-soft[data-active='true'] {
-    border-color: hsla(var(--color-vae-turquoise), 0.6);
+    border-color: hsl(var(--color-vae-turquoise) / 0.6);
   }
 
   /* Feature list cards spacing tweak */
@@ -1604,7 +1605,7 @@ body.using-keyboard *:focus {
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    background: radial-gradient(circle at 35% 25%, hsla(var(--color-vae-turquoise), 0.35), transparent 70%);
+    background: radial-gradient(circle at 35% 25%, hsl(var(--color-vae-turquoise) / 0.35), transparent 70%);
     opacity: 0;
     mix-blend-mode: overlay;
     transition: opacity 0.5s;
@@ -1616,7 +1617,7 @@ body.using-keyboard *:focus {
 
   /* Timeline Active State */
   [data-timeline-item].is-active {
-    border-color: hsla(var(--color-vae-turquoise), 0.55);
+    border-color: hsl(var(--color-vae-turquoise) / 0.55);
     background: linear-gradient(140deg, rgba(var(--vae-turquoise-rgb), 0.08), rgba(var(--vae-turquoise-rgb), 0.02));
   }
   [data-timeline-item].is-active h3 {
@@ -1640,8 +1641,8 @@ body.using-keyboard *:focus {
   /* Accent interpolation overlay (uses --about-accent HSL components) */
   .about-accent-overlay {
     background:
-      radial-gradient(circle at 25% 35%, hsla(var(--about-accent), 0.18), transparent 60%),
-      radial-gradient(circle at 75% 65%, hsla(var(--about-accent), 0.12), transparent 60%);
+      radial-gradient(circle at 25% 35%, hsl(var(--about-accent) / 0.18), transparent 60%),
+      radial-gradient(circle at 75% 65%, hsl(var(--about-accent) / 0.12), transparent 60%);
     mix-blend-mode: overlay;
     transition: background 0.9s ease;
     pointer-events: none;
@@ -1674,7 +1675,7 @@ body.using-keyboard *:focus {
     background:
       radial-gradient(
         circle at var(--radial-x, 60%) var(--radial-y, 40%),
-        hsla(var(--about-accent, 157 100% 47%), 0.18),
+        hsl(var(--about-accent, 157 100% 50%) / 0.18),
         transparent 65%
       ),
       linear-gradient(
@@ -1745,7 +1746,7 @@ body.using-keyboard *:focus {
     inset: 0;
     background: radial-gradient(
       circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      hsla(var(--color-vae-turquoise), 0.22),
+      hsl(var(--color-vae-turquoise) / 0.22),
       transparent 60%
     );
     opacity: 0;
@@ -1806,7 +1807,7 @@ body.using-keyboard *:focus {
     inset: 0;
     background: radial-gradient(
       circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      hsla(var(--color-vae-turquoise), 0.35),
+      hsl(var(--color-vae-turquoise) / 0.35),
       transparent 70%
     );
     opacity: 0;
@@ -1881,8 +1882,8 @@ body.using-keyboard *:focus {
   /* Contact radial background utility */
   .bg-contact-radial {
     background:
-      radial-gradient(circle at 40% 30%, hsla(var(--color-vae-turquoise), 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 60% 70%, hsla(var(--color-vae-turquoise), 0.05) 0%, transparent 50%);
+      radial-gradient(circle at 40% 30%, hsl(var(--color-vae-turquoise) / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, hsl(var(--color-vae-turquoise) / 0.05) 0%, transparent 50%);
   }
 
   /* Light-mode compatibility overrides for legacy dark-first classes */
@@ -1909,6 +1910,49 @@ body.using-keyboard *:focus {
   .theme-light .border-white\/20,
   .theme-light .border-white\/5 {
     border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* ========================================================================
+     ACCENT-SECTION-AUSNAHMEN
+     accent-section = bewusst grüne/dunkle Fläche in BEIDEN Themes.
+     Die Legacy-Blanket-Overrides oben (.theme-light .text-white etc.)
+     dürfen dort NICHT greifen — sonst entsteht dunkler Text auf dunklem
+     Grund. Höhere Spezifität gewinnt bei gleichem !important.
+     ======================================================================== */
+  .theme-light .accent-section .text-white {
+    color: #ffffff !important;
+  }
+  .theme-light .accent-section .fill-white {
+    fill: #ffffff !important;
+  }
+  .theme-light .accent-section .stroke-white {
+    stroke: #ffffff !important;
+  }
+  .theme-light .accent-section .bg-white\/\[0\.025\],
+  .theme-light .accent-section .bg-white\/\[0\.035\],
+  .theme-light .accent-section .bg-white\/\[0\.05\],
+  .theme-light .accent-section .bg-white\/5,
+  .theme-light .accent-section .bg-white\/10 {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  .theme-light .accent-section .border-white\/5,
+  .theme-light .accent-section .border-white\/10,
+  .theme-light .accent-section .border-white\/15,
+  .theme-light .accent-section .border-white\/20 {
+    border-color: rgba(255, 255, 255, 0.28) !important;
+  }
+  /* Geflippte Text-Tokens innerhalb accent-section ebenfalls auf hell zwingen
+     (sonst macht der Blanket-Override oben dunklen Text auf grüner Fläche).
+     Attribut-Selektoren statt Utility-Klassen, um Tailwinds
+     @apply-Zirkularitätsprüfung nicht auszulösen. */
+  .theme-light .accent-section [class~='text-text-light'] {
+    color: hsl(0 0% 98%) !important;
+  }
+  .theme-light .accent-section [class~='text-text-secondary'] {
+    color: hsl(0 0% 100% / 0.82) !important;
+  }
+  .theme-light .accent-section [class~='text-text-muted'] {
+    color: hsl(0 0% 100% / 0.65) !important;
   }
 
   /* Ensure a consistent neutral border utility across themes */
@@ -1948,8 +1992,8 @@ body.using-keyboard *:focus {
     inset: 0;
     z-index: 0;
     background:
-      radial-gradient(600px 400px at 20% 30%, hsla(var(--color-vae-turquoise), 0.05), transparent 60%),
-      radial-gradient(500px 350px at 80% 60%, hsla(var(--color-vae-turquoise), 0.04), transparent 65%);
+      radial-gradient(600px 400px at 20% 30%, hsl(var(--color-vae-turquoise) / 0.05), transparent 60%),
+      radial-gradient(500px 350px at 80% 60%, hsl(var(--color-vae-turquoise) / 0.04), transparent 65%);
     opacity: 0.9;
     pointer-events: none;
   }
@@ -2012,10 +2056,10 @@ body.using-keyboard *:focus {
 @keyframes glow {
   0%,
   100% {
-    box-shadow: 0 0 20px hsla(var(--color-vae-turquoise), 0.3);
+    box-shadow: 0 0 20px hsl(var(--color-vae-turquoise) / 0.3);
   }
   50% {
-    box-shadow: 0 0 30px hsla(var(--color-vae-turquoise), 0.6);
+    box-shadow: 0 0 30px hsl(var(--color-vae-turquoise) / 0.6);
   }
 }
 
@@ -2081,15 +2125,15 @@ body.using-keyboard *:focus {
   filter: blur(40px);
 }
 .parallax-layer.layer-1 {
-  background: radial-gradient(circle at 25% 35%, hsla(var(--color-vae-turquoise), 0.18), transparent 60%);
+  background: radial-gradient(circle at 25% 35%, hsl(var(--color-vae-turquoise) / 0.18), transparent 60%);
   animation: float 14s ease-in-out infinite;
 }
 .parallax-layer.layer-2 {
-  background: radial-gradient(circle at 75% 65%, hsla(var(--color-vae-turquoise), 0.12), transparent 65%);
+  background: radial-gradient(circle at 75% 65%, hsl(var(--color-vae-turquoise) / 0.12), transparent 65%);
   animation: float 18s ease-in-out reverse infinite;
 }
 .parallax-layer.layer-3 {
-  background: radial-gradient(circle at 50% 55%, hsla(var(--color-vae-turquoise), 0.1), transparent 55%);
+  background: radial-gradient(circle at 50% 55%, hsl(var(--color-vae-turquoise) / 0.1), transparent 55%);
   animation: float 22s ease-in-out infinite;
 }
 /* Light mode: parallax layers with minimal neutral tints */
@@ -2201,7 +2245,7 @@ body.using-keyboard *:focus {
   top: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, hsla(var(--color-vae-turquoise), 0.7), transparent);
+  background: linear-gradient(90deg, transparent, hsl(var(--color-vae-turquoise) / 0.7), transparent);
   animation: glow 6s linear infinite;
 }
 

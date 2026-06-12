@@ -1,0 +1,63 @@
+/* ============================================================================
+   VAE DESIGN TOKENS — SINGLE SOURCE OF TRUTH
+   ----------------------------------------------------------------------------
+   ALL brand colour decisions live here (Light + Dark). Nothing else.
+   Tailwind (tailwind.config.js) and every stylesheet read from these tokens
+   via the `--color-*` adapter layer in globals.css.
+
+   Values per VAE_BRAND_STYLEGUIDE.md (corrected 2026-06):
+     Brand turquoise  #00FFA5  = hsl(157 100% 50%)   (dark)
+     Light accent     #1db87a  ≈ hsl(157 90% 35%)    (darker for contrast — Julians Farbe)
+     Dark surfaces    neutral black  #050505 / #0A0A0A / #141414 / #1F1F1F
+
+   FORMAT: bare HSL channels ("H S% L%") so Tailwind can apply "/ <alpha>".
+   DO NOT add new colour systems. Change a brand value once, here.
+
+   NOTE: src/styles/{theme,design-system,buttons,typography,enhanced-effects,
+   animations}.css are NOT imported anywhere (dead). Do not edit them expecting
+   a visual effect — edit this file.
+   ============================================================================ */
+
+@layer base {
+  /* ---- DARK (default) ---- */
+  :root {
+    /* Brand */
+    --vae-primary: 157 100% 50%; /* #00FFA5 */
+    --vae-primary-strong: 157 100% 35%; /* hover / active */
+    --vae-primary-soft: 157 100% 60%; /* highlights / glows */
+
+    /* Surfaces — neutral black scale */
+    --vae-ink: 0 0% 4%; /* "vae-black" base ink */
+    --vae-bg-deep: 0 0% 4%; /* #0A0A0A primary background */
+    --vae-bg: 0 0% 8%; /* #141414 section background */
+    --vae-bg-2: 0 0% 12%; /* #1F1F1F card / elevated surface */
+
+    /* Text */
+    --vae-fg: 0 0% 95%; /* primary text */
+    --vae-fg-secondary: 0 0% 100% / 0.8; /* secondary text (alpha baked in) */
+    --vae-fg-muted: 0 0% 75% / 0.9; /* muted / meta text */
+
+    /* Borders / dividers (alpha baked in) */
+    --vae-border: 0 0% 100% / 0.1; /* default hairline */
+    --vae-border-strong: 0 0% 100% / 0.18; /* emphasised border */
+  }
+
+  /* ---- LIGHT ---- */
+  .theme-light {
+    --vae-primary: 157 90% 35%; /* #1db87a — darker accent for contrast on light */
+    --vae-primary-strong: 157 100% 28%;
+    --vae-primary-soft: 157 70% 45%;
+
+    --vae-ink: 147 18% 14%; /* deep forest ink (#1a2320) */
+    --vae-bg-deep: 0 0% 100%; /* pure white elevated */
+    --vae-bg: 120 10% 96%; /* soft sage (#f5f7f5) */
+    --vae-bg-2: 120 8% 93%; /* muted sage (#e8ebe9) */
+
+    --vae-fg: 147 18% 14%; /* deep forest text */
+    --vae-fg-secondary: 147 15% 20%;
+    --vae-fg-muted: 147 10% 30%;
+
+    --vae-border: 150 7% 78%; /* sage hairline (#c5ccc8) */
+    --vae-border-strong: 150 6% 73%; /* emphasised sage (#b7c1bc) */
+  }
+}

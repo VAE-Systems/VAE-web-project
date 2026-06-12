@@ -59,7 +59,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       id={slug}
       aria-labelledby={headingId}
       onMouseMove={reducedMotion ? undefined : handleMove}
-      className={`group relative rounded-2xl border dark:border-white/10 ${isLight ? 'border-2 border-[#b7c1bc] bg-white' : 'bg-bg-primary/5 border-vae-turquoise/20 dark:bg-white/5'} overflow-hidden backdrop-blur-md transition-all duration-500 ${className} ${!reducedMotion ? (isLight ? 'hover:border-vae-turquoise hover:shadow-[0_10px_22px_rgba(18,24,20,0.10)]' : 'hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]') : ''}`.trim()}
+      className={`group relative rounded-2xl border dark:border-white/10 ${isLight ? 'border-2 border-line-strong bg-white' : 'bg-bg-primary/5 border-vae-turquoise/20 dark:bg-white/5'} overflow-hidden backdrop-blur-md transition-all duration-500 ${className} ${!reducedMotion ? (isLight ? 'hover:border-vae-turquoise hover:shadow-[0_10px_22px_rgba(18,24,20,0.10)]' : 'hover:border-vae-turquoise/45 hover:shadow-[0_0_0_1px_rgba(var(--vae-turquoise-rgb),0.25),0_12px_44px_-10px_rgba(var(--vae-turquoise-rgb),0.4)]') : ''}`.trim()}
       style={
         reducedMotion ? undefined : ({ ['--sx' as any]: coords.x, ['--sy' as any]: coords.y } as React.CSSProperties)
       }

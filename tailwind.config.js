@@ -41,6 +41,10 @@ export default {
         'text-light': 'hsl(var(--color-text-light) / <alpha-value>)',
         'text-muted': 'hsl(var(--color-text-muted) / <alpha-value>)',
         'text-secondary': 'hsl(var(--color-text-secondary) / <alpha-value>)',
+
+        // Borders - Theme-aware (alpha baked into the token, so no <alpha-value>)
+        line: 'hsl(var(--color-line))',
+        'line-strong': 'hsl(var(--color-line-strong))',
       },
 
       // Typography

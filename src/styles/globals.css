@@ -67,23 +67,26 @@
     --shadow-turquoise: 0 8px 32px hsl(var(--color-vae-turquoise) / 0.3);
     --shadow-turquoise-glow: 0 0 40px hsl(var(--color-vae-turquoise) / 0.5);
 
-    /* Modern Tailwind compatibility - Dark Mode */
-    /* Brand turquoise #00FFA5 = hsl(157 100% 50%). Was 157 75% 40% (dull/grey) — corrected to match styleguide. */
-    --color-vae-turquoise: 157 100% 50%;
+    /* Tailwind adapter — derives from semantic tokens in tokens.css (single source). */
+    --color-vae-turquoise: var(--vae-primary);
     --color-vae-turquoise-rgb: 0, 255, 165;
     --color-white-rgb: 255, 255, 255;
     --color-black-rgb: 0, 0, 0;
-    --color-vae-black: 0 0% 4%;
+    --color-vae-black: var(--vae-ink);
 
     /* Background Colors */
-    --color-bg-darker: 0 0% 4%;
-    --color-bg-dark: 0 0% 8%;
-    --color-bg-secondary: 0 0% 12%;
+    --color-bg-darker: var(--vae-bg-deep);
+    --color-bg-dark: var(--vae-bg);
+    --color-bg-secondary: var(--vae-bg-2);
 
     /* Text Colors */
-    --color-text-light: 0 0% 95%;
-    --color-text-secondary: 0 0% 100% / 0.8;
-    --color-text-muted: 0 0% 75% / 0.9;
+    --color-text-light: var(--vae-fg);
+    --color-text-secondary: var(--vae-fg-secondary);
+    --color-text-muted: var(--vae-fg-muted);
+
+    /* Borders (theme-aware; --vae-border flips in .theme-light) */
+    --color-line: var(--vae-border);
+    --color-line-strong: var(--vae-border-strong);
 
     /* Typography Scale */
     --font-size-xs: 0.875rem; /* +0.125rem */
@@ -176,19 +179,19 @@
     --shadow-turquoise: 0 8px 32px rgba(29, 184, 122, 0.15);
     --shadow-turquoise-glow: 0 0 40px rgba(29, 184, 122, 0.2);
 
-    /* Modern Tailwind compatibility - VAE Green (kräftiger im Light Mode) */
-    --color-vae-turquoise: 157 90% 35%;
-    --color-vae-black: 147 18% 14%; /* Deep forest (#1a2320) */
+    /* Tailwind adapter (Light) — same semantic tokens; --vae-* already flip in .theme-light. */
+    --color-vae-turquoise: var(--vae-primary);
+    --color-vae-black: var(--vae-ink);
 
     /* Background Colors */
-    --color-bg-darker: 0 0% 100%; /* Pure white */
-    --color-bg-dark: 120 10% 96%; /* Soft sage (#f5f7f5) */
-    --color-bg-secondary: 120 8% 93%; /* Muted sage (#e8ebe9) */
+    --color-bg-darker: var(--vae-bg-deep);
+    --color-bg-dark: var(--vae-bg);
+    --color-bg-secondary: var(--vae-bg-2);
 
     /* Text Colors */
-    --color-text-light: 147 18% 14%; /* Deep forest (#1a2320) */
-    --color-text-secondary: 147 15% 20%; /* Medium forest */
-    --color-text-muted: 147 10% 30%; /* Slate gray (#394642) */
+    --color-text-light: var(--vae-fg);
+    --color-text-secondary: var(--vae-fg-secondary);
+    --color-text-muted: var(--vae-fg-muted);
 
     /* Surface Tone Tokens (Theming) - Light Mode */
     --surface-1: linear-gradient(to bottom right, hsl(var(--color-bg-darker)) 0%, hsl(var(--color-bg-dark)) 100%);

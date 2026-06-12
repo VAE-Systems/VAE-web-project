@@ -1,6 +1,7 @@
 import type { Preview } from 'storybook'
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
 import React from 'react'
+import '../src/styles/tokens.css'
 import '../src/styles/globals.css'
 
 const customViewports = {

@@ -172,12 +172,13 @@
     --vae-text-secondary: #2c3834; /* Medium forest */
     --vae-text-muted: #394642; /* Slate gray */
 
-    /* Glow Effects - Light Mode with VAE Green */
-    --glow-turquoise: 0 0 20px rgba(29, 184, 122, 0.25);
-    --glow-turquoise-strong: 0 0 40px rgba(29, 184, 122, 0.35);
-    --glow-turquoise-ultra: 0 0 60px rgba(29, 184, 122, 0.45);
-    --shadow-turquoise: 0 8px 32px rgba(29, 184, 122, 0.15);
-    --shadow-turquoise-glow: 0 0 40px rgba(29, 184, 122, 0.2);
+    /* DESIGN RULE: NO coloured glows in Light Mode (they look like smudges on white).
+       Pure glows -> none; elevation -> subtle neutral (forest-grey) shadow only. */
+    --glow-turquoise: none;
+    --glow-turquoise-strong: none;
+    --glow-turquoise-ultra: none;
+    --shadow-turquoise: 0 8px 24px rgba(26, 35, 32, 0.08);
+    --shadow-turquoise-glow: none;
 
     /* Tailwind adapter (Light) — same semantic tokens; --vae-* already flip in .theme-light. */
     --color-vae-turquoise: var(--vae-primary);
@@ -1221,11 +1222,37 @@ body.using-keyboard *:focus {
     border-color: rgba(255, 255, 255, 0.08) !important;
   }
 
-  /* Light mode: subtle glow for turquoise headings for professional emphasis */
+  /* DESIGN RULE: no coloured glow on headings in Light Mode. */
   .theme-light h1 .text-vae-turquoise,
   .theme-light h2 .text-vae-turquoise {
-    filter: drop-shadow(0 2px 8px rgba(0, 255, 165, 0.25));
+    filter: none;
   }
+
+  /* ====================================================================
+     LIGHT MODE — NO COLOURED GLOWS (design rule).
+     Decorative turquoise glows -> off; elevated surfaces -> subtle neutral. */
+  .theme-light .timeline-glow,
+  .theme-light .btn-convert:hover svg,
+  .theme-light .section-divider-horizontal::before {
+    filter: none !important;
+  }
+  .theme-light .btn-primary,
+  .theme-light .btn-convert,
+  .theme-light .tech-logo-item:hover,
+  .theme-light .nav-link--expanded,
+  .theme-light .nav-link--active,
+  .theme-light .nav-testphase,
+  .theme-light .nav-testphase:hover,
+  .theme-light .nav-testphase:focus-visible,
+  .theme-light .nav-testphase--active,
+  .theme-light .nav-floating-container,
+  .theme-light .nav-floating-container:hover,
+  .theme-light .dropdown-menu,
+  .theme-light .dropdown-card:hover,
+  .theme-light .dropdown-card--active {
+    box-shadow: 0 8px 24px -12px rgba(26, 35, 32, 0.18) !important;
+  }
+
   /* Standard Abstände */
   .h-space {
     @apply mb-6;

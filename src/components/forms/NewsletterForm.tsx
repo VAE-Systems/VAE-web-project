@@ -77,7 +77,7 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
               <div className="pointer-events-none absolute inset-0 bg-black/20 md:bg-black/10" />
               <div
                 role="status"
-                className="pointer-events-auto relative mx-4 w-full max-w-md rounded-2xl border border-white/10 bg-bg-secondary/80 p-5 text-center shadow-2xl backdrop-blur-xl md:p-6"
+                className="pointer-events-auto relative mx-4 w-full max-w-md rounded-2xl border border-black/10 dark:border-white/10 bg-bg-secondary/80 p-5 text-center shadow-2xl backdrop-blur-xl md:p-6"
               >
                 <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/20 text-vae-turquoise">
                   ✓

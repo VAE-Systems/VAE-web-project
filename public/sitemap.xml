@@ -87,37 +87,7 @@
     <priority>0.6</priority>
   </url>
 
-  <!-- Wissen (Sub-Pages von Werte) -->
-  <url>
-    <loc>https://vae-systems.com/wissen/transparenz-open-source</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/wissen/klare-projektkommunikation</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/wissen/vendor-lock-in-vermeiden</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/wissen/handwerkskunst-statt-schnellschuss</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://vae-systems.com/wissen/skalierbare-architektur</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <!-- Wissen-Einzelwert-Subpages 2026-06 ausgebunden (404) — Inhalt jetzt auf /ueber-uns/werte -->
 
   <!-- Contact -->
   <url>

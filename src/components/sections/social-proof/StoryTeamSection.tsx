@@ -96,7 +96,7 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
             {storyIntro.microFacts.map(f => (
               <div
                 key={f.label}
-                className="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-center backdrop-blur-sm"
+                className="rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.04] p-4 text-center backdrop-blur-sm"
               >
                 <div className="mb-1 text-[11px] uppercase tracking-wider text-vae-turquoise dark:text-vae-turquoise/70">
                   {f.label}
@@ -112,11 +112,11 @@ const StoryTeamSection: React.FC<StoryTeamSectionProps> = ({ id = 'team', classN
           {teamMembers.map(member => (
             <article
               key={member.id}
-              className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.035] p-6 backdrop-blur-sm"
+              className="group relative flex flex-col rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.035] p-6 backdrop-blur-sm"
             >
               <div className="pointer-events-none absolute -inset-px rounded-2xl bg-[radial-gradient(circle_at_20%_20%,rgba(var(--vae-turquoise-rgb),0.18),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="relative z-10 mb-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <div className="relative h-24 w-24 overflow-hidden rounded-2xl border-2 border-black/10 bg-white/5 shadow-inner shadow-black/10 dark:border-white/10 sm:h-28 sm:w-28">
+                <div className="relative h-24 w-24 overflow-hidden rounded-2xl border-2 border-black/10 bg-white/70 dark:bg-white/5 shadow-inner shadow-black/10 dark:border-white/10 sm:h-28 sm:w-28">
                   <div className="pointer-events-none absolute inset-2 rounded-xl border-2 border-black/10 dark:border-white/20" />
                   <img
                     src={member.image}

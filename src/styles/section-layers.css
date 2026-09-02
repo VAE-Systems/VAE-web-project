@@ -1,0 +1,53 @@
+/* ============================================================================
+   SECTION LAYERING SYSTEM — verbindliche Tiefen-Architektur (Phase 3)
+   ----------------------------------------------------------------------------
+   Problem vorher: jede Section stapelte Effekte mit ad-hoc z-index (z-10, z-[2],
+   -z-10, z-[1050] …). Effekt- und Event-Layer gerieten auseinander → Bugs
+   (z. B. Hover-Glow auf falscher Ebene, hart abgeschnittene Glows).
+
+   Lösung: EINE Section = EIN Stacking-Context. `.section-shell` setzt
+   `isolation: isolate`, damit negative Layer INNERHALB der Section bleiben und
+   nie hinter die Seite durchschlagen. Reihenfolge hinten → vorn:
+
+     [Section-eigener Hintergrund / Verlauf / ::before-Overlays]   (Basis)
+     .section-bg       z-index: -30   Flächen, Verläufe, Bild-Backdrops
+     .section-fx       z-index: -20   ambiente Effekte (Parallax, Partikel, Radials)
+     .section-fx-top   z-index: -10   interaktive Effekte hinter Content (z. B. Spotlight)
+     .section-content  z-index:   1   der eigentliche Inhalt
+
+   Verwendung über die <SectionShell>-Komponente (components/layout/SectionShell).
+   Effekt-Layer sind pointer-events:none — Maus-Tracking gehört auf das
+   Content-/Effekt-Element selbst, NICHT auf die ganze Section.
+   ============================================================================ */
+
+.section-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -30;
+  pointer-events: none;
+}
+
+.section-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -20;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.section-fx-top {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.section-content {
+  position: relative;
+  z-index: 1;
+}

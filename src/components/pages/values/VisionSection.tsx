@@ -55,7 +55,7 @@ export const VisionSection: React.FC = () => {
     <section
       ref={sectionRef}
       aria-labelledby="vision-title"
-      className="relative overflow-hidden border-t border-white/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 md:py-32"
+      className="relative overflow-hidden border-t border-black/10 dark:border-white/5 bg-gradient-to-b from-bg-darker via-bg-dark to-bg-darker py-24 md:py-32"
     >
       {/* Subtiler Hintergrund-Glow */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -66,7 +66,7 @@ export const VisionSection: React.FC = () => {
       <div className="container-vae relative z-10">
         <div
           ref={contentRef}
-          className="mx-auto max-w-5xl space-y-12 rounded-3xl border border-white/10 bg-white/[0.03] px-8 py-16 backdrop-blur-xl md:px-16 md:py-20"
+          className="mx-auto max-w-5xl space-y-12 rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] px-8 py-16 backdrop-blur-xl md:px-16 md:py-20"
         >
           {/* Header */}
           <div className="space-y-6 text-center">

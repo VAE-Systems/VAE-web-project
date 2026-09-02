@@ -12,7 +12,7 @@ interface DropdownContentProps {
 export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => {
   if (!content) {
     return (
-      <div className="rounded-2xl border bg-gray-50 p-6 text-gray-400 dark:border-white/10 dark:bg-[#0a0a0a]">
+      <div className="rounded-2xl border bg-gray-50 p-6 text-gray-400 dark:border-white/10 dark:bg-bg-darker">
         <p>Inhalt wird geladen …</p>
       </div>
     )
@@ -25,9 +25,9 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ content }) => 
       exit={{ opacity: 0, y: 4 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
       aria-live="polite"
-      className="dark:to-[#0a0a0a]/98 flex h-full flex-col justify-between rounded-2xl border border-gray-200/80 bg-gradient-to-br
+      className="dark:to-bg-darker/98 flex h-full flex-col justify-between rounded-2xl border border-gray-200/80 bg-gradient-to-br
         from-white via-gray-50 to-gray-100/95 p-6 text-gray-900 shadow-xl
-        shadow-gray-900/10 dark:border-white/10 dark:from-[#0a0a0a] dark:via-[#0d0d0d] dark:text-white dark:shadow-black/50"
+        shadow-gray-900/10 dark:border-white/10 dark:from-bg-darker dark:via-bg-darker dark:text-white dark:shadow-black/50"
     >
       <div className="space-y-3">
         <div>

@@ -31,6 +31,17 @@ export const LeadershipCTA: React.FC = () => {
   return (
     <section className="relative z-0 overflow-hidden border-t border-black/5 bg-bg-dark py-24 dark:border-white/5">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        {/* Firefly-Bild: zwei Stühle vor Stadtfenster – Partnerschaft & Ausblick */}
+        <div
+          className="absolute inset-0 opacity-[0.18] dark:opacity-[0.30]"
+          style={{
+            backgroundImage: 'url(/images/heroes/leadership-vision.webp)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg-dark/60 via-transparent to-bg-dark/60" />
         <div className="absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.08),transparent_70%)]" />
       </div>
 
@@ -60,19 +71,19 @@ export const LeadershipCTA: React.FC = () => {
           </div>
         </div>
 
-        <aside className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] p-10 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur xl:p-12">
+        <aside className="relative overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] p-10 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur xl:p-12">
           <div
             className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
             aria-hidden="true"
           />
           <div className="relative space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.08] px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-text-muted">
+            <div className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.08] px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-text-muted">
               <Sparkles className="h-4 w-4 text-vae-turquoise" />
               Was Sie erwartet
             </div>
             <ul className="space-y-5 text-left text-text-light/80">
               {supportingPoints.map(point => (
-                <li key={point.id} className="space-y-1 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4">
+                <li key={point.id} className="space-y-1 rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.04] px-5 py-4">
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-vae-turquoise/75">
                     {point.title}
                   </p>

@@ -124,7 +124,7 @@ const DesignHeritagePage: React.FC = () => {
                   href={artist.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition hover:border-vae-turquoise/30"
+                  className="group rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)] transition hover:border-vae-turquoise/30"
                 >
                   <h3 className="text-xl font-semibold text-text-light group-hover:text-vae-turquoise">
                     {artist.name}
@@ -149,7 +149,7 @@ const DesignHeritagePage: React.FC = () => {
               Support-Anfragen, Frustration im Team.
             </p>
 
-            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 shadow-[0_25px_70px_rgba(0,0,0,0.4)]">
+            <div className="relative overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-[0_25px_70px_rgba(0,0,0,0.4)]">
               <picture>
                 <source srcSet="/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.webp" type="image/webp" />
                 <source srcSet="/images/optimized/Finger-Zeigt-auf-VAE-Apps-auf-Leinwand.jpg" type="image/jpeg" />
@@ -199,7 +199,7 @@ const DesignHeritagePage: React.FC = () => {
               {DESIGN_PRINCIPLES.map(principle => (
                 <article
                   key={principle.title}
-                  className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)]"
+                  className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)]"
                 >
                   <h3 className="text-xl font-semibold text-text-light">{principle.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-text-secondary">{principle.body}</p>

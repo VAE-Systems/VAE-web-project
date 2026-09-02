@@ -26,13 +26,13 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
     <section
       ref={ref}
       aria-labelledby={`${leader.id}-title`}
-      className={`relative z-0 border-t border-white/5 bg-bg-darker py-20 transition duration-700 ease-out ${
+      className={`relative z-0 border-t border-black/10 dark:border-white/5 bg-bg-darker py-20 transition duration-700 ease-out ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
       }`}
     >
       <div className="container-vae grid gap-12 lg:grid-cols-[1.15fr_0.95fr] lg:items-center">
         <aside className={`flex flex-col gap-6 ${cardColumnOrder} order-first lg:order-none`}>
-          <figure className="group relative overflow-hidden rounded-[32px] border-2 border-black/25 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] dark:border-vae-turquoise/20 dark:bg-[#0a0a0a] dark:shadow-[0_18px_50px_rgba(0,0,0,0.8)] dark:hover:border-vae-turquoise/30 dark:hover:shadow-[0_20px_60px_rgba(0,255,165,0.08)] sm:p-5">
+          <figure className="group relative overflow-hidden rounded-[32px] border-2 border-black/25 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-500 hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] dark:border-vae-turquoise/20 dark:bg-bg-darker dark:shadow-[0_18px_50px_rgba(0,0,0,0.8)] dark:hover:border-vae-turquoise/30 dark:hover:shadow-[0_20px_60px_rgba(0,255,165,0.08)] sm:p-5">
             <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-br from-white via-gray-50/50 to-gray-100/30 opacity-100 dark:opacity-0" />
             <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-[radial-gradient(120%_120%_at_15%_0%,rgba(20,20,20,0.9)_0%,rgba(12,12,12,0.95)_60%,rgba(8,8,8,1)_100%)] opacity-0 dark:opacity-100" />
             <div className="pointer-events-none absolute inset-3 rounded-[28px] border border-black/10 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] dark:border-vae-turquoise/10 dark:shadow-[inset_0_0_0_1px_rgba(0,255,165,0.06)]" />
@@ -63,7 +63,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
           <h2 id={`${leader.id}-title`} className="text-3xl font-semibold text-text-light md:text-4xl lg:text-5xl">
             {leader.name} — {leader.title}
           </h2>
-          <span className="inline-flex items-center rounded-full border border-white/10 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-text-muted">
+          <span className="inline-flex items-center rounded-full border border-black/10 dark:border-white/10 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-text-muted">
             {leader.roleTag}
           </span>
           <div className="space-y-4 text-base leading-relaxed text-text-light/80">
@@ -104,7 +104,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[11px] font-medium text-text-light/70 transition-all duration-200 hover:border-vae-turquoise/50 hover:bg-vae-turquoise/10 hover:text-vae-turquoise"
+                            className="inline-flex items-center gap-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] px-2.5 py-0.5 text-[11px] font-medium text-text-light/70 transition-all duration-200 hover:border-vae-turquoise/50 hover:bg-vae-turquoise/10 hover:text-vae-turquoise"
                           >
                             <ExternalLink className="h-2.5 w-2.5" />
                             {link.label}
@@ -147,7 +147,7 @@ export const LeaderProfileSection: React.FC<LeaderProfileSectionProps> = ({ lead
               {leader.seoKeywords.map(keyword => (
                 <span
                   key={keyword}
-                  className="rounded-full border border-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-text-muted transition duration-300 hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:text-text-light"
+                  className="rounded-full border border-black/10 dark:border-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-text-muted transition duration-300 hover:-translate-y-0.5 hover:border-vae-turquoise/60 hover:text-text-light"
                 >
                   {keyword}
                 </span>

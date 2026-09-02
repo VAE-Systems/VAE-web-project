@@ -39,7 +39,7 @@ const KiOptimierungPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-vae-turquoise/25 bg-gradient-to-br from-bg-dark via-[#0f1f1f] to-bg-dark py-28">
+      <section className="relative overflow-hidden border-b border-vae-turquoise/25 bg-gradient-to-br from-bg-dark via-bg-secondary to-bg-dark py-28">
         <div className="pointer-events-none absolute inset-0 opacity-35">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(var(--vae-turquoise-rgb),0.22),transparent_55%),radial-gradient(circle_at_80%_35%,rgba(var(--vae-turquoise-rgb),0.16),transparent_60%)]" />
         </div>

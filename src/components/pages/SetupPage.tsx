@@ -583,13 +583,13 @@ const SetupPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise/10 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
+      <section className="accent-section border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise py-40 text-white dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark dark:text-text-light md:py-56">
         {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
         {/* Desktop version with fixed attachment */}
         <div
-          className="pointer-events-none absolute inset-0 hidden overflow-hidden opacity-[0.40] dark:opacity-[0.20] md:block"
+          className="pointer-events-none absolute inset-0 hidden overflow-hidden opacity-75 mix-blend-multiply dark:opacity-[0.55] dark:mix-blend-normal md:block"
           style={{
-            backgroundImage: 'url(/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp)',
+            backgroundImage: 'url(/images/heroes/setup-server-rack.webp)',
             backgroundAttachment: 'fixed',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
@@ -599,27 +599,31 @@ const SetupPage: React.FC = () => {
         />
         {/* Mobile version without fixed (iOS Safari compatibility) */}
         <div
-          className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.40] dark:opacity-[0.20] md:hidden"
+          className="pointer-events-none absolute inset-0 overflow-hidden opacity-75 mix-blend-multiply dark:opacity-[0.55] dark:mix-blend-normal md:hidden"
           style={{
-            backgroundImage: 'url(/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie.webp)',
+            backgroundImage: 'url(/images/heroes/setup-server-rack.webp)',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
           }}
           role="presentation"
         />
-        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.20),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.14),transparent_60%)]" />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_20%,rgba(255,255,255,0.12),transparent_38%),radial-gradient(circle_at_72%_38%,rgba(255,255,255,0.08),transparent_42%),linear-gradient(180deg,rgba(15,118,110,0.18)_0%,rgba(15,118,110,0.08)_42%,rgba(15,118,110,0.26)_100%)] dark:hidden"
+          aria-hidden
+        />
+        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-55">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,rgba(var(--vae-turquoise-rgb),0.24),transparent_55%),radial-gradient(circle_at_60%_70%,rgba(var(--vae-turquoise-rgb),0.18),transparent_60%)]" />
         </div>
         {/* Light Mode: no glass blur to keep poster-like clarity */}
         <div className="container-vae relative flex flex-col items-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             <ServerCog className="h-4 w-4" /> Infrastruktur Design/Setup
           </span>
-          <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
+          <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
             Eine KI-geprägte Arbeitswelt, in der Sie die Kontrolle behalten.
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-300 md:text-xl">
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/85 dark:text-gray-300 md:text-xl">
             Wir entwerfen Ihre Informationsinfrastruktur – das Betriebssystem Ihres Unternehmens. Selbstgehostet, offen
             und so gebaut, dass Sie auch morgen noch flexibel entscheiden können.
           </p>
@@ -750,7 +754,7 @@ const SetupPage: React.FC = () => {
       </section>
       {/* Section 2 */}
       <section
-        className="section-card-container border-b bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b bg-bg-dark py-20 dark:border-white/5 dark:bg-bg-darker"
         id="definition"
       >
         <div className="section-card-backdrop" />
@@ -876,7 +880,7 @@ const SetupPage: React.FC = () => {
           {/* Infrastructure Images */}
           <div className="mx-auto mt-16 max-w-5xl">
             <div className="grid gap-6 md:grid-cols-2">
-              <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
+              <div className="relative overflow-hidden rounded-[20px] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
                 <picture>
                   <source
                     srcSet="/images/optimized/Bild-von-Login-Screen-in-die-VAE-Cloud-als-Beispiel-für-Infrastruktur.webp"
@@ -894,7 +898,7 @@ const SetupPage: React.FC = () => {
                 </picture>
               </div>
 
-              <div className="relative overflow-hidden rounded-[20px] border border-white/10 bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
+              <div className="relative overflow-hidden rounded-[20px] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
                 <picture>
                   <source
                     srcSet="/images/optimized/Bild-von-OpenProject-Ticketing-Software-2-bester-blick.jpg"
@@ -1128,7 +1132,7 @@ const SetupPage: React.FC = () => {
       <section
         id="roi-calculator"
         ref={calculatorSectionRef}
-        className="border-y border-vae-turquoise/10 bg-[#f6f8f7] py-20 dark:border-white/5 dark:bg-bg-dark"
+        className="border-y border-vae-turquoise/10 bg-bg-dark py-20 dark:border-white/5 dark:bg-bg-dark"
       >
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
@@ -1198,7 +1202,7 @@ const SetupPage: React.FC = () => {
                   {saasToolCategories.map(category => (
                     <div
                       key={category.id}
-                      className="rounded-2xl border border-vae-turquoise/25 bg-[#f1fbf7] p-4 shadow-[0_12px_26px_-22px_rgba(12,74,52,0.25)] dark:border-white/10 dark:bg-bg-darker/40"
+                      className="rounded-2xl border border-vae-turquoise/25 bg-bg-dark p-4 shadow-[0_12px_26px_-22px_rgba(12,74,52,0.25)] dark:border-white/10 dark:bg-bg-darker/40"
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <span className="inline-flex items-center rounded-full border border-vae-turquoise/30 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-gray-700 shadow-[0_8px_20px_-16px_rgba(12,74,52,0.35)] dark:border-white/10 dark:bg-bg-darker/60 dark:text-text-secondary/80 dark:shadow-none">
@@ -1215,7 +1219,7 @@ const SetupPage: React.FC = () => {
                             className={cn(
                               'flex items-start justify-between gap-3 rounded-2xl border px-4 py-3 text-sm transition',
                               toolSelection[tool.id]
-                                ? 'border-2 border-vae-turquoise/80 bg-[#ecfbf6] text-gray-900 shadow-[0_14px_30px_-22px_rgba(12,74,52,0.32)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:text-white dark:shadow-none'
+                                ? 'border-2 border-vae-turquoise/80 bg-bg-dark text-gray-900 shadow-[0_14px_30px_-22px_rgba(12,74,52,0.32)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:text-white dark:shadow-none'
                                 : 'border-gray-200 bg-white text-gray-700 shadow-[0_10px_26px_-24px_rgba(15,23,42,0.2)] hover:border-vae-turquoise/40 dark:border-white/10 dark:bg-bg-darker dark:text-text-secondary dark:hover:border-white/30'
                             )}
                           >
@@ -1337,7 +1341,7 @@ const SetupPage: React.FC = () => {
                   Lizenz hinzufügen
                 </button>
                 {customLicenses.length > 0 && (
-                  <div className="mt-4 space-y-3 border-t border-white/5 pt-4">
+                  <div className="mt-4 space-y-3 border-t border-black/10 dark:border-white/5 pt-4">
                     {customLicenses.map(license => (
                       <div
                         key={license.id}
@@ -1388,7 +1392,7 @@ const SetupPage: React.FC = () => {
                       className={cn(
                         'rounded-full px-3 py-1 transition',
                         priceMode === 'net'
-                          ? 'bg-vae-turquoise text-white shadow-[0_8px_18px_-12px_rgba(8,255,193,0.6)]'
+                          ? 'bg-vae-turquoise text-white dark:shadow-[0_8px_18px_-12px_rgba(8,255,193,0.6)]'
                           : 'text-gray-600 hover:text-gray-900 dark:text-text-secondary dark:hover:text-white'
                       )}
                     >
@@ -1400,7 +1404,7 @@ const SetupPage: React.FC = () => {
                       className={cn(
                         'rounded-full px-3 py-1 transition',
                         priceMode === 'gross'
-                          ? 'bg-vae-turquoise text-white shadow-[0_8px_18px_-12px_rgba(8,255,193,0.6)]'
+                          ? 'bg-vae-turquoise text-white dark:shadow-[0_8px_18px_-12px_rgba(8,255,193,0.6)]'
                           : 'text-gray-600 hover:text-gray-900 dark:text-text-secondary dark:hover:text-white'
                       )}
                     >
@@ -1409,7 +1413,7 @@ const SetupPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="mt-4 space-y-5 text-sm text-gray-700 dark:text-text-secondary">
-                  <div className="flex flex-col gap-3 border-b border-white/10 pb-4">
+                  <div className="flex flex-col gap-3 border-b border-black/10 dark:border-white/10 pb-4">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-red-700 dark:text-red-200">
@@ -1487,7 +1491,7 @@ const SetupPage: React.FC = () => {
                 ctaDataAttribute="cta"
                 className="rounded-3xl"
               >
-                <div className="overflow-hidden rounded-3xl border border-gray-200 bg-gradient-to-br from-white via-[#f6f8f7] to-white p-6 shadow-sm transition-opacity duration-300 hover:opacity-80 dark:border-white/10 dark:from-bg-dark/80 dark:via-bg-darker dark:to-bg-dark dark:shadow-none dark:hover:opacity-70">
+                <div className="overflow-hidden rounded-3xl border border-gray-200 bg-gradient-to-br from-white via-bg-dark to-white p-6 shadow-sm transition-opacity duration-300 hover:opacity-80 dark:border-white/10 dark:from-bg-dark/80 dark:via-bg-darker dark:to-bg-dark dark:shadow-none dark:hover:opacity-70">
                   <div className="mb-6 flex items-center justify-between gap-4">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
@@ -1499,7 +1503,7 @@ const SetupPage: React.FC = () => {
 
                   <div className="space-y-4">
                     <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-black/40 dark:shadow-none">
-                      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/5 bg-gradient-to-br from-white/5 via-transparent to-bg-dark/70 dark:block" />
+                      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-black/10 dark:border-white/5 bg-gradient-to-br from-white/5 via-transparent to-bg-dark/70 dark:block" />
                       <div className="relative space-y-5 text-sm text-gray-800 dark:text-white">
                         <div>
                           <div className="flex items-center justify-between">
@@ -1655,7 +1659,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* ==================== NACH DEM SETUP: LANGFRISTIGE BETREUUNG ==================== */}
-      <section className="border-y border-gray-200 bg-[#f2fff8] py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
+      <section className="border-y border-gray-200 bg-bg-dark py-16 dark:border-white/5 dark:bg-bg-darker md:py-20">
         <div className="container-vae flex flex-col items-center gap-4 text-center md:gap-6">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise">
             Nächster Schritt
@@ -1682,7 +1686,7 @@ const SetupPage: React.FC = () => {
       </section>
 
       {/* Section 7 FAQ */}
-      <section className="accent-section bg-vae-turquoise py-20 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="accent-section bg-vae-turquoise py-20 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-darker dark:to-bg-darker dark:text-white">
         <div className="container-vae">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85 dark:text-vae-turquoise">
@@ -1750,7 +1754,7 @@ const SetupPage: React.FC = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="w-full max-w-md rounded-2xl border border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
+              className="w-full max-w-md rounded-2xl border border-black/10 dark:border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
               onClick={event => event.stopPropagation()}
             >
               <div className="mb-3 flex items-center justify-between gap-4">
@@ -1958,7 +1962,7 @@ const AnimatedBeforeAfter: React.FC = () => {
     return (
       <div className="relative min-h-[340px] overflow-hidden rounded-3xl border border-vae-turquoise/20 bg-gradient-to-br from-white via-vae-turquoise/5 to-white p-6 shadow-lg dark:from-bg-dark/70 dark:via-vae-turquoise/10 dark:to-bg-dark">
         <div className="flex items-center justify-between gap-4">
-          <div className="rounded-full border-2 border-vae-turquoise/60 bg-vae-turquoise/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise shadow-[0_0_12px_rgba(29,184,122,0.25)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:shadow-[0_0_12px_rgba(8,255,193,0.2)]">
+          <div className="rounded-full border-2 border-vae-turquoise/60 bg-vae-turquoise/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:shadow-[0_0_12px_rgba(29,184,122,0.25)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:shadow-[0_0_12px_rgba(8,255,193,0.2)]">
             Infrastructure-Design
           </div>
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-text-secondary">
@@ -2004,7 +2008,7 @@ const AnimatedBeforeAfter: React.FC = () => {
               return (
                 <div
                   key={layer.title}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-bg-darker/50 px-4 py-3 text-white shadow-sm"
+                  className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white/80 px-4 py-3 text-text-light shadow-sm dark:border-white/10 dark:bg-bg-darker/50 dark:text-white"
                 >
                   <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-vae-turquoise/15 text-vae-turquoise">
                     <Icon className="h-4 w-4" />
@@ -2036,7 +2040,7 @@ const AnimatedBeforeAfter: React.FC = () => {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.06),transparent_60%)] dark:bg-[radial-gradient(circle_at_25%_15%,rgba(45,214,175,0.18),transparent_50%)]" />
       <div className="flex flex-col items-start gap-3">
         <motion.div
-          className="whitespace-nowrap rounded-full border-2 border-vae-turquoise/60 bg-vae-turquoise/20 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-vae-turquoise shadow-[0_0_12px_rgba(29,184,122,0.25)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:shadow-[0_0_12px_rgba(8,255,193,0.2)] sm:px-3 sm:text-[11px] sm:tracking-[0.3em]"
+          className="whitespace-nowrap rounded-full border-2 border-vae-turquoise/60 bg-vae-turquoise/20 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-vae-turquoise dark:shadow-[0_0_12px_rgba(29,184,122,0.25)] dark:border-vae-turquoise/50 dark:bg-vae-turquoise/15 dark:shadow-[0_0_12px_rgba(8,255,193,0.2)] sm:px-3 sm:text-[11px] sm:tracking-[0.3em]"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -2068,11 +2072,11 @@ const AnimatedBeforeAfter: React.FC = () => {
                     // NACHHER-Button (grün) - ACTIVE
                     !isBeforeBtn &&
                       isActive &&
-                      '!border-2 !border-vae-turquoise !bg-gradient-to-br !from-vae-turquoise !to-emerald-500 !text-[#1a2320] !shadow-[0_0_24px_rgba(29,184,122,0.6),0_0_0_1px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/70 dark:!from-vae-turquoise/25 dark:!to-vae-turquoise/15 dark:!text-vae-turquoise dark:!shadow-[0_0_18px_rgba(8,255,193,0.45),0_0_0_1px_rgba(8,255,193,0.35)]',
+                      '!border-2 !border-vae-turquoise !bg-gradient-to-br !from-vae-turquoise !to-emerald-500 !text-[#1a2320] dark:!shadow-[0_0_24px_rgba(29,184,122,0.6),0_0_0_1px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/70 dark:!from-vae-turquoise/25 dark:!to-vae-turquoise/15 dark:!text-vae-turquoise dark:!shadow-[0_0_18px_rgba(8,255,193,0.45),0_0_0_1px_rgba(8,255,193,0.35)]',
                     // NACHHER-Button (grün) - INACTIVE
                     !isBeforeBtn &&
                       !isActive &&
-                      '!border-2 !border-vae-turquoise/70 !bg-vae-turquoise/15 !text-vae-turquoise hover:!-translate-y-1 hover:!border-vae-turquoise hover:!bg-gradient-to-br hover:!from-vae-turquoise hover:!to-emerald-500 hover:!text-[#1a2320] hover:!shadow-[0_0_24px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/40 dark:!bg-vae-turquoise/10 dark:!text-vae-turquoise/80 dark:hover:!border-vae-turquoise/70 dark:hover:!bg-gradient-to-br dark:hover:!from-vae-turquoise/30 dark:hover:!to-vae-turquoise/20 dark:hover:!text-vae-turquoise dark:hover:!shadow-[0_0_18px_rgba(8,255,193,0.35)]',
+                      '!border-2 !border-vae-turquoise/70 !bg-vae-turquoise/15 !text-vae-turquoise hover:!-translate-y-1 hover:!border-vae-turquoise hover:!bg-gradient-to-br hover:!from-vae-turquoise hover:!to-emerald-500 hover:!text-[#1a2320] dark:hover:!shadow-[0_0_24px_rgba(29,184,122,0.5)] dark:!border-vae-turquoise/40 dark:!bg-vae-turquoise/10 dark:!text-vae-turquoise/80 dark:hover:!border-vae-turquoise/70 dark:hover:!bg-gradient-to-br dark:hover:!from-vae-turquoise/30 dark:hover:!to-vae-turquoise/20 dark:hover:!text-vae-turquoise dark:hover:!shadow-[0_0_18px_rgba(8,255,193,0.35)]',
                     // Focus: rot bei Vorher-Button, grün bei Nachher-Button (ohne ring-offset)
                     isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-red-500/60',
                     !isBeforeBtn && '!outline-none focus:!ring-2 focus:!ring-vae-turquoise/60'
@@ -2132,7 +2136,7 @@ const AnimatedBeforeAfter: React.FC = () => {
         </div>
 
         <motion.div
-          className="relative h-[600px] overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 sm:h-[620px] sm:p-4 md:h-[660px] lg:h-[700px]"
+          className="relative h-[600px] overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/10 p-3 shadow-[0_24px_70px_rgba(0,0,0,0.35)] dark:bg-white/5 sm:h-[620px] sm:p-4 md:h-[660px] lg:h-[700px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -2281,7 +2285,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                   })}
 
                   <motion.div
-                    className="absolute inset-6 rounded-[24px] border border-white/10 bg-white/5"
+                    className="absolute inset-6 rounded-[24px] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.12 }}
                     exit={{
@@ -2317,7 +2321,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                     className="relative w-full max-w-[92%] rounded-2xl border border-vae-turquoise/30 bg-gradient-to-b from-white/95 via-white/90 to-white/85 p-4 shadow-[0_12px_32px_rgba(26,35,32,0.10)] backdrop-blur dark:from-bg-darker/60 dark:via-bg-darker/70 dark:to-bg-dark/80 dark:shadow-[0_24px_70px_rgba(0,0,0,0.45)] sm:max-w-[400px] sm:rounded-3xl sm:p-6"
                   >
                     <motion.div
-                      className="absolute inset-0 rounded-3xl border border-[#c5ccc8]/30 dark:border-white/10"
+                      className="absolute inset-0 rounded-3xl border border-line dark:border-white/10"
                       aria-hidden
                       animate={{
                         opacity: [0.15, 0.25, 0.15],
@@ -2330,7 +2334,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                     />
                     <div className="relative space-y-4">
                       <motion.div
-                        className="flex items-center justify-between gap-3 rounded-2xl border-2 border-vae-turquoise/40 bg-gradient-to-r from-vae-turquoise/15 to-vae-turquoise/5 px-4 py-3 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.3)]"
+                        className="flex items-center justify-between gap-3 rounded-2xl border-2 border-vae-turquoise/40 bg-gradient-to-r from-vae-turquoise/15 to-vae-turquoise/5 px-4 py-3 text-vae-turquoise dark:shadow-[0_0_20px_rgba(8,255,193,0.3)]"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.2 }}
@@ -2339,7 +2343,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                           <Layers className="h-5 w-5" />
                           <span>Unified Platform Stack</span>
                         </div>
-                        <span className="rounded-full border-2 border-vae-turquoise/40 bg-vae-turquoise/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-vae-turquoise shadow-[0_0_10px_rgba(8,255,193,0.2)] sm:px-3 sm:py-1 sm:text-[11px] sm:tracking-[0.24em]">
+                        <span className="rounded-full border-2 border-vae-turquoise/40 bg-vae-turquoise/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-vae-turquoise dark:shadow-[0_0_10px_rgba(8,255,193,0.2)] sm:px-3 sm:py-1 sm:text-[11px] sm:tracking-[0.24em]">
                           Orchestriert
                         </span>
                       </motion.div>{' '}
@@ -2391,7 +2395,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                                 />
                                 <div className="relative flex items-start gap-3">
                                   <motion.span
-                                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10"
+                                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 dark:bg-white/10"
                                     whileHover={{
                                       scale: 1.1,
                                       rotate: 5,
@@ -2426,7 +2430,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                                   animate={{ opacity: 1, scaleY: 1 }}
                                   transition={{ duration: 0.4, delay: idx * 0.1 + 0.3 }}
                                 >
-                                  <div className="h-full w-full rounded-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise to-vae-turquoise shadow-[0_0_8px_rgba(29,184,122,0.4)] dark:from-vae-turquoise/70 dark:via-vae-turquoise/70 dark:to-vae-turquoise/70 dark:shadow-[0_0_8px_rgba(8,255,193,0.3)]" />
+                                  <div className="h-full w-full rounded-full bg-gradient-to-b from-vae-turquoise via-vae-turquoise to-vae-turquoise dark:shadow-[0_0_8px_rgba(29,184,122,0.4)] dark:from-vae-turquoise/70 dark:via-vae-turquoise/70 dark:to-vae-turquoise/70 dark:shadow-[0_0_8px_rgba(8,255,193,0.3)]" />
                                 </motion.div>
                               )}
                             </React.Fragment>
@@ -2434,7 +2438,7 @@ const AnimatedBeforeAfter: React.FC = () => {
                         })}
                       </motion.div>
                       <motion.div
-                        className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-text-secondary"
+                        className="flex items-center justify-between gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-text-secondary"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.6 }}

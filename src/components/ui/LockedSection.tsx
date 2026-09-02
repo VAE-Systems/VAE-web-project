@@ -84,17 +84,17 @@ const LockedSection: React.FC<LockedSectionProps> = ({
     ? previewAffectsBlur
       ? 'bg-bg-darker/18 backdrop-blur-sm'
       : 'bg-bg-darker/70 backdrop-blur-xl'
-    : 'bg-[#f5f7f5]/85 backdrop-blur-md'
+    : 'bg-bg-dark/85 backdrop-blur-md'
   const cardToneClass = isDark
     ? 'border-vae-green/60 text-white shadow-[0_0_80px_rgba(5,248,200,0.25)]'
-    : 'border-vae-green/20 text-[#1a2320] shadow-[0_20px_60px_rgba(26,35,32,0.12)]'
+    : 'border-vae-green/20 text-text-light shadow-[0_20px_60px_rgba(26,35,32,0.12)]'
   const cardStateClass = isDark
     ? previewAffectsBlur
       ? 'from-bg-dark/45 via-bg-darker/50 to-bg-dark/45'
       : 'from-bg-dark/96 via-bg-darker/98 to-bg-dark/95'
     : 'from-white via-white to-white'
-  const titleClass = isDark ? 'text-white' : 'text-[#1a2320]'
-  const descriptionClass = isDark ? 'text-text-secondary' : 'text-[#2c3834]'
+  const titleClass = isDark ? 'text-white' : 'text-text-light'
+  const descriptionClass = isDark ? 'text-text-secondary' : 'text-text-secondary'
   const glowClass = isDark
     ? 'bg-[radial-gradient(circle_at_50%_50%,rgba(5,248,200,0.15),transparent_70%)]'
     : 'bg-[radial-gradient(circle_at_50%_50%,rgba(29,184,122,0.10),transparent_70%)]'

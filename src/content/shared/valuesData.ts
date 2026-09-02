@@ -39,10 +39,6 @@ export const VALUES_DATA: Value[] = [
       'nachvollziehbare Architektur',
       'Projekt-Dokumentation in Echtzeit',
     ],
-    link: {
-      text: 'Weiterlesen: Transparenz bei VAE',
-      href: '/wissen/transparenz-open-source',
-    },
   },
   {
     id: 'kommunikation',
@@ -63,10 +59,6 @@ export const VALUES_DATA: Value[] = [
       'transparente Statusmeldungen',
       'Change-Kommunikation in Tech-Projekten',
     ],
-    link: {
-      text: 'Weiterlesen: Kommunikation in Projekten',
-      href: '/wissen/klare-projektkommunikation',
-    },
   },
   {
     id: 'unabhaengigkeit',
@@ -86,10 +78,6 @@ export const VALUES_DATA: Value[] = [
       'Self-Hosted-Infrastruktur',
       'Lieferantenunabhängigkeit IT',
     ],
-    link: {
-      text: 'Weiterlesen: Unabhängigkeit sichern',
-      href: '/wissen/vendor-lock-in-vermeiden',
-    },
   },
   {
     id: 'qualitaet',
@@ -105,10 +93,6 @@ export const VALUES_DATA: Value[] = [
     deepDive:
       'Organisationen verlieren Millionen, weil sie Geschwindigkeit über Sorgfalt stellen. Nach wenigen Monaten wird der Code unbeweglich, Features dauern dreimal so lange und Teams brennen aus.\n\nWir planen deshalb mit Qualitäts-Gates: Pairing, automatisierte Tests, Observability und klare Definition-of-Done-Kriterien. Dadurch bleibt das System verlässlich und Änderungswünsche landen schneller in Produktion.\n\nQualität zahlt direkt auf Business-Ziele ein: weniger Bugs, kürzere Release-Zyklen, messbarer ROI. So wird Technologie zum Vorteil statt zum Kostenblock.',
     seoKeywords: ['Softwarequalität', 'nachhaltige Architektur', 'technische Exzellenz', 'ROI von sauberem Code'],
-    link: {
-      text: 'Weiterlesen: Qualität liefert ROI',
-      href: '/wissen/handwerkskunst-statt-schnellschuss',
-    },
   },
   {
     id: 'design',

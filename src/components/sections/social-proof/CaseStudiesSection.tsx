@@ -150,7 +150,7 @@ const CaseStudiesSection: React.FC = () => {
               key={cs.slug}
               className={`to-vae-turquoise/2 duration-400 group relative flex h-full flex-col rounded-2xl border border-vae-turquoise/20 bg-gradient-to-br from-vae-turquoise/5 p-7 backdrop-blur-xl transition-all ${cs.comingSoon ? 'opacity-75' : 'shadow-black/30/ shadow-lg hover:-translate-y-2 hover:border-vae-turquoise/40'}`}
             >
-              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_70%_30%,hsla(var(--color-vae-turquoise),0.25),transparent_60%)] opacity-0 mix-blend-screen transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_70%_30%,hsl(var(--color-vae-turquoise)/0.08),transparent_60%)] opacity-0 mix-blend-screen transition-opacity duration-500 group-hover:opacity-100" />
 
               <header className="relative z-10 mb-5">
                 <div className="mb-3 flex flex-wrap items-center gap-2">

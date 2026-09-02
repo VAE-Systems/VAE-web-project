@@ -142,7 +142,7 @@ export const TermHint: React.FC<TermHintProps> = ({ term, className, variant = '
   if (!data) return <>{term}</>
   const base =
     variant === 'chip'
-      ? 'inline-flex items-center px-2 py-1 rounded-md border border-[#c5ccc8] bg-white/90 text-[#394642] text-[11px] gap-1 hover:border-vae-turquoise/40 hover:text-[#1a2320] dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:text-white'
+      ? 'inline-flex items-center px-2 py-1 rounded-md border border-line bg-white/90 text-text-muted text-[11px] gap-1 hover:border-vae-turquoise/40 hover:text-text-light dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:text-white'
       : 'underline decoration-dotted underline-offset-2'
   return (
     <span

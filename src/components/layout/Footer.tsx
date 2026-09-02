@@ -217,10 +217,10 @@ const Footer: React.FC = () => {
                 <button
                   type="button"
                   onClick={openNewsletterNotice}
-                  className="flex w-full items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-left transition-all hover:border-white/20 hover:bg-white/[0.04]"
+                  className="flex w-full items-center gap-2 rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] px-4 py-2.5 text-left transition-all hover:border-white/20 hover:bg-white/[0.04]"
                 >
                   <span className="flex-1 text-sm text-text-muted/70">Ihre E-Mail</span>
-                  <span className="rounded-lg bg-white/[0.08] px-3 py-1.5 text-xs font-medium text-text-light/90 transition-colors group-hover:bg-white/[0.12] group-hover:text-white">
+                  <span className="rounded-lg bg-white/70 dark:bg-white/[0.08] px-3 py-1.5 text-xs font-medium text-text-light/90 transition-colors group-hover:bg-white/[0.12] group-hover:text-white">
                     →
                   </span>
                 </button>
@@ -272,7 +272,7 @@ const Footer: React.FC = () => {
         >
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- Modal content container */}
           <div
-            className="w-full max-w-md rounded-2xl border border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
+            className="w-full max-w-md rounded-2xl border border-black/10 dark:border-white/10 bg-bg-darker/95 p-6 text-left shadow-2xl backdrop-blur-md"
             role="document"
             onClick={event => event.stopPropagation()}
             onKeyDown={e => e.stopPropagation()}

@@ -28,57 +28,12 @@ function setDataAttributes(root: HTMLElement, theme: ThemeDefinition) {
   }
 }
 
-function setCssVariables(root: HTMLElement, theme: ThemeDefinition) {
-  const { palette, typography, radius, spacing, shadow, transition } = theme
-
-  const variablePairs: Array<[string, string]> = []
-
-  Object.entries(palette).forEach(([token, value]) => {
-    variablePairs.push([`--ds-color-${token}`, value])
-  })
-
-  variablePairs.push(
-    ['--theme-background', palette.background],
-    ['--theme-surface', palette.surface],
-    ['--theme-surface-muted', palette.surfaceMuted],
-    ['--theme-text', palette.text],
-    ['--theme-text-muted', palette.textMuted],
-    ['--theme-primary', palette.primary],
-    ['--theme-secondary', palette.secondary],
-    ['--theme-accent', palette.accent]
-  )
-
-  Object.entries(typography).forEach(([token, config]) => {
-    variablePairs.push(
-      [`--ds-typography-${token}-font-family`, config.fontFamily],
-      [`--ds-typography-${token}-font-size`, config.fontSize],
-      [`--ds-typography-${token}-line-height`, String(config.lineHeight)],
-      [`--ds-typography-${token}-font-weight`, String(config.fontWeight)],
-      [`--ds-typography-${token}-letter-spacing`, config.letterSpacing ?? 'normal'],
-      [`--ds-typography-${token}-text-transform`, config.textTransform ?? 'none']
-    )
-  })
-
-  Object.entries(spacing).forEach(([token, value]) => {
-    variablePairs.push([`--ds-space-${token}`, value])
-  })
-
-  Object.entries(radius).forEach(([token, value]) => {
-    variablePairs.push([`--ds-radius-${token}`, value])
-  })
-
-  Object.entries(shadow).forEach(([token, value]) => {
-    variablePairs.push([`--ds-shadow-${token}`, value])
-  })
-
-  Object.entries(transition).forEach(([token, value]) => {
-    variablePairs.push([`--ds-transition-${token}`, value])
-  })
-
-  for (const [variable, value] of variablePairs) {
-    root.style.setProperty(variable, value)
-  }
-
+// Single source of truth for brand/theme values is src/styles/tokens.css, read via
+// the `.theme-light` class toggle (setDataAttributes). The old runtime injection of
+// `--ds-*` / `--theme-*` inline variables was dead weight — nothing in the live CSS
+// consumed them (theme.css / design-system.css are not imported). Only `color-scheme`
+// is still meaningful (native form controls / scrollbars), so that's all we set here.
+function setColorScheme(root: HTMLElement, theme: ThemeDefinition) {
   root.style.setProperty('color-scheme', theme.mode)
 }
 
@@ -141,7 +96,7 @@ export const applyTheme = (mode: ThemeMode) => {
   root.classList.add('theme-transitioning')
 
   setDataAttributes(root, theme)
-  setCssVariables(root, theme)
+  setColorScheme(root, theme)
   updateBrowserMeta(theme.mode)
 
   // Remove transition class after transition completes

@@ -76,7 +76,7 @@ const ScrollProgress: React.FC = () => {
   const pct = Math.round(progress * 100)
   const glowClass = 'bg-[radial-gradient(circle_at_50%_8%,rgba(var(--vae-turquoise-rgb),0.35),transparent_70%)]'
   const handleColorClass =
-    'border-vae-turquoise/50 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark shadow-[0_8px_20px_rgba(8,255,193,0.35)]'
+    'border-vae-turquoise/50 bg-gradient-to-br from-vae-turquoise to-vae-turquoise-dark dark:shadow-[0_8px_20px_rgba(8,255,193,0.35)]'
   const fillBackground = `linear-gradient(to bottom,
         hsl(var(--color-vae-turquoise)) 0%,
         hsl(var(--color-vae-turquoise) / 0.88) 45%,

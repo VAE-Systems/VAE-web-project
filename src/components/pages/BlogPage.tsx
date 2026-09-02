@@ -1,187 +1,142 @@
-import { ArrowLeft, ArrowUpRight, ExternalLink, PenSquare } from 'lucide-react'
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃  BLOG PAGE (Listing)                                                      ┃
+ * ┃  Interner Blog: Featured-Artikel + Magazin-Grid. Kein externer Link.      ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ *
+ * 🗺️ AUFBAU
+ * ├── Hero      → Eyebrow, große Headline, ein Satz
+ * ├── Featured  → Neuester/featured Artikel als breite Karte
+ * └── Grid      → Übrige Artikel, 2-spaltig
+ *
+ * 📍 CONTENT-QUELLE: src/content/blog.ts — neuer Artikel = neues Objekt dort.
+ */
+
+import Seo from '@/components/ui/Seo'
+import { blogContent, sortedBlogPosts } from '@/content/blog'
+import { ArrowRight, CalendarDays, Clock } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Seo from '@/components/ui/Seo'
-import MagneticButton from '@/components/ui/buttons/MagneticButton'
-
-const topics = [
-  {
-    title: 'KI & Automatisierung',
-    description: 'Operationalisierbare KI-Workflows, Prompt-Standards und Automatisierung in regulierten Umgebungen.',
-  },
-  {
-    title: 'Self-Hosting & Infrastruktur',
-    description: 'Selfhosting, Vendor-Souveränität und Observability – mit Playbooks, die sich direkt anwenden lassen.',
-  },
-  {
-    title: 'Produkt & Strategie',
-    description: 'Research zu Produkt-Discovery, Governance sowie Lessons Learned aus VAE-Projekten.',
-  },
-]
-
-const quickFacts = [
-  { label: 'Tempo', value: 'Wöchentlich neue Beiträge' },
-  { label: 'Format', value: 'Deep Dives, Playbooks, Recaps' },
-  { label: 'Zugriff', value: 'Externe Docs – ohne Paywall' },
-]
-
 const BlogPage: React.FC = () => {
+  const featured = sortedBlogPosts.find(post => post.featured) ?? sortedBlogPosts[0]
+  const rest = sortedBlogPosts.filter(post => post.slug !== featured?.slug)
+
   return (
-    <div className="relative z-0 bg-gray-50 text-gray-900 dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 min-h-[100dvh] bg-white text-gray-900 dark:bg-bg-darker dark:text-text-light">
       <Seo
-        title="Blog – Insights zu KI, Infrastruktur & Self-Hosting | VAE Systems"
-        description="Knowledge Hub für KI, Self-Hosted-Infrastruktur und Open Source – kuratiert von VAE Systems."
+        title="Blog – Souveräne Technologie, klar erklärt | VAE Systems"
+        description="Methoden, Einordnungen und Werkzeuge aus echten Projekten: Self-Hosting, lokale KI und digitale Souveränität – geschrieben für Entscheider."
         canonicalPath="/ressourcen/blog"
       />
 
-      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-28 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
-        <div className="pointer-events-none absolute inset-0 hidden opacity-90 dark:block" aria-hidden="true">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.28),transparent_55%),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_75%)]" />
-          <div className="absolute inset-x-0 top-0 mx-auto h-64 w-[90%] rounded-[40px] border border-white/10 bg-white/[0.02] blur-3xl" />
-        </div>
-        <div className="container-vae relative flex flex-col gap-16 lg:flex-row lg:items-center">
-          <div className="flex-1 space-y-6 text-center lg:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:border-vae-turquoise/30 dark:bg-vae-turquoise/10 dark:text-vae-turquoise/80">
-              Unser Blog
+      {/* ── HERO ── */}
+      <header className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise pb-16 pt-28 text-white dark:border-white/5 dark:bg-bg-darker dark:text-text-light sm:pb-20 sm:pt-36">
+        {/* Firefly-Bild: aufgeschlagenes Buch, das zu Netzlinien zerfällt – jetzt deutlicher sichtbar */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-75 mix-blend-multiply dark:opacity-55 dark:mix-blend-normal"
+          style={{
+            backgroundImage: 'url(/images/heroes/blog-buch.webp)',
+            backgroundPosition: 'center 30%',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-vae-turquoise/0 bg-[linear-gradient(180deg,rgba(15,118,110,0.18)_0%,rgba(15,118,110,0.08)_42%,rgba(15,118,110,0.26)_100%)] dark:bg-[linear-gradient(180deg,rgba(6,10,9,0.82)_0%,rgba(6,10,9,0.64)_42%,rgba(6,10,9,0.90)_100%)]"
+          aria-hidden
+        />
+        <div className="container-vae relative">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:text-vae-turquoise/80">
+              {blogContent.eyebrow}
             </p>
-            <h1 className="text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
-              Insights & Knowledge Hub für souveräne Tech-Projekte
+            <h1 className="mt-4 text-balance text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
+              {blogContent.heading}
             </h1>
-            <p className="text-lg leading-relaxed text-white/85 dark:text-text-secondary">
-              Wie wir arbeiten: Methoden, Learnings und Werkzeuge aus echten Projekten.
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl">
+              {blogContent.description}
             </p>
-            <div className="flex flex-col items-center gap-4 pt-2 sm:flex-row sm:justify-center lg:justify-start">
-              <MagneticButton className="flex-1">
-                <a
-                  href="https://docs.vae.systems/s/blog"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="btn-primary inline-flex w-full items-center justify-center gap-3 px-8 py-4 text-base font-semibold"
-                >
-                  Blog öffnen
-                  <ArrowUpRight className="h-5 w-5" />
-                </a>
-              </MagneticButton>
-              <MagneticButton className="flex-1">
-                <Link
-                  to="/about/referenzen"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/35 px-6 py-3 text-sm font-semibold text-white/90 transition-colors hover:border-white/70 hover:text-white dark:border-white/15 dark:text-white/70 dark:hover:border-vae-turquoise/60"
-                >
-                  Case Studies ansehen
-                  <PenSquare className="h-4 w-4" />
-                </Link>
-              </MagneticButton>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-              {quickFacts.map(fact => (
-                <div
-                  key={fact.label}
-                  className="rounded-2xl border border-gray-200/80 bg-white px-5 py-3 text-left text-sm text-gray-700 shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75"
-                >
-                  <p className="text-[0.65rem] uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
-                    {fact.label}
-                  </p>
-                  <p className="mt-1 font-semibold text-gray-900 dark:text-white">{fact.value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex-1">
-            <div
-              aria-live="polite"
-              className="rounded-[32px] border border-gray-200/80 bg-white/90 p-8 text-left shadow-[0_25px_70px_rgba(15,23,42,0.12)] transition-[height,width,opacity] duration-300 ease-out dark:border-white/10 dark:bg-white/[0.03] dark:shadow-[0_25px_70px_rgba(0,0,0,0.4)]"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-vae-turquoise/80">
-                Was erwartet Sie?
-              </p>
-              <ul className="mt-6 space-y-5 text-base leading-relaxed text-gray-700 dark:text-white/80">
-                <li className="rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
-                    Deep Dives aus Projekten
-                  </p>
-                  <p className="mt-2 text-sm text-gray-700 dark:text-white/70">
-                    Architektur-Skizzen, Repos und Entscheidungsgrundlagen – festgehalten wie in unseren Projekträumen.
-                  </p>
-                </li>
-                <li className="rounded-2xl border border-gray-200/80 bg-white px-5 py-4 shadow-sm dark:border-white/10 dark:bg-white/[0.04]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
-                    Übergangsweise auf Outline
-                  </p>
-                  <p className="mt-2 text-sm text-gray-700 dark:text-white/70">
-                    Wir programmieren aktuell an einer eigenen Media-Plattform. Bis dahin nutzen wir Outline für unseren
-                    Blog. Link öffnet in einem neuen Tab.
-                  </p>
-                </li>
-              </ul>
-              <div className="mt-6 rounded-2xl border border-dashed border-gray-200 px-4 py-3 text-xs text-gray-600 dark:border-white/20 dark:text-white/60">
-                Hinweis: Kein Tracking, keine Paywall. Wenn Sie Fragen zu einem Beitrag haben, erreichen Sie uns direkt
-                über Kontakt oder LinkedIn.
-              </div>
-            </div>
           </div>
         </div>
-      </section>
+      </header>
 
-      <section className="border-b border-gray-100 bg-white py-20 dark:border-white/5 dark:bg-bg-dark">
-        <div className="container-vae space-y-10">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
-              Themen
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-gray-900 dark:text-white md:text-4xl">
-              Worüber wir schreiben
-            </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-gray-700 dark:text-white/70">
-              Jeder Artikel beantwortet Fragen, die Kund:innen und Partner uns stellen. Wir dokumentieren
-              Entscheidungen, Lessons Learned und konkrete Playbooks.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {topics.map(topic => (
-              <div
-                key={topic.title}
-                className="group rounded-[28px] border border-gray-200 bg-white p-6 text-left shadow-[0_20px_50px_rgba(15,23,42,0.12)] transition hover:-translate-y-1 hover:border-vae-turquoise/50 dark:border-white/10 dark:bg-white/[0.02] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] dark:hover:border-vae-turquoise/40"
-              >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-vae-turquoise dark:border-white/15 dark:bg-white/[0.04]">
-                  <ExternalLink className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">{topic.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-white/70">{topic.description}</p>
+      <main className="container-vae py-16 sm:py-20">
+        {/* ── FEATURED ── */}
+        {featured && (
+          <Link
+            to={`/ressourcen/blog/${featured.slug}`}
+            className="group relative block overflow-hidden rounded-[32px] border border-gray-200 bg-gradient-to-br from-sage-50/70 via-white to-sage-50/40 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:hover:shadow-[0_30px_90px_-50px_rgba(0,255,165,0.45)] dark:border-white/10 dark:from-white/[0.04] dark:via-bg-dark/40 dark:to-white/[0.02] sm:p-12"
+          >
+            <div
+              className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              aria-hidden
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(var(--vae-turquoise-rgb),0.08),transparent_50%)]" />
+            </div>
+            <div className="relative max-w-3xl">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full bg-vae-turquoise/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-vae-turquoise">
+                  Neuester Artikel
+                </span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-text-muted">
+                  {featured.category}
+                </span>
               </div>
+              <h2 className="mt-6 text-balance text-3xl font-semibold leading-[1.12] text-text-light transition-colors group-hover:text-vae-turquoise sm:text-4xl lg:text-5xl">
+                {featured.title}
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-text-secondary sm:text-xl">{featured.subtitle}</p>
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text-muted">
+                <span className="inline-flex items-center gap-2">
+                  <CalendarDays className="h-4 w-4 text-vae-turquoise/70" />
+                  {featured.dateLabel}
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-vae-turquoise/70" />
+                  {featured.readingTime}
+                </span>
+                <span className="inline-flex items-center gap-2 font-semibold text-vae-turquoise">
+                  Artikel lesen
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        )}
+
+        {/* ── GRID ── */}
+        {rest.length > 0 && (
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {rest.map(post => (
+              <Link
+                key={post.slug}
+                to={`/ressourcen/blog/${post.slug}`}
+                className="group flex flex-col rounded-3xl border border-gray-200 bg-white/80 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/60 dark:border-white/10 dark:bg-white/[0.03]"
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-vae-turquoise/80">
+                  {post.category}
+                </p>
+                <h3 className="mt-4 text-balance text-2xl font-semibold leading-snug text-text-light transition-colors group-hover:text-vae-turquoise sm:text-3xl">
+                  {post.title}
+                </h3>
+                <p className="mt-4 flex-1 text-base leading-relaxed text-text-secondary sm:text-lg">{post.excerpt}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-text-muted">
+                  <span className="inline-flex items-center gap-2">
+                    <CalendarDays className="h-4 w-4 text-vae-turquoise/70" />
+                    {post.dateLabel}
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-vae-turquoise/70" />
+                    {post.readingTime}
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="border-t border-black/5 bg-gradient-to-b from-gray-50 via-white to-gray-50 py-20 dark:border-white/5 dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark">
-        <div className="container-vae flex flex-col items-center gap-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
-            Navigation
-          </p>
-          <h3 className="text-3xl font-semibold text-gray-900 dark:text-white">
-            Zurück zur Website oder direkt Kontakt aufnehmen
-          </h3>
-          <p className="max-w-3xl text-base leading-relaxed text-gray-700 dark:text-white/70">
-            Sie können jederzeit zurück auf die Startseite oder direkt mit uns sprechen. Wir schicken Ihnen gerne
-            relevante Artikel oder beantworten Detailfragen aus dem Blog.
-          </p>
-          <div className="flex flex-col items-center gap-4 sm:flex-row">
-            <MagneticButton>
-              <Link to="/" className="btn-outline flex items-center gap-2 text-base">
-                <ArrowLeft className="h-5 w-5" />
-                Zurück zur Hauptseite
-              </Link>
-            </MagneticButton>
-            <MagneticButton>
-              <Link to="/contact" className="btn-primary flex items-center gap-2 text-base">
-                Kontakt aufnehmen
-                <ArrowUpRight className="h-5 w-5" />
-              </Link>
-            </MagneticButton>
-          </div>
-        </div>
-      </section>
+        )}
+      </main>
     </div>
   )
 }

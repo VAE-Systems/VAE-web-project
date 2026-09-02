@@ -21,8 +21,10 @@ import {
   FinalCtaSection,
   HeroSection,
   HomeProcessTeaserSection,
+  ManagedReferencesStrip,
   ServicesOverviewSection,
   SocialProofSection,
+  SovereigntyLadderSection,
   TechStackSection,
   WhyOpenSourceSection,
 } from '../sections'
@@ -87,9 +89,11 @@ const HomePage: React.FC = () => {
 
       {/* ── SECTION FLOW ── */}
       <HeroSection />
+      <SovereigntyLadderSection />
       <WhyOpenSourceSection />
       <ServicesOverviewSection />
       <SocialProofSection />
+      <ManagedReferencesStrip />
       <TechStackSection />
       <HomeProcessTeaserSection className="pt-0" />
       <FinalCtaSection />

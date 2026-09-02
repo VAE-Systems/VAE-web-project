@@ -1,11 +1,9 @@
 import { HERO_CONTENT } from '@/content/shared/leadershipData'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 export const LeadershipHero: React.FC = () => {
-  const bodyParagraphs = useMemo(() => HERO_CONTENT.body.split(' — ').map(chunk => chunk.trim()), [])
-
   return (
-    <section className="accent-section relative z-0 overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 text-white dark:border-white/5 dark:bg-bg-darker dark:text-text-light lg:py-28">
+    <section className="accent-section relative z-0 overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 text-white dark:border-white/5 dark:bg-bg-darker dark:text-text-light lg:py-32">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {/* Fixed Wallpaper Effect (no blur; green base stays visible) */}
         <div
@@ -22,22 +20,27 @@ export const LeadershipHero: React.FC = () => {
       </div>
 
       <div className="container-vae relative z-10">
-        <div className="flex max-w-4xl flex-col gap-5 text-left">
+        <div className="flex max-w-4xl flex-col gap-7 text-left">
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/35 bg-white/10 px-6 py-2 text-[0.75rem] font-semibold uppercase tracking-[0.35em] text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/10 dark:text-vae-turquoise/90">
             Leitung & Kultur
           </span>
-          <h1 className="text-4xl font-semibold leading-tight text-white dark:text-text-light md:text-5xl lg:text-6xl">
+
+          <h1 className="text-balance text-5xl font-semibold leading-[1.05] text-white dark:text-text-light md:text-6xl lg:text-7xl">
             {HERO_CONTENT.title}
           </h1>
-          <p className="max-w-2xl text-lg font-medium text-white/85 dark:text-text-secondary md:text-xl">
+
+          {/* Subheading = die eigentliche Aussage. Groß, eine Zeile Luft. */}
+          <p className="max-w-3xl text-xl font-medium leading-snug text-white dark:text-text-light/90 md:text-2xl">
             {HERO_CONTENT.subheading}
           </p>
-          <div className="max-w-3xl space-y-4 text-base leading-relaxed text-white/85 dark:text-text-light/80 md:text-lg">
-            {bodyParagraphs.map(paragraph => (
+
+          <div className="max-w-3xl space-y-5 text-lg leading-relaxed text-white/85 dark:text-text-light/75 md:text-xl [&_a]:font-semibold [&_a]:underline [&_a]:decoration-white/50 [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:decoration-white dark:[&_a]:decoration-vae-turquoise/60 dark:hover:[&_a]:decoration-vae-turquoise">
+            {HERO_CONTENT.body.map(paragraph => (
               <p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
             ))}
           </div>
-          <div className="flex flex-wrap gap-2 pt-3" aria-label="SEO Schlagworte">
+
+          <div className="flex flex-wrap gap-2 pt-2" aria-label="SEO Schlagworte">
             {HERO_CONTENT.seoKeywords.map(keyword => (
               <span
                 key={keyword}

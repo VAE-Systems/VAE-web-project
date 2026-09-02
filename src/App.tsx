@@ -31,6 +31,7 @@ import Footer from '@components/layout/Footer'
 import Header from '@components/layout/Header'
 import ScrollProgress from '@components/navigation/ScrollProgress'
 import SectionNavigation from '@components/navigation/SectionNavigation'
+import CommandCenterLauncher from '@components/search/CommandCenterLauncher'
 
 // ── UI ──
 import ScrollProgressBar from '@components/ui/ScrollProgressBar'
@@ -65,13 +66,16 @@ const PrivacySettings = React.lazy(() => import('@components/privacy/PrivacySett
 const ResourcesFaqPage = React.lazy(() => import('@components/pages/ResourcesFaqPage'))
 const ValuesPage = React.lazy(() => import('@/components/pages/values/ValuesPage'))
 const DesignHeritagePage = React.lazy(() => import('@/components/pages/values/DesignHeritagePage'))
-const TransparenzPage = React.lazy(() => import('@/components/pages/values/TransparenzPage'))
-const KommunikationPage = React.lazy(() => import('@/components/pages/values/KommunikationPage'))
-const UnabhaengigkeitPage = React.lazy(() => import('@/components/pages/values/UnabhaengigkeitPage'))
-const QualitaetPage = React.lazy(() => import('@/components/pages/values/QualitaetPage'))
-const SkalierbarkeitPage = React.lazy(() => import('@/components/pages/values/SkalierbarkeitPage'))
+// Einzelwert-Subpages ausgebunden (2026-06): Dateien bleiben, Routen entfernt -> 404.
+// Inhalt lebt jetzt nur noch auf der Haupt-Werte-Seite /ueber-uns/werte.
+// const TransparenzPage = React.lazy(() => import('@/components/pages/values/TransparenzPage'))
+// const KommunikationPage = React.lazy(() => import('@/components/pages/values/KommunikationPage'))
+// const UnabhaengigkeitPage = React.lazy(() => import('@/components/pages/values/UnabhaengigkeitPage'))
+// const QualitaetPage = React.lazy(() => import('@/components/pages/values/QualitaetPage'))
+// const SkalierbarkeitPage = React.lazy(() => import('@/components/pages/values/SkalierbarkeitPage'))
 const LeadershipPage = React.lazy(() => import('@components/pages/leadership/LeadershipPage'))
 const BlogPage = React.lazy(() => import('@components/pages/BlogPage'))
+const BlogArticlePage = React.lazy(() => import('@components/pages/BlogArticlePage'))
 const NotFoundPage = React.lazy(() => import('@components/pages/NotFoundPage'))
 
 // ── ADMIN PAGES (nur in Development) ──
@@ -160,14 +164,12 @@ const App: React.FC = () => {
                     <Route path="/ressourcen/case-studies" element={<ReferenzenPage />} />
 
                     <Route path="/ressourcen/blog" element={<BlogPage />} />
+                    <Route path="/ressourcen/blog/:slug" element={<BlogArticlePage />} />
                     <Route path="/ressourcen/faq" element={<ResourcesFaqPage />} />
                     <Route path="/ueber-uns/werte" element={<ValuesPage />} />
                     <Route path="/ueber-uns/design-handwerk" element={<DesignHeritagePage />} />
-                    <Route path="/wissen/transparenz-open-source" element={<TransparenzPage />} />
-                    <Route path="/wissen/klare-projektkommunikation" element={<KommunikationPage />} />
-                    <Route path="/wissen/vendor-lock-in-vermeiden" element={<UnabhaengigkeitPage />} />
-                    <Route path="/wissen/handwerkskunst-statt-schnellschuss" element={<QualitaetPage />} />
-                    <Route path="/wissen/skalierbare-architektur" element={<SkalierbarkeitPage />} />
+                    {/* Einzelwert-Subpages ausgebunden (2026-06) -> nicht mehr geroutet, laufen in 404.
+                        Inhalt jetzt nur auf /ueber-uns/werte. Reaktivieren: Imports oben + Routen hier. */}
                     <Route path="/ueber-uns/leitung" element={<LeadershipPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/termin-buchen" element={<Navigate to="/contact#booking" replace />} />
@@ -191,6 +193,7 @@ const App: React.FC = () => {
                 </Suspense>
               </main>
               <Footer />
+              <CommandCenterLauncher />
               <CookieBanner />
             </div>
           </Router>

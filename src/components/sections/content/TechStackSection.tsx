@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useRef, useState } from 'react'
 import { ParallaxBackdrop, ParticleField } from '../effects/BackgroundEffects'
+import { SectionShell } from '@/components/layout/SectionShell'
 
 // Hinweis: Logos nur gemäß Marken-/Brand-Guidelines der jeweiligen Anbieter verwenden.
 // Es werden hier ausschließlich Projekte/Stacks aufgeführt, mit denen wir regelmäßig arbeiten.
@@ -115,7 +116,6 @@ const TechStackSection: React.FC = () => {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const subRef = useRef<HTMLParagraphElement>(null)
   const logoRefs = useRef<(HTMLAnchorElement | null)[]>([])
-  const cableRefs = useRef<SVGPathElement[]>([])
   const spotlightRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(false)
 
@@ -128,42 +128,12 @@ const TechStackSection: React.FC = () => {
 
       if (reduced || small) {
         gsap.set([headingRef.current, subRef.current, logoRefs.current], { opacity: 1, y: 0 })
-        gsap.set('.radial-bg', { opacity: 1, scale: 1 })
-        gsap.set(cableRefs.current, { opacity: 0.3, strokeDashoffset: 0 })
         return
       }
 
       if (!sectionRef.current) return
 
       const trig = { trigger: sectionRef.current, start: 'top 80%' }
-
-      gsap.fromTo(
-        '.radial-bg',
-        { scale: 0, opacity: 0.6 },
-        { scale: 1, opacity: 1, duration: Motion.long, ease: Motion.ease, scrollTrigger: trig }
-      )
-
-      cableRefs.current.forEach((path, i) => {
-        if (!path) return
-        const length = path.getTotalLength()
-        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 })
-        gsap.to(path, {
-          strokeDashoffset: 0,
-          duration: 3,
-          ease: Motion.ease,
-          delay: i * 0.05,
-          scrollTrigger: trig,
-        })
-        gsap.to(path, {
-          opacity: 0.6,
-          repeat: -1,
-          yoyo: true,
-          duration: 2.5,
-          ease: 'sine.inOut',
-          delay: 3 + i * 0.05,
-          scrollTrigger: trig,
-        })
-      })
 
       // Text animations mit scrub
       gsap.fromTo(
@@ -243,7 +213,7 @@ const TechStackSection: React.FC = () => {
           // Kill Ausblendung, Glow hochfahren über Variable
           const elWithTween = el as HTMLElement & { _fadeOutTween?: gsap.core.Tween }
           elWithTween._fadeOutTween?.kill?.()
-          gsap.to(el, { '--glow-alpha': 0.78, scale: 1.085, duration: 0.25, ease: 'power2.out' })
+          gsap.to(el, { '--glow-alpha': 0.5, scale: 1.05, duration: 0.25, ease: 'power2.out' })
           const img = el.querySelector('img') as (HTMLElement & { _spinTween?: gsap.core.Tween }) | null
           if (img) {
             // Laufender Spin nur während Hover
@@ -268,7 +238,7 @@ const TechStackSection: React.FC = () => {
           }
           // Sehr langsames Ausblenden des Glows (Trail Effekt)
           const elWithTween = el as HTMLElement & { _fadeOutTween?: gsap.core.Tween }
-          const fade = gsap.to(el, { '--glow-alpha': 0, scale: 1, duration: 3.2, ease: 'power2.out' })
+          const fade = gsap.to(el, { '--glow-alpha': 0, scale: 1, duration: 1.8, ease: 'power2.out' })
           elWithTween._fadeOutTween = fade
         }
         el.addEventListener('pointerenter', handleEnter)
@@ -284,8 +254,8 @@ const TechStackSection: React.FC = () => {
             const rect = el.getBoundingClientRect()
             const xRel = (e.clientX - rect.left) / rect.width
             const yRel = (e.clientY - rect.top) / rect.height
-            const rotX = (0.5 - yRel) * 14 // etwas reduziert für Ruhe
-            const rotY = (xRel - 0.5) * 14
+            const rotX = (0.5 - yRel) * 8 // ruhiger Tilt
+            const rotY = (xRel - 0.5) * 8
             el.style.setProperty('--rx', rotX + 'deg')
             el.style.setProperty('--ry', rotY + 'deg')
             ticking = false
@@ -337,99 +307,22 @@ const TechStackSection: React.FC = () => {
   }
 
   return (
-    <section
+    <SectionShell
       id="tech-stack"
+      ref={sectionRef}
       className={
-        'surface-alt overlay-grid overlay-diag edge-glow-top tech-stack-interactive via-sage-50/30 to-sage-50/60 relative overflow-hidden border-t border-vae-turquoise/10 bg-gradient-to-b from-white py-24 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker md:py-32 ' +
+        'surface-alt overlay-grid overlay-diag edge-glow-top via-sage-50/30 to-sage-50/60 overflow-hidden border-t border-vae-turquoise/10 bg-gradient-to-b from-white py-24 dark:from-bg-darker dark:via-bg-dark dark:to-bg-darker md:py-32 ' +
         (active ? 'tech-stack-active' : '')
       }
-      ref={sectionRef}
-      // Only bind pointer movement on devices that support fine pointer input
-      onPointerMove={!window.matchMedia('(pointer: coarse)').matches ? handlePointer : undefined}
+      effects={
+        <>
+          <ParallaxBackdrop strength={8} />
+          <ParticleField count={22} />
+        </>
+      }
+      contentClassName="container mx-auto px-4"
     >
-      <ParallaxBackdrop strength={8} />
-      <ParticleField count={22} />
-      {/* Radial Background */}
-      <div className="radial-bg absolute inset-0 -z-20 scale-0 bg-[radial-gradient(circle_at_center,hsla(var(--color-vae-turquoise),0.2),transparent_70%)] opacity-0" />
-
-      {/* Animated Cables */}
-      <svg className="absolute inset-0 -z-10" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path
-          ref={el => {
-            if (el) cableRefs.current.push(el)
-          }}
-          d="M50 50 C60 40,80 30,90 10"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0,
-          }}
-        />
-        <path
-          ref={el => {
-            if (el) cableRefs.current.push(el)
-          }}
-          d="M50 50 C55 60,70 80,90 90"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0,
-          }}
-        />
-        <path
-          ref={el => {
-            if (el) cableRefs.current.push(el)
-          }}
-          d="M50 50 C40 60,20 80,10 90"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0,
-          }}
-        />
-        <path
-          ref={el => {
-            if (el) cableRefs.current.push(el)
-          }}
-          d="M50 50 C40 40,20 30,10 10"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0,
-          }}
-        />
-        <path
-          ref={el => {
-            if (el) cableRefs.current.push(el)
-          }}
-          d="M50 50 C50 30,50 10,50 0"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0,
-          }}
-        />
-        <path
-          ref={el => {
-            if (el) cableRefs.current.push(el)
-          }}
-          d="M50 50 C60 50,80 50,100 50"
-          style={{
-            stroke: 'hsla(var(--color-vae-turquoise), 0.3)',
-            strokeWidth: '1.5',
-            fill: 'none',
-            opacity: 0,
-          }}
-        />
-      </svg>
-
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
+      {/* Section Header */}
         <div className="mb-14 text-center">
           <h2 ref={headingRef} className="h2 heading-gradient h-space mb-3">
             Self-Hosted Systeme & Open-Source-KI-Modelle
@@ -441,8 +334,13 @@ const TechStackSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Tech Grid */}
-        <div ref={spotlightRef} className="tech-spotlight">
+        {/* Tech Grid — Pointer-Tracking liegt auf demselben Element wie der Glow (::before),
+            damit --spot-x/y immer relativ zu diesem Element stimmen (kein Sprung im Header). */}
+        <div
+          ref={spotlightRef}
+          className="tech-spotlight"
+          onPointerMove={!window.matchMedia('(pointer: coarse)').matches ? handlePointer : undefined}
+        >
           <div
             className="tech-stack-grid mx-auto grid max-w-5xl gap-8"
             style={{
@@ -479,8 +377,7 @@ const TechStackSection: React.FC = () => {
             Open-Source-Ökosystem.
           </p>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   )
 }
 

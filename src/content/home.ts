@@ -1,17 +1,17 @@
 export const heroTitle = ['Ihre Infrastruktur. Ihre Daten.', 'Ihre KI.'] as const
 
-export const heroEyebrow = 'Structure is strategy' as const
+export const heroEyebrow = 'Digitale Souveränität für den Mittelstand' as const
 
 export const heroTypewriterTexts = [
-  'Eigene Infrastruktur',
-  'Kontrolle statt Abos',
-  'DSGVO by design',
-  'KI auf Ihrer Hardware',
-  'Open Source + Standards',
+  'Ihre Software auf Ihren Servern',
+  'Kontrolle statt Abo-Spirale',
+  'KI, die im Haus bleibt',
+  'Unabhängig von US-Clouds',
+  'Sicher und DSGVO-konform',
 ] as const
 
 export const heroDescription =
-  'Self-Hosted-First Infrastruktur – volle Datenkontrolle, klare Kosten, vendor-neutral geplant. Open Source setzen wir dort ein, wo es den größten Hebel hat. Eigener Kundenaccount ab Vertragsstart: Chat, Files, Doku – kein E-Mail-Chaos.'
+  'Preiserhöhungen, gestrichene Funktionen, gesperrte Zugänge: Wer auf fremde Cloud-Anbieter baut, trägt deren Risiko mit. Wir bauen Ihnen eine eigene digitale Umgebung – Daten, Systeme und KI auf Servern, die Sie kontrollieren. Planbar in den Kosten, von uns betreut.'
 
 export interface HeroBenefit {
   title: string
@@ -61,7 +61,7 @@ export const whyVaeHighlights = [
   },
 ] as const
 
-export const homeOutcomesHeading = 'Resultate & Referenzen'
+export const homeOutcomesHeading = 'Resultate aus Pilotprojekten'
 
 export interface LinkText {
   before: string
@@ -69,26 +69,26 @@ export interface LinkText {
 }
 
 export const homeOutcomesDescription: LinkText = {
-  before: 'Vier Kennzahlen, an denen wir uns messen – ausführlich erläutert in den ',
+  before: 'Vier Orientierungswerte aus unseren bisherigen Pilotprojekten – Details und Kontext in den ',
   after: ' Referenzen.',
 }
 
 export const outcomeMetrics = [
   {
     value: '68 %',
-    label: 'Durchschnittliche Zeiteinsparung bei Dokumenten-Workflows',
+    label: 'Zeiteinsparung bei Dokumenten-Workflows – gemessen in einem Pilotprojekt',
   },
   {
     value: '4 Wochen',
-    label: 'Bis zur produktiven Übergabe des Infrastruktur-Setups',
+    label: 'Typische Dauer bis zur produktiven Übergabe des Infrastruktur-Setups',
   },
   {
     value: '€2.400',
-    label: 'Monatliche SaaS-Ersparnis bei typischer Pilotgröße',
+    label: 'Eingesparte SaaS-Abos pro Monat – Beispielrechnung aus einem Pilotprojekt',
   },
   {
     value: '9,6 / 10',
-    label: 'Zufriedenheit der Teams nach Onboarding-Sessions',
+    label: 'Team-Zufriedenheit nach Onboarding – interne Erhebung bei Pilotkunden',
   },
 ] as const
 
@@ -101,7 +101,7 @@ export const finalCtaHome = {
     label: 'Kostenlose Beratung buchen (45 Min)',
     ctaId: 'contact.schedule_call',
   },
-  note: 'Binnen 48h Termin verfügbar. Keine Verpflichtung, kein Sales-Pitch.',
+  note: 'Binnen 48h Termin verfügbar. Keine Verpflichtung, kein Sales-Pitch. Viele Digitalisierungs- und KI-Vorhaben können grundsätzlich förderfähig sein – wir prüfen im Erstgespräch, ob Ihr Projekt zu aktuellen KfW- oder Landesprogrammen passt.',
 } as const
 
 export const homeProcessHeading = 'Wie wir arbeiten'
@@ -204,6 +204,51 @@ export const openSourceAdvantages: OpenSourcePointWithBullets[] = [
   },
 ] as const
 
+// ── SOUVERÄNITÄTS-TREPPE ────────────────────────────────────────────────────
+// Drei Stufen der digitalen Unabhängigkeit. Ruhig, beratend, kein Alarmismus.
+
+export interface SovereigntyStep {
+  step: string
+  label: string
+  title: string
+  description: string
+  highlight?: boolean
+}
+
+export const sovereigntyContent = {
+  eyebrow: 'Digitale Souveränität',
+  heading: 'Nextcloud ist ein guter Anfang. Wir bauen die ganze Treppe.',
+  intro:
+    'Europa diskutiert über digitale Unabhängigkeit – und meist fällt dabei der Name Nextcloud. Zu Recht. Aber Dateien sind nur die erste Stufe. Wir begleiten Unternehmen Schritt für Schritt zu einer digitalen Umgebung, die ihnen wirklich gehört.',
+  ctaLabel: 'Welche Stufe passt zu Ihnen?',
+  ctaNote: 'Kostenloses Erstgespräch – wir ordnen Ihre Situation gemeinsam ein.',
+} as const
+
+export const sovereigntySteps: SovereigntyStep[] = [
+  {
+    step: '01',
+    label: 'Status quo',
+    title: 'Verstreute Abo-Tools',
+    description:
+      'Office, CRM und Cloud-Speicher laufen bei verschiedenen Anbietern. Bequem im Alltag – aber Preise, Funktionen und Datenstandorte bestimmen andere.',
+  },
+  {
+    step: '02',
+    label: 'Datenhoheit',
+    title: 'Kontrollierte Datenablage',
+    description:
+      'Dateien, Kalender und Zusammenarbeit ziehen auf eigene Server – zum Beispiel mit Nextcloud. Ihre Daten bleiben im Haus, die Grundlage ist gelegt.',
+  },
+  {
+    step: '03',
+    label: 'Volle Souveränität',
+    title: 'Eigene Systeme & KI',
+    description:
+      'CRM, Automationen und KI laufen auf Ihrer Infrastruktur – als ein zusammenhängendes System, betreut von einem Ansprechpartner. Das ist unser Zielbild.',
+    highlight: true,
+  },
+] as const
+
 export interface ServiceOverviewCard {
   id: string
   icon: string
@@ -267,11 +312,12 @@ export const servicesOverviewCards: ServiceOverviewCard[] = [
     subtitle: 'Betrieb & Optimierung',
     badge: 'KONTINUIERLICH',
     description:
-      'Wir sorgen dafür, dass Ihre Infrastruktur läuft – während Ihr Team sich auf Produkt und Kund:innen konzentriert.',
+      'Wir sorgen dafür, dass Ihre Infrastruktur läuft – während Ihr Team sich auf Produkt und Kund:innen konzentriert. Auf Wunsch übernehmen wir auch den kompletten Betrieb Ihrer Website: Hosting, Wartung, Sicherheit und Performance in einer Hand.',
     inclusions: [
       'Basis-Monitoring & Security-Patches',
       'Regelmäßige System-Reviews',
       'Backup & Disaster Recovery',
+      'Betreutes Hosting für Websites & Anwendungen',
       'Optional: monatlich kündbar',
     ],
     audience: [

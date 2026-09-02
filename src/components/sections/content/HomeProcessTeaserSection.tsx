@@ -45,7 +45,7 @@ const HomeProcessTeaserSection: React.FC<{ id?: string; className?: string }> = 
           {homeProcessTeaserSteps.map(step => (
             <li
               key={step.number}
-              className="border-border-primary/40 rounded-3xl border bg-white/[0.02] p-6 shadow-[0_30px_90px_-60px_rgba(5,212,182,0.8)] backdrop-blur"
+              className="border-border-primary/40 rounded-3xl border bg-white/70 dark:bg-white/[0.02] p-6 shadow-[0_30px_90px_-60px_rgba(5,212,182,0.8)] backdrop-blur"
             >
               <div className="grid gap-4 md:grid-cols-[auto,1fr] md:items-center">
                 <div className="flex items-center gap-4">

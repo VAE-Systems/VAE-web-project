@@ -84,7 +84,7 @@ const ResourcesFaqPage: React.FC = () => {
   const totalFaqs = filteredFaqs.length
 
   return (
-    <div className="relative z-0 bg-[#f5f7f5] text-[#1a2320] dark:bg-bg-darker dark:text-text-light">
+    <div className="relative z-0 bg-bg-dark text-text-light dark:bg-bg-darker dark:text-text-light">
       <Seo
         title="FAQ & Knowledge Base | VAE Systems"
         description="Klare Antworten auf technische, organisatorische und Karriere-Fragen rund um VAE Systems – filterbar, suchbar, ehrlich."
@@ -92,7 +92,7 @@ const ResourcesFaqPage: React.FC = () => {
       />
 
       {/* Hero */}
-      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 text-center dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-dark">
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-24 text-center dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-darker dark:to-bg-dark">
         <div aria-hidden="true">
           <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.25),transparent_60%)] dark:block" />
         </div>
@@ -126,17 +126,17 @@ const ResourcesFaqPage: React.FC = () => {
             </MagneticButton>
           </div>
           <div className="mt-10 grid w-full gap-4 md:grid-cols-3">
-            <div className="rounded-3xl border border-[#c5ccc8] bg-white p-5 text-left shadow-[0_18px_40px_rgba(26,35,32,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#394642] dark:text-white/60">Kategorien</p>
-              <p className="mt-2 text-2xl font-semibold text-[#1a2320] dark:text-white">
+            <div className="rounded-3xl border border-line bg-white p-5 text-left shadow-[0_18px_40px_rgba(26,35,32,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+              <p className="text-xs uppercase tracking-[0.3em] text-text-muted dark:text-white/60">Kategorien</p>
+              <p className="mt-2 text-2xl font-semibold text-text-light dark:text-white">
                 {categoriesWithCounts.length} Bereiche
               </p>
-              <p className="text-sm text-[#2c3834] dark:text-text-secondary">
+              <p className="text-sm text-text-secondary dark:text-text-secondary">
                 Technologie, Business, Karriere, Use Cases, Sonstiges.
               </p>
             </div>
-            <div className="rounded-3xl border border-[#c5ccc8] bg-white p-5 text-left shadow-[0_18px_40px_rgba(26,35,32,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#394642] dark:text-white/60">Einträge</p>
+            <div className="rounded-3xl border border-line bg-white p-5 text-left shadow-[0_18px_40px_rgba(26,35,32,0.08)] dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+              <p className="text-xs uppercase tracking-[0.3em] text-text-muted dark:text-white/60">Einträge</p>
               <p className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">{faqEntries.length} Fragen</p>
               <p className="text-sm text-gray-600 dark:text-text-secondary">
                 Kuratiert, keine generischen SEO-Antworten.
@@ -199,7 +199,7 @@ const ResourcesFaqPage: React.FC = () => {
       </section>
 
       {/* Categories + FAQ */}
-      <section className="accent-section bg-vae-turquoise py-16 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker">
+      <section className="accent-section bg-vae-turquoise py-16 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-darker dark:to-bg-darker">
         <div className="container-vae space-y-10">
           <div className="grid gap-5 md:grid-cols-5">
             {categoriesWithCounts.map(category => (

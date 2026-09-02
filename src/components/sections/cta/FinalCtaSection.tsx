@@ -42,6 +42,17 @@ const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ className = '', id = 
       aria-labelledby="final-cta-heading"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
+        {/* Firefly-Bild: aufsteigende Glas-Plattformen – ruhige Tiefe hinter dem CTA */}
+        <div
+          className="absolute inset-0 opacity-[0.30] mix-blend-multiply dark:opacity-[0.45] dark:mix-blend-normal"
+          style={{
+            backgroundImage: 'url(/images/heroes/final-cta-plattformen.webp)',
+            backgroundPosition: 'center 40%',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+          aria-hidden
+        />
         <div
           className="absolute inset-x-0 top-0 hidden h-72 bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.22),transparent_65%)] dark:block"
           aria-hidden

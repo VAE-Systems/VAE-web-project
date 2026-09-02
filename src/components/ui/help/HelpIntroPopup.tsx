@@ -48,15 +48,15 @@ export const HelpIntroPopup: React.FC = () => {
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-vae-turquoise/20">
                 <HelpCircle className="h-6 w-6 text-vae-turquoise" />
               </div>
-              <h3 id="help-intro-title" className="text-2xl font-semibold text-[#0f1c17] dark:text-white">
+              <h3 id="help-intro-title" className="text-2xl font-semibold text-text-light dark:text-white">
                 Hilfe-Modus aktiviert
               </h3>
             </div>
             <div className="mt-6 space-y-3">
-              <p className="text-lg font-semibold leading-relaxed text-[#0f1c17] dark:text-white">
+              <p className="text-lg font-semibold leading-relaxed text-text-light dark:text-white">
                 So funktioniert&apos;s:
               </p>
-              <ul className="ml-6 space-y-2 text-base leading-relaxed text-[#2c3a33] dark:text-white/80">
+              <ul className="ml-6 space-y-2 text-base leading-relaxed text-text-secondary dark:text-white/80">
                 <li className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise" />
                   <span>Klicken Sie auf ein beliebiges Feld oder Element</span>

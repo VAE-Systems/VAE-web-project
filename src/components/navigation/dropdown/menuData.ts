@@ -137,10 +137,7 @@ export const MENU_DATA: DropdownMenu[] = [
         title: 'Philosophie & Prinzipien',
         description: 'Verbindliche Standards für transparente, belastbare Technologieprojekte.',
         items: [
-          { text: 'Transparenz & Ehrlichkeit', href: '/wissen/transparenz-open-source' },
-          { text: 'Klare Kommunikation', href: '/wissen/klare-projektkommunikation' },
-          { text: 'Unabhängigkeit & Freiheit', href: '/wissen/vendor-lock-in-vermeiden' },
-          { text: 'Exzellenz als Standard', href: '/wissen/handwerkskunst-statt-schnellschuss' },
+          // Einzelwert-Subpages ausgebunden (2026-06) — Inhalt jetzt auf /ueber-uns/werte.
           { text: 'Liebe fürs Detail & Design', href: '/ueber-uns/design-handwerk' },
         ],
         ctaText: 'Alle Werte entdecken',

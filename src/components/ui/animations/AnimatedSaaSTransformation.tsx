@@ -486,7 +486,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
     )
 
     const renderFallbackGrid = () => (
-      <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-8">
+      <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-gradient-to-br from-bg-dark/80 via-bg-darker to-bg-dark p-8">
         <div className="mb-6 flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-[0.3em] text-text-secondary">
             SaaS vs. Self-Hosted
@@ -595,8 +595,8 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                 className={cn(
                   'group flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-bold transition-all duration-300 ease-out hover:scale-105 sm:gap-2 sm:rounded-xl sm:px-5 sm:py-2.5 sm:text-sm',
                   !isProblem
-                    ? 'border-2 border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 text-vae-turquoise shadow-[0_0_20px_rgba(8,255,193,0.4),0_0_0_1px_rgba(8,255,193,0.3)]'
-                    : 'border border-white/10 bg-white/5 text-text-secondary hover:border-vae-turquoise/40 hover:bg-vae-turquoise/5 hover:text-vae-turquoise hover:shadow-[0_0_15px_rgba(8,255,193,0.2)]'
+                    ? 'border-2 border-vae-turquoise/60 bg-gradient-to-br from-vae-turquoise/20 to-vae-turquoise/10 text-vae-turquoise dark:shadow-[0_0_20px_rgba(8,255,193,0.4),0_0_0_1px_rgba(8,255,193,0.3)]'
+                    : 'border border-white/10 bg-white/5 text-text-secondary hover:border-vae-turquoise/40 hover:bg-vae-turquoise/5 hover:text-vae-turquoise dark:hover:shadow-[0_0_15px_rgba(8,255,193,0.2)]'
                 )}
               >
                 <Lightbulb
@@ -970,7 +970,7 @@ const AnimatedSaaSTransformation: React.FC<AnimatedSaaSTransformationProps> = Re
                   />
                   <div className="rounded-[20px] border-[2px] border-vae-turquoise/35 bg-white/95 p-5 shadow-[0_8px_20px_rgba(15,23,42,0.10)] backdrop-blur-md transition-shadow duration-300 group-hover:shadow-[0_12px_28px_rgba(15,23,42,0.14)] dark:border-vae-turquoise/60 dark:bg-gradient-to-br dark:from-vae-turquoise/20 dark:via-vae-turquoise/15 dark:to-vae-turquoise/10 dark:shadow-[0_8px_32px_rgba(8,255,193,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] dark:group-hover:shadow-[0_12px_48px_rgba(8,255,193,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] sm:rounded-[24px] sm:p-6 lg:p-7">
                     <div className="flex flex-col items-center gap-1.5 sm:gap-2">
-                      <Server className="h-10 w-10 text-slate-900 dark:text-vae-turquoise dark:drop-shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
+                      <Server className="h-10 w-10 text-slate-900 dark:text-vae-turquoise dark:drop-dark:shadow-[0_2px_8px_rgba(8,255,193,0.6)] sm:h-12 sm:w-12 lg:h-14 lg:w-14" />
                       <div className="text-center">
                         <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-900 dark:text-vae-turquoise sm:text-[10px]">
                           Unified Stack

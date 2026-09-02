@@ -113,7 +113,7 @@ const ServicesHeroSection: React.FC<ServicesHeroSectionProps> = ({ innerRef }) =
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 to="/leistungen/strategie"
-                className="btn-primary flex flex-1 items-center justify-center text-center shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
+                className="btn-primary flex flex-1 items-center justify-center text-center dark:shadow-[0_0_0_1px_rgba(0,255,165,0.4),0_0_24px_-4px_rgba(0,255,165,0.35)] dark:hover:shadow-[0_0_0_1px_rgba(0,255,165,0.6),0_0_34px_-4px_rgba(0,255,165,0.55)]"
               >
                 <Icon name="auto_awesome" className="mr-3 h-7 w-7 sm:h-8 sm:w-8" />
                 Mehr zur Strategieberatung

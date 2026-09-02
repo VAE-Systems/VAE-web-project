@@ -382,7 +382,7 @@ const ContactPage: React.FC = () => {
         canonicalPath="/contact"
       />
 
-      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-28 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050a0c] dark:to-bg-dark">
+      <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise py-28 dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-darker dark:to-bg-dark">
         <div className="pointer-events-none absolute inset-0 hidden opacity-80 dark:block" aria-hidden="true">
           <div className="bg-[radial-gradient(circle_at_top,rgba(var(--vae-turquoise-rgb),0.3),radial-gradient(circle_at_bottom,rgba(5,248,200,0.12),transparent_70%)] absolute inset-0" />
         </div>
@@ -444,7 +444,7 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-b border-vae-turquoise/10 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-dark">
+      <section className="border-b border-vae-turquoise/10 bg-bg-dark py-20 dark:border-white/5 dark:bg-bg-dark">
         <div className="container-vae space-y-10">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise dark:text-vae-turquoise/70">
@@ -953,7 +953,7 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-y border-vae-turquoise/10 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-bg-darker">
+      <section className="border-y border-vae-turquoise/10 bg-bg-dark py-20 dark:border-white/5 dark:bg-bg-darker">
         <div className="container-vae grid gap-6 md:grid-cols-2">
           <div className="rounded-[28px] border border-gray-200 bg-white p-6 text-center shadow-md dark:border-white/10 dark:bg-white/[0.02] dark:shadow-none">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-vae-turquoise/10 text-vae-turquoise">
@@ -993,7 +993,7 @@ const ContactPage: React.FC = () => {
       <React.Suspense
         fallback={<div className="py-24 text-center text-sm text-gray-500 dark:text-white/60">Lade FAQ …</div>}
       >
-        <FAQSection className="accent-section bg-vae-turquoise dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker" />
+        <FAQSection className="accent-section bg-vae-turquoise dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-darker dark:to-bg-darker" />
       </React.Suspense>
 
       {/* Help Popups (managed by help system) */}

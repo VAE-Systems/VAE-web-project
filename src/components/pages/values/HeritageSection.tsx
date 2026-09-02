@@ -56,7 +56,7 @@ export const HeritageSection: React.FC = () => {
           {PRINCIPLES.map(principle => (
             <div
               key={principle.title}
-              className="rounded-3xl border border-white/10 bg-white/5 p-6 text-text-light shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur"
+              className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 p-6 text-text-light shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
                 Prinzip

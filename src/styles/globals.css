@@ -1770,23 +1770,10 @@ body.using-keyboard *:focus {
   .tech-spotlight {
     position: relative;
   }
-  .tech-spotlight::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      hsl(var(--color-vae-turquoise) / 0.22),
-      transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    mix-blend-mode: plus-lighter;
-  }
-  .tech-stack-active .tech-spotlight::before {
-    opacity: 1;
-  }
+  /* Entfernt: breiter Spotlight-Schimmer (.tech-spotlight::before) — füllte die ganze
+     Grid-Box und wurde an deren Rand hart abgeschnitten (grünes Rechteck mit Kanten).
+     Der glowy Effekt lebt jetzt ausschließlich im per-Kachel-Trail-Glow + dezentem
+     .tech-tile::after-Sheen, die innerhalb der Kacheln bleiben — keine harte Box-Kante. */
   .tech-stack-grid {
     position: relative;
     z-index: 1;
@@ -1837,7 +1824,7 @@ body.using-keyboard *:focus {
     inset: 0;
     background: radial-gradient(
       circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      hsl(var(--color-vae-turquoise) / 0.35),
+      hsl(var(--color-vae-turquoise) / 0.2),
       transparent 70%
     );
     opacity: 0;
@@ -1846,7 +1833,7 @@ body.using-keyboard *:focus {
     mix-blend-mode: overlay;
   }
   .tech-stack-active .tech-tile::after {
-    opacity: 0.35;
+    opacity: 0.18;
   }
   /* Hover scale/raise only; box-shadow jetzt GSAP-gesteuert für schnell an / langsam aus */
   .tech-tile:hover {

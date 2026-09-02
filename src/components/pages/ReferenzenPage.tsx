@@ -450,7 +450,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
     <>
       <article
         id={anchorId || study.id}
-        className="group relative rounded-3xl border border-black/5 bg-white/90 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.2)] dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.25)]"
+        className="group relative overflow-hidden rounded-[28px] border border-black/5 bg-white/90 p-8 text-text-light shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition-all duration-300 before:absolute before:inset-x-10 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-vae-turquoise/50 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:-translate-y-1.5 hover:border-vae-turquoise/40 hover:shadow-[0_30px_90px_rgba(13,148,136,0.2)] hover:before:opacity-100 dark:border-white/10 dark:bg-white/[0.03] dark:text-text-light dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)] dark:hover:shadow-[0_30px_120px_rgba(13,148,136,0.25)] sm:p-10"
         data-expanded={isExpanded}
       >
         <div className="flex flex-col gap-6 lg:flex-row">
@@ -501,8 +501,10 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
               </div>
             </div>
             <div>
-              <h3 className="text-2xl font-semibold text-text-light">{study.title}</h3>
-              <p className="mt-3 text-base text-text-secondary">{study.challenge}</p>
+              <h3 className="text-balance text-2xl font-semibold leading-snug text-text-light sm:text-3xl">
+                {study.title}
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-text-secondary">{study.challenge}</p>
             </div>
             <div className="rounded-2xl border border-black/5 bg-white/80 p-4 text-sm text-text-secondary dark:border-white/5 dark:bg-white/5">
               <p className="font-semibold text-text-light">Unsere Antwort</p>
@@ -517,9 +519,12 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
                 className="rounded-2xl border border-black/5 bg-white/80 p-4 shadow-sm dark:border-white/5 dark:bg-white/[0.04]"
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-vae-turquoise">{block.title}</p>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-text-secondary">
+                <ul className="mt-3 space-y-2.5 text-sm text-text-secondary">
                   {block.items.map(item => (
-                    <li key={item}>{item}</li>
+                    <li key={item} className="flex items-start gap-2.5 leading-relaxed">
+                      <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-vae-turquoise/70" aria-hidden />
+                      <span>{item}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -531,7 +536,7 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({
           <button
             type="button"
             onClick={onToggle}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-vae-turquoise transition-colors hover:text-vae-turquoise-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60"
+            className="inline-flex items-center gap-2 rounded-full border border-vae-turquoise/40 px-5 py-2.5 text-sm font-semibold text-vae-turquoise transition-all duration-200 hover:border-vae-turquoise hover:bg-vae-turquoise/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60"
           >
             {isExpanded ? 'Details ausblenden' : 'Details ansehen'}
             <ChevronDown
@@ -837,31 +842,44 @@ const ReferenzenPage: React.FC = () => {
 
       {/* Hero */}
       <section className="accent-section relative overflow-hidden border-b border-vae-turquoise/25 bg-vae-turquoise dark:border-white/5 dark:bg-gradient-to-b dark:from-bg-darker dark:to-bg-dark">
+        {/* Firefly-Bild: Netzwerk-Konstellation über der Region – wachsendes Projektnetz */}
+        <div
+          className="absolute inset-0 opacity-[0.35] mix-blend-multiply dark:opacity-[0.50] dark:mix-blend-normal"
+          style={{
+            backgroundImage: 'url(/images/heroes/referenzen-netzwerk.webp)',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+          aria-hidden="true"
+        />
         <div
           className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,rgba(var(--color-vae-turquoise-rgb),0.28),transparent_55%)] dark:block"
           aria-hidden="true"
         />
-        <div className="container-vae relative flex min-h-[40vh] flex-col items-center justify-center gap-6 py-24 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/10 dark:text-vae-turquoise">
+        <div className="container-vae relative flex min-h-[48vh] flex-col items-center justify-center gap-7 py-28 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-white/90 backdrop-blur-sm dark:border-vae-turquoise/40 dark:bg-vae-turquoise/10 dark:text-vae-turquoise">
             Referenzen
           </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white dark:text-text-light md:text-5xl">
+          <h1 className="max-w-4xl text-balance text-5xl font-semibold leading-[1.05] text-white dark:text-text-light md:text-6xl lg:text-7xl">
             Projekte, die zeigen, was wir können
           </h1>
-          <p className="max-w-3xl text-lg leading-relaxed text-white/85 dark:text-text-secondary">
-            Konkrete Self-Hosted-Infrastrukturen und KI-optimierte Workflows, die wir für Kund:innen und unsere eigenen
-            Teams umgesetzt haben – ehrlich, transparent, mit messbaren Ergebnissen.
+          <p className="max-w-2xl text-xl leading-relaxed text-white/90 dark:text-text-secondary md:text-2xl">
+            Self-Hosted-Infrastrukturen und KI-Workflows aus echten Projekten – ehrlich, transparent, mit messbaren
+            Ergebnissen.
           </p>
-          <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
-              <ShieldCheck className="h-4 w-4 text-white dark:text-vae-turquoise" /> Alle Projekte: Self-Hosted-First,
-              DSGVO-konform, Made in Germany
-            </p>
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm text-white/90 dark:border-vae-turquoise/40 dark:bg-vae-turquoise/5 dark:text-white/80">
-              <Shield className="h-4 w-4 text-white dark:text-vae-turquoise" /> Weitere Projekte unter NDA – hier zeigen
-              wir nur Referenzen mit Veröffentlichungsfreigabe
-            </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm font-medium text-white/85 dark:text-white/70">
+            {['Self-Hosted-First', 'DSGVO-konform', 'Made in Germany'].map(badge => (
+              <span key={badge} className="inline-flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-white/90 dark:text-vae-turquoise/80" />
+                {badge}
+              </span>
+            ))}
           </div>
+          <p className="inline-flex items-center gap-2 text-xs text-white/70 dark:text-white/50">
+            <Shield className="h-3.5 w-3.5" />
+            Weitere Projekte unter NDA – hier zeigen wir nur Referenzen mit Veröffentlichungsfreigabe.
+          </p>
         </div>
       </section>
 

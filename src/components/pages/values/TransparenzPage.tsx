@@ -159,7 +159,7 @@ const TransparenzPage: React.FC = () => {
           {PRINCIPLES.map(principle => (
             <article
               key={principle.title}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)]"
+              className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] p-6 shadow-[0_15px_35px_rgba(0,0,0,0.35)]"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-vae-turquoise dark:text-vae-turquoise/70">
                 Prinzip
@@ -185,7 +185,7 @@ const TransparenzPage: React.FC = () => {
           </div>
           <div className="space-y-6">
             {PROCESS_STEPS.map(step => (
-              <div key={step.label} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+              <div key={step.label} className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-vae-turquoise/60">{step.label}</p>
                 <h3 className="mt-2 text-2xl font-semibold text-text-light">{step.title}</h3>
                 <p className="mt-3 text-base leading-relaxed text-text-secondary">{step.detail}</p>
@@ -198,7 +198,7 @@ const TransparenzPage: React.FC = () => {
       <section className="border-b border-black/5 bg-bg-dark py-20 dark:border-white/5">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl">
-            <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+            <div className="relative overflow-hidden rounded-[24px] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
               <picture>
                 <source srcSet="/images/optimized/Bild-von-OpenProject-Ticketing-Software-3.jpg" type="image/jpeg" />
                 <img
@@ -233,7 +233,7 @@ const TransparenzPage: React.FC = () => {
             {EXAMPLES.map(example => (
               <article
                 key={example.title}
-                className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
+                className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
               >
                 <h3 className="text-lg font-semibold text-text-light">{example.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-secondary">{example.description}</p>

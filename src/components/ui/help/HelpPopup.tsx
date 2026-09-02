@@ -60,11 +60,11 @@ export const HelpPopup: React.FC<HelpPopupProps> = ({ className = '', showConfir
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-vae-turquoise/20">
                 <HelpCircle className="h-5 w-5 text-vae-turquoise" />
               </div>
-              <h3 id="help-popup-title" className="text-xl font-semibold text-[#0f1c17] dark:text-white">
+              <h3 id="help-popup-title" className="text-xl font-semibold text-text-light dark:text-white">
                 {helpText.title}
               </h3>
             </div>
-            <p id="help-popup-description" className="mt-4 text-lg leading-relaxed text-[#2c3a33] dark:text-white/80">
+            <p id="help-popup-description" className="mt-4 text-lg leading-relaxed text-text-secondary dark:text-white/80">
               {helpText.description}
             </p>
           </div>

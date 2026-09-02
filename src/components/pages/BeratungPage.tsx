@@ -730,7 +730,7 @@ const BeratungPage: React.FC = () => {
                 <picture className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100">
                   <source srcSet="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie-2.webp" type="image/webp" />
                   <img
-                    src="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie-2.jpg"
+                    src="/images/optimized/Jakob-steht-Vor-Tafel-für-Strategie-2.webp"
                     alt="Strategieentwicklung an der Tafel - Details"
                     loading="lazy"
                     className="h-full w-full object-cover"
@@ -747,7 +747,7 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== VISUELLER ÜBERGANG (Must-Fix 1, Stufe 1) ==================== */}
-      <div className="h-12 bg-vae-turquoise/10 dark:bg-gradient-to-b dark:from-bg-darker dark:to-[#0b0e13]" />
+      <div className="h-12 bg-vae-turquoise/10 dark:bg-gradient-to-b dark:from-bg-darker dark:to-bg-darker" />
 
       {/* ==================== WAS IST ENTHALTEN (FEATURES) ==================== */}
       <section className="section-card-container animate-section border-b bg-gray-50/50 pb-24 pt-32 dark:border-[hsl(0,0%,12%)] dark:bg-[hsl(0,0%,8%)]">
@@ -1069,7 +1069,7 @@ const BeratungPage: React.FC = () => {
       </section>
 
       {/* ==================== FAQ + FINAL CTA ==================== */}
-      <section className="accent-section animate-section bg-vae-turquoise py-24 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="accent-section animate-section bg-vae-turquoise py-24 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-darker dark:to-bg-darker dark:text-white">
         <div className="container-vae grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/85 dark:text-vae-turquoise/80">

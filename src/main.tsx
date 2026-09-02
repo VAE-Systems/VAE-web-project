@@ -4,6 +4,7 @@ import App from './App.tsx'
 import { useServiceWorker } from './hooks'
 import './styles/tokens.css'
 import './styles/globals.css'
+import './styles/section-layers.css'
 import './styles/ui-enhancements.css'
 
 // Service Worker Registration Component

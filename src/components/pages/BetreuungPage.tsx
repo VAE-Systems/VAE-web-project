@@ -315,13 +315,13 @@ const BetreuungPage: React.FC = () => {
         }}
       />
       {/* Hero */}
-      <section className="border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise/10 py-40 dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark md:py-56">
+      <section className="accent-section border-vae-turquoise/12 relative overflow-hidden border-b bg-vae-turquoise py-40 text-white dark:border-white/5 dark:bg-gradient-to-br dark:from-bg-dark dark:via-bg-darker dark:to-bg-dark dark:text-text-light md:py-56">
         {/* Hero Background Image - Desktop: Fixed Wallpaper, Mobile: Absolute */}
         {/* Desktop version with fixed attachment */}
         <div
-          className="pointer-events-none absolute inset-0 hidden opacity-[0.40] dark:opacity-[0.20] md:block"
+          className="pointer-events-none absolute inset-0 hidden opacity-75 mix-blend-multiply dark:opacity-[0.55] dark:mix-blend-normal md:block"
           style={{
-            backgroundImage: 'url(/images/optimized/P1010798.JPG.webp)',
+            backgroundImage: 'url(/images/heroes/betreuung-leuchtturm.webp)',
             backgroundAttachment: 'fixed',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
@@ -331,27 +331,31 @@ const BetreuungPage: React.FC = () => {
         />
         {/* Mobile version without fixed (iOS Safari compatibility) */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.40] dark:opacity-[0.20] md:hidden"
+          className="pointer-events-none absolute inset-0 opacity-75 mix-blend-multiply dark:opacity-[0.55] dark:mix-blend-normal md:hidden"
           style={{
-            backgroundImage: 'url(/images/optimized/P1010798.JPG.webp)',
+            backgroundImage: 'url(/images/heroes/betreuung-leuchtturm.webp)',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
           }}
           role="presentation"
         />
-        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.18),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.12),transparent_60%)]" />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_20%,rgba(255,255,255,0.12),transparent_38%),radial-gradient(circle_at_72%_38%,rgba(255,255,255,0.08),transparent_42%),linear-gradient(180deg,rgba(15,118,110,0.18)_0%,rgba(15,118,110,0.08)_42%,rgba(15,118,110,0.26)_100%)] dark:hidden"
+          aria-hidden
+        />
+        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-55">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(var(--vae-turquoise-rgb),0.24),transparent_55%),radial-gradient(circle_at_50%_60%,rgba(var(--vae-turquoise-rgb),0.18),transparent_60%)]" />
         </div>
         {/* Light Mode: no glass blur to keep poster-like clarity */}
         <div className="container-vae relative flex flex-col items-center justify-center text-center">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-vae-turquoise/30 bg-vae-turquoise/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise">
             MANAGED OPERATIONS
           </span>
-          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-gray-900 dark:text-white md:text-5xl">
+          <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white dark:text-white md:text-5xl">
             Weniger IT-Overhead. Mehr Zeit für Ihr Business.
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-700 dark:text-text-secondary md:text-lg">
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/85 dark:text-text-secondary md:text-lg">
             Wir übernehmen Betrieb, Wartung und Weiterentwicklung Ihrer Informationsinfrastruktur – damit Ihr Team sich
             auf Produkt, Kund:innen und Wachstum konzentrieren kann.
           </p>
@@ -667,7 +671,7 @@ const BetreuungPage: React.FC = () => {
       {/* Section 4: Service Levels */}
       <section
         id="service-levels"
-        className="section-card-container border-b border-gray-200 bg-[#f2fff8] py-24 dark:border-white/5 dark:bg-bg-darker"
+        className="section-card-container border-b border-gray-200 bg-bg-dark py-24 dark:border-white/5 dark:bg-bg-darker"
       >
         <div className="section-card-backdrop" />
         <div className="container-vae relative">
@@ -937,10 +941,10 @@ const BetreuungPage: React.FC = () => {
             {detailedServices.map(service => (
               <div
                 key={service.title}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-6 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vae-turquoise/25 bg-white/90 p-6 shadow-[0_14px_45px_-20px_rgba(15,23,42,0.35)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-vae-turquoise/50 dark:hover:shadow-[0_18px_60px_-24px_rgba(8,255,193,0.35)] dark:border-vae-turquoise/20 dark:bg-white/5 dark:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.75)] dark:hover:bg-white/10"
               >
                 <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-vae-turquoise/0 via-vae-turquoise/40 to-vae-turquoise/0 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/10 shadow-[0_0_20px_-5px_rgba(8,255,193,0.3)] transition-all duration-300 group-hover:bg-vae-turquoise/15 group-hover:shadow-[0_0_30px_-5px_rgba(8,255,193,0.5)] dark:bg-vae-turquoise/15 dark:shadow-[0_0_30px_-8px_rgba(8,255,193,0.4)] dark:group-hover:shadow-[0_0_40px_-8px_rgba(8,255,193,0.6)]">
+                <div className="relative mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-vae-turquoise/10 dark:shadow-[0_0_20px_-5px_rgba(8,255,193,0.3)] transition-all duration-300 group-hover:bg-vae-turquoise/15 dark:group-hover:shadow-[0_0_30px_-5px_rgba(8,255,193,0.5)] dark:bg-vae-turquoise/15 dark:shadow-[0_0_30px_-8px_rgba(8,255,193,0.4)] dark:group-hover:shadow-[0_0_40px_-8px_rgba(8,255,193,0.6)]">
                   <service.icon className="h-6 w-6 text-vae-turquoise" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{service.title}</h3>
@@ -1065,7 +1069,7 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 6: Gründe */}
-      <section className="border-b border-gray-200 bg-[#f2fff8] py-20 dark:border-white/5 dark:bg-transparent">
+      <section className="border-b border-gray-200 bg-bg-dark py-20 dark:border-white/5 dark:bg-transparent">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
@@ -1094,7 +1098,7 @@ const BetreuungPage: React.FC = () => {
       </section>
 
       {/* Section 7: FAQ */}
-      <section className="accent-section bg-vae-turquoise py-20 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-[#050505] dark:to-bg-darker dark:text-white">
+      <section className="accent-section bg-vae-turquoise py-20 text-gray-900 dark:bg-gradient-to-b dark:from-bg-darker dark:via-bg-darker dark:to-bg-darker dark:text-white">
         <div className="container-vae">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/85 dark:text-vae-turquoise/80">

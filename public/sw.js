@@ -4,9 +4,9 @@
  * Handles caching, offline support, and background sync
  */
 
-const CACHE_NAME = 'vae-systems-v1'
-const STATIC_CACHE = 'vae-static-v1'
-const DYNAMIC_CACHE = 'vae-dynamic-v1'
+const CACHE_NAME = 'vae-systems-v2'
+const STATIC_CACHE = 'vae-static-v2'
+const DYNAMIC_CACHE = 'vae-dynamic-v2'
 
 // Files to cache immediately
 const STATIC_FILES = ['/', '/manifest.json', '/App_Logo_light.svg']

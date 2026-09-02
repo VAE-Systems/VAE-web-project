@@ -136,7 +136,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
   return (
     <section id={id} ref={sectionRef} className={cn('relative py-24', className)} aria-labelledby={`${id}-title`}>
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,hsla(var(--color-vae-turquoise),0.07),transparent_60%),radial-gradient(circle_at_80%_70%,hsla(var(--color-vae-turquoise),0.05),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,hsl(var(--color-vae-turquoise)/0.07),transparent_60%),radial-gradient(circle_at_80%_70%,hsl(var(--color-vae-turquoise)/0.05),transparent_55%)]" />
       </div>
       <div className="relative mx-auto max-w-5xl px-6">
         <header ref={headerRef} className="mb-16 text-center">

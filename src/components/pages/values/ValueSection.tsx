@@ -70,7 +70,7 @@ export const ValueSection: React.FC<ValueSectionProps> = ({ value, index }) => {
     <section
       ref={ref}
       aria-labelledby={`${value.id}-title`}
-      className={`group relative isolate z-0 overflow-hidden border-t border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker py-24 transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:transition-none ${
+      className={`group relative isolate z-0 overflow-hidden border-t border-black/10 dark:border-white/5 bg-gradient-to-br from-bg-darker via-bg-dark to-bg-darker py-24 transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:transition-none ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       }`}
       style={{ transitionDelay: `${index * 80}ms` }}

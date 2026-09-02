@@ -38,20 +38,20 @@ export const HelpSettingsModal: React.FC<HelpSettingsModalProps> = ({ isOpen, on
       aria-labelledby="help-settings-title"
     >
       <div
-        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-sm rounded-2xl border border-[#c5ccc8] bg-white p-6 shadow-xl duration-300 dark:border-white/10 dark:bg-bg-darker"
+        className="animate-in zoom-in-95 slide-in-from-bottom-4 mx-4 max-w-sm rounded-2xl border border-line bg-white p-6 shadow-xl duration-300 dark:border-white/10 dark:bg-bg-darker"
         onClick={e => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Settings className="h-5 w-5 text-vae-turquoise" />
-            <h3 id="help-settings-title" className="text-lg font-semibold text-[#1a2320] dark:text-white">
+            <h3 id="help-settings-title" className="text-lg font-semibold text-text-light dark:text-white">
               Hilfe-Einstellungen
             </h3>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-[#394642] transition hover:text-[#1a2320] focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50 dark:text-white/60 dark:hover:text-white"
+            className="text-text-muted transition hover:text-text-light focus:outline-none focus:ring-2 focus:ring-vae-turquoise/50 dark:text-white/60 dark:hover:text-white"
             aria-label="Schließen"
           >
             <X className="h-4 w-4" />
@@ -64,13 +64,13 @@ export const HelpSettingsModal: React.FC<HelpSettingsModalProps> = ({ isOpen, on
               type="checkbox"
               checked={skipHelpForSession}
               onChange={e => setSkipHelpForSession(e.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-[#c5ccc8] bg-white text-vae-turquoise focus:ring-2 focus:ring-vae-turquoise/50 dark:border-gray-600 dark:bg-gray-700 dark:checked:bg-vae-turquoise"
+              className="mt-0.5 h-4 w-4 rounded border-line bg-white text-vae-turquoise focus:ring-2 focus:ring-vae-turquoise/50 dark:border-gray-600 dark:bg-gray-700 dark:checked:bg-vae-turquoise"
             />
             <div className="flex-1">
-              <p className="text-sm font-medium text-[#1a2320] group-hover:text-[#1a2320]/90 dark:text-white dark:group-hover:text-gray-100">
+              <p className="text-sm font-medium text-text-light group-hover:text-text-light/90 dark:text-white dark:group-hover:text-gray-100">
                 Intro nicht mehr anzeigen
               </p>
-              <p className="text-xs text-[#394642] dark:text-gray-400">
+              <p className="text-xs text-text-muted dark:text-gray-400">
                 Überspringt die Einführung dieser Session. Help-Modus bleibt aktiv.
               </p>
             </div>

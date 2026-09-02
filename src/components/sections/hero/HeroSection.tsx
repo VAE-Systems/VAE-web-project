@@ -139,7 +139,7 @@ const HeroSection: React.FC = () => {
           {/* ── MESSAGING BLOCK ── */}
           <div className="space-y-6">
             {/* Eyebrow: Brand Slogan */}
-            <p className="text-xs font-bold uppercase tracking-[0.45em] text-vae-turquoise/90 sm:text-sm">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-vae-turquoise/90 sm:text-sm sm:tracking-[0.35em]">
               {heroEyebrow}
             </p>
 
@@ -150,7 +150,7 @@ const HeroSection: React.FC = () => {
             </h1>
 
             {/* Typewriter: Rotierende USPs */}
-            <div className="min-h-[2.5rem] text-xl font-bold text-vae-turquoise md:text-2xl lg:text-4xl">
+            <div className="min-h-[2.25rem] text-lg font-medium text-vae-turquoise/80 md:text-xl lg:text-2xl">
               <span
                 className="inline-grid justify-center"
                 aria-live="polite"
@@ -161,7 +161,7 @@ const HeroSection: React.FC = () => {
                 </span>
                 <span className="col-start-1 row-start-1 inline-flex items-center gap-2">
                   <TypewriterEffect texts={heroTypewriterTexts} reducedMotion={reducedMotion} paused={!heroVisible} />
-                  <span className="inline-block h-6 w-[2px] animate-pulse bg-vae-turquoise" aria-hidden />
+                  <span className="inline-block h-5 w-[2px] animate-pulse bg-vae-turquoise/80" aria-hidden />
                 </span>
               </span>
             </div>
@@ -199,10 +199,10 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* ── TRUST BADGES ── */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold tracking-[0.3em] text-vae-turquoise dark:text-vae-turquoise/70">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs font-medium tracking-[0.12em] text-text-secondary sm:text-sm">
             {trustBadges.map(badge => (
               <span key={badge} className="inline-flex items-center gap-2 uppercase">
-                <CheckCheck className="h-5 w-5 text-vae-turquoise" />
+                <CheckCheck className="h-4 w-4 text-vae-turquoise/80" />
                 {badge}
               </span>
             ))}

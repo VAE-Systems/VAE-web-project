@@ -107,7 +107,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
                 className="absolute -inset-px rounded-2xl bg-gradient-to-br from-vae-turquoise/25 to-transparent opacity-0 blur-md transition group-hover:opacity-100"
                 aria-hidden="true"
               />
-              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm md:p-7">
+              <div className="flex h-full flex-col rounded-2xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.04] p-6 backdrop-blur-sm md:p-7">
                 <div className="mb-4 flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-vae-turquoise/25 text-vae-turquoise">
@@ -118,7 +118,7 @@ const ProcessSection: React.FC<ProcessSectionProps> = ({ id = 'prozess', classNa
                     </span>
                   </div>
                   {s.durationHint && (
-                    <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-text-secondary dark:text-white/60">
+                    <span className="rounded-md border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 px-2 py-1 text-[11px] text-text-secondary dark:text-white/60">
                       {s.durationHint}
                     </span>
                   )}

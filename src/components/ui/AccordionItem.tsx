@@ -76,8 +76,8 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
     <article
       className={`group relative overflow-hidden rounded-2xl border transition duration-200 ${
         isOpen
-          ? 'border-[#c5ccc8] bg-white/90 shadow-[0_18px_45px_rgba(26,35,32,0.12)] dark:border-white/10 dark:bg-white/[0.05]'
-          : 'border-[#d8ddd9] bg-white/80 shadow-[0_10px_28px_rgba(26,35,32,0.08)] hover:border-[#c5ccc8] dark:border-white/5 dark:bg-white/[0.03] dark:hover:border-white/10'
+          ? 'border-line bg-white/90 shadow-[0_18px_45px_rgba(26,35,32,0.12)] dark:border-white/10 dark:bg-white/[0.05]'
+          : 'border-line bg-white/80 shadow-[0_10px_28px_rgba(26,35,32,0.08)] hover:border-line dark:border-white/5 dark:bg-white/[0.03] dark:hover:border-white/10'
       }`}
     >
       <button
@@ -85,9 +85,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${id}`}
-        className="flex w-full items-center justify-between px-6 py-5 text-left text-[#1a2320] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 dark:text-white"
+        className="flex w-full items-center justify-between px-6 py-5 text-left text-text-light transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise/60 dark:text-white"
       >
-        <span className="text-lg font-semibold text-[#1a2320] dark:text-white">{question}</span>
+        <span className="text-lg font-semibold text-text-light dark:text-white">{question}</span>
         {isOpen ? (
           <Minus className="h-5 w-5 text-vae-turquoise transition duration-200 group-hover:scale-110" />
         ) : (

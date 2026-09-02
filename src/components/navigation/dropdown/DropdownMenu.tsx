@@ -327,14 +327,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 panelVisible
                   ? 'pointer-events-auto translate-y-0 opacity-100'
                   : 'pointer-events-none -translate-y-2 opacity-0'
-              } border-[#c5ccc8]/60 bg-[#f5f7f5]/95 shadow-[#1a2320]/5 dark:border-white/10 dark:bg-[hsla(0,0%,6%,0.98)] dark:shadow-black/40`}
+              } border-line bg-bg-dark/95 shadow-black/5 dark:border-white/10 dark:bg-[hsla(0,0%,6%,0.98)] dark:shadow-black/40`}
               style={{ height: panelHeight ? `${panelHeight}px` : undefined }}
             >
               <div ref={getPanelRefHandler(menu.id)}>
                 {/* Subtitle Header - elegant am Anfang des Dropdowns */}
                 {menu.subtitle && (
-                  <div className="border-b border-[#d8ddd9] bg-white px-6 py-3 dark:border-white/10 dark:bg-[#050505]">
-                    <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#394642] dark:text-white/65">
+                  <div className="border-b border-line bg-white px-6 py-3 dark:border-white/10 dark:bg-vae-black">
+                    <p className="text-xs font-medium uppercase tracking-[0.25em] text-text-muted dark:text-white/65">
                       {menu.subtitle}
                     </p>
                   </div>
@@ -380,14 +380,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         type="button"
         onClick={toggleMobileMenu}
         aria-expanded={isMobileMenuOpen}
-        className="flex w-full items-center justify-between rounded-full border border-[#c5ccc8] bg-white/95 px-4 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-[#1a2320] shadow-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:shadow-black/20 dark:focus-visible:ring-offset-bg-darker"
+        className="flex w-full items-center justify-between rounded-full border border-line bg-white/95 px-4 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-text-light shadow-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:shadow-black/20 dark:focus-visible:ring-offset-bg-darker"
       >
         <span>Menü</span>
         {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
 
       {isMobileMenuOpen && (
-        <div className="mt-4 space-y-3 rounded-3xl border border-[#c5ccc8] bg-white/95 p-4 text-[#1a2320] shadow-xl shadow-black/5 dark:border-white/10 dark:bg-bg-darker/90 dark:text-white dark:shadow-black/40">
+        <div className="mt-4 space-y-3 rounded-3xl border border-line bg-white/95 p-4 text-text-light shadow-xl shadow-black/5 dark:border-white/10 dark:bg-bg-darker/90 dark:text-white dark:shadow-black/40">
           {menus.map(menu => {
             const isExpanded = expandedMobileMenus[menu.id]
             const activeContentId = activeContentCache[menu.id] || menu.menuItems[0]?.id
@@ -395,11 +395,11 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             return (
               <div
                 key={menu.id}
-                className="overflow-hidden rounded-2xl border border-[#c5ccc8] bg-white/90 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-black/20"
+                className="overflow-hidden rounded-2xl border border-line bg-white/90 shadow-sm dark:border-white/10 dark:bg-white/5 dark:shadow-black/20"
               >
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.2em] text-[#1a2320] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-white dark:focus-visible:ring-offset-bg-darker"
+                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.2em] text-text-light transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-white dark:focus-visible:ring-offset-bg-darker"
                   aria-expanded={isExpanded}
                   aria-controls={`${menu.id}-mobile-panel`}
                   onClick={() => toggleMobileSection(menu.id)}
@@ -407,7 +407,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   {menu.label}
                   <ChevronDown
                     className={`h-4 w-4 transition-transform duration-200 ${
-                      isExpanded ? 'rotate-180 text-vae-turquoise' : 'text-[#394642] dark:text-white/60'
+                      isExpanded ? 'rotate-180 text-vae-turquoise' : 'text-text-muted dark:text-white/60'
                     }`}
                   />
                 </button>
@@ -416,7 +416,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   id={`${menu.id}-mobile-panel`}
                   className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                 >
-                  <div className="min-h-0 space-y-4 px-4 pb-4 text-[#2c3834] dark:text-white/80">
+                  <div className="min-h-0 space-y-4 px-4 pb-4 text-text-secondary dark:text-white/80">
                     <ul className="space-y-2">
                       {menu.menuItems.map(item => (
                         <li key={item.id}>
@@ -424,7 +424,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                             href={item.href}
                             onFocus={() => setMenuActiveItem(menu.id, item.id)}
                             onMouseEnter={() => setMenuActiveItem(menu.id, item.id)}
-                            className="block rounded-xl border border-[#c5ccc8] bg-white/95 px-4 py-3 text-sm font-medium text-[#1a2320] transition-all duration-200 hover:border-vae-turquoise/50 hover:text-vae-turquoise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white/80 dark:hover:border-white/40 dark:hover:text-white dark:focus-visible:ring-offset-bg-darker"
+                            className="block rounded-xl border border-line bg-white/95 px-4 py-3 text-sm font-medium text-text-light transition-all duration-200 hover:border-vae-turquoise/50 hover:text-vae-turquoise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vae-turquoise focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:bg-white/5 dark:text-white/80 dark:hover:border-white/40 dark:hover:text-white dark:focus-visible:ring-offset-bg-darker"
                           >
                             {item.label}
                           </a>

@@ -23,12 +23,14 @@ export { default as HomeProcessTeaserSection } from './content/HomeProcessTeaser
 export { default as ProcessSection } from './content/ProcessSection'
 export { default as ProductsSection } from './content/ProductsSection'
 export { default as ServicesSection } from './content/ServicesSection'
+export { default as SovereigntyLadderSection } from './content/SovereigntyLadderSection'
 export { default as TechStackSection } from './content/TechStackSection'
 export { default as WhyOpenSourceSection } from './content/WhyOpenSourceSection'
 export { default as WhyOutcomesSection } from './content/WhyOutcomesSection'
 
 // ── SOCIAL PROOF ──
 export { default as CaseStudiesSection } from './social-proof/CaseStudiesSection'
+export { default as ManagedReferencesStrip } from './social-proof/ManagedReferencesStrip'
 export { default as SocialProofSection } from './social-proof/SocialProofSection'
 export { default as StoryTeamSection } from './social-proof/StoryTeamSection'
 

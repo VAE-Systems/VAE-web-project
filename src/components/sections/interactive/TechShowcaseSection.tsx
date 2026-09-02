@@ -98,14 +98,14 @@ const TechShowcaseSection: React.FC = () => {
           </p>
         </header>
 
-        <div className="mt-12 overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.02] p-6 shadow-[0_30px_100px_-60px_rgba(5,212,182,0.8)] backdrop-blur-xl">
+        <div className="mt-12 overflow-hidden rounded-[32px] border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-6 shadow-[0_30px_100px_-60px_rgba(5,212,182,0.8)] backdrop-blur-xl">
           <div className="overflow-hidden">
             <div ref={trackRef} className="flex gap-6" style={{ willChange: reducedMotion ? undefined : 'transform' }}>
               {duplicatedTools.map((tool, index) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- Focusable for keyboard navigation
                 <div
                   key={`${tool.id}-${index}`}
-                  className="to-white/2 group relative w-[220px] shrink-0 cursor-pointer rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 p-5 text-left text-white transition-transform hover:-translate-y-1"
+                  className="to-white/2 group relative w-[220px] shrink-0 cursor-pointer rounded-2xl border border-black/10 dark:border-white/10 bg-gradient-to-b from-white/5 p-5 text-left text-white transition-transform hover:-translate-y-1"
                   onPointerEnter={handlePause}
                   onPointerLeave={handleResume}
                   onFocus={handlePause}
@@ -120,7 +120,7 @@ const TechShowcaseSection: React.FC = () => {
                   </div>
                   <p className="text-xl font-semibold text-text-light">{tool.name}</p>
                   <p className="mt-1 text-sm text-text-secondary">{tool.description}</p>
-                  <div className="bg-bg-primary/90 pointer-events-none absolute left-1/2 top-full z-10 mt-4 w-56 -translate-x-1/2 rounded-2xl border border-white/10 p-4 text-xs text-text-secondary opacity-0 backdrop-blur group-focus-within:opacity-100 group-hover:opacity-100">
+                  <div className="bg-bg-primary/90 pointer-events-none absolute left-1/2 top-full z-10 mt-4 w-56 -translate-x-1/2 rounded-2xl border border-black/10 dark:border-white/10 p-4 text-xs text-text-secondary opacity-0 backdrop-blur group-focus-within:opacity-100 group-hover:opacity-100">
                     {tool.description}
                   </div>
                 </div>
